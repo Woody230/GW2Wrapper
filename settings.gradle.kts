@@ -14,4 +14,4 @@ pluginManagement {
     }
 }
 rootProject.name = "GW2Wrapper"
-
+include("model")

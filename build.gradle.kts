@@ -1,6 +1,7 @@
 plugins {
-    kotlin("multiplatform") version "1.5.10"
+    kotlin("multiplatform") version "1.5.20"
     id("com.android.library")
+    kotlin("plugin.serialization") version "1.5.20"
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
@@ -17,6 +18,7 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
+        maven { setUrl("https://jitpack.io") }
     }
 }
 
