@@ -1,6 +1,6 @@
 package com.bselzer.library.gw2.model.common.mechanics.skill
 
-import com.bselzer.library.gw2.model.common.mechanics.AttunementName
+import com.bselzer.library.gw2.model.common.mechanics.profession.AttunementName
 import com.bselzer.library.gw2.model.common.mechanics.profession.ProfessionName
 import com.bselzer.library.gw2.model.common.mechanics.profession.weapon.WeaponName
 import com.bselzer.library.gw2.model.common.mechanics.skill.fact.SkillFact

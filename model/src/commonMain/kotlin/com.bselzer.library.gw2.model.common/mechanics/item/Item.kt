@@ -1,6 +1,5 @@
 package com.bselzer.library.gw2.model.common.mechanics.item
 
-import com.bselzer.library.gw2.model.common.mechanics.Rarity
 import com.bselzer.library.gw2.model.common.mechanics.item.detail.ItemDetail
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

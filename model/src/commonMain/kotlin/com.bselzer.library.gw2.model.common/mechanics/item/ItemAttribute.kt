@@ -1,6 +1,6 @@
 package com.bselzer.library.gw2.model.common.mechanics.item
 
-import com.bselzer.library.gw2.model.common.mechanics.AttributeName
+import com.bselzer.library.gw2.model.common.mechanics.profession.AttributeName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

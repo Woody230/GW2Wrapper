@@ -1,6 +1,5 @@
 package com.bselzer.library.gw2.model.common.mechanics.profession
 
-import com.bselzer.library.gw2.model.common.mechanics.AttunementName
 import com.bselzer.library.gw2.model.common.mechanics.profession.weapon.WeaponName
 import com.bselzer.library.gw2.model.common.mechanics.skill.SkillSlot
 import com.bselzer.library.gw2.model.common.mechanics.skill.SkillType

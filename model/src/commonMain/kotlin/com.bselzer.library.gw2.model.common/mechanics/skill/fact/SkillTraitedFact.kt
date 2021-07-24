@@ -1,8 +1,8 @@
 package com.bselzer.library.gw2.model.common.mechanics.skill.fact
 
-import com.bselzer.library.gw2.model.common.mechanics.AttributeName
 import com.bselzer.library.gw2.model.common.mechanics.combo.ComboFieldName
 import com.bselzer.library.gw2.model.common.mechanics.combo.ComboFinisherName
+import com.bselzer.library.gw2.model.common.mechanics.profession.AttributeName
 import com.bselzer.library.kotlin.extension.serialization.common.serializer.IntegerSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
