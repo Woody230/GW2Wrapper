@@ -1,10 +1,10 @@
-package com.bselzer.library.gw2.model.common.mechanics
+package com.bselzer.library.gw2.model.common.metadata
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class GameBuild(
+data class Build(
     @SerialName("id")
-    val id: Long
+    val id: Int
 )
