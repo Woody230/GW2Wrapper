@@ -1,8 +1,5 @@
 package com.bselzer.library.gw2.model.common.mechanics.profession
 
-import com.bselzer.library.gw2.model.common.mechanics.profession.weapon.WeaponName
-import com.bselzer.library.gw2.model.common.mechanics.skill.SkillSlot
-import com.bselzer.library.gw2.model.common.mechanics.skill.SkillType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,17 +9,17 @@ data class ProfessionSkill(
     val id: Int = 0,
 
     @SerialName("slot")
-    val slot: SkillSlot? = null,
+    val slot: String = "",
 
     @SerialName("type")
-    val type: SkillType? = null,
+    val type: String = "",
 
     @SerialName("offhand")
-    val offhandRequired: WeaponName? = null, // For Thief
+    val offhandRequired: String = "", // For Thief
 
     @SerialName("attunement")
-    val attunementRequired: AttunementName? = null, // For Elementalist
+    val attunementRequired: String = "", // For Elementalist
 
     @SerialName("source")
-    val stealSource: ProfessionName? = null // For Thief
+    val stealSource: String = "" // For Thief
 )

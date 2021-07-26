@@ -1,6 +1,5 @@
 package com.bselzer.library.gw2.model.common.wvw.objective
 
-import com.bselzer.library.gw2.model.common.wvw.match.map.MapType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -13,7 +12,7 @@ data class Objective(
     val name: String = "",
 
     @SerialName("type")
-    val type: ObjectiveType,
+    val type: String = "",
 
     @SerialName("sector_id")
     val mapSectorId: Int = 0,
@@ -22,11 +21,13 @@ data class Objective(
     val mapId: Int = 0,
 
     @SerialName("map_type")
-    val mapType: MapType,
+    val mapType: String = "",
 
+    // TODO X, Y, Z
     @SerialName("coord")
     val coordinates: List<Double> = emptyList(),
 
+    // TODO X, Y
     @SerialName("label_coord")
     val labelCoordinates: List<Double> = emptyList(),
 

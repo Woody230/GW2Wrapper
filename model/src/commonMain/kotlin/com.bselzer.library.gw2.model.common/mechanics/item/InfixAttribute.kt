@@ -4,13 +4,10 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ItemAttribute(
+data class InfixAttribute(
     @SerialName("attribute")
-    val name: String = "",
+    val attribute: String = "",
 
-    @SerialName("multiplier")
-    val multiplier: Double = 0.0,
-
-    @SerialName("value")
-    val value: Int = 0
+    @SerialName("modifier")
+    val modifier: Int = 0
 )

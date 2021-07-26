@@ -7,7 +7,8 @@ pluginManagement {
     }
     resolutionStrategy {
         eachPlugin {
-            if (requested.id.namespace == "com.android" || requested.id.name == "kotlin-android-extensions") {
+            if (requested.id.namespace == "com.android" || requested.id.name == "kotlin-android-extensions")
+            {
                 useModule("com.android.tools.build:gradle:4.0.1")
             }
         }
@@ -15,3 +16,5 @@ pluginManagement {
 }
 rootProject.name = "GW2Wrapper"
 include("model")
+include("model-extensions")
+include("model-extensions")

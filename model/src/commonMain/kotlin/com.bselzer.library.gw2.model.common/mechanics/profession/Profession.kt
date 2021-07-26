@@ -1,8 +1,5 @@
 package com.bselzer.library.gw2.model.common.mechanics.profession
 
-import com.bselzer.library.gw2.model.common.mechanics.profession.training.Training
-import com.bselzer.library.gw2.model.common.mechanics.profession.weapon.ProfessionWeapon
-import com.bselzer.library.gw2.model.common.mechanics.profession.weapon.WeaponName
 import com.bselzer.library.kotlin.extension.serialization.common.serializer.MapArraySerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -13,7 +10,7 @@ data class Profession(
     val id: String,
 
     @SerialName("name")
-    val name: ProfessionName,
+    val name: String = "",
 
     @SerialName("code")
     val buildTemplateId: Int,
@@ -31,10 +28,10 @@ data class Profession(
     val training: List<Training> = emptyList(),
 
     @SerialName("weapons")
-    val weapons: Map<WeaponName, ProfessionWeapon> = emptyMap(),
+    val weapons: Map<String, ProfessionWeapon> = emptyMap(),
 
     @SerialName("flags")
-    val flags: List<ProfessionFlag> = emptyList(),
+    val flags: List<String> = emptyList(),
 
     @SerialName("skills")
     val skills: List<ProfessionSkill> = emptyList(),

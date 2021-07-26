@@ -1,6 +1,5 @@
 package com.bselzer.library.gw2.model.common.mechanics.item
 
-import com.bselzer.library.gw2.model.common.mechanics.item.detail.ItemDetail
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -22,10 +21,10 @@ data class Item(
     val description: String = "",
 
     @SerialName("type")
-    val type: ItemType? = null,
+    val type: String = "",
 
     @SerialName("rarity")
-    val rarity: Rarity? = null,
+    val rarity: String = "",
 
     @SerialName("level")
     val levelRequired: Int = 0,
@@ -37,13 +36,13 @@ data class Item(
     val defaultSkinId: Int = 0,
 
     @SerialName("flags")
-    val flags: List<ItemFlag> = emptyList(),
+    val flags: List<String> = emptyList(),
 
     @SerialName("game_types")
-    val usableGameTypes: List<ItemGameType> = emptyList(),
+    val usableGameTypes: List<String> = emptyList(),
 
     @SerialName("restrictions")
-    val restrictions: List<ItemRestriction> = emptyList(),
+    val restrictions: List<String> = emptyList(),
 
     @SerialName("details")
     val detail: ItemDetail = ItemDetail()

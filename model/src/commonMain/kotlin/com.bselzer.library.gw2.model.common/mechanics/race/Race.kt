@@ -9,7 +9,7 @@ data class Race(
     val id: String,
 
     @SerialName("name")
-    val name: RaceName,
+    val name: String = "",
 
     @SerialName("skills")
     val skillIds: List<Int> = emptyList()

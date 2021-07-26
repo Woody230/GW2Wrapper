@@ -1,7 +1,7 @@
 package com.bselzer.library.gw2.model.common.mechanics.trait
 
-import com.bselzer.library.gw2.model.common.mechanics.skill.fact.SkillFact
-import com.bselzer.library.gw2.model.common.mechanics.skill.fact.SkillTraitedFact
+import com.bselzer.library.gw2.model.common.mechanics.skill.SkillFact
+import com.bselzer.library.gw2.model.common.mechanics.skill.SkillTraitedFact
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -26,7 +26,7 @@ data class Trait(
     val tier: Int = -1, // 0 = elite weapon access, 1-3 Adept/Master/Grandmaster
 
     @SerialName("slot")
-    val slot: TraitSlot? = null,
+    val slot: String = "",
 
     @SerialName("order")
     val order: Int = 0, // Only meaningful for Major traits

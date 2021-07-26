@@ -1,10 +1,5 @@
 package com.bselzer.library.gw2.model.common.mechanics.skill
 
-import com.bselzer.library.gw2.model.common.mechanics.profession.AttunementName
-import com.bselzer.library.gw2.model.common.mechanics.profession.ProfessionName
-import com.bselzer.library.gw2.model.common.mechanics.profession.weapon.WeaponName
-import com.bselzer.library.gw2.model.common.mechanics.skill.fact.SkillFact
-import com.bselzer.library.gw2.model.common.mechanics.skill.fact.SkillTraitedFact
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -26,16 +21,16 @@ data class Skill(
     val chatLink: String = "",
 
     @SerialName("type")
-    val type: SkillType? = null,
+    val type: String = "",
 
     @SerialName("weapon_type")
-    val associatedWeapon: WeaponName? = null,
+    val associatedWeapon: String = "",
 
     @SerialName("professions")
-    val associatedProfessions: List<ProfessionName> = emptyList(),
+    val associatedProfessions: List<String> = emptyList(),
 
     @SerialName("slot")
-    val slot: SkillSlot? = null,
+    val slot: String = "",
 
     @SerialName("facts")
     val facts: List<SkillFact> = emptyList(),
@@ -44,19 +39,19 @@ data class Skill(
     val traitedFacts: List<SkillTraitedFact> = emptyList(),
 
     @SerialName("categories")
-    val categories: List<SkillCategory> = emptyList(),
+    val categories: List<String> = emptyList(),
 
     @SerialName("attunement")
-    val attunement: AttunementName? = null,
+    val attunement: String = "",
 
     @SerialName("dual_attunement")
-    val dualAttunement: AttunementName? = null,
+    val dualAttunement: String = "",
 
     @SerialName("cost")
     val energyCost: Int = 0, // Revenant, Warrior, Druid
 
     @SerialName("dual_wield")
-    val dualWieldRequiredOffhand: WeaponName? = null,
+    val dualWieldRequiredOffhand: String = "",
 
     @SerialName("flip_skill")
     val flipSkillId: Int = 0,
@@ -83,5 +78,5 @@ data class Skill(
     val toolbeltSkillId: Int = 0,
 
     @SerialName("flags")
-    val flags: List<SkillFlag> = emptyList()
+    val flags: List<String> = emptyList()
 )

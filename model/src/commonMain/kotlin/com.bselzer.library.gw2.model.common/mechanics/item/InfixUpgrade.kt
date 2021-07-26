@@ -4,16 +4,13 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PvpAmulet(
+data class InfixUpgrade(
     @SerialName("id")
-    val id: Int,
-
-    @SerialName("name")
-    val name: String = "",
-
-    @SerialName("icon")
-    val iconLink: String = "",
+    val itemStatId: Int = 0,
 
     @SerialName("attributes")
-    val attributes: Map<String, Int> = emptyMap()
+    val attributes: List<InfixAttribute> = emptyList(),
+
+    @SerialName("buff")
+    val buff: InfixBuff = InfixBuff()
 )
