@@ -1,7 +1,6 @@
 pluginManagement {
     repositories {
         google()
-        jcenter()
         gradlePluginPortal()
         mavenCentral()
     }
@@ -15,6 +14,5 @@ pluginManagement {
     }
 }
 rootProject.name = "GW2Wrapper"
-include("model")
-include("model-extensions")
-include("model-extensions")
+include("v2-model")
+include("v2-model-extensions")
