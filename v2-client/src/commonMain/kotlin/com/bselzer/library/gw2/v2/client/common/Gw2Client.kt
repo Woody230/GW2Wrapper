@@ -2,6 +2,7 @@ package com.bselzer.library.gw2.v2.client.common
 
 import com.bselzer.library.gw2.v2.client.common.constant.Endpoints
 import com.bselzer.library.gw2.v2.client.common.constant.Headers
+import com.bselzer.library.gw2.v2.client.common.extension.bearer
 import io.ktor.client.*
 import io.ktor.client.features.*
 import io.ktor.client.features.json.*
@@ -40,10 +41,17 @@ open class Gw2Client(
      */
     val account: AccountClient
 
+    /**
+     * The token client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/tokeninfo">the wiki</a>
+     */
+    val token: TokenClient
+
     init
     {
         val setupClient = httpClient.setup(json, configuration)
         account = AccountClient(setupClient)
+        token = TokenClient(setupClient)
     }
 
     /**
@@ -65,8 +73,8 @@ open class Gw2Client(
                 header(Headers.SCHEMA_VERSION, version)
             }
 
-            configuration.apiKey?.let { apikey ->
-                header(HttpHeaders.Authorization, "${Headers.BEARER} $apikey")
+            configuration.token?.let { token ->
+                bearer(token)
             }
 
             configuration.language?.let { language ->

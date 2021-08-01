@@ -15,9 +15,7 @@ import kotlin.time.ExperimentalTime
  * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account">the wiki</a>
  */
 @OptIn(ExperimentalTime::class)
-class AccountClient(
-    private val httpClient: HttpClient
-)
+class AccountClient(httpClient: HttpClient) : BaseClient(httpClient)
 {
     /**
      * Scopes: account
@@ -26,5 +24,5 @@ class AccountClient(
      * @return the account information
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account">the wiki</a>
      */
-    suspend fun account(): Account = httpClient.get(path = Endpoints.ACCOUNT)
+    suspend fun information(): Account = httpClient.get(path = Endpoints.ACCOUNT)
 }

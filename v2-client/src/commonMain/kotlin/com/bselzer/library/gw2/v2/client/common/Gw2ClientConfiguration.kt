@@ -15,12 +15,12 @@ data class Gw2ClientConfiguration(
     val schemaVersion: String? = null,
 
     /**
-     * The API key to use as the access token.
+     * The access token.
      *
      * If null, then no access token will be added.
      * Note that many endpoints do not need authorization.
      */
-    val apiKey: String? = null,
+    val token: String? = null,
 
     /**
      * The language to retrieve data for.

@@ -7,13 +7,8 @@ internal object Endpoints
      */
     const val MAXIMUM_PAGE_SIZE = 200
 
-    /**
-     * The base url.
-     */
     const val BASE_URL = "api.guildwars2.com/v2"
-
-    /**
-     * The account endpoint.
-     */
     const val ACCOUNT = "account"
+    const val TOKEN_INFO = "tokeninfo"
+    const val CREATE_SUBTOKEN = "createsubtoken"
 }
