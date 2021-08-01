@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * The token information associated with an API key.
+ * The token information associated with an API key or another token.
  *
  * Scopes: account
  * @see <a href="https://wiki.guildwars2.com/wiki/API:2/tokeninfo">the wiki</a>
