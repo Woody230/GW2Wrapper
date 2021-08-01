@@ -34,8 +34,5 @@ enum class AttributeName
     TOUGHNESS,
 
     @SerialName("Vitality")
-    VITALITY,
-
-    @SerialName("None")
-    NONE
+    VITALITY
 }

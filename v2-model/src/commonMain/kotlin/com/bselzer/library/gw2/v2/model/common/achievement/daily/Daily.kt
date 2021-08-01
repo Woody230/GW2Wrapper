@@ -16,6 +16,8 @@ data class Daily(
 
     /**
      * The access requirement.
+     *
+     * @since 2019-05-16T00:00:00.000Z or later, the access object before this schema date is NOT supported by this wrapper
      */
     @SerialName("access")
     val access: DailyAccess = DailyAccess()

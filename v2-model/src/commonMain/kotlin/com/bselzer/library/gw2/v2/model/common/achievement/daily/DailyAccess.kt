@@ -12,7 +12,7 @@ data class DailyAccess(
     val product: String = "",
 
     /**
-     * Whether the account has access to this achievement.
+     * Whether the account needs to have or not have access to the product to be able to access the achievement.
      */
     @SerialName("condition")
     val accessibility: String = ""
