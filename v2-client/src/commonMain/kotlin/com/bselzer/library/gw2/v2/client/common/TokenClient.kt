@@ -1,7 +1,7 @@
 package com.bselzer.library.gw2.v2.client.common
 
 import com.bselzer.library.gw2.v2.client.common.constant.Endpoints
-import com.bselzer.library.gw2.v2.client.common.extension.bearer
+import com.bselzer.library.gw2.v2.client.common.extension.ensureBearer
 import com.bselzer.library.gw2.v2.model.common.account.token.SubToken
 import com.bselzer.library.gw2.v2.model.common.account.token.TokenInfo
 import io.ktor.client.*
@@ -41,15 +41,7 @@ class TokenClient(httpClient: HttpClient) : BaseClient(httpClient)
         urls: List<String>,
         token: String? = null
     ): SubToken = httpClient.get(path = Endpoints.CREATE_SUBTOKEN) {
-        if (token != null)
-        {
-            // Override the configuration API key with the given API key.
-            bearer(token)
-        } else
-        {
-            throw IllegalArgumentException("Unable to create a sub-token without an API key defined in the configuration or the method parameter.")
-        }
-
+        ensureBearer(token)
         parameter("expire", expiration)
         parameter("permissions", permissions.joinToString())
         parameter("urls", urls.joinToString())

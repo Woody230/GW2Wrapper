@@ -9,6 +9,10 @@ internal object Endpoints
 
     const val BASE_URL = "api.guildwars2.com/v2"
     const val ACCOUNT = "account"
+    const val ACHIEVEMENTS = "achievements"
+    const val BANK = "bank"
+    const val DAILY_CRAFTING = "dailycrafting"
+    const val DUNGEONS = "dungeons"
     const val TOKEN_INFO = "tokeninfo"
     const val CREATE_SUBTOKEN = "createsubtoken"
 }

@@ -61,6 +61,8 @@ open class Gw2Client(
         defaultRequest {
             host = Endpoints.BASE_URL
 
+            // TODO validation?
+
             // Enable kotlinx.serialization
             install(JsonFeature) {
                 serializer = KotlinxSerializer(json)
