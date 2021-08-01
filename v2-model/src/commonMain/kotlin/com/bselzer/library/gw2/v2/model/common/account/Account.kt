@@ -12,6 +12,7 @@ import kotlin.time.ExperimentalTime
  * The account information.
  *
  * Scopes: account
+ *
  * Optional scopes: guilds, progression
  */
 @ExperimentalTime

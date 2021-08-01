@@ -4,6 +4,8 @@ plugins {
     kotlin("plugin.serialization")
 }
 
+val ktorVersion = "1.6.2"
+
 kotlin {
     jvm()
     android {
@@ -13,12 +15,10 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
-
-                // TODO constants to store versions
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
+                implementation(project(":v2-model"))
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-serialization:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
-                implementation("com.github.Woody230.KotlinExtensions:serialization:1.2.6")
-                implementation("com.github.Woody230.KotlinExtensions:datetime:1.2.6")
             }
         }
         val commonTest by getting {
