@@ -33,4 +33,16 @@ data class Gw2ClientConfiguration(
      * The page size.
      */
     val pageSize: Int = Endpoints.MAXIMUM_PAGE_SIZE,
+
+    /* TODO scope validation
+    /**
+     * Whether to validate that the required scopes to access the endpoints exist.
+     */
+    val validateScopes: Boolean = true,
+
+    /**
+     * Whether to validate that the optional scopes to access information returned from endpoints exist.
+     */
+    val validateOptionalScopes: Boolean = false
+     */
 )

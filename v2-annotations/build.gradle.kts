@@ -15,11 +15,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
-                implementation(project(":v2-model"))
-                implementation(project(":v2-annotations"))
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-serialization:$ktorVersion")
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
             }
         }
         val commonTest by getting {

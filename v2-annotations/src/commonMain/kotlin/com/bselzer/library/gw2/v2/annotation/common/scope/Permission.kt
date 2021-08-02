@@ -1,4 +1,4 @@
-package com.bselzer.library.gw2.v2.model.extension.common.enumeration.scope
+package com.bselzer.library.gw2.v2.annotation.common.scope
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

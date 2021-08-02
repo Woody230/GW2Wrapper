@@ -17,3 +17,4 @@ rootProject.name = "GW2Wrapper"
 include("v2-model")
 include("v2-model-extensions")
 include("v2-client")
+include("v2-annotations")

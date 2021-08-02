@@ -13,6 +13,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
+                implementation(project(":v2-annotations"))
 
                 // TODO constants to store versions
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")

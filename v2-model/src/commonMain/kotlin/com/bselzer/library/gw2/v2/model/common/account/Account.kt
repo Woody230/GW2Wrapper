@@ -1,5 +1,8 @@
 package com.bselzer.library.gw2.v2.model.common.account
 
+import com.bselzer.library.gw2.v2.annotation.common.scope.Permission
+import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
+import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
 import com.bselzer.library.gw2.v2.model.common.serialization.SecondDurationSerializer
 import com.bselzer.library.kotlin.extension.datetime.common.function.minValue
 import kotlinx.datetime.LocalDateTime
@@ -10,11 +13,9 @@ import kotlin.time.ExperimentalTime
 
 /**
  * The account information.
- *
- * Scopes: account
- *
- * Optional scopes: guilds, progression
  */
+@Scope(Requirement.REQUIRED, Permission.ACCOUNT)
+@Scope(Requirement.OPTIONAL, Permission.GUILDS, Permission.PROGRESSION)
 @ExperimentalTime
 @Serializable
 data class Account(
@@ -54,9 +55,9 @@ data class Account(
     /**
      * The guilds ids that the account is a leader of, in the form of UUIDs.
      *
-     * Scopes: guilds
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id">the wiki</a>
      */
+    @Scope(Requirement.REQUIRED, Permission.GUILDS)
     @SerialName("guild_leader")
     val leaderGuilds: List<String> = emptyList(),
 
@@ -80,33 +81,29 @@ data class Account(
 
     /**
      * The personal fractal reward level.
-     *
-     * Scopes: progression
      */
+    @Scope(Requirement.REQUIRED, Permission.PROGRESSION)
     @SerialName("fractal_level")
     val fractalLevel: Int = 0,
 
     /**
      * The number of daily achievement points earned.
-     *
-     * Scopes: progression
      */
+    @Scope(Requirement.REQUIRED, Permission.PROGRESSION)
     @SerialName("daily_ap")
     val dailyAp: Int = 0,
 
     /**
      * The number of monthly achievement points earned.
-     *
-     * Scopes: progression
      */
+    @Scope(Requirement.REQUIRED, Permission.PROGRESSION)
     @SerialName("monthly_ap")
     val monthlyAp: Int = 0,
 
     /**
      * The personal WvW rank.
-     *
-     * Scopes: progression
      */
+    @Scope(Requirement.REQUIRED, Permission.PROGRESSION)
     @SerialName("wvw_rank")
     val wvwRank: Int = 0,
 

@@ -1,5 +1,8 @@
 package com.bselzer.library.gw2.v2.client.common
 
+import com.bselzer.library.gw2.v2.annotation.common.scope.Permission
+import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
+import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
 import com.bselzer.library.gw2.v2.client.common.constant.Endpoints
 import com.bselzer.library.gw2.v2.client.common.extension.ensureBearer
 import com.bselzer.library.gw2.v2.model.common.account.token.SubToken
@@ -11,18 +14,17 @@ import kotlinx.datetime.LocalDateTime
 /**
  * The token client.
  *
- * Scopes: account
  * @see <a href="https://wiki.guildwars2.com/wiki/API:2/tokeninfo">tokeninfo on the wiki</a>
  * @see <a href="https://wiki.guildwars2.com/wiki/API:2/createsubtoken">createsubtoken on the wiki</a>
  */
+@Scope(Requirement.REQUIRED, Permission.ACCOUNT)
 class TokenClient(httpClient: HttpClient) : BaseClient(httpClient)
 {
     /**
-     * Scopes: account
-     *
      * @return the token information
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/tokeninfo">tokeninfo on the wiki</a>
      */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
     suspend fun information(): TokenInfo = httpClient.get(path = Endpoints.TOKEN_INFO)
 
     /**
@@ -30,11 +32,10 @@ class TokenClient(httpClient: HttpClient) : BaseClient(httpClient)
      *
      * The token must either be defined in the configuration or by [token].
      *
-     * Scopes: account
-     *
      * @return the sub-token id
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/createsubtoken">createsubtoken on the wiki</a>
      */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
     suspend fun createSubToken(
         expiration: LocalDateTime,
         permissions: List<String>,
