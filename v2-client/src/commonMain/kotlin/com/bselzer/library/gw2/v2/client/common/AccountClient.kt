@@ -5,10 +5,8 @@ import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
 import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
 import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Accounts
 import com.bselzer.library.gw2.v2.client.common.extension.ensureBearer
-import com.bselzer.library.gw2.v2.model.common.account.Account
-import com.bselzer.library.gw2.v2.model.common.account.AccountAchievement
-import com.bselzer.library.gw2.v2.model.common.account.AccountFinisher
-import com.bselzer.library.gw2.v2.model.common.account.bank.BankItem
+import com.bselzer.library.gw2.v2.model.common.account.*
+import com.bselzer.library.gw2.v2.model.common.account.bank.BankSlot
 import io.ktor.client.*
 import io.ktor.client.request.*
 import kotlin.time.ExperimentalTime
@@ -45,13 +43,13 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
 
     /**
      * Gets the bank slots associated with an account.
-     * A null [BankItem] indicates that the slot does not contain an item.
+     * A null [BankSlot] indicates that the slot does not contain an item.
      *
      * @return the account's bank slots
      * @see <a href="https://wiki.guildwars2.com/wiki/Account_vault">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.INVENTORIES)
-    suspend fun bankItems(token: String? = null): List<BankItem> =
+    suspend fun bankSlots(token: String? = null): List<BankSlot> =
         httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.BANK}") {
             ensureBearer(token)
         }
@@ -71,9 +69,9 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * @return the ids of the dungeon paths completed since the daily reset
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/dungeons">the wiki</a>
      */
-    // TODO enum for the paths (when doing dungeons endpoint) and extension method
+    // TODO enum for the paths and extension method
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
-    suspend fun dungeons(token: String? = null): List<String> =
+    suspend fun dailyDungeons(token: String? = null): List<String> =
         httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.DUNGEONS}") {
             ensureBearer(token)
         }
@@ -102,6 +100,66 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
     suspend fun gliders(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.GLIDERS}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the ids of the unlocked home instance cats
+     * @since 2019-03-22T00:00:00Z or later
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/home/cats">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION, Permission.UNLOCKS)
+    suspend fun cats(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.HOME}/${Accounts.CATS}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the ids of the unlocked home instance nodes
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/home/nodes">the wiki</a>
+     */
+    // TODO enum for the ids and extension method
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION, Permission.UNLOCKS)
+    suspend fun nodes(token: String? = null): List<String> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.HOME}/${Accounts.NODES}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * Gets the shared slots associated with an account.
+     * A null [SharedSlot] indicates that the slot does not contain an item.
+     * @return the account's shared slots
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/inventory">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.INVENTORIES)
+    suspend fun inventories(token: String? = null): List<SharedSlot> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.INVENTORY}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the amount of luck consumed or null if the account has no luck
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/luck">the wiki</a>
+     */
+    // Response is a collection of AccountLuck objects, but there will only be 1 at most with an irrelevant id.
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION, Permission.UNLOCKS)
+    suspend fun luck(token: String? = null): Int? = httpClient.get<List<AccountLuck>>(path = "${Accounts.ACCOUNT}/${Accounts.LUCK}") {
+        ensureBearer(token)
+    }.firstOrNull()?.value
+
+    /**
+     * @return the ids of the unlocked mail carriers
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
+    suspend fun mailCarriers(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.MAIL_CARRIERS}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the ids of the map chests unlocked since the daily reset
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mapchests">the wiki</a>
+     */
+    // TODO enum for the ids and extension method
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
+    suspend fun dailyMapChests(token: String? = null): List<String> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.MAP_CHESTS}") {
         ensureBearer(token)
     }
 }

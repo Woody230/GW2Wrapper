@@ -12,7 +12,7 @@ data class Gw2ClientConfiguration(
      * An ISO 8601 datetime to specify a particular schema, or "latest" to use the latest schema.
      * If null, then no schema version will be added.
      */
-    val schemaVersion: String? = null,
+    val schemaVersion: String? = "2021-08-01T00:00:00Z",
 
     /**
      * The access token.

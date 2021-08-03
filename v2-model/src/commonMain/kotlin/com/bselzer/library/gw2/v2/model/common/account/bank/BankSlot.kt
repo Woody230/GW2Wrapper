@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
  */
 @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.INVENTORIES)
 @Serializable
-data class BankItem(
+data class BankSlot(
     @SerialName("id")
     val id: Int = 0,
 

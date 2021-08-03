@@ -10,4 +10,11 @@ internal object Accounts
     const val DYES = "dyes"
     const val FINISHERS = "finishers"
     const val GLIDERS = "gliders"
+    const val HOME = "home"
+    const val CATS = "cats"
+    const val NODES = "nodes"
+    const val INVENTORY = "inventory"
+    const val LUCK = "luck"
+    const val MAIL_CARRIERS = "mailcarriers"
+    const val MAP_CHESTS = "mapchests"
 }
