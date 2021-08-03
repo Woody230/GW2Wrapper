@@ -7,6 +7,7 @@ import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Accounts
 import com.bselzer.library.gw2.v2.client.common.extension.ensureBearer
 import com.bselzer.library.gw2.v2.model.common.account.Account
 import com.bselzer.library.gw2.v2.model.common.account.AccountAchievement
+import com.bselzer.library.gw2.v2.model.common.account.AccountFinisher
 import com.bselzer.library.gw2.v2.model.common.account.bank.BankItem
 import io.ktor.client.*
 import io.ktor.client.request.*
@@ -73,7 +74,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
     // TODO enum for the paths (when doing dungeons endpoint) and extension method
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
     suspend fun dungeons(token: String? = null): List<String> =
-        httpClient.get("${Accounts.ACCOUNT}/${Accounts.DUNGEONS}") {
+        httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.DUNGEONS}") {
             ensureBearer(token)
         }
 
@@ -82,7 +83,25 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/colors">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
-    suspend fun dyes(token: String? = null): List<Int> = httpClient.get("${Accounts.ACCOUNT}/${Accounts.DYES}") {
+    suspend fun dyes(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.DYES}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the account's unlocked finishers
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/finishers">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
+    suspend fun finishers(token: String? = null): List<AccountFinisher> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.FINISHERS}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the ids of the unlocked gliders
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/gliders">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
+    suspend fun gliders(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.GLIDERS}") {
         ensureBearer(token)
     }
 }

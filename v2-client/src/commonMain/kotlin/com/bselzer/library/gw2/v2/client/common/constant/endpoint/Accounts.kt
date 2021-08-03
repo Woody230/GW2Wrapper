@@ -8,4 +8,6 @@ internal object Accounts
     const val DAILY_CRAFTING = "dailycrafting"
     const val DUNGEONS = "dungeons"
     const val DYES = "dyes"
+    const val FINISHERS = "finishers"
+    const val GLIDERS = "gliders"
 }
