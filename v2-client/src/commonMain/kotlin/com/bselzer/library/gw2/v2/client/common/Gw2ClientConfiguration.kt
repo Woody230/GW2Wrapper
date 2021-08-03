@@ -1,6 +1,6 @@
 package com.bselzer.library.gw2.v2.client.common
 
-import com.bselzer.library.gw2.v2.client.common.constant.Endpoints
+import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Endpoints
 
 /**
  * The configuration for the [Gw2Client]

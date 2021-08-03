@@ -5,7 +5,7 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 
 /**
- * Adds the bearer authorization.
+ * Sets the bearer authorization.
  */
 fun HttpRequestBuilder.bearer(token: String)
 {
@@ -25,4 +25,24 @@ fun HttpRequestBuilder.ensureBearer(token: String?)
     {
         throw IllegalArgumentException("A bearer is required. The token must be defined in the configuration or as a method parameter.")
     }
+}
+
+/**
+ * Sets the accepted language if it is provided.
+ */
+fun HttpRequestBuilder.language(language: String?)
+{
+    // Don't override the configuration API key if the language is not provided.
+    language ?: return
+    headers[HttpHeaders.AcceptLanguage] = language
+}
+
+/**
+ * Sets the schema version if it is provided.
+ */
+fun HttpRequestBuilder.schemaVersion(version: String?)
+{
+    // Don't override the configuration API key if the version is not provided.
+    version ?: return
+    headers[Headers.SCHEMA_VERSION] = version
 }

@@ -1,8 +1,10 @@
 package com.bselzer.library.gw2.v2.client.common
 
-import com.bselzer.library.gw2.v2.client.common.constant.Endpoints
 import com.bselzer.library.gw2.v2.client.common.constant.Headers
+import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Endpoints
 import com.bselzer.library.gw2.v2.client.common.extension.bearer
+import com.bselzer.library.gw2.v2.client.common.extension.language
+import com.bselzer.library.gw2.v2.client.common.extension.schemaVersion
 import io.ktor.client.*
 import io.ktor.client.features.*
 import io.ktor.client.features.json.*
@@ -42,6 +44,12 @@ open class Gw2Client(
     val account: AccountClient
 
     /**
+     * The achievement client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements">the wiki</a>
+     */
+    val achievement: AchievementClient
+
+    /**
      * The token client.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/tokeninfo">the wiki</a>
      */
@@ -50,8 +58,9 @@ open class Gw2Client(
     init
     {
         val setupClient = httpClient.setup(json, configuration)
-        account = AccountClient(setupClient)
-        token = TokenClient(setupClient)
+        account = AccountClient(setupClient, configuration)
+        achievement = AchievementClient(setupClient, configuration)
+        token = TokenClient(setupClient, configuration)
     }
 
     /**
@@ -72,7 +81,7 @@ open class Gw2Client(
             header(HttpHeaders.ContentType, Headers.JSON)
 
             configuration.schemaVersion?.let { version ->
-                header(Headers.SCHEMA_VERSION, version)
+                schemaVersion(version)
             }
 
             configuration.token?.let { token ->
@@ -80,7 +89,7 @@ open class Gw2Client(
             }
 
             configuration.language?.let { language ->
-                header(HttpHeaders.AcceptLanguage, language)
+                language(language)
             }
         }
     }

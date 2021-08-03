@@ -3,7 +3,7 @@ package com.bselzer.library.gw2.v2.client.common
 import com.bselzer.library.gw2.v2.annotation.common.scope.Permission
 import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
 import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
-import com.bselzer.library.gw2.v2.client.common.constant.Endpoints
+import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Accounts
 import com.bselzer.library.gw2.v2.client.common.extension.ensureBearer
 import com.bselzer.library.gw2.v2.model.common.account.Account
 import com.bselzer.library.gw2.v2.model.common.account.AccountAchievement
@@ -20,7 +20,7 @@ import kotlin.time.ExperimentalTime
 @OptIn(ExperimentalTime::class)
 @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
 @Scope(Requirement.OPTIONAL, Permission.GUILDS, Permission.PROGRESSION)
-class AccountClient(httpClient: HttpClient) : BaseClient(httpClient)
+class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration)
 {
     /**
      * @return the account information
@@ -28,7 +28,7 @@ class AccountClient(httpClient: HttpClient) : BaseClient(httpClient)
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
     @Scope(Requirement.OPTIONAL, Permission.GUILDS, Permission.PROGRESSION)
-    suspend fun information(token: String? = null): Account = httpClient.get(path = Endpoints.ACCOUNT) {
+    suspend fun account(token: String? = null): Account = httpClient.get(path = Accounts.ACCOUNT) {
         ensureBearer(token)
     }
 
@@ -38,7 +38,7 @@ class AccountClient(httpClient: HttpClient) : BaseClient(httpClient)
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
     suspend fun achievements(token: String? = null): List<AccountAchievement> =
-        httpClient.get(path = "${Endpoints.ACCOUNT}/${Endpoints.ACHIEVEMENTS}") {
+        httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.ACHIEVEMENTS}") {
             ensureBearer(token)
         }
 
@@ -51,7 +51,7 @@ class AccountClient(httpClient: HttpClient) : BaseClient(httpClient)
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.INVENTORIES)
     suspend fun bankItems(token: String? = null): List<BankItem> =
-        httpClient.get(path = "${Endpoints.ACCOUNT}/${Endpoints.BANK}") {
+        httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.BANK}") {
             ensureBearer(token)
         }
 
@@ -62,7 +62,7 @@ class AccountClient(httpClient: HttpClient) : BaseClient(httpClient)
     // TODO enum for the items and extension method
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
     suspend fun dailyCrafting(token: String? = null): List<String> =
-        httpClient.get(path = "${Endpoints.ACCOUNT}/${Endpoints.DAILY_CRAFTING}") {
+        httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.DAILY_CRAFTING}") {
             ensureBearer(token)
         }
 
@@ -73,7 +73,16 @@ class AccountClient(httpClient: HttpClient) : BaseClient(httpClient)
     // TODO enum for the paths (when doing dungeons endpoint) and extension method
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
     suspend fun dungeons(token: String? = null): List<String> =
-        httpClient.get("${Endpoints.ACCOUNT}/${Endpoints.DUNGEONS}") {
+        httpClient.get("${Accounts.ACCOUNT}/${Accounts.DUNGEONS}") {
             ensureBearer(token)
         }
+
+    /**
+     * @return the ids of the unlocked dyes on the account
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/colors">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
+    suspend fun dyes(token: String? = null): List<Int> = httpClient.get("${Accounts.ACCOUNT}/${Accounts.DYES}") {
+        ensureBearer(token)
+    }
 }
