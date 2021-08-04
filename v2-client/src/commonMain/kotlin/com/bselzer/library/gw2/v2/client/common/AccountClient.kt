@@ -191,4 +191,59 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
     suspend fun materials(token: String? = null): List<AccountMaterial> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.MATERIALS}") {
         ensureBearer(token)
     }
+
+    /**
+     * @return the ids of the unlocked minis
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/minis">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
+    suspend fun minis(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.MINIS}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the ids of the unlocked mount skins
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/mounts/skins">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
+    suspend fun mountSkins(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.MOUNTS}/${Accounts.SKINS}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the ids of the unlocked mount types
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/mounts/types">the wiki</a>
+     */
+    // TODO enums and extension method
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
+    suspend fun mountTypes(token: String? = null): List<String> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.MOUNTS}/${Accounts.TYPES}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the ids of the unlocked novelties
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/novelties">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
+    suspend fun novelties(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.NOVELTIES}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the ids of the unlocked outfits
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/outfits">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
+    suspend fun outfits(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.OUTFITS}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the ids of the unlocked PvP heroes
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/pvp/heroes">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
+    suspend fun pvpHeroes(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.PVP}/${Accounts.HEROES}") {
+        ensureBearer(token)
+    }
 }

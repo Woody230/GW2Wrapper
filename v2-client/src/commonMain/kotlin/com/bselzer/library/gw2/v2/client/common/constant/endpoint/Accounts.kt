@@ -21,4 +21,12 @@ internal object Accounts
     const val MASTERY = "mastery"
     const val POINTS = "points"
     const val MATERIALS = "materials"
+    const val MINIS = "minis"
+    const val MOUNTS = "mounts"
+    const val SKINS = "skins"
+    const val TYPES = "types"
+    const val NOVELTIES = "novelties"
+    const val OUTFITS = "outfits"
+    const val PVP = "pvp"
+    const val HEROES = "heroes"
 }
