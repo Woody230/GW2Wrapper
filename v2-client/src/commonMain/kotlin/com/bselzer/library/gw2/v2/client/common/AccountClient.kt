@@ -246,4 +246,21 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
     suspend fun pvpHeroes(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.PVP}/${Accounts.HEROES}") {
         ensureBearer(token)
     }
+
+    /**
+     * @return the ids of the raids completed since the weekly reset
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/raids">the wiki</a>
+     */
+    // TODO enums and extension method
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
+    suspend fun weeklyRaids(token: String? = null): List<String> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.RAIDS}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the ids of the unlocked recipes
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/recipes">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
+    suspend fun recipes(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.RECIPES}")
 }

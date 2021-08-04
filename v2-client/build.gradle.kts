@@ -26,6 +26,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
+                implementation("io.ktor:ktor-client-mock:$ktorVersion")
             }
         }
         val androidTest by getting {
@@ -37,6 +38,7 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-test-junit")
+                implementation("io.ktor:ktor-client-apache:$ktorVersion")
             }
         }
     }

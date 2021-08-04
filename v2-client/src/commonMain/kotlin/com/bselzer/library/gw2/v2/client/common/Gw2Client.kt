@@ -1,6 +1,5 @@
 package com.bselzer.library.gw2.v2.client.common
 
-import com.bselzer.library.gw2.v2.client.common.constant.Headers
 import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Endpoints
 import com.bselzer.library.gw2.v2.client.common.extension.bearer
 import com.bselzer.library.gw2.v2.client.common.extension.language
@@ -11,6 +10,7 @@ import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.request.*
 import io.ktor.http.*
+import io.ktor.utils.io.core.*
 import kotlinx.serialization.json.Json
 
 /**
@@ -21,7 +21,7 @@ open class Gw2Client(
     httpClient: HttpClient,
     json: Json = DEFAULT_JSON,
     private val configuration: Gw2ClientConfiguration = Gw2ClientConfiguration()
-)
+) : Closeable
 {
     companion object
     {
@@ -36,6 +36,11 @@ open class Gw2Client(
             coerceInputValues = true
         }
     }
+
+    /**
+     * The HTTP client.
+     */
+    private val httpClient: HttpClient
 
     /**
      * The account client.
@@ -57,29 +62,32 @@ open class Gw2Client(
 
     init
     {
-        val setupClient = httpClient.setup(json, configuration)
-        account = AccountClient(setupClient, configuration)
-        achievement = AchievementClient(setupClient, configuration)
-        token = TokenClient(setupClient, configuration)
+        val client = httpClient.setup(json, configuration)
+        this.httpClient = client
+        account = AccountClient(client, configuration)
+        achievement = AchievementClient(client, configuration)
+        token = TokenClient(client, configuration)
     }
 
     /**
      * @return a new http client with the configuration applied
      */
     private fun HttpClient.setup(json: Json, configuration: Gw2ClientConfiguration): HttpClient = config {
+        // Enable kotlinx.serialization
+        install(JsonFeature) {
+            serializer = KotlinxSerializer(json)
+        }
+
         defaultRequest {
             host = Endpoints.BASE_URL
 
-            // TODO validation?
-
-            // Enable kotlinx.serialization
-            install(JsonFeature) {
-                serializer = KotlinxSerializer(json)
+            url {
+                protocol = URLProtocol.HTTPS
             }
 
-            // Set up the headers.
-            header(HttpHeaders.ContentType, Headers.JSON)
+            // TODO HttpResponseValidator? https://ktor.io/docs/response-validation.html#custom
 
+            // Set up the headers.
             configuration.schemaVersion?.let { version ->
                 schemaVersion(version)
             }
@@ -92,5 +100,13 @@ open class Gw2Client(
                 language(language)
             }
         }
+    }
+
+    /**
+     * Close the HTTP client.
+     */
+    override fun close()
+    {
+        httpClient.close()
     }
 }

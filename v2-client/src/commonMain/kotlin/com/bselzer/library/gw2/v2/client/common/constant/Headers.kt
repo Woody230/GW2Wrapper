@@ -8,11 +8,6 @@ internal object Headers
     const val BEARER = "Bearer"
 
     /**
-     * The JSON type of content.
-     */
-    const val JSON = "application/json"
-
-    /**
      * The schema version header.
      */
     const val SCHEMA_VERSION = "X-Schema-Version"

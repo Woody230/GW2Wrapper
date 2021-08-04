@@ -29,4 +29,6 @@ internal object Accounts
     const val OUTFITS = "outfits"
     const val PVP = "pvp"
     const val HEROES = "heroes"
+    const val RAIDS = "raids"
+    const val RECIPES = "recipes"
 }
