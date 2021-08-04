@@ -7,6 +7,8 @@ import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Accounts
 import com.bselzer.library.gw2.v2.client.common.extension.ensureBearer
 import com.bselzer.library.gw2.v2.model.common.account.*
 import com.bselzer.library.gw2.v2.model.common.account.bank.BankSlot
+import com.bselzer.library.gw2.v2.model.common.account.mastery.AccountMastery
+import com.bselzer.library.gw2.v2.model.common.account.mastery.AccountMasteryPoints
 import io.ktor.client.*
 import io.ktor.client.request.*
 import kotlin.time.ExperimentalTime
@@ -46,7 +48,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * A null [BankSlot] indicates that the slot does not contain an item.
      *
      * @return the account's bank slots
-     * @see <a href="https://wiki.guildwars2.com/wiki/Account_vault">the wiki</a>
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/bank">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.INVENTORIES)
     suspend fun bankSlots(token: String? = null): List<BankSlot> =
@@ -56,7 +58,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
 
     /**
      * @return the time-gated recipes that have been crafted since the daily reset
-     * @see <a href="https://wiki.guildwars2.com/wiki/Crafting#Time_gated_recipes">the wiki</a>
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/dailycrafting">the wiki</a>
      */
     // TODO enum for the items and extension method
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
@@ -67,7 +69,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
 
     /**
      * @return the ids of the dungeon paths completed since the daily reset
-     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/dungeons">the wiki</a>
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/dungeons">the wiki</a>
      */
     // TODO enum for the paths and extension method
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
@@ -78,7 +80,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
 
     /**
      * @return the ids of the unlocked dyes on the account
-     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/colors">the wiki</a>
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/dyes">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
     suspend fun dyes(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.DYES}") {
@@ -87,7 +89,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
 
     /**
      * @return the account's unlocked finishers
-     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/finishers">the wiki</a>
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/finishers">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
     suspend fun finishers(token: String? = null): List<AccountFinisher> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.FINISHERS}") {
@@ -96,7 +98,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
 
     /**
      * @return the ids of the unlocked gliders
-     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/gliders">the wiki</a>
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/gliders">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
     suspend fun gliders(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.GLIDERS}") {
@@ -106,7 +108,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
     /**
      * @return the ids of the unlocked home instance cats
      * @since 2019-03-22T00:00:00Z or later
-     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/home/cats">the wiki</a>
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/home/cats">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION, Permission.UNLOCKS)
     suspend fun cats(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.HOME}/${Accounts.CATS}") {
@@ -115,7 +117,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
 
     /**
      * @return the ids of the unlocked home instance nodes
-     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/home/nodes">the wiki</a>
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/home/nodes">the wiki</a>
      */
     // TODO enum for the ids and extension method
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION, Permission.UNLOCKS)
@@ -146,7 +148,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
 
     /**
      * @return the ids of the unlocked mail carriers
-     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">the wiki</a>
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/mailcarriers">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
     suspend fun mailCarriers(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.MAIL_CARRIERS}") {
@@ -155,11 +157,38 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
 
     /**
      * @return the ids of the map chests unlocked since the daily reset
-     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mapchests">the wiki</a>
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/mapchests">the wiki</a>
      */
     // TODO enum for the ids and extension method
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
     suspend fun dailyMapChests(token: String? = null): List<String> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.MAP_CHESTS}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the account's unlocked masteries
+     * @See <a href="https://wiki.guildwars2.com/wiki/API:2/account/masteries">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
+    suspend fun masteries(token: String? = null): List<AccountMastery> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.MASTERIES}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the account's unlocked mastery point counts
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/mastery/points">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
+    suspend fun masteryPoints(token: String? = null): AccountMasteryPoints = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.MASTERY}/${Accounts.POINTS}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the account's materials
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/materials">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.INVENTORIES)
+    suspend fun materials(token: String? = null): List<AccountMaterial> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.MATERIALS}") {
         ensureBearer(token)
     }
 }

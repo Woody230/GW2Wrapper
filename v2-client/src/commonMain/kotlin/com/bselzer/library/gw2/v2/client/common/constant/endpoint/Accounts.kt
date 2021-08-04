@@ -17,4 +17,8 @@ internal object Accounts
     const val LUCK = "luck"
     const val MAIL_CARRIERS = "mailcarriers"
     const val MAP_CHESTS = "mapchests"
+    const val MASTERIES = "masteries"
+    const val MASTERY = "mastery"
+    const val POINTS = "points"
+    const val MATERIALS = "materials"
 }
