@@ -262,5 +262,44 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/recipes">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
-    suspend fun recipes(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.RECIPES}")
+    suspend fun recipes(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.RECIPES}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the ids of the unlocked skins
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/skins">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
+    suspend fun skins(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.SKINS}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the ids of the unlocked titles
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/titles">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
+    suspend fun titles(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.TITLES}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the account's currencies
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/wallet">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.WALLET)
+    suspend fun currencies(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.WALLET}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the ids of the world bosses completed since the daily reset
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/worldbosses">the wiki</a>
+     */
+    // TODO enums and extension method
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
+    suspend fun dailyWorldBosses(token: String? = null): List<String> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.WORLD_BOSSES}") {
+        ensureBearer(token)
+    }
 }

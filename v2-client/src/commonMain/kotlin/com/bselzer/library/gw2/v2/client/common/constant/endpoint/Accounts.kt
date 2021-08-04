@@ -31,4 +31,7 @@ internal object Accounts
     const val HEROES = "heroes"
     const val RAIDS = "raids"
     const val RECIPES = "recipes"
+    const val TITLES = "titles"
+    const val WALLET = "wallet"
+    const val WORLD_BOSSES = "worldbosses"
 }
