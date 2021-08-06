@@ -17,8 +17,8 @@ kotlin {
                 implementation(project(":v2-annotations"))
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
-                implementation("com.github.Woody230.KotlinExtensions:serialization:1.2.6")
-                implementation("com.github.Woody230.KotlinExtensions:function:1.2.6")
+                implementation("com.github.Woody230.KotlinExtensions:serialization:1.2.7")
+                implementation("com.github.Woody230.KotlinExtensions:function:1.2.7")
             }
         }
         val commonTest by getting {

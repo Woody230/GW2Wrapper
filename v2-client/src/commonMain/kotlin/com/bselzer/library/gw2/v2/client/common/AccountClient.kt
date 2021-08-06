@@ -6,7 +6,6 @@ import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
 import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Accounts
 import com.bselzer.library.gw2.v2.client.common.extension.ensureBearer
 import com.bselzer.library.gw2.v2.model.common.account.*
-import com.bselzer.library.gw2.v2.model.common.account.bank.BankSlot
 import com.bselzer.library.gw2.v2.model.common.account.mastery.AccountMastery
 import com.bselzer.library.gw2.v2.model.common.account.mastery.AccountMasteryPoints
 import io.ktor.client.*

@@ -55,6 +55,12 @@ open class Gw2Client(
     val achievement: AchievementClient
 
     /**
+     * The character client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters">the wiki</a>
+     */
+    val character: CharacterClient
+
+    /**
      * The token client.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/tokeninfo">the wiki</a>
      */
@@ -66,6 +72,7 @@ open class Gw2Client(
         this.httpClient = client
         account = AccountClient(client, configuration)
         achievement = AchievementClient(client, configuration)
+        character = CharacterClient(client, configuration)
         token = TokenClient(client, configuration)
     }
 

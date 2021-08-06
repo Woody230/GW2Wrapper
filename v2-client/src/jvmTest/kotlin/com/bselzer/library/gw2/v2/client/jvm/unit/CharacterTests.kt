@@ -6,16 +6,16 @@ import io.ktor.client.*
 import io.ktor.client.engine.mock.*
 import io.ktor.http.*
 import kotlinx.coroutines.runBlocking
-import kotlin.test.Test
+import org.junit.Test
 import kotlin.test.assertEquals
 
-class AchievementTests
+class CharacterTests
 {
     /**
-     * Verifies that the achievement ids endpoint is being called and the response is deserialized correctly.
+     * Verifies that the character backstory endpoint is being called and the response is deserialized correctly.
      */
     @Test
-    fun achievementIds()
+    fun backstory()
     {
         // Arrange
         val httpClient = HttpClient(MockEngine) {
@@ -23,7 +23,10 @@ class AchievementTests
                 addHandler { request ->
                     when (request.url.toString())
                     {
-                        "https://api.guildwars2.com/v2/achievements" -> respond("[1, 614, 1024, 29]", headers = ContentType.Application.Json.asHeader())
+                        "https://api.guildwars2.com/v2/characters/John Doe/backstory" -> respond(
+                            "[\"1-45\", \"180-99\", \"78-79\"]",
+                            headers = ContentType.Application.Json.asHeader()
+                        )
                         else -> error("Cannot handle ${request.url.fullPath}")
                     }
                 }
@@ -35,11 +38,11 @@ class AchievementTests
         // Act
         val ids = runBlocking {
             gw2Client.use {
-                it.achievement.ids()
+                it.character.backstory("John Doe", "")
             }
         }
 
         // Assert
-        assertEquals(listOf(1, 614, 1024, 29), ids)
+        assertEquals(listOf("1-45", "180-99", "78-79"), ids)
     }
 }

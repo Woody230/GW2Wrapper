@@ -1,8 +1,9 @@
-package com.bselzer.library.gw2.v2.model.common.account.bank
+package com.bselzer.library.gw2.v2.model.common.account
 
 import com.bselzer.library.gw2.v2.annotation.common.scope.Permission
 import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
 import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
+import com.bselzer.library.gw2.v2.model.common.character.ItemStat
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -14,6 +15,10 @@ import kotlinx.serialization.Serializable
 @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.INVENTORIES)
 @Serializable
 data class BankSlot(
+    /**
+     * The id of the item.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
+     */
     @SerialName("id")
     val id: Int = 0,
 
@@ -38,11 +43,11 @@ data class BankSlot(
     val skin: Int = 0,
 
     /**
-     * The ids of the dyes, if applicable.
+     * The ids of the dyes. An id will be null if there is no selection.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/colors">the wiki</a>
      */
     @SerialName("dyes")
-    val dyes: List<Int> = emptyList(),
+    val dyes: List<Int?> = emptyList(),
 
     /**
      * The ids of the upgrades (runes/sigils) applied to the item.
@@ -81,5 +86,5 @@ data class BankSlot(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/itemstats">the wiki</a>
      */
     @SerialName("stats")
-    val stats: List<BankItemStat> = emptyList()
+    val stats: List<ItemStat> = emptyList()
 )
