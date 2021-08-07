@@ -6,6 +6,7 @@ import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
 import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Accounts
 import com.bselzer.library.gw2.v2.client.common.extension.ensureBearer
 import com.bselzer.library.gw2.v2.model.common.account.*
+import com.bselzer.library.gw2.v2.model.common.account.build.BuildStorageSlot
 import com.bselzer.library.gw2.v2.model.common.account.mastery.AccountMastery
 import com.bselzer.library.gw2.v2.model.common.account.mastery.AccountMasteryPoints
 import io.ktor.client.*
@@ -56,6 +57,15 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
         }
 
     /**
+     * @return the build templates stored on the account
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/buildstorage">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
+    suspend fun buildStorageSlots(token: String? = null): List<BuildStorageSlot> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.BUILD_STORAGE}") {
+        ensureBearer(token)
+    }
+
+    /**
      * @return the time-gated recipes that have been crafted since the daily reset
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/dailycrafting">the wiki</a>
      */
@@ -83,6 +93,15 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
     suspend fun dyes(token: String? = null): List<Int> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.DYES}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the ids of the unlocked emotes on the account
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/emotes">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
+    suspend fun emotes(token: String? = null): List<String> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.EMOTES}") {
         ensureBearer(token)
     }
 
@@ -131,7 +150,16 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/inventory">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.INVENTORIES)
-    suspend fun inventories(token: String? = null): List<SharedSlot> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.INVENTORY}") {
+    suspend fun sharedSlots(token: String? = null): List<SharedSlot> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.INVENTORY}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the account's legendary armory items
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/legendaryarmory">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.INVENTORIES, Permission.UNLOCKS)
+    suspend fun legendaryArmory(token: String? = null): List<ArmoryItem> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.LEGENDARY_ARMORY}") {
         ensureBearer(token)
     }
 

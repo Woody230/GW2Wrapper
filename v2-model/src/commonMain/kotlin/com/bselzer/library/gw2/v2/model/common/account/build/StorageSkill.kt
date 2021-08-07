@@ -1,10 +1,10 @@
-package com.bselzer.library.gw2.v2.model.common.character
+package com.bselzer.library.gw2.v2.model.common.account.build
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CharacterSkills(
+data class StorageSkill(
     /**
      * The id of the heal skill.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
@@ -24,12 +24,5 @@ data class CharacterSkills(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
      */
     @SerialName("elite")
-    val eliteId: Int = 0,
-
-    /**
-     * The ids of the legends for Revenants.
-     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
-     */
-    @SerialName("legends")
-    val legendIds: List<String?> = emptyList()
+    val eliteId: Int = 0
 )

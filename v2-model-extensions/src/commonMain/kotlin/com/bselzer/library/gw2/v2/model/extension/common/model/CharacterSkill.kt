@@ -5,6 +5,6 @@ import com.bselzer.library.gw2.v2.model.extension.common.enumeration.profession.
 import com.bselzer.library.kotlin.extension.function.common.objects.validEnumValues
 
 /**
- * The [CharacterSkills.legends] as a collection of [LegendName]
+ * The [CharacterSkills.legendIds] as a collection of [LegendName]
  */
-fun CharacterSkills.legends(): List<LegendName> = legends.validEnumValues()
+fun CharacterSkills.legends(): List<LegendName> = legendIds.validEnumValues()
