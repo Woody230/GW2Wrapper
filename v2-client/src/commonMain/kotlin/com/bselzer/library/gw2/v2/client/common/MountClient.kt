@@ -23,7 +23,7 @@ class MountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the skins associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mounts/skins">the wiki</a>
      */
-    suspend fun skins(ids: Collection<Int>, language: String? = null): List<MountSkin> = chunked(ids, "${Mounts.MOUNTS}/${Mounts.SKINS}") {
+    suspend fun skins(ids: Collection<Int>, language: String? = null): List<MountSkin> = chunkedIds(ids, "${Mounts.MOUNTS}/${Mounts.SKINS}") {
         language(language)
     }
 
@@ -37,7 +37,7 @@ class MountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the types associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mounts/types">the wiki</a>
      */
-    suspend fun types(ids: Collection<String>, language: String? = null): List<MountType> = chunked(ids, "${Mounts.MOUNTS}/${Mounts.TYPES}") {
+    suspend fun types(ids: Collection<String>, language: String? = null): List<MountType> = chunkedIds(ids, "${Mounts.MOUNTS}/${Mounts.TYPES}") {
         language(language)
     }
 }

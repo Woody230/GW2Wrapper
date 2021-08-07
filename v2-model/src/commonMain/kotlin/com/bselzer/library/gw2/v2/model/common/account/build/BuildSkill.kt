@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class StorageSkill(
+data class BuildSkill(
     /**
      * The id of the heal skill.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
@@ -17,7 +17,7 @@ data class StorageSkill(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
      */
     @SerialName("utilities")
-    val utilityIds: List<Int?> = emptyList(),
+    val utilityIds: List<Int> = emptyList(),
 
     /**
      * The id of the elite skill.

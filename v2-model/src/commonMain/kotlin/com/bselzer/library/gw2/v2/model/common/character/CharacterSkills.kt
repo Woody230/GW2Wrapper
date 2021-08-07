@@ -17,7 +17,7 @@ data class CharacterSkills(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
      */
     @SerialName("utilities")
-    val utilityIds: List<Int?> = emptyList(),
+    val utilityIds: List<Int> = emptyList(),
 
     /**
      * The id of the elite skill.

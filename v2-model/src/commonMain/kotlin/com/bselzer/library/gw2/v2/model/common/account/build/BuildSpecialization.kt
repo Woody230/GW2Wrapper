@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class StorageSpecialization(
+data class BuildSpecialization(
     /**
      * The id of the specialization.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/specializations">the wiki</a>

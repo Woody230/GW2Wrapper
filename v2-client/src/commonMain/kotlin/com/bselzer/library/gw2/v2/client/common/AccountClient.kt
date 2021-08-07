@@ -6,7 +6,7 @@ import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
 import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Accounts
 import com.bselzer.library.gw2.v2.client.common.extension.ensureBearer
 import com.bselzer.library.gw2.v2.model.common.account.*
-import com.bselzer.library.gw2.v2.model.common.account.build.BuildStorageSlot
+import com.bselzer.library.gw2.v2.model.common.account.build.BuildTemplate
 import com.bselzer.library.gw2.v2.model.common.account.mastery.AccountMastery
 import com.bselzer.library.gw2.v2.model.common.account.mastery.AccountMasteryPoints
 import io.ktor.client.*
@@ -61,7 +61,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/buildstorage">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
-    suspend fun buildStorageSlots(token: String? = null): List<BuildStorageSlot> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.BUILD_STORAGE}") {
+    suspend fun storedBuildTemplates(token: String? = null): List<BuildTemplate> = httpClient.get(path = "${Accounts.ACCOUNT}/${Accounts.BUILD_STORAGE}") {
         ensureBearer(token)
     }
 

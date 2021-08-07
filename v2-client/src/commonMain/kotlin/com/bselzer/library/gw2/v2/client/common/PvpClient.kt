@@ -46,7 +46,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/games">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PVP)
-    suspend fun games(ids: Collection<String>, token: String? = null): List<PvpGame> = chunked(ids, "${PvP.PVP}/${PvP.GAMES}") {
+    suspend fun games(ids: Collection<String>, token: String? = null): List<PvpGame> = chunkedIds(ids, "${PvP.PVP}/${PvP.GAMES}") {
         ensureBearer(token)
     }
 
@@ -69,7 +69,9 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the ranks associated with the [ids]
      * @see <a href='https://wiki.guildwars2.com/wiki/API:2/pvp/ranks">the wiki</a>
      */
-    suspend fun ranks(ids: Collection<Int>): List<PvpRank> = chunked(ids, "${PvP.PVP}/${PvP.RANKS}")
+    suspend fun ranks(ids: Collection<Int>, language: String? = null): List<PvpRank> = chunkedIds(ids, "${PvP.PVP}/${PvP.RANKS}") {
+        language(language)
+    }
 
     /**
      * @return the ids of all the PvP League seasons
@@ -81,7 +83,9 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the seasons associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">the wiki</a>
      */
-    suspend fun seasons(ids: Collection<String>): List<PvpSeason> = chunked(ids, "${PvP.PVP}/${PvP.SEASONS}")
+    suspend fun seasons(ids: Collection<String>, language: String? = null): List<PvpSeason> = chunkedIds(ids, "${PvP.PVP}/${PvP.SEASONS}") {
+        language(language)
+    }
 
     /**
      * @return the available regions with leaderboards
@@ -110,7 +114,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the heroes associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">the wiki</a>
      */
-    suspend fun heroes(ids: Collection<String>, language: String? = null): List<String> = chunked(ids, "${PvP.PVP}/${PvP.HEROES}") {
+    suspend fun heroes(ids: Collection<String>, language: String? = null): List<String> = chunkedIds(ids, "${PvP.PVP}/${PvP.HEROES}") {
         language(language)
     }
 
@@ -124,7 +128,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the amulets associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/amulets">the wiki</a>
      */
-    suspend fun amulets(ids: Collection<Int>, language: String? = null): List<PvpAmulet> = chunked(ids, "${PvP.PVP}/${PvP.AMULETS}") {
+    suspend fun amulets(ids: Collection<Int>, language: String? = null): List<PvpAmulet> = chunkedIds(ids, "${PvP.PVP}/${PvP.AMULETS}") {
         language(language)
     }
 }

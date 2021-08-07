@@ -1,10 +1,11 @@
-package com.bselzer.library.gw2.v2.model.common.character
+package com.bselzer.library.gw2.v2.model.common.account.build
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+// TODO replace with PvpEquipment in character?
 @Serializable
-data class PvpEquipment(
+data class EquipmentTemplatePvp(
     /**
      * The id of the PvP amulet.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/amulets">the wiki</a>
@@ -26,5 +27,5 @@ data class PvpEquipment(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
     @SerialName("sigils")
-    val sigilIds: List<Int?> = emptyList()
+    val sigilIds: List<Int> = emptyList()
 )

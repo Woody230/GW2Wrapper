@@ -5,6 +5,8 @@ import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
 import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
 import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Characters
 import com.bselzer.library.gw2.v2.client.common.extension.ensureBearer
+import com.bselzer.library.gw2.v2.model.common.account.build.BuildTemplateTab
+import com.bselzer.library.gw2.v2.model.common.account.build.EquipmentTemplateTab
 import com.bselzer.library.gw2.v2.model.common.character.*
 import com.bselzer.library.gw2.v2.model.common.character.superadventurebox.SabProgress
 import io.ktor.client.*
@@ -29,11 +31,29 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     }
 
     /**
-     * @return the character overview. Excludes hero point and super adventure box information.
+     * @return the character overview associated with the [name]. Excludes hero point and super adventure box information.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     suspend fun overview(name: String, token: String? = null): Character = httpClient.get(path = "${Characters.CHARACTERS}/${name}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the character overviews associated with the [names]. Excludes hero point and super adventure box information.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
+    suspend fun overviews(names: List<String>, token: String? = null): List<Character> = chunkedIds(names, Characters.CHARACTERS) {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return all the character overviews. Excludes hero point and super adventure box information.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
+    suspend fun overviews(token: String? = null): List<Character> = allIds(Characters.CHARACTERS) {
         ensureBearer(token)
     }
 
@@ -56,6 +76,44 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     }.backstory
 
     /**
+     * @return the ids of the character's build template tabs
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters/:id/buildtabs">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
+    suspend fun buildTabIds(name: String, token: String? = null): List<Int> = httpClient.get(path = "${Characters.CHARACTERS}/${name}/${Characters.BUILD_TABS}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the build template tabs associated with the [ids]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters/:id/buildtabs">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
+    suspend fun buildTabs(name: String, ids: Collection<Int>, token: String? = null): List<BuildTemplateTab> =
+        chunkedTabs(ids, "${Characters.CHARACTERS}/${name}/${Characters.BUILD_TABS}") {
+            ensureBearer(token)
+        }
+
+    /**
+     * @return all the build template tabs
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters/:id/buildtabs">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
+    suspend fun buildTabs(name: String, token: String? = null): List<BuildTemplateTab> = allTabs("${Characters.CHARACTERS}/${name}/${Characters.BUILD_TABS}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the currently active build template tab
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters/:id/buildtabs">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
+    suspend fun activeBuildTab(name: String, token: String? = null): BuildTemplateTab =
+        httpClient.get(path = "${Characters.CHARACTERS}/${name}/${Characters.BUILD_TABS}/${Characters.ACTIVE}") {
+            ensureBearer(token)
+        }
+
+    /**
      * @return the unlocked crafting disciplines.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Crafting">the wiki</a>
      */
@@ -74,6 +132,44 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
         httpClient.get<Character>(path = "${Characters.CHARACTERS}/${name}/${Characters.EQUIPMENT}") {
             ensureBearer(token)
         }.equipment
+
+    /**
+     * @return the ids of the character's equipment template tabs
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters/:id/equipmenttabs">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
+    suspend fun equipmentTabIds(name: String, token: String? = null): List<Int> = httpClient.get(path = "${Characters.CHARACTERS}/${name}/${Characters.EQUIPMENT_TABS}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the equipment template tabs associated with the [ids]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters/:id/equipmenttabs">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
+    suspend fun equipmentTabs(name: String, ids: Collection<Int>, token: String? = null): List<EquipmentTemplateTab> =
+        chunkedTabs(ids, "${Characters.CHARACTERS}/${name}/${Characters.EQUIPMENT_TABS}") {
+            ensureBearer(token)
+        }
+
+    /**
+     * @return all the equipment template tabs
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters/:id/equipmenttabs">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
+    suspend fun equipmentTabs(name: String, token: String? = null): List<EquipmentTemplateTab> = allTabs("${Characters.CHARACTERS}/${name}/${Characters.EQUIPMENT_TABS}") {
+        ensureBearer(token)
+    }
+
+    /**
+     * @return the currently active equipment template tab
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters/:id/equipmenttabs">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
+    suspend fun activeEquipmentTab(name: String, token: String? = null): EquipmentTemplateTab =
+        httpClient.get(path = "${Characters.CHARACTERS}/${name}/${Characters.EQUIPMENT_TABS}/${Characters.ACTIVE}") {
+            ensureBearer(token)
+        }
 
     /**
      * @return the ids of the skill challenges.
@@ -141,4 +237,13 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     suspend fun recipes(name: String, token: String? = null): List<Int> = httpClient.get<Character>(path = "${Characters.CHARACTERS}/${name}/${Characters.RECIPES}") {
         ensureBearer(token)
     }.recipes
+
+    /**
+     * @return the ids for quests related to the character's story progression
+     * @see <a href='https://wiki.guildwars2.com/wiki/API:2/characters/:id/quests">the wiki</a>
+     */
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS, Permission.PROGRESSION)
+    suspend fun quests(name: String, token: String? = null): List<Int> = httpClient.get(path = "${Characters.CHARACTERS}/${name}/${Characters.QUESTS}") {
+        ensureBearer(token)
+    }
 }

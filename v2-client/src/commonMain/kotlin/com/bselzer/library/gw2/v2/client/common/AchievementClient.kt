@@ -26,7 +26,9 @@ class AchievementClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
      * @return the achievements associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements">the wiki</a>
      */
-    suspend fun achievements(ids: Collection<Int>): List<Achievement> = chunked(ids, Achievements.ACHIEVEMENTS)
+    suspend fun achievements(ids: Collection<Int>, language: String? = null): List<Achievement> = chunkedIds(ids, Achievements.ACHIEVEMENTS) {
+        language(language)
+    }
 
     /**
      * @return today's dailies
@@ -50,7 +52,9 @@ class AchievementClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
      * @return the achievement groups associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/groups">the wiki</a>
      */
-    suspend fun groups(ids: Collection<String>): List<AchievementGroup> = chunked(ids, "${Achievements.ACHIEVEMENTS}/${Achievements.GROUPS}")
+    suspend fun groups(ids: Collection<String>, language: String? = null): List<AchievementGroup> = chunkedIds(ids, "${Achievements.ACHIEVEMENTS}/${Achievements.GROUPS}") {
+        language(language)
+    }
 
     /**
      * @return the ids of all achievement categories
@@ -63,7 +67,7 @@ class AchievementClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/categories">the wiki</a>
      */
     suspend fun categories(ids: Collection<Int>, language: String? = null): List<AchievementCategory> =
-        chunked(ids, "${Achievements.ACHIEVEMENTS}/${Achievements.CATEGORIES}") {
+        chunkedIds(ids, "${Achievements.ACHIEVEMENTS}/${Achievements.CATEGORIES}") {
             language(language)
         }
 }

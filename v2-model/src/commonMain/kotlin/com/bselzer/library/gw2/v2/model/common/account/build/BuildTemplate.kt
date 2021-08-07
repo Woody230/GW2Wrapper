@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class BuildStorageSlot(
+data class BuildTemplate(
     /**
      * The name of the template given by the player.
      */
@@ -21,29 +21,35 @@ data class BuildStorageSlot(
      * The selected specializations and traits.
      */
     @SerialName("specializations")
-    val specializations: List<StorageSpecialization> = emptyList(),
+    val specializations: List<BuildSpecialization> = emptyList(),
 
     /**
      * The selected skills on land.
      */
     @SerialName("skills")
-    val terrestrialSkills: List<StorageSkill> = emptyList(),
+    val terrestrialSkills: List<BuildSkill> = emptyList(),
 
     /**
      * The selected skills underwater.
      */
     @SerialName("aquatic_skills")
-    val aquaticSkills: List<StorageSkill> = emptyList(),
+    val aquaticSkills: List<BuildSkill> = emptyList(),
 
     /**
-     * The selected legends on land. For Revenants only.
+     * The selected pets. For Rangers only.
+     */
+    @SerialName("pets")
+    val pets: BuildPets = BuildPets(),
+
+    /**
+     * The selected legends on land. For Revenants only. A null indicates no selection.
      */
     @SerialName("legends")
-    val terrestrialLegends: List<String> = emptyList(),
+    val terrestrialLegends: List<String?> = emptyList(),
 
     /**
-     * The selected legends underwater. For Revenants only.
+     * The selected legends underwater. For Revenants only. A null indicates no selection.
      */
     @SerialName("aquatic_legends")
-    val aquaticLegends: List<String> = emptyList()
+    val aquaticLegends: List<String?> = emptyList()
 )
