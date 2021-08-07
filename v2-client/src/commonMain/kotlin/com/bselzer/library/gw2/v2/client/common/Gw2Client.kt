@@ -61,16 +61,46 @@ open class Gw2Client(
     val character: CharacterClient
 
     /**
-     * The token client.
-     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/tokeninfo">the wiki</a>
+     * The daily crafting client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/dailycrafting">the wiki</a>
      */
-    val token: TokenClient
+    val dailyCrafting: DailyCraftingClient
+
+    /**
+     * The map chests client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mapchests">the wiki</a>
+     */
+    val mapChest: MapChestClient
+
+    /**
+     * The mastery client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/masteries">the wiki</a>
+     */
+    val mastery: MasteryClient
+
+    /**
+     * The mount client.
+     * @see <a href='https://wiki.guildwars2.com/wiki/API:2/mounts">the wiki</a>
+     */
+    val mount: MountClient
 
     /**
      * The player vs player client.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp">the wiki</a>
      */
     val pvp: PvpClient
+
+    /**
+     * The token client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/tokeninfo">the wiki</a>
+     */
+    val token: TokenClient
+
+    /**
+     * The world boss client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/worldbosses">the wiki</a>
+     */
+    val worldBoss: WorldBossClient
 
     init
     {
@@ -79,8 +109,13 @@ open class Gw2Client(
         account = AccountClient(client, configuration)
         achievement = AchievementClient(client, configuration)
         character = CharacterClient(client, configuration)
-        token = TokenClient(client, configuration)
+        dailyCrafting = DailyCraftingClient(client, configuration)
+        mapChest = MapChestClient(client, configuration)
+        mastery = MasteryClient(client, configuration)
+        mount = MountClient(client, configuration)
         pvp = PvpClient(client, configuration)
+        token = TokenClient(client, configuration)
+        worldBoss = WorldBossClient(client, configuration)
     }
 
     /**

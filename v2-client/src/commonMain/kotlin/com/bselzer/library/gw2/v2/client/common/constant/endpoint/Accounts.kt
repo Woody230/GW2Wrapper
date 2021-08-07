@@ -8,12 +8,16 @@ internal object Accounts
     const val DAILY_CRAFTING = "dailycrafting"
     const val DUNGEONS = "dungeons"
     const val DYES = "dyes"
+
+    //TODO emotes
     const val FINISHERS = "finishers"
     const val GLIDERS = "gliders"
     const val HOME = "home"
     const val CATS = "cats"
     const val NODES = "nodes"
     const val INVENTORY = "inventory"
+
+    //TODO legendary armory
     const val LUCK = "luck"
     const val MAIL_CARRIERS = "mailcarriers"
     const val MAP_CHESTS = "mapchests"
@@ -31,6 +35,8 @@ internal object Accounts
     const val HEROES = "heroes"
     const val RAIDS = "raids"
     const val RECIPES = "recipes"
+
+    //TODO skins
     const val TITLES = "titles"
     const val WALLET = "wallet"
     const val WORLD_BOSSES = "worldbosses"
