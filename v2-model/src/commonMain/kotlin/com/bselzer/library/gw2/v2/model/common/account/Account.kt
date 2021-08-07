@@ -20,7 +20,7 @@ import kotlin.time.ExperimentalTime
 @Serializable
 data class Account(
     /**
-     * The identifier in the form of a UUID.
+     * The id in the form of a UUID.
      */
     @SerialName("id")
     val id: String = "",

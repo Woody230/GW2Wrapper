@@ -1,0 +1,27 @@
+package com.bselzer.library.gw2.v2.model.common.pvp.standing
+
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+@SerialName("current")
+data class CurrentStanding(
+    override val totalPoints: Int = 0,
+    override val division: Int = 0,
+    override val points: Int = 0,
+    override val repeats: Int = 0,
+
+    /**
+     * The current rating level.
+     * @since season 5 or after
+     */
+    @SerialName("rating")
+    val rating: Int = 0,
+
+    /**
+     * The number of points decayed.
+     * @since season 5 or after
+     */
+    @SerialName("decay")
+    val decay: Int = 0
+) : PvpStanding()

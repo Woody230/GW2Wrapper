@@ -1,6 +1,5 @@
 package com.bselzer.library.gw2.v2.client.common
 
-import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Endpoints
 import io.ktor.client.*
 import io.ktor.client.request.*
 
@@ -27,11 +26,11 @@ abstract class BaseClient(
     private fun HttpRequestBuilder.idsParameter(ids: Collection<*>) = parameter("ids", ids.asIdsParameter())
 
     /**
-     * Chunks the ids into requests small enough for the API to accept, if there are more than [Endpoints.MAXIMUM_PAGE_SIZE] ids.
+     * Chunks the ids into requests small enough for the API to accept, if there are more than [pageSize] ids.
      *
      * @return the collection of ids represented by the ids
      */
-    protected suspend fun <T> chunked(ids: Collection<*>, basePath: String, block: HttpRequestBuilder.() -> Unit = {}): List<T>
+    protected suspend fun <T> chunked(ids: Collection<*>, basePath: String, pageSize: Int = configuration.pageSize, block: HttpRequestBuilder.() -> Unit = {}): List<T>
     {
         val responses = mutableListOf<T>()
         for (chunk in ids.chunked(configuration.pageSize))

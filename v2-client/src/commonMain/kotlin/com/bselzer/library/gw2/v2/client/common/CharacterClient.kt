@@ -16,7 +16,7 @@ import io.ktor.client.request.*
  * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters">the wiki</a>
  */
 @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
-@Scope(Requirement.OPTIONAL, Permission.INVENTORIES)
+@Scope(Requirement.OPTIONAL, Permission.BUILDS, Permission.INVENTORIES, Permission.PROGRESSION)
 class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration)
 {
     /**
@@ -29,7 +29,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     }
 
     /**
-     * The character overview. Excludes hero point and super adventure box information.
+     * @return the character overview. Excludes hero point and super adventure box information.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
@@ -38,7 +38,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     }
 
     /**
-     * The character with only the core information populated.
+     * @return the character with only the core information populated.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Core">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
@@ -56,7 +56,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     }.backstory
 
     /**
-     * The unlocked crafting disciplines.
+     * @return the unlocked crafting disciplines.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Crafting">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
@@ -66,7 +66,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
         }.crafting
 
     /**
-     * The equipped items.
+     * @return the equipped items.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Equipment">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS, Permission.ACCOUNT)
@@ -76,7 +76,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
         }.equipment
 
     /**
-     * The ids of the skill challenges.
+     * @return the ids of the skill challenges.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Heropoints">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS, Permission.PROGRESSION)
@@ -85,7 +85,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     }
 
     /**
-     * The equipped bags.
+     * @return the equipped bags.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Inventory">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS, Permission.INVENTORIES)
@@ -94,7 +94,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     }.bags
 
     /**
-     * The skills in each game mode.
+     * @return the skills in each game mode.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Skills">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
@@ -103,7 +103,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     }.skills
 
     /**
-     * The specializations in each game mode.
+     * @return the specializations in each game mode.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Specialization">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
@@ -113,7 +113,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
         }.specializations
 
     /**
-     * The skill tree trainings.
+     * @return the skill tree trainings.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Training">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
@@ -123,7 +123,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
         }.trainings
 
     /**
-     * The super adventure box progress.
+     * @return the super adventure box progress.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Super_Adventure_Box_.28sab.29">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.CHARACTERS, Permission.PROGRESSION)
@@ -133,7 +133,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
         }
 
     /**
-     * The unlocked recipes. Note that recipes have been account bound since the July 26, 2016 release.
+     * @return the unlocked recipes. Note that recipes have been account bound since the July 26, 2016 release.
      * @see <a href="https://github.com/arenanet/api-cdi/blob/master/v2/characters/characters.js">the cdi</a>
      * @see <a href="https://wiki.guildwars2.com/wiki/Game_updates/2016-07-26#Update_-_July_26.2C_2016">the release notes</a>
      */

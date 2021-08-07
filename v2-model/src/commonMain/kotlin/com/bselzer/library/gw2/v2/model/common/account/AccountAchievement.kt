@@ -16,7 +16,7 @@ data class AccountAchievement(
     val id: Int = 0,
 
     /**
-     * Reference identifiers indicating progress of the achievement.
+     * Reference ids indicating progress of the achievement.
      */
     @SerialName("bits")
     val bits: List<Int> = emptyList(),

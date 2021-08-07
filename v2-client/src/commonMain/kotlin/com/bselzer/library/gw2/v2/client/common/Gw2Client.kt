@@ -66,6 +66,12 @@ open class Gw2Client(
      */
     val token: TokenClient
 
+    /**
+     * The player vs player client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp">the wiki</a>
+     */
+    val pvp: PvpClient
+
     init
     {
         val client = httpClient.setup(json, configuration)
@@ -74,6 +80,7 @@ open class Gw2Client(
         achievement = AchievementClient(client, configuration)
         character = CharacterClient(client, configuration)
         token = TokenClient(client, configuration)
+        pvp = PvpClient(client, configuration)
     }
 
     /**
