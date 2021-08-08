@@ -67,6 +67,12 @@ open class Gw2Client(
     val color: ColorClient
 
     /**
+     * The currency client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/currencies">the wiki</a>
+     */
+    val currency: CurrencyClient
+
+    /**
      * The daily crafting client.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/dailycrafting">the wiki</a>
      */
@@ -116,6 +122,7 @@ open class Gw2Client(
         achievement = AchievementClient(client, configuration)
         character = CharacterClient(client, configuration)
         color = ColorClient(client, configuration)
+        currency = CurrencyClient(client, configuration)
         dailyCrafting = DailyCraftingClient(client, configuration)
         mapChest = MapChestClient(client, configuration)
         mastery = MasteryClient(client, configuration)
