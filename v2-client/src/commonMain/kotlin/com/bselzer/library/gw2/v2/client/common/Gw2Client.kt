@@ -91,6 +91,18 @@ open class Gw2Client(
     val emote: EmoteClient
 
     /**
+     * The legend client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/legends">the wiki</a>
+     */
+    val legend: LegendClient
+
+    /**
+     * The legendary armory client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/legendaryarmory">the wiki</a>
+     */
+    val legendaryArmory: LegendaryArmoryClient
+
+    /**
      * The map chests client.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mapchests">the wiki</a>
      */
@@ -138,6 +150,8 @@ open class Gw2Client(
         dailyCrafting = DailyCraftingClient(client, configuration)
         dungeon = DungeonClient(client, configuration)
         emote = EmoteClient(client, configuration)
+        legend = LegendClient(client, configuration)
+        legendaryArmory = LegendaryArmoryClient(client, configuration)
         mapChest = MapChestClient(client, configuration)
         mastery = MasteryClient(client, configuration)
         mount = MountClient(client, configuration)
