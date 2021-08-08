@@ -31,7 +31,7 @@ abstract class BaseClient(
     private fun HttpRequestBuilder.allIdsParameter(parameterName: String = "ids") = parameter(parameterName, "all")
 
     /**
-     * Chunks the ids into requests small enough for the API to accept, if there are more than [configuration.pageSize] ids.
+     * Chunks the ids into requests small enough for the API to accept, if there are more ids than the configuration page size.
      *
      * @return the collection of objects represented by the ids
      */

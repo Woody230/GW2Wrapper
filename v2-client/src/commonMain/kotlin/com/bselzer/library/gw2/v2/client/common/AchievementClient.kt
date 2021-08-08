@@ -57,6 +57,14 @@ class AchievementClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
     }
 
     /**
+     * @return all the achievement groups
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/groups">the wiki</a>
+     */
+    suspend fun groups(language: String? = null): List<AchievementGroup> = allIds("${Achievements.ACHIEVEMENTS}/${Achievements.GROUPS}") {
+        language(language)
+    }
+
+    /**
      * @return the ids of all achievement categories
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/categories">the wiki</a>
      */
@@ -68,6 +76,15 @@ class AchievementClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
      */
     suspend fun categories(ids: Collection<Int>, language: String? = null): List<AchievementCategory> =
         chunkedIds(ids, "${Achievements.ACHIEVEMENTS}/${Achievements.CATEGORIES}") {
+            language(language)
+        }
+
+    /**
+     * @return all the achievement categories
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/categories">the wiki</a>
+     */
+    suspend fun categories(language: String? = null): List<AchievementCategory> =
+        allIds("${Achievements.ACHIEVEMENTS}/${Achievements.CATEGORIES}") {
             language(language)
         }
 }

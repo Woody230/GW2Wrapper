@@ -25,4 +25,12 @@ class MasteryClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
     suspend fun masteries(ids: Collection<Int>, language: String? = null): List<Mastery> = chunkedIds(ids, Masteries.MASTERIES) {
         language(language)
     }
+
+    /**
+     * @return all the masteries
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/masteries">the wiki</a>
+     */
+    suspend fun masteries(language: String? = null): List<Mastery> = allIds(Masteries.MASTERIES) {
+        language(language)
+    }
 }
