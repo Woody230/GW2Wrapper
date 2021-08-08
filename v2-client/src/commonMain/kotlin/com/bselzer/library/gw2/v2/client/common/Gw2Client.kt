@@ -79,6 +79,18 @@ open class Gw2Client(
     val dailyCrafting: DailyCraftingClient
 
     /**
+     * The dungeon client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/dungeons">the wiki</a>
+     */
+    val dungeon: DungeonClient
+
+    /**
+     * The emote client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/emotes">the wiki</a>
+     */
+    val emote: EmoteClient
+
+    /**
      * The map chests client.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mapchests">the wiki</a>
      */
@@ -124,6 +136,8 @@ open class Gw2Client(
         color = ColorClient(client, configuration)
         currency = CurrencyClient(client, configuration)
         dailyCrafting = DailyCraftingClient(client, configuration)
+        dungeon = DungeonClient(client, configuration)
+        emote = EmoteClient(client, configuration)
         mapChest = MapChestClient(client, configuration)
         mastery = MasteryClient(client, configuration)
         mount = MountClient(client, configuration)
