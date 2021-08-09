@@ -1,7 +1,7 @@
 package com.bselzer.library.gw2.v2.client.jvm.unit
 
 import asHeader
-import com.bselzer.library.gw2.v2.client.common.Gw2Client
+import com.bselzer.library.gw2.v2.client.common.client.Gw2Client
 import io.ktor.client.*
 import io.ktor.client.engine.mock.*
 import io.ktor.http.*

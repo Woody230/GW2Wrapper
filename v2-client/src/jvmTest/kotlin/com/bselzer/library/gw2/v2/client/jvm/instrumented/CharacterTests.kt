@@ -1,6 +1,6 @@
 package com.bselzer.library.gw2.v2.client.jvm.instrumented
 
-import com.bselzer.library.gw2.v2.client.common.Gw2Client
+import com.bselzer.library.gw2.v2.client.common.client.Gw2Client
 import io.ktor.client.*
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.decodeFromString
