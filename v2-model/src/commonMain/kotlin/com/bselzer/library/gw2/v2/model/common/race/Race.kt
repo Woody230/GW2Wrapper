@@ -1,4 +1,4 @@
-package com.bselzer.library.gw2.v2.model.common.mechanics.race
+package com.bselzer.library.gw2.v2.model.common.race
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -11,6 +11,10 @@ data class Race(
     @SerialName("name")
     val name: String = "",
 
+    /**
+     * The ids of the skills usable by characters of this race.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
+     */
     @SerialName("skills")
     val skillIds: List<Int> = emptyList()
 )

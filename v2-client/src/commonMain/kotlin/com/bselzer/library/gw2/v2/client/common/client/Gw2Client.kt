@@ -139,6 +139,12 @@ open class Gw2Client(
     val pvp: PvpClient
 
     /**
+     * The race client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/races">the wiki</a.
+     */
+    val race: RaceClient
+
+    /**
      * The token client.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/tokeninfo">the wiki</a>
      */
@@ -170,6 +176,7 @@ open class Gw2Client(
         pet = PetClient(client, configuration)
         profession = ProfessionClient(client, configuration)
         pvp = PvpClient(client, configuration)
+        race = RaceClient(client, configuration)
         token = TokenClient(client, configuration)
         worldBoss = WorldBossClient(client, configuration)
     }
