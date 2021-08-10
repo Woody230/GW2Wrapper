@@ -145,6 +145,12 @@ open class Gw2Client(
     val race: RaceClient
 
     /**
+     * The raid client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/raids">the wiki</a>
+     */
+    val raid: RaidClient
+
+    /**
      * The token client.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/tokeninfo">the wiki</a>
      */
@@ -177,6 +183,7 @@ open class Gw2Client(
         profession = ProfessionClient(client, configuration)
         pvp = PvpClient(client, configuration)
         race = RaceClient(client, configuration)
+        raid = RaidClient(client, configuration)
         token = TokenClient(client, configuration)
         worldBoss = WorldBossClient(client, configuration)
     }
