@@ -1,11 +1,10 @@
 package com.bselzer.library.gw2.v2.model.common.profession.skill
 
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-class ElementalistSkill(
-    override val id: Int = 0,
-    override val slot: String = "",
-
+@Serializable
+data class ElementalistSkill(
     /**
      * The name of the required attunement.
      */

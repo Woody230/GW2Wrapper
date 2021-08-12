@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 abstract class TrainingTrack
 {
     @SerialName("cost")
-    abstract val cost: Int
+    val cost: Int = 0
 }

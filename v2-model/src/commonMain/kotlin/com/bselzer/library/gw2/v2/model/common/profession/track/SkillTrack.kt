@@ -6,8 +6,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 @SerialName("Skill")
 data class SkillTrack(
-    override val cost: Int = 0,
-
     /**
      * The id of the skill.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>

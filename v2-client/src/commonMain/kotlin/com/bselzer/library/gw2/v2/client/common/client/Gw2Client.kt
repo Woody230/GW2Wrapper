@@ -30,6 +30,7 @@ open class Gw2Client(
          *
          * It is designed to be lenient in order to avoid errors.
          */
+        // TODO serializer modules
         val DEFAULT_JSON = Json {
             isLenient = true
             ignoreUnknownKeys = true

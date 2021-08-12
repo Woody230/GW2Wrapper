@@ -6,8 +6,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 @SerialName("Trait")
 data class TraitTrack(
-    override val cost: Int = 0,
-
     /**
      * The id of the trait.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/traits">the wiki</a>

@@ -1,7 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.mechanics.trait
 
-import com.bselzer.library.gw2.v2.model.common.mechanics.skill.SkillFact
-import com.bselzer.library.gw2.v2.model.common.mechanics.skill.SkillTraitedFact
+import com.bselzer.library.gw2.v2.model.common.skill.fact.SkillFact
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -35,7 +34,7 @@ data class Trait(
     val facts: List<SkillFact> = emptyList(),
 
     @SerialName("traited_facts")
-    val traitedFacts: List<SkillTraitedFact> = emptyList(),
+    val traitedFacts: List<SkillFact> = emptyList(),
 
     @SerialName("skills")
     val skills: List<TraitSkill> = emptyList()

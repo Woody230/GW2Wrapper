@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 abstract class PvpStanding
 {
     @SerialName("total_points")
-    abstract val totalPoints: Int
+    val totalPoints: Int = 0
 
     /**
      * The index into the /v2/pvp/seasons divisions.
@@ -15,14 +15,14 @@ abstract class PvpStanding
      */
     // TODO reference object instead of endpoint
     @SerialName("division")
-    abstract val division: Int
+    val division: Int = 0
 
     @SerialName("points")
-    abstract val points: Int
+    val points: Int = 0
 
     /**
      * The number of times the account has maxed out the repeat division.
      */
     @SerialName("repeats")
-    abstract val repeats: Int
+    val repeats: Int = 0
 }

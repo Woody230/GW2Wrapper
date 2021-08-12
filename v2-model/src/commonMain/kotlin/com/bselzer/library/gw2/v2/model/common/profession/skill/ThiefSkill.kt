@@ -5,11 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ThiefSkill(
-    override val id: Int = 0,
-    override val slot: String = "",
-
     /**
-     * The name of the required offhand weapon.
+     * The weapon type of the required offhand.
      */
     @SerialName("offhand")
     val offhandRequired: String = "",

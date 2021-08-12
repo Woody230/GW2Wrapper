@@ -1,10 +1,10 @@
-package com.bselzer.library.gw2.v2.model.common.mechanics.skill
+package com.bselzer.library.gw2.v2.model.common.skill.fact
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Prefix(
+data class BuffPrefix(
     @SerialName("text")
     val description: String = "",
 
@@ -12,7 +12,7 @@ data class Prefix(
     val iconLink: String = "",
 
     @SerialName("status")
-    val effect: String = "",
+    val status: String = "",
 
     @SerialName("description")
     val effectDescription: String = ""

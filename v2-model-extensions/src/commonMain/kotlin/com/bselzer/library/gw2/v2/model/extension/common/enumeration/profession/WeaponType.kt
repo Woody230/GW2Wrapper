@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class WeaponName
+enum class WeaponType
 {
     @SerialName("Nothing")
     NOTHING,

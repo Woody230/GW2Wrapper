@@ -4,18 +4,18 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-abstract class ProfessionSkill
+open class ProfessionSkill
 {
     /**
      * The id of the skill.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
      */
     @SerialName("id")
-    abstract val id: Int
+    val id: Int = 0
 
     /**
      * The skill slot the skill belongs to.
      */
     @SerialName("slot")
-    abstract val slot: String
+    val slot: String = ""
 }

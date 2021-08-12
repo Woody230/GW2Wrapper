@@ -19,17 +19,17 @@ abstract class TokenInfo
      * The requested token id.
      */
     @SerialName("id")
-    abstract val id: String
+    val id: String = ""
 
     /**
      * The name of the token, given by the owner.
      */
     @SerialName("name")
-    abstract val name: String
+    val name: String = ""
 
     /**
      * The permissions accessible by the token.
      */
     @SerialName("permissions")
-    abstract val permissions: List<String>
+    val permissions: List<String> = emptyList()
 }

@@ -18,7 +18,7 @@ data class Profession(
      * @see <a href="https://wiki.guildwars2.com/wiki/Chat_link_format#Build_template_link">the wiki</a>
      */
     @SerialName("code")
-    val buildTemplateId: Int,
+    val buildTemplateId: Int = 0,
 
     @SerialName("icon")
     val iconLink: String = "",
@@ -34,10 +34,10 @@ data class Profession(
     val specializationIds: List<Int> = emptyList(),
 
     @SerialName("training")
-    val training: List<Training> = emptyList(),
+    val trainings: List<Training> = emptyList(),
 
     /**
-     * The names of the weapon types mapped to its details.
+     * The weapon types mapped to its details.
      */
     @SerialName("weapons")
     val weapons: Map<String, ProfessionWeapon> = emptyMap(),

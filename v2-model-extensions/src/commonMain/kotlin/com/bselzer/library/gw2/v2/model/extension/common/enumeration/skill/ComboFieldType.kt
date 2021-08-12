@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class ComboFieldName
+enum class ComboFieldType
 {
     @SerialName("Air")
     AIR,
