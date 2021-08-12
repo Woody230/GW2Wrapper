@@ -176,6 +176,12 @@ open class Gw2Client(
     val token: TokenClient
 
     /**
+     * The trait client.
+     * <a href="https://wiki.guildwars2.com/wiki/API:2/traits">the wiki</a>
+     */
+    val trait: TraitClient
+
+    /**
      * The world boss client.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/worldbosses">the wiki</a>
      */
@@ -207,6 +213,7 @@ open class Gw2Client(
         specialization = SpecializationClient(client, configuration)
         token = TokenClient(client, configuration)
         title = TitleClient(client, configuration)
+        trait = TraitClient(client, configuration)
         worldBoss = WorldBossClient(client, configuration)
     }
 

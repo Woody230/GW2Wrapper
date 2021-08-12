@@ -1,6 +1,6 @@
-package com.bselzer.library.gw2.v2.model.common.mechanics.trait
+package com.bselzer.library.gw2.v2.model.common.trait
 
-import com.bselzer.library.gw2.v2.model.common.skill.fact.SkillFact
+import com.bselzer.library.gw2.v2.model.common.trait.fact.TraitFact
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -18,23 +18,30 @@ data class Trait(
     @SerialName("description")
     val description: String = "",
 
+    /**
+     * The id of the specialization this trait belongs to.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/specializations">the wiki</a>
+     */
     @SerialName("specialization")
     val specializationId: Int = 0,
 
     @SerialName("tier")
-    val tier: Int = -1, // 0 = elite weapon access, 1-3 Adept/Master/Grandmaster
+    val tier: Int = Int.MIN_VALUE,
 
     @SerialName("slot")
     val slot: String = "",
 
+    /**
+     * The position of this trait within the [tier].
+     */
     @SerialName("order")
-    val order: Int = 0, // Only meaningful for Major traits
+    val order: Int = 0,
 
     @SerialName("facts")
-    val facts: List<SkillFact> = emptyList(),
+    val facts: List<TraitFact> = emptyList(),
 
     @SerialName("traited_facts")
-    val traitedFacts: List<SkillFact> = emptyList(),
+    val traitedFacts: List<TraitFact> = emptyList(),
 
     @SerialName("skills")
     val skills: List<TraitSkill> = emptyList()
