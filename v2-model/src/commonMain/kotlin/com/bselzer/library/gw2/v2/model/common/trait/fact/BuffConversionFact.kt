@@ -23,4 +23,4 @@ data class BuffConversionFact(
      */
     @SerialName("target")
     val target: String = ""
-)
+) : TraitFact()
