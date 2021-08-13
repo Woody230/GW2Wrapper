@@ -4,4 +4,6 @@ internal object Guilds
 {
     const val GUILD = "guild"
     const val LOG = "log"
+    const val MEMBERS = "members"
+    const val RANKS = "ranks"
 }

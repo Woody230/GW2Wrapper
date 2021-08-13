@@ -14,12 +14,14 @@ data class RankChangeLog(
 
     /**
      * The name of the old rank.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/ranks">the wiki</a>
      */
     @SerialName("old_rank")
     val oldRank: String = "",
 
     /**
      * The name of the new rank.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/ranks">the wiki</a>
      */
     @SerialName("new_rank")
     val newRank: String = ""
