@@ -9,7 +9,7 @@ import com.bselzer.library.gw2.v2.model.common.account.token.SubToken
 import com.bselzer.library.gw2.v2.model.common.account.token.TokenInfo
 import io.ktor.client.*
 import io.ktor.client.request.*
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.Instant
 
 /**
  * The token client.
@@ -37,7 +37,7 @@ class TokenClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
     suspend fun createSubToken(
-        expiration: LocalDateTime,
+        expiration: Instant,
         permissions: List<String>,
         urls: List<String>,
         token: String? = null

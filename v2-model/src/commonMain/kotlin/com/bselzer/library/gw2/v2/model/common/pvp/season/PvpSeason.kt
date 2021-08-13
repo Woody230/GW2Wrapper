@@ -1,8 +1,7 @@
 package com.bselzer.library.gw2.v2.model.common.pvp.season
 
 import com.bselzer.library.gw2.v2.model.common.pvp.season.leaderboard.PvpSeasonLeaderboard
-import com.bselzer.library.kotlin.extension.datetime.common.function.minValue
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -18,10 +17,10 @@ data class PvpSeason(
     val name: String = "",
 
     @SerialName("start")
-    val startAt: LocalDateTime = LocalDateTime.minValue(),
+    val startAt: Instant = Instant.DISTANT_PAST,
 
     @SerialName("end")
-    val endAt: LocalDateTime = LocalDateTime.minValue(),
+    val endAt: Instant = Instant.DISTANT_PAST,
 
     /**
      * Whether this season is currently active.

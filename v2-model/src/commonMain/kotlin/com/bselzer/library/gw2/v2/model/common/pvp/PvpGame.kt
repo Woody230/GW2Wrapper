@@ -1,7 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.pvp
 
-import com.bselzer.library.kotlin.extension.datetime.common.function.minValue
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -24,13 +23,13 @@ data class PvpGame(
      * The start date.
      */
     @SerialName("started")
-    val startedAt: LocalDateTime = LocalDateTime.minValue(),
+    val startedAt: Instant = Instant.DISTANT_PAST,
 
     /**
      * The end date.
      */
     @SerialName("ended")
-    val endedAt: LocalDateTime = LocalDateTime.minValue(),
+    val endedAt: Instant = Instant.DISTANT_PAST,
 
     /**
      * The result of the match.

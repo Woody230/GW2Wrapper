@@ -1,7 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.pvp.leaderboard
 
-import com.bselzer.library.kotlin.extension.datetime.common.function.minValue
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -23,7 +22,7 @@ data class PvpLeaderboard(
      * The date when the rank was achieved.
      */
     @SerialName("date")
-    val achievedAt: LocalDateTime = LocalDateTime.minValue(),
+    val achievedAt: Instant = Instant.DISTANT_PAST,
 
     @SerialName("scores")
     val scores: List<PvpLeaderboardScore> = emptyList()

@@ -1,7 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.wvw.match
 
-import com.bselzer.library.kotlin.extension.datetime.common.function.minValue
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,10 +10,10 @@ data class Match(
     val id: String,
 
     @SerialName("start_time")
-    val startTime: LocalDateTime = LocalDateTime.minValue(),
+    val startTime: Instant = Instant.DISTANT_PAST,
 
     @SerialName("end_time")
-    val endTime: LocalDateTime = LocalDateTime.minValue(),
+    val endTime: Instant = Instant.DISTANT_PAST,
 
     @SerialName("scores")
     val scores: WorldCount = WorldCount(),

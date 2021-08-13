@@ -1,10 +1,10 @@
-package com.bselzer.library.gw2.v2.model.common.guild
+package com.bselzer.library.gw2.v2.model.common.emblem
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class GuildEmblem(
+data class Emblem(
     @SerialName("id")
     val id: Int = 0,
 

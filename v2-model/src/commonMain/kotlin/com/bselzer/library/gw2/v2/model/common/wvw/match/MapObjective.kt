@@ -1,6 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.wvw.match
 
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -16,13 +16,13 @@ data class MapObjective(
     val owner: String = "",
 
     @SerialName("last_flipped")
-    val lastFlippedAt: LocalDateTime? = null,
+    val lastFlippedAt: Instant? = null,
 
     @SerialName("claimed_by")
     val claimedBy: String? = null,
 
     @SerialName("claimed_at")
-    val claimedAt: LocalDateTime? = null,
+    val claimedAt: Instant? = null,
 
     @SerialName("points_tick")
     val pointsPerTick: Int = 0,

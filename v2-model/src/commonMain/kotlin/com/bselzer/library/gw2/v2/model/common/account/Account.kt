@@ -4,8 +4,7 @@ import com.bselzer.library.gw2.v2.annotation.common.scope.Permission
 import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
 import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
 import com.bselzer.library.gw2.v2.model.common.serialization.SecondDurationSerializer
-import com.bselzer.library.kotlin.extension.datetime.common.function.minValue
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.time.Duration
@@ -65,7 +64,7 @@ data class Account(
      * The date and time of account creation.
      */
     @SerialName("created")
-    val createdAt: LocalDateTime = LocalDateTime.minValue(),
+    val createdAt: Instant = Instant.DISTANT_PAST,
 
     /**
      * The types of access, indicating no access, free to play access, or base/expansion content access.
@@ -113,7 +112,7 @@ data class Account(
      * @since 2019-02-21T00:00:00Z or later
      */
     @SerialName("last_modified")
-    val lastModifiedAt: LocalDateTime = LocalDateTime.minValue(),
+    val lastModifiedAt: Instant = Instant.DISTANT_PAST,
 
     /**
      * The number of build storage slots.

@@ -86,10 +86,22 @@ open class Gw2Client(
     val dungeon: DungeonClient
 
     /**
+     * The emblem client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/emblem">the wiki</a>
+     */
+    val emblem: EmblemClient
+
+    /**
      * The emote client.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/emotes">the wiki</a>
      */
     val emote: EmoteClient
+
+    /**
+     * The guild client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild">the wiki</a>
+     */
+    val guild: GuildClient
 
     /**
      * The legend client. For Revenants.
@@ -198,7 +210,9 @@ open class Gw2Client(
         currency = CurrencyClient(client, configuration)
         dailyCrafting = DailyCraftingClient(client, configuration)
         dungeon = DungeonClient(client, configuration)
+        emblem = EmblemClient(client, configuration)
         emote = EmoteClient(client, configuration)
+        guild = GuildClient(client, configuration)
         legend = LegendClient(client, configuration)
         legendaryArmory = LegendaryArmoryClient(client, configuration)
         mapChest = MapChestClient(client, configuration)

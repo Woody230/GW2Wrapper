@@ -3,8 +3,7 @@ package com.bselzer.library.gw2.v2.model.common.account.token
 import com.bselzer.library.gw2.v2.annotation.common.scope.Permission
 import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
 import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
-import com.bselzer.library.kotlin.extension.datetime.common.function.minValue
-import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -21,13 +20,13 @@ data class SubTokenInfo(
      * The expiration date.
      */
     @SerialName("expires_at")
-    val expiresAt: LocalDateTime = LocalDateTime.minValue(),
+    val expiresAt: Instant = Instant.DISTANT_PAST,
 
     /**
      * The creation date.
      */
     @SerialName("issued_at")
-    val issuedAt: LocalDateTime = LocalDateTime.minValue(),
+    val issuedAt: Instant = Instant.DISTANT_PAST,
 
     /**
      * The collection of available endpoints if the token is restricted.
