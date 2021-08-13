@@ -104,6 +104,11 @@ open class Gw2Client(
     val guild: GuildClient
 
     /**
+     * The home instance client.
+     */
+    val home: HomeClient
+
+    /**
      * The legend client. For Revenants.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/legends">the wiki</a>
      */
@@ -213,6 +218,7 @@ open class Gw2Client(
         emblem = EmblemClient(client, configuration)
         emote = EmoteClient(client, configuration)
         guild = GuildClient(client, configuration)
+        home = HomeClient(client, configuration)
         legend = LegendClient(client, configuration)
         legendaryArmory = LegendaryArmoryClient(client, configuration)
         mapChest = MapChestClient(client, configuration)
