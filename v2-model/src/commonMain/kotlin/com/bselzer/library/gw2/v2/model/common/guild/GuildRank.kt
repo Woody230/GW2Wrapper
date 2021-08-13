@@ -6,13 +6,13 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class GuildRank(
     /**
-     * The name of the rank.
+     * The name of the rank given by the leader.
      */
     @SerialName("id")
     val id: String = "",
 
     /**
-     * The ranking order. The lower the value, the higher the priority.
+     * The sorting order. The lower the value, the higher the priority.
      */
     @SerialName("order")
     val order: Int = Int.MAX_VALUE,

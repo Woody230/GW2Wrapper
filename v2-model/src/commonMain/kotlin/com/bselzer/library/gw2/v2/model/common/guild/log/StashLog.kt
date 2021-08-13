@@ -26,7 +26,7 @@ data class StashLog(
     val count: Int = 0,
 
     /**
-     * The amount of copper operated with.
+     * The amount of copper coins operated with.
      */
     @SerialName("coins")
     val coins: Int = 0

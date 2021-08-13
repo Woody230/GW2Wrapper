@@ -5,16 +5,15 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-abstract class TraitFact
-{
+open class TraitFact(
     /**
      * The description of the fact.
      */
     @SerialName("text")
-    val description: String = ""
+    val description: String = "",
 
     @SerialName("icon")
-    val iconLink: String = ""
+    val iconLink: String = "",
 
     /**
      * The id of the required trait.
@@ -23,7 +22,7 @@ abstract class TraitFact
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/traits">the wiki</a>
      */
     @SerialName("requires_trait")
-    val traitId: Int? = null
+    val traitId: Int? = null,
 
     /**
      * The index of the fact in the [Trait.facts] that is overridden when the trait associated with [traitId] is selected.
@@ -32,4 +31,29 @@ abstract class TraitFact
      */
     @SerialName("overrides")
     val overrides: Int? = null
+)
+{
+    override fun equals(other: Any?): Boolean
+    {
+        if (this === other) return true
+        if (other == null || this::class != other::class) return false
+
+        other as TraitFact
+
+        if (description != other.description) return false
+        if (iconLink != other.iconLink) return false
+        if (traitId != other.traitId) return false
+        if (overrides != other.overrides) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int
+    {
+        var result = description.hashCode()
+        result = 31 * result + iconLink.hashCode()
+        result = 31 * result + (traitId ?: 0)
+        result = 31 * result + (overrides ?: 0)
+        return result
+    }
 }

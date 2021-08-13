@@ -13,6 +13,7 @@ object PlayerVsPlayer
         polymorphic(PvpStanding::class) {
             subclass(BestStanding::class, serializer())
             subclass(CurrentStanding::class, serializer())
+            default { serializer() }
         }
     }
 }

@@ -1,12 +1,15 @@
-package com.bselzer.library.gw2.v2.model.common.profession.track
+package com.bselzer.library.gw2.v2.model.common.guild.upgrade.cost
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-open class TrainingTrack(
-    @SerialName("cost")
-    val cost: Int = 0
+open class GuildUpgradeCost(
+    /**
+     * The amount required.
+     */
+    @SerialName("count")
+    val count: Int = 0
 )
 {
     override fun equals(other: Any?): Boolean
@@ -14,15 +17,15 @@ open class TrainingTrack(
         if (this === other) return true
         if (other == null || this::class != other::class) return false
 
-        other as TrainingTrack
+        other as GuildUpgradeCost
 
-        if (cost != other.cost) return false
+        if (count != other.count) return false
 
         return true
     }
 
     override fun hashCode(): Int
     {
-        return cost
+        return count
     }
 }

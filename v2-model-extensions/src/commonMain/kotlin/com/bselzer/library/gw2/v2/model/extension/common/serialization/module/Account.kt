@@ -14,6 +14,7 @@ object Account
         polymorphic(TokenInfo::class) {
             subclass(ApiKeyInfo::class, serializer())
             subclass(SubTokenInfo::class, serializer())
+            default { serializer() }
         }
     }
 }

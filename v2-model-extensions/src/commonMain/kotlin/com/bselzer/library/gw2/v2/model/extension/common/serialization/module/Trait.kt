@@ -27,6 +27,7 @@ object Trait
             subclass(RechargeFact::class, serializer())
             subclass(TimeFact::class, serializer())
             subclass(UnblockableFact::class, serializer())
+            default { serializer() }
         }
     }
 }

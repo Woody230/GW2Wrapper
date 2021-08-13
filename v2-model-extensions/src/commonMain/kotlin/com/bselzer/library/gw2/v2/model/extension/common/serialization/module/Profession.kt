@@ -16,6 +16,7 @@ object Profession
         polymorphic(TrainingTrack::class) {
             subclass(SkillTrack::class, serializer())
             subclass(TraitTrack::class, serializer())
+            default { serializer() }
         }
     }
 

@@ -14,6 +14,7 @@ object Achievement
             subclass(ItemReward::class, serializer())
             subclass(MasteryReward::class, serializer())
             subclass(TitleReward::class, serializer())
+            default { serializer() }
         }
     }
 
@@ -23,6 +24,7 @@ object Achievement
             subclass(MiniBit::class, serializer())
             subclass(SkinBit::class, serializer())
             subclass(TextBit::class, serializer())
+            default { serializer() }
         }
     }
 }
