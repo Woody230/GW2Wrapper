@@ -109,6 +109,12 @@ open class Gw2Client(
     val home: HomeClient
 
     /**
+     * The item client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
+     */
+    val item: ItemClient
+
+    /**
      * The legend client. For Revenants.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/legends">the wiki</a>
      */
@@ -219,6 +225,7 @@ open class Gw2Client(
         emote = EmoteClient(client, configuration)
         guild = GuildClient(client, configuration)
         home = HomeClient(client, configuration)
+        item = ItemClient(client, configuration)
         legend = LegendClient(client, configuration)
         legendaryArmory = LegendaryArmoryClient(client, configuration)
         mapChest = MapChestClient(client, configuration)

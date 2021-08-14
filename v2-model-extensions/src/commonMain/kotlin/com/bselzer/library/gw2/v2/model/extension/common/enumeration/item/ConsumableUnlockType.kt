@@ -4,9 +4,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class ItemDetailUnlockType
+enum class ConsumableUnlockType
 {
-    //Consumable
     @SerialName("BagSlot")
     BAG_SLOT,
 

@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-enum class ItemDetailFlag
+enum class WeaponDetailType
 {
     @SerialName("Axe")
     AXE,
@@ -12,29 +12,8 @@ enum class ItemDetailFlag
     @SerialName("Dagger")
     DAGGER,
 
-    @SerialName("Mace")
-    MACE,
-
-    @SerialName("Pistol")
-    PISTOL,
-
-    @SerialName("Sword")
-    SWORD,
-
-    @SerialName("Scepter")
-    SCEPTER,
-
     @SerialName("Focus")
     FOCUS,
-
-    @SerialName("Shield")
-    SHIELD,
-
-    @SerialName("Torch")
-    TORCH,
-
-    @SerialName("Warhorn")
-    WARHORN,
 
     @SerialName("Greatsword")
     GREATSWORD,
@@ -42,36 +21,57 @@ enum class ItemDetailFlag
     @SerialName("Hammer")
     HAMMER,
 
+    @SerialName("Harpoon")
+    SPEAR,
+
     @SerialName("LongBow")
     LONGBOW,
+
+    @SerialName("Mace")
+    MACE,
+
+    @SerialName("Pistol")
+    PISTOL,
 
     @SerialName("Rifle")
     RIFLE,
 
+    @SerialName("Scepter")
+    SCEPTER,
+
+    @SerialName("Shield")
+    SHIELD,
+
     @SerialName("ShortBow")
     SHORTBOW,
-
-    @SerialName("Staff")
-    STAFF,
-
-    @SerialName("Harpoon")
-    SPEAR,
 
     @SerialName("Speargun")
     HARPOON_GUN,
 
+    @SerialName("Staff")
+    STAFF,
+
+    @SerialName("Sword")
+    SWORD,
+
+    @SerialName("Torch")
+    TORCH,
+
     @SerialName("Trident")
     TRIDENT,
 
-    @SerialName("HeavyArmor")
-    HEAVY_ARMOR,
+    @SerialName("Warhorn")
+    WARHORN,
 
-    @SerialName("MediumArmor")
-    MEDIUM_ARMOR,
+    @SerialName("LargeBundle")
+    LARGE_BUNDLE,
 
-    @SerialName("LightArmor")
-    LIGHT_ARMOR,
+    @SerialName("SmallBundle")
+    SMALL_BUNDLE,
 
-    @SerialName("Trinket")
-    TRINKET;
+    @SerialName("Toy")
+    TOY,
+
+    @SerialName("ToyTwoHanded")
+    TWO_HANDED_TOY
 }

@@ -1,4 +1,4 @@
-package com.bselzer.library.gw2.v2.model.common.item
+package com.bselzer.library.gw2.v2.model.common.itemstat
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
