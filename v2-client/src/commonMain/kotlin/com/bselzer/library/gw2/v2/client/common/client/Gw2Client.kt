@@ -139,6 +139,12 @@ open class Gw2Client(
     val mastery: MasteryClient
 
     /**
+     * The material client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/materials">the wiki</a>
+     */
+    val material: MaterialClient
+
+    /**
      * The mount client.
      * @see <a href='https://wiki.guildwars2.com/wiki/API:2/mounts">the wiki</a>
      */
@@ -230,6 +236,7 @@ open class Gw2Client(
         legendaryArmory = LegendaryArmoryClient(client, configuration)
         mapChest = MapChestClient(client, configuration)
         mastery = MasteryClient(client, configuration)
+        material = MaterialClient(client, configuration)
         mount = MountClient(client, configuration)
         pet = PetClient(client, configuration)
         profession = ProfessionClient(client, configuration)
