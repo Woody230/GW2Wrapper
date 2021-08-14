@@ -1,7 +1,7 @@
 package com.bselzer.library.gw2.v2.model.common.guild.upgrade
 
+import com.bselzer.library.gw2.v2.model.common.extension.serialization.SecondDurationSerializer
 import com.bselzer.library.gw2.v2.model.common.guild.upgrade.cost.GuildUpgradeCost
-import com.bselzer.library.gw2.v2.model.common.serialization.SecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.time.Duration

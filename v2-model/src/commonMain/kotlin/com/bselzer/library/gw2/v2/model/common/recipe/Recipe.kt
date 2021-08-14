@@ -1,6 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.recipe
 
-import com.bselzer.library.gw2.v2.model.common.serialization.MillisecondDurationSerializer
+import com.bselzer.library.gw2.v2.model.common.extension.serialization.MillisecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.time.Duration

@@ -1,4 +1,4 @@
-package com.bselzer.library.gw2.v2.model.common.serialization
+package com.bselzer.library.gw2.v2.model.common.extension.serialization
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -11,17 +11,17 @@ import kotlin.time.DurationUnit
 import kotlin.time.ExperimentalTime
 
 /**
- * A serializer for milliseconds in the form of a [Duration]
+ * A serializer for seconds in the form of a [Duration]
  */
 @ExperimentalTime
-class MillisecondDurationSerializer : KSerializer<Duration>
+class SecondDurationSerializer : KSerializer<Duration>
 {
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("Duration", PrimitiveKind.LONG)
 
-    override fun deserialize(decoder: Decoder): Duration = Duration.milliseconds(decoder.decodeDouble())
+    override fun deserialize(decoder: Decoder): Duration = Duration.seconds(decoder.decodeDouble())
 
     override fun serialize(encoder: Encoder, value: Duration)
     {
-        encoder.encodeDouble(value.toDouble(DurationUnit.MILLISECONDS))
+        encoder.encodeDouble(value.toDouble(DurationUnit.SECONDS))
     }
 }
