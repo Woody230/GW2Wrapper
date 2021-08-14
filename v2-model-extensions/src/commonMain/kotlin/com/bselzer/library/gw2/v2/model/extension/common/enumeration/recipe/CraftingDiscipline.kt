@@ -1,4 +1,4 @@
-package com.bselzer.library.gw2.v2.model.extension.common.enumeration.character
+package com.bselzer.library.gw2.v2.model.extension.common.enumeration.recipe
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
