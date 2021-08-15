@@ -147,16 +147,22 @@ open class Gw2Client(
     val item: ItemClient
 
     /**
+     * The legendary armory client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/legendaryarmory">the wiki</a>
+     */
+    val legendaryArmory: LegendaryArmoryClient
+
+    /**
      * The legend client. For Revenants.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/legends">the wiki</a>
      */
     val legend: LegendClient
 
     /**
-     * The legendary armory client.
-     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/legendaryarmory">the wiki</a>
+     * The mail carrier client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">the wiki</a>
      */
-    val legendaryArmory: LegendaryArmoryClient
+    val mailCarrier: MailCarrierClient
 
     /**
      * The map chests client.
@@ -181,6 +187,12 @@ open class Gw2Client(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/materials">the wiki</a>
      */
     val material: MaterialClient
+
+    /**
+     * The mini-pet client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/minis">the wiki</a>
+     */
+    val mini: MiniClient
 
     /**
      * The mount client.
@@ -293,12 +305,14 @@ open class Gw2Client(
         guild = GuildClient(client, configuration)
         home = HomeClient(client, configuration)
         item = ItemClient(client, configuration)
-        legend = LegendClient(client, configuration)
         legendaryArmory = LegendaryArmoryClient(client, configuration)
+        legend = LegendClient(client, configuration)
+        mailCarrier = MailCarrierClient(client, configuration)
         mapChest = MapChestClient(client, configuration)
         map = MapClient(client, configuration)
         mastery = MasteryClient(client, configuration)
         material = MaterialClient(client, configuration)
+        mini = MiniClient(client, configuration)
         mount = MountClient(client, configuration)
         pet = PetClient(client, configuration)
         profession = ProfessionClient(client, configuration)
