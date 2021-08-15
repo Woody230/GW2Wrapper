@@ -1,5 +1,7 @@
 package com.bselzer.library.gw2.v2.model.common.wvw.objective
 
+import com.bselzer.library.gw2.v2.model.common.extension.dimension.Point2D
+import com.bselzer.library.gw2.v2.model.common.extension.dimension.Point3D
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -23,13 +25,11 @@ data class Objective(
     @SerialName("map_type")
     val mapType: String = "",
 
-    // TODO X, Y, Z
     @SerialName("coord")
-    val coordinates: List<Double> = emptyList(),
+    val coordinates: Point3D = Point3D(),
 
-    // TODO X, Y
     @SerialName("label_coord")
-    val labelCoordinates: List<Double> = emptyList(),
+    val labelCoordinates: Point2D = Point2D(),
 
     @SerialName("marker")
     val iconLink: String = "",

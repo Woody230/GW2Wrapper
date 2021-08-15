@@ -30,6 +30,7 @@ abstract class BaseClient(
      */
     protected fun HttpRequestBuilder.allIdsParameter(parameterName: String = "ids") = parameter(parameterName, "all")
 
+    // TODO T inherit an id from an interface, and use its type instead of *
     /**
      * Chunks the ids into requests small enough for the API to accept, if there are more ids than the configuration page size.
      *
