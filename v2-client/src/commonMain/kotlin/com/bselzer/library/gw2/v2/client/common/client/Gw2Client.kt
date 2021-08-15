@@ -187,6 +187,12 @@ open class Gw2Client(
     val pvp: PvpClient
 
     /**
+     * The quest client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/quests">the wiki</a>
+     */
+    val quest: QuestClient
+
+    /**
      * The race client.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/races">the wiki</a.
      */
@@ -268,6 +274,7 @@ open class Gw2Client(
         pet = PetClient(client, configuration)
         profession = ProfessionClient(client, configuration)
         pvp = PvpClient(client, configuration)
+        quest = QuestClient(client, configuration)
         race = RaceClient(client, configuration)
         raid = RaidClient(client, configuration)
         recipe = RecipeClient(client, configuration)
