@@ -21,6 +21,11 @@ abstract class BaseClient(
     }
 
     /**
+     * Adds the id.
+     */
+    protected fun HttpRequestBuilder.idParameter(id: Any) = parameter("id", id)
+
+    /**
      * Adds the ids as a comma separated string.
      */
     protected fun HttpRequestBuilder.idsParameter(ids: Collection<*>, parameterName: String = "ids") = parameter(parameterName, ids.asIdsParameter())
@@ -81,6 +86,15 @@ abstract class BaseClient(
     protected suspend inline fun <reified T> all(basePath: String, idParameterName: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> =
         httpClient.get(path = basePath) {
             allIdsParameter(idParameterName)
+            apply(block)
+        }
+
+    /**
+     * @return a single object
+     */
+    protected suspend inline fun <reified T> single(id: Any, basePath: String, block: HttpRequestBuilder.() -> Unit = {}): T =
+        httpClient.get(path = basePath) {
+            idParameter(id)
             apply(block)
         }
 }

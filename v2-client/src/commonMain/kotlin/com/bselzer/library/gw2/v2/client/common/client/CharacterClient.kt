@@ -194,7 +194,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Skills">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
-    suspend fun skills(name: String, token: String? = null): ModeSkills = httpClient.get<Character>(path = "${Characters.CHARACTERS}/${name}/${Characters.SKILLS}") {
+    suspend fun skills(name: String, token: String? = null): CharacterModeSkills = httpClient.get<Character>(path = "${Characters.CHARACTERS}/${name}/${Characters.SKILLS}") {
         ensureBearer(token)
     }.skills
 
@@ -203,7 +203,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Specialization">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
-    suspend fun specializations(name: String, token: String? = null): ModeSpecializations =
+    suspend fun specializations(name: String, token: String? = null): CharacterModeSpecializations =
         httpClient.get<Character>(path = "${Characters.CHARACTERS}/${name}/${Characters.SPECIALIZATIONS}") {
             ensureBearer(token)
         }.specializations

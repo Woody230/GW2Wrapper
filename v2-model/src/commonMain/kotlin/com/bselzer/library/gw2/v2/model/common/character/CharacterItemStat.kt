@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ItemStat(
+data class CharacterItemStat(
     /**
      * The id of the item stat.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/itemstats">the wiki</a>

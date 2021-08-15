@@ -131,14 +131,14 @@ data class Character constructor(
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS, Permission.BUILDS)
     @SerialName("skills")
-    val skills: ModeSkills = ModeSkills(),
+    val skills: CharacterModeSkills = CharacterModeSkills(),
 
     /**
      * The specializations and traits in each game mode.
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS, Permission.BUILDS)
     @SerialName("specializations")
-    val specializations: ModeSpecializations = ModeSpecializations(),
+    val specializations: CharacterModeSpecializations = CharacterModeSpecializations(),
 
     /**
      * The skill tree trainings.
@@ -152,14 +152,14 @@ data class Character constructor(
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS, Permission.PROGRESSION)
     @SerialName("wvw_abilities")
-    val wvwAbilities: List<WvwAbility> = emptyList(),
+    val wvwAbilities: List<CharacterWvwAbility> = emptyList(),
 
     /**
      * The player vs. player equipment.
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS, Permission.PROGRESSION)
     @SerialName("equipment_pvp")
-    val pvpEquipment: PvpEquipment = PvpEquipment(),
+    val pvpEquipment: CharacterPvpEquipment = CharacterPvpEquipment(),
 
     @SerialName("flags")
     val flags: List<String> = emptyList()

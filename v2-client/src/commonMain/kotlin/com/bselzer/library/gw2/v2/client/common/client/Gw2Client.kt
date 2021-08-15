@@ -225,7 +225,7 @@ open class Gw2Client(
     val profession: ProfessionClient
 
     /**
-     * The player vs player client.
+     * The player vs. player client.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp">the wiki</a>
      */
     val pvp: PvpClient
@@ -302,6 +302,12 @@ open class Gw2Client(
      */
     val worldBoss: WorldBossClient
 
+    /**
+     * The world vs. world client.
+     * @see <a href='https://wiki.guildwars2.com/wiki/API:2/wvw">the wiki</a>
+     */
+    val wvw: WvwClient
+
     init
     {
         val client = httpClient.setup(json, configuration)
@@ -349,6 +355,7 @@ open class Gw2Client(
         title = TitleClient(client, configuration)
         trait = TraitClient(client, configuration)
         worldBoss = WorldBossClient(client, configuration)
+        wvw = WvwClient(client, configuration)
     }
 
     /**

@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ModeSkills(
+data class CharacterModeSkills(
     /**
      * the player vs. environment skills.
      */

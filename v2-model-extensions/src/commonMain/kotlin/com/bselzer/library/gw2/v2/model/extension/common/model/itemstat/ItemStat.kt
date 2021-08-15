@@ -1,6 +1,6 @@
 package com.bselzer.library.gw2.v2.model.extension.common.model.itemstat
 
-import com.bselzer.library.gw2.v2.model.common.character.ItemStat
+import com.bselzer.library.gw2.v2.model.common.character.CharacterItemStat
 import com.bselzer.library.gw2.v2.model.common.itemstat.ItemAttribute
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.profession.AttributeName
 import com.bselzer.library.kotlin.extension.function.common.objects.enumValueOrNull
@@ -12,6 +12,6 @@ import com.bselzer.library.kotlin.extension.function.common.objects.validEnumVal
 fun ItemAttribute.name(): AttributeName? = name.enumValueOrNull<AttributeName>()
 
 /**
- * The [ItemStat.attributes] with [AttributeName] keys
+ * The [CharacterItemStat.attributes] with [AttributeName] keys
  */
-fun ItemStat.attributes(): Map<AttributeName, Double> = attributes.validEnumValues()
+fun CharacterItemStat.attributes(): Map<AttributeName, Double> = attributes.validEnumValues()

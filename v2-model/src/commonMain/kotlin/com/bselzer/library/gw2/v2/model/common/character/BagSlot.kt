@@ -44,7 +44,7 @@ data class BagSlot(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/itemstats">the wiki</a>
      */
     @SerialName("stats")
-    val stats: List<ItemStat> = emptyList(),
+    val stats: List<CharacterItemStat> = emptyList(),
 
     /**
      * What owns this item. Null if there is no binding.
