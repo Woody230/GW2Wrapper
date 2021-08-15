@@ -118,6 +118,18 @@ open class Gw2Client(
     val emote: EmoteClient
 
     /**
+     * The finisher client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/finishers">the wiki</a>
+     */
+    val finisher: FinisherClient
+
+    /**
+     * The glider client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/gliders">the wiki</a>
+     */
+    val glider: GliderClient
+
+    /**
      * The guild client.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild">the wiki</a>
      */
@@ -276,6 +288,8 @@ open class Gw2Client(
         dungeon = DungeonClient(client, configuration)
         emblem = EmblemClient(client, configuration)
         emote = EmoteClient(client, configuration)
+        finisher = FinisherClient(client, configuration)
+        glider = GliderClient(client, configuration)
         guild = GuildClient(client, configuration)
         home = HomeClient(client, configuration)
         item = ItemClient(client, configuration)
