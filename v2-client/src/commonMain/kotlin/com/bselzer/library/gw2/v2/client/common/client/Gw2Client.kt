@@ -38,6 +38,8 @@ open class Gw2Client(
         }
     }
 
+    // TODO individual id endpoints instead of only lists
+
     /**
      * The HTTP client.
      */
@@ -72,6 +74,12 @@ open class Gw2Client(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/colors">the wiki</a>
      */
     val color: ColorClient
+
+    /**
+     * The commerce client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce">the wiki</a>
+     */
+    val commerce: CommerceClient
 
     /**
      * The continent client.
@@ -261,6 +269,7 @@ open class Gw2Client(
         backstory = BackstoryClient(client, configuration)
         character = CharacterClient(client, configuration)
         color = ColorClient(client, configuration)
+        commerce = CommerceClient(client, configuration)
         continent = ContinentClient(client, configuration)
         currency = CurrencyClient(client, configuration)
         dailyCrafting = DailyCraftingClient(client, configuration)
