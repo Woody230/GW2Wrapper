@@ -8,9 +8,9 @@ import com.bselzer.library.kotlin.extension.function.common.objects.validEnumVal
 /**
  * The [BackstoryAnswer.professions] as a collection of [ProfessionName]
  */
-fun BackstoryAnswer.professions(): List<ProfessionName>? = professions?.validEnumValues()
+fun BackstoryAnswer.professions(): List<ProfessionName> = professions.validEnumValues()
 
 /**
  * The [BackstoryAnswer.races] as a collection of [RaceName]
  */
-fun BackstoryAnswer.races(): List<RaceName>? = races?.validEnumValues()
+fun BackstoryAnswer.races(): List<RaceName> = races.validEnumValues()

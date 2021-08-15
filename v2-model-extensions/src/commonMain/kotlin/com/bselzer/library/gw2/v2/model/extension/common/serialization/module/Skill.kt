@@ -1,12 +1,10 @@
 package com.bselzer.library.gw2.v2.model.extension.common.serialization.module
 
 import com.bselzer.library.gw2.v2.model.common.skill.fact.*
-import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.serializer
 
-@OptIn(InternalSerializationApi::class)
 object Skill
 {
     val FACT = SerializersModule {

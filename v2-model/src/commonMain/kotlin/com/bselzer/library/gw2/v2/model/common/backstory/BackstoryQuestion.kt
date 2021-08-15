@@ -30,16 +30,16 @@ data class BackstoryQuestion(
     /**
      * The names of the professions that can choose this question.
      *
-     * Null if there are no profession requirements.
+     * Empty if there are no profession requirements.
      */
     @SerialName("professions")
-    val professions: List<String>? = null,
+    val professions: List<String> = emptyList(),
 
     /**
      * The names of the races that can choose this question.
      *
-     * Null if there are no race requirements.
+     * Empty if there are no race requirements.
      */
     @SerialName("races")
-    val races: List<String>? = null
+    val races: List<String> = emptyList()
 )

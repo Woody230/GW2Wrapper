@@ -7,4 +7,4 @@ import com.bselzer.library.kotlin.extension.function.common.objects.validEnumVal
 /**
  * The [Story.races] as a collection of [RaceName]
  */
-fun Story.races(): List<RaceName>? = races?.validEnumValues()
+fun Story.races(): List<RaceName> = races.validEnumValues()

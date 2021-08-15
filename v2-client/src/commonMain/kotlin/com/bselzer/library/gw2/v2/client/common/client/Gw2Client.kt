@@ -261,6 +261,12 @@ open class Gw2Client(
     val skill: SkillClient
 
     /**
+     * The skin client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skins">the wiki</a>
+     */
+    val skin: SkinClient
+
+    /**
      * The specialization client.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/specializations">the wiki</a>
      */
@@ -336,6 +342,7 @@ open class Gw2Client(
         raid = RaidClient(client, configuration)
         recipe = RecipeClient(client, configuration)
         skill = SkillClient(client, configuration)
+        skin = SkinClient(client, configuration)
         specialization = SpecializationClient(client, configuration)
         story = StoryClient(client, configuration)
         token = TokenClient(client, configuration)

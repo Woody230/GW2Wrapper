@@ -45,16 +45,16 @@ data class Story(
     /**
      * The names of the races that can participate in this story.
      *
-     * Null if there are no race requirements.
+     * Empty if there are no race requirements.
      */
     @SerialName("races")
-    val races: List<String>? = null,
+    val races: List<String> = emptyList(),
 
     /**
      * The flags for additional requirements for being able to participate in this story.
      *
-     * Null if there are no additional requirements.
+     * Empty if there are no additional requirements.
      */
     @SerialName("flags")
-    val flags: List<String>? = null
+    val flags: List<String> = emptyList()
 )
