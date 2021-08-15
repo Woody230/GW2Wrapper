@@ -201,6 +201,18 @@ open class Gw2Client(
     val mount: MountClient
 
     /**
+     * The novelty client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/novelties">the wiki</a>
+     */
+    val novelty: NoveltyClient
+
+    /**
+     * The outfit client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/outfits">the wiki</a>
+     */
+    val outfit: OutfitClient
+
+    /**
      * The pet client. For Rangers.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pets">the wiki</a>
      */
@@ -314,6 +326,8 @@ open class Gw2Client(
         material = MaterialClient(client, configuration)
         mini = MiniClient(client, configuration)
         mount = MountClient(client, configuration)
+        novelty = NoveltyClient(client, configuration)
+        outfit = OutfitClient(client, configuration)
         pet = PetClient(client, configuration)
         profession = ProfessionClient(client, configuration)
         pvp = PvpClient(client, configuration)
