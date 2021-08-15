@@ -8,9 +8,7 @@ internal object WvW
     const val OVERVIEW = "overview"
     const val SCORES = "scores"
     const val STATS = "stats"
-    const val TEAMS = "teams"
     const val OBJECTIVES = "objectives"
     const val RANKS = "ranks"
     const val UPGRADES = "upgrades"
-    const val WORLDS = "worlds"
 }

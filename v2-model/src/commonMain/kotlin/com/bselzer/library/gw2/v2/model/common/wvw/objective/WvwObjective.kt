@@ -6,7 +6,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Objective(
+data class WvwObjective(
     @SerialName("id")
     val id: String,
 
@@ -37,6 +37,10 @@ data class Objective(
     @SerialName("chatLink")
     val chatLink: String = "",
 
+    /**
+     * The id of the upgrade.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/upgrades">the wiki</a>
+     */
     @SerialName("upgrade_id")
     val upgradeId: Int = 0
 )
