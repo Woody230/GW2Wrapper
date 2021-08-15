@@ -223,6 +223,12 @@ open class Gw2Client(
     val specialization: SpecializationClient
 
     /**
+     * The story client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/stories">the wiki</a>
+     */
+    val story: StoryClient
+
+    /**
      * The title client.
      * <a href="https://wiki.guildwars2.com/wiki/API:2/titles">the wiki</a>
      */
@@ -280,6 +286,7 @@ open class Gw2Client(
         recipe = RecipeClient(client, configuration)
         skill = SkillClient(client, configuration)
         specialization = SpecializationClient(client, configuration)
+        story = StoryClient(client, configuration)
         token = TokenClient(client, configuration)
         title = TitleClient(client, configuration)
         trait = TraitClient(client, configuration)

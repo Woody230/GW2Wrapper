@@ -29,13 +29,17 @@ data class BackstoryAnswer(
 
     /**
      * The names of the professions that can choose this answer.
+     *
+     * Null if there are no profession requirements.
      */
     @SerialName("professions")
-    val professions: List<String> = emptyList(),
+    val professions: List<String>? = null,
 
     /**
      * The names of the races that can choose this answer.
+     *
+     * Null if there are no race requirements.
      */
     @SerialName("races")
-    val races: List<String> = emptyList()
+    val races: List<String>? = null
 )
