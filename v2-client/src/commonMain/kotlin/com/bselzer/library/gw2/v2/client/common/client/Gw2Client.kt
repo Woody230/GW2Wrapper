@@ -124,6 +124,12 @@ open class Gw2Client(
     val emote: EmoteClient
 
     /**
+     * The file client for commonly requests in-game assets.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/files">the wiki</a>
+     */
+    val file: FileClient
+
+    /**
      * The finisher client.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/finishers">the wiki</a>
      */
@@ -337,6 +343,7 @@ open class Gw2Client(
         dungeon = DungeonClient(client, configuration)
         emblem = EmblemClient(client, configuration)
         emote = EmoteClient(client, configuration)
+        file = FileClient(client, configuration)
         finisher = FinisherClient(client, configuration)
         glider = GliderClient(client, configuration)
         guild = GuildClient(client, configuration)
