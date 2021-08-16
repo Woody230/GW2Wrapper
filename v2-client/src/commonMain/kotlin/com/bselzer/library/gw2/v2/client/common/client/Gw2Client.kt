@@ -64,6 +64,12 @@ open class Gw2Client(
     val backstory: BackstoryClient
 
     /**
+     * The build client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/build">the wiki</a>
+     */
+    val build: BuildClient
+
+    /**
      * The character client.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters">the wiki</a>
      */
@@ -321,6 +327,7 @@ open class Gw2Client(
         account = AccountClient(client, configuration)
         achievement = AchievementClient(client, configuration)
         backstory = BackstoryClient(client, configuration)
+        build = BuildClient(client, configuration)
         character = CharacterClient(client, configuration)
         color = ColorClient(client, configuration)
         commerce = CommerceClient(client, configuration)

@@ -1,4 +1,4 @@
-package com.bselzer.library.gw2.v2.model.common.metadata
+package com.bselzer.library.gw2.v2.model.common.build
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
