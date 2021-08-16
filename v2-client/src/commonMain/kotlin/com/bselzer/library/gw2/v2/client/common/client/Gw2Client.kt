@@ -243,6 +243,12 @@ open class Gw2Client(
     val pvp: PvpClient
 
     /**
+     * The quaggan client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/quaggans">the wiki</a>
+     */
+    val quaggan: QuagganClient
+
+    /**
      * The quest client.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/quests">the wiki</a>
      */
@@ -363,6 +369,7 @@ open class Gw2Client(
         pet = PetClient(client, configuration)
         profession = ProfessionClient(client, configuration)
         pvp = PvpClient(client, configuration)
+        quaggan = QuagganClient(client, configuration)
         quest = QuestClient(client, configuration)
         race = RaceClient(client, configuration)
         raid = RaidClient(client, configuration)

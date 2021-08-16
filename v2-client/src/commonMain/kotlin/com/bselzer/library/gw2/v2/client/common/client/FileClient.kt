@@ -18,6 +18,12 @@ class FileClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
     suspend fun ids(): List<String> = httpClient.get(path = Files.FILES)
 
     /**
+     * @return the commonly requested asset associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/files">the wiki</a>
+     */
+    suspend fun asset(id: String): Asset = single(id, Files.FILES)
+
+    /**
      * @return the commonly requested assets associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/files">the wiki</a>
      */
