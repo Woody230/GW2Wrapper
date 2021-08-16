@@ -19,6 +19,14 @@ class SkinClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
     suspend fun ids(): List<Int> = httpClient.get(path = Skins.SKINS)
 
     /**
+     * @return the skin associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skins">the wiki</a>
+     */
+    suspend fun skin(id: Int, language: String? = null): Skin = single(id, Skins.SKINS) {
+        language(language)
+    }
+
+    /**
      * @return the skins associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skins">the wiki</a>
      */

@@ -23,6 +23,14 @@ class AchievementClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
     suspend fun ids(): List<Int> = httpClient.get(path = Achievements.ACHIEVEMENTS)
 
     /**
+     * @return the achievement associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements">the wiki</a>
+     */
+    suspend fun achievement(id: Int, language: String? = null): Achievement = single(id, Achievements.ACHIEVEMENTS) {
+        language(language)
+    }
+
+    /**
      * @return the achievements associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements">the wiki</a>
      */
@@ -49,6 +57,14 @@ class AchievementClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
     suspend fun groupIds(): List<String> = httpClient.get(path = "${Achievements.ACHIEVEMENTS}/${Achievements.GROUPS}")
 
     /**
+     * @return the achievement group associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/groups">the wiki</a>
+     */
+    suspend fun group(id: String, language: String? = null): AchievementGroup = single(id, "${Achievements.ACHIEVEMENTS}/${Achievements.GROUPS}") {
+        language(language)
+    }
+
+    /**
      * @return the achievement groups associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/groups">the wiki</a>
      */
@@ -69,6 +85,15 @@ class AchievementClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/categories">the wiki</a>
      */
     suspend fun categoryIds(): List<Int> = httpClient.get(path = "${Achievements.ACHIEVEMENTS}/${Achievements.CATEGORIES}")
+
+    /**
+     * @return the achievement category associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/categories">the wiki</a>
+     */
+    suspend fun category(id: Int, language: String? = null): AchievementCategory =
+        single(id, "${Achievements.ACHIEVEMENTS}/${Achievements.CATEGORIES}") {
+            language(language)
+        }
 
     /**
      * @return the achievement categories associated with the [ids]

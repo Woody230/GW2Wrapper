@@ -2,7 +2,7 @@ package com.bselzer.library.gw2.v2.client.common.client
 
 import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Specializations
 import com.bselzer.library.gw2.v2.client.common.extension.language
-import com.bselzer.library.gw2.v2.model.common.skill.Skill
+import com.bselzer.library.gw2.v2.model.common.specialization.Specialization
 import io.ktor.client.*
 import io.ktor.client.request.*
 
@@ -19,10 +19,18 @@ class SpecializationClient(httpClient: HttpClient, configuration: Gw2ClientConfi
     suspend fun ids(): List<Int> = httpClient.get(path = Specializations.SPECIALIZATIONS)
 
     /**
+     * @return the specialization associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/specializations">the wiki</a>
+     */
+    suspend fun specialization(id: Int, language: String? = null): Specialization = single(id, Specializations.SPECIALIZATIONS) {
+        language(language)
+    }
+
+    /**
      * @return the specializations associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/specializations">the wiki</a>
      */
-    suspend fun specializations(ids: Collection<Int>, language: String? = null): List<Skill> = chunkedIds(ids, Specializations.SPECIALIZATIONS) {
+    suspend fun specializations(ids: Collection<Int>, language: String? = null): List<Specialization> = chunkedIds(ids, Specializations.SPECIALIZATIONS) {
         language(language)
     }
 
@@ -30,7 +38,7 @@ class SpecializationClient(httpClient: HttpClient, configuration: Gw2ClientConfi
      * @return all the specializations
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/specializations">the wiki</a>
      */
-    suspend fun specializations(language: String? = null): List<Skill> = allIds(Specializations.SPECIALIZATIONS) {
+    suspend fun specializations(language: String? = null): List<Specialization> = allIds(Specializations.SPECIALIZATIONS) {
         language(language)
     }
 }

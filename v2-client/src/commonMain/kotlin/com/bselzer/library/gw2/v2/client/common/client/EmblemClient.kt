@@ -18,6 +18,12 @@ class EmblemClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration
     suspend fun foregroundEmblemIds(): List<Int> = httpClient.get(path = "${Emblems.EMBLEM}/${Emblems.FOREGROUNDS}")
 
     /**
+     * @return the foreground emblem associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/emblem/foregrounds">the wiki</a>
+     */
+    suspend fun foregroundEmblem(id: Int): Emblem = single(id, "${Emblems.EMBLEM}/${Emblems.FOREGROUNDS}")
+
+    /**
      * @return the foreground emblems associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/emblem/foregrounds">the wiki</a>
      */
@@ -34,6 +40,12 @@ class EmblemClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/emblem/backgrounds">the wiki</a>
      */
     suspend fun backgroundEmblemIds(): List<Int> = httpClient.get(path = "${Emblems.EMBLEM}/${Emblems.BACKGROUNDS}")
+
+    /**
+     * @return the background emblem associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/emblem/backgrounds">the wiki</a>
+     */
+    suspend fun backgroundEmblem(id: Int): Emblem = single(id, "${Emblems.EMBLEM}/${Emblems.BACKGROUNDS}")
 
     /**
      * @return the background emblems associated with the [ids]

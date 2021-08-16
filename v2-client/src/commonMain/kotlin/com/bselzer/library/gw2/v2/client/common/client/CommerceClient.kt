@@ -54,6 +54,13 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
     suspend fun listingIds(): List<Int> = httpClient.get(path = "${Commerce.COMMERCE}/${Commerce.LISTINGS}")
 
     /**
+     * @return the listing associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/listings">the wiki</a>
+     */
+    suspend fun listing(id: Int): Listings = single(id, "${Commerce.COMMERCE}/${Commerce.LISTINGS}")
+
+
+    /**
      * @return the listings associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/listings">the wiki</a>
      */
@@ -64,6 +71,12 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/prices">the wiki</a>
      */
     suspend fun priceIds(): List<Int> = httpClient.get(path = "${Commerce.COMMERCE}/${Commerce.PRICES}")
+
+    /**
+     * @return the price associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/prices">the wiki</a>
+     */
+    suspend fun price(id: Int): Prices = single(id, "${Commerce.COMMERCE}/${Commerce.PRICES}")
 
     /**
      * @return the prices associated with the [ids]

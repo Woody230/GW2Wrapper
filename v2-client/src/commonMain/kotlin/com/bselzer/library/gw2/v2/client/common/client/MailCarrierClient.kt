@@ -19,6 +19,14 @@ class MailCarrierClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
     suspend fun ids(): List<Int> = httpClient.get(path = MailCarriers.MAIL_CARRIERS)
 
     /**
+     * @return the mail carrier associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">the wiki</a>
+     */
+    suspend fun mailCarrier(id: Int, language: String? = null): MailCarrier = single(id, MailCarriers.MAIL_CARRIERS) {
+        language(language)
+    }
+
+    /**
      * @return the mail carriers associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">the wiki</a>
      */

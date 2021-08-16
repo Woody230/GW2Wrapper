@@ -18,6 +18,12 @@ class HomeClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
     suspend fun catIds(): List<Int> = httpClient.get(path = "${Home.HOME}/${Home.CATS}")
 
     /**
+     * @return the cat associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/home/cats">the wiki</a>
+     */
+    suspend fun cat(id: Int): Cat = single(id, "${Home.HOME}/${Home.CATS}")
+
+    /**
      * @return the cats associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/home/cats">the wiki</a>
      */
@@ -36,10 +42,16 @@ class HomeClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
     suspend fun nodeIds(): List<String> = httpClient.get(path = "${Home.HOME}/${Home.NODES}")
 
     /**
+     * @return the node associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/home/nodes">the wiki</a>
+     */
+    suspend fun node(id: String): Node = single(id, "${Home.HOME}/${Home.NODES}")
+
+    /**
      * @return the nodes associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/home/nodes">the wiki</a>
      */
-    suspend fun nodes(ids: Collection<String>): List<Cat> = chunkedIds(ids, "${Home.HOME}/${Home.NODES}")
+    suspend fun nodes(ids: Collection<String>): List<Node> = chunkedIds(ids, "${Home.HOME}/${Home.NODES}")
 
     /**
      * @return all the nodes

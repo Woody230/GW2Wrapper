@@ -18,6 +18,12 @@ class LegendaryArmoryClient(httpClient: HttpClient, configuration: Gw2ClientConf
     suspend fun ids(): List<Int> = httpClient.get(path = Armory.LEGENDARY_ARMORY)
 
     /**
+     * @return the legendary item associated with the [id] in the armory
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/legendaryarmory">the wiki</a>
+     */
+    suspend fun legendary(id: Int): ArmoryItem = single(id, Armory.LEGENDARY_ARMORY)
+
+    /**
      * @return the legendary items associated with the [ids] in the armory
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/legendaryarmory">the wiki</a>
      */

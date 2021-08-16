@@ -20,6 +20,14 @@ class StoryClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
     suspend fun ids(): List<Int> = httpClient.get(path = Stories.STORIES)
 
     /**
+     * @return the story associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/stories">the wiki</a>
+     */
+    suspend fun story(id: Int, language: String? = null): Story = single(id, Stories.STORIES) {
+        language(language)
+    }
+
+    /**
      * @return the stories associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/stories">the wiki</a>
      */
@@ -40,6 +48,14 @@ class StoryClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/stories/seasons">the wiki</a>
      */
     suspend fun seasonIds(): List<String> = httpClient.get(path = "${Stories.STORIES}/${Stories.SEASONS}")
+
+    /**
+     * @return the season associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/stories/seasons">the wiki</a>
+     */
+    suspend fun season(id: String, language: String? = null): StorySeason = single(id, "${Stories.STORIES}/${Stories.SEASONS}") {
+        language(language)
+    }
 
     /**
      * @return the seasons associated with the [ids]

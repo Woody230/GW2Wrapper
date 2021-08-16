@@ -38,8 +38,6 @@ open class Gw2Client(
         }
     }
 
-    // TODO individual id endpoints instead of only lists
-
     /**
      * The HTTP client.
      */

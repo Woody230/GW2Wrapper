@@ -19,6 +19,14 @@ class NoveltyClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
     suspend fun ids(): List<Int> = httpClient.get(path = Novelties.NOVELTIES)
 
     /**
+     * @return the novelty associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/novelties">the wiki</a>
+     */
+    suspend fun novelty(id: Int, language: String? = null): Novelty = single(id, Novelties.NOVELTIES) {
+        language(language)
+    }
+
+    /**
      * @return the novelties associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/novelties">the wiki</a>
      */

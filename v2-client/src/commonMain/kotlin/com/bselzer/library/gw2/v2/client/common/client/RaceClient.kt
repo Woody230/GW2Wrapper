@@ -18,6 +18,12 @@ class RaceClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
     suspend fun ids(): List<String> = httpClient.get(path = Races.RACES)
 
     /**
+     * @return the race associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/races">the wiki</a>
+     */
+    suspend fun race(id: String): Race = single(id, Races.RACES)
+
+    /**
      * @return the races associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/races">the wiki</a>
      */

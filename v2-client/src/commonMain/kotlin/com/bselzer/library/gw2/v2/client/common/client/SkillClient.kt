@@ -19,6 +19,14 @@ class SkillClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
     suspend fun ids(): List<Int> = httpClient.get(path = Skills.SKILLS)
 
     /**
+     * @return the skill associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
+     */
+    suspend fun skill(id: Int, language: String? = null): Skill = single(id, Skills.SKILLS) {
+        language(language)
+    }
+
+    /**
      * @return the skills associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
      */

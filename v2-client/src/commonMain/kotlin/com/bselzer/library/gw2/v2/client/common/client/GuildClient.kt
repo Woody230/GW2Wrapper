@@ -122,6 +122,14 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
     suspend fun permissionIds(): List<String> = httpClient.get(path = "${Guilds.GUILD}/${Guilds.PERMISSIONS}")
 
     /**
+     * @return the permission associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/permissions">the wiki</a>
+     */
+    suspend fun permission(id: String, language: String? = null): GuildPermission = single(id, "${Guilds.GUILD}/${Guilds.PERMISSIONS}") {
+        language(language)
+    }
+
+    /**
      * @return the permissions associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/permissions">the wiki</a>
      */
@@ -150,6 +158,14 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/upgrades">the wiki</a>
      */
     suspend fun upgradeIds(): List<Int> = httpClient.get(path = "${Guilds.GUILD}/${Guilds.UPGRADES}")
+
+    /**
+     * @return the upgrade associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/upgrades">the wiki</a>
+     */
+    suspend fun upgrade(id: Int, language: String? = null): GuildUpgrade = single(id, "${Guilds.GUILD}/${Guilds.UPGRADES}") {
+        language(language)
+    }
 
     /**
      * @return the upgrades associated with the [ids]

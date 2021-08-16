@@ -19,6 +19,14 @@ class MaterialClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
     suspend fun ids(): List<Int> = httpClient.get(path = Materials.MATERIALS)
 
     /**
+     * @return the material associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/materials">the wiki</a>
+     */
+    suspend fun material(id: Int, language: String? = null): Material = single(id, Materials.MATERIALS) {
+        language(language)
+    }
+
+    /**
      * @return the materials associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/materials">the wiki</a>
      */

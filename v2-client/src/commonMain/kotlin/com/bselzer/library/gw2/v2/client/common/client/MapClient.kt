@@ -19,6 +19,14 @@ class MapClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
     suspend fun ids(): List<Int> = httpClient.get(path = Maps.MAPS)
 
     /**
+     * @return the map associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/maps">the wiki</a>
+     */
+    suspend fun map(id: Int, language: String? = null): Map = single(id, Maps.MAPS) {
+        language(language)
+    }
+
+    /**
      * @return the maps associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/maps">the wiki</a>
      */

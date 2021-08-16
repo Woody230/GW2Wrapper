@@ -19,6 +19,14 @@ class TraitClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
     suspend fun ids(): List<Int> = httpClient.get(path = Traits.TRAITS)
 
     /**
+     * @return the trait associated with the [id]
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/traits">the wiki</a>
+     */
+    suspend fun trait(id: Int, language: String? = null): Trait = single(id, Traits.TRAITS) {
+        language(language)
+    }
+
+    /**
      * @return the traits associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/traits">the wiki</a>
      */
