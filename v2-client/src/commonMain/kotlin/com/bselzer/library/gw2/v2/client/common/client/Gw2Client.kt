@@ -303,6 +303,12 @@ open class Gw2Client(
     val worldBoss: WorldBossClient
 
     /**
+     * The world client.
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/worlds">the wiki</a>
+     */
+    val world: WorldClient
+
+    /**
      * The world vs. world client.
      * @see <a href='https://wiki.guildwars2.com/wiki/API:2/wvw">the wiki</a>
      */
@@ -355,6 +361,7 @@ open class Gw2Client(
         title = TitleClient(client, configuration)
         trait = TraitClient(client, configuration)
         worldBoss = WorldBossClient(client, configuration)
+        world = WorldClient(client, configuration)
         wvw = WvwClient(client, configuration)
     }
 
