@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.character.superadventurebox
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -9,7 +10,7 @@ data class SabZone(
      * The id of the world.
      */
     @SerialName("id")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     /**
      * The difficulty mode cleared.
@@ -28,4 +29,4 @@ data class SabZone(
      */
     @SerialName("zone")
     val zoneNumber: Int = 0
-)
+) : Identifiable<Int>

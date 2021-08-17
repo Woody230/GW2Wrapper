@@ -7,6 +7,7 @@ import com.bselzer.library.gw2.v2.client.common.extension.ensureBearer
 import com.bselzer.library.gw2.v2.client.common.extension.language
 import com.bselzer.library.gw2.v2.model.common.pvp.PvpAmulet
 import com.bselzer.library.gw2.v2.model.common.pvp.PvpGame
+import com.bselzer.library.gw2.v2.model.common.pvp.hero.PvpHero
 import com.bselzer.library.gw2.v2.model.common.pvp.leaderboard.PvpLeaderboard
 import com.bselzer.library.gw2.v2.model.common.pvp.rank.PvpRank
 import com.bselzer.library.gw2.v2.model.common.pvp.season.PvpSeason
@@ -176,7 +177,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the hero associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">the wiki</a>
      */
-    suspend fun hero(id: String, language: String? = null): String = single(id, "${PVP}/${HEROES}") {
+    suspend fun hero(id: String, language: String? = null): PvpHero = single(id, "${PVP}/${HEROES}") {
         language(language)
     }
 
@@ -184,7 +185,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the heroes associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">the wiki</a>
      */
-    suspend fun heroes(ids: Collection<String>, language: String? = null): List<String> = chunkedIds(ids, "${PVP}/${HEROES}") {
+    suspend fun heroes(ids: Collection<String>, language: String? = null): List<PvpHero> = chunkedIds(ids, "${PVP}/${HEROES}") {
         language(language)
     }
 
@@ -192,7 +193,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return all the heroes
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">the wiki</a>
      */
-    suspend fun heroes(language: String? = null): List<String> = allIds("${PVP}/${HEROES}") {
+    suspend fun heroes(language: String? = null): List<PvpHero> = allIds("${PVP}/${HEROES}") {
         language(language)
     }
 

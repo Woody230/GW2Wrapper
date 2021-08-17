@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.guild.emblem
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,7 +12,7 @@ data class GuildEmblemComponent(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/emblem/foregrounds">emblem foregrounds on the wiki</a>
      */
     @SerialName("id")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     /**
      * The ids of the colors used.
@@ -19,4 +20,4 @@ data class GuildEmblemComponent(
      */
     @SerialName("colors")
     val colors: List<Int> = emptyList()
-)
+) : Identifiable<Int>

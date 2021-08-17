@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.profession
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import com.bselzer.library.gw2.v2.model.common.profession.skill.ProfessionSkill
 import com.bselzer.library.kotlin.extension.serialization.common.serializer.MapArraySerializer
 import kotlinx.serialization.SerialName
@@ -8,7 +9,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Profession(
     @SerialName("id")
-    val id: String,
+    override val id: String,
 
     @SerialName("name")
     val name: String = "",
@@ -55,4 +56,4 @@ data class Profession(
     @Serializable(with = MapArraySerializer::class)
     @SerialName("skills_by_palette")
     val buildTemplateIds: Map<Int, Int> = emptyMap()
-)
+) : Identifiable<String>

@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.commerce.listing
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,7 +11,7 @@ data class Listings(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
     @SerialName("id")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     /**
      * The buy listings ordered from the lowest to the highest buy order.
@@ -23,4 +24,4 @@ data class Listings(
      */
     @SerialName("sells")
     val sells: List<Listing> = emptyList()
-)
+) : Identifiable<Int>

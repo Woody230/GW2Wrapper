@@ -3,6 +3,7 @@ package com.bselzer.library.gw2.v2.model.common.account
 import com.bselzer.library.gw2.v2.annotation.common.scope.Permission
 import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
 import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import com.bselzer.library.gw2.v2.model.common.extension.serialization.SecondDurationSerializer
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
@@ -22,7 +23,7 @@ data class Account(
      * The id in the form of a UUID.
      */
     @SerialName("id")
-    val id: String = "",
+    override val id: String = "",
 
     /**
      * The age in the form of seconds.
@@ -122,4 +123,4 @@ data class Account(
      */
     @SerialName("build_storage_slots")
     val buildStorageSlots: Int = 0
-)
+) : Identifiable<String>

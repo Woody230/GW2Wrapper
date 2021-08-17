@@ -1,12 +1,13 @@
 package com.bselzer.library.gw2.v2.model.common.mailcarrier
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class MailCarrier(
     @SerialName("id")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     /**
      * The ids of the items used to unlock this mail carrier.
@@ -29,4 +30,4 @@ data class MailCarrier(
 
     @SerialName("flags")
     val flags: List<String> = emptyList()
-)
+) : Identifiable<Int>

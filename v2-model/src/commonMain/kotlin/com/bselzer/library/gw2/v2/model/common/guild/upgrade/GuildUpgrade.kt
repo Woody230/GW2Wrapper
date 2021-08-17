@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.guild.upgrade
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import com.bselzer.library.gw2.v2.model.common.extension.serialization.SecondDurationSerializer
 import com.bselzer.library.gw2.v2.model.common.guild.upgrade.cost.GuildUpgradeCost
 import kotlinx.serialization.SerialName
@@ -11,7 +12,7 @@ import kotlin.time.ExperimentalTime
 @Serializable
 open class GuildUpgrade(
     @SerialName("id")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     @SerialName("name")
     val name: String = "",
@@ -50,7 +51,7 @@ open class GuildUpgrade(
 
     @SerialName("costs")
     val costs: List<GuildUpgradeCost> = emptyList()
-)
+) : Identifiable<Int>
 {
     override fun equals(other: Any?): Boolean
     {

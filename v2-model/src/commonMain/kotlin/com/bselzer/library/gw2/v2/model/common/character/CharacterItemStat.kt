@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.character
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,7 +11,7 @@ data class CharacterItemStat(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/itemstats">the wiki</a>
      */
     @SerialName("id")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     /**
      * The name of the stats mapped to the amounts.
@@ -18,4 +19,4 @@ data class CharacterItemStat(
      */
     @SerialName("attributes")
     val attributes: Map<String, Double> = emptyMap()
-)
+) : Identifiable<Int>

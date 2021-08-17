@@ -1,12 +1,13 @@
 package com.bselzer.library.gw2.v2.model.common.mount
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class MountSkin(
     @SerialName("id")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     @SerialName("name")
     val name: String = "",
@@ -27,4 +28,4 @@ data class MountSkin(
      */
     @SerialName("dye_slots")
     val dyeSlots: List<DyeSlot> = emptyList()
-)
+) : Identifiable<Int>

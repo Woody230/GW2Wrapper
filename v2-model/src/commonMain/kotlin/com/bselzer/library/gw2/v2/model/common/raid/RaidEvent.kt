@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.raid
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,8 +11,8 @@ data class RaidEvent(
      */
     // TODO enum and extension
     @SerialName("id")
-    val id: String = "",
+    override val id: String = "",
 
     @SerialName("type")
     val type: String = ""
-)
+) : Identifiable<String>

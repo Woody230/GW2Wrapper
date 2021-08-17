@@ -1,12 +1,13 @@
 package com.bselzer.library.gw2.v2.model.common.finisher
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Finisher(
     @SerialName("id")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     /**
      * The description of how to unlock this finisher.
@@ -32,4 +33,4 @@ data class Finisher(
 
     @SerialName("name")
     val name: String = ""
-)
+) : Identifiable<Int>

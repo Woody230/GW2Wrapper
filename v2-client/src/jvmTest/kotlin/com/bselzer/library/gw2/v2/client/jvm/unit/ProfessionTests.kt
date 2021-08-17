@@ -58,6 +58,7 @@ class ProfessionTests
         assertEquals(1, professions.size)
 
         val profession = professions.single()
+        assertEquals("Necromancer", profession.id)
         assertEquals("Necromancer", profession.name)
 
         val spec = profession.trainings.firstOrNull { training -> training.name == "Reaper" }

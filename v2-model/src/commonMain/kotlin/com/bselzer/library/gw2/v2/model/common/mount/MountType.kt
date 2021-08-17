@@ -1,12 +1,13 @@
 package com.bselzer.library.gw2.v2.model.common.mount
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class MountType(
     @SerialName("id")
-    val id: String = "",
+    override val id: String = "",
 
     @SerialName("name")
     val name: String = "",
@@ -27,4 +28,4 @@ data class MountType(
 
     @SerialName("skills")
     val skills: List<MountSkill> = emptyList()
-)
+) : Identifiable<String>

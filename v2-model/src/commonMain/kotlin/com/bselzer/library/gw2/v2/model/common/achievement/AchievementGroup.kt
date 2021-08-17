@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.achievement
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -9,7 +10,7 @@ data class AchievementGroup(
      * The id in the form of a UUID.
      */
     @SerialName("id")
-    val id: String = "",
+    override val id: String = "",
 
     @SerialName("name")
     val name: String = "",
@@ -29,4 +30,4 @@ data class AchievementGroup(
      */
     @SerialName("categories")
     val categories: List<Int> = emptyList()
-)
+) : Identifiable<String>

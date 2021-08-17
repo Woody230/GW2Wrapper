@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.emote
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,7 +11,7 @@ data class Emote(
      */
     // TODO enum and extension
     @SerialName("id")
-    val id: String = "",
+    override val id: String = "",
 
     /**
      * The unlocked commands associated with the emote.
@@ -24,4 +25,4 @@ data class Emote(
      */
     @SerialName("unlock_items")
     val unlockItems: List<Int> = emptyList()
-)
+) : Identifiable<String>

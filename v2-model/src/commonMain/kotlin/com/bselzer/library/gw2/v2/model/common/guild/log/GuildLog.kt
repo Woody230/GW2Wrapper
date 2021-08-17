@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.guild.log
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -10,7 +11,7 @@ open class GuildLog(
      * The id of the log. It is only unique within the scope of the associated guild.
      */
     @SerialName("id")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     /**
      * The date and time this log was created.
@@ -25,7 +26,7 @@ open class GuildLog(
      */
     @SerialName("user")
     val user: String? = null
-)
+) : Identifiable<Int>
 {
     override fun equals(other: Any?): Boolean
     {

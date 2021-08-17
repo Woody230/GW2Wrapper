@@ -2,13 +2,14 @@ package com.bselzer.library.gw2.v2.model.common.achievement
 
 import com.bselzer.library.gw2.v2.model.common.achievement.bit.AchievementBit
 import com.bselzer.library.gw2.v2.model.common.achievement.reward.AchievementReward
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Achievement(
     @SerialName("id")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     @SerialName("icon")
     val iconLink: String = "",
@@ -72,4 +73,4 @@ data class Achievement(
      */
     @SerialName("point_cap")
     val pointCap: Int = 0
-)
+) : Identifiable<Int>

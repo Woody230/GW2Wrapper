@@ -1,12 +1,13 @@
 package com.bselzer.library.gw2.v2.model.common.novelty
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Novelty(
     @SerialName("id")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     /**
      * The ids of the items used to unlock this novelty.
@@ -26,4 +27,4 @@ data class Novelty(
 
     @SerialName("slot")
     val slot: String = ""
-)
+) : Identifiable<Int>

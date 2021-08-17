@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.account
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,7 +11,7 @@ data class AccountMaterial(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
     @SerialName("id")
-    val itemId: Int = 0,
+    override val id: Int = 0,
 
     /**
      * The id of the material category in the materials endpoint.
@@ -29,4 +30,4 @@ data class AccountMaterial(
      * The number of the material in the account vault.
      */
     val count: Int = 0
-)
+) : Identifiable<Int>

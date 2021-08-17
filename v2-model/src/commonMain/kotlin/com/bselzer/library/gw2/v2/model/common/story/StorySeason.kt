@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.story
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -9,7 +10,7 @@ data class StorySeason(
      * The id of the season in the form of a UUID.
      */
     @SerialName("id")
-    val id: String = "",
+    override val id: String = "",
 
     @SerialName("name")
     val name: String = "",
@@ -26,4 +27,4 @@ data class StorySeason(
      */
     @SerialName("stories")
     val storyIds: List<Int> = emptyList()
-)
+) : Identifiable<String>

@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.map
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import com.bselzer.library.gw2.v2.model.common.extension.dimension.Rectangle
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -7,7 +8,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Map(
     @SerialName("id")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     @SerialName("name")
     val name: String = "",
@@ -88,4 +89,4 @@ data class Map(
      */
     @SerialName("continent_name")
     val continentName: String = ""
-)
+) : Identifiable<Int>

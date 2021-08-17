@@ -1,12 +1,13 @@
 package com.bselzer.library.gw2.v2.model.common.item
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 open class Item(
     @SerialName("id")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     /**
      * The chat link.
@@ -57,7 +58,7 @@ open class Item(
 
     @SerialName("restrictions")
     val restrictions: List<String> = emptyList()
-)
+) : Identifiable<Int>
 {
     override fun equals(other: Any?): Boolean
     {

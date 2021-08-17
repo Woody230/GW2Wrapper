@@ -1,12 +1,13 @@
 package com.bselzer.library.gw2.v2.model.common.wvw.ability
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Ability(
     @SerialName("id")
-    val id: Int,
+    override val id: Int = 0,
 
     @SerialName("name")
     val name: String = "",
@@ -15,8 +16,8 @@ data class Ability(
     val description: String = "",
 
     @SerialName("icon")
-    val icon: String,
+    val icon: String = "",
 
     @SerialName("ranks")
-    val ranks: List<AbilityRank>
-)
+    val ranks: List<AbilityRank> = emptyList()
+) : Identifiable<Int>

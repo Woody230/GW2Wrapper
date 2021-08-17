@@ -3,6 +3,7 @@ package com.bselzer.library.gw2.v2.model.common.guild
 import com.bselzer.library.gw2.v2.annotation.common.scope.Permission
 import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
 import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import com.bselzer.library.gw2.v2.model.common.guild.emblem.GuildEmblem
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -10,6 +11,12 @@ import kotlinx.serialization.Serializable
 @Scope(Requirement.OPTIONAL, Permission.GUILDS)
 @Serializable
 data class Guild(
+    /**
+     * The id in the form of a UUID.
+     */
+    @SerialName("id")
+    override val id: String = "",
+
     @Scope(Requirement.REQUIRED, Permission.GUILDS)
     @SerialName("level")
     val level: Int = 0,
@@ -56,12 +63,6 @@ data class Guild(
     @SerialName("member_capacity")
     val memberCapacity: Int = 0,
 
-    /**
-     * The id in the form of a UUID.
-     */
-    @SerialName("id")
-    val id: String = "",
-
     @SerialName("name")
     val name: String = "",
 
@@ -73,4 +74,4 @@ data class Guild(
 
     @SerialName("emblem")
     val emblem: GuildEmblem = GuildEmblem()
-)
+) : Identifiable<String>

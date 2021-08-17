@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.trait
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import com.bselzer.library.gw2.v2.model.common.trait.fact.TraitFact
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -7,7 +8,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Trait(
     @SerialName("id")
-    val id: Int,
+    override val id: Int,
 
     @SerialName("name")
     val name: String = "",
@@ -45,4 +46,4 @@ data class Trait(
 
     @SerialName("skills")
     val skills: List<TraitSkill> = emptyList()
-)
+) : Identifiable<Int>

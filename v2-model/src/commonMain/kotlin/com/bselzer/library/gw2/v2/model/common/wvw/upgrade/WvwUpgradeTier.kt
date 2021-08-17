@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class WvwUpgradeTier(
     @SerialName("name")
-    val name: String,
+    val name: String = "",
 
     @SerialName("yaks_required")
     val yaksRequired: Int = 0,

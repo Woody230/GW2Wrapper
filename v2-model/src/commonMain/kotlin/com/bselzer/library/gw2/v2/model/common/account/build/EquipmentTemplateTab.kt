@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.account.build
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -9,7 +10,7 @@ data class EquipmentTemplateTab(
      * The id and index of the tab.
      */
     @SerialName("tab")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     /**
      * The name of the tab given by the player.
@@ -34,4 +35,4 @@ data class EquipmentTemplateTab(
      */
     @SerialName("equipment_pvp")
     val pvpEquipment: EquipmentTemplatePvp = EquipmentTemplatePvp()
-)
+) : Identifiable<Int>

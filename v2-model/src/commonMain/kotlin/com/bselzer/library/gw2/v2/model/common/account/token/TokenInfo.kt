@@ -3,6 +3,7 @@ package com.bselzer.library.gw2.v2.model.common.account.token
 import com.bselzer.library.gw2.v2.annotation.common.scope.Permission
 import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
 import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -18,7 +19,7 @@ open class TokenInfo(
      * The requested token id.
      */
     @SerialName("id")
-    val id: String = "",
+    override val id: String = "",
 
     /**
      * The name of the token, given by the owner.
@@ -31,7 +32,7 @@ open class TokenInfo(
      */
     @SerialName("permissions")
     val permissions: List<String> = emptyList()
-)
+) : Identifiable<String>
 {
     override fun equals(other: Any?): Boolean
     {

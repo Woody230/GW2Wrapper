@@ -1,12 +1,13 @@
 package com.bselzer.library.gw2.v2.model.common.material
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Material(
     @SerialName("id")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     /**
      * The name of the category.
@@ -26,4 +27,4 @@ data class Material(
      */
     @SerialName("order")
     val order: Int = 0
-)
+) : Identifiable<Int>

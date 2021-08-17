@@ -3,7 +3,6 @@ package com.bselzer.library.gw2.v2.client.common.client
 import com.bselzer.library.gw2.v2.client.common.extension.language
 import com.bselzer.library.gw2.v2.model.common.mastery.Mastery
 import io.ktor.client.*
-import io.ktor.client.request.*
 
 /**
  * The mastery client.
@@ -20,7 +19,7 @@ class MasteryClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * @return the ids of the available masteries
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/masteries">the wiki</a>
      */
-    suspend fun ids(): List<Int> = httpClient.get(path = MASTERIES)
+    suspend fun ids(): List<Int> = get(path = MASTERIES)
 
     /**
      * @return the mastery associated with the [id]

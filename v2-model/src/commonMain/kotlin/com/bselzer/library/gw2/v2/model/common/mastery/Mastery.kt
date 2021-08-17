@@ -1,12 +1,13 @@
 package com.bselzer.library.gw2.v2.model.common.mastery
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Mastery(
     @SerialName("id")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     @SerialName("name")
     val name: String = "",
@@ -31,4 +32,4 @@ data class Mastery(
 
     @SerialName("levels")
     val levels: List<MasteryLevel> = emptyList()
-)
+) : Identifiable<Int>

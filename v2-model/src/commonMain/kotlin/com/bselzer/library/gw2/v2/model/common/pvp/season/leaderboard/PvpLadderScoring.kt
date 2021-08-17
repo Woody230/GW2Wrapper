@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.pvp.season.leaderboard
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -9,7 +10,7 @@ data class PvpLadderScoring(
      * The id of the scoring method in the form of a UUID.
      */
     @SerialName("id")
-    val id: String = "",
+    override val id: String = "",
 
     /**
      * The type of the content.
@@ -34,4 +35,4 @@ data class PvpLadderScoring(
      */
     @SerialName("ordering")
     val ordering: String = ""
-)
+) : Identifiable<String>

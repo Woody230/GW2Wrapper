@@ -3,6 +3,7 @@ package com.bselzer.library.gw2.v2.model.common.character
 import com.bselzer.library.gw2.v2.annotation.common.scope.Permission
 import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
 import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import com.bselzer.library.gw2.v2.model.common.extension.serialization.SecondDurationSerializer
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
@@ -12,7 +13,7 @@ import kotlin.time.ExperimentalTime
 
 @OptIn(ExperimentalTime::class)
 @Serializable
-data class Character constructor(
+data class Character(
     /**
      * The ids of the backstory answers to character creation questions.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/backstory/answers">the wiki</a>
@@ -163,4 +164,7 @@ data class Character constructor(
 
     @SerialName("flags")
     val flags: List<String> = emptyList()
-)
+) : Identifiable<String>
+{
+    override val id: String = name
+}

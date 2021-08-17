@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.recipe
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import com.bselzer.library.gw2.v2.model.common.extension.serialization.MillisecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -10,7 +11,7 @@ import kotlin.time.ExperimentalTime
 @Serializable
 data class Recipe(
     @SerialName("id")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     @SerialName("type")
     val type: String = "",
@@ -75,4 +76,4 @@ data class Recipe(
      */
     @SerialName("chat_link")
     val chatLink: String = ""
-)
+) : Identifiable<Int>

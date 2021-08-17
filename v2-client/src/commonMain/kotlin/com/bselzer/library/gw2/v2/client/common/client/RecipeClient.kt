@@ -54,11 +54,11 @@ class RecipeClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration
      * @return the recipes associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/recipes">the wiki</a>
      */
-    suspend fun recipe(id: String): Recipe = single(id, RECIPES)
+    suspend fun recipe(id: Int): Recipe = single(id, RECIPES)
 
     /**
      * @return the recipes associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/recipes">the wiki</a>
      */
-    suspend fun recipes(ids: Collection<String>): List<Recipe> = chunkedIds(ids, RECIPES)
+    suspend fun recipes(ids: Collection<Int>): List<Recipe> = chunkedIds(ids, RECIPES)
 }

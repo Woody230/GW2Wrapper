@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.pvp
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -10,7 +11,7 @@ data class PvpGame(
      * The id in the form of a UUID.
      */
     @SerialName("id")
-    val id: String = "",
+    override val id: String = "",
 
     /**
      * The id of the map the match was played on.
@@ -73,4 +74,4 @@ data class PvpGame(
      */
     @SerialName("season")
     val season: String = ""
-)
+) : Identifiable<String>

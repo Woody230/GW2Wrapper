@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.account.build
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -9,7 +10,7 @@ data class BuildTemplateTab(
      * The id and index of the tab.
      */
     @SerialName("tab")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     /**
      * Whether this tab is the currently selected tab.
@@ -19,4 +20,4 @@ data class BuildTemplateTab(
 
     @SerialName("build")
     val build: BuildTemplate = BuildTemplate()
-)
+) : Identifiable<Int>

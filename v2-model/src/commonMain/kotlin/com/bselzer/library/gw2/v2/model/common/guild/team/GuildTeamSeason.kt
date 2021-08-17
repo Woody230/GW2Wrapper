@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.guild.team
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,7 +11,7 @@ data class GuildTeamSeason(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">the wiki</a>
      */
     @SerialName("id")
-    val id: String = "",
+    override val id: String = "",
 
     @SerialName("wins")
     val wins: Int = 0,
@@ -20,4 +21,4 @@ data class GuildTeamSeason(
 
     @SerialName("rating")
     val rating: Int = 0
-)
+) : Identifiable<String>

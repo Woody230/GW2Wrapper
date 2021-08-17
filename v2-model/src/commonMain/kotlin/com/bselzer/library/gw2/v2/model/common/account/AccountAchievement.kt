@@ -3,6 +3,7 @@ package com.bselzer.library.gw2.v2.model.common.account
 import com.bselzer.library.gw2.v2.annotation.common.scope.Permission
 import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
 import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -13,7 +14,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class AccountAchievement(
     @SerialName("id")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     /**
      * Reference ids indicating progress of the achievement.
@@ -50,4 +51,4 @@ data class AccountAchievement(
      */
     @SerialName("unlocked")
     val unlocked: Boolean? = null
-)
+) : Identifiable<Int>

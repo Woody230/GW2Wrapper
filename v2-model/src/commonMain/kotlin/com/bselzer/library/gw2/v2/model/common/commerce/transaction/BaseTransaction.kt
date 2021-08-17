@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.commerce.transaction
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -7,7 +8,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 abstract class BaseTransaction(
     @SerialName("id")
-    val id: Long = 0,
+    override val id: Long = 0,
 
     /**
      * The id of the item.
@@ -33,7 +34,7 @@ abstract class BaseTransaction(
      */
     @SerialName("created")
     val createdAt: Instant = Instant.DISTANT_PAST
-)
+) : Identifiable<Long>
 {
     override fun equals(other: Any?): Boolean
     {

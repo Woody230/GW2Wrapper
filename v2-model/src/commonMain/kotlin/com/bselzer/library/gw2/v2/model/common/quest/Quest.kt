@@ -1,12 +1,13 @@
 package com.bselzer.library.gw2.v2.model.common.quest
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Quest(
     @SerialName("id")
-    val id: Int = 0,
+    override val id: Int = 0,
 
     @SerialName("name")
     val name: String = "",
@@ -26,4 +27,4 @@ data class Quest(
 
     @SerialName("goals")
     val goals: List<QuestGoal> = emptyList()
-)
+) : Identifiable<Int>

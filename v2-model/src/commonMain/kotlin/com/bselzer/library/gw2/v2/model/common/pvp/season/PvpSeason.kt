@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.pvp.season
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import com.bselzer.library.gw2.v2.model.common.pvp.season.leaderboard.PvpSeasonLeaderboard
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
@@ -11,7 +12,7 @@ data class PvpSeason(
      * The id in the form of a UUID.
      */
     @SerialName("id")
-    val id: String = "",
+    override val id: String = "",
 
     @SerialName("name")
     val name: String = "",
@@ -36,4 +37,4 @@ data class PvpSeason(
 
     @SerialName("ranks")
     val ranks: List<PvpSeasonRank> = emptyList()
-)
+) : Identifiable<String>

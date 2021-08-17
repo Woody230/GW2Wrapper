@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.client.common.client
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import io.ktor.client.*
 import io.ktor.client.request.*
 
@@ -23,7 +24,7 @@ abstract class BaseClient(
     /**
      * Adds the id.
      */
-    protected fun HttpRequestBuilder.idParameter(id: Any) = parameter("id", id)
+    protected fun HttpRequestBuilder.idParameter(id: Any?) = parameter("id", id)
 
     /**
      * Adds the ids as a comma separated string.
@@ -48,7 +49,7 @@ abstract class BaseClient(
      *
      * @return the collection of objects represented by the ids
      */
-    protected suspend inline fun <reified T> chunkedIds(ids: Collection<*>, path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> =
+    protected suspend inline fun <reified T : Identifiable<Id>, Id> chunkedIds(ids: Collection<Id>, path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> =
         chunked(ids, path, "ids", block)
 
     /**
@@ -56,7 +57,7 @@ abstract class BaseClient(
      *
      * @return the collection of objects represented by the ids
      */
-    protected suspend inline fun <reified T> chunkedTabs(ids: Collection<*>, path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> =
+    protected suspend inline fun <reified T : Identifiable<Id>, Id> chunkedTabs(ids: Collection<Id>, path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> =
         chunked(ids, path, "tabs", block)
 
     /**
@@ -74,7 +75,12 @@ abstract class BaseClient(
      *
      * @return the collection of objects represented by the ids
      */
-    protected suspend inline fun <reified T> chunked(ids: Collection<*>, path: String, idsParameterName: String, block: HttpRequestBuilder.() -> Unit = {}): List<T>
+    protected suspend inline fun <reified T : Identifiable<Id>, Id> chunked(
+        ids: Collection<Id>,
+        path: String,
+        idsParameterName: String,
+        block: HttpRequestBuilder.() -> Unit = {}
+    ): List<T>
     {
         val responses = mutableListOf<T>()
         for (chunk in ids.chunked(configuration.pageSize))
@@ -99,7 +105,7 @@ abstract class BaseClient(
     /**
      * @return a single object
      */
-    protected suspend inline fun <reified T> single(id: Any, path: String, block: HttpRequestBuilder.() -> Unit = {}): T =
+    protected suspend inline fun <reified T : Identifiable<Id>, Id> single(id: Id, path: String, block: HttpRequestBuilder.() -> Unit = {}): T =
         httpClient.get(path = path) {
             idParameter(id)
             apply(block)

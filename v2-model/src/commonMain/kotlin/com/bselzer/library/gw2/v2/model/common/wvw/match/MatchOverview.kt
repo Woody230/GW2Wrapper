@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.common.wvw.match
 
+import com.bselzer.library.gw2.v2.model.common.extension.base.Identifiable
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -7,7 +8,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class MatchOverview(
     @SerialName("id")
-    val id: String,
+    override val id: String = "",
 
     @SerialName("start_time")
     val startTime: Instant = Instant.DISTANT_PAST,
@@ -23,4 +24,4 @@ data class MatchOverview(
 
     @SerialName("all_worlds")
     val allWorlds: WorldCounts = WorldCounts(),
-)
+) : Identifiable<String>

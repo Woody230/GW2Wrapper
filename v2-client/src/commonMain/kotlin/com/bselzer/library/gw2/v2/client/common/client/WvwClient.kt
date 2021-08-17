@@ -82,7 +82,7 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the ids of the available matches
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun matchIds(): List<Int> = get(path = "${WVW}/${MATCHES}")
+    suspend fun matchIds(): List<String> = get(path = "${WVW}/${MATCHES}")
 
     /**
      * @return the match associated with the [World.id]
@@ -94,13 +94,13 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the match associated with the [World.id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun match(id: Int): Match = single(id, "${WVW}/${MATCHES}")
+    suspend fun match(id: String): Match = single(id, "${WVW}/${MATCHES}")
 
     /**
      * @return the matches associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun matches(ids: Collection<Int>): List<Match> = chunkedIds(ids, "${WVW}/${MATCHES}")
+    suspend fun matches(ids: Collection<String>): List<Match> = chunkedIds(ids, "${WVW}/${MATCHES}")
 
     /**
      * @return all the matches
@@ -124,13 +124,13 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the match overview associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun overview(id: Int): MatchOverview = single(id, "${WVW}/${MATCHES}/${OVERVIEW}")
+    suspend fun overview(id: String): MatchOverview = single(id, "${WVW}/${MATCHES}/${OVERVIEW}")
 
     /**
      * @return the match overviews associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun overviews(ids: Collection<Int>): List<MatchOverview> = chunkedIds(ids, "${WVW}/${MATCHES}/${OVERVIEW}")
+    suspend fun overviews(ids: Collection<String>): List<MatchOverview> = chunkedIds(ids, "${WVW}/${MATCHES}/${OVERVIEW}")
 
     /**
      * @return all the match overviews
@@ -154,13 +154,13 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the match score associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun score(id: Int): MatchScore = single(id, "${WVW}/${MATCHES}/${SCORES}")
+    suspend fun score(id: String): MatchScore = single(id, "${WVW}/${MATCHES}/${SCORES}")
 
     /**
      * @return the match scores associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun scores(ids: Collection<Int>): List<MatchScore> = chunkedIds(ids, "${WVW}/${MATCHES}/${SCORES}")
+    suspend fun scores(ids: Collection<String>): List<MatchScore> = chunkedIds(ids, "${WVW}/${MATCHES}/${SCORES}")
 
     /**
      * @return all the match overviews
@@ -172,7 +172,7 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the ids of the available match stats
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun statIds(): List<Int> = get(path = "${WVW}/${MATCHES}/${STATS}")
+    suspend fun statIds(): List<String> = get(path = "${WVW}/${MATCHES}/${STATS}")
 
     /**
      * @return the match stat associated with the [World.id]
@@ -184,13 +184,13 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the match stat associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun stat(id: Int): MatchStat = single(id, "${WVW}/${MATCHES}/${STATS}")
+    suspend fun stat(id: String): MatchStat = single(id, "${WVW}/${MATCHES}/${STATS}")
 
     /**
      * @return the match stats associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun stats(ids: Collection<Int>): List<MatchStat> = chunkedIds(ids, "${WVW}/${MATCHES}/${STATS}")
+    suspend fun stats(ids: Collection<String>): List<MatchStat> = chunkedIds(ids, "${WVW}/${MATCHES}/${STATS}")
 
     /**
      * @return all the match stats
