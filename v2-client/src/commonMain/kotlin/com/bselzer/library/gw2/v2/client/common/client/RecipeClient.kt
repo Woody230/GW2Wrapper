@@ -1,6 +1,5 @@
 package com.bselzer.library.gw2.v2.client.common.client
 
-import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Recipes
 import com.bselzer.library.gw2.v2.model.common.recipe.Recipe
 import io.ktor.client.*
 import io.ktor.client.request.*
@@ -11,6 +10,12 @@ import io.ktor.client.request.*
  */
 class RecipeClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration)
 {
+    private companion object
+    {
+        const val RECIPES = "recipes"
+        const val SEARCH = "search"
+    }
+
     /**
      * The recipe input item id.
      */
@@ -27,13 +32,13 @@ class RecipeClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration
      * @return the ids of the available recipes
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/recipes">the wiki</a>
      */
-    suspend fun ids(): List<String> = httpClient.get(path = Recipes.RECIPES)
+    suspend fun ids(): List<String> = get(path = RECIPES)
 
     /**
      * @return the ids of the recipes that use the item with the given [input] id
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/recipes/search">the wiki</a>
      */
-    suspend fun ids(input: RecipeInput): List<Int> = httpClient.get(path = "${Recipes.RECIPES}/${Recipes.SEARCH}") {
+    suspend fun ids(input: RecipeInput): List<Int> = get(path = "${RECIPES}/${SEARCH}") {
         parameter("input", input.itemId)
     }
 
@@ -41,7 +46,7 @@ class RecipeClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration
      * @return the ids of the recipes that produce the item with the given [output] id
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/recipes/search">the wiki</a>
      */
-    suspend fun ids(output: RecipeOutput): List<Int> = httpClient.get(path = "${Recipes.RECIPES}/${Recipes.SEARCH}") {
+    suspend fun ids(output: RecipeOutput): List<Int> = get(path = "${RECIPES}/${SEARCH}") {
         parameter("output", output.itemId)
     }
 
@@ -49,11 +54,11 @@ class RecipeClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration
      * @return the recipes associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/recipes">the wiki</a>
      */
-    suspend fun recipe(id: String): Recipe = single(id, Recipes.RECIPES)
+    suspend fun recipe(id: String): Recipe = single(id, RECIPES)
 
     /**
      * @return the recipes associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/recipes">the wiki</a>
      */
-    suspend fun recipes(ids: Collection<String>): List<Recipe> = chunkedIds(ids, Recipes.RECIPES)
+    suspend fun recipes(ids: Collection<String>): List<Recipe> = chunkedIds(ids, RECIPES)
 }

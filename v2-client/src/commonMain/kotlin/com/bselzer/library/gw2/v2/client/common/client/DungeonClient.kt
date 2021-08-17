@@ -1,10 +1,8 @@
 package com.bselzer.library.gw2.v2.client.common.client
 
-import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Dungeons
 import com.bselzer.library.gw2.v2.client.common.extension.language
 import com.bselzer.library.gw2.v2.model.common.dungeon.Dungeon
 import io.ktor.client.*
-import io.ktor.client.request.*
 
 /**
  * The dungeon client.
@@ -12,17 +10,22 @@ import io.ktor.client.request.*
  */
 class DungeonClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration)
 {
+    private companion object
+    {
+        const val DUNGEONS = "dungeons"
+    }
+
     /**
      * @return the ids of the available dungeons
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/dungeons">the wiki</a>
      */
-    suspend fun ids(): List<String> = httpClient.get(path = Dungeons.DUNGEONS)
+    suspend fun ids(): List<String> = get(path = DUNGEONS)
 
     /**
      * @return the dungeon associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/dungeons">the wiki</a>
      */
-    suspend fun dungeon(id: String, language: String? = null): Dungeon = single(id, Dungeons.DUNGEONS) {
+    suspend fun dungeon(id: String, language: String? = null): Dungeon = single(id, DUNGEONS) {
         language(language)
     }
 
@@ -30,7 +33,7 @@ class DungeonClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * @return the dungeons associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/dungeons">the wiki</a>
      */
-    suspend fun dungeons(ids: Collection<String>, language: String? = null): List<Dungeon> = chunkedIds(ids, Dungeons.DUNGEONS) {
+    suspend fun dungeons(ids: Collection<String>, language: String? = null): List<Dungeon> = chunkedIds(ids, DUNGEONS) {
         language(language)
     }
 
@@ -38,7 +41,7 @@ class DungeonClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * @return all the dungeons
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/dungeons">the wiki</a>
      */
-    suspend fun dungeons(language: String? = null): List<Dungeon> = allIds(Dungeons.DUNGEONS) {
+    suspend fun dungeons(language: String? = null): List<Dungeon> = allIds(DUNGEONS) {
         language(language)
     }
 }

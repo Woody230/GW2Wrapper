@@ -1,6 +1,6 @@
 package com.bselzer.library.gw2.v2.client.common.client
 
-import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Endpoints
+import com.bselzer.library.gw2.v2.client.common.constant.Endpoints
 import com.bselzer.library.gw2.v2.client.common.extension.bearer
 import com.bselzer.library.gw2.v2.client.common.extension.language
 import com.bselzer.library.gw2.v2.client.common.extension.schemaVersion
@@ -35,6 +35,7 @@ open class Gw2Client(
             isLenient = true
             ignoreUnknownKeys = true
             coerceInputValues = true
+            encodeDefaults = true
         }
     }
 

@@ -1,10 +1,8 @@
 package com.bselzer.library.gw2.v2.client.common.client
 
-import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Maps
 import com.bselzer.library.gw2.v2.client.common.extension.language
 import com.bselzer.library.gw2.v2.model.common.map.Map
 import io.ktor.client.*
-import io.ktor.client.request.*
 
 /**
  * The map client.
@@ -12,17 +10,22 @@ import io.ktor.client.request.*
  */
 class MapClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration)
 {
+    private companion object
+    {
+        const val MAPS = "maps"
+    }
+
     /**
      * @return the ids of the available maps
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/maps">the wiki</a>
      */
-    suspend fun ids(): List<Int> = httpClient.get(path = Maps.MAPS)
+    suspend fun ids(): List<Int> = get(path = MAPS)
 
     /**
      * @return the map associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/maps">the wiki</a>
      */
-    suspend fun map(id: Int, language: String? = null): Map = single(id, Maps.MAPS) {
+    suspend fun map(id: Int, language: String? = null): Map = single(id, MAPS) {
         language(language)
     }
 
@@ -30,7 +33,7 @@ class MapClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the maps associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/maps">the wiki</a>
      */
-    suspend fun maps(ids: Collection<Int>, language: String? = null): List<Map> = chunkedIds(ids, Maps.MAPS) {
+    suspend fun maps(ids: Collection<Int>, language: String? = null): List<Map> = chunkedIds(ids, MAPS) {
         language(language)
     }
 
@@ -38,7 +41,7 @@ class MapClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return all the maps
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/maps">the wiki</a>
      */
-    suspend fun maps(language: String? = null): List<Map> = allIds(Maps.MAPS) {
+    suspend fun maps(language: String? = null): List<Map> = allIds(MAPS) {
         language(language)
     }
 }

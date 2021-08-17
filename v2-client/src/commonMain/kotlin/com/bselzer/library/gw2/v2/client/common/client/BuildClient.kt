@@ -1,9 +1,7 @@
 package com.bselzer.library.gw2.v2.client.common.client
 
-import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Builds
 import com.bselzer.library.gw2.v2.model.common.build.Build
 import io.ktor.client.*
-import io.ktor.client.request.*
 
 /**
  * The build client.
@@ -11,8 +9,13 @@ import io.ktor.client.request.*
  */
 class BuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration)
 {
+    private companion object
+    {
+        const val BUILD = "build"
+    }
+
     /**
      * @return the current build id
      */
-    suspend fun buildId(): Int = httpClient.get<Build>(path = Builds.BUILD).id
+    suspend fun buildId(): Int = get<Build>(path = BUILD).id
 }

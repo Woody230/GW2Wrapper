@@ -1,10 +1,8 @@
 package com.bselzer.library.gw2.v2.client.common.client
 
-import com.bselzer.library.gw2.v2.client.common.constant.endpoint.MailCarriers
 import com.bselzer.library.gw2.v2.client.common.extension.language
 import com.bselzer.library.gw2.v2.model.common.mailcarrier.MailCarrier
 import io.ktor.client.*
-import io.ktor.client.request.*
 
 /**
  * The mail carrier client.
@@ -12,17 +10,22 @@ import io.ktor.client.request.*
  */
 class MailCarrierClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration)
 {
+    private companion object
+    {
+        const val MAIL_CARRIERS = "mailcarriers"
+    }
+
     /**
      * @return the ids of the available mail carriers
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">the wiki</a>
      */
-    suspend fun ids(): List<Int> = httpClient.get(path = MailCarriers.MAIL_CARRIERS)
+    suspend fun ids(): List<Int> = get(path = MAIL_CARRIERS)
 
     /**
      * @return the mail carrier associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">the wiki</a>
      */
-    suspend fun mailCarrier(id: Int, language: String? = null): MailCarrier = single(id, MailCarriers.MAIL_CARRIERS) {
+    suspend fun mailCarrier(id: Int, language: String? = null): MailCarrier = single(id, MAIL_CARRIERS) {
         language(language)
     }
 
@@ -30,7 +33,7 @@ class MailCarrierClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
      * @return the mail carriers associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">the wiki</a>
      */
-    suspend fun mailCarriers(ids: Collection<Int>, language: String? = null): List<MailCarrier> = chunkedIds(ids, MailCarriers.MAIL_CARRIERS) {
+    suspend fun mailCarriers(ids: Collection<Int>, language: String? = null): List<MailCarrier> = chunkedIds(ids, MAIL_CARRIERS) {
         language(language)
     }
 
@@ -38,7 +41,7 @@ class MailCarrierClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
      * @return all the mail carriers
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">the wiki</a>
      */
-    suspend fun mailCarriers(language: String? = null): List<MailCarrier> = allIds(MailCarriers.MAIL_CARRIERS) {
+    suspend fun mailCarriers(language: String? = null): List<MailCarrier> = allIds(MAIL_CARRIERS) {
         language(language)
     }
 }

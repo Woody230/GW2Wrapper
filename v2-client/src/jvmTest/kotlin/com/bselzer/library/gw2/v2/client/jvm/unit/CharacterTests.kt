@@ -24,7 +24,7 @@ class CharacterTests
                     when (request.url.toString())
                     {
                         "https://api.guildwars2.com/v2/characters/John Doe/backstory" -> respond(
-                            "[\"1-45\", \"180-99\", \"78-79\"]",
+                            "{ \"backstory\": [\"1-45\", \"180-99\", \"78-79\"] }",
                             headers = ContentType.Application.Json.asHeader()
                         )
                         else -> error("Cannot handle ${request.url.fullPath}")

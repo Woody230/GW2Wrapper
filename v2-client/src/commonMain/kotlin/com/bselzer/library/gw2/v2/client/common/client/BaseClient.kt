@@ -35,44 +35,51 @@ abstract class BaseClient(
      */
     protected fun HttpRequestBuilder.allIdsParameter(parameterName: String = "ids") = parameter(parameterName, "all")
 
+    /**
+     * @return the object
+     */
+    protected suspend inline fun <reified T> get(path: String, block: HttpRequestBuilder.() -> Unit = {}): T = httpClient.get(path = path) {
+        apply(block)
+    }
+
     // TODO T inherit an id from an interface, and use its type instead of *
     /**
      * Chunks the ids into requests small enough for the API to accept, if there are more ids than the configuration page size.
      *
      * @return the collection of objects represented by the ids
      */
-    protected suspend inline fun <reified T> chunkedIds(ids: Collection<*>, basePath: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> =
-        chunked(ids, basePath, "ids", block)
+    protected suspend inline fun <reified T> chunkedIds(ids: Collection<*>, path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> =
+        chunked(ids, path, "ids", block)
 
     /**
      * Chunks the ids into requests small enough for the API to accept, if there are more ids than the configuration page size.
      *
      * @return the collection of objects represented by the ids
      */
-    protected suspend inline fun <reified T> chunkedTabs(ids: Collection<*>, basePath: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> =
-        chunked(ids, basePath, "tabs", block)
+    protected suspend inline fun <reified T> chunkedTabs(ids: Collection<*>, path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> =
+        chunked(ids, path, "tabs", block)
 
     /**
      * @return all the objects
      */
-    protected suspend inline fun <reified T> allIds(basePath: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> = all(basePath, "ids", block)
+    protected suspend inline fun <reified T> allIds(path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> = all(path, "ids", block)
 
     /**
      * @return all the objects
      */
-    protected suspend inline fun <reified T> allTabs(basePath: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> = all(basePath, "tabs", block)
+    protected suspend inline fun <reified T> allTabs(path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> = all(path, "tabs", block)
 
     /**
      * Chunks the ids into requests small enough for the API to accept, if there are more tids than the configuration page size.
      *
      * @return the collection of objects represented by the ids
      */
-    protected suspend inline fun <reified T> chunked(ids: Collection<*>, basePath: String, idsParameterName: String, block: HttpRequestBuilder.() -> Unit = {}): List<T>
+    protected suspend inline fun <reified T> chunked(ids: Collection<*>, path: String, idsParameterName: String, block: HttpRequestBuilder.() -> Unit = {}): List<T>
     {
         val responses = mutableListOf<T>()
         for (chunk in ids.chunked(configuration.pageSize))
         {
-            responses.addAll(httpClient.get(path = basePath) {
+            responses.addAll(httpClient.get(path = path) {
                 idsParameter(chunk, idsParameterName)
                 apply(block)
             })
@@ -83,8 +90,8 @@ abstract class BaseClient(
     /**
      * @return all the objects
      */
-    protected suspend inline fun <reified T> all(basePath: String, idParameterName: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> =
-        httpClient.get(path = basePath) {
+    protected suspend inline fun <reified T> all(path: String, idParameterName: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> =
+        httpClient.get(path = path) {
             allIdsParameter(idParameterName)
             apply(block)
         }
@@ -92,8 +99,8 @@ abstract class BaseClient(
     /**
      * @return a single object
      */
-    protected suspend inline fun <reified T> single(id: Any, basePath: String, block: HttpRequestBuilder.() -> Unit = {}): T =
-        httpClient.get(path = basePath) {
+    protected suspend inline fun <reified T> single(id: Any, path: String, block: HttpRequestBuilder.() -> Unit = {}): T =
+        httpClient.get(path = path) {
             idParameter(id)
             apply(block)
         }

@@ -1,11 +1,9 @@
 package com.bselzer.library.gw2.v2.client.common.client
 
-import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Mounts
 import com.bselzer.library.gw2.v2.client.common.extension.language
 import com.bselzer.library.gw2.v2.model.common.mount.MountSkin
 import com.bselzer.library.gw2.v2.model.common.mount.MountType
 import io.ktor.client.*
-import io.ktor.client.request.*
 
 /**
  * The mount client.
@@ -13,17 +11,24 @@ import io.ktor.client.request.*
  */
 class MountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration)
 {
+    private companion object
+    {
+        const val MOUNTS = "mounts"
+        const val SKINS = "skins"
+        const val TYPES = "types"
+    }
+
     /**
      * @return the ids of the available skins
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mounts/skins">the wiki</a>
      */
-    suspend fun skinIds(): List<Int> = httpClient.get(path = "${Mounts.MOUNTS}/${Mounts.SKINS}")
+    suspend fun skinIds(): List<Int> = get(path = "${MOUNTS}/${SKINS}")
 
     /**
      * @return the skin associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mounts/skins">the wiki</a>
      */
-    suspend fun skin(id: Int, language: String? = null): MountSkin = single(id, "${Mounts.MOUNTS}/${Mounts.SKINS}") {
+    suspend fun skin(id: Int, language: String? = null): MountSkin = single(id, "${MOUNTS}/${SKINS}") {
         language(language)
     }
 
@@ -31,7 +36,7 @@ class MountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the skins associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mounts/skins">the wiki</a>
      */
-    suspend fun skins(ids: Collection<Int>, language: String? = null): List<MountSkin> = chunkedIds(ids, "${Mounts.MOUNTS}/${Mounts.SKINS}") {
+    suspend fun skins(ids: Collection<Int>, language: String? = null): List<MountSkin> = chunkedIds(ids, "${MOUNTS}/${SKINS}") {
         language(language)
     }
 
@@ -39,7 +44,7 @@ class MountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return all the skins
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mounts/skins">the wiki</a>
      */
-    suspend fun skins(language: String? = null): List<MountSkin> = allIds("${Mounts.MOUNTS}/${Mounts.SKINS}") {
+    suspend fun skins(language: String? = null): List<MountSkin> = allIds("${MOUNTS}/${SKINS}") {
         language(language)
     }
 
@@ -47,13 +52,13 @@ class MountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the ids of the available types
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mounts/types">the wiki</a>
      */
-    suspend fun typeIds(): List<String> = httpClient.get(path = "${Mounts.MOUNTS}/${Mounts.TYPES}")
+    suspend fun typeIds(): List<String> = get(path = "${MOUNTS}/${TYPES}")
 
     /**
      * @return the type associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mounts/types">the wiki</a>
      */
-    suspend fun type(id: String, language: String? = null): MountType = single(id, "${Mounts.MOUNTS}/${Mounts.TYPES}") {
+    suspend fun type(id: String, language: String? = null): MountType = single(id, "${MOUNTS}/${TYPES}") {
         language(language)
     }
 
@@ -61,7 +66,7 @@ class MountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the types associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mounts/types">the wiki</a>
      */
-    suspend fun types(ids: Collection<String>, language: String? = null): List<MountType> = chunkedIds(ids, "${Mounts.MOUNTS}/${Mounts.TYPES}") {
+    suspend fun types(ids: Collection<String>, language: String? = null): List<MountType> = chunkedIds(ids, "${MOUNTS}/${TYPES}") {
         language(language)
     }
 
@@ -69,7 +74,7 @@ class MountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return all the types
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mounts/types">the wiki</a>
      */
-    suspend fun types(language: String? = null): List<MountType> = allIds("${Mounts.MOUNTS}/${Mounts.TYPES}") {
+    suspend fun types(language: String? = null): List<MountType> = allIds("${MOUNTS}/${TYPES}") {
         language(language)
     }
 }

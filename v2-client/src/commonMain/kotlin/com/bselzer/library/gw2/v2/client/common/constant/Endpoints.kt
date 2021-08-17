@@ -1,4 +1,4 @@
-package com.bselzer.library.gw2.v2.client.common.constant.endpoint
+package com.bselzer.library.gw2.v2.client.common.constant
 
 /**
  * Common endpoint constants.

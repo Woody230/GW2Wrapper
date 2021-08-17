@@ -1,10 +1,8 @@
 package com.bselzer.library.gw2.v2.client.common.client
 
-import com.bselzer.library.gw2.v2.client.common.constant.endpoint.Items
 import com.bselzer.library.gw2.v2.client.common.extension.language
 import com.bselzer.library.gw2.v2.model.common.item.Item
 import io.ktor.client.*
-import io.ktor.client.request.*
 
 /**
  * The item client.
@@ -12,17 +10,22 @@ import io.ktor.client.request.*
  */
 class ItemClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration)
 {
+    private companion object
+    {
+        const val ITEMS = "items"
+    }
+
     /**
      * @return the ids of the available items
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
-    suspend fun ids(): List<Int> = httpClient.get(path = Items.ITEMS)
+    suspend fun ids(): List<Int> = get(path = ITEMS)
 
     /**
      * @return the item associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
-    suspend fun item(id: Int, language: String? = null): List<Item> = single(id, Items.ITEMS) {
+    suspend fun item(id: Int, language: String? = null): List<Item> = single(id, ITEMS) {
         language(language)
     }
 
@@ -30,7 +33,7 @@ class ItemClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
      * @return the items associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
-    suspend fun items(ids: Collection<Int>, language: String? = null): List<Item> = chunkedIds(ids, Items.ITEMS) {
+    suspend fun items(ids: Collection<Int>, language: String? = null): List<Item> = chunkedIds(ids, ITEMS) {
         language(language)
     }
 }
