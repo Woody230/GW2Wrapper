@@ -2,6 +2,10 @@ package com.bselzer.library.gw2.v2.model.extension.common.chatlink
 
 import com.bselzer.library.kotlin.extension.base64.common.decodeBase64ToByteArray
 import com.bselzer.library.kotlin.extension.base64.common.encodeBase64ToString
+import com.bselzer.library.kotlin.extension.function.common.collection.toByteArray
+import com.bselzer.library.kotlin.extension.function.common.objects.toBoolean
+import com.bselzer.library.kotlin.extension.function.common.objects.toInt
+import kotlin.experimental.or
 
 abstract class ChatLink<Link> where Link : ChatLink<Link>
 {
@@ -55,6 +59,50 @@ abstract class ChatLink<Link> where Link : ChatLink<Link>
      * @return the link data
      */
     protected abstract fun getData(): ByteArray
+
+    /**
+     * Combine bit flags into a byte.
+     * @return a byte of flags in big endian format
+     */
+    protected fun encodeFlags(vararg flags: Boolean): Byte
+    {
+        var byte: Byte = 0
+        var shift = 7
+        flags.forEach { flag ->
+            byte = byte or (flag.toInt() shl shift).toByte()
+
+            // Move the shifting to the right to apply the next flag.
+            shift -= 1
+        }
+        return byte
+    }
+
+    /**
+     * Extracts the flag bits from the byte.
+     * @return the flags
+     */
+    protected fun decodeFlags(byte: Byte): List<Boolean>
+    {
+        val flags = mutableListOf<Boolean>()
+        (7 downTo 0).forEach { index ->
+            val bit = (byte.toInt() shr index) and 1
+            flags.add(bit.toBoolean())
+        }
+        return flags
+    }
+
+    /**
+     * @return [this] as a byte array in little endian format with [slots] number of bytes
+     */
+    protected fun Int.bytes(take: Int, slots: Int): List<Byte>
+    {
+        val bytes = this.toByteArray().take(3).toMutableList()
+
+        // Fill the remaining slots with zero.
+        (1..slots - take).forEach { _ -> bytes.add(0) }
+
+        return bytes
+    }
 
     override fun equals(other: Any?): Boolean
     {
