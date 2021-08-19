@@ -7,7 +7,7 @@ import com.bselzer.library.kotlin.extension.function.common.objects.toBoolean
 import com.bselzer.library.kotlin.extension.function.common.objects.toInt
 import kotlin.experimental.or
 
-abstract class ChatLink<Link> where Link : ChatLink<Link>
+abstract class ChatLink
 {
     /**
      * The first byte of a chat link.
@@ -26,9 +26,8 @@ abstract class ChatLink<Link> where Link : ChatLink<Link>
     /**
      * Extracts the components from the [encoded] link.
      * @param encoded the encoded link
-     * @return the [Link] with the components populated
      */
-    fun decode(encoded: String): Link
+    fun decode(encoded: String)
     {
         // Need to remove the enclosing square brackets and ampersand before decoding, if it exists.
         val input = encoded.removeSurrounding("[&", "]")
@@ -45,15 +44,15 @@ abstract class ChatLink<Link> where Link : ChatLink<Link>
             throw IllegalArgumentException("Unable to decode an invalid link: the header byte of '$encoded' does not equal '$header'")
         }
 
-        // Let the subclass create itself using the data.
-        return decode(bytes.copyOfRange(1, bytes.size - 1))
+        // Let the subclass populate itself using the data.
+        decode(bytes.copyOfRange(1, bytes.size - 1))
     }
 
     /**
+     * Populate the components from the [bytes].
      * @param bytes the decoded link with the header removed
-     * @return the [Link] with the components populated
      */
-    protected abstract fun decode(bytes: ByteArray): Link
+    protected abstract fun decode(bytes: ByteArray)
 
     /**
      * @return the link data
@@ -109,7 +108,7 @@ abstract class ChatLink<Link> where Link : ChatLink<Link>
         if (this === other) return true
         if (other == null || this::class != other::class) return false
 
-        other as ChatLink<*>
+        other as ChatLink
 
         if (header != other.header) return false
         return encode() == other.encode()

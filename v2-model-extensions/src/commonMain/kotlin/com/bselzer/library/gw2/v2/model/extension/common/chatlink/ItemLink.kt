@@ -2,6 +2,9 @@ package com.bselzer.library.gw2.v2.model.extension.common.chatlink
 
 import com.bselzer.library.kotlin.extension.function.common.collection.toInt
 
+/**
+ * A link to an item.
+ */
 class ItemLink(
     /**
      * The number of the item in the stack.
@@ -31,7 +34,7 @@ class ItemLink(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
     var secondUpgradeId: Int = 0
-) : ChatLink<ItemLink>()
+) : ChatLink()
 {
     override val header: Byte = 2
 
@@ -51,7 +54,8 @@ class ItemLink(
         return bytes
     }
 
-    override fun decode(bytes: ByteArray): ItemLink = apply {
+    override fun decode(bytes: ByteArray)
+    {
         if (bytes.size < 4)
         {
             throw IllegalArgumentException("Unable to decode ${this::class.simpleName}: at least 4 data bytes required for the item count and the item id")
@@ -60,7 +64,7 @@ class ItemLink(
         count = bytes.first()
         itemId = bytes.copyOfRange(1, 3).toInt()
 
-        val flags = decodeFlags(bytes.getOrNull(4) ?: return@apply)
+        val flags = decodeFlags(bytes.getOrNull(4) ?: return)
         val isSkinned = flags[0]
         val hasFirstUpgradeSlot = flags[1]
         val hasSecondUpgradeSlot = flags[2]

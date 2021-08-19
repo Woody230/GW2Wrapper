@@ -1,15 +1,16 @@
-import com.bselzer.library.gw2.v2.model.extension.common.chatlink.CoinLink
-import kotlin.test.Test
+import com.bselzer.library.gw2.v2.model.extension.common.chatlink.NpcTextLink
+import org.junit.Test
 import kotlin.test.assertEquals
 
-class CoinLinkTests
+class NpcTextLinkTests
 {
     private companion object
     {
         val mapping: Map<String, Int> = mapOf(
-            "[&AQAAAAA=]" to 0,
-            "[&AQEAAAA=]" to 1,
-            "[&AdsnAAA=]" to 10203
+            "[&AxcnAAA=]" to 10007,
+            "[&AxgnAAA=]" to 10008,
+            "[&AxknAAA=]" to 10009,
+            "[&AyAnAAA=]" to 10016
         )
     }
 
@@ -20,10 +21,10 @@ class CoinLinkTests
         {
             // Arrange
             val link = input.key
-            val coins = input.value
+            val id = input.value
 
             // Act
-            val output = CoinLink(coins).encode()
+            val output = NpcTextLink(id = id).encode()
 
             // Assert
             assertEquals(link, output)
@@ -37,15 +38,15 @@ class CoinLinkTests
         {
             // Arrange
             val link = input.key
-            val coins = input.value
+            val id = input.value
 
             // Act
-            val output = CoinLink().apply {
+            val output = NpcTextLink().apply {
                 decode(link)
             }
 
             // Assert
-            assertEquals(coins, output.coins)
+            assertEquals(id, output.id)
         }
     }
 }

@@ -1,15 +1,13 @@
-import com.bselzer.library.gw2.v2.model.extension.common.chatlink.CoinLink
-import kotlin.test.Test
+import com.bselzer.library.gw2.v2.model.extension.common.chatlink.TraitLink
+import org.junit.Test
 import kotlin.test.assertEquals
 
-class CoinLinkTests
+class TraitLinkTests
 {
     private companion object
     {
         val mapping: Map<String, Int> = mapOf(
-            "[&AQAAAAA=]" to 0,
-            "[&AQEAAAA=]" to 1,
-            "[&AdsnAAA=]" to 10203
+            "[&B/IDAAA=]" to 1010,
         )
     }
 
@@ -20,10 +18,10 @@ class CoinLinkTests
         {
             // Arrange
             val link = input.key
-            val coins = input.value
+            val id = input.value
 
             // Act
-            val output = CoinLink(coins).encode()
+            val output = TraitLink(id = id).encode()
 
             // Assert
             assertEquals(link, output)
@@ -37,15 +35,15 @@ class CoinLinkTests
         {
             // Arrange
             val link = input.key
-            val coins = input.value
+            val id = input.value
 
             // Act
-            val output = CoinLink().apply {
+            val output = TraitLink().apply {
                 decode(link)
             }
 
             // Assert
-            assertEquals(coins, output.coins)
+            assertEquals(id, output.id)
         }
     }
 }

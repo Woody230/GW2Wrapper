@@ -42,7 +42,9 @@ class ItemLinkTests
             val id = input.value
 
             // Act
-            val output = ItemLink().decode(link)
+            val output = ItemLink().apply {
+                decode(link)
+            }
 
             // Assert
             assertEquals(1, output.count)
@@ -77,7 +79,9 @@ class ItemLinkTests
         val firstUpgradeId = 24575
 
         // Act
-        val output = ItemLink().decode(link)
+        val output = ItemLink().apply {
+            decode(link)
+        }
 
         // Assert
         assertEquals(1, output.count)
@@ -113,7 +117,9 @@ class ItemLinkTests
         val secondUpgradeId = 24615
 
         // Act
-        val output = ItemLink().decode(link)
+        val output = ItemLink().apply {
+            decode(link)
+        }
 
         // Assert
         assertEquals(1, output.count)
@@ -147,7 +153,9 @@ class ItemLinkTests
         val skinId = 3709
 
         // Act
-        val output = ItemLink().decode(link)
+        val output = ItemLink().apply {
+            decode(link)
+        }
 
         // Assert
         assertEquals(1, output.count)
@@ -183,7 +191,9 @@ class ItemLinkTests
         val firstUpgradeId = 24575
 
         // Act
-        val output = ItemLink().decode(link)
+        val output = ItemLink().apply {
+            decode(link)
+        }
 
         // Assert
         assertEquals(1, output.count)
@@ -221,7 +231,9 @@ class ItemLinkTests
         val secondUpgradeId = 24615
 
         // Act
-        val output = ItemLink().decode(link)
+        val output = ItemLink().apply {
+            decode(link)
+        }
 
         // Assert
         assertEquals(1, output.count)
