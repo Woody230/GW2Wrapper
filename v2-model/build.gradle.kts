@@ -18,8 +18,8 @@ kotlin {
                 // TODO constants to store versions
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
-                implementation("com.github.Woody230.KotlinExtensions:serialization:1.2.7")
-                implementation("com.github.Woody230.KotlinExtensions:datetime:1.2.7")
+                implementation("com.github.Woody230.KotlinExtensions:serialization:1.2.9")
+                implementation("com.github.Woody230.KotlinExtensions:datetime:1.2.9")
             }
         }
         val commonTest by getting {
