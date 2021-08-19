@@ -45,7 +45,7 @@ abstract class ChatLink
         }
 
         // Let the subclass populate itself using the data.
-        decode(bytes.copyOfRange(1, bytes.size - 1))
+        decode(bytes.copyOfRange(1, bytes.size))
     }
 
     /**
@@ -93,14 +93,14 @@ abstract class ChatLink
     /**
      * @return [this] as a byte array in little endian format with [slots] number of bytes
      */
-    protected fun Int.bytes(take: Int, slots: Int): List<Byte>
+    protected fun Int.bytes(take: Int, slots: Int): ByteArray
     {
         val bytes = this.toByteArray().take(3).toMutableList()
 
         // Fill the remaining slots with zero.
         (1..slots - take).forEach { _ -> bytes.add(0) }
 
-        return bytes
+        return bytes.toByteArray()
     }
 
     override fun equals(other: Any?): Boolean

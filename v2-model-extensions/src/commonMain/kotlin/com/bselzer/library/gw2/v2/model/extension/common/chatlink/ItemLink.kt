@@ -62,14 +62,14 @@ class ItemLink(
         }
 
         count = bytes.first()
-        itemId = bytes.copyOfRange(1, 3).toInt()
+        itemId = bytes.copyOfRange(1, 4).toInt()
 
         val flags = decodeFlags(bytes.getOrNull(4) ?: return)
         val isSkinned = flags[0]
         val hasFirstUpgradeSlot = flags[1]
         val hasSecondUpgradeSlot = flags[2]
 
-        val additionalData = bytes.copyOfRange(5, bytes.size - 1).toMutableList().apply {
+        val additionalData = bytes.copyOfRange(5, bytes.size).toMutableList().apply {
             // Fill the remaining space if the data does not exist.
             (1..12 - size).forEach { _ -> add(0) }
         }.toByteArray()
@@ -98,6 +98,6 @@ class ItemLink(
     private fun ByteArray.decodeGroup(group: Int): Int
     {
         val start = group * 4
-        return copyOfRange(start, start + 3).toInt()
+        return copyOfRange(start, start + 4).toInt()
     }
 }
