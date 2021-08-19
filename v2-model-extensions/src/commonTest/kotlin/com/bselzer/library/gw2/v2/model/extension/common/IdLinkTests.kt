@@ -1,17 +1,15 @@
-import com.bselzer.library.gw2.v2.model.extension.common.chatlink.SkillLink
+package com.bselzer.library.gw2.v2.model.extension.common
+
+import com.bselzer.library.gw2.v2.model.extension.common.chatlink.IdLink
 import org.junit.Test
 import kotlin.test.assertEquals
 
-class SkillLinkTests
+abstract class IdLinkTests<Link> : ChatLinkTests<Link>() where Link : IdLink
 {
-    private companion object
-    {
-        val mapping: Map<String, Int> = mapOf(
-            "[&BucCAAA=]" to 743,
-            "[&BnMVAAA=]" to 5491,
-            "[&Bn0VAAA=]" to 5501,
-        )
-    }
+    /**
+     * The mapping of a chat link to the id.
+     */
+    abstract val mapping: Map<String, Int>
 
     @Test
     fun encode()
@@ -20,10 +18,10 @@ class SkillLinkTests
         {
             // Arrange
             val link = input.key
-            val id = input.value
+            instance.id = input.value
 
             // Act
-            val output = SkillLink(id = id).encode()
+            val output = instance.encode()
 
             // Assert
             assertEquals(link, output)
@@ -40,9 +38,7 @@ class SkillLinkTests
             val id = input.value
 
             // Act
-            val output = SkillLink().apply {
-                decode(link)
-            }
+            val output = decode(link)
 
             // Assert
             assertEquals(id, output.id)

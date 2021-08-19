@@ -1,3 +1,5 @@
+package com.bselzer.library.gw2.v2.model.extension.common
+
 import com.bselzer.library.gw2.v2.model.common.world.World
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.world.WorldLanguage
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.world.WorldRegion

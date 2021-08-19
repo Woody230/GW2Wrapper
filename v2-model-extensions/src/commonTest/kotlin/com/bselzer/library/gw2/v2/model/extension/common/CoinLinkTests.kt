@@ -1,3 +1,5 @@
+package com.bselzer.library.gw2.v2.model.extension.common
+
 import com.bselzer.library.gw2.v2.model.extension.common.chatlink.CoinLink
 import kotlin.test.Test
 import kotlin.test.assertEquals
