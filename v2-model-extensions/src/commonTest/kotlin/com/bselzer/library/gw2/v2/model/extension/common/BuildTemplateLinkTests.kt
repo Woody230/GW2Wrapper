@@ -3,9 +3,7 @@ package com.bselzer.library.gw2.v2.model.extension.common
 import com.bselzer.library.gw2.v2.model.extension.common.chatlink.build.BuildTemplateLink
 import com.bselzer.library.gw2.v2.model.extension.common.chatlink.build.LinkSkill
 import com.bselzer.library.gw2.v2.model.extension.common.chatlink.build.LinkSpecialization
-import com.bselzer.library.gw2.v2.model.extension.common.chatlink.build.profession.LinkLegend
-import com.bselzer.library.gw2.v2.model.extension.common.chatlink.build.profession.LinkProfessionData
-import com.bselzer.library.gw2.v2.model.extension.common.chatlink.build.profession.LinkRevenantData
+import com.bselzer.library.gw2.v2.model.extension.common.chatlink.build.profession.*
 import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -81,6 +79,35 @@ class BuildTemplateLinkTests : ChatLinkTests<BuildTemplateLink>()
         const val REVENANT_INACTIVE_WATER_UTILITY3: Short = 4564.toShort()
         const val REVENANT_INACTIVE_LAND_ELITE: Short = 4554.toShort()
         const val REVENANT_INACTIVE_WATER_ELITE: Short = 4554.toShort()
+
+        const val RANGER_LINK = "[&DQQhNh4vNy6hAHgAugC+AL4AGwD6FpoAwADtAD0iFRQAAAAAAAAAAAAAAAA=]"
+        const val RANGER_PROFESSION: Byte = 4
+        const val RANGER_SPEC1: Byte = 33
+        const val RANGER_SPEC2: Byte = 30
+        const val RANGER_SPEC3: Byte = 55
+        const val RANGER_SPEC1_TRAIT1: Byte = 2
+        const val RANGER_SPEC1_TRAIT2: Byte = 1
+        const val RANGER_SPEC1_TRAIT3: Byte = 3
+        const val RANGER_SPEC2_TRAIT1: Byte = 3
+        const val RANGER_SPEC2_TRAIT2: Byte = 3
+        const val RANGER_SPEC2_TRAIT3: Byte = 2
+        const val RANGER_SPEC3_TRAIT1: Byte = 2
+        const val RANGER_SPEC3_TRAIT2: Byte = 3
+        const val RANGER_SPEC3_TRAIT3: Byte = 2
+        const val RANGER_LAND_HEAL: Short = 161.toShort()
+        const val RANGER_WATER_HEAL: Short = 120.toShort()
+        const val RANGER_LAND_UTILITY1: Short = 186.toShort()
+        const val RANGER_WATER_UTILITY1: Short = 190.toShort()
+        const val RANGER_LAND_UTILITY2: Short = 190.toShort()
+        const val RANGER_WATER_UTILITY2: Short = 27.toShort()
+        const val RANGER_LAND_UTILITY3: Short = 5882.toShort()
+        const val RANGER_WATER_UTILITY3: Short = 154.toShort()
+        const val RANGER_LAND_ELITE: Short = 192.toShort()
+        const val RANGER_WATER_ELITE: Short = 237.toShort()
+        const val RANGER_LAND_PET1: Byte = 61
+        const val RANGER_WATER_PET1: Byte = 21
+        const val RANGER_LAND_PET2: Byte = 34
+        const val RANGER_WATER_PET2: Byte = 20
     }
 
     override val instance: BuildTemplateLink = BuildTemplateLink()
@@ -261,5 +288,78 @@ class BuildTemplateLinkTests : ChatLinkTests<BuildTemplateLink>()
 
         assertEquals(REVENANT_INACTIVE_LAND_UTILITY3, data.utilitySkill3.terrestrialId)
         assertEquals(REVENANT_INACTIVE_WATER_UTILITY3, data.utilitySkill3.aquaticId)
+    }
+
+    @Test
+    fun encodeRanger()
+    {
+        // Arrange
+        instance.profession = RANGER_PROFESSION
+        instance.specialization1 = LinkSpecialization(RANGER_SPEC1, RANGER_SPEC1_TRAIT1, RANGER_SPEC1_TRAIT2, RANGER_SPEC1_TRAIT3)
+        instance.specialization2 = LinkSpecialization(RANGER_SPEC2, RANGER_SPEC2_TRAIT1, RANGER_SPEC2_TRAIT2, RANGER_SPEC2_TRAIT3)
+        instance.specialization3 = LinkSpecialization(RANGER_SPEC3, RANGER_SPEC3_TRAIT1, RANGER_SPEC3_TRAIT2, RANGER_SPEC3_TRAIT3)
+        instance.healSkill = LinkSkill(RANGER_LAND_HEAL, RANGER_WATER_HEAL)
+        instance.utilitySkill1 = LinkSkill(RANGER_LAND_UTILITY1, RANGER_WATER_UTILITY1)
+        instance.utilitySkill2 = LinkSkill(RANGER_LAND_UTILITY2, RANGER_WATER_UTILITY2)
+        instance.utilitySkill3 = LinkSkill(RANGER_LAND_UTILITY3, RANGER_WATER_UTILITY3)
+        instance.eliteSkill = LinkSkill(RANGER_LAND_ELITE, RANGER_WATER_ELITE)
+
+        val pet1 = LinkPet(RANGER_LAND_PET1, RANGER_WATER_PET1)
+        val pet2 = LinkPet(RANGER_LAND_PET2, RANGER_WATER_PET2)
+        instance.professionData = LinkRangerData(pet1, pet2)
+
+        // Act
+        val output = instance.encode()
+
+        // Assert
+        assertEquals(output, RANGER_LINK)
+    }
+
+    @Test
+    fun decodeRanger()
+    {
+        // Act
+        val output = decode(RANGER_LINK)
+
+        // Assert
+        assertEquals(RANGER_PROFESSION, output.profession)
+
+        assertEquals(RANGER_SPEC1, output.specialization1.specializationId)
+        assertEquals(RANGER_SPEC1_TRAIT1, output.specialization1.trait1)
+        assertEquals(RANGER_SPEC1_TRAIT2, output.specialization1.trait2)
+        assertEquals(RANGER_SPEC1_TRAIT3, output.specialization1.trait3)
+
+        assertEquals(RANGER_SPEC2, output.specialization2.specializationId)
+        assertEquals(RANGER_SPEC2_TRAIT1, output.specialization2.trait1)
+        assertEquals(RANGER_SPEC2_TRAIT2, output.specialization2.trait2)
+        assertEquals(RANGER_SPEC2_TRAIT3, output.specialization2.trait3)
+
+        assertEquals(RANGER_SPEC3, output.specialization3.specializationId)
+        assertEquals(RANGER_SPEC3_TRAIT1, output.specialization3.trait1)
+        assertEquals(RANGER_SPEC3_TRAIT2, output.specialization3.trait2)
+        assertEquals(RANGER_SPEC3_TRAIT3, output.specialization3.trait3)
+
+        assertEquals(RANGER_LAND_HEAL, output.healSkill.terrestrialId)
+        assertEquals(RANGER_WATER_HEAL, output.healSkill.aquaticId)
+
+        assertEquals(RANGER_LAND_UTILITY1, output.utilitySkill1.terrestrialId)
+        assertEquals(RANGER_WATER_UTILITY1, output.utilitySkill1.aquaticId)
+
+        assertEquals(RANGER_LAND_UTILITY2, output.utilitySkill2.terrestrialId)
+        assertEquals(RANGER_WATER_UTILITY2, output.utilitySkill2.aquaticId)
+
+        assertEquals(RANGER_LAND_UTILITY3, output.utilitySkill3.terrestrialId)
+        assertEquals(RANGER_WATER_UTILITY3, output.utilitySkill3.aquaticId)
+
+        assertEquals(RANGER_LAND_ELITE, output.eliteSkill.terrestrialId)
+        assertEquals(RANGER_WATER_ELITE, output.eliteSkill.aquaticId)
+
+        val data = output.professionData as LinkRangerData
+        assertNotNull(data)
+
+        assertEquals(RANGER_LAND_PET1, data.activePet.terrestrialId)
+        assertEquals(RANGER_WATER_PET1, data.activePet.aquaticId)
+        assertEquals(RANGER_LAND_PET2, data.inactivePet.terrestrialId)
+        assertEquals(RANGER_WATER_PET2, data.inactivePet.aquaticId)
     }
 }

@@ -24,7 +24,7 @@ data class LinkRangerData(
     override fun getData(): ByteArray
     {
         val pets = byteArrayOf(activePet.terrestrialId, inactivePet.terrestrialId, activePet.aquaticId, inactivePet.aquaticId)
-        val filler = listOf<Byte>().fill(8) { 0 }
+        val filler = listOf<Byte>().fill(12) { 0 }
         return pets + filler
     }
 
