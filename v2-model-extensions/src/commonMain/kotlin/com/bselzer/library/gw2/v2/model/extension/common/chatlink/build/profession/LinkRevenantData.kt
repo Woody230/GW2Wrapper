@@ -1,6 +1,7 @@
 package com.bselzer.library.gw2.v2.model.extension.common.chatlink.build.profession
 
 import com.bselzer.library.gw2.v2.model.extension.common.chatlink.build.LinkSkill
+import com.bselzer.library.kotlin.extension.function.common.collection.toByteArray
 import com.bselzer.library.kotlin.extension.function.common.collection.toShort
 import kotlinx.serialization.Serializable
 
@@ -40,8 +41,8 @@ data class LinkRevenantData(
     override fun getData(): ByteArray
     {
         val legends = byteArrayOf(activeLegend.terrestrialId, inactiveLegend.terrestrialId, activeLegend.aquaticId, inactiveLegend.aquaticId)
-        val landSkills = byteArrayOf(utilitySkill1.terrestrialId.toByte(), utilitySkill2.terrestrialId.toByte(), utilitySkill3.terrestrialId.toByte())
-        val waterSkills = byteArrayOf(utilitySkill1.aquaticId.toByte(), utilitySkill2.aquaticId.toByte(), utilitySkill3.aquaticId.toByte())
+        val landSkills = utilitySkill1.terrestrialId.toByteArray() + utilitySkill2.terrestrialId.toByteArray() + utilitySkill3.terrestrialId.toByteArray()
+        val waterSkills = utilitySkill1.aquaticId.toByteArray() + utilitySkill2.aquaticId.toByteArray() + utilitySkill3.aquaticId.toByteArray()
         return legends + landSkills + waterSkills
     }
 
@@ -50,15 +51,16 @@ data class LinkRevenantData(
         // Ensure bytes size.
         super.decode(bytes)
 
+        // TODO arraydeque
         activeLegend.terrestrialId = bytes[0]
         inactiveLegend.terrestrialId = bytes[1]
         activeLegend.aquaticId = bytes[2]
         inactiveLegend.aquaticId = bytes[3]
-        utilitySkill1.terrestrialId = bytes.copyOfRange(3, 5).toShort()
-        utilitySkill2.terrestrialId = bytes.copyOfRange(5, 7).toShort()
-        utilitySkill3.terrestrialId = bytes.copyOfRange(7, 9).toShort()
-        utilitySkill1.aquaticId = bytes.copyOfRange(9, 11).toShort()
-        utilitySkill2.aquaticId = bytes.copyOfRange(11, 13).toShort()
-        utilitySkill3.aquaticId = bytes.copyOfRange(13, 15).toShort()
+        utilitySkill1.terrestrialId = bytes.copyOfRange(4, 6).toShort()
+        utilitySkill2.terrestrialId = bytes.copyOfRange(6, 8).toShort()
+        utilitySkill3.terrestrialId = bytes.copyOfRange(8, 10).toShort()
+        utilitySkill1.aquaticId = bytes.copyOfRange(10, 12).toShort()
+        utilitySkill2.aquaticId = bytes.copyOfRange(12, 14).toShort()
+        utilitySkill3.aquaticId = bytes.copyOfRange(14, 16).toShort()
     }
 }

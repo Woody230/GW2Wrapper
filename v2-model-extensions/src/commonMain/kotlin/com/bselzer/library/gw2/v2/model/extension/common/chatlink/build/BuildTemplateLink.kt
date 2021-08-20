@@ -88,6 +88,7 @@ class BuildTemplateLink(
 
         profession = bytes[0]
 
+        // TODO arraydeque
         var start = 1
         var end = start + specialization1.size
         specialization1.decode(bytes.copyOfRange(start, end))
