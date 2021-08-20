@@ -1,6 +1,7 @@
 package com.bselzer.library.gw2.v2.model.extension.common.chatlink.build.profession
 
 import com.bselzer.library.gw2.v2.model.extension.common.chatlink.build.LinkSkill
+import com.bselzer.library.kotlin.extension.function.common.collection.removeFirst
 import com.bselzer.library.kotlin.extension.function.common.collection.toByteArray
 import com.bselzer.library.kotlin.extension.function.common.collection.toShort
 import kotlinx.serialization.Serializable
@@ -46,21 +47,20 @@ data class LinkRevenantData(
         return legends + landSkills + waterSkills
     }
 
-    override fun decode(bytes: ByteArray)
+    override fun decode(bytes: ArrayDeque<Byte>)
     {
         // Ensure bytes size.
         super.decode(bytes)
 
-        // TODO arraydeque
-        activeLegend.terrestrialId = bytes[0]
-        inactiveLegend.terrestrialId = bytes[1]
-        activeLegend.aquaticId = bytes[2]
-        inactiveLegend.aquaticId = bytes[3]
-        utilitySkill1.terrestrialId = bytes.copyOfRange(4, 6).toShort()
-        utilitySkill2.terrestrialId = bytes.copyOfRange(6, 8).toShort()
-        utilitySkill3.terrestrialId = bytes.copyOfRange(8, 10).toShort()
-        utilitySkill1.aquaticId = bytes.copyOfRange(10, 12).toShort()
-        utilitySkill2.aquaticId = bytes.copyOfRange(12, 14).toShort()
-        utilitySkill3.aquaticId = bytes.copyOfRange(14, 16).toShort()
+        activeLegend.terrestrialId = bytes.removeFirst()
+        inactiveLegend.terrestrialId = bytes.removeFirst()
+        activeLegend.aquaticId = bytes.removeFirst()
+        inactiveLegend.aquaticId = bytes.removeFirst()
+        utilitySkill1.terrestrialId = bytes.removeFirst(take = 2).toShort()
+        utilitySkill2.terrestrialId = bytes.removeFirst(take = 2).toShort()
+        utilitySkill3.terrestrialId = bytes.removeFirst(take = 2).toShort()
+        utilitySkill1.aquaticId = bytes.removeFirst(take = 2).toShort()
+        utilitySkill2.aquaticId = bytes.removeFirst(take = 2).toShort()
+        utilitySkill3.aquaticId = bytes.removeFirst(take = 2).toShort()
     }
 }

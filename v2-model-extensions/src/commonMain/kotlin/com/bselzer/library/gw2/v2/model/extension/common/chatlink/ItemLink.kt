@@ -1,5 +1,7 @@
 package com.bselzer.library.gw2.v2.model.extension.common.chatlink
 
+import com.bselzer.library.kotlin.extension.function.common.collection.fill
+import com.bselzer.library.kotlin.extension.function.common.collection.removeFirst
 import com.bselzer.library.kotlin.extension.function.common.collection.toByteArray
 import com.bselzer.library.kotlin.extension.function.common.collection.toInt
 import com.bselzer.library.kotlin.extension.function.common.objects.toBits
@@ -57,50 +59,34 @@ class ItemLink(
         return bytes
     }
 
-    override fun decode(bytes: ByteArray)
+    override fun decode(bytes: ArrayDeque<Byte>)
     {
         if (bytes.size < 4)
         {
             throw IllegalArgumentException("Unable to decode ${this::class.simpleName}: at least 4 data bytes required for the item count and the item id")
         }
 
-        count = bytes.first()
-        itemId = bytes.copyOfRange(1, 4).toInt()
+        count = bytes.removeFirst()
+        itemId = bytes.removeFirst(take = 3).toInt()
 
-        val flags = (bytes.getOrNull(4) ?: return).toBits()
+        val flags = bytes.removeFirstOrNull()?.toBits() ?: return
         val isSkinned = flags[0]
         val hasFirstUpgradeSlot = flags[1]
         val hasSecondUpgradeSlot = flags[2]
 
-        val additionalData = bytes.copyOfRange(5, bytes.size).toMutableList().apply {
-            // Fill the remaining space if the data does not exist.
-            (1..12 - size).forEach { _ -> add(0) }
-        }.toByteArray()
-
-        var group = 0
+        // Additional data may contain up to 12 bytes, so fill it to be consistent.
+        val additionalData = ArrayDeque(bytes.fill(12) { 0 })
         if (isSkinned)
         {
-            skinId = additionalData.decodeGroup(group)
-            group += 1
+            skinId = additionalData.removeFirst(take = 4).toInt()
         }
         if (hasFirstUpgradeSlot)
         {
-            firstUpgradeId = additionalData.decodeGroup(group)
-            group += 1
+            firstUpgradeId = additionalData.removeFirst(take = 4).toInt()
         }
         if (hasSecondUpgradeSlot)
         {
-            secondUpgradeId = additionalData.decodeGroup(group)
-            group += 1
+            secondUpgradeId = additionalData.removeFirst(take = 4).toInt()
         }
-    }
-
-    /**
-     * @return the integer associated with the bytes in the [group]
-     */
-    private fun ByteArray.decodeGroup(group: Int): Int
-    {
-        val start = group * 4
-        return copyOfRange(start, start + 4).toInt()
     }
 }

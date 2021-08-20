@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.extension.common.chatlink
 
+import com.bselzer.library.kotlin.extension.function.common.collection.removeFirst
 import com.bselzer.library.kotlin.extension.function.common.collection.toByteArray
 import com.bselzer.library.kotlin.extension.function.common.collection.toInt
 
@@ -46,14 +47,14 @@ class WvwObjectiveLink(
 
     override fun getData(): ByteArray = objectiveId.toByteArray(take = 3, capacity = 4) + mapId.toByteArray(take = 3, capacity = 4)
 
-    override fun decode(bytes: ByteArray)
+    override fun decode(bytes: ArrayDeque<Byte>)
     {
         if (bytes.size != 8)
         {
             throw IllegalArgumentException("Unable to decode ${this::class.simpleName}: exactly 8 data bytes are required for the objective id and map id")
         }
 
-        objectiveId = bytes.copyOfRange(0, 4).toInt()
-        mapId = bytes.copyOfRange(4, 8).toInt()
+        objectiveId = bytes.removeFirst(take = 4).toInt()
+        mapId = bytes.removeFirst(take = 4).toInt()
     }
 }

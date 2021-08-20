@@ -17,7 +17,7 @@ class CoinLink(
 
     override fun getData(): ByteArray = coins.toByteArray()
 
-    override fun decode(bytes: ByteArray)
+    override fun decode(bytes: ArrayDeque<Byte>)
     {
         coins = bytes.toInt()
     }

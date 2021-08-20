@@ -27,7 +27,7 @@ abstract class ChatLink
     {
         // Need to remove the enclosing square brackets and ampersand before decoding, if it exists.
         val input = encoded.removeSurrounding("[&", "]")
-        val bytes = input.decodeBase64ToByteArray()
+        val bytes = ArrayDeque(input.decodeBase64ToByteArray().toList())
 
         // Verify that the header byte exists.
         if (bytes.isEmpty())
@@ -35,20 +35,20 @@ abstract class ChatLink
             throw IllegalArgumentException("Unable to decode an invalid link: '$encoded' produces an empty byte array")
         }
         // Verify that the header matches the current type of object.
-        else if (bytes.first() != header)
+        else if (bytes.removeFirst() != header)
         {
             throw IllegalArgumentException("Unable to decode an invalid link: the header byte of '$encoded' does not equal '$header'")
         }
 
         // Let the subclass populate itself using the data.
-        decode(bytes.copyOfRange(1, bytes.size))
+        decode(bytes)
     }
 
     /**
      * Populate the components from the [bytes].
      * @param bytes the decoded link with the header removed
      */
-    protected abstract fun decode(bytes: ByteArray)
+    protected abstract fun decode(bytes: ArrayDeque<Byte>)
 
     /**
      * @return the link data

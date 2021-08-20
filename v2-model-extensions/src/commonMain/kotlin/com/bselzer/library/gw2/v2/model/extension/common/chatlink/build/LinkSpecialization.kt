@@ -47,14 +47,14 @@ data class LinkSpecialization(
         return byteArrayOf(specializationId, flags.toByte())
     }
 
-    override fun decode(bytes: ByteArray)
+    override fun decode(bytes: ArrayDeque<Byte>)
     {
         // Ensure bytes size.
         super.decode(bytes)
 
-        specializationId = bytes[0]
+        specializationId = bytes.removeFirst()
 
-        val flags = bytes[1].toBits()
+        val flags = bytes.removeFirst().toBits()
         trait3 = flags.decodeTrait(2, 4)
         trait2 = flags.decodeTrait(4, 6)
         trait1 = flags.decodeTrait(6, 8)

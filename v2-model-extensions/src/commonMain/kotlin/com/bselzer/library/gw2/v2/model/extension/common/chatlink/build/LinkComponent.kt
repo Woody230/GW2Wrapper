@@ -8,14 +8,14 @@ abstract class LinkComponent
     abstract val size: Int
 
     /**
-     * Populate the components from the [bytes].
-     * @param bytes the data bytes relevant to the component
+     * Populate the components from the first [size] bytes of the [bytes]
+     * @param bytes all of the data bytes
      */
-    open fun decode(bytes: ByteArray)
+    open fun decode(bytes: ArrayDeque<Byte>)
     {
-        if (bytes.size != size)
+        if (bytes.size < size)
         {
-            throw IllegalArgumentException("Unable to decode link component data: exactly $size bytes are required")
+            throw IllegalArgumentException("Unable to decode ${this::class.simpleName} data: $size bytes are required")
         }
     }
 

@@ -9,7 +9,7 @@ abstract class IdLink(
 {
     override fun getData(): ByteArray = id.toByteArray()
 
-    override fun decode(bytes: ByteArray)
+    override fun decode(bytes: ArrayDeque<Byte>)
     {
         id = bytes.toInt()
     }

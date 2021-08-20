@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.extension.common.chatlink.build
 
+import com.bselzer.library.kotlin.extension.function.common.collection.removeFirst
 import com.bselzer.library.kotlin.extension.function.common.collection.toByteArray
 import com.bselzer.library.kotlin.extension.function.common.collection.toShort
 import kotlinx.serialization.Serializable
@@ -25,12 +26,12 @@ data class LinkSkill(
 
     override fun getData(): ByteArray = terrestrialId.toByteArray() + aquaticId.toByteArray()
 
-    override fun decode(bytes: ByteArray)
+    override fun decode(bytes: ArrayDeque<Byte>)
     {
         // Ensure bytes size.
         super.decode(bytes)
 
-        terrestrialId = bytes.copyOfRange(0, 2).toShort()
-        aquaticId = bytes.copyOfRange(2, 4).toShort()
+        terrestrialId = bytes.removeFirst(take = 2).toShort()
+        aquaticId = bytes.removeFirst(take = 2).toShort()
     }
 }

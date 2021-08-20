@@ -79,47 +79,22 @@ class BuildTemplateLink(
         return byteArrayOf(profession) + specs + skills + professionData.getData()
     }
 
-    override fun decode(bytes: ByteArray)
+    override fun decode(bytes: ArrayDeque<Byte>)
     {
         if (bytes.size != size)
         {
             throw IllegalArgumentException("Unable to decode build template link: exactly $size data bytes are required")
         }
 
-        profession = bytes[0]
-
-        // TODO arraydeque
-        var start = 1
-        var end = start + specialization1.size
-        specialization1.decode(bytes.copyOfRange(start, end))
-
-        start = end
-        end += specialization2.size
-        specialization2.decode(bytes.copyOfRange(start, end))
-
-        start = end
-        end += specialization3.size
-        specialization3.decode(bytes.copyOfRange(start, end))
-
-        start = end
-        end += healSkill.size
-        healSkill.decode(bytes.copyOfRange(start, end))
-
-        start = end
-        end += utilitySkill1.size
-        utilitySkill1.decode(bytes.copyOfRange(start, end))
-
-        start = end
-        end += utilitySkill2.size
-        utilitySkill2.decode(bytes.copyOfRange(start, end))
-
-        start = end
-        end += utilitySkill3.size
-        utilitySkill3.decode(bytes.copyOfRange(start, end))
-
-        start = end
-        end += eliteSkill.size
-        eliteSkill.decode(bytes.copyOfRange(start, end))
+        profession = bytes.removeFirst()
+        specialization1.decode(bytes)
+        specialization2.decode(bytes)
+        specialization3.decode(bytes)
+        healSkill.decode(bytes)
+        utilitySkill1.decode(bytes)
+        utilitySkill2.decode(bytes)
+        utilitySkill3.decode(bytes)
+        eliteSkill.decode(bytes)
 
         professionData = when (profession)
         {
@@ -127,9 +102,6 @@ class BuildTemplateLink(
             LinkRevenantData.CODE -> LinkRevenantData()
             else -> LinkProfessionData()
         }
-
-        start = end
-        end += professionData.size
-        professionData.decode(bytes.copyOfRange(start, end))
+        professionData.decode(bytes)
     }
 }
