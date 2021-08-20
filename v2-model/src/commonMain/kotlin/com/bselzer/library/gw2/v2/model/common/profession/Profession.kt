@@ -55,5 +55,5 @@ data class Profession(
      */
     @Serializable(with = MapArraySerializer::class)
     @SerialName("skills_by_palette")
-    val buildTemplateIds: Map<Int, Int> = emptyMap()
+    val skillPaletteIds: Map<Int, Int> = emptyMap()
 ) : Identifiable<String>

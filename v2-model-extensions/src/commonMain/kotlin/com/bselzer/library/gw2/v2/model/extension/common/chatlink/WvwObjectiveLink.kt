@@ -1,5 +1,6 @@
 package com.bselzer.library.gw2.v2.model.extension.common.chatlink
 
+import com.bselzer.library.kotlin.extension.function.common.collection.toByteArray
 import com.bselzer.library.kotlin.extension.function.common.collection.toInt
 
 /**
@@ -43,7 +44,7 @@ class WvwObjectiveLink(
 
     override val header: Byte = 12
 
-    override fun getData(): ByteArray = objectiveId.bytes(take = 3, slots = 4) + mapId.bytes(take = 3, slots = 4)
+    override fun getData(): ByteArray = objectiveId.toByteArray(take = 3, capacity = 4) + mapId.toByteArray(take = 3, capacity = 4)
 
     override fun decode(bytes: ByteArray)
     {

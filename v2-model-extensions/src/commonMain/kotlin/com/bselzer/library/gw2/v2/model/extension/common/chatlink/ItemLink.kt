@@ -1,6 +1,9 @@
 package com.bselzer.library.gw2.v2.model.extension.common.chatlink
 
+import com.bselzer.library.kotlin.extension.function.common.collection.toByteArray
 import com.bselzer.library.kotlin.extension.function.common.collection.toInt
+import com.bselzer.library.kotlin.extension.function.common.objects.toBits
+import com.bselzer.library.kotlin.extension.function.common.objects.toByte
 
 /**
  * A link to an item.
@@ -43,14 +46,14 @@ class ItemLink(
         val isSkinned = skinId > 0
         val hasFirstUpgradeSlot = firstUpgradeId > 0
         val hasSecondUpgradeSlot = secondUpgradeId > 0
-        val flags = encodeFlags(isSkinned, hasFirstUpgradeSlot, hasSecondUpgradeSlot)
-        var bytes = byteArrayOf(count) + itemId.bytes(take = 3, slots = 3) + byteArrayOf(flags)
+        val flags = listOf(isSkinned, hasFirstUpgradeSlot, hasSecondUpgradeSlot).toByte()
+        var bytes = byteArrayOf(count) + itemId.toByteArray(take = 3, capacity = 3) + byteArrayOf(flags)
 
         // Only include the skin and upgrade slots if the flags exist.
         // Consequently, the link can have a variable length instead of being fixed and zeroed out.
-        if (isSkinned) bytes += skinId.bytes(take = 3, slots = 4)
-        if (hasFirstUpgradeSlot) bytes += firstUpgradeId.bytes(take = 3, slots = 4)
-        if (hasSecondUpgradeSlot) bytes += secondUpgradeId.bytes(take = 3, slots = 4)
+        if (isSkinned) bytes += skinId.toByteArray(take = 3, capacity = 4)
+        if (hasFirstUpgradeSlot) bytes += firstUpgradeId.toByteArray(take = 3, capacity = 4)
+        if (hasSecondUpgradeSlot) bytes += secondUpgradeId.toByteArray(take = 3, capacity = 4)
         return bytes
     }
 
@@ -64,7 +67,7 @@ class ItemLink(
         count = bytes.first()
         itemId = bytes.copyOfRange(1, 4).toInt()
 
-        val flags = decodeFlags(bytes.getOrNull(4) ?: return)
+        val flags = (bytes.getOrNull(4) ?: return).toBits()
         val isSkinned = flags[0]
         val hasFirstUpgradeSlot = flags[1]
         val hasSecondUpgradeSlot = flags[2]
