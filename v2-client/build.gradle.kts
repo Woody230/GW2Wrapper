@@ -4,6 +4,9 @@ plugins {
     kotlin("plugin.serialization")
 }
 
+val extensionVersion = "1.2.15"
+val datetimeVersion = "0.2.1"
+val serializationVersion = "1.2.2"
 val ktorVersion = "1.6.2"
 
 kotlin {
@@ -19,7 +22,7 @@ kotlin {
                 implementation(project(":v2-annotations"))
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-client-serialization:$ktorVersion")
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
             }
         }
         val commonTest by getting {
@@ -30,15 +33,9 @@ kotlin {
                 implementation("io.ktor:ktor-client-mock:$ktorVersion")
             }
         }
-        val androidTest by getting {
-            dependencies {
-                implementation(kotlin("test-junit"))
-                implementation("junit:junit:4.13.2")
-            }
-        }
         val jvmTest by getting {
             dependencies {
-                implementation("org.jetbrains.kotlin:kotlin-test-junit")
+                implementation(kotlin("test-junit"))
                 implementation("io.ktor:ktor-client-apache:$ktorVersion")
             }
         }

@@ -4,6 +4,10 @@ plugins {
     kotlin("plugin.serialization")
 }
 
+val extensionVersion = "1.2.15"
+val datetimeVersion = "0.2.1"
+val serializationVersion = "1.2.2"
+
 kotlin {
     jvm()
     android {
@@ -15,11 +19,11 @@ kotlin {
                 implementation(kotlin("stdlib-common"))
                 implementation(project(":v2-model"))
                 implementation(project(":v2-annotations"))
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
-                implementation("com.github.Woody230.KotlinExtensions:serialization:1.2.15")
-                implementation("com.github.Woody230.KotlinExtensions:function:1.2.15")
-                implementation("com.github.Woody230.KotlinExtensions:base64:1.2.15")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
+                implementation("com.github.Woody230.KotlinExtensions:serialization:$extensionVersion")
+                implementation("com.github.Woody230.KotlinExtensions:function:$extensionVersion")
+                implementation("com.github.Woody230.KotlinExtensions:base64:$extensionVersion")
             }
         }
         val commonTest by getting {
@@ -27,17 +31,6 @@ kotlin {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
                 implementation(kotlin("test-junit"))
-            }
-        }
-        val androidTest by getting {
-            dependencies {
-                implementation(kotlin("test-junit"))
-                implementation("junit:junit:4.13.2")
-            }
-        }
-        val jvmTest by getting {
-            dependencies {
-                implementation("org.jetbrains.kotlin:kotlin-test-junit")
             }
         }
     }

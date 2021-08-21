@@ -4,7 +4,9 @@ plugins {
     kotlin("plugin.serialization")
 }
 
-val ktorVersion = "1.6.2"
+val extensionVersion = "1.2.15"
+val datetimeVersion = "0.2.1"
+val serializationVersion = "1.2.2"
 
 kotlin {
     jvm()
@@ -15,24 +17,13 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-            }
-        }
-        val androidTest by getting {
-            dependencies {
-                implementation(kotlin("test-junit"))
-                implementation("junit:junit:4.13.2")
-            }
-        }
-        val jvmTest by getting {
-            dependencies {
-                implementation("org.jetbrains.kotlin:kotlin-test-junit")
             }
         }
     }
