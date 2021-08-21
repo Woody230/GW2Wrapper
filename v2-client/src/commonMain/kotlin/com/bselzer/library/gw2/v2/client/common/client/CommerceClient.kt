@@ -3,7 +3,7 @@ package com.bselzer.library.gw2.v2.client.common.client
 import com.bselzer.library.gw2.v2.annotation.common.scope.Permission
 import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
 import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
-import com.bselzer.library.gw2.v2.client.common.extension.ensureBearer
+import com.bselzer.library.gw2.v2.client.common.extension.bearer
 import com.bselzer.library.gw2.v2.model.common.commerce.delivery.Delivery
 import com.bselzer.library.gw2.v2.model.common.commerce.exchange.CoinExchange
 import com.bselzer.library.gw2.v2.model.common.commerce.exchange.GemExchange
@@ -43,7 +43,7 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.TRADING_POST)
     suspend fun delivery(token: String? = null): Delivery = get(path = "${COMMERCE}/${DELIVERY}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -106,7 +106,7 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.TRADING_POST)
     suspend fun currentBuys(token: String? = null): List<CurrentTransaction> =
         get(path = "${COMMERCE}/${TRANSACTIONS}/${CURRENT}/${BUYS}") {
-            ensureBearer(token)
+            bearer(token)
         }
 
     /**
@@ -115,7 +115,7 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      */
     suspend fun currentSells(token: String? = null): List<CurrentTransaction> =
         get(path = "${COMMERCE}/${TRANSACTIONS}/${CURRENT}/${BUYS}") {
-            ensureBearer(token)
+            bearer(token)
         }
 
     /**
@@ -125,7 +125,7 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.TRADING_POST)
     suspend fun pastBuys(token: String? = null): List<PastTransaction> =
         get(path = "${COMMERCE}/${TRANSACTIONS}/${HISTORY}/${SELLS}") {
-            ensureBearer(token)
+            bearer(token)
         }
 
     /**
@@ -134,6 +134,6 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      */
     suspend fun pastSells(token: String? = null): List<PastTransaction> =
         get(path = "${COMMERCE}/${TRANSACTIONS}/${HISTORY}/${SELLS}") {
-            ensureBearer(token)
+            bearer(token)
         }
 }

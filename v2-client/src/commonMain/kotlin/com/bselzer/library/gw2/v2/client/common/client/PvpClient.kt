@@ -3,7 +3,7 @@ package com.bselzer.library.gw2.v2.client.common.client
 import com.bselzer.library.gw2.v2.annotation.common.scope.Permission
 import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
 import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
-import com.bselzer.library.gw2.v2.client.common.extension.ensureBearer
+import com.bselzer.library.gw2.v2.client.common.extension.bearer
 import com.bselzer.library.gw2.v2.client.common.extension.language
 import com.bselzer.library.gw2.v2.model.common.pvp.PvpAmulet
 import com.bselzer.library.gw2.v2.model.common.pvp.PvpGame
@@ -42,7 +42,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PVP)
     suspend fun stats(token: String? = null): PvpStats = get(path = "${PVP}/${STATS}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -51,7 +51,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PVP)
     suspend fun gameIds(token: String? = null): List<String> = get(path = "${PVP}/${GAMES}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -60,7 +60,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PVP)
     suspend fun game(id: String, token: String? = null): PvpGame = single(id, "${PVP}/${GAMES}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -69,7 +69,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PVP)
     suspend fun games(ids: Collection<String>, token: String? = null): List<PvpGame> = chunkedIds(ids, "${PVP}/${GAMES}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -78,7 +78,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PVP)
     suspend fun games(token: String? = null): List<PvpGame> = allIds("${PVP}/${GAMES}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -87,7 +87,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PVP)
     suspend fun standings(token: String? = null): PvpStandings = get(path = "${PVP}/${STANDINGS}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**

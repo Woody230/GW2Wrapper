@@ -1,51 +1,27 @@
 package com.bselzer.library.gw2.v2.client.jvm.unit
 
-import asHeader
-import com.bselzer.library.gw2.v2.client.common.client.Gw2Client
 import com.bselzer.library.gw2.v2.model.common.profession.track.SkillTrack
 import com.bselzer.library.gw2.v2.model.common.profession.track.TraitTrack
-import io.ktor.client.*
 import io.ktor.client.engine.mock.*
-import io.ktor.http.*
-import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
-class ProfessionTests
+class ProfessionTests : BaseUnitTests()
 {
-    // TODO consolidate common test stuff
+    override fun createEngineConfig(): MockEngineConfig.() -> Unit = {
+        val response = getProfessionResource()
+        exhaust(url = "https://api.guildwars2.com/v2/professions?ids=all", content = response)
+    }
+
     /**
      * Verifies that the profession endpoint is being called and the response is deserialized correctly.
      */
     @Test
     fun profession()
     {
-        // Arrange
-        val resource = this::class.java.getResource("/Profession.json")!!.readText()
-        val httpClient = HttpClient(MockEngine) {
-            engine {
-                addHandler { request ->
-                    when (request.url.toString())
-                    {
-                        "https://api.guildwars2.com/v2/professions?ids=all" -> respond(
-                            resource,
-                            headers = ContentType.Application.Json.asHeader()
-                        )
-                        else -> error("Cannot handle ${request.url.fullPath}")
-                    }
-                }
-            }
-        }
-
-        val gw2Client = Gw2Client(httpClient)
-
         // Act
-        val professions = runBlocking {
-            gw2Client.use {
-                it.profession.professions()
-            }
-        }
+        val professions = use { profession.professions() }
 
         // Assert
         assertEquals(1, professions.size)

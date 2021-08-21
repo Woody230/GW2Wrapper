@@ -13,4 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-/v2-client/src/commonTest/resources/Data.json
+/v2-client/src/commonTest/resources/Secrets.json

@@ -1,7 +1,7 @@
 package com.bselzer.library.gw2.v2.client.common.client
 
 import com.bselzer.library.gw2.v2.annotation.common.scope.*
-import com.bselzer.library.gw2.v2.client.common.extension.ensureBearer
+import com.bselzer.library.gw2.v2.client.common.extension.bearer
 import com.bselzer.library.gw2.v2.client.common.extension.language
 import com.bselzer.library.gw2.v2.model.common.guild.Guild
 import com.bselzer.library.gw2.v2.model.common.guild.GuildMember
@@ -43,7 +43,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
     @GuildScope(Requirement.OPTIONAL, GuildRanking.LEADER, GuildRanking.MEMBER)
     @Scope(Requirement.OPTIONAL, Permission.GUILDS)
     suspend fun guild(guildId: String, token: String? = null): List<Guild> = get(path = "${GUILD}/${guildId}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -53,7 +53,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
     @GuildScope(Requirement.REQUIRED, GuildRanking.LEADER)
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.GUILDS)
     suspend fun logs(guildId: String, token: String? = null): List<GuildLog> = get(path = "${GUILD}/${guildId}/${LOG}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -63,7 +63,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
     @GuildScope(Requirement.REQUIRED, GuildRanking.LEADER)
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.GUILDS)
     suspend fun logs(guildId: String, since: Int, token: String? = null): List<GuildLog> = get(path = "${GUILD}/${guildId}/${LOG}") {
-        ensureBearer(token)
+        bearer(token)
         parameter("since", since)
     }
 
@@ -74,7 +74,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
     @GuildScope(Requirement.REQUIRED, GuildRanking.LEADER)
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.GUILDS)
     suspend fun members(guildId: String, token: String? = null): List<GuildMember> = get(path = "${GUILD}/${guildId}/${MEMBERS}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -84,7 +84,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
     @GuildScope(Requirement.REQUIRED, GuildRanking.LEADER)
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.GUILDS)
     suspend fun ranks(guildId: String, token: String? = null): List<GuildRank> = get(path = "${GUILD}/${guildId}/${RANKS}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -94,7 +94,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
     @GuildScope(Requirement.REQUIRED, GuildRanking.LEADER)
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.GUILDS)
     suspend fun stashes(guildId: String, token: String? = null): List<GuildStash> = get(path = "${GUILD}/${guildId}/${STASH}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -104,7 +104,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
     @GuildScope(Requirement.REQUIRED, GuildRanking.LEADER)
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.GUILDS)
     suspend fun storageSlots(guildId: String, token: String? = null): List<GuildStorageSlot> = get(path = "${GUILD}/${guildId}/${STASH}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -114,7 +114,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
     @GuildScope(Requirement.REQUIRED, GuildRanking.LEADER)
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.GUILDS)
     suspend fun teams(guildId: String, token: String? = null): List<GuildTeam> = get(path = "${GUILD}/${guildId}/${TEAMS}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -124,7 +124,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
     @GuildScope(Requirement.REQUIRED, GuildRanking.LEADER)
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.GUILDS)
     suspend fun upgradeIds(guildId: String, token: String? = null): List<Int> = get(path = "${GUILD}/${guildId}/${UPGRADES}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**

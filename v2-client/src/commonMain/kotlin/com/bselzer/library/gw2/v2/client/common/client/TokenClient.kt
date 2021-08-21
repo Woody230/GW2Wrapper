@@ -3,7 +3,7 @@ package com.bselzer.library.gw2.v2.client.common.client
 import com.bselzer.library.gw2.v2.annotation.common.scope.Permission
 import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
 import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
-import com.bselzer.library.gw2.v2.client.common.extension.ensureBearer
+import com.bselzer.library.gw2.v2.client.common.extension.bearer
 import com.bselzer.library.gw2.v2.model.common.account.token.SubToken
 import com.bselzer.library.gw2.v2.model.common.account.token.TokenInfo
 import io.ktor.client.*
@@ -47,7 +47,7 @@ class TokenClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
         urls: List<String>,
         token: String? = null
     ): SubToken = get(path = CREATE_SUBTOKEN) {
-        ensureBearer(token)
+        bearer(token)
         parameter("expire", expiration)
         parameter("permissions", permissions.joinToString())
         parameter("urls", urls.joinToString())

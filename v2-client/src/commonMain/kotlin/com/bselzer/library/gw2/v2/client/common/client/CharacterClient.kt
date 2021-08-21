@@ -3,7 +3,7 @@ package com.bselzer.library.gw2.v2.client.common.client
 import com.bselzer.library.gw2.v2.annotation.common.scope.Permission
 import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
 import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
-import com.bselzer.library.gw2.v2.client.common.extension.ensureBearer
+import com.bselzer.library.gw2.v2.client.common.extension.bearer
 import com.bselzer.library.gw2.v2.model.common.account.build.BuildTemplateTab
 import com.bselzer.library.gw2.v2.model.common.account.build.EquipmentTemplateTab
 import com.bselzer.library.gw2.v2.model.common.character.*
@@ -45,7 +45,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     suspend fun ids(token: String? = null): List<String> = get(path = CHARACTERS) {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -54,7 +54,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     suspend fun overview(name: String, token: String? = null): Character = get(path = "${CHARACTERS}/${name}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -63,7 +63,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     suspend fun overviews(names: List<String>, token: String? = null): List<Character> = chunkedIds(names, CHARACTERS) {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -72,7 +72,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     suspend fun overviews(token: String? = null): List<Character> = allIds(CHARACTERS) {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -81,7 +81,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     suspend fun core(name: String, token: String? = null): Character = get(path = "${CHARACTERS}/${name}/${CORE}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -90,7 +90,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     suspend fun backstory(name: String, token: String? = null): List<String> = get<Character>(path = "${CHARACTERS}/${name}/${BACKSTORY}") {
-        ensureBearer(token)
+        bearer(token)
     }.backstory
 
     /**
@@ -99,7 +99,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
     suspend fun buildTabIds(name: String, token: String? = null): List<Int> = get(path = "${CHARACTERS}/${name}/${BUILD_TABS}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -109,7 +109,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
     suspend fun buildTabs(name: String, ids: Collection<Int>, token: String? = null): List<BuildTemplateTab> =
         chunkedTabs(ids, "${CHARACTERS}/${name}/${BUILD_TABS}") {
-            ensureBearer(token)
+            bearer(token)
         }
 
     /**
@@ -118,7 +118,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
     suspend fun buildTabs(name: String, token: String? = null): List<BuildTemplateTab> = allTabs("${CHARACTERS}/${name}/${BUILD_TABS}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -128,7 +128,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
     suspend fun activeBuildTab(name: String, token: String? = null): BuildTemplateTab =
         get(path = "${CHARACTERS}/${name}/${BUILD_TABS}/${ACTIVE}") {
-            ensureBearer(token)
+            bearer(token)
         }
 
     /**
@@ -138,7 +138,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     suspend fun crafting(name: String, token: String? = null): List<CharacterCrafting> =
         get<Character>(path = "${CHARACTERS}/${name}/${CRAFTING}") {
-            ensureBearer(token)
+            bearer(token)
         }.crafting
 
     /**
@@ -148,7 +148,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS, Permission.ACCOUNT)
     suspend fun equipment(name: String, token: String? = null): List<CharacterEquipment> =
         get<Character>(path = "${CHARACTERS}/${name}/${EQUIPMENT}") {
-            ensureBearer(token)
+            bearer(token)
         }.equipment
 
     /**
@@ -157,7 +157,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
     suspend fun equipmentTabIds(name: String, token: String? = null): List<Int> = get(path = "${CHARACTERS}/${name}/${EQUIPMENT_TABS}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -167,7 +167,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
     suspend fun equipmentTabs(name: String, ids: Collection<Int>, token: String? = null): List<EquipmentTemplateTab> =
         chunkedTabs(ids, "${CHARACTERS}/${name}/${EQUIPMENT_TABS}") {
-            ensureBearer(token)
+            bearer(token)
         }
 
     /**
@@ -176,7 +176,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
     suspend fun equipmentTabs(name: String, token: String? = null): List<EquipmentTemplateTab> = allTabs("${CHARACTERS}/${name}/${EQUIPMENT_TABS}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -186,7 +186,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
     suspend fun activeEquipmentTab(name: String, token: String? = null): EquipmentTemplateTab =
         get(path = "${CHARACTERS}/${name}/${EQUIPMENT_TABS}/${ACTIVE}") {
-            ensureBearer(token)
+            bearer(token)
         }
 
     /**
@@ -195,7 +195,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS, Permission.PROGRESSION)
     suspend fun heroPoints(name: String, token: String? = null): List<String> = get(path = "${CHARACTERS}/${name}/${HEROPOINTS}") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -204,7 +204,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS, Permission.INVENTORIES)
     suspend fun bags(name: String, token: String? = null): List<Bag?> = get<Character>(path = "${CHARACTERS}/${name}/${INVENTORY}") {
-        ensureBearer(token)
+        bearer(token)
     }.bags
 
     /**
@@ -213,7 +213,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     suspend fun skills(name: String, token: String? = null): CharacterModeSkills = get<Character>(path = "${CHARACTERS}/${name}/${SKILLS}") {
-        ensureBearer(token)
+        bearer(token)
     }.skills
 
     /**
@@ -223,7 +223,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     suspend fun specializations(name: String, token: String? = null): CharacterModeSpecializations =
         get<Character>(path = "${CHARACTERS}/${name}/${SPECIALIZATIONS}") {
-            ensureBearer(token)
+            bearer(token)
         }.specializations
 
     /**
@@ -233,7 +233,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     suspend fun trainings(name: String, token: String? = null): List<CharacterTraining> =
         get<Character>(path = "${CHARACTERS}/${name}/${TRAINING}") {
-            ensureBearer(token)
+            bearer(token)
         }.trainings
 
     /**
@@ -243,7 +243,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     @Scope(Requirement.REQUIRED, Permission.CHARACTERS, Permission.PROGRESSION)
     suspend fun superAdventureBox(name: String, token: String? = null): SabProgress =
         get(path = "${CHARACTERS}/${name}/${SUPER_ADVENTURE_BOX}") {
-            ensureBearer(token)
+            bearer(token)
         }
 
     /**
@@ -253,7 +253,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS, Permission.INVENTORIES)
     suspend fun recipes(name: String, token: String? = null): List<Int> = get<Character>(path = "${CHARACTERS}/${name}/${RECIPES}") {
-        ensureBearer(token)
+        bearer(token)
     }.recipes
 
     /**
@@ -262,6 +262,6 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS, Permission.PROGRESSION)
     suspend fun quests(name: String, token: String? = null): List<Int> = get(path = "${CHARACTERS}/${name}/${QUESTS}") {
-        ensureBearer(token)
+        bearer(token)
     }
 }

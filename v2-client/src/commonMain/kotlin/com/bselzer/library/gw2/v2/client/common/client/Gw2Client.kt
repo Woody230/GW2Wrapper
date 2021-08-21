@@ -19,7 +19,7 @@ import kotlinx.serialization.json.Json
  * @see <a href="https://wiki.guildwars2.com/wiki/API:Main">the wiki</a>
  */
 open class Gw2Client(
-    httpClient: HttpClient,
+    httpClient: HttpClient = HttpClient(),
     json: Json = DEFAULT_JSON,
     private val configuration: Gw2ClientConfiguration = Gw2ClientConfiguration()
 ) : Closeable
@@ -395,14 +395,15 @@ open class Gw2Client(
             serializer = KotlinxSerializer(json)
         }
 
+        // TODO HttpResponseValidator? https://ktor.io/docs/response-validation.html#custom
+
+        // NOTE: this default request is applied last.
         defaultRequest {
             host = Endpoints.BASE_URL
 
             url {
                 protocol = URLProtocol.HTTPS
             }
-
-            // TODO HttpResponseValidator? https://ktor.io/docs/response-validation.html#custom
 
             // Set up the headers.
             configuration.schemaVersion?.let { version ->

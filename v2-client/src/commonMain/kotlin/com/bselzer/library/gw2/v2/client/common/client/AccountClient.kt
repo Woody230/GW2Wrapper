@@ -3,7 +3,7 @@ package com.bselzer.library.gw2.v2.client.common.client
 import com.bselzer.library.gw2.v2.annotation.common.scope.Permission
 import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
 import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
-import com.bselzer.library.gw2.v2.client.common.extension.ensureBearer
+import com.bselzer.library.gw2.v2.client.common.extension.bearer
 import com.bselzer.library.gw2.v2.model.common.account.*
 import com.bselzer.library.gw2.v2.model.common.account.build.BuildTemplate
 import com.bselzer.library.gw2.v2.model.common.account.mastery.AccountMastery
@@ -67,7 +67,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
     @Scope(Requirement.OPTIONAL, Permission.GUILDS, Permission.PROGRESSION)
     suspend fun account(token: String? = null): Account = get(path = ACCOUNT) {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -77,7 +77,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
     suspend fun achievements(token: String? = null): List<AccountAchievement> =
         get(path = "$ACCOUNT/$ACHIEVEMENTS") {
-            ensureBearer(token)
+            bearer(token)
         }
 
     /**
@@ -90,7 +90,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.INVENTORIES)
     suspend fun bankSlots(token: String? = null): List<BankSlot> =
         get(path = "$ACCOUNT/$BANK") {
-            ensureBearer(token)
+            bearer(token)
         }
 
     /**
@@ -99,7 +99,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
     suspend fun storedBuildTemplates(token: String? = null): List<BuildTemplate> = get(path = "$ACCOUNT/$BUILD_STORAGE") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -110,7 +110,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
     suspend fun dailyCrafting(token: String? = null): List<String> =
         get(path = "$ACCOUNT/$DAILY_CRAFTING") {
-            ensureBearer(token)
+            bearer(token)
         }
 
     /**
@@ -121,7 +121,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
     suspend fun dailyDungeons(token: String? = null): List<String> =
         get(path = "$ACCOUNT/$DUNGEONS") {
-            ensureBearer(token)
+            bearer(token)
         }
 
     /**
@@ -130,7 +130,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
     suspend fun dyes(token: String? = null): List<Int> = get(path = "$ACCOUNT/$DYES") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -139,7 +139,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
     suspend fun emotes(token: String? = null): List<String> = get(path = "$ACCOUNT/$EMOTES") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -148,7 +148,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
     suspend fun finishers(token: String? = null): List<AccountFinisher> = get(path = "$ACCOUNT/$FINISHERS") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -157,7 +157,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
     suspend fun gliders(token: String? = null): List<Int> = get(path = "$ACCOUNT/$GLIDERS") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -167,7 +167,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION, Permission.UNLOCKS)
     suspend fun cats(token: String? = null): List<Int> = get(path = "$ACCOUNT/$HOME/$CATS") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -177,7 +177,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
     // TODO enum for the ids and extension method
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION, Permission.UNLOCKS)
     suspend fun nodes(token: String? = null): List<String> = get(path = "$ACCOUNT/$HOME/$NODES") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -188,7 +188,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.INVENTORIES)
     suspend fun sharedSlots(token: String? = null): List<SharedSlot> = get(path = "$ACCOUNT/$INVENTORY") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -197,7 +197,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.INVENTORIES, Permission.UNLOCKS)
     suspend fun legendaryArmory(token: String? = null): List<ArmoryItem> = get(path = "$ACCOUNT/$LEGENDARY_ARMORY") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -207,7 +207,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
     // Response is a collection of AccountLuck objects, but there will only be 1 at most with an irrelevant id.
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION, Permission.UNLOCKS)
     suspend fun luck(token: String? = null): Int? = get<List<AccountLuck>>(path = "$ACCOUNT/$LUCK") {
-        ensureBearer(token)
+        bearer(token)
     }.firstOrNull()?.value
 
     /**
@@ -216,7 +216,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
     suspend fun mailCarriers(token: String? = null): List<Int> = get(path = "$ACCOUNT/$MAIL_CARRIERS") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -226,7 +226,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
     // TODO enum for the ids and extension method
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
     suspend fun dailyMapChests(token: String? = null): List<String> = get(path = "$ACCOUNT/$MAP_CHESTS") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -235,7 +235,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
     suspend fun masteries(token: String? = null): List<AccountMastery> = get(path = "$ACCOUNT/$MASTERIES") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -244,7 +244,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
     suspend fun masteryPoints(token: String? = null): AccountMasteryPoints = get(path = "$ACCOUNT/$MASTERY/$POINTS") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -253,7 +253,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.INVENTORIES)
     suspend fun materials(token: String? = null): List<AccountMaterial> = get(path = "$ACCOUNT/$MATERIALS") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -262,7 +262,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
     suspend fun minis(token: String? = null): List<Int> = get(path = "$ACCOUNT/$MINIS") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -271,7 +271,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
     suspend fun mountSkins(token: String? = null): List<Int> = get(path = "$ACCOUNT/$MOUNTS/$SKINS") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -281,7 +281,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
     // TODO enums and extension method
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
     suspend fun mountTypes(token: String? = null): List<String> = get(path = "$ACCOUNT/$MOUNTS/$TYPES") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -290,7 +290,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
     suspend fun novelties(token: String? = null): List<Int> = get(path = "$ACCOUNT/$NOVELTIES") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -299,7 +299,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
     suspend fun outfits(token: String? = null): List<Int> = get(path = "$ACCOUNT/$OUTFITS") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -308,7 +308,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
     suspend fun pvpHeroes(token: String? = null): List<Int> = get(path = "$ACCOUNT/$PVP/$HEROES") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -318,7 +318,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
     // TODO enums and extension method
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
     suspend fun weeklyRaids(token: String? = null): List<String> = get(path = "$ACCOUNT/$RAIDS") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -327,7 +327,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
     suspend fun recipes(token: String? = null): List<Int> = get(path = "$ACCOUNT/$RECIPES") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -336,7 +336,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
     suspend fun skins(token: String? = null): List<Int> = get(path = "$ACCOUNT/$SKINS") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -345,7 +345,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.UNLOCKS)
     suspend fun titles(token: String? = null): List<Int> = get(path = "$ACCOUNT/$TITLES") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -354,7 +354,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.WALLET)
     suspend fun currencies(token: String? = null): List<Int> = get(path = "$ACCOUNT/$WALLET") {
-        ensureBearer(token)
+        bearer(token)
     }
 
     /**
@@ -364,6 +364,6 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
     // TODO enums and extension method
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
     suspend fun dailyWorldBosses(token: String? = null): List<String> = get(path = "$ACCOUNT/$WORLD_BOSSES") {
-        ensureBearer(token)
+        bearer(token)
     }
 }
