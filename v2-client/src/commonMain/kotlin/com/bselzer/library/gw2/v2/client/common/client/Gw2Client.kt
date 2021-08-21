@@ -4,6 +4,7 @@ import com.bselzer.library.gw2.v2.client.common.constant.Endpoints
 import com.bselzer.library.gw2.v2.client.common.extension.bearer
 import com.bselzer.library.gw2.v2.client.common.extension.language
 import com.bselzer.library.gw2.v2.client.common.extension.schemaVersion
+import com.bselzer.library.gw2.v2.client.common.serialization.Modules
 import io.ktor.client.*
 import io.ktor.client.features.*
 import io.ktor.client.features.json.*
@@ -30,12 +31,12 @@ open class Gw2Client(
          *
          * It is designed to be lenient in order to avoid errors.
          */
-        // TODO serializer modules
         val DEFAULT_JSON = Json {
             isLenient = true
             ignoreUnknownKeys = true
             coerceInputValues = true
             encodeDefaults = true
+            serializersModule = Modules.ALL
         }
     }
 

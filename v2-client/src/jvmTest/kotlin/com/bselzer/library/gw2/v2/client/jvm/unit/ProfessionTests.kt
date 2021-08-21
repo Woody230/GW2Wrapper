@@ -2,16 +2,12 @@ package com.bselzer.library.gw2.v2.client.jvm.unit
 
 import asHeader
 import com.bselzer.library.gw2.v2.client.common.client.Gw2Client
-import com.bselzer.library.gw2.v2.client.common.client.Gw2Client.Companion.DEFAULT_JSON
 import com.bselzer.library.gw2.v2.model.common.profession.track.SkillTrack
 import com.bselzer.library.gw2.v2.model.common.profession.track.TraitTrack
-import com.bselzer.library.gw2.v2.model.extension.common.serialization.module.Profession
 import io.ktor.client.*
 import io.ktor.client.engine.mock.*
 import io.ktor.http.*
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.modules.plus
 import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -42,10 +38,7 @@ class ProfessionTests
             }
         }
 
-        // TODO default should include serializer modules
-        val gw2Client = Gw2Client(httpClient, Json(DEFAULT_JSON) {
-            serializersModule = Profession.TRACK + Profession.SKILL
-        })
+        val gw2Client = Gw2Client(httpClient)
 
         // Act
         val professions = runBlocking {
