@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-open class Item(
+abstract class Item(
     @SerialName("id")
     override val id: Int = 0,
 

@@ -1,9 +1,12 @@
 package com.bselzer.library.gw2.v2.client.jvm.instrumented
 
 import com.bselzer.library.gw2.v2.model.common.profession.Profession
-import com.bselzer.library.gw2.v2.model.common.profession.skill.ElementalistSkill
 import com.bselzer.library.gw2.v2.model.common.profession.track.SkillTrack
 import com.bselzer.library.gw2.v2.model.common.profession.track.TraitTrack
+import com.bselzer.library.gw2.v2.model.extension.common.model.profession.attunement
+import com.bselzer.library.gw2.v2.model.extension.common.model.profession.offhand
+import com.bselzer.library.gw2.v2.model.extension.common.model.profession.slot
+import com.bselzer.library.gw2.v2.model.extension.common.model.profession.source
 import org.junit.Test
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
@@ -21,7 +24,19 @@ class ProfessionTests : BaseInstrumentedTests()
 
         // Assert
         assertProfession(profession)
-        assertTrue(profession.skills.any { skill -> skill is ElementalistSkill && skill.id > 0 })
+        assertTrue(profession.skills.any { skill -> skill.attunement() != null && skill.id > 0 })
+    }
+
+    @Test
+    fun thief()
+    {
+        // Act
+        val profession = use { profession.profession("Thief") }
+
+        // Assert
+        assertProfession(profession)
+        assertTrue(profession.skills.any { skill -> skill.source() != null && skill.id > 0 })
+        assertTrue(profession.weapons.values.flatMap { weapon -> weapon.skills }.any { skill -> skill.offhand() != null && skill.id > 0 })
     }
 
     @Test
@@ -43,5 +58,8 @@ class ProfessionTests : BaseInstrumentedTests()
         assertTrue(tracks.any { track -> track is SkillTrack && track.id > 0 })
         assertTrue(tracks.any { track -> track is TraitTrack && track.id > 0 })
         assertTrue(profession.skills.isNotEmpty())
+        assertTrue(profession.skills.any { skill -> skill.slot() != null })
+        assertTrue(profession.weapons.isNotEmpty())
+        assertTrue(profession.weapons.values.flatMap { weapon -> weapon.skills }.isNotEmpty())
     }
 }

@@ -2,7 +2,7 @@ package com.bselzer.library.gw2.v2.model.extension.common.model.account
 
 import com.bselzer.library.gw2.v2.model.common.account.Account
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.scope.Access
-import com.bselzer.library.kotlin.extension.function.common.objects.validEnumValues
+import com.bselzer.library.kotlin.extension.serialization.common.function.validEnumValues
 import kotlin.time.ExperimentalTime
 
 /**

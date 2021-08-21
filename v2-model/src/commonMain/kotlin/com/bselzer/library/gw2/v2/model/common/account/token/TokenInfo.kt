@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
  */
 @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
 @Serializable
-open class TokenInfo(
+abstract class TokenInfo(
     /**
      * The requested token id.
      */

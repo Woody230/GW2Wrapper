@@ -3,7 +3,7 @@ package com.bselzer.library.gw2.v2.model.extension.common.enumeration.specializa
 import com.bselzer.library.gw2.v2.model.common.specialization.Specialization
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.profession.ProfessionName
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.profession.SpecializationName
-import com.bselzer.library.kotlin.extension.function.common.objects.enumValueOrNull
+import com.bselzer.library.kotlin.extension.serialization.common.function.enumValueOrNull
 
 /**
  * The [Specialization.name] as a [SpecializationName]

@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-open class PvpStanding(
+abstract class PvpStanding(
     @SerialName("total_points")
     val totalPoints: Int = 0,
 

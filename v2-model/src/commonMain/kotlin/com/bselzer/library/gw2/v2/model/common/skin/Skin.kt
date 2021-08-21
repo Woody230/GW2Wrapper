@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-open class Skin(
+abstract class Skin(
     @SerialName("id")
     override val id: Int = 0,
 

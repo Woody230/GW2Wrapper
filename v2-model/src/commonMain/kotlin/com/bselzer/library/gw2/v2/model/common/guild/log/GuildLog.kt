@@ -6,7 +6,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-open class GuildLog(
+abstract class GuildLog(
     /**
      * The id of the log. It is only unique within the scope of the associated guild.
      */

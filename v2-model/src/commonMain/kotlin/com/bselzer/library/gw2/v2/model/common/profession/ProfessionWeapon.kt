@@ -1,6 +1,5 @@
 package com.bselzer.library.gw2.v2.model.common.profession
 
-import com.bselzer.library.gw2.v2.model.common.profession.skill.ProfessionSkill
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -17,5 +16,5 @@ data class ProfessionWeapon(
     val specializationId: Int = 0,
 
     @SerialName("skills")
-    val skills: List<ProfessionSkill> = emptyList()
+    val skills: List<ProfessionWeaponSkill> = emptyList()
 )

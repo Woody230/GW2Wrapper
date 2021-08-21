@@ -8,8 +8,8 @@ import com.bselzer.library.gw2.v2.model.extension.common.enumeration.skill.Skill
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.skill.SkillFlag
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.skill.SkillSlot
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.skill.SkillType
-import com.bselzer.library.kotlin.extension.function.common.objects.enumValueOrNull
-import com.bselzer.library.kotlin.extension.function.common.objects.validEnumValues
+import com.bselzer.library.kotlin.extension.serialization.common.function.enumValueOrNull
+import com.bselzer.library.kotlin.extension.serialization.common.function.validEnumValues
 
 /**
  * The [Skill.type] as a [SkillType]

@@ -2,7 +2,7 @@ package com.bselzer.library.gw2.v2.model.extension.common.model.mount
 
 import com.bselzer.library.gw2.v2.model.common.mount.MountSkill
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.skill.SkillSlot
-import com.bselzer.library.kotlin.extension.function.common.objects.enumValueOrNull
+import com.bselzer.library.kotlin.extension.serialization.common.function.enumValueOrNull
 
 /**
  * The [MountSkill.slot] as a [SkillSlot]

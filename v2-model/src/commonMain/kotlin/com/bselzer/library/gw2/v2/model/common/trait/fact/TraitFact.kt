@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-open class TraitFact(
+abstract class TraitFact(
     /**
      * The description of the fact.
      */

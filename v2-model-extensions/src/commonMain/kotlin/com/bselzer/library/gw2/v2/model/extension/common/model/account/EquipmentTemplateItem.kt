@@ -4,7 +4,7 @@ import com.bselzer.library.gw2.v2.model.common.account.build.EquipmentTemplateIt
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.character.EquipmentSlot
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.item.ItemLocation
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.scope.Binding
-import com.bselzer.library.kotlin.extension.function.common.objects.enumValueOrNull
+import com.bselzer.library.kotlin.extension.serialization.common.function.enumValueOrNull
 
 /**
  * The [EquipmentTemplateItem.slot] as an [EquipmentSlot]

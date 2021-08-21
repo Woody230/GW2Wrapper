@@ -3,7 +3,7 @@ package com.bselzer.library.gw2.v2.model.extension.common.model.backstory
 import com.bselzer.library.gw2.v2.model.common.backstory.BackstoryQuestion
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.character.RaceName
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.profession.ProfessionName
-import com.bselzer.library.kotlin.extension.function.common.objects.validEnumValues
+import com.bselzer.library.kotlin.extension.serialization.common.function.validEnumValues
 
 /**
  * The [BackstoryQuestion.professions] as a collection of [ProfessionName]

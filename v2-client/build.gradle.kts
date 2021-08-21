@@ -26,7 +26,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-                implementation(project(":v2-model-extensions")) // TODO handle serializers module
+                implementation(project(":v2-model-extensions"))
                 implementation("io.ktor:ktor-client-mock:$ktorVersion")
             }
         }

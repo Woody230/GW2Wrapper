@@ -10,7 +10,7 @@ import kotlin.time.ExperimentalTime
 
 @OptIn(ExperimentalTime::class)
 @Serializable
-open class GuildUpgrade(
+abstract class GuildUpgrade(
     @SerialName("id")
     override val id: Int = 0,
 

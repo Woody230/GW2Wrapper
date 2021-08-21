@@ -5,7 +5,7 @@ import com.bselzer.library.gw2.v2.model.extension.common.enumeration.world.World
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.world.WorldName
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.world.WorldPopulationLevel
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.world.WorldRegion
-import com.bselzer.library.kotlin.extension.function.common.objects.enumValueOrNull
+import com.bselzer.library.kotlin.extension.serialization.common.function.enumValueOrNull
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonPrimitive

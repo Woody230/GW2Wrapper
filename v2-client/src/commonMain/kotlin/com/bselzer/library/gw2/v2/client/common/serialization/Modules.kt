@@ -9,9 +9,6 @@ import com.bselzer.library.gw2.v2.model.common.guild.log.*
 import com.bselzer.library.gw2.v2.model.common.guild.upgrade.*
 import com.bselzer.library.gw2.v2.model.common.guild.upgrade.cost.*
 import com.bselzer.library.gw2.v2.model.common.item.*
-import com.bselzer.library.gw2.v2.model.common.profession.skill.ElementalistSkill
-import com.bselzer.library.gw2.v2.model.common.profession.skill.ProfessionSkill
-import com.bselzer.library.gw2.v2.model.common.profession.skill.ThiefSkill
 import com.bselzer.library.gw2.v2.model.common.profession.track.SkillTrack
 import com.bselzer.library.gw2.v2.model.common.profession.track.TrainingTrack
 import com.bselzer.library.gw2.v2.model.common.profession.track.TraitTrack
@@ -36,7 +33,6 @@ object Modules
         polymorphic(TokenInfo::class) {
             subclass(ApiKeyInfo::class, serializer())
             subclass(SubTokenInfo::class, serializer())
-            default { serializer() }
         }
     }
 
@@ -49,7 +45,6 @@ object Modules
             subclass(ItemReward::class, serializer())
             subclass(MasteryReward::class, serializer())
             subclass(TitleReward::class, serializer())
-            default { serializer() }
         }
     }
 
@@ -62,7 +57,6 @@ object Modules
             subclass(MiniBit::class, serializer())
             subclass(SkinBit::class, serializer())
             subclass(TextBit::class, serializer())
-            default { serializer() }
         }
     }
 
@@ -81,7 +75,6 @@ object Modules
             subclass(StashLog::class, serializer())
             subclass(TreasuryLog::class, serializer())
             subclass(UpgradeLog::class, serializer())
-            default { serializer() }
         }
     }
 
@@ -100,7 +93,6 @@ object Modules
             subclass(HubUpgrade::class, serializer())
             subclass(QueueUpgrade::class, serializer())
             subclass(UnlockUpgrade::class, serializer())
-            default { serializer() }
         }
     }
 
@@ -112,9 +104,7 @@ object Modules
             subclass(CoinUpgradeCost::class, serializer())
             subclass(CollectibleUpgradeCost::class, serializer())
             subclass(CurrencyUpgradeCost::class, serializer())
-            subclass(GuildUpgradeCost::class, serializer())
             subclass(ItemUpgradeCost::class, serializer())
-            default { serializer() }
         }
     }
 
@@ -138,7 +128,6 @@ object Modules
             subclass(TrophyItem::class, serializer())
             subclass(UpgradeComponentItem::class, serializer())
             subclass(WeaponItem::class, serializer())
-            default { serializer() }
         }
     }
 
@@ -149,7 +138,6 @@ object Modules
         polymorphic(PvpStanding::class) {
             subclass(BestStanding::class, serializer())
             subclass(CurrentStanding::class, serializer())
-            default { serializer() }
         }
     }
 
@@ -160,18 +148,6 @@ object Modules
         polymorphic(TrainingTrack::class) {
             subclass(SkillTrack::class, serializer())
             subclass(TraitTrack::class, serializer())
-            default { serializer() }
-        }
-    }
-
-    /**
-     * The [ProfessionSkill] serializers module.
-     */
-    val PROFESSION_SKILL = SerializersModule {
-        polymorphic(ProfessionSkill::class) {
-            subclass(ElementalistSkill::class, serializer())
-            subclass(ThiefSkill::class, serializer())
-            default { serializer() }
         }
     }
 
@@ -198,7 +174,6 @@ object Modules
             subclass(RechargeFact::class, serializer())
             subclass(TimeFact::class, serializer())
             subclass(UnblockableFact::class, serializer())
-            default { serializer() }
         }
     }
 
@@ -211,7 +186,6 @@ object Modules
             subclass(BackSkin::class, serializer())
             subclass(GatheringToolSkin::class, serializer())
             subclass(WeaponSkin::class, serializer())
-            default { serializer() }
         }
     }
 
@@ -236,7 +210,6 @@ object Modules
             subclass(com.bselzer.library.gw2.v2.model.common.trait.fact.RechargeFact::class, serializer())
             subclass(com.bselzer.library.gw2.v2.model.common.trait.fact.TimeFact::class, serializer())
             subclass(com.bselzer.library.gw2.v2.model.common.trait.fact.UnblockableFact::class, serializer())
-            default { serializer() }
         }
     }
 
@@ -244,5 +217,5 @@ object Modules
      * All of the serializer modules.
      */
     val ALL: SerializersModule =
-        TOKEN_INFO + ACHIEVEMENT_REWARD + ACHIEVEMENT_BIT + GUILD_LOG + GUILD_UPGRADE + GUILD_UPGRADE_COST + ITEM + PVP_STANDING + TRAINING_TRACK + PROFESSION_SKILL + SKILL_FACT + SKIN + TRAIT_FACT
+        TOKEN_INFO + ACHIEVEMENT_REWARD + ACHIEVEMENT_BIT + GUILD_LOG + GUILD_UPGRADE + GUILD_UPGRADE_COST + ITEM + PVP_STANDING + TRAINING_TRACK + SKILL_FACT + SKIN + TRAIT_FACT
 }

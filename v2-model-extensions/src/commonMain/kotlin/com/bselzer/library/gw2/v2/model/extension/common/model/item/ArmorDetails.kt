@@ -3,7 +3,7 @@ package com.bselzer.library.gw2.v2.model.extension.common.model.item
 import com.bselzer.library.gw2.v2.model.common.item.detail.ArmorDetails
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.item.ArmorDetailType
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.item.ArmorWeight
-import com.bselzer.library.kotlin.extension.function.common.objects.enumValueOrNull
+import com.bselzer.library.kotlin.extension.serialization.common.function.enumValueOrNull
 
 /**
  * The [ArmorDetails.type] as an [ArmorDetailType]

@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-open class GuildUpgradeCost(
+abstract class GuildUpgradeCost(
     /**
      * The amount required.
      */

@@ -4,7 +4,7 @@ import com.bselzer.library.gw2.v2.model.common.pvp.stat.PvpStats
 import com.bselzer.library.gw2.v2.model.common.pvp.stat.StatAggregate
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.profession.ProfessionName
 import com.bselzer.library.gw2.v2.model.extension.common.enumeration.pvp.PvpLadderType
-import com.bselzer.library.kotlin.extension.function.common.objects.validEnumValues
+import com.bselzer.library.kotlin.extension.serialization.common.function.validEnumValues
 
 /**
  * The [PvpStats.professionAggregate] with [ProfessionName] keys
