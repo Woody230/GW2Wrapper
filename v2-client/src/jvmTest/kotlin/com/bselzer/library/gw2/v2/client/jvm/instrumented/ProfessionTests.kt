@@ -3,10 +3,10 @@ package com.bselzer.library.gw2.v2.client.jvm.instrumented
 import com.bselzer.library.gw2.v2.model.common.profession.Profession
 import com.bselzer.library.gw2.v2.model.common.profession.track.SkillTrack
 import com.bselzer.library.gw2.v2.model.common.profession.track.TraitTrack
-import com.bselzer.library.gw2.v2.model.extension.common.model.profession.attunement
-import com.bselzer.library.gw2.v2.model.extension.common.model.profession.offhand
-import com.bselzer.library.gw2.v2.model.extension.common.model.profession.slot
-import com.bselzer.library.gw2.v2.model.extension.common.model.profession.source
+import com.bselzer.library.gw2.v2.model.enumeration.common.extension.profession.attunement
+import com.bselzer.library.gw2.v2.model.enumeration.common.extension.profession.offhand
+import com.bselzer.library.gw2.v2.model.enumeration.common.extension.profession.slot
+import com.bselzer.library.gw2.v2.model.enumeration.common.extension.profession.source
 import org.junit.Test
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue

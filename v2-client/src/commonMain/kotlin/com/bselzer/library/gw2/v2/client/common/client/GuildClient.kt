@@ -1,6 +1,5 @@
 package com.bselzer.library.gw2.v2.client.common.client
 
-import com.bselzer.library.gw2.v2.annotation.common.scope.*
 import com.bselzer.library.gw2.v2.client.common.extension.bearer
 import com.bselzer.library.gw2.v2.client.common.extension.language
 import com.bselzer.library.gw2.v2.model.common.guild.Guild
@@ -12,6 +11,11 @@ import com.bselzer.library.gw2.v2.model.common.guild.stash.GuildStash
 import com.bselzer.library.gw2.v2.model.common.guild.storage.GuildStorageSlot
 import com.bselzer.library.gw2.v2.model.common.guild.team.GuildTeam
 import com.bselzer.library.gw2.v2.model.common.guild.upgrade.GuildUpgrade
+import com.bselzer.library.gw2.v2.scope.common.core.Permission
+import com.bselzer.library.gw2.v2.scope.common.core.Requirement
+import com.bselzer.library.gw2.v2.scope.common.core.Scope
+import com.bselzer.library.gw2.v2.scope.common.guild.GuildRanking
+import com.bselzer.library.gw2.v2.scope.common.guild.GuildScope
 import io.ktor.client.*
 import io.ktor.client.request.*
 

@@ -19,7 +19,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("stdlib-common"))
                 implementation(project(":v2-model"))
-                implementation(project(":v2-annotations"))
+                implementation(project(":v2-scope"))
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-client-serialization:$ktorVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:$datetimeVersion")
@@ -29,7 +29,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-                implementation(project(":v2-model-extensions"))
+                implementation(project(":v2-model-enumeration"))
                 implementation("io.ktor:ktor-client-mock:$ktorVersion")
             }
         }

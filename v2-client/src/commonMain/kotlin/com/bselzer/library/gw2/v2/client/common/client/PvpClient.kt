@@ -1,8 +1,5 @@
 package com.bselzer.library.gw2.v2.client.common.client
 
-import com.bselzer.library.gw2.v2.annotation.common.scope.Permission
-import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
-import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
 import com.bselzer.library.gw2.v2.client.common.extension.bearer
 import com.bselzer.library.gw2.v2.client.common.extension.language
 import com.bselzer.library.gw2.v2.model.common.pvp.PvpAmulet
@@ -13,6 +10,9 @@ import com.bselzer.library.gw2.v2.model.common.pvp.rank.PvpRank
 import com.bselzer.library.gw2.v2.model.common.pvp.season.PvpSeason
 import com.bselzer.library.gw2.v2.model.common.pvp.standing.PvpStandings
 import com.bselzer.library.gw2.v2.model.common.pvp.stat.PvpStats
+import com.bselzer.library.gw2.v2.scope.common.core.Permission
+import com.bselzer.library.gw2.v2.scope.common.core.Requirement
+import com.bselzer.library.gw2.v2.scope.common.core.Scope
 import io.ktor.client.*
 
 /**

@@ -1,11 +1,11 @@
 package com.bselzer.library.gw2.v2.client.common.client
 
-import com.bselzer.library.gw2.v2.annotation.common.scope.Permission
-import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
-import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
 import com.bselzer.library.gw2.v2.client.common.extension.bearer
 import com.bselzer.library.gw2.v2.model.common.account.token.SubToken
 import com.bselzer.library.gw2.v2.model.common.account.token.TokenInfo
+import com.bselzer.library.gw2.v2.scope.common.core.Permission
+import com.bselzer.library.gw2.v2.scope.common.core.Requirement
+import com.bselzer.library.gw2.v2.scope.common.core.Scope
 import io.ktor.client.*
 import io.ktor.client.request.*
 import kotlinx.datetime.Instant

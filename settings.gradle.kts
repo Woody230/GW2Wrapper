@@ -15,6 +15,8 @@ pluginManagement {
 }
 rootProject.name = "GW2Wrapper"
 include("v2-model")
-include("v2-model-extensions")
+include("v2-model-enumeration")
 include("v2-client")
-include("v2-annotations")
+include("v2-chatlink")
+include("v2-scope")
+include("v2-scope-processor")

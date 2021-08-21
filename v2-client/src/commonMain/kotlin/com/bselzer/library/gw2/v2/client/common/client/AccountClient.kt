@@ -1,13 +1,13 @@
 package com.bselzer.library.gw2.v2.client.common.client
 
-import com.bselzer.library.gw2.v2.annotation.common.scope.Permission
-import com.bselzer.library.gw2.v2.annotation.common.scope.Requirement
-import com.bselzer.library.gw2.v2.annotation.common.scope.Scope
 import com.bselzer.library.gw2.v2.client.common.extension.bearer
 import com.bselzer.library.gw2.v2.model.common.account.*
 import com.bselzer.library.gw2.v2.model.common.account.build.BuildTemplate
 import com.bselzer.library.gw2.v2.model.common.account.mastery.AccountMastery
 import com.bselzer.library.gw2.v2.model.common.account.mastery.AccountMasteryPoints
+import com.bselzer.library.gw2.v2.scope.common.core.Permission
+import com.bselzer.library.gw2.v2.scope.common.core.Requirement
+import com.bselzer.library.gw2.v2.scope.common.core.Scope
 import io.ktor.client.*
 import kotlin.time.ExperimentalTime
 
