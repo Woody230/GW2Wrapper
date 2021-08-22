@@ -5,16 +5,19 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MatchStat(
+data class WvwMatchScore(
     @SerialName("id")
     override val id: String = "",
 
-    @SerialName("deaths")
-    val deaths: WorldCount = WorldCount(),
+    @SerialName("scores")
+    val scores: WvwWorldCount = WvwWorldCount(),
 
-    @SerialName("kills")
-    val kills: WorldCount = WorldCount(),
+    @SerialName("skirmishes")
+    val skirmishes: List<WvwSkirmish> = emptyList(),
+
+    @SerialName("victory_points")
+    val victoryPoints: WvwWorldCount = WvwWorldCount(),
 
     @SerialName("maps")
-    val maps: List<Map> = emptyList()
+    val maps: List<WvwMap> = emptyList()
 ) : Identifiable<String>

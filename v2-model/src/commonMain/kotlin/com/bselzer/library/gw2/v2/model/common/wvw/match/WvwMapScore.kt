@@ -4,10 +4,10 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MapScore(
+data class WvwMapScore(
     @SerialName("type")
     val mapType: String = "",
 
     @SerialName("scores")
-    val scores: WorldCount = WorldCount()
+    val scores: WvwWorldCount = WvwWorldCount()
 )

@@ -2,7 +2,7 @@ package com.bselzer.library.gw2.v2.client.common.client
 
 import com.bselzer.library.gw2.v2.client.common.extension.bearer
 import com.bselzer.library.gw2.v2.model.common.account.build.BuildTemplateTab
-import com.bselzer.library.gw2.v2.model.common.account.build.EquipmentTemplateTab
+import com.bselzer.library.gw2.v2.model.common.account.equipment.EquipmentTemplateTab
 import com.bselzer.library.gw2.v2.model.common.character.*
 import com.bselzer.library.gw2.v2.model.common.character.superadventurebox.SabProgress
 import com.bselzer.library.gw2.v2.scope.common.core.Permission

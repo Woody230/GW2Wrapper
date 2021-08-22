@@ -1,4 +1,4 @@
-package com.bselzer.library.gw2.v2.model.common.account.build
+package com.bselzer.library.gw2.v2.model.common.account.equipment
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

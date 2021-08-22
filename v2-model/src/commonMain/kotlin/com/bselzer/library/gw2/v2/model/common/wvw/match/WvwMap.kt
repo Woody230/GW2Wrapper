@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Map(
+data class WvwMap(
     @SerialName("id")
     override val id: Int = 0,
 
@@ -13,23 +13,23 @@ data class Map(
     val type: String = "",
 
     @SerialName("scores")
-    val scores: WorldCount = WorldCount(),
+    val scores: WvwWorldCount = WvwWorldCount(),
 
     @SerialName("deaths")
-    val deaths: WorldCount = WorldCount(),
+    val deaths: WvwWorldCount = WvwWorldCount(),
 
     @SerialName("kills")
-    val kills: WorldCount = WorldCount(),
+    val kills: WvwWorldCount = WvwWorldCount(),
 
     @SerialName("objectives")
-    val objectives: List<MapObjective> = emptyList(),
+    val objectives: List<WvwMapObjective> = emptyList(),
 
     @SerialName("bonuses")
-    val bonuses: List<MapBonus> = emptyList(),
+    val bonuses: List<WvwMapBonus> = emptyList(),
 
     @SerialName("skirmishes")
-    val skirmishes: List<Skirmish> = emptyList(),
+    val skirmishes: List<WvwSkirmish> = emptyList(),
 
     @SerialName("victory_points")
-    val victoryPoints: WorldCount = WorldCount()
+    val victoryPoints: WvwWorldCount = WvwWorldCount()
 ) : Identifiable<Int>

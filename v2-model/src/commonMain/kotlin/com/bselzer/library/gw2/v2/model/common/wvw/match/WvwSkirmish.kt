@@ -5,13 +5,13 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Skirmish(
+data class WvwSkirmish(
     @SerialName("id")
     override val id: Int = 0,
 
     @SerialName("scores")
-    val scores: WorldCount = WorldCount(),
+    val scores: WvwWorldCount = WvwWorldCount(),
 
     @SerialName("map_scores")
-    val mapScores: List<MapScore> = emptyList()
+    val mapScores: List<WvwMapScore> = emptyList()
 ) : Identifiable<Int>

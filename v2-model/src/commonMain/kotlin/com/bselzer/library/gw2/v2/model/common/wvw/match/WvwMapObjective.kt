@@ -6,7 +6,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MapObjective(
+data class WvwMapObjective(
     @SerialName("id")
     override val id: String = "",
 

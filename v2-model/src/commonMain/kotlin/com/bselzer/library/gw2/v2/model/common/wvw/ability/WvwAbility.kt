@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Ability(
+data class WvwAbility(
     @SerialName("id")
     override val id: Int = 0,
 
@@ -19,5 +19,5 @@ data class Ability(
     val icon: String = "",
 
     @SerialName("ranks")
-    val ranks: List<AbilityRank> = emptyList()
+    val ranks: List<WvwAbilityRank> = emptyList()
 ) : Identifiable<Int>

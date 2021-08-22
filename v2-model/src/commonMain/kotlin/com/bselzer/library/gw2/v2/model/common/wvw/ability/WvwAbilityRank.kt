@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AbilityRank(
+data class WvwAbilityRank(
     @SerialName("cost")
     val cost: Int = 0,
 

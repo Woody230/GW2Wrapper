@@ -6,7 +6,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Match(
+data class WvwMatchOverview(
     @SerialName("id")
     override val id: String = "",
 
@@ -17,23 +17,11 @@ data class Match(
     val endTime: Instant = Instant.DISTANT_PAST,
 
     @SerialName("scores")
-    val scores: WorldCount = WorldCount(),
+    val scores: WvwWorldCount = WvwWorldCount(),
 
     @SerialName("worlds")
-    val worlds: WorldCount = WorldCount(),
+    val worlds: WvwWorldCount = WvwWorldCount(),
 
     @SerialName("all_worlds")
-    val allWorlds: WorldCounts = WorldCounts(),
-
-    @SerialName("deaths")
-    val deaths: WorldCount = WorldCount(),
-
-    @SerialName("kills")
-    val kills: WorldCount = WorldCount(),
-
-    @SerialName("victory_points")
-    val victoryPoints: WorldCount = WorldCount(),
-
-    @SerialName("maps")
-    val maps: List<Map> = emptyList()
+    val allWorlds: WvwWorldCounts = WvwWorldCounts(),
 ) : Identifiable<String>
