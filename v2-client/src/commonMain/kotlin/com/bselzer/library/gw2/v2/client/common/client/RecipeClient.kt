@@ -17,37 +17,25 @@ class RecipeClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration
     }
 
     /**
-     * The recipe input item id.
-     */
-    @JvmInline
-    value class RecipeInput(val itemId: Int)
-
-    /**
-     * The recipe output item id.
-     */
-    @JvmInline
-    value class RecipeOutput(val itemId: Int)
-
-    /**
      * @return the ids of the available recipes
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/recipes">the wiki</a>
      */
     suspend fun ids(): List<String> = get(path = RECIPES)
 
     /**
-     * @return the ids of the recipes that use the item with the given [input] id
+     * @return the ids of the recipes that use the item with the given [itemId]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/recipes/search">the wiki</a>
      */
-    suspend fun ids(input: RecipeInput): List<Int> = get(path = "${RECIPES}/${SEARCH}") {
-        parameter("input", input.itemId)
+    suspend fun idsByInput(itemId: Int): List<Int> = get(path = "${RECIPES}/${SEARCH}") {
+        parameter("input", itemId)
     }
 
     /**
-     * @return the ids of the recipes that produce the item with the given [output] id
+     * @return the ids of the recipes that produce the item with the given [itemId]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/recipes/search">the wiki</a>
      */
-    suspend fun ids(output: RecipeOutput): List<Int> = get(path = "${RECIPES}/${SEARCH}") {
-        parameter("output", output.itemId)
+    suspend fun idsByOutput(itemId: Int): List<Int> = get(path = "${RECIPES}/${SEARCH}") {
+        parameter("output", itemId)
     }
 
     /**

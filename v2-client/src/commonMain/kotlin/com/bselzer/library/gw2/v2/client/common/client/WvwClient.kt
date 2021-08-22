@@ -31,20 +31,17 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
         const val UPGRADES = "upgrades"
     }
 
-    @JvmInline
-    value class World(val id: Int)
-
     /**
      * Adds the world id.
      */
-    private fun HttpRequestBuilder.world(world: World) = parameter("world", world.id)
+    private fun HttpRequestBuilder.world(world: Int) = parameter("world", world)
 
     /**
      * @return a single object
      */
-    private suspend inline fun <reified T> single(world: World, basePath: String, block: HttpRequestBuilder.() -> Unit = {}): T =
+    private suspend inline fun <reified T> single(worldId: Int, basePath: String, block: HttpRequestBuilder.() -> Unit = {}): T =
         get(path = basePath) {
-            world(world)
+            world(worldId)
             apply(block)
         }
 
@@ -85,13 +82,13 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
     suspend fun matchIds(): List<String> = get(path = "${WVW}/${MATCHES}")
 
     /**
-     * @return the match associated with the [World.id]
+     * @return the match associated with the [worldId]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun match(world: World): WvwMatch = single(world, "${WVW}/${MATCHES}")
+    suspend fun match(worldId: Int): WvwMatch = single(worldId, "${WVW}/${MATCHES}")
 
     /**
-     * @return the match associated with the [World.id]
+     * @return the match associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
     suspend fun match(id: String): WvwMatch = single(id, "${WVW}/${MATCHES}")
@@ -115,10 +112,10 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
     suspend fun overviewIds(): List<Int> = get(path = "${WVW}/${MATCHES}/${OVERVIEW}")
 
     /**
-     * @return the match overview associated with the [World.id]
+     * @return the match overview associated with the [worldId]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun overview(world: World): WvwMatchOverview = single(world, "${WVW}/${MATCHES}/${OVERVIEW}")
+    suspend fun overview(worldId: Int): WvwMatchOverview = single(worldId, "${WVW}/${MATCHES}/${OVERVIEW}")
 
     /**
      * @return the match overview associated with the [id]
@@ -145,10 +142,10 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
     suspend fun scoreIds(): List<Int> = get(path = "${WVW}/${MATCHES}/${SCORES}")
 
     /**
-     * @return the match score associated with the [World.id]
+     * @return the match score associated with the [worldId]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun score(world: World): WvwMatchScore = single(world, "${WVW}/${MATCHES}/${SCORES}")
+    suspend fun score(worldId: Int): WvwMatchScore = single(worldId, "${WVW}/${MATCHES}/${SCORES}")
 
     /**
      * @return the match score associated with the [id]
@@ -175,10 +172,10 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
     suspend fun statIds(): List<String> = get(path = "${WVW}/${MATCHES}/${STATS}")
 
     /**
-     * @return the match stat associated with the [World.id]
+     * @return the match stat associated with the [worldId]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun stat(world: World): WvwMatchStat = single(world, "${WVW}/${MATCHES}/${STATS}")
+    suspend fun stat(worldId: Int): WvwMatchStat = single(worldId, "${WVW}/${MATCHES}/${STATS}")
 
     /**
      * @return the match stat associated with the [id]
