@@ -4,45 +4,15 @@ plugins {
     kotlin("plugin.serialization")
 }
 
-val extensionVersion = "1.2.15"
-val datetimeVersion = "0.2.1"
-val serializationVersion = "1.2.2"
+android.setup()
 
-kotlin {
-    jvm()
-    android {
-        publishLibraryVariants("release", "debug")
+kotlin.setup {
+    commonMain {
+        v2Model()
+        v2Scope()
+        ktxSerialization()
+        personalKtxSerialization()
+        personalKtxFunction()
     }
-    sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(kotlin("stdlib-common"))
-                implementation(project(":v2-model"))
-                implementation(project(":v2-scope"))
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
-                implementation("com.github.Woody230.KotlinExtensions:serialization:$extensionVersion")
-                implementation("com.github.Woody230.KotlinExtensions:function:$extensionVersion")
-            }
-        }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
-                implementation(kotlin("test-junit"))
-            }
-        }
-    }
-}
-
-android {
-    compileSdkVersion(30)
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdkVersion(23)
-        targetSdkVersion(30)
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
+    commonTest()
 }

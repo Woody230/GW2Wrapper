@@ -1,7 +1,7 @@
 plugins {
-    kotlin("multiplatform") version "1.5.20"
+    kotlin("multiplatform")
     id("com.android.library")
-    kotlin("plugin.serialization") version "1.5.20"
+    kotlin("plugin.serialization") version KOTLIN
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
@@ -21,21 +21,6 @@ allprojects {
     }
 }
 
-kotlin {
-    android {
-        publishLibraryVariants("release", "debug")
-    }
-}
+android.setup(manifestPath = "buildSrc/src/androidMain/AndroidManifest.xml")
+kotlin.setup()
 
-android {
-    compileSdkVersion(30)
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-    defaultConfig {
-        minSdkVersion(23)
-        targetSdkVersion(30)
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-}
