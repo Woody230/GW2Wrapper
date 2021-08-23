@@ -15,4 +15,5 @@ kotlin.setup {
         personalKtxBase64()
     }
     commonTest()
+    jvmTest()
 }

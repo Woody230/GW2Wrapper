@@ -48,6 +48,19 @@ fun NamedDomainObjectContainer<KotlinSourceSet>.commonTest(block: KotlinDependen
         dependencies {
             implementation(kotlin("test-common"))
             implementation(kotlin("test-annotations-common"))
+            implementation(kotlin("test-junit"))
+            block(this)
+        }
+    }
+}
+
+/**
+ * Sets up JVM dependencies.
+ */
+fun NamedDomainObjectContainer<KotlinSourceSet>.jvmMain(block: KotlinDependencyHandler.() -> Unit = {})
+{
+    getByName("jvmMain") {
+        dependencies {
             block(this)
         }
     }
@@ -59,6 +72,31 @@ fun NamedDomainObjectContainer<KotlinSourceSet>.commonTest(block: KotlinDependen
 fun NamedDomainObjectContainer<KotlinSourceSet>.jvmTest(block: KotlinDependencyHandler.() -> Unit = {})
 {
     getByName("jvmTest") {
+        dependencies {
+            implementation(kotlin("test-junit"))
+            block(this)
+        }
+    }
+}
+
+/**
+ * Sets up Android dependencies.
+ */
+fun NamedDomainObjectContainer<KotlinSourceSet>.androidMain(block: KotlinDependencyHandler.() -> Unit = {})
+{
+    getByName("androidMain") {
+        dependencies {
+            block(this)
+        }
+    }
+}
+
+/**
+ * Sets up Android test dependencies.
+ */
+fun NamedDomainObjectContainer<KotlinSourceSet>.androidTest(block: KotlinDependencyHandler.() -> Unit = {})
+{
+    getByName("androidTest") {
         dependencies {
             implementation(kotlin("test-junit"))
             block(this)

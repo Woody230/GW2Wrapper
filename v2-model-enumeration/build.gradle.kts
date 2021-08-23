@@ -15,4 +15,5 @@ kotlin.setup {
         personalKtxFunction()
     }
     commonTest()
+    jvmTest()
 }
