@@ -9,6 +9,9 @@ private const val PERSONAL_EXTENSION = "2.0.0"
 private const val KTX_DATETIME = "0.2.1"
 private const val KTX_SERIALIZATION = "1.2.2"
 private const val KTOR = "1.6.2"
+private const val SQL_DELIGHT = "1.5.1"
+private const val ANDROID_TEST = "1.1.0"
+private const val ROBOLECTRIC = "4.6.1"
 const val KOTLIN = "1.5.20"
 
 fun KotlinDependencyHandler.ktxDateTime() = implementation("org.jetbrains.kotlinx:kotlinx-datetime:$KTX_DATETIME")
@@ -25,6 +28,8 @@ fun KotlinDependencyHandler.jvmKtorClient() = implementation("io.ktor:ktor-clien
 fun KotlinDependencyHandler.mockKtorClient() = implementation("io.ktor:ktor-client-mock:$KTOR")
 fun KotlinDependencyHandler.ktorClient() = implementation("io.ktor:ktor-client-core:$KTOR")
 fun KotlinDependencyHandler.ktorClientSerialization() = implementation("io.ktor:ktor-client-serialization:$KTOR")
+fun KotlinDependencyHandler.androidSqlDelight() = implementation("com.squareup.sqldelight:android-driver:$SQL_DELIGHT")
+fun KotlinDependencyHandler.jvmSqlDelight() = implementation("com.squareup.sqldelight:sqlite-driver:$SQL_DELIGHT")
 
 /**
  * Sets up common dependencies.
@@ -99,6 +104,11 @@ fun NamedDomainObjectContainer<KotlinSourceSet>.androidTest(block: KotlinDepende
     getByName("androidTest") {
         dependencies {
             implementation(kotlin("test-junit"))
+            implementation("androidx.test.ext:junit:$ANDROID_TEST")
+            implementation("androidx.test:core:$ANDROID_TEST")
+            implementation("androidx.test:runner:$ANDROID_TEST")
+            implementation("androidx.test:rules:$ANDROID_TEST")
+            implementation("org.robolectric:robolectric:$ROBOLECTRIC")
             block(this)
         }
     }
@@ -114,6 +124,7 @@ fun LibraryExtension.setup(manifestPath: String = "src/androidMain/AndroidManife
     defaultConfig {
         minSdkVersion(23)
         targetSdkVersion(30)
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

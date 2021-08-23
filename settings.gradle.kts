@@ -9,6 +9,9 @@ pluginManagement {
             if (requested.id.namespace == "com.android" || requested.id.name == "kotlin-android-extensions")
             {
                 useModule("com.android.tools.build:gradle:4.0.1")
+            } else if (requested.id.id == "com.squareup.sqldelight")
+            {
+                useModule("com.squareup.sqldelight:gradle-plugin:1.5.1")
             }
         }
     }
@@ -20,3 +23,4 @@ include("v2-client")
 include("v2-chatlink")
 include("v2-scope")
 include("v2-scope-processor")
+include("v2-database")
