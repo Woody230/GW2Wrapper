@@ -1,8 +1,8 @@
 package com.bselzer.library.gw2.v2.chatlink.build
 
-import com.bselzer.library.kotlin.extension.function.common.collection.removeFirst
-import com.bselzer.library.kotlin.extension.function.common.collection.toByteArray
-import com.bselzer.library.kotlin.extension.function.common.collection.toShort
+import com.bselzer.library.kotlin.extension.function.collection.removeFirst
+import com.bselzer.library.kotlin.extension.function.collection.toByteArray
+import com.bselzer.library.kotlin.extension.function.collection.toShort
 import kotlinx.serialization.Serializable
 
 @Serializable

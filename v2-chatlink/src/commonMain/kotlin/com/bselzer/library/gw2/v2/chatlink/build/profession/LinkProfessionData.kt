@@ -1,7 +1,7 @@
 package com.bselzer.library.gw2.v2.chatlink.build.profession
 
 import com.bselzer.library.gw2.v2.chatlink.build.LinkComponent
-import com.bselzer.library.kotlin.extension.function.common.collection.fill
+import com.bselzer.library.kotlin.extension.function.collection.fill
 import kotlinx.serialization.Serializable
 
 @Serializable

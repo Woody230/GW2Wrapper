@@ -4,8 +4,8 @@ import com.bselzer.library.gw2.v2.model.enumeration.character.RaceName
 import com.bselzer.library.gw2.v2.model.enumeration.item.ItemRarity
 import com.bselzer.library.gw2.v2.model.enumeration.skin.SkinFlag
 import com.bselzer.library.gw2.v2.model.skin.Skin
-import com.bselzer.library.kotlin.extension.serialization.common.function.enumValueOrNull
-import com.bselzer.library.kotlin.extension.serialization.common.function.validEnumValues
+import com.bselzer.library.kotlin.extension.serialization.function.enumValueOrNull
+import com.bselzer.library.kotlin.extension.serialization.function.validEnumValues
 
 /**
  * The [Skin.flags] as a collection of [SkinFlag]

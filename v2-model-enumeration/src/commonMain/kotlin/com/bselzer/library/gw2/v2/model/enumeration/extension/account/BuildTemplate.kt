@@ -3,8 +3,8 @@ package com.bselzer.library.gw2.v2.model.enumeration.extension.account
 import com.bselzer.library.gw2.v2.model.account.build.BuildTemplate
 import com.bselzer.library.gw2.v2.model.enumeration.profession.LegendName
 import com.bselzer.library.gw2.v2.model.enumeration.profession.ProfessionName
-import com.bselzer.library.kotlin.extension.serialization.common.function.enumValueOrNull
-import com.bselzer.library.kotlin.extension.serialization.common.function.validEnumValues
+import com.bselzer.library.kotlin.extension.serialization.function.enumValueOrNull
+import com.bselzer.library.kotlin.extension.serialization.function.validEnumValues
 
 /**
  * The [BuildTemplate.profession] as a [ProfessionName]

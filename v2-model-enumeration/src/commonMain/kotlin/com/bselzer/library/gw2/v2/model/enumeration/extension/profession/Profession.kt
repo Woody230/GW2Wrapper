@@ -5,8 +5,8 @@ import com.bselzer.library.gw2.v2.model.enumeration.profession.ProfessionName
 import com.bselzer.library.gw2.v2.model.enumeration.profession.WeaponType
 import com.bselzer.library.gw2.v2.model.profession.Profession
 import com.bselzer.library.gw2.v2.model.profession.ProfessionWeapon
-import com.bselzer.library.kotlin.extension.serialization.common.function.enumValueOrNull
-import com.bselzer.library.kotlin.extension.serialization.common.function.validEnumValues
+import com.bselzer.library.kotlin.extension.serialization.function.enumValueOrNull
+import com.bselzer.library.kotlin.extension.serialization.function.validEnumValues
 
 /**
  * The [Profession.name] as a [ProfessionName]

@@ -1,8 +1,8 @@
 package com.bselzer.library.gw2.v2.chatlink.build
 
-import com.bselzer.library.kotlin.extension.function.common.collection.fill
-import com.bselzer.library.kotlin.extension.function.common.objects.toBits
-import com.bselzer.library.kotlin.extension.function.common.objects.toByte
+import com.bselzer.library.kotlin.extension.function.collection.fill
+import com.bselzer.library.kotlin.extension.function.objects.toBits
+import com.bselzer.library.kotlin.extension.function.objects.toByte
 import kotlinx.serialization.Serializable
 
 @Serializable

@@ -4,8 +4,8 @@ import com.bselzer.library.gw2.v2.model.enumeration.item.InfusionUpgradeFlag
 import com.bselzer.library.gw2.v2.model.enumeration.item.UpgradeComponentDetailType
 import com.bselzer.library.gw2.v2.model.enumeration.item.UpgradeComponentFlag
 import com.bselzer.library.gw2.v2.model.item.detail.UpgradeComponentDetails
-import com.bselzer.library.kotlin.extension.serialization.common.function.enumValueOrNull
-import com.bselzer.library.kotlin.extension.serialization.common.function.validEnumValues
+import com.bselzer.library.kotlin.extension.serialization.function.enumValueOrNull
+import com.bselzer.library.kotlin.extension.serialization.function.validEnumValues
 
 /**
  * The [UpgradeComponentDetails.type] as an [UpgradeComponentDetailType]

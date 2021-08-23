@@ -4,8 +4,8 @@ import com.bselzer.library.gw2.v2.model.enumeration.recipe.CraftingDiscipline
 import com.bselzer.library.gw2.v2.model.enumeration.recipe.RecipeFlag
 import com.bselzer.library.gw2.v2.model.enumeration.recipe.RecipeType
 import com.bselzer.library.gw2.v2.model.recipe.Recipe
-import com.bselzer.library.kotlin.extension.serialization.common.function.enumValueOrNull
-import com.bselzer.library.kotlin.extension.serialization.common.function.validEnumValues
+import com.bselzer.library.kotlin.extension.serialization.function.enumValueOrNull
+import com.bselzer.library.kotlin.extension.serialization.function.validEnumValues
 
 /**
  * The [Recipe.type] as a [RecipeType]

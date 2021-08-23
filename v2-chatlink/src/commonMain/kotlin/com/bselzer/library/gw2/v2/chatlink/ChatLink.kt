@@ -1,7 +1,7 @@
 package com.bselzer.library.gw2.v2.chatlink
 
-import com.bselzer.library.kotlin.extension.base64.common.decodeBase64ToByteArray
-import com.bselzer.library.kotlin.extension.base64.common.encodeBase64ToString
+import com.bselzer.library.kotlin.extension.base64.decodeBase64ToByteArray
+import com.bselzer.library.kotlin.extension.base64.encodeBase64ToString
 
 abstract class ChatLink
 {

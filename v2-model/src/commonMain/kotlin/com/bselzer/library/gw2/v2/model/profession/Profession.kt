@@ -1,7 +1,7 @@
 package com.bselzer.library.gw2.v2.model.profession
 
 import com.bselzer.library.gw2.v2.model.extension.base.Identifiable
-import com.bselzer.library.kotlin.extension.serialization.common.serializer.MapArraySerializer
+import com.bselzer.library.kotlin.extension.serialization.serializer.MapArraySerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

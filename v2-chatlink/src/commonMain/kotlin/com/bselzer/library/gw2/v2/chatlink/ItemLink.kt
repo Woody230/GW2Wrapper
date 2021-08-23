@@ -1,11 +1,11 @@
 package com.bselzer.library.gw2.v2.chatlink
 
-import com.bselzer.library.kotlin.extension.function.common.collection.fill
-import com.bselzer.library.kotlin.extension.function.common.collection.removeFirst
-import com.bselzer.library.kotlin.extension.function.common.collection.toByteArray
-import com.bselzer.library.kotlin.extension.function.common.collection.toInt
-import com.bselzer.library.kotlin.extension.function.common.objects.toBits
-import com.bselzer.library.kotlin.extension.function.common.objects.toByte
+import com.bselzer.library.kotlin.extension.function.collection.fill
+import com.bselzer.library.kotlin.extension.function.collection.removeFirst
+import com.bselzer.library.kotlin.extension.function.collection.toByteArray
+import com.bselzer.library.kotlin.extension.function.collection.toInt
+import com.bselzer.library.kotlin.extension.function.objects.toBits
+import com.bselzer.library.kotlin.extension.function.objects.toByte
 
 /**
  * A link to an item.

@@ -5,8 +5,8 @@ import com.bselzer.library.gw2.v2.model.enumeration.item.ItemGameType
 import com.bselzer.library.gw2.v2.model.enumeration.item.ItemRarity
 import com.bselzer.library.gw2.v2.model.enumeration.item.ItemRestriction
 import com.bselzer.library.gw2.v2.model.item.Item
-import com.bselzer.library.kotlin.extension.serialization.common.function.enumValueOrNull
-import com.bselzer.library.kotlin.extension.serialization.common.function.validEnumValues
+import com.bselzer.library.kotlin.extension.serialization.function.enumValueOrNull
+import com.bselzer.library.kotlin.extension.serialization.function.validEnumValues
 
 /**
  * The [Item.rarity] as an [ItemRarity]

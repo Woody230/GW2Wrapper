@@ -4,7 +4,7 @@ import com.bselzer.library.gw2.v2.model.enumeration.profession.AttunementName
 import com.bselzer.library.gw2.v2.model.enumeration.profession.ProfessionName
 import com.bselzer.library.gw2.v2.model.enumeration.skill.SkillSlot
 import com.bselzer.library.gw2.v2.model.profession.ProfessionSkill
-import com.bselzer.library.kotlin.extension.serialization.common.function.enumValueOrNull
+import com.bselzer.library.kotlin.extension.serialization.function.enumValueOrNull
 
 /**
  * The [ProfessionSkill.slot] as a [SkillSlot]
