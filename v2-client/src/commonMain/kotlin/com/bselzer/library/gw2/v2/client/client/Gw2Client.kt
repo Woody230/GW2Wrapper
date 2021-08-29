@@ -13,6 +13,7 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.utils.io.core.*
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonBuilder
 
 /**
  * The GW2 client.
@@ -20,7 +21,7 @@ import kotlinx.serialization.json.Json
  */
 open class Gw2Client(
     httpClient: HttpClient = HttpClient(),
-    json: Json = DEFAULT_JSON,
+    private val json: Json = DEFAULT_JSON,
     private val configuration: Gw2ClientConfiguration = Gw2ClientConfiguration()
 ) : Closeable
 {
@@ -385,6 +386,21 @@ open class Gw2Client(
         world = WorldClient(client, configuration)
         wvw = WvwClient(client, configuration)
     }
+
+    /**
+     * @return a new [Gw2Client] with an updated [Gw2ClientConfiguration]
+     */
+    fun config(block: Gw2ClientConfiguration.() -> Gw2ClientConfiguration): Gw2Client = Gw2Client(httpClient, json, block(configuration))
+
+    /**
+     * @return a new [Gw2Client] with an updated [Json]
+     */
+    fun json(block: JsonBuilder.() -> Unit): Gw2Client = Gw2Client(httpClient, Json(json, block), configuration)
+
+    /**
+     * @return a new [Gw2Client] with an updated [HttpClientConfig]
+     */
+    fun httpClient(block: HttpClientConfig<*>.() -> Unit): Gw2Client = Gw2Client(httpClient.config(block), json, configuration)
 
     /**
      * @return a new http client with the configuration applied

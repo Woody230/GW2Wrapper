@@ -5,34 +5,23 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 
 /**
- * Sets the bearer authorization if the [token] exists and has not been set.
+ * Sets the bearer authorization if the [token] is not null.
  */
-internal fun HttpRequestBuilder.bearer(token: String?)
-{
-    if (token != null && !headers.contains(HttpHeaders.Authorization))
-    {
-        headers[HttpHeaders.Authorization] = "${Headers.BEARER} $token"
-    }
-}
+internal fun HttpRequestBuilder.bearer(token: String?) = setHeader(HttpHeaders.Authorization, "${Headers.BEARER} $token")
 
 /**
- * Sets the accepted language if the [language] exists and has not been set.
+ * Sets the accepted language if the [language] is not null.
  */
-internal fun HttpRequestBuilder.language(language: String?)
-{
-    if (language != null && !headers.contains(HttpHeaders.AcceptLanguage))
-    {
-        headers[HttpHeaders.AcceptLanguage] = language
-    }
-}
+internal fun HttpRequestBuilder.language(language: String?) = setHeader(HttpHeaders.AcceptLanguage, language)
 
 /**
- * Sets the schema version if the [version] exists and has not been set.
+ * Sets the schema version if the [version] is not null.
  */
-internal fun HttpRequestBuilder.schemaVersion(version: String?)
-{
-    if (version != null && !headers.contains(Headers.SCHEMA_VERSION))
-    {
-        headers[Headers.SCHEMA_VERSION] = version
-    }
+internal fun HttpRequestBuilder.schemaVersion(version: String?) = setHeader(Headers.SCHEMA_VERSION, version)
+
+/**
+ * Sets the [header] to [value] if it is not null.
+ */
+internal fun HttpRequestBuilder.setHeader(header: String, value: String?) = value?.let {
+    headers[header] = value
 }
