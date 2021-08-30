@@ -26,11 +26,16 @@ class TokenClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
     }
 
     /**
+     * Gets the token information.
+     *
+     * The token must either be defined in the configuration or by [token].
      * @return the token information
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/tokeninfo">tokeninfo on the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
-    suspend fun information(): TokenInfo = get(path = TOKEN_INFO)
+    suspend fun information(token: String? = null): TokenInfo = get(path = TOKEN_INFO) {
+        bearer(token)
+    }
 
     /**
      * Creates a sub-token that expires at [expiration], that is able to access the endpoints associated with the [permissions] or defined by the [urls].
