@@ -3,7 +3,7 @@ package com.bselzer.library.gw2.v2.model.enumeration.extension.wvw
 import com.bselzer.library.gw2.v2.model.enumeration.wvw.ObjectiveOwner
 import com.bselzer.library.gw2.v2.model.enumeration.wvw.ObjectiveType
 import com.bselzer.library.gw2.v2.model.wvw.match.WvwMapObjective
-import com.bselzer.library.kotlin.extension.function.objects.enumValueOrNull
+import com.bselzer.library.kotlin.extension.serialization.function.enumValueOrNull
 
 /**
  * The [WvwMapObjective.type] as an [ObjectiveType]
