@@ -11,10 +11,6 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.serializer
 
-private val json: Json = Json {
-
-}
-
 /**
  * The [World.name] as a [WorldName]
  */
