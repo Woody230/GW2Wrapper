@@ -5,10 +5,10 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
-private const val PERSONAL_EXTENSION = "2.0.0"
-private const val KTX_DATETIME = "0.2.1"
-private const val KTX_SERIALIZATION = "1.2.2"
-private const val KTOR = "1.6.2"
+private const val PERSONAL_EXTENSION = "2.1.0"
+private const val KTX_DATETIME = "0.3.0"
+private const val KTX_SERIALIZATION = "1.3.0"
+private const val KTOR = "1.6.4"
 private const val SQL_DELIGHT = "1.5.1"
 private const val ANDROID_TEST = "1.1.0"
 private const val ROBOLECTRIC = "4.6.1"
