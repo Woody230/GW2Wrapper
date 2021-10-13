@@ -23,4 +23,3 @@ allprojects {
 
 android.setup(manifestPath = "buildSrc/src/androidMain/AndroidManifest.xml")
 kotlin.setup()
-

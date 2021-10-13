@@ -12,10 +12,12 @@ private const val KTOR = "1.6.4"
 private const val SQL_DELIGHT = "1.5.1"
 private const val ANDROID_TEST = "1.1.0"
 private const val ROBOLECTRIC = "4.6.1"
+private const val COROUTINE = "1.5.2"
 const val KOTLIN = "1.5.30"
 
 fun KotlinDependencyHandler.ktxDateTime() = implementation("org.jetbrains.kotlinx:kotlinx-datetime:$KTX_DATETIME")
 fun KotlinDependencyHandler.ktxSerialization() = implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$KTX_SERIALIZATION")
+fun KotlinDependencyHandler.v2Client() = implementation(project(":v2-client"))
 fun KotlinDependencyHandler.v2Model() = implementation(project(":v2-model"))
 fun KotlinDependencyHandler.v2ModelEnumeration() = implementation(project(":v2-model-enumeration"))
 fun KotlinDependencyHandler.v2Scope() = implementation(project(":v2-scope"))
@@ -30,6 +32,7 @@ fun KotlinDependencyHandler.ktorClient() = implementation("io.ktor:ktor-client-c
 fun KotlinDependencyHandler.ktorClientSerialization() = implementation("io.ktor:ktor-client-serialization:$KTOR")
 fun KotlinDependencyHandler.androidSqlDelight() = implementation("com.squareup.sqldelight:android-driver:$SQL_DELIGHT")
 fun KotlinDependencyHandler.jvmSqlDelight() = implementation("com.squareup.sqldelight:sqlite-driver:$SQL_DELIGHT")
+fun KotlinDependencyHandler.coroutine() = implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINE")
 
 /**
  * Sets up common dependencies.
@@ -119,11 +122,11 @@ fun NamedDomainObjectContainer<KotlinSourceSet>.androidTest(block: KotlinDepende
  */
 fun LibraryExtension.setup(manifestPath: String = "src/androidMain/AndroidManifest.xml", block: LibraryExtension.() -> Unit = {})
 {
-    compileSdkVersion(30)
+    compileSdk = 30
     sourceSets.getByName("main").manifest.srcFile(manifestPath)
     defaultConfig {
-        minSdkVersion(23)
-        targetSdkVersion(30)
+        minSdk = 23
+        targetSdk = 30
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {

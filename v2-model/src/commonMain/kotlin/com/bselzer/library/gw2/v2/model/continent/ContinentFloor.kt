@@ -1,7 +1,7 @@
 package com.bselzer.library.gw2.v2.model.continent
 
 import com.bselzer.library.gw2.v2.model.extension.base.Identifiable
-import com.bselzer.library.gw2.v2.model.extension.dimension.Point2D
+import com.bselzer.library.gw2.v2.model.extension.dimension.Dimension2D
 import com.bselzer.library.gw2.v2.model.extension.dimension.Rectangle
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -12,7 +12,7 @@ data class ContinentFloor(
     override val id: Int = 0,
 
     @SerialName("texture_dims")
-    val textureDimensions: Point2D = Point2D(),
+    val textureDimensions: Dimension2D = Dimension2D(),
 
     @SerialName("clamped_view")
     val clampedView: Rectangle = Rectangle(),
