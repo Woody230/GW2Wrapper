@@ -13,6 +13,7 @@ kotlin.setup {
         ktxDateTime()
         personalKtxSerialization()
         personalKtxDateTime()
+        personalKtxGeometry()
     }
     commonTest()
 }

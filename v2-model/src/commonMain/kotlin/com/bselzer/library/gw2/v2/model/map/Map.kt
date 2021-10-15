@@ -1,7 +1,7 @@
 package com.bselzer.library.gw2.v2.model.map
 
 import com.bselzer.library.gw2.v2.model.extension.base.Identifiable
-import com.bselzer.library.gw2.v2.model.extension.dimension.Rectangle
+import com.bselzer.library.kotlin.extension.geometry.shape.Rectangle
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

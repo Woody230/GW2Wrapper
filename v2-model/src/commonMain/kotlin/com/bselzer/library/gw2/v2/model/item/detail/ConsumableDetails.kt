@@ -1,6 +1,6 @@
 package com.bselzer.library.gw2.v2.model.item.detail
 
-import com.bselzer.library.gw2.v2.model.extension.serialization.MillisecondDurationSerializer
+import com.bselzer.library.kotlin.extension.datetime.serialization.MillisecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.time.Duration

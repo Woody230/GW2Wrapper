@@ -1,10 +1,10 @@
 package com.bselzer.library.gw2.v2.model.character
 
 import com.bselzer.library.gw2.v2.model.extension.base.Identifiable
-import com.bselzer.library.gw2.v2.model.extension.serialization.SecondDurationSerializer
 import com.bselzer.library.gw2.v2.scope.core.Permission
 import com.bselzer.library.gw2.v2.scope.core.Requirement
 import com.bselzer.library.gw2.v2.scope.core.Scope
+import com.bselzer.library.kotlin.extension.datetime.serialization.SecondDurationSerializer
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -1,7 +1,7 @@
 package com.bselzer.library.gw2.v2.model.continent.map
 
 import com.bselzer.library.gw2.v2.model.extension.base.Identifiable
-import com.bselzer.library.gw2.v2.model.extension.dimension.Point2D
+import com.bselzer.library.kotlin.extension.geometry.position.Point2D
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

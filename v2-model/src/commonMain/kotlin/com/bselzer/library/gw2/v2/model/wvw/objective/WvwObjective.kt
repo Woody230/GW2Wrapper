@@ -1,8 +1,8 @@
 package com.bselzer.library.gw2.v2.model.wvw.objective
 
 import com.bselzer.library.gw2.v2.model.extension.base.Identifiable
-import com.bselzer.library.gw2.v2.model.extension.dimension.Point2D
-import com.bselzer.library.gw2.v2.model.extension.dimension.Point3D
+import com.bselzer.library.kotlin.extension.geometry.position.Point2D
+import com.bselzer.library.kotlin.extension.geometry.position.Point3D
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

@@ -12,6 +12,7 @@ kotlin.setup {
         ktxSerialization()
         ktorClient()
         coroutine()
+        personalKtxGeometry()
     }
     commonTest {
         mockKtorClient()

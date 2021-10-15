@@ -22,10 +22,6 @@ fun KotlinDependencyHandler.v2Model() = implementation(project(":v2-model"))
 fun KotlinDependencyHandler.v2ModelEnumeration() = implementation(project(":v2-model-enumeration"))
 fun KotlinDependencyHandler.v2Scope() = implementation(project(":v2-scope"))
 fun KotlinDependencyHandler.v2ScopeProcessor() = implementation(project(":v2-scope-processor"))
-fun KotlinDependencyHandler.personalKtxSerialization() = implementation("com.github.Woody230.KotlinExtensions:serialization:$PERSONAL_EXTENSION")
-fun KotlinDependencyHandler.personalKtxFunction() = implementation("com.github.Woody230.KotlinExtensions:function:$PERSONAL_EXTENSION")
-fun KotlinDependencyHandler.personalKtxBase64() = implementation("com.github.Woody230.KotlinExtensions:base64:$PERSONAL_EXTENSION")
-fun KotlinDependencyHandler.personalKtxDateTime() = implementation("com.github.Woody230.KotlinExtensions:datetime:$PERSONAL_EXTENSION")
 fun KotlinDependencyHandler.jvmKtorClient() = implementation("io.ktor:ktor-client-apache:$KTOR")
 fun KotlinDependencyHandler.mockKtorClient() = implementation("io.ktor:ktor-client-mock:$KTOR")
 fun KotlinDependencyHandler.ktorClient() = implementation("io.ktor:ktor-client-core:$KTOR")
@@ -34,11 +30,17 @@ fun KotlinDependencyHandler.androidSqlDelight() = implementation("com.squareup.s
 fun KotlinDependencyHandler.jvmSqlDelight() = implementation("com.squareup.sqldelight:sqlite-driver:$SQL_DELIGHT")
 fun KotlinDependencyHandler.coroutine() = implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINE")
 
+// TODO jitpack
+fun KotlinDependencyHandler.personalKtxSerialization() = implementation("com.bselzer.library.kotlin.extension:serialization:$PERSONAL_EXTENSION")
+fun KotlinDependencyHandler.personalKtxFunction() = implementation("com.bselzer.library.kotlin.extension:function:$PERSONAL_EXTENSION")
+fun KotlinDependencyHandler.personalKtxBase64() = implementation("com.bselzer.library.kotlin.extension:base64:$PERSONAL_EXTENSION")
+fun KotlinDependencyHandler.personalKtxDateTime() = implementation("com.bselzer.library.kotlin.extension:datetime:$PERSONAL_EXTENSION")
+fun KotlinDependencyHandler.personalKtxGeometry() = implementation("com.bselzer.library.kotlin.extension:geometry:$PERSONAL_EXTENSION")
+
 /**
  * Sets up common dependencies.
  */
-fun NamedDomainObjectContainer<KotlinSourceSet>.commonMain(block: KotlinDependencyHandler.() -> Unit = {})
-{
+fun NamedDomainObjectContainer<KotlinSourceSet>.commonMain(block: KotlinDependencyHandler.() -> Unit = {}) {
     getByName("commonMain") {
         dependencies {
             implementation(kotlin("stdlib-common"))
