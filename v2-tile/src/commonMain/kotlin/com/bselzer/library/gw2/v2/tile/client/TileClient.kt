@@ -3,11 +3,14 @@ package com.bselzer.library.gw2.v2.tile.client
 import com.bselzer.library.gw2.v2.model.continent.Continent
 import com.bselzer.library.gw2.v2.model.continent.ContinentFloor
 import com.bselzer.library.gw2.v2.tile.constants.Endpoints
-import com.bselzer.library.gw2.v2.tile.model.Tile
-import com.bselzer.library.gw2.v2.tile.model.TileGrid
+import com.bselzer.library.gw2.v2.tile.model.request.TileGridRequest
+import com.bselzer.library.gw2.v2.tile.model.request.TileRequest
+import com.bselzer.library.gw2.v2.tile.model.response.Tile
+import com.bselzer.library.gw2.v2.tile.model.response.TileGrid
 import io.ktor.client.*
 import io.ktor.client.features.*
 import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.http.cio.*
 import io.ktor.util.*
@@ -30,6 +33,7 @@ open class TileClient(
     private val baseUrls: ArrayDeque<String> = ArrayDeque(configuration.baseUrls)
 
     init {
+        // Default to the main url if no urls are provided.
         if (baseUrls.isEmpty()) {
             baseUrls.add(Endpoints.BASE_URL)
         }
@@ -37,8 +41,37 @@ open class TileClient(
 
     /**
      * @return the tile grid for the [floor] within the [continent] at the given [zoom] level
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki for continents</a>
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/maps"> the wiki for maps</a>
      */
-    suspend fun grid(continent: Continent, floor: ContinentFloor, zoom: Int): TileGrid = coroutineScope {
+    suspend fun grid(continent: Continent, floor: ContinentFloor, zoom: Int): TileGrid {
+        val request = requestGrid(continent, floor, zoom)
+        return grid(request.tileWidth, request.tileHeight, request.startX, request.endX, request.startY, request.endY, request.tileRequests)
+    }
+
+    /**
+     * @return the tile grid generated from the [tileRequests]
+     */
+    suspend fun grid(tileWidth: Int, tileHeight: Int, startX: Int, endX: Int, startY: Int, endY: Int, tileRequests: Collection<TileRequest>): TileGrid = coroutineScope {
+        val deferred = tileRequests.map { request ->
+            // Using async for parallelism.
+            async {
+                val content: ByteArray = try {
+                    httpClient.get(request.url)
+                } catch (ex: Exception) {
+                    ByteArray(0)
+                }
+                return@async Tile(request.x, request.y, content)
+            }
+        }
+
+        return@coroutineScope TileGrid(tileWidth, tileHeight, startX, endX, startY, endY, deferred.map { it.await() })
+    }
+
+    /**
+     * @return the requests for tiles on the [floor] within the [continent] at the given [zoom] level
+     */
+    suspend fun requestGrid(continent: Continent, floor: ContinentFloor, zoom: Int): TileGridRequest {
         // Default to the max zoom if the requested zoom is too much.
         val requestedZoom = min(zoom, continent.maxZoom)
         val requestedZoomTiles = 2.0.pow(requestedZoom)
@@ -51,32 +84,22 @@ open class TileClient(
         val tileHeight = gridHeight / maxZoomTiles
 
         // Get the tile position bounds within the grid.
-        val minX = floor(floor.clampedView.x1 * requestedZoomTiles / gridWidth).toInt()
-        val maxX = floor(floor.clampedView.x2 * requestedZoomTiles / gridWidth).toInt()
-        val minY = floor(floor.clampedView.y1 * requestedZoomTiles / gridHeight).toInt()
-        val maxY = floor(floor.clampedView.y2 * requestedZoomTiles / gridHeight).toInt()
+        val startX = floor(floor.clampedView.x1 * requestedZoomTiles / gridWidth).toInt()
+        val endX = floor(floor.clampedView.x2 * requestedZoomTiles / gridWidth).toInt()
+        val startY = floor(floor.clampedView.y1 * requestedZoomTiles / gridHeight).toInt()
+        val endY = floor(floor.clampedView.y2 * requestedZoomTiles / gridHeight).toInt()
 
-        // Make the requests to get tile content.
-        val deferred = mutableListOf<Deferred<Tile>>()
+        // Create the requests for tile content.
+        val requests = mutableListOf<TileRequest>()
         val mutex = Mutex()
-        for (y in minY..maxY) {
-            for (x in minX..maxX) {
+        for (y in startY..endY) {
+            for (x in startX..endX) {
                 val url = takeBaseUrl(mutex).constructUrl(continent.id, floor.id, requestedZoom, x, y)
-
-                // Using async for parallelism.
-                deferred.add(async {
-                    try {
-                        val content = httpClient.get<ByteArray>(url)
-                        return@async Tile(x, y, content)
-                    } catch (ex: Exception) {
-                        return@async Tile(x, y, ByteArray(0))
-                    }
-                })
+                requests.add(TileRequest(url, x, y))
             }
         }
 
-        val tiles = deferred.map { it.await() }.groupBy { it.y }.map { it.value }
-        return@coroutineScope TileGrid(tileWidth.toInt(), tileHeight.toInt(), tiles)
+        return TileGridRequest(tileWidth.toInt(), tileHeight.toInt(), startX, endX, startY, endY, requests)
     }
 
     /**

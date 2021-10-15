@@ -1,4 +1,4 @@
-package com.bselzer.library.gw2.v2.tile.model
+package com.bselzer.library.gw2.v2.tile.model.response
 
 /**
  * Represents a tile within the grid.
