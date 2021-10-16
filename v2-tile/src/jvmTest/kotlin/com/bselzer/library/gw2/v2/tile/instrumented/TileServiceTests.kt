@@ -42,6 +42,8 @@ class TileServiceTests : BaseTests() {
 
         // Assert
         assertEquals(1, grid.tiles.size)
+        assertEquals(256, grid.tileWidth)
+        assertEquals(256, grid.tileHeight)
 
         val tile = grid.tiles[0]
         assertEquals(0, tile.x)

@@ -1,7 +1,7 @@
 package com.bselzer.library.gw2.v2.model.continent.map
 
 import com.bselzer.library.gw2.v2.model.extension.base.Identifiable
-import com.bselzer.library.kotlin.extension.geometry.position.Point2D
+import com.bselzer.library.kotlin.extension.geometry.dimension.bi.position.Point
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -20,13 +20,13 @@ data class MapSector(
      * The coordinates of this area, typically at the center.
      */
     @SerialName("coord")
-    val coordinates: Point2D = Point2D(),
+    val coordinates: Point = Point(),
 
     /**
      * The boundary of this area.
      */
     @SerialName("bounds")
-    val bounds: List<Point2D> = emptyList(),
+    val bounds: List<Point> = emptyList(),
 
     /**
      * The id of the chat link.

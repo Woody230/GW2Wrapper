@@ -1,7 +1,7 @@
 package com.bselzer.library.gw2.v2.model.continent.map
 
 import com.bselzer.library.gw2.v2.model.extension.base.Identifiable
-import com.bselzer.library.kotlin.extension.geometry.position.Point2D
+import com.bselzer.library.kotlin.extension.geometry.dimension.bi.position.Point
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -23,13 +23,13 @@ data class MapRenownHeart(
     val level: Int = 0,
 
     @SerialName("coord")
-    val coordinates: Point2D = Point2D(),
+    val coordinates: Point = Point(),
 
     /**
      * The boundary of where the player can complete the heart.
      */
     @SerialName("bounds")
-    val bounds: List<Point2D> = emptyList(),
+    val bounds: List<Point> = emptyList(),
 
     /**
      * The id of the chat link.

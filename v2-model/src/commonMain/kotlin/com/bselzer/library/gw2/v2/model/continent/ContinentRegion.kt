@@ -2,8 +2,8 @@ package com.bselzer.library.gw2.v2.model.continent
 
 import com.bselzer.library.gw2.v2.model.continent.map.ContinentMap
 import com.bselzer.library.gw2.v2.model.extension.base.Identifiable
-import com.bselzer.library.kotlin.extension.geometry.position.Point2D
-import com.bselzer.library.kotlin.extension.geometry.shape.Rectangle
+import com.bselzer.library.kotlin.extension.geometry.dimension.bi.polygon.Digon
+import com.bselzer.library.kotlin.extension.geometry.dimension.bi.position.Point
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -19,17 +19,17 @@ data class ContinentRegion(
      * The coordinates of the region label.
      */
     @SerialName("label_coord")
-    val labelCoordinates: Point2D = Point2D(),
+    val labelCoordinates: Point = Point(),
 
     /**
      * The continent dimensions.
      *
-     * [Rectangle.x1] and [Rectangle.y1] are the top-left coordinates.
+     * [Digon.point1] contains the top-left coordinates.
      *
-     * [Rectangle.x2] and [Rectangle.y2] are the bottom-right coordinates.
+     * [Digon.point2] contains the bottom-right coordinates.
      */
     @SerialName("continent_rect")
-    val continentRectangle: Rectangle = Rectangle(),
+    val continentRectangle: Digon = Digon(),
 
     /**
      * A map of the map id to the map information.

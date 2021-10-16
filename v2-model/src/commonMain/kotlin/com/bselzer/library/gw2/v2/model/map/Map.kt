@@ -1,7 +1,7 @@
 package com.bselzer.library.gw2.v2.model.map
 
 import com.bselzer.library.gw2.v2.model.extension.base.Identifiable
-import com.bselzer.library.kotlin.extension.geometry.shape.Rectangle
+import com.bselzer.library.kotlin.extension.geometry.dimension.bi.polygon.Digon
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -35,22 +35,22 @@ data class Map(
     /**
      * The map dimensions.
      *
-     * [Rectangle.x1] and [Rectangle.y1] are the bottom-left coordinates.
+     * [Digon.point1] contains the bottom-left coordinates.
      *
-     * [Rectangle.x2] and [Rectangle.y2] are the top-right coordinates.
+     * [Digon.point2] contains the top-right coordinates.
      */
     @SerialName("map_rect")
-    val mapRectangle: Rectangle = Rectangle(),
+    val mapRectangle: Digon = Digon(),
 
     /**
      * The continent dimensions.
      *
-     * [Rectangle.x1] and [Rectangle.y1] are the top-left coordinates.
+     * [Digon.point1] contains the top-left coordinates.
      *
-     * [Rectangle.x2] and [Rectangle.y2] are the bottom-right coordinates.
+     * [Digon.point2] contains are the bottom-right coordinates.
      */
     @SerialName("continent_rect")
-    val continentRectangle: Rectangle = Rectangle(),
+    val continentRectangle: Digon = Digon(),
 
     @SerialName("type")
     val type: String = "",

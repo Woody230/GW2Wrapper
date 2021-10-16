@@ -4,8 +4,6 @@ package com.bselzer.library.gw2.v2.tile.model.response
  * The tiles within the grid.
  */
 data class TileGrid(
-    // TODO use dimension and position 2d (migrate to KotlinExtensions)
-
     /**
      * The width of each individual tile.
      */

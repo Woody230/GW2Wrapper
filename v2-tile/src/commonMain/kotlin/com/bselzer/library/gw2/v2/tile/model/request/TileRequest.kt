@@ -19,5 +19,5 @@ data class TileRequest(
     /**
      * The vertical position within the grid.
      */
-    val y: Int = 0,
+    val y: Int = 0
 )

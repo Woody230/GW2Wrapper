@@ -7,16 +7,6 @@ import com.bselzer.library.gw2.v2.tile.model.response.TileGrid
  */
 data class TileGridRequest(
     /**
-     * The width of each individual tile.
-     */
-    val tileWidth: Int = 0,
-
-    /**
-     * The height of each individual tile.
-     */
-    val tileHeight: Int = 0,
-
-    /**
      * The starting horizontal tile position.
      */
     val startX: Int = 0,
@@ -35,6 +25,16 @@ data class TileGridRequest(
      * The ending vertical tile position.
      */
     val endY: Int = 0,
+
+    /**
+     * The width of each individual tile.
+     */
+    val tileWidth: Int = 0,
+
+    /**
+     * The height of each individual tile.
+     */
+    val tileHeight: Int = 0,
 
     /**
      * The requests for tiles.

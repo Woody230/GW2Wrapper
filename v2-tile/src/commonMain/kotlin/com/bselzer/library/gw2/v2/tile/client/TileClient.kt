@@ -80,14 +80,14 @@ open class TileClient(
         // Get the dimensions of each individual tile.
         val gridWidth = floor.textureDimensions.width
         val gridHeight = floor.textureDimensions.height
-        val tileWidth = gridWidth / maxZoomTiles
-        val tileHeight = gridHeight / maxZoomTiles
+        val tileWidth = (gridWidth / maxZoomTiles).toInt()
+        val tileHeight = (gridHeight / maxZoomTiles).toInt()
 
         // Get the tile position bounds within the grid.
-        val startX = floor(floor.clampedView.x1 * requestedZoomTiles / gridWidth).toInt()
-        val endX = floor(floor.clampedView.x2 * requestedZoomTiles / gridWidth).toInt()
-        val startY = floor(floor.clampedView.y1 * requestedZoomTiles / gridHeight).toInt()
-        val endY = floor(floor.clampedView.y2 * requestedZoomTiles / gridHeight).toInt()
+        val startX = floor(floor.clampedView.point1.x * requestedZoomTiles / gridWidth).toInt()
+        val endX = floor(floor.clampedView.point2.x * requestedZoomTiles / gridWidth).toInt()
+        val startY = floor(floor.clampedView.point1.y * requestedZoomTiles / gridHeight).toInt()
+        val endY = floor(floor.clampedView.point2.x * requestedZoomTiles / gridHeight).toInt()
 
         // Create the requests for tile content.
         val requests = mutableListOf<TileRequest>()
@@ -99,7 +99,7 @@ open class TileClient(
             }
         }
 
-        return TileGridRequest(tileWidth.toInt(), tileHeight.toInt(), startX, endX, startY, endY, requests)
+        return TileGridRequest(startX, endX, startY, endY, tileWidth, tileHeight, requests)
     }
 
     /**
