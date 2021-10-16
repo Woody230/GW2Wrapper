@@ -12,12 +12,12 @@ data class TileRequest(
     val url: String = "",
 
     /**
-     * The horizontal position within the grid.
+     * The horizontal position within the texture.
      */
     val x: Int = 0,
 
     /**
-     * The vertical position within the grid.
+     * The vertical position within the texture.
      */
     val y: Int = 0
 )

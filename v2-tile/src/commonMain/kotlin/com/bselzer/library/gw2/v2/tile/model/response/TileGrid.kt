@@ -1,5 +1,7 @@
 package com.bselzer.library.gw2.v2.tile.model.response
 
+import kotlin.math.abs
+
 /**
  * The tiles within the grid.
  */
@@ -43,6 +45,16 @@ data class TileGrid(
      * All of the tiles within the boundary.
      */
     val grid: List<List<Tile>> = createGrid()
+
+    /**
+     * The width of the entire grid.
+     */
+    val width: Int = (abs(startX - endX) + 1) * tileWidth
+
+    /**
+     * The height of the entire grid.
+     */
+    val height: Int = (abs(startY - endY) + 1) * tileHeight
 
     /**
      * @return the grid from the [tiles] with missing tiles created with empty content

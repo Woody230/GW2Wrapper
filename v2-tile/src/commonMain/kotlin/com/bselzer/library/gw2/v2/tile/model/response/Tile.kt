@@ -5,12 +5,12 @@ package com.bselzer.library.gw2.v2.tile.model.response
  */
 data class Tile(
     /**
-     * The horizontal position within the grid.
+     * The horizontal position within the texture.
      */
     val x: Int = 0,
 
     /**
-     * The vertical position within the grid.
+     * The vertical position within the texture.
      */
     val y: Int = 0,
 
