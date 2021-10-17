@@ -15,27 +15,27 @@ class ImageGenerator(
     private val tile: TileClient = TileClient(),
 ) {
     /**
-     * Constructs the WvW map at each zoom level and outputs each image as a PNG file in the [outputDirectory].
+     * Constructs the map at each zoom level and outputs each image as a PNG file in the [outputDirectory].
      *
      * @param outputDirectory where to store the images
-     * @param continent the WvW continent
-     * @param floor the WvW floor within the [continent]
+     * @param continent the continent
+     * @param floor the floor within the [continent]
      */
-    suspend fun generateWvwMap(continent: Continent, floor: ContinentFloor, outputDirectory: String) = coroutineScope {
+    suspend fun generateMap(continent: Continent, floor: ContinentFloor, outputDirectory: String) = coroutineScope {
         for (zoom in continent.minZoom..continent.maxZoom) {
             val grid = tile.grid(continent, floor, zoom)
-            generateWvwMap(outputDirectory, "WvwMap$zoom", grid)
+            generateMap(outputDirectory, "Map$zoom", grid)
         }
     }
 
     /**
-     * Constructs the WvW map bitmap and outputs it as a PNG file in the [outputDirectory].
+     * Constructs the map bitmap and outputs it as a PNG file in the [outputDirectory].
      *
      * @param outputDirectory where to store the image
      * @param fileName the name of the image file, excluding the extension
      * @param grid the tiled map grid
      */
-    fun generateWvwMap(outputDirectory: String, fileName: String = "WvwMap", grid: TileGrid) {
+    fun generateMap(outputDirectory: String, fileName: String = "Map", grid: TileGrid) {
         val map = Bitmap.createBitmap(grid.width, grid.height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(map)
         grid.grid.forEachIndexed { y, row ->

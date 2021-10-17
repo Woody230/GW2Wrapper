@@ -19,7 +19,7 @@ class ImageGeneratorTests {
         runBlocking {
             val gw2 = Gw2Client()
             val directory = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)!!.path
-            ImageGenerator().generateWvwMap(gw2.continent.continent(2), gw2.continent.floor(2, 3), directory)
+            ImageGenerator().generateMap(gw2.continent.continent(2), gw2.continent.floor(2, 3), directory)
         }
     }
 }
