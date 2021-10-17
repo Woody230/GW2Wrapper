@@ -44,16 +44,13 @@ open class TileClient(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki for continents</a>
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/maps"> the wiki for maps</a>
      */
-    suspend fun grid(continent: Continent, floor: ContinentFloor, zoom: Int): TileGrid {
-        val request = requestGrid(continent, floor, zoom)
-        return grid(request.tileWidth, request.tileHeight, request.startX, request.endX, request.startY, request.endY, request.tileRequests)
-    }
+    suspend fun grid(continent: Continent, floor: ContinentFloor, zoom: Int): TileGrid = grid(requestGrid(continent, floor, zoom))
 
     /**
-     * @return the tile grid generated from the [tileRequests]
+     * @return the tile grid generated from the [request]
      */
-    suspend fun grid(tileWidth: Int, tileHeight: Int, startX: Int, endX: Int, startY: Int, endY: Int, tileRequests: Collection<TileRequest>): TileGrid = coroutineScope {
-        val deferred = tileRequests.map { request ->
+    suspend fun grid(request: TileGridRequest): TileGrid = coroutineScope {
+        val deferred = request.tileRequests.map { request ->
             // Using async for parallelism.
             async {
                 val content: ByteArray = try {
@@ -65,7 +62,7 @@ open class TileClient(
             }
         }
 
-        return@coroutineScope TileGrid(tileWidth, tileHeight, startX, endX, startY, endY, deferred.map { it.await() })
+        return@coroutineScope TileGrid(request.tileWidth, request.tileHeight, request.startX, request.endX, request.startY, request.endY, deferred.map { it.await() })
     }
 
     /**

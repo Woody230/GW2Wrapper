@@ -3,7 +3,8 @@ package com.bselzer.library.gw2.v2.tile.image
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
-import com.bselzer.library.gw2.v2.client.client.Gw2Client
+import com.bselzer.library.gw2.v2.model.continent.Continent
+import com.bselzer.library.gw2.v2.model.continent.ContinentFloor
 import com.bselzer.library.gw2.v2.tile.client.TileClient
 import com.bselzer.library.gw2.v2.tile.model.response.TileGrid
 import kotlinx.coroutines.coroutineScope
@@ -11,22 +12,16 @@ import java.io.File
 import java.io.FileOutputStream
 
 class ImageGenerator(
-    private val gw2: Gw2Client = Gw2Client(),
     private val tile: TileClient = TileClient(),
 ) {
-    private companion object {
-        const val WVW_CONTINENT = 2
-        const val WVW_FLOOR = 3
-    }
-
     /**
      * Constructs the WvW map at each zoom level and outputs each image as a PNG file in the [outputDirectory].
      *
      * @param outputDirectory where to store the images
+     * @param continent the WvW continent
+     * @param floor the WvW floor within the [continent]
      */
-    suspend fun generateWvwMap(outputDirectory: String) = coroutineScope {
-        val continent = gw2.continent.continent(WVW_CONTINENT)
-        val floor = gw2.continent.floor(WVW_CONTINENT, WVW_FLOOR)
+    suspend fun generateWvwMap(continent: Continent, floor: ContinentFloor, outputDirectory: String) = coroutineScope {
         for (zoom in continent.minZoom..continent.maxZoom) {
             val grid = tile.grid(continent, floor, zoom)
             generateWvwMap(outputDirectory, "WvwMap$zoom", grid)

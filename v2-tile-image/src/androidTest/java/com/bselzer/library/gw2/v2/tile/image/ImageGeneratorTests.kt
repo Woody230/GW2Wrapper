@@ -3,6 +3,7 @@ package com.bselzer.library.gw2.v2.tile.image
 import android.os.Environment
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.bselzer.library.gw2.v2.client.client.Gw2Client
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -16,8 +17,9 @@ class ImageGeneratorTests {
     fun writeWvwMap() {
         // Outputs to sdcard/Android/data/{{PackageName}}/files/download in View -> Tool Windows -> Device File Explorer
         runBlocking {
+            val gw2 = Gw2Client()
             val directory = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)!!.path
-            ImageGenerator().generateWvwMap(directory)
+            ImageGenerator().generateWvwMap(gw2.continent.continent(2), gw2.continent.floor(2, 3), directory)
         }
     }
 }

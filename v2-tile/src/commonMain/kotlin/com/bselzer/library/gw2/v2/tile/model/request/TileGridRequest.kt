@@ -40,4 +40,17 @@ data class TileGridRequest(
      * The requests for tiles.
      */
     val tileRequests: List<TileRequest> = emptyList(),
-)
+) {
+    /**
+     * Note that only existing [tileRequests] are used to form the bound.
+     *
+     * @return a request with existing tiles clamped by the given bounds
+     */
+    fun bounded(startX: Int = this.startX, endX: Int = this.endX, startY: Int = this.startY, endY: Int = this.endY): TileGridRequest = copy(
+        startX = startX,
+        endX = endX,
+        startY = startY,
+        endY = endY,
+        tileRequests = tileRequests.filter { tileRequest -> tileRequest.x in startX..endX && tileRequest.y in startY..endY }
+    )
+}
