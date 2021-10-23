@@ -19,6 +19,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlin.math.floor
+import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.pow
 
@@ -41,6 +42,9 @@ open class TileClient(
 
     /**
      * @return the tile grid for the [floor] within the [continent] at the given [zoom] level
+     * @param continent the continent
+     * @param floor the floor within the [continent]
+     * @param zoom the level of detail between the [Continent.minZoom] and [Continent.maxZoom] inclusive
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki for continents</a>
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/maps"> the wiki for maps</a>
      */
@@ -48,29 +52,44 @@ open class TileClient(
 
     /**
      * @return the tile grid generated from the [request]
+     * @param request the request to get grid and tile content from
      */
     suspend fun grid(request: TileGridRequest): TileGrid = coroutineScope {
-        val deferred = request.tileRequests.map { request ->
-            // Using async for parallelism.
-            async {
-                val content: ByteArray = try {
-                    httpClient.get(request.url)
-                } catch (ex: Exception) {
-                    ByteArray(0)
-                }
-                return@async Tile(request.x, request.y, content)
-            }
-        }
-
-        return@coroutineScope TileGrid(request.tileWidth, request.tileHeight, request.startX, request.endX, request.startY, request.endY, deferred.map { it.await() })
+        val tiles = request.tileRequests.map { request -> tile(request) }
+        return@coroutineScope TileGrid(request, tiles)
     }
 
     /**
+     * @return the deferred tile from the [TileRequest.url]
+     * @param request the request to get the tile content from
+     */
+    suspend fun tileAsync(request: TileRequest): Deferred<Tile> = coroutineScope {
+        // Use async for parallelism.
+        async {
+            val content: ByteArray = try {
+                httpClient.get(request.url)
+            } catch (ex: Exception) {
+                ByteArray(0)
+            }
+            return@async Tile(request, content)
+        }
+    }
+
+    /**
+     * @return the tile from the [TileRequest.url]
+     * @param request the request to get the tile content from
+     */
+    suspend fun tile(request: TileRequest) = tileAsync(request).await()
+
+    /**
      * @return the requests for tiles on the [floor] within the [continent] at the given [zoom] level
+     * @param continent the continent
+     * @param floor the floor within the [continent]
+     * @param zoom the level of detail between the [Continent.minZoom] and [Continent.maxZoom] inclusive
      */
     suspend fun requestGrid(continent: Continent, floor: ContinentFloor, zoom: Int): TileGridRequest {
-        // Default to the max zoom if the requested zoom is too much.
-        val requestedZoom = min(zoom, continent.maxZoom)
+        // Default to the min/max zoom if the requested zoom is too little/much.
+        val requestedZoom = max(0, min(zoom, continent.maxZoom))
         val requestedZoomTiles = 2.0.pow(requestedZoom)
         val maxZoomTiles = 2.0.pow(continent.maxZoom)
 

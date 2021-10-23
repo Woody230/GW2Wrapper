@@ -1,5 +1,7 @@
 package com.bselzer.library.gw2.v2.tile.model.response
 
+import com.bselzer.library.gw2.v2.tile.model.request.TileRequest
+
 /**
  * Represents a tile within the grid.
  */
@@ -19,6 +21,11 @@ data class Tile(
      */
     val content: ByteArray = ByteArray(0)
 ) {
+    /**
+     * Creates a new instance using the data from the [request].
+     */
+    constructor(request: TileRequest, content: ByteArray = ByteArray(0)) : this(request.x, request.y, content)
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || this::class != other::class) return false
