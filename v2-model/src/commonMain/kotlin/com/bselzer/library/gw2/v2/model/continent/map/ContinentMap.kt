@@ -47,7 +47,7 @@ data class ContinentMap(
      *
      * [Digon.point1] contains the top-left coordinates.
      *
-     * [Digon.point2] contains are the bottom-right coordinates.
+     * [Digon.point2] contains the bottom-right coordinates.
      */
     @SerialName("continent_rect")
     val continentRectangle: Digon = Digon(),
