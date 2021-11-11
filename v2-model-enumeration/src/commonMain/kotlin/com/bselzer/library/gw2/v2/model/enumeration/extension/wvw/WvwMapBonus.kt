@@ -1,6 +1,7 @@
 package com.bselzer.library.gw2.v2.model.enumeration.extension.wvw
 
 import com.bselzer.library.gw2.v2.model.enumeration.wvw.MapBonusType
+import com.bselzer.library.gw2.v2.model.enumeration.wvw.ObjectiveOwner
 import com.bselzer.library.gw2.v2.model.wvw.match.WvwMapBonus
 import com.bselzer.library.kotlin.extension.serialization.function.enumValueOrNull
 
@@ -8,3 +9,8 @@ import com.bselzer.library.kotlin.extension.serialization.function.enumValueOrNu
  * The [WvwMapBonus.type] as a [MapBonusType]
  */
 fun WvwMapBonus.type(): MapBonusType? = type.enumValueOrNull<MapBonusType>()
+
+/**
+ * The [WvwMapBonus.owner] as an [ObjectiveOwner]
+ */
+fun WvwMapBonus.owner(): ObjectiveOwner? = owner.enumValueOrNull<ObjectiveOwner>()
