@@ -3,7 +3,7 @@ package com.bselzer.library.gw2.v2.model.continent
 import com.bselzer.library.gw2.v2.model.continent.map.ContinentMap
 import com.bselzer.library.gw2.v2.model.extension.base.Identifiable
 import com.bselzer.library.kotlin.extension.geometry.dimension.bi.polygon.Digon
-import com.bselzer.library.kotlin.extension.geometry.dimension.bi.position.Point
+import com.bselzer.library.kotlin.extension.geometry.dimension.bi.position.Point2D
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -19,7 +19,7 @@ data class ContinentRegion(
      * The coordinates of the region label.
      */
     @SerialName("label_coord")
-    val labelCoordinates: Point = Point(),
+    val labelCoordinates: Point2D = Point2D(),
 
     /**
      * The continent dimensions.

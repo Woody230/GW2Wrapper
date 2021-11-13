@@ -1,7 +1,7 @@
 package com.bselzer.library.gw2.v2.model.continent
 
 import com.bselzer.library.gw2.v2.model.extension.base.Identifiable
-import com.bselzer.library.kotlin.extension.geometry.dimension.bi.Dimension
+import com.bselzer.library.kotlin.extension.geometry.dimension.bi.Dimension2D
 import com.bselzer.library.kotlin.extension.geometry.dimension.bi.polygon.Digon
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -15,7 +15,7 @@ data class ContinentFloor(
      * The width and height of the texture.
      */
     @SerialName("texture_dims")
-    val textureDimensions: Dimension = Dimension(),
+    val textureDimensions: Dimension2D = Dimension2D(),
 
     /**
      * The bounds of this floor within the continent's texture.
