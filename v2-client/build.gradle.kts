@@ -10,7 +10,6 @@ kotlin.setup {
     commonMain {
         v2Model()
         v2Scope()
-        v2ScopeProcessor()
         ktxDateTime()
         ktorClient()
         ktorClientSerialization()
