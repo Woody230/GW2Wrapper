@@ -16,7 +16,7 @@ data class WvwAbility(
     val description: String = "",
 
     @SerialName("icon")
-    val icon: String = "",
+    val iconLink: String = "",
 
     @SerialName("ranks")
     val ranks: List<WvwAbilityRank> = emptyList()
