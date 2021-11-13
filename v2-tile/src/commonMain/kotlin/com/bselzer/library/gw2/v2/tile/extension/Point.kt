@@ -15,8 +15,8 @@ fun Point.scale(grid: TileGrid, continent: Continent, zoom: Int): Point
     // Scale the coordinates to the current zoom level.
     val zoomWidth = 2.0.pow(zoom) * grid.tileWidth
     val zoomHeight = 2.0.pow(zoom) * grid.tileHeight
-    val zoomX = zoomWidth * x / continent.continentDimensions.width
-    val zoomY = zoomHeight * y / continent.continentDimensions.height
+    val zoomX = zoomWidth * x / continent.dimensions.width
+    val zoomY = zoomHeight * y / continent.dimensions.height
 
     // Remove the excluded starting tiles.
     val x = zoomX - (grid.startX * grid.tileWidth)
