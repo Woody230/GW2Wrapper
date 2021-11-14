@@ -10,9 +10,9 @@ kotlin.setup {
     commonMain {
         v2Model()
         ktxSerialization()
-        personalKtxSerialization()
-        personalKtxFunction()
-        personalKtxBase64()
+        extSerialization()
+        extFunction()
+        extBase64()
     }
     commonTest()
     jvmTest()

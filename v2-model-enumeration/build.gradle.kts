@@ -11,8 +11,8 @@ kotlin.setup {
         v2Model()
         v2Scope()
         ktxSerialization()
-        personalKtxSerialization()
-        personalKtxFunction()
+        extSerialization()
+        extFunction()
     }
     commonTest()
     jvmTest()

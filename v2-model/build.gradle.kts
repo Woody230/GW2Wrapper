@@ -11,9 +11,9 @@ kotlin.setup {
         v2Scope()
         ktxSerialization()
         ktxDateTime()
-        personalKtxSerialization()
-        personalKtxDateTime()
-        personalKtxGeometry()
+        extSerialization()
+        extDateTime()
+        extGeometry()
     }
     commonTest()
 }
