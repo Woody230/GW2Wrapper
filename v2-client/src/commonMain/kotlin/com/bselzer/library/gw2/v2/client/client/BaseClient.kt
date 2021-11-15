@@ -82,8 +82,7 @@ abstract class BaseClient(
     ): List<T>
     {
         val responses = mutableListOf<T>()
-        for (chunk in ids.chunked(configuration.pageSize))
-        {
+        for (chunk in ids.toHashSet().chunked(configuration.pageSize)) {
             responses.addAll(httpClient.get(path = path) {
                 idsParameter(chunk, idsParameterName)
                 apply(block)
