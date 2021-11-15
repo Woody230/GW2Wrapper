@@ -1,4 +1,4 @@
-package com.bselzer.library.gw2.v2.cache.cache
+package com.bselzer.library.gw2.v2.cache.instance
 
 import com.bselzer.library.gw2.v2.client.client.Gw2Client
 import com.bselzer.library.gw2.v2.model.world.World
@@ -9,7 +9,7 @@ import com.bselzer.library.kotlin.extension.kodein.db.transaction.TransactionSta
 /**
  * Represents a cache related to the [World] model.
  */
-class WorldCache(transactionStarter: TransactionStarter, client: Gw2Client) : BaseModelCache(transactionStarter, client) {
+class WorldCache(transactionStarter: TransactionStarter, client: Gw2Client) : BaseCache(transactionStarter, client) {
     /**
      * Finds the worlds.
      *

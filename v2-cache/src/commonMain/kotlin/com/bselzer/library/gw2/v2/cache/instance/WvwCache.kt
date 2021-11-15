@@ -1,4 +1,4 @@
-package com.bselzer.library.gw2.v2.cache.cache
+package com.bselzer.library.gw2.v2.cache.instance
 
 import com.bselzer.library.gw2.v2.client.client.Gw2Client
 import com.bselzer.library.gw2.v2.model.guild.upgrade.ClaimableUpgrade
@@ -17,7 +17,7 @@ import org.kodein.db.getById
 /**
  * Represents a cache for World vs. World models.
  */
-class WvwCache(transactionStarter: TransactionStarter, client: Gw2Client) : BaseModelCache(transactionStarter, client) {
+class WvwCache(transactionStarter: TransactionStarter, client: Gw2Client) : BaseCache(transactionStarter, client) {
     /**
      * Puts the match and associated objectives.
      */

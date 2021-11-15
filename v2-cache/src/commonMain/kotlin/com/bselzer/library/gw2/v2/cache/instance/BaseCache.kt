@@ -1,10 +1,10 @@
-package com.bselzer.library.gw2.v2.cache.cache
+package com.bselzer.library.gw2.v2.cache.instance
 
 import com.bselzer.library.gw2.v2.client.client.Gw2Client
 import com.bselzer.library.kotlin.extension.kodein.db.transaction.DBTransaction
 import com.bselzer.library.kotlin.extension.kodein.db.transaction.TransactionStarter
 
-abstract class BaseModelCache(private val transactionStarter: TransactionStarter, protected val client: Gw2Client) {
+abstract class BaseCache(private val transactionStarter: TransactionStarter, protected val client: Gw2Client) {
     /**
      * Executes the [block] for the current transaction.
      *
