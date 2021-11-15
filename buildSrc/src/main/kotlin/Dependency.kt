@@ -16,14 +16,16 @@ const val KOTLIN = "1.5.30"
 
 fun KotlinDependencyHandler.ktxDateTime() = api("org.jetbrains.kotlinx:kotlinx-datetime:$KTX_DATETIME")
 fun KotlinDependencyHandler.ktxSerialization() = api("org.jetbrains.kotlinx:kotlinx-serialization-json:$KTX_SERIALIZATION")
+fun KotlinDependencyHandler.ktorClient() = api("io.ktor:ktor-client-core:$KTOR")
+fun KotlinDependencyHandler.ktorClientSerialization() = api("io.ktor:ktor-client-serialization:$KTOR")
+fun KotlinDependencyHandler.coroutine() = api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINE")
+
 fun KotlinDependencyHandler.v2Client() = api(project(":v2-client"))
 fun KotlinDependencyHandler.v2Model() = api(project(":v2-model"))
 fun KotlinDependencyHandler.v2ModelEnumeration() = api(project(":v2-model-enumeration"))
 fun KotlinDependencyHandler.v2Scope() = api(project(":v2-scope"))
 fun KotlinDependencyHandler.v2Tile() = api(project(":v2-tile"))
-fun KotlinDependencyHandler.ktorClient() = api("io.ktor:ktor-client-core:$KTOR")
-fun KotlinDependencyHandler.ktorClientSerialization() = api("io.ktor:ktor-client-serialization:$KTOR")
-fun KotlinDependencyHandler.coroutine() = api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINE")
+fun KotlinDependencyHandler.v2Cache() = api(project(":v2-cache"))
 
 // TODO jitpack
 fun KotlinDependencyHandler.extSerialization() = api("com.bselzer.library.kotlin.extension:serialization:$EXTENSION")
