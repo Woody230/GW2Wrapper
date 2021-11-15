@@ -31,6 +31,7 @@ fun KotlinDependencyHandler.extFunction() = api("com.bselzer.library.kotlin.exte
 fun KotlinDependencyHandler.extBase64() = api("com.bselzer.library.kotlin.extension:base64:$EXTENSION")
 fun KotlinDependencyHandler.extDateTime() = api("com.bselzer.library.kotlin.extension:datetime:$EXTENSION")
 fun KotlinDependencyHandler.extGeometry() = api("com.bselzer.library.kotlin.extension:geometry:$EXTENSION")
+fun KotlinDependencyHandler.extKodeinDb() = api("com.bselzer.library.kotlin.extension:kodein-db:$EXTENSION")
 
 // Test
 fun KotlinDependencyHandler.androidKtorClient() = implementation("io.ktor:ktor-client-android:$KTOR")
