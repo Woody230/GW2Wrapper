@@ -9,7 +9,7 @@ import com.bselzer.library.kotlin.extension.kodein.db.transaction.TransactionSta
 /**
  * Represents a cache related to the [World] model.
  */
-class WorldCache(transactionStarter: TransactionStarter, client: Gw2Client) : BaseCache(transactionStarter, client) {
+class WorldCache(transactionStarter: TransactionStarter, client: Gw2Client) : Gw2Cache(transactionStarter, client) {
     /**
      * Finds the worlds.
      *

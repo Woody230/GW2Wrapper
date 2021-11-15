@@ -17,7 +17,7 @@ import org.kodein.db.getById
 /**
  * Represents a cache for World vs. World models.
  */
-class WvwCache(transactionStarter: TransactionStarter, client: Gw2Client) : BaseCache(transactionStarter, client) {
+class WvwCache(transactionStarter: TransactionStarter, client: Gw2Client) : Gw2Cache(transactionStarter, client) {
     /**
      * Puts the match and associated objectives.
      */
