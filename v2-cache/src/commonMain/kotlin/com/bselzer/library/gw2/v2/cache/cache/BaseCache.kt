@@ -1,4 +1,4 @@
-package com.bselzer.library.gw2.v2.cache
+package com.bselzer.library.gw2.v2.cache.cache
 
 import com.bselzer.library.gw2.v2.client.client.Gw2Client
 import com.bselzer.library.kotlin.extension.kodein.db.transaction.DBTransaction

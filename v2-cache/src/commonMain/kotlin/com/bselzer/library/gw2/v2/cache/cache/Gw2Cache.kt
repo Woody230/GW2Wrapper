@@ -1,4 +1,4 @@
-package com.bselzer.library.gw2.v2.cache
+package com.bselzer.library.gw2.v2.cache.cache
 
 import com.bselzer.library.gw2.v2.client.client.Gw2Client
 import com.bselzer.library.kotlin.extension.kodein.db.transaction.DBTransactionProvider
@@ -7,7 +7,6 @@ import com.bselzer.library.kotlin.extension.kodein.db.transaction.TransactionSta
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
-// TODO DB: set up type table and serializers
 /**
  * The caching abstraction for the GW2 API.
  *
