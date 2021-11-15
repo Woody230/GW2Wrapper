@@ -13,7 +13,7 @@ import com.bselzer.library.kotlin.extension.kodein.db.transaction.TransactionSta
 /**
  * Represents a cache for models related to [Continent].
  */
-class ContinentCache(transactionStarter: TransactionStarter, client: Gw2Client) : BaseCache(transactionStarter, client) {
+class ContinentCache(transactionStarter: TransactionStarter, client: Gw2Client) : BaseModelCache(transactionStarter, client) {
     /**
      * Puts the map with the given [id] and its associated continent and default floor.
      *

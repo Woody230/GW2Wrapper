@@ -1,30 +1,39 @@
 package com.bselzer.library.gw2.v2.cache.cache
 
-import com.bselzer.library.gw2.v2.client.client.Gw2Client
-import com.bselzer.library.kotlin.extension.kodein.db.transaction.DBTransaction
+import com.bselzer.library.kotlin.extension.kodein.db.transaction.TransactionFinisher
 import com.bselzer.library.kotlin.extension.kodein.db.transaction.TransactionStarter
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 
-abstract class BaseCache(private val transactionStarter: TransactionStarter, protected val client: Gw2Client) {
+abstract class BaseCache<Cache : BaseCache<Cache>>(private val transactionStarter: TransactionStarter, private val transactionFinisher: TransactionFinisher) {
     /**
-     * Executes the [block] for the current transaction.
-     *
-     * @param block the transaction function
+     * The subclass instance.
      */
-    protected suspend fun transaction(block: suspend DBTransaction.() -> Unit): Unit = runTransaction(block)
+    protected abstract val self: Cache
 
     /**
-     * Executes the [block] for the current transition.
-     *
-     * @param block the transaction function
-     * @return the result of the [block]
+     * The lock instance.
      */
-    protected suspend fun <R> runTransaction(block: suspend DBTransaction.() -> R): R {
-        val transaction = transactionStarter.begin()
-        return block(transaction)
+    private val lock = Mutex()
+
+    /**
+     * Executes the [block] under a lock.
+     */
+    suspend fun withLock(block: suspend Cache.() -> Unit): Unit = lock.withLock { block(self) }
+
+    /**
+     * Executes the [block] within a transaction.
+     */
+    suspend fun transaction(block: suspend Cache.() -> Unit) {
+        transactionStarter.begin()
+        block(self)
+        transactionFinisher.end()
     }
 
     /**
-     * Clears the database of all relevant models.
+     * Executes the [block] within a transaction with the lock.
      */
-    abstract suspend fun clear()
+    suspend fun lockedTransaction(block: suspend Cache.() -> Unit): Unit = withLock {
+        transaction(block)
+    }
 }
