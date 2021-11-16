@@ -33,7 +33,8 @@ class TileCache(transactionStarter: TransactionStarter, private val client: Tile
     /**
      * Finds the tiles with the same [TileRequest.zoom], [TileRequest.x], and [TileRequest.y].
      *
-     * If there are missing tiles, then they are not resolved with a call to the tile service. A call to [putTiles] should be made first instead.
+     * If there are missing tiles, then they are not resolved with a call to the tile service.
+     * A call to [putTiles] should be made first.
      *
      * @param tileRequests the requests
      * @return the tiles

@@ -8,6 +8,7 @@ android.setup()
 kotlin.setup {
     commonMain {
         v2Tile()
+        extKodeinDb()
     }
     commonTest()
 }

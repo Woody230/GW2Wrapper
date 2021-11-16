@@ -43,6 +43,8 @@ class ContinentCache(transactionStarter: TransactionStarter, client: Gw2Client) 
     /**
      * Gets the continent associated with the map.
      *
+     * If there is no continent in the database, then the api is called.
+     *
      * @param map the map
      * @return the continent
      */
@@ -50,6 +52,8 @@ class ContinentCache(transactionStarter: TransactionStarter, client: Gw2Client) 
 
     /**
      * Gets the default floor associated with the map.
+     *
+     * If there is no floor in the database, then the api is called.
      *
      * @param map the map
      * @return the default floor
