@@ -10,8 +10,8 @@ import com.bselzer.library.kotlin.extension.kodein.db.operation.clear
 import com.bselzer.library.kotlin.extension.kodein.db.operation.getById
 import com.bselzer.library.kotlin.extension.kodein.db.operation.putMissingById
 import com.bselzer.library.kotlin.extension.kodein.db.transaction.TransactionStarter
-import org.kodein.db.asModelSequence
 import org.kodein.db.find
+import org.kodein.db.useModels
 
 /**
  * The cache for the [TileClient].
@@ -39,9 +39,9 @@ class TileCache(transactionStarter: TransactionStarter, private val client: Tile
      * @param tileRequests the requests
      * @return the tiles
      */
-    suspend fun findTiles(tileRequests: Collection<TileRequest>): Sequence<Tile> = runTransaction {
+    suspend fun findTiles(tileRequests: Collection<TileRequest>) = runTransaction {
         val ids = tileRequests.map { tileRequest -> tileRequest.id() }
-        reader.find<Tile>().all().asModelSequence().filter { tile -> ids.contains(tile.id()) }
+        reader.find<Tile>().all().useModels { it.filter { tile -> ids.contains(tile.id()) }.toList() }
     }
 
     /**

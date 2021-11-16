@@ -1,10 +1,12 @@
 package com.bselzer.library.gw2.v2.tile.model.response
 
 import com.bselzer.library.gw2.v2.tile.model.request.TileRequest
+import kotlinx.serialization.Serializable
 
 /**
  * Represents a tile within the grid.
  */
+@Serializable
 data class Tile(
     /**
      * The horizontal position within the texture.

@@ -1,10 +1,12 @@
 package com.bselzer.library.gw2.v2.tile.model.request
 
 import com.bselzer.library.gw2.v2.tile.model.response.Tile
+import kotlinx.serialization.Serializable
 
 /**
  * Represents a request for getting [Tile] content.
  */
+@Serializable
 data class TileRequest(
     /**
      * The request.

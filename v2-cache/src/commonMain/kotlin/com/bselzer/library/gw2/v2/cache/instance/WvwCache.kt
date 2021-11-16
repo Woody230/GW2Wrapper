@@ -19,15 +19,6 @@ import org.kodein.db.getById
  * Represents a cache for World vs. World models.
  */
 class WvwCache(transactionStarter: TransactionStarter, client: Gw2Client) : Gw2Cache(transactionStarter, client) {
-    /**
-     * Puts the match and associated objectives.
-     *
-     * @param match the match
-     */
-    suspend fun putMatch(match: WvwMatch): Unit = transaction {
-        writer.put(match)
-        putObjectives(match)
-    }
 
     /**
      * Finds the objectives in the database associated with the [match].
@@ -38,13 +29,12 @@ class WvwCache(transactionStarter: TransactionStarter, client: Gw2Client) : Gw2C
      * @param match the match
      * @return the objectives
      */
-    suspend fun findObjectives(match: WvwMatch): Sequence<WvwObjective> = runTransaction {
-        val ids = match.maps.flatMap { map -> map.objectives.map { objective -> objective.id } }
-        reader.find<WvwObjective>().all().asModelSequence().filter { objective -> ids.contains(objective.id) }
+    suspend fun findObjectives(match: WvwMatch): Collection<WvwObjective> = findByReferenceIds(listOf(match)) {
+        maps.flatMap { map -> map.objectives.map { objective -> objective.id } }
     }
 
     /**
-     * Gets the upgrade associated with the objective.
+     * Gets the upgrade associated with the [objective].
      *
      * If there is no upgrade, then it is not resolved with a call to the api.
      * A call to [putMatch] should be made first.
@@ -57,14 +47,32 @@ class WvwCache(transactionStarter: TransactionStarter, client: Gw2Client) : Gw2C
     }
 
     /**
-     * Finds the guild upgrades associated with the match objective.
+     * Finds the upgrades associated with the [objectives].
+     *
+     * If there are missing upgrades, then they are not resolved with a call to the api.
+     * A call to [putMatch] should be made first.
+     *
+     * @param objectives the objectives
+     * @return the upgrades
+     */
+    suspend fun findUpgrades(objectives: Collection<WvwObjective>): Collection<WvwUpgrade> = findByReferenceId(objectives) { upgradeId }
+
+    /**
+     * Finds the guild upgrades associated with the match [objectives].
      *
      * If there are missing upgrades, then they are not resolved with a call to the api.
      * A call to [putMatch] should be made first.
      */
-    suspend fun findGuildUpgrades(objective: WvwMapObjective): Sequence<GuildUpgrade> = runTransaction {
-        val ids = objective.guildUpgradeIds
-        reader.find<GuildUpgrade>().all().asModelSequence().filter { upgrade -> ids.contains(upgrade.id) }
+    suspend fun findGuildUpgrades(objectives: Collection<WvwMapObjective>): Collection<GuildUpgrade> = findByReferenceIds(objectives) { guildUpgradeIds }
+
+    /**
+     * Puts the match and associated objectives.
+     *
+     * @param match the match
+     */
+    suspend fun putMatch(match: WvwMatch): Unit = transaction {
+        writer.put(match)
+        putObjectives(match)
     }
 
     /**

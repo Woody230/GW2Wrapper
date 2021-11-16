@@ -3,6 +3,7 @@ package com.bselzer.library.gw2.v2.tile.cache.metadata
 import com.bselzer.library.gw2.v2.tile.model.request.TileRequest
 import com.bselzer.library.gw2.v2.tile.model.response.Tile
 import org.kodein.db.Options
+import org.kodein.db.Value
 import org.kodein.db.model.orm.Metadata
 import org.kodein.db.model.orm.MetadataExtractor
 
@@ -24,10 +25,10 @@ class TileMetadataExtractor : MetadataExtractor {
  * Creates an id using the zoom and position of the tile.
  * @return the id
  */
-fun Tile.id() = listOf(zoom, x, y)
+fun Tile.id() = Value.of(zoom, x, y)
 
 /**
  * Creates an id using the zoom and position of the tile.
  * @return the id
  */
-fun TileRequest.id() = listOf(zoom, x, y)
+fun TileRequest.id() = Value.of(zoom, x, y)

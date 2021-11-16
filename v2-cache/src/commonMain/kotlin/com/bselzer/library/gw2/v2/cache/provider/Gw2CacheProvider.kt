@@ -15,7 +15,10 @@ import com.bselzer.library.kotlin.extension.kodein.db.transaction.TransactionSta
  * @param transactionStarter the transaction starter
  * @param transactionFinisher the transaction finisher
  */
-class Gw2CacheProvider(transactionStarter: TransactionStarter, transactionFinisher: TransactionFinisher) : DBCacheProvider<Gw2Cache>(transactionStarter, transactionFinisher) {
+class Gw2CacheProvider(private val transactionStarter: TransactionStarter, transactionFinisher: TransactionFinisher) :
+    DBCacheProvider<Gw2Cache, Gw2CacheProvider>(transactionStarter, transactionFinisher) {
+    override val instance: Gw2CacheProvider = this
+
     /**
      * Injects the GW2 caches into the provider.
      */

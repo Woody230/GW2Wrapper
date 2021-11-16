@@ -4,7 +4,7 @@ import com.bselzer.library.gw2.v2.client.constant.Endpoints
 import com.bselzer.library.gw2.v2.client.extension.bearer
 import com.bselzer.library.gw2.v2.client.extension.language
 import com.bselzer.library.gw2.v2.client.extension.schemaVersion
-import com.bselzer.library.gw2.v2.client.serialization.Modules
+import com.bselzer.library.gw2.v2.model.serialization.Modules
 import io.ktor.client.*
 import io.ktor.client.features.*
 import io.ktor.client.features.json.*

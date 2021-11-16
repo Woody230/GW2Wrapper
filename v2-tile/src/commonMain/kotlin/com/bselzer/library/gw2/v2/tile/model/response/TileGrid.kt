@@ -1,10 +1,12 @@
 package com.bselzer.library.gw2.v2.tile.model.response
 
 import com.bselzer.library.gw2.v2.tile.model.request.TileGridRequest
+import kotlinx.serialization.Serializable
 
 /**
  * The tiles within the grid.
  */
+@Serializable
 data class TileGrid(
     /**
      * The width of each individual tile.

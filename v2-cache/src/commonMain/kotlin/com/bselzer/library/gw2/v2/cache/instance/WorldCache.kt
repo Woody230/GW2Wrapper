@@ -17,7 +17,7 @@ class WorldCache(transactionStarter: TransactionStarter, client: Gw2Client) : Gw
      *
      * @return the worlds
      */
-    suspend fun findWorlds(): Sequence<World> = runTransaction {
+    suspend fun findWorlds() = runTransaction {
         findAllOnce { client.world.worlds() }
     }
 

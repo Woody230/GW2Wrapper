@@ -1,10 +1,12 @@
 package com.bselzer.library.gw2.v2.tile.model.request
 
 import com.bselzer.library.gw2.v2.tile.model.response.TileGrid
+import kotlinx.serialization.Serializable
 
 /**
  * Represents a request for getting [TileGrid] content.
  */
+@Serializable
 data class TileGridRequest(
     /**
      * The starting horizontal tile position.
