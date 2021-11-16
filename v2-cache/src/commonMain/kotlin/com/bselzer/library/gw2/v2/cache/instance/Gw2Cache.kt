@@ -5,7 +5,7 @@ import com.bselzer.library.kotlin.extension.kodein.db.cache.DBCache
 import com.bselzer.library.kotlin.extension.kodein.db.transaction.TransactionStarter
 
 /**
- * The base GW2 cache instance.
+ * The base [Gw2Client] cache instance.
  */
 abstract class Gw2Cache(transactionStarter: TransactionStarter, protected val client: Gw2Client) : DBCache(transactionStarter) {
     /**

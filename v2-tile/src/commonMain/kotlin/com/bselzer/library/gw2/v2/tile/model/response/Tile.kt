@@ -17,6 +17,11 @@ data class Tile(
     val y: Int = 0,
 
     /**
+     * The zoom level.
+     */
+    val zoom: Int = 0,
+
+    /**
      * The content.
      */
     val content: ByteArray = ByteArray(0)
@@ -24,7 +29,7 @@ data class Tile(
     /**
      * Creates a new instance using the data from the [request].
      */
-    constructor(request: TileRequest, content: ByteArray = ByteArray(0)) : this(request.x, request.y, content)
+    constructor(request: TileRequest, content: ByteArray = ByteArray(0)) : this(request.x, request.y, request.zoom, content)
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -34,6 +39,7 @@ data class Tile(
 
         if (x != other.x) return false
         if (y != other.y) return false
+        if (zoom != other.zoom) return false
         if (!content.contentEquals(other.content)) return false
 
         return true
@@ -42,6 +48,7 @@ data class Tile(
     override fun hashCode(): Int {
         var result = x
         result = 31 * result + y
+        result = 31 * result + zoom
         result = 31 * result + content.contentHashCode()
         return result
     }

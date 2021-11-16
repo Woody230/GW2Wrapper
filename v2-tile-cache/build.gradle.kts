@@ -7,7 +7,7 @@ android.setup()
 
 kotlin.setup {
     commonMain {
-        v2Cache()
+        v2Tile()
     }
     commonTest()
 }

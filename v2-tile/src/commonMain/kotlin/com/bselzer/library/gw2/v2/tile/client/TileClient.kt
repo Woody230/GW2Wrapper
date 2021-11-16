@@ -115,7 +115,7 @@ open class TileClient(
             }
         }
 
-        return TileGridRequest(startX, endX, startY, endY, tileWidth, tileHeight, requests)
+        return TileGridRequest(startX, endX, startY, endY, tileWidth, tileHeight, zoom, requests)
     }
 
     /**

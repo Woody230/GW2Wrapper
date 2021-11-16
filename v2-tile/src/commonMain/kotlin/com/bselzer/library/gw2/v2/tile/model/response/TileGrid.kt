@@ -37,6 +37,11 @@ data class TileGrid(
     val endY: Int = 0,
 
     /**
+     * The zoom level.
+     */
+    val zoom: Int = 0,
+
+    /**
      * The subset of tiles with content.
      */
     val tiles: List<Tile> = emptyList(),
@@ -76,6 +81,7 @@ data class TileGrid(
         request.endX,
         request.startY,
         request.endY,
+        request.zoom,
         tiles
     )
 

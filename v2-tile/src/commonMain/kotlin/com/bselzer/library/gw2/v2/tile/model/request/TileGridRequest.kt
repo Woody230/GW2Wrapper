@@ -37,6 +37,11 @@ data class TileGridRequest(
     val tileHeight: Int = 0,
 
     /**
+     * The zoom level.
+     */
+    val zoom: Int = 0,
+
+    /**
      * The requests for tiles.
      */
     val tileRequests: List<TileRequest> = emptyList(),

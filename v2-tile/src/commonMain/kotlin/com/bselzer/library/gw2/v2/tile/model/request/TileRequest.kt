@@ -19,5 +19,10 @@ data class TileRequest(
     /**
      * The vertical position within the texture.
      */
-    val y: Int = 0
+    val y: Int = 0,
+
+    /**
+     * The zoom level.
+     */
+    val zoom: Int = 0,
 )
