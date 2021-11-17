@@ -7,14 +7,14 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Legend(
     @SerialName("id")
-    override val id: String,
+    override val id: String = "",
 
     /**
      * The id used in build template chat links.
      * @see <a href="https://wiki.guildwars2.com/wiki/Chat_link_format#Build_template_link">the wiki</a>
      */
     @SerialName("code")
-    val buildTemplateId: Int,
+    val buildTemplateId: Int = 0,
 
     /**
      * The id of the profession skill used to swap to this legend.

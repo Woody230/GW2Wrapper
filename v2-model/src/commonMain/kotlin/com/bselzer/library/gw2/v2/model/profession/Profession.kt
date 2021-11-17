@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Profession(
     @SerialName("id")
-    override val id: String,
+    override val id: String = "",
 
     @SerialName("name")
     val name: String = "",

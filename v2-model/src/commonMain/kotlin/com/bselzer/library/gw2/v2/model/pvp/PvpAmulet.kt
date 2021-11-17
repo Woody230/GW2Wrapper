@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class PvpAmulet(
     @SerialName("id")
-    override val id: Int,
+    override val id: Int = 0,
 
     @SerialName("name")
     val name: String = "",

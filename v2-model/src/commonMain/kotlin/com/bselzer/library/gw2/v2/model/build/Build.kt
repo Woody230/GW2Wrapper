@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Build(
     @SerialName("id")
-    override val id: Int
+    override val id: Int = 0
 ) : Identifiable<Int>

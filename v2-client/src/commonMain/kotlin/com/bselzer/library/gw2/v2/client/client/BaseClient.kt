@@ -177,17 +177,17 @@ abstract class BaseClient(
     }
 
     /**
-     * Creates a new instance from an empty or optional constructor.
+     * Creates a new default instance of a single object.
      */
     protected inline fun <reified T> defaultSingle(): T = DEFAULT_RECOVERY.defaultSingle()
 
     /**
-     * Creates a new instance from an empty or optional constructor with the id populated.
+     * Creates a new default instance of a single object with the id populated.
      */
     protected inline fun <reified T : Identifiable<Id>, Id> defaultSingle(id: Id): T = DEFAULT_RECOVERY.defaultSingle(id)
 
     /**
-     * Creates new instances from an empty or optional constructor wit the id populated.
+     * Creates a new default instance of multiple objects with the id populated.
      */
     protected inline fun <reified T : Identifiable<Id>, Id> defaultAll(ids: Collection<Id>): List<T> = ids.map { id -> defaultSingle(id) }
 }

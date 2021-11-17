@@ -42,7 +42,6 @@ data class Tile(
         if (x != other.x) return false
         if (y != other.y) return false
         if (zoom != other.zoom) return false
-        if (!content.contentEquals(other.content)) return false
 
         return true
     }
@@ -51,7 +50,6 @@ data class Tile(
         var result = x
         result = 31 * result + y
         result = 31 * result + zoom
-        result = 31 * result + content.contentHashCode()
         return result
     }
 }

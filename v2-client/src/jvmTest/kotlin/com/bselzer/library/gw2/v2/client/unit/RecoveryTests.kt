@@ -70,6 +70,14 @@ class RecoveryTests : BaseUnitTests() {
     }
 
     /**
+     * Verifies that the build endpoint can be recovered.
+     */
+    @Test
+    fun build() = testRecovery({ build.buildId() }) { result ->
+        assertEquals(0, result)
+    }
+
+    /**
      * Verifies that a singleById call can be recovered.
      */
     @Test
