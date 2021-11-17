@@ -11,15 +11,18 @@ abstract class BaseClient(
     protected val configuration: Gw2ClientConfiguration
 )
 {
+    protected companion object {
+        // TODO Expect/actual is used because of publishing not working due to the reflection artifact. https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/
+        val DEFAULT_RECOVERY = DefaultRecovery()
+    }
+
     /**
      * @return the ids as a comma separated string or "-1" if there are no ids
      */
-    private fun Collection<*>.asIdsParameter(): String = if (isEmpty())
-    {
+    private fun Collection<*>.asIdsParameter(): String = if (isEmpty()) {
         // {"text": "all ids provided are invalid"} is returned when no ids are provided
         "-1"
-    } else
-    {
+    } else {
         joinToString(separator = ",")
     }
 
@@ -176,26 +179,12 @@ abstract class BaseClient(
     /**
      * Creates a new instance from an empty or optional constructor.
      */
-    protected inline fun <reified T> defaultSingle(): T {
-        val constructor = T::class.constructors.find { it.parameters.all { parameter -> parameter.isOptional } }
-            ?: throw NotImplementedError("Default recovery mode: ${T::class} is missing a completely optional constructor")
-
-        return constructor.callBy(emptyMap())
-    }
+    protected inline fun <reified T> defaultSingle(): T = DEFAULT_RECOVERY.defaultSingle()
 
     /**
      * Creates a new instance from an empty or optional constructor with the id populated.
      */
-    protected inline fun <reified T : Identifiable<Id>, Id> defaultSingle(id: Id): T {
-        val constructor = T::class.constructors.find { it.parameters.all { parameter -> parameter.isOptional } }
-            ?: throw NotImplementedError("Default recovery mode: ${T::class} is missing a completely optional constructor")
-
-        val idParameter = constructor.parameters.firstOrNull { parameter -> parameter.name == "id" }
-            ?: throw Exception("Default recovery mode: ${T::class} is missing the id parameter with a name of 'id'.")
-
-        // Populate the id instead of leaving it defaulted.
-        return constructor.callBy(mapOf(idParameter to id))
-    }
+    protected inline fun <reified T : Identifiable<Id>, Id> defaultSingle(id: Id): T = DEFAULT_RECOVERY.defaultSingle(id)
 
     /**
      * Creates new instances from an empty or optional constructor wit the id populated.

@@ -13,11 +13,16 @@ kotlin.setup {
         ktxDateTime()
         ktorClient()
         ktorClientSerialization()
-        reflection()
     }
     commonTest {
         v2ModelEnumeration()
         mockKtorClient()
+    }
+    androidMain {
+        reflection()
+    }
+    jvmMain {
+        reflection()
     }
     jvmTest {
         jvmTest()
