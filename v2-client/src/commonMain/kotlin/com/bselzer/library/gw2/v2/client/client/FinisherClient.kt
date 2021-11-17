@@ -19,13 +19,13 @@ class FinisherClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the ids of the available finishers
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/finishers">the wiki</a>
      */
-    suspend fun ids(): List<Int> = get(path = FINISHERS)
+    suspend fun ids(): List<Int> = getList(path = FINISHERS)
 
     /**
      * @return the finisher associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/finishers">the wiki</a>
      */
-    suspend fun finisher(id: Int, language: String? = null): Finisher = single(id, FINISHERS) {
+    suspend fun finisher(id: Int, language: String? = null): Finisher = getSingleById(id, FINISHERS) {
         language(language)
     }
 

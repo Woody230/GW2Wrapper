@@ -43,8 +43,7 @@ abstract class BaseUnitTests : BaseTests()
      * Adds an exhaustive response block for a single valid request.
      */
     protected fun MockEngineConfig.exhaust(url: String, content: String) = addHandler { request ->
-        when (request.url.toString())
-        {
+        when (request.url.toString()) {
             url -> respond(
                 headers = jsonHeader(),
                 content = content
@@ -52,4 +51,9 @@ abstract class BaseUnitTests : BaseTests()
             else -> request.throwError()
         }
     }
+
+    /**
+     * Adds a response block that throws an error.
+     */
+    protected fun MockEngineConfig.throwError() = addHandler { request -> request.throwError() }
 }

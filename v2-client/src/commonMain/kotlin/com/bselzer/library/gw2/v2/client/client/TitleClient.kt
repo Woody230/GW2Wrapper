@@ -19,13 +19,13 @@ class TitleClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the ids of the available titles
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/titles">the wiki</a>
      */
-    suspend fun ids(): List<Int> = get(path = TITLES)
+    suspend fun ids(): List<Int> = getList(path = TITLES)
 
     /**
      * @return the title associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/titles">the wiki</a>
      */
-    suspend fun title(id: Int, language: String? = null): Title = single(id, TITLES) {
+    suspend fun title(id: Int, language: String? = null): Title = getSingleById(id, TITLES) {
         language(language)
     }
 

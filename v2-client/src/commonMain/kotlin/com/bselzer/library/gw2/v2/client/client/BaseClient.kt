@@ -1,5 +1,7 @@
 package com.bselzer.library.gw2.v2.client.client
 
+import com.bselzer.library.gw2.v2.client.client.ExceptionRecoveryMode.DEFAULT
+import com.bselzer.library.gw2.v2.client.client.ExceptionRecoveryMode.NONE
 import com.bselzer.library.gw2.v2.model.extension.base.Identifiable
 import io.ktor.client.*
 import io.ktor.client.request.*
@@ -37,10 +39,44 @@ abstract class BaseClient(
     protected fun HttpRequestBuilder.allIdsParameter(parameterName: String = "ids") = parameter(parameterName, "all")
 
     /**
+     * Gets the object without recovery.
+     *
      * @return the object
      */
-    protected suspend inline fun <reified T> get(path: String, block: HttpRequestBuilder.() -> Unit = {}): T = httpClient.get(path = path) {
+    protected suspend inline fun <reified T> forceGetSingle(path: String, block: HttpRequestBuilder.() -> Unit = {}): T = httpClient.get(path = path) {
         apply(block)
+    }
+
+    /**
+     * Gets the object with recovery.
+     *
+     * @return the object
+     */
+    protected suspend inline fun <reified T> getSingle(path: String, block: HttpRequestBuilder.() -> Unit = {}): T =
+        tryOrRecover({ defaultSingle() }) { forceGetSingle(path, block) }
+
+    /**
+     * Gets the identifiable object with recovery.
+     * @return the identifiable object
+     */
+    protected suspend inline fun <reified T : Identifiable<Id>, Id> getIdentifiableSingle(
+        id: Id,
+        path: String,
+        default: () -> T = { defaultSingle(id) },
+        block: HttpRequestBuilder.() -> Unit = {}
+    ): T = tryOrRecover(default) { forceGetSingle(path, block) }
+
+    /**
+     * Gets the objects with recovery.
+     *
+     * @return the objects
+     */
+    protected suspend inline fun <reified T> getList(path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> = tryOrRecover(
+        { emptyList() }
+    ) {
+        httpClient.get(path = path) {
+            apply(block)
+        }
     }
 
     /**
@@ -70,7 +106,7 @@ abstract class BaseClient(
     protected suspend inline fun <reified T> allTabs(path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> = all(path, "tabs", block)
 
     /**
-     * Chunks the ids into requests small enough for the API to accept, if there are more tids than the configuration page size.
+     * Chunks the ids into requests small enough for the API to accept, if there are more ids than the configuration page size.
      *
      * @return the collection of objects represented by the ids
      */
@@ -79,8 +115,9 @@ abstract class BaseClient(
         path: String,
         idsParameterName: String,
         block: HttpRequestBuilder.() -> Unit = {}
-    ): List<T>
-    {
+    ): List<T> = tryOrRecover(
+        { defaultAll(ids) }
+    ) {
         val responses = mutableListOf<T>()
         for (chunk in ids.toHashSet().chunked(configuration.pageSize)) {
             responses.addAll(httpClient.get(path = path) {
@@ -88,24 +125,80 @@ abstract class BaseClient(
                 apply(block)
             })
         }
-        return responses
+        responses
     }
 
     /**
      * @return all the objects
      */
-    protected suspend inline fun <reified T> all(path: String, idParameterName: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> =
+    protected suspend inline fun <reified T> all(
+        path: String,
+        idParameterName: String,
+        block: HttpRequestBuilder.() -> Unit = {}
+    ): List<T> = tryOrRecover(
+        // Don't know the associated ids so can't do proper defaulting.
+        { emptyList() }
+    ) {
         httpClient.get(path = path) {
             allIdsParameter(idParameterName)
             apply(block)
         }
+    }
 
     /**
+     * Gets the identifiable object with recovery.
+     *
      * @return a single object
      */
-    protected suspend inline fun <reified T : Identifiable<Id>, Id> single(id: Id, path: String, block: HttpRequestBuilder.() -> Unit = {}): T =
+    protected suspend inline fun <reified T : Identifiable<Id>, Id> getSingleById(id: Id, path: String, block: HttpRequestBuilder.() -> Unit = {}): T = tryOrRecover(
+        default = { defaultSingle(id) }
+    ) {
         httpClient.get(path = path) {
             idParameter(id)
             apply(block)
         }
+    }
+
+    /**
+     * Attempts to call the [block]. If the [block] fails and the recovery mode is [DEFAULT], then the [default] is called.
+     *
+     * @return the result of the [block] or the recovery result
+     */
+    protected inline fun <reified T> tryOrRecover(default: () -> T, block: () -> T): T = try {
+        block()
+    } catch (exception: Exception) {
+        when (configuration.exceptionRecoveryMode) {
+            NONE -> throw exception
+            DEFAULT -> default()
+        }
+    }
+
+    /**
+     * Creates a new instance from an empty or optional constructor.
+     */
+    protected inline fun <reified T> defaultSingle(): T {
+        val constructor = T::class.constructors.find { it.parameters.all { parameter -> parameter.isOptional } }
+            ?: throw NotImplementedError("Default recovery mode: ${T::class} is missing a completely optional constructor")
+
+        return constructor.callBy(emptyMap())
+    }
+
+    /**
+     * Creates a new instance from an empty or optional constructor with the id populated.
+     */
+    protected inline fun <reified T : Identifiable<Id>, Id> defaultSingle(id: Id): T {
+        val constructor = T::class.constructors.find { it.parameters.all { parameter -> parameter.isOptional } }
+            ?: throw NotImplementedError("Default recovery mode: ${T::class} is missing a completely optional constructor")
+
+        val idParameter = constructor.parameters.firstOrNull { parameter -> parameter.name == "id" }
+            ?: throw Exception("Default recovery mode: ${T::class} is missing the id parameter with a name of 'id'.")
+
+        // Populate the id instead of leaving it defaulted.
+        return constructor.callBy(mapOf(idParameter to id))
+    }
+
+    /**
+     * Creates new instances from an empty or optional constructor wit the id populated.
+     */
+    protected inline fun <reified T : Identifiable<Id>, Id> defaultAll(ids: Collection<Id>): List<T> = ids.map { id -> defaultSingle(id) }
 }

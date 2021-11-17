@@ -20,13 +20,13 @@ class ProfessionClient(httpClient: HttpClient, configuration: Gw2ClientConfigura
      * @return the ids of the available professions
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/professions">the wiki</a>
      */
-    suspend fun ids(): List<String> = get(path = PROFESSIONS)
+    suspend fun ids(): List<String> = getList(path = PROFESSIONS)
 
     /**
      * @return the profession associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/professions">the wiki</a>
      */
-    suspend fun profession(id: String, language: String? = null): Profession = single(id, PROFESSIONS) {
+    suspend fun profession(id: String, language: String? = null): Profession = getSingleById(id, PROFESSIONS) {
         language(language)
     }
 

@@ -19,13 +19,13 @@ class SkinClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
      * @return the ids of the available skins
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skins">the wiki</a>
      */
-    suspend fun ids(): List<Int> = get(path = SKINS)
+    suspend fun ids(): List<Int> = getList(path = SKINS)
 
     /**
      * @return the skin associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skins">the wiki</a>
      */
-    suspend fun skin(id: Int, language: String? = null): Skin = single(id, SKINS) {
+    suspend fun skin(id: Int, language: String? = null): Skin = getSingleById(id, SKINS) {
         language(language)
     }
 

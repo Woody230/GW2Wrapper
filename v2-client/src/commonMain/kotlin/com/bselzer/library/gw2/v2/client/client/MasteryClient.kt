@@ -19,13 +19,13 @@ class MasteryClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * @return the ids of the available masteries
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/masteries">the wiki</a>
      */
-    suspend fun ids(): List<Int> = get(path = MASTERIES)
+    suspend fun ids(): List<Int> = getList(path = MASTERIES)
 
     /**
      * @return the mastery associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/masteries">the wiki</a>
      */
-    suspend fun mastery(id: Int, language: String? = null): Mastery = single(id, MASTERIES) {
+    suspend fun mastery(id: Int, language: String? = null): Mastery = getSingleById(id, MASTERIES) {
         language(language)
     }
 

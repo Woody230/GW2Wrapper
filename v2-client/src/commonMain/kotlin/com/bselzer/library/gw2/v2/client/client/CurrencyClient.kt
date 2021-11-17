@@ -19,13 +19,13 @@ class CurrencyClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the ids of the available currencies
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/currencies">the wiki</a>
      */
-    suspend fun ids(): List<Int> = get(path = CURRENCIES)
+    suspend fun ids(): List<Int> = getList(path = CURRENCIES)
 
     /**
      * @return the currency associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/currencies">the wiki</a>
      */
-    suspend fun currency(id: Int, language: String? = null): Currency = single(id, CURRENCIES) {
+    suspend fun currency(id: Int, language: String? = null): Currency = getSingleById(id, CURRENCIES) {
         language(language)
     }
 

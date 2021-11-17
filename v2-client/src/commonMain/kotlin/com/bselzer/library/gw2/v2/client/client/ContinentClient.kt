@@ -31,13 +31,13 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @return the ids of the available continents
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
-    suspend fun ids(): List<Int> = get(path = CONTINENTS)
+    suspend fun ids(): List<Int> = getList(path = CONTINENTS)
 
     /**
      * @return the continent associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
-    suspend fun continent(id: Int, language: String? = null): Continent = single(id, CONTINENTS) {
+    suspend fun continent(id: Int, language: String? = null): Continent = getSingleById(id, CONTINENTS) {
         language(language)
     }
 
@@ -61,14 +61,14 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @return the ids of the available floors in the continent with [continentId]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
-    suspend fun floorIds(continentId: Int): List<Int> = get(path = "${CONTINENTS}/${continentId}/${FLOORS}")
+    suspend fun floorIds(continentId: Int): List<Int> = getList(path = "${CONTINENTS}/${continentId}/${FLOORS}")
 
     /**
      * @return the floor associated with the [floorId] in the continent with the [continentId]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     suspend fun floor(continentId: Int, floorId: Int, language: String? = null): ContinentFloor =
-        single(floorId, "${CONTINENTS}/${continentId}/${FLOORS}") {
+        getSingleById(floorId, "${CONTINENTS}/${continentId}/${FLOORS}") {
             language(language)
         }
 
@@ -94,14 +94,14 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     suspend fun regionIds(continentId: Int, floorId: Int): List<Int> =
-        get(path = "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}")
+        getList(path = "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}")
 
     /**
      * @return the region associated with the [regionId] in the continent with [continentId] and floor with [floorId]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     suspend fun region(continentId: Int, floorId: Int, regionId: Int, language: String? = null): ContinentRegion =
-        single(regionId, "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}") {
+        getSingleById(regionId, "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}") {
             language(language)
         }
 
@@ -128,14 +128,14 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     suspend fun mapIds(continentId: Int, floorId: Int, regionId: Int): List<Int> =
-        get(path = "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}")
+        getList(path = "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}")
 
     /**
      * @return the map associated with the [mapId] in the continent with [continentId], floor with [floorId], and region with [regionId]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     suspend fun map(continentId: Int, floorId: Int, regionId: Int, mapId: Int, language: String? = null): ContinentMap =
-        single(mapId, "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}") {
+        getSingleById(mapId, "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}") {
             language(language)
         }
 
@@ -162,13 +162,13 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     suspend fun sectorIds(continentId: Int, floorId: Int, regionId: Int, mapId: Int): List<Int> =
-        get(path = "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${SECTORS}")
+        getList(path = "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${SECTORS}")
 
     /**
      * @return the sector associated with the [sectorId] in the continent with [continentId], floor with [floorId], region with [regionId], and map with [mapId]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
-    suspend fun sector(continentId: Int, floorId: Int, regionId: Int, mapId: Int, sectorId: Int, language: String? = null): MapSector = single(
+    suspend fun sector(continentId: Int, floorId: Int, regionId: Int, mapId: Int, sectorId: Int, language: String? = null): MapSector = getSingleById(
         sectorId,
         "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${SECTORS}"
     ) {
@@ -200,7 +200,7 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     suspend fun pointOfInterestIds(continentId: Int, floorId: Int, regionId: Int, mapId: Int): List<Int> =
-        get(path = "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${POINT_OF_INTERESTS}")
+        getList(path = "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${POINT_OF_INTERESTS}")
 
     /**
      * @return the point of interest associated with the [pointOfInterestId] in the continent with [continentId], floor with [floorId], region with [regionId], and map with [mapId]
@@ -213,7 +213,7 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
         mapId: Int,
         pointOfInterestId: Int,
         language: String? = null
-    ): List<MapPointOfInterest> = single(
+    ): List<MapPointOfInterest> = getSingleById(
         pointOfInterestId,
         "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${POINT_OF_INTERESTS}"
     ) {
@@ -252,14 +252,14 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     suspend fun renownHeartIds(continentId: Int, floorId: Int, regionId: Int, mapId: Int): List<Int> =
-        get(path = "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${TASKS}")
+        getList(path = "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${TASKS}")
 
     /**
      * @return the renown hearts associated with the [renownHeartId] in the continent with [continentId], floor with [floorId], region with [regionId], and map with [mapId]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     suspend fun renownHeart(continentId: Int, floorId: Int, regionId: Int, mapId: Int, renownHeartId: Int, language: String? = null): MapRenownHeart =
-        single(
+        getSingleById(
             renownHeartId,
             "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${TASKS}"
         ) {

@@ -18,13 +18,13 @@ class QuagganClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * @return the ids of the available quaggans
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/quaggans">the wiki</a>
      */
-    suspend fun ids(): List<String> = get(path = QUAGGANS)
+    suspend fun ids(): List<String> = getList(path = QUAGGANS)
 
     /**
      * @return the quaggan associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/quaggans">the wiki</a>
      */
-    suspend fun quaggan(id: String): Quaggan = single(id, QUAGGANS)
+    suspend fun quaggan(id: String): Quaggan = getSingleById(id, QUAGGANS)
 
     /**
      * @return the quaggans associated with the [ids]

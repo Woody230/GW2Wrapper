@@ -19,6 +19,7 @@ fun KotlinDependencyHandler.ktxSerialization() = api("org.jetbrains.kotlinx:kotl
 fun KotlinDependencyHandler.ktorClient() = api("io.ktor:ktor-client-core:$KTOR")
 fun KotlinDependencyHandler.ktorClientSerialization() = api("io.ktor:ktor-client-serialization:$KTOR")
 fun KotlinDependencyHandler.coroutine() = api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINE")
+fun KotlinDependencyHandler.reflection() = implementation("org.jetbrains.kotlin:kotlin-reflect:$KOTLIN")
 
 fun KotlinDependencyHandler.v2Client() = api(project(":v2-client"))
 fun KotlinDependencyHandler.v2Model() = api(project(":v2-model"))

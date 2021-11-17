@@ -19,13 +19,13 @@ class GliderClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration
      * @return the ids of the available gliders
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/gliders">the wiki</a>
      */
-    suspend fun ids(): List<Int> = get(path = GLIDERS)
+    suspend fun ids(): List<Int> = getList(path = GLIDERS)
 
     /**
      * @return the glider associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/gliders">the wiki</a>
      */
-    suspend fun glider(id: Int, language: String? = null): Glider = single(id, GLIDERS) {
+    suspend fun glider(id: Int, language: String? = null): Glider = getSingleById(id, GLIDERS) {
         language(language)
     }
 

@@ -34,6 +34,11 @@ data class Gw2ClientConfiguration(
      */
     val pageSize: Int = Endpoints.MAXIMUM_PAGE_SIZE,
 
+    /**
+     * How to recover when an exception occurs.
+     */
+    val exceptionRecoveryMode: ExceptionRecoveryMode = ExceptionRecoveryMode.NONE
+
     /* TODO scope validation
     /**
      * Whether to validate that the required scopes to access the endpoints exist.
@@ -46,3 +51,18 @@ data class Gw2ClientConfiguration(
     val validateOptionalScopes: Boolean = false
      */
 )
+
+/**
+ * How to recover when an exception occurs.
+ */
+enum class ExceptionRecoveryMode {
+    /**
+     * Do not recover. The exception will be thrown.
+     */
+    NONE,
+
+    /**
+     * Create a default object where appropriate.
+     */
+    DEFAULT,
+}

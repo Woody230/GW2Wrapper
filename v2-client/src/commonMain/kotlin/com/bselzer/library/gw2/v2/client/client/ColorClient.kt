@@ -19,13 +19,13 @@ class ColorClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the ids of the available dye colors
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/colors">the wiki</a>
      */
-    suspend fun ids(): List<Int> = get(path = COLORS)
+    suspend fun ids(): List<Int> = getList(path = COLORS)
 
     /**
      * @return the dye color associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/colors">the wiki</a>
      */
-    suspend fun color(id: Int, language: String? = null): DyeColor = single(id, COLORS) {
+    suspend fun color(id: Int, language: String? = null): DyeColor = getSingleById(id, COLORS) {
         language(language)
     }
 

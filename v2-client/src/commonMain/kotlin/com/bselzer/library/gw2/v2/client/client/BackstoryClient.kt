@@ -22,13 +22,13 @@ class BackstoryClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @return the ids of the available answers
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/backstory/answers">the wiki</a>
      */
-    suspend fun answerIds(): List<String> = get(path = "${BACKSTORY}/${ANSWERS}")
+    suspend fun answerIds(): List<String> = getList(path = "${BACKSTORY}/${ANSWERS}")
 
     /**
      * @return the answer associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/backstory/answers">the wiki</a>
      */
-    suspend fun answer(id: String, language: String? = null): BackstoryAnswer = single(id, "${BACKSTORY}/${ANSWERS}") {
+    suspend fun answer(id: String, language: String? = null): BackstoryAnswer = getSingleById(id, "${BACKSTORY}/${ANSWERS}") {
         language(language)
     }
 
@@ -52,13 +52,13 @@ class BackstoryClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @return the ids of the available questions
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/backstory/questions">the wiki</a>
      */
-    suspend fun questionIds(): List<Int> = get(path = "${BACKSTORY}/${QUESTIONS}")
+    suspend fun questionIds(): List<Int> = getList(path = "${BACKSTORY}/${QUESTIONS}")
 
     /**
      * @return the question associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/backstory/questions">the wiki</a>
      */
-    suspend fun question(id: Int, language: String? = null): BackstoryQuestion = single(id, "${BACKSTORY}/${QUESTIONS}") {
+    suspend fun question(id: Int, language: String? = null): BackstoryQuestion = getSingleById(id, "${BACKSTORY}/${QUESTIONS}") {
         language(language)
     }
 

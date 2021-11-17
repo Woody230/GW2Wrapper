@@ -19,13 +19,13 @@ class DungeonClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * @return the ids of the available dungeons
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/dungeons">the wiki</a>
      */
-    suspend fun ids(): List<String> = get(path = DUNGEONS)
+    suspend fun ids(): List<String> = getList(path = DUNGEONS)
 
     /**
      * @return the dungeon associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/dungeons">the wiki</a>
      */
-    suspend fun dungeon(id: String, language: String? = null): Dungeon = single(id, DUNGEONS) {
+    suspend fun dungeon(id: String, language: String? = null): Dungeon = getSingleById(id, DUNGEONS) {
         language(language)
     }
 

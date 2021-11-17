@@ -27,13 +27,13 @@ class AchievementClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
      * @return the ids of all achievements
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements">the wiki</a>
      */
-    suspend fun ids(): List<Int> = get(path = ACHIEVEMENTS)
+    suspend fun ids(): List<Int> = getList(path = ACHIEVEMENTS)
 
     /**
      * @return the achievement associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements">the wiki</a>
      */
-    suspend fun achievement(id: Int, language: String? = null): Achievement = single(id, ACHIEVEMENTS) {
+    suspend fun achievement(id: Int, language: String? = null): Achievement = getSingleById(id, ACHIEVEMENTS) {
         language(language)
     }
 
@@ -49,25 +49,25 @@ class AchievementClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
      * @return today's dailies
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/daily">the wiki</a>
      */
-    suspend fun dailiesForToday(): Dailies = get(path = "${ACHIEVEMENTS}/${DAILY}")
+    suspend fun dailiesForToday(): Dailies = getSingle(path = "${ACHIEVEMENTS}/${DAILY}")
 
     /**
      * @return tomorrow's dailies
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/daily/tomorrow">the wiki</a>
      */
-    suspend fun dailiesForTomorrow(): Dailies = get(path = "${ACHIEVEMENTS}/${DAILY}/${TOMORROW}")
+    suspend fun dailiesForTomorrow(): Dailies = getSingle(path = "${ACHIEVEMENTS}/${DAILY}/${TOMORROW}")
 
     /**
      * @return the ids of all achievement groups
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/groups">the wiki</a>
      */
-    suspend fun groupIds(): List<String> = get(path = "${ACHIEVEMENTS}/${GROUPS}")
+    suspend fun groupIds(): List<String> = getList(path = "${ACHIEVEMENTS}/${GROUPS}")
 
     /**
      * @return the achievement group associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/groups">the wiki</a>
      */
-    suspend fun group(id: String, language: String? = null): AchievementGroup = single(id, "${ACHIEVEMENTS}/${GROUPS}") {
+    suspend fun group(id: String, language: String? = null): AchievementGroup = getSingleById(id, "${ACHIEVEMENTS}/${GROUPS}") {
         language(language)
     }
 
@@ -91,14 +91,14 @@ class AchievementClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
      * @return the ids of all achievement categories
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/categories">the wiki</a>
      */
-    suspend fun categoryIds(): List<Int> = get(path = "${ACHIEVEMENTS}/${CATEGORIES}")
+    suspend fun categoryIds(): List<Int> = getList(path = "${ACHIEVEMENTS}/${CATEGORIES}")
 
     /**
      * @return the achievement category associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/categories">the wiki</a>
      */
     suspend fun category(id: Int, language: String? = null): AchievementCategory =
-        single(id, "${ACHIEVEMENTS}/${CATEGORIES}") {
+        getSingleById(id, "${ACHIEVEMENTS}/${CATEGORIES}") {
             language(language)
         }
 

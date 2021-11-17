@@ -19,13 +19,13 @@ class WorldClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the ids of the available worlds
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/worlds">the wiki</a>
      */
-    suspend fun ids(): List<Int> = get(path = WORLDS)
+    suspend fun ids(): List<Int> = getList(path = WORLDS)
 
     /**
      * @return the world associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/worlds">the wiki</a>
      */
-    suspend fun world(id: Int, language: String? = null): List<World> = single(id, WORLDS) {
+    suspend fun world(id: Int, language: String? = null): List<World> = getSingleById(id, WORLDS) {
         language(language)
     }
 

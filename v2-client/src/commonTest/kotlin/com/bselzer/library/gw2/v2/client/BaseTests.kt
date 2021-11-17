@@ -1,11 +1,14 @@
 package com.bselzer.library.gw2.v2.client
 
+import com.bselzer.library.gw2.v2.client.client.ExceptionRecoveryMode
 import com.bselzer.library.gw2.v2.client.client.Gw2Client
 import com.bselzer.library.gw2.v2.client.client.Gw2ClientConfiguration
 import io.ktor.client.*
+import io.ktor.client.engine.mock.*
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import kotlin.test.fail
 
 abstract class BaseTests
 {
@@ -60,4 +63,40 @@ abstract class BaseTests
     protected fun Map<String, String>.characterName(): String = this.getValue("characterName")
 
     protected fun getProfessionResource(): String = "Profession.json".getResource()
+
+    /**
+     * Asserts a failure due to an exception not being thrown.
+     */
+    protected fun expectedException(): Nothing = fail("Expected an exception to be thrown")
+
+    /**
+     * Asserts that recovery can be performed.
+     */
+    protected fun <R> testRecovery(callEndpoint: suspend Gw2Client.() -> R, defaultAssertion: (R) -> Unit) =
+        try {
+            use { callEndpoint(this) }
+            expectedException()
+        } catch (exception: Exception) {
+            Gw2Client(createHttpClient(), createJson(), Gw2ClientConfiguration(exceptionRecoveryMode = ExceptionRecoveryMode.DEFAULT)).use {
+                val result = runBlocking { callEndpoint(it) }
+                defaultAssertion(result)
+            }
+        }
+
+    /**
+     * Asserts that recovery cannot be performed.
+     */
+    protected fun <R> failedRecovery(callEndpoint: suspend Gw2Client.() -> R) = try {
+        use { callEndpoint(this) }
+        expectedException()
+    } catch (exception: Exception) {
+        try {
+            Gw2Client(createHttpClient(), createJson(), Gw2ClientConfiguration(exceptionRecoveryMode = ExceptionRecoveryMode.DEFAULT)).use {
+                runBlocking { callEndpoint(it) }
+                expectedException()
+            }
+        } catch (exception: Exception) {
+
+        }
+    }
 }

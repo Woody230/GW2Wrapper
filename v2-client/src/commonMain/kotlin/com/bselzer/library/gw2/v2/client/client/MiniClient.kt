@@ -19,7 +19,7 @@ class MiniClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
      * @return the ids of the available minis
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/minis">the wiki</a>
      */
-    suspend fun ids(): List<Int> = get(path = MINIS)
+    suspend fun ids(): List<Int> = getList(path = MINIS)
 
     /**
      * @return the minis associated with the [ids]

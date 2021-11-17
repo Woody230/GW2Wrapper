@@ -19,13 +19,13 @@ class PetClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the ids of the available pets
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pets">the wiki</a>
      */
-    suspend fun ids(): List<Int> = get(path = PETS)
+    suspend fun ids(): List<Int> = getList(path = PETS)
 
     /**
      * @return the pet associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pets">the wiki</a>
      */
-    suspend fun pet(id: Int, language: String? = null): Pet = single(id, PETS) {
+    suspend fun pet(id: Int, language: String? = null): Pet = getSingleById(id, PETS) {
         language(language)
     }
 

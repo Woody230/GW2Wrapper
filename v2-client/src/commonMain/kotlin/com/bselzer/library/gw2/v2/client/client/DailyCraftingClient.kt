@@ -18,5 +18,5 @@ class DailyCraftingClient(httpClient: HttpClient, configuration: Gw2ClientConfig
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/dailycrafting">the wiki</a>
      */
     // TODO enum and extension method
-    suspend fun ids(): List<String> = get(path = DAILY_CRAFTING)
+    suspend fun ids(): List<String> = getList(path = DAILY_CRAFTING)
 }

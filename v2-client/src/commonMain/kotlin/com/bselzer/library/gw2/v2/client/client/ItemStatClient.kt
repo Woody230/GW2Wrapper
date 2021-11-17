@@ -19,13 +19,13 @@ class ItemStatClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the ids of the available item stats
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/itemstats">the wiki</a>
      */
-    suspend fun ids(): List<Int> = get(path = ITEM_STATS)
+    suspend fun ids(): List<Int> = getList(path = ITEM_STATS)
 
     /**
      * @return the item stat associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/itemstats">the wiki</a>
      */
-    suspend fun itemStat(id: Int, language: String? = null): ItemStat = single(id, ITEM_STATS) {
+    suspend fun itemStat(id: Int, language: String? = null): ItemStat = getSingleById(id, ITEM_STATS) {
         language(language)
     }
 

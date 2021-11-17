@@ -19,13 +19,13 @@ class QuestClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the ids of the available quests
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/quests">the wiki</a>
      */
-    suspend fun ids(): List<Int> = get(path = QUESTS)
+    suspend fun ids(): List<Int> = getList(path = QUESTS)
 
     /**
      * @return the quest associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/quests">the wiki</a>
      */
-    suspend fun quest(id: Int, language: String? = null): Quest = single(id, QUESTS) {
+    suspend fun quest(id: Int, language: String? = null): Quest = getSingleById(id, QUESTS) {
         language(language)
     }
 

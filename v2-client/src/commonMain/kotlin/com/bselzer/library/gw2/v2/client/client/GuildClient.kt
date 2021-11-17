@@ -46,7 +46,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      */
     @GuildScope(Requirement.OPTIONAL, GuildRanking.LEADER, GuildRanking.MEMBER)
     @Scope(Requirement.OPTIONAL, Permission.GUILDS)
-    suspend fun guild(guildId: String, token: String? = null): List<Guild> = get(path = "${GUILD}/${guildId}") {
+    suspend fun guild(guildId: String, token: String? = null): Guild = getIdentifiableSingle(guildId, path = "${GUILD}/${guildId}") {
         bearer(token)
     }
 
@@ -56,7 +56,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      */
     @GuildScope(Requirement.REQUIRED, GuildRanking.LEADER)
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.GUILDS)
-    suspend fun logs(guildId: String, token: String? = null): List<GuildLog> = get(path = "${GUILD}/${guildId}/${LOG}") {
+    suspend fun logs(guildId: String, token: String? = null): List<GuildLog> = getList(path = "${GUILD}/${guildId}/${LOG}") {
         bearer(token)
     }
 
@@ -66,7 +66,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      */
     @GuildScope(Requirement.REQUIRED, GuildRanking.LEADER)
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.GUILDS)
-    suspend fun logs(guildId: String, since: Int, token: String? = null): List<GuildLog> = get(path = "${GUILD}/${guildId}/${LOG}") {
+    suspend fun logs(guildId: String, since: Int, token: String? = null): List<GuildLog> = getList(path = "${GUILD}/${guildId}/${LOG}") {
         bearer(token)
         parameter("since", since)
     }
@@ -77,7 +77,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      */
     @GuildScope(Requirement.REQUIRED, GuildRanking.LEADER)
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.GUILDS)
-    suspend fun members(guildId: String, token: String? = null): List<GuildMember> = get(path = "${GUILD}/${guildId}/${MEMBERS}") {
+    suspend fun members(guildId: String, token: String? = null): List<GuildMember> = getList(path = "${GUILD}/${guildId}/${MEMBERS}") {
         bearer(token)
     }
 
@@ -87,7 +87,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      */
     @GuildScope(Requirement.REQUIRED, GuildRanking.LEADER)
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.GUILDS)
-    suspend fun ranks(guildId: String, token: String? = null): List<GuildRank> = get(path = "${GUILD}/${guildId}/${RANKS}") {
+    suspend fun ranks(guildId: String, token: String? = null): List<GuildRank> = getList(path = "${GUILD}/${guildId}/${RANKS}") {
         bearer(token)
     }
 
@@ -97,7 +97,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      */
     @GuildScope(Requirement.REQUIRED, GuildRanking.LEADER)
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.GUILDS)
-    suspend fun stashes(guildId: String, token: String? = null): List<GuildStash> = get(path = "${GUILD}/${guildId}/${STASH}") {
+    suspend fun stashes(guildId: String, token: String? = null): List<GuildStash> = getList(path = "${GUILD}/${guildId}/${STASH}") {
         bearer(token)
     }
 
@@ -107,7 +107,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      */
     @GuildScope(Requirement.REQUIRED, GuildRanking.LEADER)
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.GUILDS)
-    suspend fun storageSlots(guildId: String, token: String? = null): List<GuildStorageSlot> = get(path = "${GUILD}/${guildId}/${STASH}") {
+    suspend fun storageSlots(guildId: String, token: String? = null): List<GuildStorageSlot> = getList(path = "${GUILD}/${guildId}/${STASH}") {
         bearer(token)
     }
 
@@ -117,7 +117,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      */
     @GuildScope(Requirement.REQUIRED, GuildRanking.LEADER)
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.GUILDS)
-    suspend fun teams(guildId: String, token: String? = null): List<GuildTeam> = get(path = "${GUILD}/${guildId}/${TEAMS}") {
+    suspend fun teams(guildId: String, token: String? = null): List<GuildTeam> = getList(path = "${GUILD}/${guildId}/${TEAMS}") {
         bearer(token)
     }
 
@@ -127,7 +127,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      */
     @GuildScope(Requirement.REQUIRED, GuildRanking.LEADER)
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.GUILDS)
-    suspend fun upgradeIds(guildId: String, token: String? = null): List<Int> = get(path = "${GUILD}/${guildId}/${UPGRADES}") {
+    suspend fun upgradeIds(guildId: String, token: String? = null): List<Int> = getList(path = "${GUILD}/${guildId}/${UPGRADES}") {
         bearer(token)
     }
 
@@ -135,13 +135,13 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the ids of the available permissions
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/permissions">the wiki</a>
      */
-    suspend fun permissionIds(): List<String> = get(path = "${GUILD}/${PERMISSIONS}")
+    suspend fun permissionIds(): List<String> = getList(path = "${GUILD}/${PERMISSIONS}")
 
     /**
      * @return the permission associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/permissions">the wiki</a>
      */
-    suspend fun permission(id: String, language: String? = null): GuildPermission = single(id, "${GUILD}/${PERMISSIONS}") {
+    suspend fun permission(id: String, language: String? = null): GuildPermission = getSingleById(id, "${GUILD}/${PERMISSIONS}") {
         language(language)
     }
 
@@ -165,7 +165,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the id, in the form of a UUID, of the guild with the given [name]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/search">the wiki</a>
      */
-    suspend fun search(name: String): String? = get<List<String>>(path = "${GUILD}/${SEARCH}") {
+    suspend fun search(name: String): String? = getList<String>(path = "${GUILD}/${SEARCH}") {
         parameter("name", name)
     }.firstOrNull()
 
@@ -173,13 +173,13 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the ids of the available upgrades
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/upgrades">the wiki</a>
      */
-    suspend fun upgradeIds(): List<Int> = get(path = "${GUILD}/${UPGRADES}")
+    suspend fun upgradeIds(): List<Int> = getList(path = "${GUILD}/${UPGRADES}")
 
     /**
      * @return the upgrade associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/upgrades">the wiki</a>
      */
-    suspend fun upgrade(id: Int, language: String? = null): GuildUpgrade = single(id, "${GUILD}/${UPGRADES}") {
+    suspend fun upgrade(id: Int, language: String? = null): GuildUpgrade = getSingleById(id, "${GUILD}/${UPGRADES}") {
         language(language)
     }
 

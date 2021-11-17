@@ -19,13 +19,13 @@ class ItemClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
      * @return the ids of the available items
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
-    suspend fun ids(): List<Int> = get(path = ITEMS)
+    suspend fun ids(): List<Int> = getList(path = ITEMS)
 
     /**
      * @return the item associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
-    suspend fun item(id: Int, language: String? = null): List<Item> = single(id, ITEMS) {
+    suspend fun item(id: Int, language: String? = null): List<Item> = getSingleById(id, ITEMS) {
         language(language)
     }
 

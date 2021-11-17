@@ -21,13 +21,13 @@ class StoryClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the ids of the available stories
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/stories">the wiki</a>
      */
-    suspend fun ids(): List<Int> = get(path = STORIES)
+    suspend fun ids(): List<Int> = getList(path = STORIES)
 
     /**
      * @return the story associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/stories">the wiki</a>
      */
-    suspend fun story(id: Int, language: String? = null): Story = single(id, STORIES) {
+    suspend fun story(id: Int, language: String? = null): Story = getSingleById(id, STORIES) {
         language(language)
     }
 
@@ -51,13 +51,13 @@ class StoryClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the ids of the available seasons
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/stories/seasons">the wiki</a>
      */
-    suspend fun seasonIds(): List<String> = get(path = "${STORIES}/${SEASONS}")
+    suspend fun seasonIds(): List<String> = getList(path = "${STORIES}/${SEASONS}")
 
     /**
      * @return the season associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/stories/seasons">the wiki</a>
      */
-    suspend fun season(id: String, language: String? = null): StorySeason = single(id, "${STORIES}/${SEASONS}") {
+    suspend fun season(id: String, language: String? = null): StorySeason = getSingleById(id, "${STORIES}/${SEASONS}") {
         language(language)
     }
 

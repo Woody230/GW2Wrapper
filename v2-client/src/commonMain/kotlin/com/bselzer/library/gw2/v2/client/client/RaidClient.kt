@@ -19,13 +19,13 @@ class RaidClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
      * @return the ids of the available raids
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/raids">the wiki</a>
      */
-    suspend fun ids(): List<String> = get(path = RAIDS)
+    suspend fun ids(): List<String> = getList(path = RAIDS)
 
     /**
      * @return the raid associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/raids">the wiki</a>
      */
-    suspend fun raid(id: String, language: String? = null): Raid = single(id, RAIDS) {
+    suspend fun raid(id: String, language: String? = null): Raid = getSingleById(id, RAIDS) {
         language(language)
     }
 

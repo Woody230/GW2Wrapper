@@ -18,5 +18,5 @@ class WorldBossClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/worldbosses">the wiki</a>
      */
     // TODO enum and extension method
-    suspend fun ids(): List<String> = get(path = WORLD_BOSSES)
+    suspend fun ids(): List<String> = getList(path = WORLD_BOSSES)
 }

@@ -19,13 +19,13 @@ class OutfitClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration
      * @return the ids of the available outfits
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/outfits">the wiki</a>
      */
-    suspend fun ids(): List<Int> = get(path = OUTFITS)
+    suspend fun ids(): List<Int> = getList(path = OUTFITS)
 
     /**
      * @return the outfit associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/outfits">the wiki</a>
      */
-    suspend fun outfit(id: Int, language: String? = null): Outfit = single(id, OUTFITS) {
+    suspend fun outfit(id: Int, language: String? = null): Outfit = getSingleById(id, OUTFITS) {
         language(language)
     }
 

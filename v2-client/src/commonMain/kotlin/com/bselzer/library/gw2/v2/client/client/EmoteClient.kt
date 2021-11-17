@@ -18,13 +18,13 @@ class EmoteClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the ids of the available emotes
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/emotes">the wiki</a>
      */
-    suspend fun ids(): List<String> = get(path = EMOTES)
+    suspend fun ids(): List<String> = getList(path = EMOTES)
 
     /**
      * @return the emote associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/emotes">the wiki</a>
      */
-    suspend fun emotes(id: String): Emote = single(id, EMOTES)
+    suspend fun emotes(id: String): Emote = getSingleById(id, EMOTES)
 
     /**
      * @return the emotes associated with the [ids]

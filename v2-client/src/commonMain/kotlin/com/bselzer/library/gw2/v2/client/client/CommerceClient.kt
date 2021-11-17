@@ -42,7 +42,7 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/delivery">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.TRADING_POST)
-    suspend fun delivery(token: String? = null): Delivery = get(path = "${COMMERCE}/${DELIVERY}") {
+    suspend fun delivery(token: String? = null): Delivery = getSingle(path = "${COMMERCE}/${DELIVERY}") {
         bearer(token)
     }
 
@@ -50,7 +50,7 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the information about the exchange of [quantity] coins to gems
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/exchange/coins">the wiki</a>
      */
-    suspend fun coinExchange(quantity: Int): CoinExchange = get(path = "${COMMERCE}/${EXCHANGE}/${COINS}") {
+    suspend fun coinExchange(quantity: Int): CoinExchange = getSingle(path = "${COMMERCE}/${EXCHANGE}/${COINS}") {
         parameter("quantity", quantity)
     }
 
@@ -58,7 +58,7 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the information about the exchange of [quantity] gems to coins
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/exchange/gems">the wiki</a>
      */
-    suspend fun gemExchange(quantity: Int): GemExchange = get(path = "${COMMERCE}/${EXCHANGE}/${GEMS}") {
+    suspend fun gemExchange(quantity: Int): GemExchange = getSingle(path = "${COMMERCE}/${EXCHANGE}/${GEMS}") {
         parameter("quantity", quantity)
     }
 
@@ -66,13 +66,13 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the ids of the available listings
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/listings">the wiki</a>
      */
-    suspend fun listingIds(): List<Int> = get(path = "${COMMERCE}/${LISTINGS}")
+    suspend fun listingIds(): List<Int> = getList(path = "${COMMERCE}/${LISTINGS}")
 
     /**
      * @return the listing associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/listings">the wiki</a>
      */
-    suspend fun listing(id: Int): Listings = single(id, "${COMMERCE}/${LISTINGS}")
+    suspend fun listing(id: Int): Listings = getSingleById(id, "${COMMERCE}/${LISTINGS}")
 
 
     /**
@@ -85,13 +85,13 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the ids of the available prices
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/prices">the wiki</a>
      */
-    suspend fun priceIds(): List<Int> = get(path = "${COMMERCE}/${PRICES}")
+    suspend fun priceIds(): List<Int> = getList(path = "${COMMERCE}/${PRICES}")
 
     /**
      * @return the price associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/prices">the wiki</a>
      */
-    suspend fun price(id: Int): Prices = single(id, "${COMMERCE}/${PRICES}")
+    suspend fun price(id: Int): Prices = getSingleById(id, "${COMMERCE}/${PRICES}")
 
     /**
      * @return the prices associated with the [ids]
@@ -105,7 +105,7 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.TRADING_POST)
     suspend fun currentBuys(token: String? = null): List<CurrentTransaction> =
-        get(path = "${COMMERCE}/${TRANSACTIONS}/${CURRENT}/${BUYS}") {
+        getList(path = "${COMMERCE}/${TRANSACTIONS}/${CURRENT}/${BUYS}") {
             bearer(token)
         }
 
@@ -114,7 +114,7 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/transactions">the wiki</a>
      */
     suspend fun currentSells(token: String? = null): List<CurrentTransaction> =
-        get(path = "${COMMERCE}/${TRANSACTIONS}/${CURRENT}/${BUYS}") {
+        getList(path = "${COMMERCE}/${TRANSACTIONS}/${CURRENT}/${BUYS}") {
             bearer(token)
         }
 
@@ -124,7 +124,7 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.TRADING_POST)
     suspend fun pastBuys(token: String? = null): List<PastTransaction> =
-        get(path = "${COMMERCE}/${TRANSACTIONS}/${HISTORY}/${SELLS}") {
+        getList(path = "${COMMERCE}/${TRANSACTIONS}/${HISTORY}/${SELLS}") {
             bearer(token)
         }
 
@@ -133,7 +133,7 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/transactions">the wiki</a>
      */
     suspend fun pastSells(token: String? = null): List<PastTransaction> =
-        get(path = "${COMMERCE}/${TRANSACTIONS}/${HISTORY}/${SELLS}") {
+        getList(path = "${COMMERCE}/${TRANSACTIONS}/${HISTORY}/${SELLS}") {
             bearer(token)
         }
 }

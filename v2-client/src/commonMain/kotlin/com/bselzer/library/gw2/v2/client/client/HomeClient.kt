@@ -20,13 +20,13 @@ class HomeClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
      * @return the ids of the available cats
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/home/cats">the wiki</a>
      */
-    suspend fun catIds(): List<Int> = get(path = "${HOME}/${CATS}")
+    suspend fun catIds(): List<Int> = getList(path = "${HOME}/${CATS}")
 
     /**
      * @return the cat associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/home/cats">the wiki</a>
      */
-    suspend fun cat(id: Int): Cat = single(id, "${HOME}/${CATS}")
+    suspend fun cat(id: Int): Cat = getSingleById(id, "${HOME}/${CATS}")
 
     /**
      * @return the cats associated with the [ids]
@@ -44,13 +44,13 @@ class HomeClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
      * @return the ids of the available nodes
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/home/nodes">the wiki</a>
      */
-    suspend fun nodeIds(): List<String> = get(path = "${HOME}/${NODES}")
+    suspend fun nodeIds(): List<String> = getList(path = "${HOME}/${NODES}")
 
     /**
      * @return the node associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/home/nodes">the wiki</a>
      */
-    suspend fun node(id: String): Node = single(id, "${HOME}/${NODES}")
+    suspend fun node(id: String): Node = getSingleById(id, "${HOME}/${NODES}")
 
     /**
      * @return the nodes associated with the [ids]

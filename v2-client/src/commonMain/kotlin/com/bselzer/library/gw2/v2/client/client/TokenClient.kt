@@ -33,7 +33,7 @@ class TokenClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/tokeninfo">tokeninfo on the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
-    suspend fun information(token: String? = null): TokenInfo = get(path = TOKEN_INFO) {
+    suspend fun information(token: String? = null): TokenInfo = forceGetSingle(path = TOKEN_INFO) {
         bearer(token)
     }
 
@@ -51,7 +51,7 @@ class TokenClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
         permissions: List<String>,
         urls: List<String>,
         token: String? = null
-    ): SubToken = get(path = CREATE_SUBTOKEN) {
+    ): SubToken = forceGetSingle(path = CREATE_SUBTOKEN) {
         bearer(token)
         parameter("expire", expiration)
         parameter("permissions", permissions.joinToString())
