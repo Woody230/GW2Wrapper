@@ -6,15 +6,12 @@ import com.bselzer.library.gw2.v2.cache.instance.WorldCache
 import com.bselzer.library.gw2.v2.cache.instance.WvwCache
 import com.bselzer.library.gw2.v2.client.client.Gw2Client
 import com.bselzer.library.kotlin.extension.kodein.db.cache.DBCacheProvider
-import com.bselzer.library.kotlin.extension.kodein.db.transaction.DBTransactionProvider
+import org.kodein.db.DB
 
 /**
  * The caching abstraction for GW2 instances.
- *
- * @param transactionProvider the transaction provider
  */
-class Gw2CacheProvider(transactionProvider: DBTransactionProvider) :
-    DBCacheProvider<Gw2Cache, Gw2CacheProvider>(transactionProvider) {
+class Gw2CacheProvider(database: DB) : DBCacheProvider<Gw2Cache, Gw2CacheProvider>(database) {
 
     override val instance: Gw2CacheProvider = this
 

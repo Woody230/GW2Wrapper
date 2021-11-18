@@ -10,6 +10,9 @@ import com.bselzer.library.kotlin.extension.kodein.db.operation.clear
 import com.bselzer.library.kotlin.extension.kodein.db.operation.getById
 import com.bselzer.library.kotlin.extension.kodein.db.operation.putMissingById
 import com.bselzer.library.kotlin.extension.kodein.db.transaction.TransactionManager
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import org.kodein.db.find
 import org.kodein.db.useModels
 
@@ -32,13 +35,25 @@ class TileCache(transactionManager: TransactionManager, private val client: Tile
     /**
      * Finds the tiles with the same [TileRequest.zoom], [TileRequest.x], and [TileRequest.y].
      *
+     * If there are missing tiles, then the tile service is called.
+     *
+     * @param tileRequests the requests
+     * @return the deferred tiles
+     */
+    suspend fun findTilesAsync(tileRequests: Collection<TileRequest>): Collection<Deferred<Tile>> = transaction {
+        coroutineScope { tileRequests.map { tileRequest -> async { getTile(tileRequest) } } }
+    }
+
+    /**
+     * Finds the tiles with the same [TileRequest.zoom], [TileRequest.x], and [TileRequest.y].
+     *
      * If there are missing tiles, then they are not resolved with a call to the tile service.
      * A call to [putTiles] should be made first.
      *
      * @param tileRequests the requests
      * @return the tiles
      */
-    suspend fun findTiles(tileRequests: Collection<TileRequest>) = transaction { db ->
+    suspend fun findTiles(tileRequests: Collection<TileRequest>): Collection<Tile> = transaction { db ->
         val ids = tileRequests.map { tileRequest -> tileRequest.id() }
         db.reader.find<Tile>().all().useModels { it.filter { tile -> ids.contains(tile.id()) }.toList() }
     }
