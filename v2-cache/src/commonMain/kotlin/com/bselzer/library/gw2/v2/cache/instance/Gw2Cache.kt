@@ -31,7 +31,7 @@ abstract class Gw2Cache(transactionStarter: TransactionStarter, protected val cl
         crossinline getId: Origin.() -> Id
     ): Collection<Reference> = `access$runTransaction` {
         val ids = origin.map(getId)
-        reader.find<Reference>().all().useModels { it.filter { upgrade -> ids.contains(upgrade.id) }.toList() }
+        reader.find<Reference>().all().useModels { it.filter { reference -> ids.contains(reference.id) }.toList() }
     }
 
     /**
@@ -48,7 +48,7 @@ abstract class Gw2Cache(transactionStarter: TransactionStarter, protected val cl
         crossinline getIds: Origin.() -> Collection<Id>
     ): Collection<Reference> = `access$runTransaction` {
         val ids = origin.flatMap(getIds)
-        reader.find<Reference>().all().useModels { it.filter { upgrade -> ids.contains(upgrade.id) }.toList() }
+        reader.find<Reference>().all().useModels { it.filter { reference -> ids.contains(reference.id) }.toList() }
     }
 
     @PublishedApi
