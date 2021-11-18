@@ -9,7 +9,7 @@ import com.bselzer.library.gw2.v2.model.wvw.objective.WvwObjective
 import com.bselzer.library.gw2.v2.model.wvw.upgrade.WvwUpgrade
 import com.bselzer.library.kotlin.extension.kodein.db.operation.clear
 import com.bselzer.library.kotlin.extension.kodein.db.operation.putMissingById
-import com.bselzer.library.kotlin.extension.kodein.db.transaction.TransactionStarter
+import com.bselzer.library.kotlin.extension.kodein.db.transaction.TransactionManager
 import org.kodein.db.asModelSequence
 import org.kodein.db.deleteFrom
 import org.kodein.db.find
@@ -18,7 +18,7 @@ import org.kodein.db.getById
 /**
  * Represents a cache for World vs. World models.
  */
-class WvwCache(transactionStarter: TransactionStarter, client: Gw2Client) : Gw2Cache(transactionStarter, client) {
+class WvwCache(transactionManager: TransactionManager, client: Gw2Client) : Gw2Cache(transactionManager, client) {
 
     /**
      * Finds the objectives in the database associated with the [match].
@@ -42,8 +42,8 @@ class WvwCache(transactionStarter: TransactionStarter, client: Gw2Client) : Gw2C
      * @param objective the objective
      * @return the upgrade
      */
-    suspend fun getUpgrade(objective: WvwObjective): WvwUpgrade? = runTransaction {
-        reader.getById(objective.upgradeId)
+    suspend fun getUpgrade(objective: WvwObjective): WvwUpgrade? = transaction { db ->
+        db.reader.getById(objective.upgradeId)
     }
 
     /**
@@ -71,7 +71,6 @@ class WvwCache(transactionStarter: TransactionStarter, client: Gw2Client) : Gw2C
      * @param match the match
      */
     suspend fun putMatch(match: WvwMatch): Unit = transaction {
-        writer.put(match)
         putObjectives(match)
     }
 
@@ -80,14 +79,14 @@ class WvwCache(transactionStarter: TransactionStarter, client: Gw2Client) : Gw2C
      *
      * @param match the match
      */
-    private suspend fun putObjectives(match: WvwMatch): Unit = transaction {
+    private suspend fun putObjectives(match: WvwMatch): Unit = transaction { db ->
         val objectiveIds = match.maps.flatMap { map -> map.objectives.map { objective -> objective.id } }
         putMissingById(
             requestIds = { objectiveIds },
             requestById = { ids -> client.wvw.objectives(ids) }
         )
 
-        val objectives = objectiveIds.mapNotNull { id -> reader.getById<WvwObjective>(id) }
+        val objectives = objectiveIds.mapNotNull { id -> db.reader.getById<WvwObjective>(id) }
         putUpgrades(objectives)
         putGuildUpgrades(match)
     }
@@ -127,7 +126,7 @@ class WvwCache(transactionStarter: TransactionStarter, client: Gw2Client) : Gw2C
     /**
      * Clears the [WvwMatch], [WvwObjective], and [WvwUpgrade], and [ClaimableUpgrade] guild upgrade models.
      */
-    override suspend fun clear() = transaction {
+    override suspend fun clear(): Unit = transaction { db ->
         clear<WvwMatch>()
         clear<WvwObjective>()
         clear<WvwUpgrade>()
@@ -135,7 +134,7 @@ class WvwCache(transactionStarter: TransactionStarter, client: Gw2Client) : Gw2C
         // Since guild upgrades are not completely WvW specific, need to delete the specific upgrades.
         // Ids are only dynamically found through the match so using it wouldn't be comprehensive.
         // Therefore, the only resolution is to delete any ClaimableUpgrade, which should only be tactics.
-        val tactics = reader.find<GuildUpgrade>().all().asModelSequence().filter { guildUpgrade -> guildUpgrade is ClaimableUpgrade }
-        tactics.forEach { tactic -> writer.deleteFrom(tactic) }
+        val tactics = db.reader.find<GuildUpgrade>().all().asModelSequence().filter { guildUpgrade -> guildUpgrade is ClaimableUpgrade }
+        tactics.forEach { tactic -> db.writer.deleteFrom(tactic) }
     }
 }

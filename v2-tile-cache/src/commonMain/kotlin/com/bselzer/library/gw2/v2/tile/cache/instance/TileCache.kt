@@ -9,15 +9,14 @@ import com.bselzer.library.kotlin.extension.kodein.db.cache.DBCache
 import com.bselzer.library.kotlin.extension.kodein.db.operation.clear
 import com.bselzer.library.kotlin.extension.kodein.db.operation.getById
 import com.bselzer.library.kotlin.extension.kodein.db.operation.putMissingById
-import com.bselzer.library.kotlin.extension.kodein.db.transaction.TransactionStarter
+import com.bselzer.library.kotlin.extension.kodein.db.transaction.TransactionManager
 import org.kodein.db.find
 import org.kodein.db.useModels
 
 /**
  * The cache for the [TileClient].
  */
-class TileCache(transactionStarter: TransactionStarter, private val client: TileClient): DBCache(transactionStarter)
-{
+class TileCache(transactionManager: TransactionManager, private val client: TileClient) : DBCache(transactionManager) {
     /**
      * Gets the tile with the same [TileRequest.zoom], [TileRequest.x] and [TileRequest.y].
      *
@@ -26,7 +25,7 @@ class TileCache(transactionStarter: TransactionStarter, private val client: Tile
      * @param tileRequest the request
      * @return the tile
      */
-    suspend fun getTile(tileRequest: TileRequest): Tile = runTransaction {
+    suspend fun getTile(tileRequest: TileRequest): Tile = transaction {
         getById(tileRequest.id(), { client.tile(tileRequest) })
     }
 
@@ -39,9 +38,9 @@ class TileCache(transactionStarter: TransactionStarter, private val client: Tile
      * @param tileRequests the requests
      * @return the tiles
      */
-    suspend fun findTiles(tileRequests: Collection<TileRequest>) = runTransaction {
+    suspend fun findTiles(tileRequests: Collection<TileRequest>) = transaction { db ->
         val ids = tileRequests.map { tileRequest -> tileRequest.id() }
-        reader.find<Tile>().all().useModels { it.filter { tile -> ids.contains(tile.id()) }.toList() }
+        db.reader.find<Tile>().all().useModels { it.filter { tile -> ids.contains(tile.id()) }.toList() }
     }
 
     /**
