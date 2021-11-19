@@ -52,11 +52,11 @@ open class TileClient(
 
     /**
      * @return the tile grid generated from the [request]
-     * @param request the request to get grid and tile content from
+     * @param request the request to get the grid and tile content from
      */
-    suspend fun grid(request: TileGridRequest): TileGrid = coroutineScope {
-        val tiles = request.tileRequests.map { request -> tile(request) }
-        return@coroutineScope TileGrid(request, tiles)
+    suspend fun grid(request: TileGridRequest): TileGrid {
+        val tiles = request.tileRequests.map { tileRequest -> tileAsync(tileRequest) }.map { deferred -> deferred.await() }
+        return TileGrid(request, tiles)
     }
 
     /**
