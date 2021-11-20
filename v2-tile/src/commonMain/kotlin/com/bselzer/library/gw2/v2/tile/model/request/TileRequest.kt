@@ -11,20 +11,30 @@ data class TileRequest(
     /**
      * The request.
      */
-    val url: String = "",
+    val url: String,
 
     /**
-     * The horizontal position within the texture.
+     * The relative horizontal position within the texture.
      */
-    val x: Int = 0,
+    val gridX: Int,
 
     /**
-     * The vertical position within the texture.
+     * The relative vertical position within the texture.
      */
-    val y: Int = 0,
+    val gridY: Int,
+
+    /**
+     * The width.
+     */
+    val width: Int,
+
+    /**
+     * The height.
+     */
+    val height: Int,
 
     /**
      * The zoom level.
      */
-    val zoom: Int = 0,
+    val zoom: Int,
 )

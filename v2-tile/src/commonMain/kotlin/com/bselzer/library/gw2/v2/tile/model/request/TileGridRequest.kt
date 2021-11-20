@@ -11,42 +11,52 @@ data class TileGridRequest(
     /**
      * The starting horizontal tile position.
      */
-    val startX: Int = 0,
+    val startX: Int,
 
     /**
      * The ending horizontal tile position.
      */
-    val endX: Int = 0,
+    val endX: Int,
 
     /**
      * The starting vertical tile position.
      */
-    val startY: Int = 0,
+    val startY: Int,
 
     /**
      * The ending vertical tile position.
      */
-    val endY: Int = 0,
+    val endY: Int,
 
     /**
      * The width of each individual tile.
      */
-    val tileWidth: Int = 0,
+    val tileWidth: Int,
 
     /**
      * The height of each individual tile.
      */
-    val tileHeight: Int = 0,
+    val tileHeight: Int,
+
+    /**
+     * The width of the texture.
+     */
+    val textureWidth: Int,
+
+    /**
+     * The height of the texture.
+     */
+    val textureHeight: Int,
 
     /**
      * The zoom level.
      */
-    val zoom: Int = 0,
+    val zoom: Int,
 
     /**
      * The requests for tiles.
      */
-    val tileRequests: List<TileRequest> = emptyList(),
+    val tileRequests: List<TileRequest>,
 ) {
     /**
      * Note that only existing [tileRequests] are used to form the bound.
@@ -58,6 +68,6 @@ data class TileGridRequest(
         endX = endX,
         startY = startY,
         endY = endY,
-        tileRequests = tileRequests.filter { tileRequest -> tileRequest.x in startX..endX && tileRequest.y in startY..endY }
+        tileRequests = tileRequests.filter { tileRequest -> tileRequest.gridX in startX..endX && tileRequest.gridY in startY..endY }
     )
 }

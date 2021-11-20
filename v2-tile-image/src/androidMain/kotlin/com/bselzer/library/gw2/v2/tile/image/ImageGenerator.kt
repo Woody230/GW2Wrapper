@@ -41,7 +41,7 @@ class ImageGenerator(
         grid.grid.forEachIndexed { y, row ->
             row.forEachIndexed { x, tile ->
                 val bitmap = BitmapFactory.decodeByteArray(tile.content, 0, tile.content.size)
-                    ?: throw NullPointerException("Missing content for the tile [${tile.x},${tile.y}].")
+                    ?: throw NullPointerException("Missing content for the tile [${tile.gridX},${tile.gridY}].")
                 canvas.drawBitmap(bitmap, (grid.tileWidth * x).toFloat(), (grid.tileHeight * y).toFloat(), null)
             }
         }

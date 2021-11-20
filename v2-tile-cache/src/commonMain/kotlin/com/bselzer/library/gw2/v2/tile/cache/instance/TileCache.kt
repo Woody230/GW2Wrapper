@@ -18,7 +18,7 @@ import kotlinx.coroutines.coroutineScope
  */
 class TileCache(transactionManager: TransactionManager, private val client: TileClient) : DBCache(transactionManager) {
     /**
-     * Gets the tile with the same [TileRequest.zoom], [TileRequest.x] and [TileRequest.y].
+     * Gets the tile with the same [TileRequest.zoom], [TileRequest.gridX] and [TileRequest.gridY].
      *
      * If there is no tile in the database, then the tile service is called.
      *
@@ -36,7 +36,7 @@ class TileCache(transactionManager: TransactionManager, private val client: Tile
     }
 
     /**
-     * Finds the tiles with the same [TileRequest.zoom], [TileRequest.x], and [TileRequest.y].
+     * Finds the tiles with the same [TileRequest.zoom], [TileRequest.gridX], and [TileRequest.gridY].
      *
      * If there are missing tiles, then the tile service is called.
      *

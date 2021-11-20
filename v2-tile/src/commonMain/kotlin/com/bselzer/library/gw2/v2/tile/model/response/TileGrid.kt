@@ -2,6 +2,7 @@ package com.bselzer.library.gw2.v2.tile.model.response
 
 import com.bselzer.library.gw2.v2.tile.model.request.TileGridRequest
 import kotlinx.serialization.Serializable
+import kotlin.math.pow
 
 /**
  * The tiles within the grid.
@@ -17,6 +18,16 @@ data class TileGrid(
      * The height of each individual tile.
      */
     val tileHeight: Int = 0,
+
+    /**
+     * The width of the texture.
+     */
+    val textureWidth: Int = 0,
+
+    /**
+     * The height of the texture.
+     */
+    val textureHeight: Int = 0,
 
     /**
      * The starting horizontal tile position.
@@ -77,25 +88,52 @@ data class TileGrid(
      * Creates a new instance using the data from the [request].
      */
     constructor(request: TileGridRequest, tiles: List<Tile> = emptyList()) : this(
-        request.tileWidth,
-        request.tileHeight,
-        request.startX,
-        request.endX,
-        request.startY,
-        request.endY,
-        request.zoom,
-        tiles
+        tileWidth = request.tileWidth,
+        tileHeight = request.tileHeight,
+        textureWidth = request.textureWidth,
+        textureHeight = request.textureHeight,
+        startX = request.startX,
+        endX = request.endX,
+        startY = request.startY,
+        endY = request.endY,
+        zoom = request.zoom,
+        tiles = tiles
     )
+
+    /**
+     * @return the position scaled to the bounds of the grid within the [zoom] level
+     */
+    fun scale(x: Int, y: Int): Pair<Int, Int> {
+        val zoom = textureScale(x, y)
+
+        // Remove the excluded starting tiles.
+        val scaledX = zoom.first - (startX * tileWidth)
+        val scaledY = zoom.second - (startY * tileHeight)
+        return Pair(scaledX, scaledY)
+    }
+
+    /**
+     * @return the position scaled to the absolute coordinates within the [zoom] level
+     */
+    fun textureScale(x: Int, y: Int): Pair<Int, Int> {
+        // Scale the coordinates to the current zoom level.
+        val zoomWidth = 2.0.pow(zoom) * tileWidth
+        val zoomHeight = 2.0.pow(zoom) * tileHeight
+        val zoomX = (zoomWidth * x / textureWidth).toInt()
+        val zoomY = (zoomHeight * y / textureHeight).toInt()
+        return Pair(zoomX, zoomY)
+    }
 
     /**
      * @return the grid from the [tiles] with missing tiles created with empty content
      */
     private fun createGrid(): List<List<Tile>> {
-        val grouped = tiles.groupBy { it.y }
+        val grouped = tiles.groupBy { it.gridY }
         val grid = mutableListOf<List<Tile>>()
         for (y in startY..endY) {
             val group = grouped[y] ?: emptyList()
-            val row = (startX..endX).map { x -> group.firstOrNull { tile -> tile.x == x } ?: Tile() }
+            val row =
+                (startX..endX).map { x -> group.firstOrNull { tile -> tile.gridX == x } ?: Tile(gridX = x, gridY = y, width = tileWidth, height = tileHeight, zoom = zoom) }
             grid.add(row)
         }
         return grid

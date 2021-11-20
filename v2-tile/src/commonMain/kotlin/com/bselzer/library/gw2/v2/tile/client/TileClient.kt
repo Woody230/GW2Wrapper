@@ -94,28 +94,39 @@ open class TileClient(
         val maxZoomTiles = 2.0.pow(continent.maxZoom)
 
         // Get the dimensions of each individual tile.
-        val gridWidth = floor.textureDimensions.width
-        val gridHeight = floor.textureDimensions.height
-        val tileWidth = (gridWidth / maxZoomTiles).toInt()
-        val tileHeight = (gridHeight / maxZoomTiles).toInt()
+        val textureWidth = floor.textureDimensions.width.toInt()
+        val textureHeight = floor.textureDimensions.height.toInt()
+        val tileWidth = (textureWidth / maxZoomTiles).toInt()
+        val tileHeight = (textureHeight / maxZoomTiles).toInt()
 
         // Get the tile position bounds within the grid.
-        val startX = floor(floor.clampedView.point1.x * requestedZoomTiles / gridWidth).toInt()
-        val endX = floor(floor.clampedView.point2.x * requestedZoomTiles / gridWidth).toInt()
-        val startY = floor(floor.clampedView.point1.y * requestedZoomTiles / gridHeight).toInt()
-        val endY = floor(floor.clampedView.point2.x * requestedZoomTiles / gridHeight).toInt()
+        val startX = floor(floor.clampedView.point1.x * requestedZoomTiles / textureWidth).toInt()
+        val endX = floor(floor.clampedView.point2.x * requestedZoomTiles / textureWidth).toInt()
+        val startY = floor(floor.clampedView.point1.y * requestedZoomTiles / textureHeight).toInt()
+        val endY = floor(floor.clampedView.point2.x * requestedZoomTiles / textureHeight).toInt()
 
         // Create the requests for tile content.
         val requests = mutableListOf<TileRequest>()
         val mutex = Mutex()
-        for (y in startY..endY) {
-            for (x in startX..endX) {
-                val url = takeBaseUrl(mutex).constructUrl(continent.id, floor.id, requestedZoom, x, y)
-                requests.add(TileRequest(url, x, y))
+        for (gridY in startY..endY) {
+            for (gridX in startX..endX) {
+                val url = takeBaseUrl(mutex).constructUrl(continent.id, floor.id, requestedZoom, gridX, gridY)
+                requests.add(TileRequest(url = url, gridX = gridX, gridY = gridY, width = tileWidth, height = tileHeight, zoom = zoom))
             }
         }
 
-        return TileGridRequest(startX, endX, startY, endY, tileWidth, tileHeight, zoom, requests)
+        return TileGridRequest(
+            startX = startX,
+            endX = endX,
+            startY = startY,
+            endY = endY,
+            tileWidth = tileWidth,
+            tileHeight = tileHeight,
+            textureWidth = textureWidth,
+            textureHeight = textureHeight,
+            zoom = zoom,
+            tileRequests = requests
+        )
     }
 
     /**

@@ -30,7 +30,7 @@ fun World.region(): WorldRegion?
     return try
     {
         val regionId = id.toString().getOrNull(0)?.toString() ?: return null
-        Json { coerceInputValues = true }.decodeFromJsonElement(serializer(), JsonPrimitive(regionId))
+        Json.decodeFromJsonElement(serializer(), JsonPrimitive(regionId))
     } catch (ex: SerializationException)
     {
         null

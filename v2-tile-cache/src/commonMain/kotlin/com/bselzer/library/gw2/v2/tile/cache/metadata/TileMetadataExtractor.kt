@@ -25,10 +25,10 @@ class TileMetadataExtractor : MetadataExtractor {
  * Creates an id using the zoom and position of the tile.
  * @return the id
  */
-fun Tile.id() = Value.of(zoom, x, y)
+fun Tile.id() = Value.of(zoom, gridX, gridY)
 
 /**
- * Creates an id using the zoom and position of the tile.
+ * Creates an id using the zoom and posit`ion of the tile.
  * @return the id
  */
-fun TileRequest.id() = Value.of(zoom, x, y)
+fun TileRequest.id() = Value.of(zoom, gridX, gridY)
