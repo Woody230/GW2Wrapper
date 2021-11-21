@@ -38,7 +38,7 @@ class ImageGenerator(
     fun generateMap(outputDirectory: String, fileName: String = "Map", grid: TileGrid) {
         val map = Bitmap.createBitmap(grid.width, grid.height, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(map)
-        grid.grid.forEachIndexed { y, row ->
+        grid.rows.forEachIndexed { y, row ->
             row.forEachIndexed { x, tile ->
                 val bitmap = BitmapFactory.decodeByteArray(tile.content, 0, tile.content.size)
                     ?: throw NullPointerException("Missing content for the tile [${tile.gridX},${tile.gridY}].")

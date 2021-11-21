@@ -60,9 +60,9 @@ data class TileGrid(
     val tiles: List<Tile> = emptyList(),
 ) {
     /**
-     * All of the tiles within the boundary.
+     * All of the tiles within the boundary by rows.
      */
-    val grid: List<List<Tile>> = createGrid()
+    val rows: List<List<Tile>> = createRows()
 
     /**
      * The number of columns within the grid.
@@ -127,7 +127,7 @@ data class TileGrid(
     /**
      * @return the grid from the [tiles] with missing tiles created with empty content
      */
-    private fun createGrid(): List<List<Tile>> {
+    private fun createRows(): List<List<Tile>> {
         val grouped = tiles.groupBy { it.gridY }
         val grid = mutableListOf<List<Tile>>()
         for (y in startY..endY) {
