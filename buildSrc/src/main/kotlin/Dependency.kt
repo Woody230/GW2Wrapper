@@ -12,7 +12,7 @@ private const val KTOR = "1.6.4"
 private const val ANDROID_TEST = "1.1.0"
 private const val ROBOLECTRIC = "4.6.1"
 private const val COROUTINE = "1.5.2"
-const val KOTLIN = "1.5.30"
+const val KOTLIN = "1.5.31"
 
 fun KotlinDependencyHandler.ktxDateTime() = api("org.jetbrains.kotlinx:kotlinx-datetime:$KTX_DATETIME")
 fun KotlinDependencyHandler.ktxSerialization() = api("org.jetbrains.kotlinx:kotlinx-serialization-json:$KTX_SERIALIZATION")
