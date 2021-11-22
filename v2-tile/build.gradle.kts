@@ -8,7 +8,8 @@ android.setup()
 
 kotlin.setup {
     commonMain {
-        v2Client()
+        v2Model()
+        v2ModelExtension()
         ktxSerialization()
         ktorClient()
         coroutine()

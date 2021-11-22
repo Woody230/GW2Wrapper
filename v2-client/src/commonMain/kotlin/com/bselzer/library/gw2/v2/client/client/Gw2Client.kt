@@ -21,26 +21,10 @@ import kotlinx.serialization.json.JsonBuilder
  */
 open class Gw2Client(
     private var httpClient: HttpClient = HttpClient(),
-    private var json: Json = DEFAULT_JSON,
+    private var json: Json = Modules.JSON,
     private var configuration: Gw2ClientConfiguration = Gw2ClientConfiguration()
 ) : Closeable
 {
-    companion object
-    {
-        /**
-         * The default [Json] instance.
-         *
-         * It is designed to be lenient in order to avoid errors.
-         */
-        val DEFAULT_JSON = Json {
-            isLenient = true
-            ignoreUnknownKeys = true
-            coerceInputValues = true
-            encodeDefaults = true
-            serializersModule = Modules.ALL
-        }
-    }
-
     /**
      * The account client.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account">the wiki</a>

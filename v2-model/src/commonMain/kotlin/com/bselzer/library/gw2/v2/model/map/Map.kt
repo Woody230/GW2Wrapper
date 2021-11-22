@@ -1,7 +1,6 @@
 package com.bselzer.library.gw2.v2.model.map
 
 import com.bselzer.library.gw2.v2.model.extension.base.Identifiable
-import com.bselzer.library.kotlin.extension.geometry.dimension.bi.polygon.Digon
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -35,22 +34,22 @@ data class Map(
     /**
      * The map dimensions.
      *
-     * [Digon.point1] contains the bottom-left coordinates.
+     * The first sublist contains the bottom-left coordinates.
      *
-     * [Digon.point2] contains the top-right coordinates.
+     * The second sublist contains the top-right coordinates.
      */
     @SerialName("map_rect")
-    val mapRectangle: Digon = Digon(),
+    val mapRectangle: List<List<Double>> = emptyList(),
 
     /**
      * The continent dimensions.
      *
-     * [Digon.point1] contains the top-left coordinates.
+     * The first sublist contains the top-left coordinates.
      *
-     * [Digon.point2] contains are the bottom-right coordinates.
+     * The second sublist contains are the bottom-right coordinates.
      */
     @SerialName("continent_rect")
-    val continentRectangle: Digon = Digon(),
+    val continentRectangle: List<List<Double>> = emptyList(),
 
     @SerialName("type")
     val type: String = "",

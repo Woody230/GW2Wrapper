@@ -1,7 +1,6 @@
 package com.bselzer.library.gw2.v2.model.continent.map
 
 import com.bselzer.library.gw2.v2.model.extension.base.Identifiable
-import com.bselzer.library.kotlin.extension.geometry.dimension.bi.position.Point2D
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -17,16 +16,16 @@ data class MapSector(
     val level: Int = 0,
 
     /**
-     * The coordinates of this area, typically at the center.
+     * The two-dimensional coordinates within the texture.
      */
     @SerialName("coord")
-    val coordinates: Point2D = Point2D(),
+    val coordinates: List<Double> = emptyList(),
 
     /**
-     * The boundary of this area.
+     * The boundary of this area represented by multiple two-dimensional coordinates.
      */
     @SerialName("bounds")
-    val bounds: List<Point2D> = emptyList(),
+    val bounds: List<List<Double>> = emptyList(),
 
     /**
      * The id of the chat link.

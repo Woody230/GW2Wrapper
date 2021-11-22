@@ -4,10 +4,10 @@ import com.bselzer.library.gw2.v2.model.enumeration.world.WorldLanguage
 import com.bselzer.library.gw2.v2.model.enumeration.world.WorldName
 import com.bselzer.library.gw2.v2.model.enumeration.world.WorldPopulationLevel
 import com.bselzer.library.gw2.v2.model.enumeration.world.WorldRegion
+import com.bselzer.library.gw2.v2.model.serialization.Modules
 import com.bselzer.library.gw2.v2.model.world.World
 import com.bselzer.library.kotlin.extension.serialization.function.enumValueOrNull
 import kotlinx.serialization.SerializationException
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.serializer
 
@@ -30,7 +30,7 @@ fun World.region(): WorldRegion?
     return try
     {
         val regionId = id.toString().getOrNull(0)?.toString() ?: return null
-        Json.decodeFromJsonElement(serializer(), JsonPrimitive(regionId))
+        Modules.JSON.decodeFromJsonElement(serializer(), JsonPrimitive(regionId))
     } catch (ex: SerializationException)
     {
         null
@@ -46,7 +46,7 @@ fun World.language(): WorldLanguage?
     return try
     {
         val languageId = id.toString().getOrNull(1)?.toString() ?: return null
-        Json.decodeFromJsonElement(serializer(), JsonPrimitive(languageId))
+        Modules.JSON.decodeFromJsonElement(serializer(), JsonPrimitive(languageId))
     } catch (ex: SerializationException)
     {
         null

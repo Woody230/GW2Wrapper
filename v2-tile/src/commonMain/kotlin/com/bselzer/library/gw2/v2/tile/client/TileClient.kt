@@ -2,6 +2,8 @@ package com.bselzer.library.gw2.v2.tile.client
 
 import com.bselzer.library.gw2.v2.model.continent.Continent
 import com.bselzer.library.gw2.v2.model.continent.ContinentFloor
+import com.bselzer.library.gw2.v2.model.extension.continent.clampedView
+import com.bselzer.library.gw2.v2.model.extension.continent.textureDimensions
 import com.bselzer.library.gw2.v2.tile.constants.Endpoints
 import com.bselzer.library.gw2.v2.tile.model.request.TileGridRequest
 import com.bselzer.library.gw2.v2.tile.model.request.TileRequest
@@ -94,16 +96,18 @@ open class TileClient(
         val maxZoomTiles = 2.0.pow(continent.maxZoom)
 
         // Get the dimensions of each individual tile.
-        val textureWidth = floor.textureDimensions.width.toInt()
-        val textureHeight = floor.textureDimensions.height.toInt()
+        val textureDimensions = floor.textureDimensions()
+        val textureWidth = textureDimensions.width.toInt()
+        val textureHeight = textureDimensions.height.toInt()
         val tileWidth = (textureWidth / maxZoomTiles).toInt()
         val tileHeight = (textureHeight / maxZoomTiles).toInt()
 
         // Get the tile position bounds within the grid.
-        val startX = floor(floor.clampedView.point1.x * requestedZoomTiles / textureWidth).toInt()
-        val endX = floor(floor.clampedView.point2.x * requestedZoomTiles / textureWidth).toInt()
-        val startY = floor(floor.clampedView.point1.y * requestedZoomTiles / textureHeight).toInt()
-        val endY = floor(floor.clampedView.point2.x * requestedZoomTiles / textureHeight).toInt()
+        val clampedView = floor.clampedView()
+        val startX = floor(clampedView.point1.x * requestedZoomTiles / textureWidth).toInt()
+        val endX = floor(clampedView.point2.x * requestedZoomTiles / textureWidth).toInt()
+        val startY = floor(clampedView.point1.y * requestedZoomTiles / textureHeight).toInt()
+        val endY = floor(clampedView.point2.x * requestedZoomTiles / textureHeight).toInt()
 
         // Create the requests for tile content.
         val requests = mutableListOf<TileRequest>()

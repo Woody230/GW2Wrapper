@@ -3,6 +3,7 @@ package com.bselzer.library.gw2.v2.client
 import com.bselzer.library.gw2.v2.client.client.ExceptionRecoveryMode
 import com.bselzer.library.gw2.v2.client.client.Gw2Client
 import com.bselzer.library.gw2.v2.client.client.Gw2ClientConfiguration
+import com.bselzer.library.gw2.v2.model.serialization.Modules
 import io.ktor.client.*
 import io.ktor.client.engine.mock.*
 import kotlinx.coroutines.runBlocking
@@ -24,7 +25,7 @@ abstract class BaseTests
 
     private fun createGw2Client(): Gw2Client = Gw2Client(createHttpClient(), createJson(), createConfiguration())
     open fun createHttpClient(): HttpClient = HttpClient()
-    open fun createJson(): Json = Gw2Client.DEFAULT_JSON
+    open fun createJson(): Json = Modules.JSON
     open fun createConfiguration(): Gw2ClientConfiguration = Gw2ClientConfiguration()
 
     /**

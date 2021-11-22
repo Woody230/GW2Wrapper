@@ -24,6 +24,7 @@ fun KotlinDependencyHandler.reflection() = implementation("org.jetbrains.kotlin:
 fun KotlinDependencyHandler.v2Client() = api(project(":v2-client"))
 fun KotlinDependencyHandler.v2Model() = api(project(":v2-model"))
 fun KotlinDependencyHandler.v2ModelEnumeration() = api(project(":v2-model-enumeration"))
+fun KotlinDependencyHandler.v2ModelExtension() = api(project(":v2-model-extension"))
 fun KotlinDependencyHandler.v2Scope() = api(project(":v2-scope"))
 fun KotlinDependencyHandler.v2Tile() = api(project(":v2-tile"))
 

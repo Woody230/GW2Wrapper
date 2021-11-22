@@ -18,6 +18,7 @@ import com.bselzer.library.gw2.v2.model.pvp.standing.PvpStanding
 import com.bselzer.library.gw2.v2.model.skill.fact.*
 import com.bselzer.library.gw2.v2.model.skin.*
 import com.bselzer.library.gw2.v2.model.trait.fact.*
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.plus
 import kotlinx.serialization.modules.polymorphic
@@ -217,4 +218,17 @@ object Modules
      */
     val ALL: SerializersModule =
         TOKEN_INFO + ACHIEVEMENT_REWARD + ACHIEVEMENT_BIT + GUILD_LOG + GUILD_UPGRADE + GUILD_UPGRADE_COST + ITEM + PVP_STANDING + TRAINING_TRACK + SKILL_FACT + SKIN + TRAIT_FACT
+
+    /**
+     * The model [Json] instance.
+     *
+     * It is designed to be lenient in order to avoid errors.
+     */
+    val JSON = Json {
+        isLenient = true
+        ignoreUnknownKeys = true
+        coerceInputValues = true
+        encodeDefaults = true
+        serializersModule = ALL
+    }
 }

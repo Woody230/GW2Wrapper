@@ -1,7 +1,6 @@
 package com.bselzer.library.gw2.v2.model.continent.map
 
 import com.bselzer.library.gw2.v2.model.extension.base.Identifiable
-import com.bselzer.library.kotlin.extension.geometry.dimension.bi.position.Point2D
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,8 +9,11 @@ data class MapMasteryPoint(
     @SerialName("id")
     override val id: Int = 0,
 
+    /**
+     * The two-dimensional position within the texture.
+     */
     @SerialName("coord")
-    val coordinates: Point2D = Point2D(),
+    val coordinates: List<Double> = emptyList(),
 
     @SerialName("region")
     val region: String = ""

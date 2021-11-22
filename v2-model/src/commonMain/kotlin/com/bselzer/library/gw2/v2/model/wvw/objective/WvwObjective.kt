@@ -3,8 +3,6 @@ package com.bselzer.library.gw2.v2.model.wvw.objective
 import com.bselzer.library.gw2.v2.model.extension.base.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import com.bselzer.library.kotlin.extension.geometry.dimension.bi.position.Point2D
-import com.bselzer.library.kotlin.extension.geometry.dimension.tri.position.Point3D
 
 @Serializable
 data class WvwObjective(
@@ -29,11 +27,17 @@ data class WvwObjective(
     @SerialName("map_type")
     val mapType: String = "",
 
+    /**
+     * The three-dimensional position of the objective within the texture.
+     */
     @SerialName("coord")
-    val coordinates: Point3D = Point3D(),
+    val coordinates: List<Double> = emptyList(),
 
+    /**
+     * The two-dimensional position of the label within the texture.
+     */
     @SerialName("label_coord")
-    val labelCoordinates: Point2D = Point2D(),
+    val labelCoordinates: List<Double> = emptyList(),
 
     @SerialName("marker")
     val iconLink: String = "",
