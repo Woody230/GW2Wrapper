@@ -19,11 +19,17 @@ data class WvwMatch(
     @SerialName("scores")
     val scores: WvwWorldCount = WvwWorldCount(),
 
+    /**
+     * The main worlds.
+     */
     @SerialName("worlds")
-    val worlds: WvwWorldCount = WvwWorldCount(),
+    val worlds: WvwWorldId = WvwWorldId(),
 
+    /**
+     * All of the worlds, including links.
+     */
     @SerialName("all_worlds")
-    val allWorlds: WvwWorldCounts = WvwWorldCounts(),
+    val allWorlds: WvwWorldIds = WvwWorldIds(),
 
     @SerialName("deaths")
     val deaths: WvwWorldCount = WvwWorldCount(),

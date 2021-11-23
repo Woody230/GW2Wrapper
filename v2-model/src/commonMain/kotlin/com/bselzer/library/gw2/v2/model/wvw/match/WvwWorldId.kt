@@ -4,13 +4,13 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class WvwWorldCounts(
+data class WvwWorldId(
     @SerialName("red")
-    val red: List<Int> = emptyList(),
+    val red: Int = 0,
 
     @SerialName("blue")
-    val blue: List<Int> = emptyList(),
+    val blue: Int = 0,
 
     @SerialName("green")
-    val green: List<Int> = emptyList()
+    val green: Int = 0
 )

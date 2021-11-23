@@ -20,8 +20,8 @@ data class WvwMatchOverview(
     val scores: WvwWorldCount = WvwWorldCount(),
 
     @SerialName("worlds")
-    val worlds: WvwWorldCount = WvwWorldCount(),
+    val worlds: WvwWorldId = WvwWorldId(),
 
     @SerialName("all_worlds")
-    val allWorlds: WvwWorldCounts = WvwWorldCounts(),
+    val allWorlds: WvwWorldIds = WvwWorldIds(),
 ) : Identifiable<String>
