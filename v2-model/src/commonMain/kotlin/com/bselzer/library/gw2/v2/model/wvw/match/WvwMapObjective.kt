@@ -32,7 +32,7 @@ data class WvwMapObjective(
     val pointsPerTick: Int = 0,
 
     @SerialName("points_capture")
-    val pointsOnCapture: Int = 0,
+    val pointsPerCapture: Int = 0,
 
     @SerialName("guild_upgrades")
     val guildUpgradeIds: List<Int> = emptyList(),
