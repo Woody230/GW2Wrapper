@@ -64,6 +64,7 @@ abstract class BaseTests
     protected fun Map<String, String>.characterName(): String = this.getValue("characterName")
 
     protected fun getProfessionResource(): String = "Profession.json".getResource()
+    protected fun getGuildUpgradeResource(): String = "GuildUpgrade.json".getResource()
 
     /**
      * Asserts a failure due to an exception not being thrown.

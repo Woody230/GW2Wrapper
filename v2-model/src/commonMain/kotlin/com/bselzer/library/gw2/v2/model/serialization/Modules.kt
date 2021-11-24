@@ -22,7 +22,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.plus
 import kotlinx.serialization.modules.polymorphic
-import kotlinx.serialization.serializer
+import kotlinx.serialization.modules.subclass
 
 object Modules
 {
@@ -31,8 +31,8 @@ object Modules
      */
     val TOKEN_INFO = SerializersModule {
         polymorphic(TokenInfo::class) {
-            subclass(ApiKeyInfo::class, serializer())
-            subclass(SubTokenInfo::class, serializer())
+            subclass(ApiKeyInfo::class)
+            subclass(SubTokenInfo::class)
         }
     }
 
@@ -41,10 +41,10 @@ object Modules
      */
     val ACHIEVEMENT_REWARD = SerializersModule {
         polymorphic(AchievementReward::class) {
-            subclass(CoinReward::class, serializer())
-            subclass(ItemReward::class, serializer())
-            subclass(MasteryReward::class, serializer())
-            subclass(TitleReward::class, serializer())
+            subclass(CoinReward::class)
+            subclass(ItemReward::class)
+            subclass(MasteryReward::class)
+            subclass(TitleReward::class)
         }
     }
 
@@ -53,10 +53,10 @@ object Modules
      */
     val ACHIEVEMENT_BIT = SerializersModule {
         polymorphic(AchievementBit::class) {
-            subclass(ItemBit::class, serializer())
-            subclass(MiniBit::class, serializer())
-            subclass(SkinBit::class, serializer())
-            subclass(TextBit::class, serializer())
+            subclass(ItemBit::class)
+            subclass(MiniBit::class)
+            subclass(SkinBit::class)
+            subclass(TextBit::class)
         }
     }
 
@@ -65,16 +65,16 @@ object Modules
      */
     val GUILD_LOG = SerializersModule {
         polymorphic(GuildLog::class) {
-            subclass(InfluenceLog::class, serializer())
-            subclass(InviteDeclinedLog::class, serializer())
-            subclass(InvitedLog::class, serializer())
-            subclass(JoinedLog::class, serializer())
-            subclass(KickLog::class, serializer())
-            subclass(MessageOfTheDayLog::class, serializer())
-            subclass(RankChangeLog::class, serializer())
-            subclass(StashLog::class, serializer())
-            subclass(TreasuryLog::class, serializer())
-            subclass(UpgradeLog::class, serializer())
+            subclass(InfluenceLog::class)
+            subclass(InviteDeclinedLog::class)
+            subclass(InvitedLog::class)
+            subclass(JoinedLog::class)
+            subclass(KickLog::class)
+            subclass(MessageOfTheDayLog::class)
+            subclass(RankChangeLog::class)
+            subclass(StashLog::class)
+            subclass(TreasuryLog::class)
+            subclass(UpgradeLog::class)
         }
     }
 
@@ -83,16 +83,17 @@ object Modules
      */
     val GUILD_UPGRADE = SerializersModule {
         polymorphic(GuildUpgrade::class) {
-            subclass(AccumulatingCurrencyUpgrade::class, serializer())
-            subclass(BankTabUpgrade::class, serializer())
-            subclass(BoostUpgrade::class, serializer())
-            subclass(ClaimableUpgrade::class, serializer())
-            subclass(DecorationUpgrade::class, serializer())
-            subclass(GuildHallExpeditionUpgrade::class, serializer())
-            subclass(GuildHallUpgrade::class, serializer())
-            subclass(HubUpgrade::class, serializer())
-            subclass(QueueUpgrade::class, serializer())
-            subclass(UnlockUpgrade::class, serializer())
+            subclass(AccumulatingCurrencyUpgrade::class)
+            subclass(BankTabUpgrade::class)
+            subclass(BoostUpgrade::class)
+            subclass(ClaimableUpgrade::class)
+            subclass(ConsumableUpgrade::class)
+            subclass(DecorationUpgrade::class)
+            subclass(GuildHallExpeditionUpgrade::class)
+            subclass(GuildHallUpgrade::class)
+            subclass(HubUpgrade::class)
+            subclass(QueueUpgrade::class)
+            subclass(UnlockUpgrade::class)
         }
     }
 
@@ -101,10 +102,10 @@ object Modules
      */
     val GUILD_UPGRADE_COST = SerializersModule {
         polymorphic(GuildUpgradeCost::class) {
-            subclass(CoinUpgradeCost::class, serializer())
-            subclass(CollectibleUpgradeCost::class, serializer())
-            subclass(CurrencyUpgradeCost::class, serializer())
-            subclass(ItemUpgradeCost::class, serializer())
+            subclass(CoinUpgradeCost::class)
+            subclass(CollectibleUpgradeCost::class)
+            subclass(CurrencyUpgradeCost::class)
+            subclass(ItemUpgradeCost::class)
         }
     }
 
@@ -113,21 +114,21 @@ object Modules
      */
     val ITEM = SerializersModule {
         polymorphic(Item::class) {
-            subclass(ArmorItem::class, serializer())
-            subclass(BackItem::class, serializer())
-            subclass(BagItem::class, serializer())
-            subclass(ConsumableItem::class, serializer())
-            subclass(ContainerItem::class, serializer())
-            subclass(CraftingMaterialItem::class, serializer())
-            subclass(GatheringToolItem::class, serializer())
-            subclass(GizmoItem::class, serializer())
-            subclass(KeyItem::class, serializer())
-            subclass(MiniItem::class, serializer())
-            subclass(SalvageKitItem::class, serializer())
-            subclass(TraitGuideItem::class, serializer())
-            subclass(TrophyItem::class, serializer())
-            subclass(UpgradeComponentItem::class, serializer())
-            subclass(WeaponItem::class, serializer())
+            subclass(ArmorItem::class)
+            subclass(BackItem::class)
+            subclass(BagItem::class)
+            subclass(ConsumableItem::class)
+            subclass(ContainerItem::class)
+            subclass(CraftingMaterialItem::class)
+            subclass(GatheringToolItem::class)
+            subclass(GizmoItem::class)
+            subclass(KeyItem::class)
+            subclass(MiniItem::class)
+            subclass(SalvageKitItem::class)
+            subclass(TraitGuideItem::class)
+            subclass(TrophyItem::class)
+            subclass(UpgradeComponentItem::class)
+            subclass(WeaponItem::class)
         }
     }
 
@@ -136,8 +137,8 @@ object Modules
      */
     val PVP_STANDING = SerializersModule {
         polymorphic(PvpStanding::class) {
-            subclass(BestStanding::class, serializer())
-            subclass(CurrentStanding::class, serializer())
+            subclass(BestStanding::class)
+            subclass(CurrentStanding::class)
         }
     }
 
@@ -146,8 +147,8 @@ object Modules
      */
     val TRAINING_TRACK = SerializersModule {
         polymorphic(TrainingTrack::class) {
-            subclass(SkillTrack::class, serializer())
-            subclass(TraitTrack::class, serializer())
+            subclass(SkillTrack::class)
+            subclass(TraitTrack::class)
         }
     }
 
@@ -156,24 +157,24 @@ object Modules
      */
     val SKILL_FACT = SerializersModule {
         polymorphic(SkillFact::class) {
-            subclass(SkillAttributeAdjustFact::class, serializer())
-            subclass(SkillBuffFact::class, serializer())
-            subclass(SkillComboFieldFact::class, serializer())
-            subclass(SkillComboFinisherFact::class, serializer())
-            subclass(SkillDamageFact::class, serializer())
-            subclass(SkillDistanceFact::class, serializer())
-            subclass(SkillDurationFact::class, serializer())
-            subclass(SkillHealFact::class, serializer())
-            subclass(SkillHealingAdjustFact::class, serializer())
-            subclass(SkillNoDataFact::class, serializer())
-            subclass(SkillNumberFact::class, serializer())
-            subclass(SkillPercentFact::class, serializer())
-            subclass(SkillPrefixedBuffFact::class, serializer())
-            subclass(SkillRadiusFact::class, serializer())
-            subclass(SkillRangeFact::class, serializer())
-            subclass(SkillRechargeFact::class, serializer())
-            subclass(SkillTimeFact::class, serializer())
-            subclass(SkillUnblockableFact::class, serializer())
+            subclass(SkillAttributeAdjustFact::class)
+            subclass(SkillBuffFact::class)
+            subclass(SkillComboFieldFact::class)
+            subclass(SkillComboFinisherFact::class)
+            subclass(SkillDamageFact::class)
+            subclass(SkillDistanceFact::class)
+            subclass(SkillDurationFact::class)
+            subclass(SkillHealFact::class)
+            subclass(SkillHealingAdjustFact::class)
+            subclass(SkillNoDataFact::class)
+            subclass(SkillNumberFact::class)
+            subclass(SkillPercentFact::class)
+            subclass(SkillPrefixedBuffFact::class)
+            subclass(SkillRadiusFact::class)
+            subclass(SkillRangeFact::class)
+            subclass(SkillRechargeFact::class)
+            subclass(SkillTimeFact::class)
+            subclass(SkillUnblockableFact::class)
         }
     }
 
@@ -182,10 +183,10 @@ object Modules
      */
     val SKIN = SerializersModule {
         polymorphic(Skin::class) {
-            subclass(ArmorSkin::class, serializer())
-            subclass(BackSkin::class, serializer())
-            subclass(GatheringToolSkin::class, serializer())
-            subclass(WeaponSkin::class, serializer())
+            subclass(ArmorSkin::class)
+            subclass(BackSkin::class)
+            subclass(GatheringToolSkin::class)
+            subclass(WeaponSkin::class)
         }
     }
 
@@ -194,22 +195,22 @@ object Modules
      */
     val TRAIT_FACT = SerializersModule {
         polymorphic(TraitFact::class) {
-            subclass(TraitAttributeAdjustFact::class, serializer())
-            subclass(TraitBuffFact::class, serializer())
-            subclass(TraitBuffConversionFact::class, serializer())
-            subclass(TraitComboFieldFact::class, serializer())
-            subclass(TraitComboFinisherFact::class, serializer())
-            subclass(TraitDamageFact::class, serializer())
-            subclass(TraitDistanceFact::class, serializer())
-            subclass(TraitNoDataFact::class, serializer())
-            subclass(TraitNumberFact::class, serializer())
-            subclass(TraitPercentFact::class, serializer())
-            subclass(TraitPrefixedBuffFact::class, serializer())
-            subclass(TraitRadiusFact::class, serializer())
-            subclass(TraitRangeFact::class, serializer())
-            subclass(TraitRechargeFact::class, serializer())
-            subclass(TraitTimeFact::class, serializer())
-            subclass(TraitUnblockableFact::class, serializer())
+            subclass(TraitAttributeAdjustFact::class)
+            subclass(TraitBuffFact::class)
+            subclass(TraitBuffConversionFact::class)
+            subclass(TraitComboFieldFact::class)
+            subclass(TraitComboFinisherFact::class)
+            subclass(TraitDamageFact::class)
+            subclass(TraitDistanceFact::class)
+            subclass(TraitNoDataFact::class)
+            subclass(TraitNumberFact::class)
+            subclass(TraitPercentFact::class)
+            subclass(TraitPrefixedBuffFact::class)
+            subclass(TraitRadiusFact::class)
+            subclass(TraitRangeFact::class)
+            subclass(TraitRechargeFact::class)
+            subclass(TraitTimeFact::class)
+            subclass(TraitUnblockableFact::class)
         }
     }
 
@@ -229,6 +230,7 @@ object Modules
         ignoreUnknownKeys = true
         coerceInputValues = true
         encodeDefaults = true
+        classDiscriminator = "type"
         serializersModule = ALL
     }
 }
