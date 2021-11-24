@@ -10,6 +10,7 @@ import com.bselzer.library.gw2.v2.model.guild.log.GuildLog
 import com.bselzer.library.gw2.v2.model.guild.stash.GuildStash
 import com.bselzer.library.gw2.v2.model.guild.storage.GuildStorageSlot
 import com.bselzer.library.gw2.v2.model.guild.team.GuildTeam
+import com.bselzer.library.gw2.v2.model.guild.treasury.GuildTreasurySlot
 import com.bselzer.library.gw2.v2.model.guild.upgrade.GuildUpgrade
 import com.bselzer.library.gw2.v2.scope.core.Permission
 import com.bselzer.library.gw2.v2.scope.core.Requirement
@@ -38,6 +39,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
         const val UPGRADES = "upgrades"
         const val PERMISSIONS = "permissions"
         const val SEARCH = "search"
+        const val TREASURY = "treasury"
     }
 
     /**
@@ -197,5 +199,15 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      */
     suspend fun upgrades(language: String? = null): List<GuildUpgrade> = allIds("${GUILD}/${UPGRADES}") {
         language(language)
+    }
+
+    /**
+     * @return all the treasury slots
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id/treasury">the wiki</a>
+     */
+    @GuildScope(Requirement.REQUIRED, GuildRanking.LEADER)
+    @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.GUILDS)
+    suspend fun treasury(guildId: String, token: String? = null): List<GuildTreasurySlot> = getList(path = "${GUILD}/${guildId}/${TREASURY}") {
+        bearer(token)
     }
 }
