@@ -7,7 +7,13 @@ import io.ktor.http.*
 /**
  * Sets the bearer authorization if the [token] is not null.
  */
-internal fun HttpRequestBuilder.bearer(token: String?) = setHeader(HttpHeaders.Authorization, "${Headers.BEARER} $token")
+internal fun HttpRequestBuilder.bearer(token: String?) {
+    // Only populate if the token exists since the associated endpoint may become completely invalid due to a 401 instead of returning partial data.
+    // An example of this includes the guild endpoint.
+    if (!token.isNullOrBlank()) {
+        setHeader(HttpHeaders.Authorization, "${Headers.BEARER} $token")
+    }
+}
 
 /**
  * Sets the accepted language if the [language] is not null.
