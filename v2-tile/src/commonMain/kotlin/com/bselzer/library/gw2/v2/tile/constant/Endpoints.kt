@@ -1,4 +1,4 @@
-package com.bselzer.library.gw2.v2.tile.constants
+package com.bselzer.library.gw2.v2.tile.constant
 
 /**
  * Common endpoint constants.
@@ -10,7 +10,7 @@ internal object Endpoints {
     const val BASE_URL = "https://tiles.guildwars2.com"
 
     /**
-     * The alias
+     * The alias urls.
      */
     val ALIAS_URLS = listOf(
         "https://tiles1.guildwars2.com",

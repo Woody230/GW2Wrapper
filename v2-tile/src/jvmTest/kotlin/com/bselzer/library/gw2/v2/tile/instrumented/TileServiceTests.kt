@@ -1,7 +1,7 @@
 package com.bselzer.library.gw2.v2.tile.instrumented
 
 import com.bselzer.library.gw2.v2.tile.BaseTests
-import com.bselzer.library.gw2.v2.tile.constants.Endpoints
+import com.bselzer.library.gw2.v2.tile.constant.Endpoints
 import io.ktor.client.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.runBlocking
@@ -46,8 +46,8 @@ class TileServiceTests : BaseTests() {
         assertEquals(256, grid.tileHeight)
 
         val tile = grid.tiles[0]
-        assertEquals(0, tile.x)
-        assertEquals(0, tile.y)
+        assertEquals(0, tile.gridX)
+        assertEquals(0, tile.gridY)
         assertTrue(tile.content.isNotEmpty())
     }
 

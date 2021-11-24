@@ -8,16 +8,10 @@ android.setup()
 
 kotlin.setup {
     commonMain {
-        v2Model()
-        v2ModelExtension()
-        ktxSerialization()
         ktorClient()
-        coroutine()
+        ktxSerialization()
     }
-    commonTest {
-        mockKtorClient()
-        v2Client()
-    }
+    commonTest()
     jvmTest {
         jvmTest()
         jvmKtorClient()

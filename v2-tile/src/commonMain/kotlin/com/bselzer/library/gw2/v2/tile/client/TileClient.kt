@@ -4,7 +4,7 @@ import com.bselzer.library.gw2.v2.model.continent.Continent
 import com.bselzer.library.gw2.v2.model.continent.ContinentFloor
 import com.bselzer.library.gw2.v2.model.extension.continent.clampedView
 import com.bselzer.library.gw2.v2.model.extension.continent.textureDimensions
-import com.bselzer.library.gw2.v2.tile.constants.Endpoints
+import com.bselzer.library.gw2.v2.tile.constant.Endpoints
 import com.bselzer.library.gw2.v2.tile.model.request.TileGridRequest
 import com.bselzer.library.gw2.v2.tile.model.request.TileRequest
 import com.bselzer.library.gw2.v2.tile.model.response.Tile
