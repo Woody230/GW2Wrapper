@@ -1,6 +1,7 @@
 package com.bselzer.library.gw2.v2.model.extension.wvw
 
 import com.bselzer.library.gw2.v2.model.enumeration.extension.wvw.owner
+import com.bselzer.library.gw2.v2.model.enumeration.wvw.ObjectiveOwner
 import com.bselzer.library.gw2.v2.model.enumeration.wvw.ObjectiveOwner.*
 import com.bselzer.library.gw2.v2.model.wvw.match.WvwMap
 import com.bselzer.library.gw2.v2.model.wvw.match.WvwMapObjective
@@ -18,9 +19,9 @@ fun WvwMatch?.objective(objective: WvwObjective): WvwMapObjective? = this?.map(o
 fun WvwMatch.map(objective: WvwObjective): WvwMap? = this.maps.firstOrNull { map -> map.id == objective.mapId }
 
 /**
- * @return all the world ids linked together that are associated with the [WvwMapObjective.owner]
+ * @return all the world ids linked together that are associated with the [owner]
  */
-fun WvwMatch.linkedWorlds(objective: WvwObjective): Collection<Int> = when (objective(objective)?.owner()) {
+fun WvwMatch.linkedWorlds(owner: ObjectiveOwner) = when (owner) {
     RED -> allWorlds.red
     BLUE -> allWorlds.blue
     GREEN -> allWorlds.green
@@ -28,11 +29,32 @@ fun WvwMatch.linkedWorlds(objective: WvwObjective): Collection<Int> = when (obje
 }
 
 /**
- * @return the main world id associated with the [WvwMapObjective.owner]
+ * @return the main world id associated with the [.owner]
  */
-fun WvwMatch.mainWorld(objective: WvwObjective): Int? = when (objective(objective)?.owner()) {
+fun WvwMatch.mainWorld(owner: ObjectiveOwner): Int? = when (owner) {
     RED -> worlds.red
     BLUE -> worlds.blue
     GREEN -> worlds.green
     else -> null
+}
+
+/**
+ * @return the objective owner color mapped to the score within the [WvwMatch.scores]
+ */
+fun WvwMatch.scores(): Map<ObjectiveOwner, Int> = mapOf(
+    BLUE to scores.blue,
+    GREEN to scores.green,
+    RED to scores.red
+)
+
+/**
+ * @return the points that would currently be awarded to each [ObjectiveOwner] if a tick passed
+ */
+fun WvwMatch.potentialPointsPerTick(): Map<ObjectiveOwner?, Int> {
+    val ppt = mutableMapOf<ObjectiveOwner?, Int>()
+    maps.flatMap { map -> map.objectives }.forEach { objective ->
+        val owner = objective.owner()
+        ppt[owner] = (ppt[owner] ?: 0).plus(objective.pointsPerTick)
+    }
+    return ppt
 }
