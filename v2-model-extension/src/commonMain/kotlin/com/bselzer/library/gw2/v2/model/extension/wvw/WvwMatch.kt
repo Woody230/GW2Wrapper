@@ -6,6 +6,7 @@ import com.bselzer.library.gw2.v2.model.enumeration.wvw.ObjectiveOwner.*
 import com.bselzer.library.gw2.v2.model.wvw.match.WvwMap
 import com.bselzer.library.gw2.v2.model.wvw.match.WvwMapObjective
 import com.bselzer.library.gw2.v2.model.wvw.match.WvwMatch
+import com.bselzer.library.gw2.v2.model.wvw.match.WvwWorldCount
 import com.bselzer.library.gw2.v2.model.wvw.objective.WvwObjective
 
 /**
@@ -39,18 +40,9 @@ fun WvwMatch.mainWorld(owner: ObjectiveOwner): Int? = when (owner) {
 }
 
 /**
- * @return the objective owner color mapped to the score within the [WvwMatch.scores]
- */
-fun WvwMatch.scores(): Map<ObjectiveOwner, Int> = mapOf(
-    BLUE to scores.blue,
-    GREEN to scores.green,
-    RED to scores.red
-)
-
-/**
  * @return the points that would currently be awarded to each [ObjectiveOwner] if a tick passed
  */
-fun WvwMatch.potentialPointsPerTick(): Map<ObjectiveOwner?, Int> {
+fun WvwMatch.pointsPerTick(): Map<ObjectiveOwner?, Int> {
     val ppt = mutableMapOf<ObjectiveOwner?, Int>()
     maps.flatMap { map -> map.objectives }.forEach { objective ->
         val owner = objective.owner()
@@ -58,3 +50,32 @@ fun WvwMatch.potentialPointsPerTick(): Map<ObjectiveOwner?, Int> {
     }
     return ppt
 }
+
+/**
+ * @return the total number of victory points earned through all of the skirmishes for each [ObjectiveOwner]
+ */
+fun WvwMatch.victoryPoints(): Map<ObjectiveOwner, Int> = victoryPoints.count()
+
+/**
+ * @return the score within the [WvwMatch.scores] for each [ObjectiveOwner]
+ */
+fun WvwMatch.scores(): Map<ObjectiveOwner, Int> = scores.count()
+
+/**
+ * @return the deaths within the [WvwMatch.deaths] for each [ObjectiveOwner]
+ */
+fun WvwMatch.deaths(): Map<ObjectiveOwner, Int> = deaths.count()
+
+/**
+ * @return the kills within the [WvwMatch.kills] for each [ObjectiveOwner]
+ */
+fun WvwMatch.kills(): Map<ObjectiveOwner, Int> = kills.count()
+
+/**
+ * @return a mapping of the owner to the [WvwWorldCount] value
+ */
+private fun WvwWorldCount.count(): Map<ObjectiveOwner, Int> = mapOf(
+    BLUE to blue,
+    GREEN to green,
+    RED to red
+)
