@@ -5,7 +5,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
-private const val EXTENSION = "2.1.0"
+private const val EXTENSION = "3.0.0"
 private const val KTX_DATETIME = "0.3.0"
 private const val KTX_SERIALIZATION = "1.3.0"
 private const val KTOR = "1.6.4"
