@@ -18,8 +18,6 @@ allprojects {
         google()
         mavenCentral()
         maven { setUrl("https://jitpack.io") }
-
-        //TODO temporary
         mavenLocal()
     }
 }
