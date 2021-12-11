@@ -21,8 +21,16 @@ fun WvwUpgrade.level(yaksDelivered: Int): Int {
  * @param yaksDelivered the number of yaks delivered to the associated objective
  * @return the tier, or null if no tiers are fulfilled
  */
-fun WvwUpgrade.tier(yaksDelivered: Int): WvwUpgradeTier? {
-    var upgradeTier: WvwUpgradeTier? = null
+fun WvwUpgrade.tier(yaksDelivered: Int): WvwUpgradeTier? = tiers(yaksDelivered).lastOrNull()
+
+/**
+ * Finds the fulfilled [WvwUpgradeTier]s based on the number of [yaksDelivered] satisfying the cumulative number of [WvwUpgradeTier.yaksRequired].
+ *
+ * @param yaksDelivered the number of yaks delivered to the associated objective
+ * @return the fulfilled upgrade tiers
+ */
+fun WvwUpgrade.tiers(yaksDelivered: Int): Collection<WvwUpgradeTier> {
+    val upgradeTiers = mutableListOf<WvwUpgradeTier>()
     var yaksRequired = 0
     for (tier in tiers) {
         // Yaks required is for the current tier and is not cumulative so the tier order matters.
@@ -33,10 +41,10 @@ fun WvwUpgrade.tier(yaksDelivered: Int): WvwUpgradeTier? {
         }
 
         // Have enough yaks so it has been upgraded another level.
-        upgradeTier = tier
+        upgradeTiers.add(tier)
     }
 
-    return upgradeTier
+    return upgradeTiers
 }
 
 /**
