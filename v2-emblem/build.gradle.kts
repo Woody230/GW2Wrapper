@@ -4,6 +4,8 @@ plugins {
     kotlin("plugin.serialization")
 }
 
+publishing.publish(project)
+
 android.setup()
 
 kotlin.setup {
