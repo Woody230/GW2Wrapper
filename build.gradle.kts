@@ -9,7 +9,7 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 }
 
 allprojects {
-    group = "com.bselzer.library.gw2"
+    group = "com.bselzer.gw2"
     version = "1.0.0"
 
     apply(plugin = "maven-publish")

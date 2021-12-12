@@ -35,12 +35,12 @@ fun KotlinDependencyHandler.v2Scope() = api(project(":v2-scope"))
 fun KotlinDependencyHandler.v2Tile() = api(project(":v2-tile"))
 
 // TODO jitpack
-fun KotlinDependencyHandler.extSerialization() = api("com.bselzer.library.kotlin.extension:serialization:$EXTENSION")
-fun KotlinDependencyHandler.extFunction() = api("com.bselzer.library.kotlin.extension:function:$EXTENSION")
-fun KotlinDependencyHandler.extBase64() = api("com.bselzer.library.kotlin.extension:base64:$EXTENSION")
-fun KotlinDependencyHandler.extDateTime() = api("com.bselzer.library.kotlin.extension:datetime:$EXTENSION")
-fun KotlinDependencyHandler.extGeometry() = api("com.bselzer.library.kotlin.extension:geometry:$EXTENSION")
-fun KotlinDependencyHandler.extKodeinDb() = api("com.bselzer.library.kotlin.extension:kodein-db:$EXTENSION")
+fun KotlinDependencyHandler.extSerialization() = api("com.bselzer.ktx:serialization:$EXTENSION")
+fun KotlinDependencyHandler.extFunction() = api("com.bselzer.ktx:function:$EXTENSION")
+fun KotlinDependencyHandler.extBase64() = api("com.bselzer.ktx:base64:$EXTENSION")
+fun KotlinDependencyHandler.extDateTime() = api("com.bselzer.ktx:datetime:$EXTENSION")
+fun KotlinDependencyHandler.extGeometry() = api("com.bselzer.ktx:geometry:$EXTENSION")
+fun KotlinDependencyHandler.extKodeinDb() = api("com.bselzer.ktx:kodein-db:$EXTENSION")
 
 // Test
 fun KotlinDependencyHandler.androidKtorClient() = implementation("io.ktor:ktor-client-android:$KTOR")
