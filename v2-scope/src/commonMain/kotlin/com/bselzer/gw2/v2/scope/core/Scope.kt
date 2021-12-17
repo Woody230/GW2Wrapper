@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.scope.core
 
-// TODO processor module
+// TODO processor module https://github.com/google/ksp
 @Target(AnnotationTarget.CLASS, AnnotationTarget.FUNCTION, AnnotationTarget.FIELD)
 @Repeatable
 @Retention(AnnotationRetention.SOURCE)
