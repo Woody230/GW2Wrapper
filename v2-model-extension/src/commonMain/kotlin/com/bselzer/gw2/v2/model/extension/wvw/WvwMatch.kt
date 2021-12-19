@@ -12,7 +12,9 @@ import com.bselzer.gw2.v2.model.wvw.objective.WvwObjective
 /**
  * @return the objective from the match endpoint that matches the objective from the objectives endpoint
  */
-fun WvwMatch?.objective(objective: WvwObjective): WvwMapObjective? = this?.map(objective)?.objectives?.firstOrNull { match -> match.id == objective.id }
+fun WvwMatch?.objective(objective: WvwObjective?): WvwMapObjective? = objective?.let {
+    this?.map(objective)?.objectives?.firstOrNull { match -> match.id == objective.id }
+}
 
 /**
  * @return the map associated with the [objective]
