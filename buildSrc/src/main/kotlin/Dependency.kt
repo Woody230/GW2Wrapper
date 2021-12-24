@@ -12,13 +12,13 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
 private const val BASE_PUBLISHING_NAME = "gw2"
 private const val EXTENSION = "3.0.0"
-private const val KTX_DATETIME = "0.3.0"
-private const val KTX_SERIALIZATION = "1.3.0"
+private const val KTX_DATETIME = "0.3.1"
+private const val KTX_SERIALIZATION = "1.3.1"
 private const val KTOR = "1.6.7"
 private const val ANDROID_TEST = "1.1.0"
 private const val ROBOLECTRIC = "4.6.1"
 private const val COROUTINE = "1.5.2"
-const val KOTLIN = "1.5.31"
+const val KOTLIN = "1.6.10"
 
 fun KotlinDependencyHandler.ktxDateTime() = api("org.jetbrains.kotlinx:kotlinx-datetime:$KTX_DATETIME")
 fun KotlinDependencyHandler.ktxSerialization() = api("org.jetbrains.kotlinx:kotlinx-serialization-json:$KTX_SERIALIZATION")
@@ -34,7 +34,6 @@ fun KotlinDependencyHandler.v2ModelExtension() = api(project(":v2-model-extensio
 fun KotlinDependencyHandler.v2Scope() = api(project(":v2-scope"))
 fun KotlinDependencyHandler.v2Tile() = api(project(":v2-tile"))
 
-// TODO jitpack
 fun KotlinDependencyHandler.extSerialization() = api("com.bselzer.ktx:serialization:$EXTENSION")
 fun KotlinDependencyHandler.extFunction() = api("com.bselzer.ktx:function:$EXTENSION")
 fun KotlinDependencyHandler.extBase64() = api("com.bselzer.ktx:base64:$EXTENSION")
@@ -134,11 +133,11 @@ fun NamedDomainObjectContainer<KotlinSourceSet>.androidTest(block: KotlinDepende
  */
 fun LibraryExtension.setup(manifestPath: String = "src/androidMain/AndroidManifest.xml", block: LibraryExtension.() -> Unit = {})
 {
-    compileSdk = 30
+    compileSdk = 31
     sourceSets.getByName("main").manifest.srcFile(manifestPath)
     defaultConfig {
         minSdk = 23
-        targetSdk = 30
+        targetSdk = 31
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
