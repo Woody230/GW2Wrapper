@@ -3,6 +3,7 @@ package com.bselzer.gw2.v2.model.extension.wvw
 import com.bselzer.gw2.v2.model.enumeration.extension.wvw.owner
 import com.bselzer.gw2.v2.model.enumeration.wvw.ObjectiveOwner
 import com.bselzer.gw2.v2.model.enumeration.wvw.ObjectiveOwner.*
+import com.bselzer.gw2.v2.model.world.World
 import com.bselzer.gw2.v2.model.wvw.match.WvwMap
 import com.bselzer.gw2.v2.model.wvw.match.WvwMapObjective
 import com.bselzer.gw2.v2.model.wvw.match.WvwMatch
@@ -20,6 +21,19 @@ fun WvwMatch?.objective(objective: WvwObjective?): WvwMapObjective? = objective?
  * @return the map associated with the [objective]
  */
 fun WvwMatch.map(objective: WvwObjective): WvwMap? = this.maps.firstOrNull { map -> map.id == objective.mapId }
+
+/**
+ * @return the [ObjectiveOwner] associated with the [world]
+ */
+fun WvwMatch.owner(world: World): ObjectiveOwner {
+    val id = world.id
+    return when {
+        allWorlds.red.contains(id) -> RED
+        allWorlds.blue.contains(id) -> BLUE
+        allWorlds.green.contains(id) -> GREEN
+        else -> NEUTRAL
+    }
+}
 
 /**
  * @return all the world ids linked together that are associated with the [owner]
