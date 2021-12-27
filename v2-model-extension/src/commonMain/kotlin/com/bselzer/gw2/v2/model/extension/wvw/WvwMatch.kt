@@ -36,6 +36,11 @@ fun WvwMatch.owner(world: World): ObjectiveOwner {
 }
 
 /**
+ * @return all the world ids associated with the match
+ */
+fun WvwMatch.allWorlds(): List<Int> = allWorlds.red + allWorlds.blue + allWorlds.green
+
+/**
  * @return all the world ids linked together that are associated with the [owner]
  */
 fun WvwMatch.linkedWorlds(owner: ObjectiveOwner) = when (owner) {

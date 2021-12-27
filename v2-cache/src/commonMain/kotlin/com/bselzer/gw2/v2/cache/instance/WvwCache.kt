@@ -1,6 +1,8 @@
 package com.bselzer.gw2.v2.cache.instance
 
 import com.bselzer.gw2.v2.client.client.Gw2Client
+import com.bselzer.gw2.v2.model.extension.world.WorldId
+import com.bselzer.gw2.v2.model.extension.wvw.allWorlds
 import com.bselzer.gw2.v2.model.guild.upgrade.ClaimableUpgrade
 import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgrade
 import com.bselzer.gw2.v2.model.wvw.match.WvwMapObjective
@@ -10,15 +12,29 @@ import com.bselzer.gw2.v2.model.wvw.upgrade.WvwUpgrade
 import com.bselzer.ktx.kodein.db.operation.clear
 import com.bselzer.ktx.kodein.db.operation.putMissingById
 import com.bselzer.ktx.kodein.db.transaction.TransactionManager
-import org.kodein.db.asModelSequence
-import org.kodein.db.deleteFrom
-import org.kodein.db.find
-import org.kodein.db.getById
+import org.kodein.db.*
 
 /**
  * Represents a cache for World vs. World models.
  */
 class WvwCache(transactionManager: TransactionManager, client: Gw2Client) : Gw2Cache(transactionManager, client) {
+
+    /**
+     * Finds the match in the database that the world with the given [worldId] is associated with.
+     *
+     * If there is no match, then it is resolved with a call to the api.
+     *
+     * @param worldId the id of the world
+     * @return the match
+     */
+    suspend fun findMatch(worldId: WorldId): WvwMatch = transaction { db ->
+        var stored = db.reader.find<WvwMatch>().all().useModels { it.firstOrNull { match -> match.allWorlds().contains(worldId.value) } }
+        if (stored == null) {
+            stored = client.wvw.match(worldId = worldId.value)
+            db.writer.put(stored)
+        }
+        stored
+    }
 
     /**
      * Finds the objectives in the database associated with the [match].

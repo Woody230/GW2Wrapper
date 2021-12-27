@@ -11,6 +11,7 @@ kotlin.setup {
     commonMain {
         extKodeinDb()
         v2Client()
+        v2ModelExtension()
     }
     commonTest()
 }
