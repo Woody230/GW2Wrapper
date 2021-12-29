@@ -29,7 +29,4 @@ data class WvwMap(
 
     @SerialName("skirmishes")
     val skirmishes: List<WvwSkirmish> = emptyList(),
-
-    @SerialName("victory_points")
-    val victoryPoints: WvwWorldCount = WvwWorldCount()
 ) : Identifiable<Int>

@@ -1,13 +1,11 @@
 package com.bselzer.gw2.v2.model.extension.wvw
 
-import com.bselzer.gw2.v2.model.enumeration.extension.wvw.owner
 import com.bselzer.gw2.v2.model.enumeration.wvw.ObjectiveOwner
 import com.bselzer.gw2.v2.model.enumeration.wvw.ObjectiveOwner.*
 import com.bselzer.gw2.v2.model.world.World
 import com.bselzer.gw2.v2.model.wvw.match.WvwMap
 import com.bselzer.gw2.v2.model.wvw.match.WvwMapObjective
 import com.bselzer.gw2.v2.model.wvw.match.WvwMatch
-import com.bselzer.gw2.v2.model.wvw.match.WvwWorldCount
 import com.bselzer.gw2.v2.model.wvw.objective.WvwObjective
 
 /**
@@ -65,10 +63,7 @@ fun WvwMatch.mainWorld(owner: ObjectiveOwner): Int? = when (owner) {
  */
 fun WvwMatch.pointsPerTick(): Map<ObjectiveOwner?, Int> {
     val ppt = mutableMapOf<ObjectiveOwner?, Int>()
-    maps.flatMap { map -> map.objectives }.forEach { objective ->
-        val owner = objective.owner()
-        ppt[owner] = (ppt[owner] ?: 0).plus(objective.pointsPerTick)
-    }
+    maps.forEach { map -> ppt.merge(map.pointsPerTick()) }
     return ppt
 }
 
@@ -91,12 +86,3 @@ fun WvwMatch.deaths(): Map<ObjectiveOwner, Int> = deaths.count()
  * @return the kills within the [WvwMatch.kills] for each [ObjectiveOwner]
  */
 fun WvwMatch.kills(): Map<ObjectiveOwner, Int> = kills.count()
-
-/**
- * @return a mapping of the owner to the [WvwWorldCount] value
- */
-private fun WvwWorldCount.count(): Map<ObjectiveOwner, Int> = mapOf(
-    BLUE to blue,
-    GREEN to green,
-    RED to red
-)
