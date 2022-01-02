@@ -13,6 +13,7 @@ import com.bselzer.ktx.kodein.db.operation.clear
 import com.bselzer.ktx.kodein.db.operation.putMissingById
 import com.bselzer.ktx.kodein.db.transaction.TransactionManager
 import org.kodein.db.*
+import kotlin.jvm.JvmName
 
 /**
  * Represents a cache for World vs. World models.
@@ -79,14 +80,26 @@ class WvwCache(transactionManager: TransactionManager, client: Gw2Client) : Gw2C
      * If there are missing upgrades, then they are not resolved with a call to the api.
      * A call to [putMatch] should be made first.
      */
+    @JvmName("findGuildUpgradesByObjective")
     suspend fun findGuildUpgrades(objectives: Collection<WvwMapObjective>): Collection<GuildUpgrade> = findByReferenceIds(objectives) { guildUpgradeIds }
+
+    /**
+     * Finds the guild upgrades associated with all the [ids] if provided, or all the ids returned from the api by default.
+     *
+     * If there are missing upgrades, then they are resolved with a call to the api.
+     *
+     * @param ids the ids of the guild upgrades to find
+     */
+    @JvmName("findGuildUpgradesById")
+    suspend fun findGuildUpgrades(ids: Collection<Int>? = null): Collection<GuildUpgrade> = findByReferenceId(ids ?: client.guild.upgradeIds()) { this }
 
     /**
      * Puts the match and associated objectives.
      *
      * @param match the match
      */
-    suspend fun putMatch(match: WvwMatch): Unit = transaction {
+    suspend fun putMatch(match: WvwMatch): Unit = transaction { db ->
+        db.writer.put(match)
         putObjectives(match)
     }
 

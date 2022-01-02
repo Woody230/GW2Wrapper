@@ -60,6 +60,21 @@ fun WvwUpgrade.yakRatio(yaksDelivered: Int): Pair<Int, Int> {
 }
 
 /**
+ * Calculates the ratio of delivered yaks to the total number of yaks required for each tier.
+ *
+ * @param yaksDelivered the number of yaks delivered to the associated objective
+ * @return the ratios represented as a pair
+ */
+fun WvwUpgrade.yakRatios(yaksDelivered: Int): Collection<Pair<Int, Int>> {
+    var remaining = yaksDelivered
+    return tiers.map { tier ->
+        val subtract = min(remaining, tier.yaksRequired)
+        remaining -= subtract
+        Pair(subtract, tier.yaksRequired)
+    }
+}
+
+/**
  * Determines whether the number of yaks delivered satisfies all upgrade tiers.
  *
  * @param yaksDelivered the number of yaks delivered to the associated objective
