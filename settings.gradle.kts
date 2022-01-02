@@ -14,6 +14,7 @@ pluginManagement {
     }
 }
 rootProject.name = "GW2Wrapper"
+include("asset-cdn")
 include("v2-model")
 include("v2-model-enumeration")
 include("v2-model-extension")
