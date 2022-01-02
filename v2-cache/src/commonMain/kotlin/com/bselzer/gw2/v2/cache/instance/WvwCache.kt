@@ -79,6 +79,9 @@ class WvwCache(transactionManager: TransactionManager, client: Gw2Client) : Gw2C
      *
      * If there are missing upgrades, then they are not resolved with a call to the api.
      * A call to [putMatch] should be made first.
+     *
+     * @param objectives the objectives
+     * @return the guild upgrades
      */
     @JvmName("findGuildUpgradesByObjective")
     suspend fun findGuildUpgrades(objectives: Collection<WvwMapObjective>): Collection<GuildUpgrade> = findByReferenceIds(objectives) { guildUpgradeIds }
@@ -89,9 +92,14 @@ class WvwCache(transactionManager: TransactionManager, client: Gw2Client) : Gw2C
      * If there are missing upgrades, then they are resolved with a call to the api.
      *
      * @param ids the ids of the guild upgrades to find
+     * @return the guild upgrades
      */
     @JvmName("findGuildUpgradesById")
-    suspend fun findGuildUpgrades(ids: Collection<Int>? = null): Collection<GuildUpgrade> = findByReferenceId(ids ?: client.guild.upgradeIds()) { this }
+    suspend fun findGuildUpgrades(ids: Collection<Int>? = null): Collection<GuildUpgrade> {
+        val guildUpgradeIds = ids ?: client.guild.upgradeIds()
+        putGuildUpgrades(guildUpgradeIds)
+        return findByReferenceId(guildUpgradeIds) { this }
+    }
 
     /**
      * Puts the match and associated objectives.
@@ -121,13 +129,14 @@ class WvwCache(transactionManager: TransactionManager, client: Gw2Client) : Gw2C
     }
 
     /**
-     * Puts the missing upgrades from the objectives.
+     * Puts the missing upgrades associated with the given [ids].
      *
-     * @param objectives the objectives
+     * @param ids the ids of the upgrades
      */
-    private suspend fun putUpgrades(objectives: Collection<WvwObjective>): Unit = transaction {
+    @JvmName("putUpgradesById")
+    private suspend fun putUpgrades(ids: Collection<Int>): Unit = transaction {
         putMissingById(
-            requestIds = { objectives.map { objective -> objective.upgradeId } },
+            requestIds = { ids },
             requestById = { ids -> client.wvw.upgrades(ids) },
             getId = { upgrade -> upgrade.id },
 
@@ -137,13 +146,21 @@ class WvwCache(transactionManager: TransactionManager, client: Gw2Client) : Gw2C
     }
 
     /**
-     * Puts the missing guild upgrades from the objectives within the match.
+     * Puts the missing upgrades from the objectives.
      *
-     * @param match the match
+     * @param objectives the objectives
      */
-    private suspend fun putGuildUpgrades(match: WvwMatch): Unit = transaction {
+    @JvmName("putUpgradesByObjective")
+    private suspend fun putUpgrades(objectives: Collection<WvwObjective>): Unit = putUpgrades(ids = objectives.map { objective -> objective.upgradeId })
+
+    /**
+     * Puts the missing guild upgrades associated with the given [ids].
+     *
+     * @param ids the ids of the guild upgrades
+     */
+    private suspend fun putGuildUpgrades(ids: Collection<Int>) = transaction {
         putMissingById(
-            requestIds = { match.maps.flatMap { map -> map.objectives.flatMap { objective -> objective.guildUpgradeIds } } },
+            requestIds = { ids },
             requestById = { ids -> client.guild.upgrades(ids) },
             getId = { upgrade -> upgrade.id },
 
@@ -151,6 +168,15 @@ class WvwCache(transactionManager: TransactionManager, client: Gw2Client) : Gw2C
             default = { ClaimableUpgrade() }
         )
     }
+
+    /**
+     * Puts the missing guild upgrades from the objectives within the match.
+     *
+     * @param match the match
+     */
+    private suspend fun putGuildUpgrades(match: WvwMatch): Unit = putGuildUpgrades(
+        ids = match.maps.flatMap { map -> map.objectives.flatMap { objective -> objective.guildUpgradeIds } }
+    )
 
     /**
      * Clears the [WvwMatch], [WvwObjective], and [WvwUpgrade], and [ClaimableUpgrade] guild upgrade models.
