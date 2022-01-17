@@ -51,7 +51,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
-    suspend fun overview(name: String, token: String? = null): Character = getIdentifiableSingle(name, path = "${CHARACTERS}/${name}", default = { Character(name = name) }) {
+    suspend fun overview(name: String, token: String? = null): Character = getIdentifiableSingle(name, path = "${CHARACTERS}/${name}", instance = { Character(name = it) }) {
         bearer(token)
     }
 
@@ -60,7 +60,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
-    suspend fun overviews(names: List<String>, token: String? = null): List<Character> = chunkedIds(names, CHARACTERS) {
+    suspend fun overviews(names: List<String>, token: String? = null): List<Character> = chunkedIds(names, CHARACTERS, instance = { Character(name = it) }) {
         bearer(token)
     }
 
@@ -78,19 +78,14 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Core">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
-    suspend fun core(name: String, token: String? = null): Character =
-        getIdentifiableSingle(name, path = "${CHARACTERS}/${name}/${CORE}", default = { Character(name = name) }) {
-            bearer(token)
-        }
+    suspend fun core(name: String, token: String? = null): Character = character(name = name, subPath = CORE, token = token)
 
     /**
      * @return the backstory answer ids for the character with the given [name]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Backstory">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
-    suspend fun backstory(name: String, token: String? = null): List<String> = getSingle<Character>(path = "${CHARACTERS}/${name}/${BACKSTORY}") {
-        bearer(token)
-    }.backstory
+    suspend fun backstory(name: String, token: String? = null): List<String> = character(name = name, subPath = BACKSTORY, token = token).backstory
 
     /**
      * @return the ids of the character's build template tabs
@@ -107,7 +102,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
     suspend fun buildTabs(name: String, ids: Collection<Int>, token: String? = null): List<BuildTemplateTab> =
-        chunkedTabs(ids, "${CHARACTERS}/${name}/${BUILD_TABS}") {
+        chunkedTabs(ids, "${CHARACTERS}/${name}/${BUILD_TABS}", instance = { BuildTemplateTab(id = it) }) {
             bearer(token)
         }
 
@@ -126,7 +121,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
     suspend fun activeBuildTab(name: String, token: String? = null): BuildTemplateTab =
-        getSingle(path = "${CHARACTERS}/${name}/${BUILD_TABS}/${ACTIVE}") {
+        getSingle(path = "${CHARACTERS}/${name}/${BUILD_TABS}/${ACTIVE}", instance = { BuildTemplateTab() }) {
             bearer(token)
         }
 
@@ -135,20 +130,14 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Crafting">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
-    suspend fun crafting(name: String, token: String? = null): List<CharacterCrafting> =
-        getSingle<Character>(path = "${CHARACTERS}/${name}/${CRAFTING}") {
-            bearer(token)
-        }.crafting
+    suspend fun crafting(name: String, token: String? = null): List<CharacterCrafting> = character(name = name, subPath = CRAFTING, token = token).crafting
 
     /**
      * @return the equipped items.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Equipment">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS, Permission.ACCOUNT)
-    suspend fun equipment(name: String, token: String? = null): List<CharacterEquipment> =
-        getSingle<Character>(path = "${CHARACTERS}/${name}/${EQUIPMENT}") {
-            bearer(token)
-        }.equipment
+    suspend fun equipment(name: String, token: String? = null): List<CharacterEquipment> = character(name = name, subPath = EQUIPMENT, token = token).equipment
 
     /**
      * @return the ids of the character's equipment template tabs
@@ -165,7 +154,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
     suspend fun equipmentTabs(name: String, ids: Collection<Int>, token: String? = null): List<EquipmentTemplateTab> =
-        chunkedTabs(ids, "${CHARACTERS}/${name}/${EQUIPMENT_TABS}") {
+        chunkedTabs(ids, "${CHARACTERS}/${name}/${EQUIPMENT_TABS}", instance = { EquipmentTemplateTab(id = it) }) {
             bearer(token)
         }
 
@@ -184,7 +173,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.BUILDS, Permission.CHARACTERS)
     suspend fun activeEquipmentTab(name: String, token: String? = null): EquipmentTemplateTab =
-        getSingle(path = "${CHARACTERS}/${name}/${EQUIPMENT_TABS}/${ACTIVE}") {
+        getSingle(path = "${CHARACTERS}/${name}/${EQUIPMENT_TABS}/${ACTIVE}", instance = { EquipmentTemplateTab() }) {
             bearer(token)
         }
 
@@ -202,18 +191,14 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Inventory">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS, Permission.INVENTORIES)
-    suspend fun bags(name: String, token: String? = null): List<Bag?> = getSingle<Character>(path = "${CHARACTERS}/${name}/${INVENTORY}") {
-        bearer(token)
-    }.bags
+    suspend fun bags(name: String, token: String? = null): List<Bag?> = character(name = name, subPath = INVENTORY, token = token).bags
 
     /**
      * @return the skills in each game mode.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Skills">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
-    suspend fun skills(name: String, token: String? = null): CharacterModeSkills = getSingle<Character>(path = "${CHARACTERS}/${name}/${SKILLS}") {
-        bearer(token)
-    }.skills
+    suspend fun skills(name: String, token: String? = null): CharacterModeSkills = character(name = name, subPath = SKILLS, token = token).skills
 
     /**
      * @return the specializations in each game mode.
@@ -221,19 +206,14 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     suspend fun specializations(name: String, token: String? = null): CharacterModeSpecializations =
-        getSingle<Character>(path = "${CHARACTERS}/${name}/${SPECIALIZATIONS}") {
-            bearer(token)
-        }.specializations
+        character(name = name, subPath = SPECIALIZATIONS, token = token).specializations
 
     /**
      * @return the skill tree trainings.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/characters#Training">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
-    suspend fun trainings(name: String, token: String? = null): List<CharacterTraining> =
-        getSingle<Character>(path = "${CHARACTERS}/${name}/${TRAINING}") {
-            bearer(token)
-        }.trainings
+    suspend fun trainings(name: String, token: String? = null): List<CharacterTraining> = character(name = name, subPath = TRAINING, token = token).trainings
 
     /**
      * @return the super adventure box progress.
@@ -241,7 +221,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     @Scope(Requirement.REQUIRED, Permission.CHARACTERS, Permission.PROGRESSION)
     suspend fun superAdventureBox(name: String, token: String? = null): SabProgress =
-        getSingle(path = "${CHARACTERS}/${name}/${SUPER_ADVENTURE_BOX}") {
+        getSingle(path = "${CHARACTERS}/${name}/${SUPER_ADVENTURE_BOX}", instance = { SabProgress() }) {
             bearer(token)
         }
 
@@ -251,9 +231,7 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/Game_updates/2016-07-26#Update_-_July_26.2C_2016">the release notes</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS, Permission.INVENTORIES)
-    suspend fun recipes(name: String, token: String? = null): List<Int> = getSingle<Character>(path = "${CHARACTERS}/${name}/${RECIPES}") {
-        bearer(token)
-    }.recipes
+    suspend fun recipes(name: String, token: String? = null): List<Int> = character(name = name, subPath = RECIPES, token = token).recipes
 
     /**
      * @return the ids for quests related to the character's story progression
@@ -263,4 +241,12 @@ class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     suspend fun quests(name: String, token: String? = null): List<Int> = getList(path = "${CHARACTERS}/${name}/${QUESTS}") {
         bearer(token)
     }
+
+    /**
+     * Get an instance of a character with a partial population based on the [subpath] endpoint.
+     */
+    private suspend fun character(name: String, subPath: String, token: String? = null) =
+        getIdentifiableSingle(id = name, path = "${CHARACTERS}/${name}/${subPath}", instance = { Character(name = it) }) {
+            bearer(token)
+        }
 }

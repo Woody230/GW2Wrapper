@@ -22,13 +22,13 @@ class LegendaryArmoryClient(httpClient: HttpClient, configuration: Gw2ClientConf
      * @return the legendary item associated with the [id] in the armory
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/legendaryarmory">the wiki</a>
      */
-    suspend fun legendary(id: Int): ArmoryItem = getSingleById(id, LEGENDARY_ARMORY)
+    suspend fun legendary(id: Int): ArmoryItem = getSingleById(id, LEGENDARY_ARMORY, instance = { ArmoryItem(id = it) })
 
     /**
      * @return the legendary items associated with the [ids] in the armory
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/legendaryarmory">the wiki</a>
      */
-    suspend fun legendaries(ids: Collection<Int>): List<ArmoryItem> = chunkedIds(ids, LEGENDARY_ARMORY)
+    suspend fun legendaries(ids: Collection<Int>): List<ArmoryItem> = chunkedIds(ids, LEGENDARY_ARMORY, instance = { ArmoryItem(id = it) })
 
     /**
      * @return all the legendary armory items

@@ -22,13 +22,13 @@ class RaceClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
      * @return the race associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/races">the wiki</a>
      */
-    suspend fun race(id: String): Race = getSingleById(id, RACES)
+    suspend fun race(id: String): Race = getSingleById(id, RACES, instance = { Race(id = it) })
 
     /**
      * @return the races associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/races">the wiki</a>
      */
-    suspend fun races(ids: Collection<String>): List<Race> = chunkedIds(ids, RACES)
+    suspend fun races(ids: Collection<String>): List<Race> = chunkedIds(ids, RACES, instance = { Race(id = it) })
 
     /**
      * @return all the races

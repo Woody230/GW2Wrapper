@@ -22,13 +22,13 @@ class FileClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
      * @return the commonly requested asset associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/files">the wiki</a>
      */
-    suspend fun asset(id: String): Asset = getSingleById(id, FILES)
+    suspend fun asset(id: String): Asset = getSingleById(id, FILES, instance = { Asset(id = it) })
 
     /**
      * @return the commonly requested assets associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/files">the wiki</a>
      */
-    suspend fun assets(ids: Collection<String>): List<Asset> = chunkedIds(ids, FILES)
+    suspend fun assets(ids: Collection<String>): List<Asset> = chunkedIds(ids, FILES, instance = { Asset(id = it) })
 
     /**
      * @return all the commonly requests assets

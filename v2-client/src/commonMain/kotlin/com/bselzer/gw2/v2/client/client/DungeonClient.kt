@@ -23,7 +23,7 @@ class DungeonClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * @return the dungeon associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/dungeons">the wiki</a>
      */
-    suspend fun dungeon(id: String, language: String? = null): Dungeon = getSingleById(id, DUNGEONS) {
+    suspend fun dungeon(id: String, language: String? = null): Dungeon = getSingleById(id, DUNGEONS, instance = { Dungeon(id = it) }) {
         language(language)
     }
 
@@ -31,7 +31,7 @@ class DungeonClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * @return the dungeons associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/dungeons">the wiki</a>
      */
-    suspend fun dungeons(ids: Collection<String>, language: String? = null): List<Dungeon> = chunkedIds(ids, DUNGEONS) {
+    suspend fun dungeons(ids: Collection<String>, language: String? = null): List<Dungeon> = chunkedIds(ids, DUNGEONS, { Dungeon(id = it) }) {
         language(language)
     }
 

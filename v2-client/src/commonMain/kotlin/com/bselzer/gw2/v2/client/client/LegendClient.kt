@@ -23,7 +23,7 @@ class LegendClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration
      * @return the legend associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/legends">the wiki</a>
      */
-    suspend fun legend(id: String, language: String? = null): Legend = getSingleById(id, LEGENDS) {
+    suspend fun legend(id: String, language: String? = null): Legend = getSingleById(id, LEGENDS, instance = { Legend(id = it) }) {
         language(language)
     }
 
@@ -31,7 +31,7 @@ class LegendClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration
      * @return the legends associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/legends">the wiki</a>
      */
-    suspend fun legends(ids: Collection<String>, language: String? = null): List<Legend> = chunkedIds(ids, LEGENDS) {
+    suspend fun legends(ids: Collection<String>, language: String? = null): List<Legend> = chunkedIds(ids, LEGENDS, instance = { Legend(id = it) }) {
         language(language)
     }
 

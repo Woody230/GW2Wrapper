@@ -23,7 +23,7 @@ class MapClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the map associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/maps">the wiki</a>
      */
-    suspend fun map(id: Int, language: String? = null): Map = getSingleById(id, MAPS) {
+    suspend fun map(id: Int, language: String? = null): Map = getSingleById(id, MAPS, instance = { Map(id = it) }) {
         language(language)
     }
 
@@ -31,7 +31,7 @@ class MapClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the maps associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/maps">the wiki</a>
      */
-    suspend fun maps(ids: Collection<Int>, language: String? = null): List<Map> = chunkedIds(ids, MAPS) {
+    suspend fun maps(ids: Collection<Int>, language: String? = null): List<Map> = chunkedIds(ids, MAPS, instance = { Map(id = it) }) {
         language(language)
     }
 

@@ -31,7 +31,7 @@ class AchievementClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
      * @return the achievement associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements">the wiki</a>
      */
-    suspend fun achievement(id: Int, language: String? = null): Achievement = getSingleById(id, ACHIEVEMENTS) {
+    suspend fun achievement(id: Int, language: String? = null): Achievement = getSingleById(id, ACHIEVEMENTS, instance = { Achievement(id = it) }) {
         language(language)
     }
 
@@ -39,7 +39,7 @@ class AchievementClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
      * @return the achievements associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements">the wiki</a>
      */
-    suspend fun achievements(ids: Collection<Int>, language: String? = null): List<Achievement> = chunkedIds(ids, ACHIEVEMENTS) {
+    suspend fun achievements(ids: Collection<Int>, language: String? = null): List<Achievement> = chunkedIds(ids, ACHIEVEMENTS, instance = { Achievement(id = it) }) {
         language(language)
     }
 
@@ -47,13 +47,13 @@ class AchievementClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
      * @return today's dailies
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/daily">the wiki</a>
      */
-    suspend fun dailiesForToday(): Dailies = getSingle(path = "${ACHIEVEMENTS}/${DAILY}")
+    suspend fun dailiesForToday(): Dailies = getSingle(path = "${ACHIEVEMENTS}/${DAILY}", instance = { Dailies() })
 
     /**
      * @return tomorrow's dailies
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/daily/tomorrow">the wiki</a>
      */
-    suspend fun dailiesForTomorrow(): Dailies = getSingle(path = "${ACHIEVEMENTS}/${DAILY}/${TOMORROW}")
+    suspend fun dailiesForTomorrow(): Dailies = getSingle(path = "${ACHIEVEMENTS}/${DAILY}/${TOMORROW}", instance = { Dailies() })
 
     /**
      * @return the ids of all achievement groups
@@ -65,7 +65,7 @@ class AchievementClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
      * @return the achievement group associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/groups">the wiki</a>
      */
-    suspend fun group(id: String, language: String? = null): AchievementGroup = getSingleById(id, "${ACHIEVEMENTS}/${GROUPS}") {
+    suspend fun group(id: String, language: String? = null): AchievementGroup = getSingleById(id, "${ACHIEVEMENTS}/${GROUPS}", instance = { AchievementGroup(id = it) }) {
         language(language)
     }
 
@@ -73,9 +73,10 @@ class AchievementClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
      * @return the achievement groups associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/groups">the wiki</a>
      */
-    suspend fun groups(ids: Collection<String>, language: String? = null): List<AchievementGroup> = chunkedIds(ids, "${ACHIEVEMENTS}/${GROUPS}") {
-        language(language)
-    }
+    suspend fun groups(ids: Collection<String>, language: String? = null): List<AchievementGroup> =
+        chunkedIds(ids, "${ACHIEVEMENTS}/${GROUPS}", instance = { AchievementGroup(id = it) }) {
+            language(language)
+        }
 
     /**
      * @return all the achievement groups
@@ -96,7 +97,7 @@ class AchievementClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/categories">the wiki</a>
      */
     suspend fun category(id: Int, language: String? = null): AchievementCategory =
-        getSingleById(id, "${ACHIEVEMENTS}/${CATEGORIES}") {
+        getSingleById(id, "${ACHIEVEMENTS}/${CATEGORIES}", instance = { AchievementCategory(id = it) }) {
             language(language)
         }
 
@@ -105,7 +106,7 @@ class AchievementClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements/categories">the wiki</a>
      */
     suspend fun categories(ids: Collection<Int>, language: String? = null): List<AchievementCategory> =
-        chunkedIds(ids, "${ACHIEVEMENTS}/${CATEGORIES}") {
+        chunkedIds(ids, "${ACHIEVEMENTS}/${CATEGORIES}", instance = { AchievementCategory(id = it) }) {
             language(language)
         }
 

@@ -23,7 +23,7 @@ class OutfitClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration
      * @return the outfit associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/outfits">the wiki</a>
      */
-    suspend fun outfit(id: Int, language: String? = null): Outfit = getSingleById(id, OUTFITS) {
+    suspend fun outfit(id: Int, language: String? = null): Outfit = getSingleById(id, OUTFITS, instance = { Outfit(id = it) }) {
         language(language)
     }
 
@@ -31,7 +31,7 @@ class OutfitClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration
      * @return the outfits associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/outfits">the wiki</a>
      */
-    suspend fun outfits(ids: Collection<Int>, language: String? = null): List<Outfit> = chunkedIds(ids, OUTFITS) {
+    suspend fun outfits(ids: Collection<Int>, language: String? = null): List<Outfit> = chunkedIds(ids, OUTFITS, instance = { Outfit(id = it) }) {
         language(language)
     }
 

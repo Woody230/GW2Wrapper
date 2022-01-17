@@ -23,7 +23,7 @@ class FinisherClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the finisher associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/finishers">the wiki</a>
      */
-    suspend fun finisher(id: Int, language: String? = null): Finisher = getSingleById(id, FINISHERS) {
+    suspend fun finisher(id: Int, language: String? = null): Finisher = getSingleById(id, FINISHERS, instance = { Finisher(id = it) }) {
         language(language)
     }
 
@@ -31,7 +31,7 @@ class FinisherClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the finishers associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/finishers">the wiki</a>
      */
-    suspend fun finishers(ids: Collection<Int>, language: String? = null): List<Finisher> = chunkedIds(ids, FINISHERS) {
+    suspend fun finishers(ids: Collection<Int>, language: String? = null): List<Finisher> = chunkedIds(ids, FINISHERS, instance = { Finisher(id = it) }) {
         language(language)
     }
 

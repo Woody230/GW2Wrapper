@@ -16,7 +16,7 @@ data class Continent(
      * The width and height of the continent.
      */
     @SerialName("continent_dims")
-    val dimensions: List<Double>,
+    val dimensions: List<Double> = emptyList(),
 
     @SerialName("min_zoom")
     val minZoom: Int = 0,

@@ -88,6 +88,7 @@ object Modules {
             subclass(ClaimableUpgrade::class)
             subclass(ConsumableUpgrade::class)
             subclass(DecorationUpgrade::class)
+            subclass(DefaultUpgrade::class)
             subclass(GuildHallExpeditionUpgrade::class)
             subclass(GuildHallUpgrade::class)
             subclass(HubUpgrade::class)
@@ -119,6 +120,7 @@ object Modules {
             subclass(ConsumableItem::class)
             subclass(ContainerItem::class)
             subclass(CraftingMaterialItem::class)
+            subclass(DefaultItem::class)
             subclass(GatheringToolItem::class)
             subclass(GizmoItem::class)
             subclass(KeyItem::class)
@@ -184,6 +186,7 @@ object Modules {
         polymorphic(Skin::class) {
             subclass(ArmorSkin::class)
             subclass(BackSkin::class)
+            subclass(DefaultSkin::class)
             subclass(GatheringToolSkin::class)
             subclass(WeaponSkin::class)
         }

@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.extension.language
+import com.bselzer.gw2.v2.model.item.DefaultItem
 import com.bselzer.gw2.v2.model.item.Item
 import io.ktor.client.*
 
@@ -23,7 +24,7 @@ class ItemClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
      * @return the item associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
-    suspend fun item(id: Int, language: String? = null): List<Item> = getSingleById(id, ITEMS) {
+    suspend fun item(id: Int, language: String? = null): Item = getSingleById(id, ITEMS, instance = { DefaultItem(identifier = it) }) {
         language(language)
     }
 
@@ -31,7 +32,7 @@ class ItemClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
      * @return the items associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
-    suspend fun items(ids: Collection<Int>, language: String? = null): List<Item> = chunkedIds(ids, ITEMS) {
+    suspend fun items(ids: Collection<Int>, language: String? = null): List<Item> = chunkedIds(ids, ITEMS, instance = { DefaultItem(identifier = it) }) {
         language(language)
     }
 }

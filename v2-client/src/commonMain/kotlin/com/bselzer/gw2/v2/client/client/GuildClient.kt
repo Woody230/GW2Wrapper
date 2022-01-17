@@ -11,6 +11,7 @@ import com.bselzer.gw2.v2.model.guild.stash.GuildStash
 import com.bselzer.gw2.v2.model.guild.storage.GuildStorageSlot
 import com.bselzer.gw2.v2.model.guild.team.GuildTeam
 import com.bselzer.gw2.v2.model.guild.treasury.GuildTreasurySlot
+import com.bselzer.gw2.v2.model.guild.upgrade.DefaultUpgrade
 import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgrade
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
@@ -46,7 +47,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      */
     @GuildScope(Requirement.OPTIONAL, GuildRanking.LEADER, GuildRanking.MEMBER)
     @Scope(Requirement.OPTIONAL, Permission.GUILDS)
-    suspend fun guild(guildId: String, token: String? = null): Guild = getIdentifiableSingle(guildId, path = "${GUILD}/${guildId}") {
+    suspend fun guild(guildId: String, token: String? = null): Guild = getIdentifiableSingle(guildId, path = "${GUILD}/${guildId}", instance = { Guild(id = it) }) {
         bearer(token)
     }
 
@@ -141,7 +142,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the permission associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/permissions">the wiki</a>
      */
-    suspend fun permission(id: String, language: String? = null): GuildPermission = getSingleById(id, "${GUILD}/${PERMISSIONS}") {
+    suspend fun permission(id: String, language: String? = null): GuildPermission = getSingleById(id, "${GUILD}/${PERMISSIONS}", instance = { GuildPermission(id = it) }) {
         language(language)
     }
 
@@ -149,9 +150,10 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the permissions associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/permissions">the wiki</a>
      */
-    suspend fun permissions(ids: Collection<String>, language: String? = null): List<GuildPermission> = chunkedIds(ids, "${GUILD}/${PERMISSIONS}") {
-        language(language)
-    }
+    suspend fun permissions(ids: Collection<String>, language: String? = null): List<GuildPermission> =
+        chunkedIds(ids, "${GUILD}/${PERMISSIONS}", instance = { GuildPermission(id = it) }) {
+            language(language)
+        }
 
     /**
      * @return all the permissions
@@ -179,7 +181,7 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the upgrade associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/upgrades">the wiki</a>
      */
-    suspend fun upgrade(id: Int, language: String? = null): GuildUpgrade = getSingleById(id, "${GUILD}/${UPGRADES}") {
+    suspend fun upgrade(id: Int, language: String? = null): GuildUpgrade = getSingleById(id, "${GUILD}/${UPGRADES}", instance = { DefaultUpgrade(identifier = it) }) {
         language(language)
     }
 
@@ -187,9 +189,10 @@ class GuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the upgrades associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/upgrades">the wiki</a>
      */
-    suspend fun upgrades(ids: Collection<Int>, language: String? = null): List<GuildUpgrade> = chunkedIds(ids, "${GUILD}/${UPGRADES}") {
-        language(language)
-    }
+    suspend fun upgrades(ids: Collection<Int>, language: String? = null): List<GuildUpgrade> =
+        chunkedIds(ids, "${GUILD}/${UPGRADES}", instance = { DefaultUpgrade(identifier = it) }) {
+            language(language)
+        }
 
     /**
      * @return all the upgrades

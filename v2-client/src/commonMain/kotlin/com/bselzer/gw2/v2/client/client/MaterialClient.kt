@@ -23,7 +23,7 @@ class MaterialClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the material associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/materials">the wiki</a>
      */
-    suspend fun material(id: Int, language: String? = null): Material = getSingleById(id, MATERIALS) {
+    suspend fun material(id: Int, language: String? = null): Material = getSingleById(id, MATERIALS, instance = { Material(id = it) }) {
         language(language)
     }
 
@@ -31,7 +31,7 @@ class MaterialClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the materials associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/materials">the wiki</a>
      */
-    suspend fun materials(ids: Collection<Int>, language: String? = null): List<Material> = chunkedIds(ids, MATERIALS) {
+    suspend fun materials(ids: Collection<Int>, language: String? = null): List<Material> = chunkedIds(ids, MATERIALS, instance = { Material(id = it) }) {
         language(language)
     }
 

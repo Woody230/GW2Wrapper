@@ -17,7 +17,7 @@ data class ContinentRegion(
      * The two-dimensional coordinates of the region label.
      */
     @SerialName("label_coord")
-    val labelCoordinates: List<Double>,
+    val labelCoordinates: List<Double> = emptyList(),
 
     /**
      * The continent dimensions.
@@ -27,7 +27,7 @@ data class ContinentRegion(
      * The second sublist contains the bottom-right coordinates.
      */
     @SerialName("continent_rect")
-    val continentRectangle: List<List<Double>>,
+    val continentRectangle: List<List<Double>> = emptyList(),
 
     /**
      * A map of the map id to the map information.

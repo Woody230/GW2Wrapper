@@ -26,7 +26,7 @@ class BackstoryClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @return the answer associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/backstory/answers">the wiki</a>
      */
-    suspend fun answer(id: String, language: String? = null): BackstoryAnswer = getSingleById(id, "${BACKSTORY}/${ANSWERS}") {
+    suspend fun answer(id: String, language: String? = null): BackstoryAnswer = getSingleById(id, "${BACKSTORY}/${ANSWERS}", instance = { BackstoryAnswer(id = it) }) {
         language(language)
     }
 
@@ -34,9 +34,10 @@ class BackstoryClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @return the answers associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/backstory/answers">the wiki</a>
      */
-    suspend fun answers(ids: Collection<String>, language: String? = null): List<BackstoryAnswer> = chunkedIds(ids, "${BACKSTORY}/${ANSWERS}") {
-        language(language)
-    }
+    suspend fun answers(ids: Collection<String>, language: String? = null): List<BackstoryAnswer> =
+        chunkedIds(ids, "${BACKSTORY}/${ANSWERS}", instance = { BackstoryAnswer(id = it) }) {
+            language(language)
+        }
 
     /**
      * @return all the answers
@@ -56,7 +57,7 @@ class BackstoryClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @return the question associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/backstory/questions">the wiki</a>
      */
-    suspend fun question(id: Int, language: String? = null): BackstoryQuestion = getSingleById(id, "${BACKSTORY}/${QUESTIONS}") {
+    suspend fun question(id: Int, language: String? = null): BackstoryQuestion = getSingleById(id, "${BACKSTORY}/${QUESTIONS}", instance = { BackstoryQuestion(id = it) }) {
         language(language)
     }
 
@@ -64,9 +65,10 @@ class BackstoryClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @return the questions associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/backstory/questions">the wiki</a>
      */
-    suspend fun questions(ids: Collection<Int>, language: String? = null): List<BackstoryQuestion> = chunkedIds(ids, "${BACKSTORY}/${QUESTIONS}") {
-        language(language)
-    }
+    suspend fun questions(ids: Collection<Int>, language: String? = null): List<BackstoryQuestion> =
+        chunkedIds(ids, "${BACKSTORY}/${QUESTIONS}", instance = { BackstoryQuestion(id = it) }) {
+            language(language)
+        }
 
     /**
      * @return all the questions

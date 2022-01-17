@@ -4,7 +4,7 @@ import com.bselzer.gw2.v2.chatlink.build.BuildTemplateLink
 import com.bselzer.gw2.v2.chatlink.build.LinkSkill
 import com.bselzer.gw2.v2.chatlink.build.LinkSpecialization
 import com.bselzer.gw2.v2.chatlink.build.profession.*
-import org.junit.Test
+import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue

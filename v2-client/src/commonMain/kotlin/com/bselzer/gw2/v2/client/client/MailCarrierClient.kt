@@ -23,7 +23,7 @@ class MailCarrierClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
      * @return the mail carrier associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">the wiki</a>
      */
-    suspend fun mailCarrier(id: Int, language: String? = null): MailCarrier = getSingleById(id, MAIL_CARRIERS) {
+    suspend fun mailCarrier(id: Int, language: String? = null): MailCarrier = getSingleById(id, MAIL_CARRIERS, instance = { MailCarrier(id = it) }) {
         language(language)
     }
 
@@ -31,7 +31,7 @@ class MailCarrierClient(httpClient: HttpClient, configuration: Gw2ClientConfigur
      * @return the mail carriers associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/mailcarriers">the wiki</a>
      */
-    suspend fun mailCarriers(ids: Collection<Int>, language: String? = null): List<MailCarrier> = chunkedIds(ids, MAIL_CARRIERS) {
+    suspend fun mailCarriers(ids: Collection<Int>, language: String? = null): List<MailCarrier> = chunkedIds(ids, MAIL_CARRIERS, instance = { MailCarrier(id = it) }) {
         language(language)
     }
 

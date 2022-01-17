@@ -1,8 +1,15 @@
 package com.bselzer.gw2.v2.client.instrumented
 
+import com.bselzer.gw2.v2.model.guild.upgrade.DefaultUpgrade
+import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgrade
+import com.bselzer.gw2.v2.model.serialization.Modules
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.junit.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class RecoveryTests : BaseInstrumentedTests() {
     /**
@@ -35,6 +42,34 @@ class RecoveryTests : BaseInstrumentedTests() {
         testRecovery({ achievement.achievements(listOf(id)) }) { results ->
             assertEquals(1, results.size)
             assertEquals(id, results.single().id)
+        }
+    }
+
+    /**
+     * Verifies that a polymorphic object can be recovered.
+     */
+    @Test
+    fun polymorphism() {
+        // Arrange
+        val id = -999
+
+        // Act / Assert
+        testRecovery({ guild.upgrade(id) }) { result ->
+            // Result should be defaulted, except for the id.
+            assertEquals(id, result.id)
+            assertEquals("", result.iconLink)
+            assertEquals(0, result.requiredLevel)
+            assertContentEquals(emptyList(), result.prerequisites)
+
+            // The identifier parameter should not interfere with retaining the actual id parameter when encoding/decoding.
+            val json = Json { serializersModule = Modules.GUILD_UPGRADE }
+            val encoded = json.encodeToString(result)
+            val decoded = json.decodeFromString<GuildUpgrade>(encoded)
+            assertTrue { decoded is DefaultUpgrade }
+            assertEquals(id, decoded.id)
+            assertEquals("", decoded.iconLink)
+            assertEquals(0, decoded.requiredLevel)
+            assertContentEquals(emptyList(), decoded.prerequisites)
         }
     }
 }

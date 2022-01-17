@@ -23,7 +23,7 @@ class MiniClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
      * @return the minis associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/minis">the wiki</a>
      */
-    suspend fun minis(ids: Collection<Int>, language: String? = null): List<Mini> = chunkedIds(ids, MINIS) {
+    suspend fun minis(ids: Collection<Int>, language: String? = null): List<Mini> = chunkedIds(ids, MINIS, instance = { Mini(id = it) }) {
         language(language)
     }
 

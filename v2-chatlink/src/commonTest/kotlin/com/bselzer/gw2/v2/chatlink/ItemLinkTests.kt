@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.chatlink
 
-import org.junit.Test
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class ItemLinkTests {

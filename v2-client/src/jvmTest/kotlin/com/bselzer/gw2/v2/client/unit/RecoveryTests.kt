@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.client.unit
 
 import com.bselzer.gw2.v2.model.character.Character
 import io.ktor.client.engine.mock.*
+import kotlinx.datetime.Instant
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
@@ -129,5 +130,5 @@ class RecoveryTests : BaseUnitTests() {
      * Verifies that a forceGetSingle call cannot be recovered.
      */
     @Test
-    fun forceGetSingle() = failedRecovery { token.information("") }
+    fun forceGetSingle() = failedRecovery { token.createSubToken(Instant.DISTANT_FUTURE, emptyList(), emptyList()) }
 }

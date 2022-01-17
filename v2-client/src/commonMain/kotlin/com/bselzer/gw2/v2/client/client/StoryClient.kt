@@ -25,7 +25,7 @@ class StoryClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the story associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/stories">the wiki</a>
      */
-    suspend fun story(id: Int, language: String? = null): Story = getSingleById(id, STORIES) {
+    suspend fun story(id: Int, language: String? = null): Story = getSingleById(id, STORIES, instance = { Story(id = it) }) {
         language(language)
     }
 
@@ -33,7 +33,7 @@ class StoryClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the stories associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/stories">the wiki</a>
      */
-    suspend fun stories(ids: Collection<Int>, language: String? = null): List<Story> = chunkedIds(ids, STORIES) {
+    suspend fun stories(ids: Collection<Int>, language: String? = null): List<Story> = chunkedIds(ids, STORIES, instance = { Story(id = it) }) {
         language(language)
     }
 
@@ -55,7 +55,7 @@ class StoryClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the season associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/stories/seasons">the wiki</a>
      */
-    suspend fun season(id: String, language: String? = null): StorySeason = getSingleById(id, "${STORIES}/${SEASONS}") {
+    suspend fun season(id: String, language: String? = null): StorySeason = getSingleById(id, "${STORIES}/${SEASONS}", instance = { StorySeason(id = it) }) {
         language(language)
     }
 
@@ -63,7 +63,7 @@ class StoryClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the seasons associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/stories/seasons">the wiki</a>
      */
-    suspend fun seasons(ids: Collection<String>, language: String? = null): List<StorySeason> = chunkedIds(ids, "${STORIES}/${SEASONS}") {
+    suspend fun seasons(ids: Collection<String>, language: String? = null): List<StorySeason> = chunkedIds(ids, "${STORIES}/${SEASONS}", instance = { StorySeason(id = it) }) {
         language(language)
     }
 

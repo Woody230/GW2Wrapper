@@ -64,7 +64,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
     @Scope(Requirement.OPTIONAL, Permission.GUILDS, Permission.PROGRESSION)
-    suspend fun account(token: String? = null): Account = getSingle(path = ACCOUNT) {
+    suspend fun account(token: String? = null): Account = getSingle(path = ACCOUNT, instance = { Account() }) {
         bearer(token)
     }
 
@@ -241,7 +241,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/mastery/points">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION)
-    suspend fun masteryPoints(token: String? = null): AccountMasteryPoints = getSingle(path = "$ACCOUNT/$MASTERY/$POINTS") {
+    suspend fun masteryPoints(token: String? = null): AccountMasteryPoints = getSingle(path = "$ACCOUNT/$MASTERY/$POINTS", instance = { AccountMasteryPoints() }) {
         bearer(token)
     }
 

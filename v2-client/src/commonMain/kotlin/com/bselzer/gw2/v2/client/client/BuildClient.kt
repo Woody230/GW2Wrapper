@@ -15,5 +15,5 @@ class BuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
     /**
      * @return the current build id
      */
-    suspend fun buildId(): Int = getSingle<Build>(path = BUILD).id
+    suspend fun buildId(): Int = getSingle(path = BUILD, instance = { Build() }).id
 }

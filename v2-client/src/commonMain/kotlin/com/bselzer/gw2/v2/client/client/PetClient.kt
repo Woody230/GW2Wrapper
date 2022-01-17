@@ -23,7 +23,7 @@ class PetClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the pet associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pets">the wiki</a>
      */
-    suspend fun pet(id: Int, language: String? = null): Pet = getSingleById(id, PETS) {
+    suspend fun pet(id: Int, language: String? = null): Pet = getSingleById(id, PETS, instance = { Pet(id = it) }) {
         language(language)
     }
 
@@ -31,7 +31,7 @@ class PetClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the pets associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pets">the wiki</a>
      */
-    suspend fun pets(ids: Collection<Int>, language: String? = null): List<Pet> = chunkedIds(ids, PETS) {
+    suspend fun pets(ids: Collection<Int>, language: String? = null): List<Pet> = chunkedIds(ids, PETS, instance = { Pet(id = it) }) {
         language(language)
     }
 

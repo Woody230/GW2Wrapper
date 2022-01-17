@@ -23,7 +23,7 @@ class ItemStatClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the item stat associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/itemstats">the wiki</a>
      */
-    suspend fun itemStat(id: Int, language: String? = null): ItemStat = getSingleById(id, ITEM_STATS) {
+    suspend fun itemStat(id: Int, language: String? = null): ItemStat = getSingleById(id, ITEM_STATS, instance = { ItemStat(id = it) }) {
         language(language)
     }
 
@@ -31,7 +31,7 @@ class ItemStatClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the item stats associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/itemstats">the wiki</a>
      */
-    suspend fun itemStats(ids: Collection<Int>, language: String? = null): List<ItemStat> = chunkedIds(ids, ITEM_STATS) {
+    suspend fun itemStats(ids: Collection<Int>, language: String? = null): List<ItemStat> = chunkedIds(ids, ITEM_STATS, instance = { ItemStat(id = it) }) {
         language(language)
     }
 

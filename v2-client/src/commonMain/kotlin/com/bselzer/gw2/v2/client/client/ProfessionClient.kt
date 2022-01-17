@@ -24,7 +24,7 @@ class ProfessionClient(httpClient: HttpClient, configuration: Gw2ClientConfigura
      * @return the profession associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/professions">the wiki</a>
      */
-    suspend fun profession(id: String, language: String? = null): Profession = getSingleById(id, PROFESSIONS) {
+    suspend fun profession(id: String, language: String? = null): Profession = getSingleById(id, PROFESSIONS, instance = { Profession(id = it) }) {
         language(language)
     }
 
@@ -32,7 +32,7 @@ class ProfessionClient(httpClient: HttpClient, configuration: Gw2ClientConfigura
      * @return the professions associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/professions">the wiki</a>
      */
-    suspend fun professions(ids: Collection<String>, language: String? = null): List<Profession> = chunkedIds(ids, PROFESSIONS) {
+    suspend fun professions(ids: Collection<String>, language: String? = null): List<Profession> = chunkedIds(ids, PROFESSIONS, instance = { Profession(id = it) }) {
         language(language)
     }
 

@@ -23,7 +23,7 @@ class WorldClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the world associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/worlds">the wiki</a>
      */
-    suspend fun world(id: Int, language: String? = null): List<World> = getSingleById(id, WORLDS) {
+    suspend fun world(id: Int, language: String? = null): World = getSingleById(id, WORLDS, instance = { World(id = it) }) {
         language(language)
     }
 
@@ -31,7 +31,7 @@ class WorldClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the worlds associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/worlds">the wiki</a>
      */
-    suspend fun worlds(ids: Collection<Int>, language: String? = null): List<World> = chunkedIds(ids, WORLDS) {
+    suspend fun worlds(ids: Collection<Int>, language: String? = null): List<World> = chunkedIds(ids, WORLDS, instance = { World(id = it) }) {
         language(language)
     }
 

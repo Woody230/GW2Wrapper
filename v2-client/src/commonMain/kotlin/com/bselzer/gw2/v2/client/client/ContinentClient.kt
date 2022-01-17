@@ -35,7 +35,7 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @return the continent associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
-    suspend fun continent(id: Int, language: String? = null): Continent = getSingleById(id, CONTINENTS) {
+    suspend fun continent(id: Int, language: String? = null): Continent = getSingleById(id, CONTINENTS, instance = { Continent(id = it) }) {
         language(language)
     }
 
@@ -43,7 +43,7 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @return the continents associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
-    suspend fun continents(ids: Collection<Int>, language: String? = null): List<Continent> = chunkedIds(ids, CONTINENTS) {
+    suspend fun continents(ids: Collection<Int>, language: String? = null): List<Continent> = chunkedIds(ids, CONTINENTS, instance = { Continent(id = it) }) {
         language(language)
     }
 
@@ -66,7 +66,7 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     suspend fun floor(continentId: Int, floorId: Int, language: String? = null): ContinentFloor =
-        getSingleById(floorId, "${CONTINENTS}/${continentId}/${FLOORS}") {
+        getSingleById(floorId, "${CONTINENTS}/${continentId}/${FLOORS}", instance = { ContinentFloor(id = it) }) {
             language(language)
         }
 
@@ -75,7 +75,7 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     suspend fun floors(continentId: Int, floorIds: Collection<Int>, language: String? = null): List<ContinentFloor> =
-        chunkedIds(floorIds, "${CONTINENTS}/${continentId}/${FLOORS}") {
+        chunkedIds(floorIds, "${CONTINENTS}/${continentId}/${FLOORS}", instance = { ContinentFloor(id = it) }) {
             language(language)
         }
 
@@ -99,7 +99,7 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     suspend fun region(continentId: Int, floorId: Int, regionId: Int, language: String? = null): ContinentRegion =
-        getSingleById(regionId, "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}") {
+        getSingleById(regionId, "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}", instance = { ContinentRegion(id = it) }) {
             language(language)
         }
 
@@ -108,7 +108,7 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     suspend fun regions(continentId: Int, floorId: Int, regionIds: Collection<Int>, language: String? = null): List<ContinentRegion> =
-        chunkedIds(regionIds, "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}") {
+        chunkedIds(regionIds, "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}", instance = { ContinentRegion(id = it) }) {
             language(language)
         }
 
@@ -133,7 +133,7 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     suspend fun map(continentId: Int, floorId: Int, regionId: Int, mapId: Int, language: String? = null): ContinentMap =
-        getSingleById(mapId, "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}") {
+        getSingleById(mapId, "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}", instance = { ContinentMap(id = it) }) {
             language(language)
         }
 
@@ -142,7 +142,7 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     suspend fun maps(continentId: Int, floorId: Int, regionId: Int, mapIds: Collection<Int>, language: String? = null): List<ContinentMap> =
-        chunkedIds(mapIds, "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}") {
+        chunkedIds(mapIds, "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}", instance = { ContinentMap(id = it) }) {
             language(language)
         }
 
@@ -168,7 +168,8 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     suspend fun sector(continentId: Int, floorId: Int, regionId: Int, mapId: Int, sectorId: Int, language: String? = null): MapSector = getSingleById(
         sectorId,
-        "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${SECTORS}"
+        "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${SECTORS}",
+        instance = { MapSector(id = it) }
     ) {
         language(language)
     }
@@ -179,7 +180,8 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      */
     suspend fun sectors(continentId: Int, floorId: Int, regionId: Int, mapId: Int, sectorIds: Collection<Int>, language: String? = null): List<MapSector> = chunkedIds(
         sectorIds,
-        "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${SECTORS}"
+        "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${SECTORS}",
+        instance = { MapSector(id = it) }
     ) {
         language(language)
     }
@@ -211,9 +213,10 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
         mapId: Int,
         pointOfInterestId: Int,
         language: String? = null
-    ): List<MapPointOfInterest> = getSingleById(
+    ): MapPointOfInterest = getSingleById(
         pointOfInterestId,
-        "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${POINT_OF_INTERESTS}"
+        "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${POINT_OF_INTERESTS}",
+        instance = { MapPointOfInterest(id = it) }
     ) {
         language(language)
     }
@@ -231,7 +234,8 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
         language: String? = null
     ): List<MapPointOfInterest> = chunkedIds(
         pointOfInterestIds,
-        "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${POINT_OF_INTERESTS}"
+        "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${POINT_OF_INTERESTS}",
+        instance = { MapPointOfInterest(id = it) }
     ) {
         language(language)
     }
@@ -259,7 +263,8 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     suspend fun renownHeart(continentId: Int, floorId: Int, regionId: Int, mapId: Int, renownHeartId: Int, language: String? = null): MapRenownHeart =
         getSingleById(
             renownHeartId,
-            "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${TASKS}"
+            "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${TASKS}",
+            instance = { MapRenownHeart(id = it) }
         ) {
             language(language)
         }
@@ -271,7 +276,8 @@ class ContinentClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
     suspend fun renownHearts(continentId: Int, floorId: Int, regionId: Int, mapId: Int, renownHeartIds: Collection<Int>, language: String? = null): List<MapRenownHeart> =
         chunkedIds(
             renownHeartIds,
-            "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${TASKS}"
+            "${CONTINENTS}/${continentId}/${FLOORS}/${floorId}/${REGIONS}/${regionId}/${MAPS}/${mapId}/${TASKS}",
+            instance = { MapRenownHeart(id = it) }
         ) {
             language(language)
         }

@@ -20,12 +20,6 @@ kotlin.setup {
         v2ModelEnumeration()
         mockKtorClient()
     }
-    androidMain {
-        reflection()
-    }
-    jvmMain {
-        reflection()
-    }
     jvmTest {
         jvmTest()
         jvmKtorClient()

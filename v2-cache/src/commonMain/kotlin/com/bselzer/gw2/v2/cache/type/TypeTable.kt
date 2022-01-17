@@ -73,6 +73,7 @@ fun TypeTable.Builder.guildUpgrade(): Unit = root<GuildUpgrade>().run {
     sub<BoostUpgrade>()
     sub<ClaimableUpgrade>()
     sub<DecorationUpgrade>()
+    sub<DefaultUpgrade>()
     sub<GuildHallExpeditionUpgrade>()
     sub<GuildHallUpgrade>()
     sub<HubUpgrade>()
@@ -100,6 +101,7 @@ fun TypeTable.Builder.item(): Unit = root<Item>().run {
     sub<ConsumableItem>()
     sub<ContainerItem>()
     sub<CraftingMaterialItem>()
+    sub<DefaultItem>()
     sub<GatheringToolItem>()
     sub<GizmoItem>()
     sub<KeyItem>()
@@ -155,6 +157,7 @@ fun TypeTable.Builder.skillFact(): Unit = root<SkillFact>().run {
 fun TypeTable.Builder.skin(): Unit = root<Skin>().run {
     sub<ArmorSkin>()
     sub<BackSkin>()
+    sub<DefaultSkin>()
     sub<GatheringToolSkin>()
     sub<WeaponSkin>()
 }

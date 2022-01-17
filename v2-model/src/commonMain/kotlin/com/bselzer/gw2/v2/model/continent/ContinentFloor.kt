@@ -19,7 +19,7 @@ data class ContinentFloor(
      * The bounds of this floor within the continent's texture represented by two-dimensional coordinates.
      */
     @SerialName("clamped_view")
-    val clampedView: List<List<Double>>,
+    val clampedView: List<List<Double>> = emptyList(),
 
     /**
      * A map of the region id to the region information.

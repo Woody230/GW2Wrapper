@@ -40,7 +40,7 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/delivery">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.TRADING_POST)
-    suspend fun delivery(token: String? = null): Delivery = getSingle(path = "${COMMERCE}/${DELIVERY}") {
+    suspend fun delivery(token: String? = null): Delivery = getSingle(path = "${COMMERCE}/${DELIVERY}", instance = { Delivery() }) {
         bearer(token)
     }
 
@@ -48,7 +48,7 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the information about the exchange of [quantity] coins to gems
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/exchange/coins">the wiki</a>
      */
-    suspend fun coinExchange(quantity: Int): CoinExchange = getSingle(path = "${COMMERCE}/${EXCHANGE}/${COINS}") {
+    suspend fun coinExchange(quantity: Int): CoinExchange = getSingle(path = "${COMMERCE}/${EXCHANGE}/${COINS}", { CoinExchange() }) {
         parameter("quantity", quantity)
     }
 
@@ -56,7 +56,7 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the information about the exchange of [quantity] gems to coins
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/exchange/gems">the wiki</a>
      */
-    suspend fun gemExchange(quantity: Int): GemExchange = getSingle(path = "${COMMERCE}/${EXCHANGE}/${GEMS}") {
+    suspend fun gemExchange(quantity: Int): GemExchange = getSingle(path = "${COMMERCE}/${EXCHANGE}/${GEMS}", instance = { GemExchange() }) {
         parameter("quantity", quantity)
     }
 
@@ -70,14 +70,14 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the listing associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/listings">the wiki</a>
      */
-    suspend fun listing(id: Int): Listings = getSingleById(id, "${COMMERCE}/${LISTINGS}")
+    suspend fun listing(id: Int): Listings = getSingleById(id, "${COMMERCE}/${LISTINGS}", instance = { Listings(id = it) })
 
 
     /**
      * @return the listings associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/listings">the wiki</a>
      */
-    suspend fun listings(ids: Collection<Int>): List<Listings> = chunkedIds(ids, "${COMMERCE}/${LISTINGS}")
+    suspend fun listings(ids: Collection<Int>): List<Listings> = chunkedIds(ids, "${COMMERCE}/${LISTINGS}", instance = { Listings(id = it) })
 
     /**
      * @return the ids of the available prices
@@ -89,13 +89,13 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the price associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/prices">the wiki</a>
      */
-    suspend fun price(id: Int): Prices = getSingleById(id, "${COMMERCE}/${PRICES}")
+    suspend fun price(id: Int): Prices = getSingleById(id, "${COMMERCE}/${PRICES}", instance = { Prices(id = it) })
 
     /**
      * @return the prices associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/prices">the wiki</a>
      */
-    suspend fun prices(ids: Collection<Int>): List<Prices> = chunkedIds(ids, "${COMMERCE}/${PRICES}")
+    suspend fun prices(ids: Collection<Int>): List<Prices> = chunkedIds(ids, "${COMMERCE}/${PRICES}", instance = { Prices(id = it) })
 
     /**
      * @return the current unfilled transactions for buy orders

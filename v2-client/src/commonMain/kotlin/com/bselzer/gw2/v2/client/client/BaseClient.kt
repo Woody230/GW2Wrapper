@@ -10,11 +10,6 @@ abstract class BaseClient(
     protected val httpClient: HttpClient,
     protected val configuration: Gw2ClientConfiguration
 ) {
-    protected companion object {
-        // TODO Expect/actual is used because of publishing not working due to the reflection artifact. https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/
-        val DEFAULT_RECOVERY = DefaultRecovery()
-    }
-
     /**
      * @return the ids as a comma separated string or "-1" if there are no ids
      */
@@ -54,8 +49,8 @@ abstract class BaseClient(
      *
      * @return the object
      */
-    protected suspend inline fun <reified T> getSingle(path: String, block: HttpRequestBuilder.() -> Unit = {}): T =
-        tryOrRecover({ defaultSingle() }) { forceGetSingle(path, block) }
+    protected suspend inline fun <reified T> getSingle(path: String, instance: () -> T, block: HttpRequestBuilder.() -> Unit = {}): T =
+        tryOrRecover(instance) { forceGetSingle(path, block) }
 
     /**
      * Gets the identifiable object with recovery.
@@ -64,9 +59,9 @@ abstract class BaseClient(
     protected suspend inline fun <reified T : Identifiable<Id>, Id> getIdentifiableSingle(
         id: Id,
         path: String,
-        default: () -> T = { defaultSingle(id) },
+        instance: (Id) -> T,
         block: HttpRequestBuilder.() -> Unit = {}
-    ): T = tryOrRecover(default) { forceGetSingle(path, block) }
+    ): T = tryOrRecover(default = { instance(id) }) { forceGetSingle(path, block) }
 
     /**
      * Gets the objects with recovery.
@@ -86,16 +81,26 @@ abstract class BaseClient(
      *
      * @return the collection of objects represented by the ids
      */
-    protected suspend inline fun <reified T : Identifiable<Id>, Id> chunkedIds(ids: Collection<Id>, path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> =
-        chunked(ids, path, "ids", block)
+    protected suspend inline fun <reified T : Identifiable<Id>, Id> chunkedIds(
+        ids: Collection<Id>,
+        path: String,
+        instance: (Id) -> T,
+        block: HttpRequestBuilder.() -> Unit = {}
+    ): List<T> =
+        chunked(ids, path, "ids", instance, block)
 
     /**
      * Chunks the ids into requests small enough for the API to accept, if there are more ids than the configuration page size.
      *
      * @return the collection of objects represented by the ids
      */
-    protected suspend inline fun <reified T : Identifiable<Id>, Id> chunkedTabs(ids: Collection<Id>, path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> =
-        chunked(ids, path, "tabs", block)
+    protected suspend inline fun <reified T : Identifiable<Id>, Id> chunkedTabs(
+        ids: Collection<Id>,
+        path: String,
+        instance: (Id) -> T,
+        block: HttpRequestBuilder.() -> Unit = {}
+    ): List<T> =
+        chunked(ids, path, "tabs", instance, block)
 
     /**
      * @return all the objects
@@ -116,9 +121,10 @@ abstract class BaseClient(
         ids: Collection<Id>,
         path: String,
         idsParameterName: String,
+        instance: (Id) -> T,
         block: HttpRequestBuilder.() -> Unit = {}
     ): List<T> = tryOrRecover(
-        { defaultAll(ids) }
+        { ids.map { id -> instance(id) } }
     ) {
         val responses = mutableListOf<T>()
         for (chunk in ids.toHashSet().chunked(configuration.pageSize)) {
@@ -152,14 +158,15 @@ abstract class BaseClient(
      *
      * @return a single object
      */
-    protected suspend inline fun <reified T : Identifiable<Id>, Id> getSingleById(id: Id, path: String, block: HttpRequestBuilder.() -> Unit = {}): T = tryOrRecover(
-        default = { defaultSingle(id) }
-    ) {
-        httpClient.get(path = path) {
-            idParameter(id)
-            apply(block)
+    protected suspend inline fun <reified T : Identifiable<Id>, Id> getSingleById(id: Id, path: String, instance: (Id) -> T, block: HttpRequestBuilder.() -> Unit = {}): T =
+        tryOrRecover(
+            default = { instance(id) }
+        ) {
+            httpClient.get(path = path) {
+                idParameter(id)
+                apply(block)
+            }
         }
-    }
 
     /**
      * Attempts to call the [block]. If the [block] fails and the recovery mode is [DEFAULT], then the [default] is called.
@@ -174,19 +181,4 @@ abstract class BaseClient(
             DEFAULT -> default()
         }
     }
-
-    /**
-     * Creates a new default instance of a single object.
-     */
-    protected inline fun <reified T> defaultSingle(): T = DEFAULT_RECOVERY.defaultSingle()
-
-    /**
-     * Creates a new default instance of a single object with the id populated.
-     */
-    protected inline fun <reified T : Identifiable<Id>, Id> defaultSingle(id: Id): T = DEFAULT_RECOVERY.defaultSingle(id)
-
-    /**
-     * Creates a new default instance of multiple objects with the id populated.
-     */
-    protected inline fun <reified T : Identifiable<Id>, Id> defaultAll(ids: Collection<Id>): List<T> = ids.map { id -> defaultSingle(id) }
 }

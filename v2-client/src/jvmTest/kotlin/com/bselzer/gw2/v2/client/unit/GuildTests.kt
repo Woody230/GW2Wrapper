@@ -5,7 +5,7 @@ import com.bselzer.gw2.v2.model.guild.upgrade.ClaimableUpgrade
 import com.bselzer.gw2.v2.model.guild.upgrade.cost.CollectibleUpgradeCost
 import com.bselzer.gw2.v2.model.guild.upgrade.cost.ItemUpgradeCost
 import io.ktor.client.engine.mock.*
-import org.junit.Test
+import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 

@@ -23,7 +23,7 @@ class SpecializationClient(httpClient: HttpClient, configuration: Gw2ClientConfi
      * @return the specialization associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/specializations">the wiki</a>
      */
-    suspend fun specialization(id: Int, language: String? = null): Specialization = getSingleById(id, SPECIALIZATIONS) {
+    suspend fun specialization(id: Int, language: String? = null): Specialization = getSingleById(id, SPECIALIZATIONS, instance = { Specialization(id = it) }) {
         language(language)
     }
 
@@ -31,9 +31,10 @@ class SpecializationClient(httpClient: HttpClient, configuration: Gw2ClientConfi
      * @return the specializations associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/specializations">the wiki</a>
      */
-    suspend fun specializations(ids: Collection<Int>, language: String? = null): List<Specialization> = chunkedIds(ids, SPECIALIZATIONS) {
-        language(language)
-    }
+    suspend fun specializations(ids: Collection<Int>, language: String? = null): List<Specialization> =
+        chunkedIds(ids, SPECIALIZATIONS, instance = { Specialization(id = it) }) {
+            language(language)
+        }
 
     /**
      * @return all the specializations
