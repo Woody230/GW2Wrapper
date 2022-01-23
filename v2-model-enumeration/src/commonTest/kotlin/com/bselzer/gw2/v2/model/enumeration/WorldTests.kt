@@ -5,7 +5,7 @@ import com.bselzer.gw2.v2.model.enumeration.extension.world.region
 import com.bselzer.gw2.v2.model.enumeration.world.WorldLanguage
 import com.bselzer.gw2.v2.model.enumeration.world.WorldRegion
 import com.bselzer.gw2.v2.model.world.World
-import org.junit.Test
+import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
 
