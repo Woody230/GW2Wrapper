@@ -72,6 +72,7 @@ fun TypeTable.Builder.guildUpgrade(): Unit = root<GuildUpgrade>().run {
     sub<BankTabUpgrade>()
     sub<BoostUpgrade>()
     sub<ClaimableUpgrade>()
+    sub<ConsumableUpgrade>()
     sub<DecorationUpgrade>()
     sub<DefaultUpgrade>()
     sub<GuildHallExpeditionUpgrade>()

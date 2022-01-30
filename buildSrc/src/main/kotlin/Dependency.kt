@@ -18,6 +18,7 @@ private const val KTOR = "1.6.7"
 private const val ANDROID_TEST = "1.1.0"
 private const val ROBOLECTRIC = "4.6.1"
 private const val COROUTINE = "1.5.2"
+private const val KODEIN_DB = "0.9.0-beta"
 const val KOTLIN = "1.6.10"
 
 fun KotlinDependencyHandler.ktxDateTime() = api("org.jetbrains.kotlinx:kotlinx-datetime:$KTX_DATETIME")
@@ -44,6 +45,11 @@ fun KotlinDependencyHandler.extKodeinDb() = api("com.bselzer.ktx:kodein-db:$EXTE
 fun KotlinDependencyHandler.androidKtorClient() = implementation("io.ktor:ktor-client-android:$KTOR")
 fun KotlinDependencyHandler.jvmKtorClient() = implementation("io.ktor:ktor-client-apache:$KTOR")
 fun KotlinDependencyHandler.mockKtorClient() = implementation("io.ktor:ktor-client-mock:$KTOR")
+fun KotlinDependencyHandler.testKodeinDb() {
+    api("org.kodein.db:kodein-db:$KODEIN_DB")
+    api("org.kodein.db:kodein-db-inmemory:$KODEIN_DB")
+    api("org.kodein.db:kodein-db-serializer-kotlinx:$KODEIN_DB")
+}
 
 /**
  * Sets up common dependencies.

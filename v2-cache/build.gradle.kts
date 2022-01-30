@@ -13,5 +13,9 @@ kotlin.setup {
         v2Client()
         v2ModelExtension()
     }
-    commonTest()
+    commonTest {
+        mockKtorClient()
+        testKodeinDb()
+    }
+    jvmTest()
 }
