@@ -4,6 +4,7 @@ import com.bselzer.gw2.v2.client.client.Gw2Client
 import com.bselzer.gw2.v2.model.extension.world.WorldId
 import com.bselzer.gw2.v2.model.extension.wvw.allWorlds
 import com.bselzer.gw2.v2.model.guild.upgrade.ClaimableUpgrade
+import com.bselzer.gw2.v2.model.guild.upgrade.DefaultUpgrade
 import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgrade
 import com.bselzer.gw2.v2.model.wvw.match.WvwMapObjective
 import com.bselzer.gw2.v2.model.wvw.match.WvwMatch
@@ -165,7 +166,7 @@ class WvwCache(transactionManager: TransactionManager, client: Gw2Client) : Gw2C
             getId = { upgrade -> upgrade.id },
 
             // Need to default since some ids may not exist and this will prevent repeated API calls.
-            default = { ClaimableUpgrade() }
+            default = { DefaultUpgrade() }
         )
     }
 
