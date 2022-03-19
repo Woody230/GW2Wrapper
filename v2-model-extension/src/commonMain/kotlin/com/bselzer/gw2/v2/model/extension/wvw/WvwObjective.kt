@@ -7,22 +7,9 @@ import com.bselzer.ktx.geometry.dimension.bi.position.Point2D
 import com.bselzer.ktx.geometry.dimension.tri.position.Point3D
 
 /**
- * @return the [WvwObjective.id] broken into its parts: the map and objective ids.
+ * The id of the objective wrapped by a [WvwObjectiveId].
  */
-fun WvwObjective.id(): Pair<Int, Int> {
-    val parts = id.split("-")
-    return Pair(parts.getOrNull(0)?.toIntOrNull() ?: -1, parts.getOrNull(1)?.toIntOrNull() ?: -1)
-}
-
-/**
- * @return the map id within the [WvwObjective.id]
- */
-fun WvwObjective.mapId(): Int = id().first
-
-/**
- * @return the objective id within the [WvwObjective.id]
- */
-fun WvwObjective.objectiveId(): Int = id().second
+fun WvwObjective.id(): WvwObjectiveId = WvwObjectiveId(id)
 
 /**
  * The [WvwObjective.coordinates] as a [Point3D].
