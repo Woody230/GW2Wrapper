@@ -7,11 +7,6 @@ import com.bselzer.ktx.geometry.dimension.bi.position.Point2D
 import com.bselzer.ktx.geometry.dimension.tri.position.Point3D
 
 /**
- * The id of the objective wrapped by a [WvwObjectiveId].
- */
-fun WvwObjective.id(): WvwObjectiveId = WvwObjectiveId(id)
-
-/**
  * The [WvwObjective.coordinates] as a [Point3D].
  */
 fun WvwObjective.coordinates(): Point3D = coordinates.toPoint3D()

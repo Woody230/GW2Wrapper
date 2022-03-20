@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.account.build
 
+import com.bselzer.gw2.v2.model.pet.PetId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,12 +11,12 @@ data class BuildPets(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pets">the wiki</a>
      */
     @SerialName("terrestrial")
-    val terrestrialIds: List<Int?> = emptyList(),
+    val terrestrialIds: List<PetId?> = emptyList(),
 
     /**
      * The ids of the selected pets underwater. An id is null if it is not selected.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pets">the wiki</a>
      */
     @SerialName("aquatic")
-    val aquaticIds: List<Int?> = emptyList()
+    val aquaticIds: List<PetId?> = emptyList()
 )

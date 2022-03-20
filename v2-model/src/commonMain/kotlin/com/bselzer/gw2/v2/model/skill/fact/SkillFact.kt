@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.model.skill.fact
 
 import com.bselzer.gw2.v2.model.skill.Skill
+import com.bselzer.gw2.v2.model.trait.TraitId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -22,7 +23,7 @@ abstract class SkillFact(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/traits">the wiki</a>
      */
     @SerialName("requires_trait")
-    val traitId: Int? = null,
+    val traitId: TraitId? = null,
 
     /**
      * The index of the fact in the [Skill.facts] that is overridden when the trait associated with [traitId] is selected.
@@ -49,7 +50,7 @@ abstract class SkillFact(
     override fun hashCode(): Int {
         var result = description.hashCode()
         result = 31 * result + iconLink.hashCode()
-        result = 31 * result + (traitId ?: 0)
+        result = 31 * result + (traitId?.hashCode() ?: 0)
         result = 31 * result + (overrides ?: 0)
         return result
     }

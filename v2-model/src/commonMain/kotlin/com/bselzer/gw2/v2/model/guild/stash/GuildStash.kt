@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.guild.stash
 
+import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgradeId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,7 +11,7 @@ data class GuildStash(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/upgrades">the wiki</a>
      */
     @SerialName("upgrade_id")
-    val upgradeId: Int = 0,
+    val upgradeId: GuildUpgradeId = GuildUpgradeId(),
 
     /**
      * The number of slots in this section of the vault.

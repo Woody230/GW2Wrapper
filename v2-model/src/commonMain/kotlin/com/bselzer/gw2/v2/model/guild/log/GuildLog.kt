@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.model.guild.log
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.identifier.Identifiable
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -11,7 +11,7 @@ abstract class GuildLog(
      * The id of the log. It is only unique within the scope of the associated guild.
      */
     @SerialName("id")
-    override val id: Int = 0,
+    override val id: GuildLogId = GuildLogId(),
 
     /**
      * The date and time this log was created.
@@ -41,7 +41,7 @@ abstract class GuildLog(
     }
 
     override fun hashCode(): Int {
-        var result = id
+        var result = id.hashCode()
         result = 31 * result + createdAt.hashCode()
         result = 31 * result + (user?.hashCode() ?: 0)
         return result

@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.tile.client
 
 import com.bselzer.gw2.v2.model.continent.Continent
-import com.bselzer.gw2.v2.model.continent.ContinentFloor
+import com.bselzer.gw2.v2.model.continent.floor.Floor
 import com.bselzer.gw2.v2.model.extension.continent.clampedView
 import com.bselzer.gw2.v2.model.extension.continent.textureDimensions
 import com.bselzer.gw2.v2.tile.constant.Endpoints
@@ -10,14 +10,11 @@ import com.bselzer.gw2.v2.tile.model.request.TileRequest
 import com.bselzer.gw2.v2.tile.model.response.Tile
 import com.bselzer.gw2.v2.tile.model.response.TileGrid
 import io.ktor.client.*
-import io.ktor.client.features.*
 import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import io.ktor.http.*
-import io.ktor.http.cio.*
-import io.ktor.util.*
 import io.ktor.utils.io.core.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlin.math.floor
@@ -50,7 +47,7 @@ open class TileClient(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki for continents</a>
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/maps"> the wiki for maps</a>
      */
-    suspend fun grid(continent: Continent, floor: ContinentFloor, zoom: Int): TileGrid = grid(requestGrid(continent, floor, zoom))
+    suspend fun grid(continent: Continent, floor: Floor, zoom: Int): TileGrid = grid(requestGrid(continent, floor, zoom))
 
     /**
      * @return the tile grid generated from the [request]
@@ -89,7 +86,7 @@ open class TileClient(
      * @param floor the floor within the [continent]
      * @param zoom the level of detail between the [Continent.minZoom] and [Continent.maxZoom] inclusive
      */
-    suspend fun requestGrid(continent: Continent, floor: ContinentFloor, zoom: Int): TileGridRequest {
+    suspend fun requestGrid(continent: Continent, floor: Floor, zoom: Int): TileGridRequest {
         // Default to the min/max zoom if the requested zoom is too little/much.
         val requestedZoom = max(0, min(zoom, continent.maxZoom))
         val requestedZoomTiles = 2.0.pow(requestedZoom)

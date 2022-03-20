@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.guild
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
 import com.bselzer.gw2.v2.model.guild.emblem.GuildEmblem
+import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
@@ -15,7 +15,7 @@ data class Guild(
      * The id in the form of a UUID.
      */
     @SerialName("id")
-    override val id: String = "",
+    override val id: GuildId = GuildId(),
 
     @Scope(Requirement.REQUIRED, Permission.GUILDS)
     @SerialName("level")

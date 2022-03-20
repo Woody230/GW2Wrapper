@@ -1,13 +1,14 @@
 package com.bselzer.gw2.v2.model.specialization
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.trait.TraitId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Specialization(
     @SerialName("id")
-    override val id: Int = 0,
+    override val id: SpecializationId = SpecializationId(),
 
     @SerialName("name")
     val name: String = "",
@@ -35,21 +36,21 @@ data class Specialization(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/traits">the wiki</a>
      */
     @SerialName("minor_traits")
-    val minorTraitIds: List<Int> = emptyList(),
+    val minorTraitIds: List<TraitId> = emptyList(),
 
     /**
      * The ids of the major traits.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/traits">the wiki</a>
      */
     @SerialName("major_traits")
-    val majorTraitIds: List<Int> = emptyList(),
+    val majorTraitIds: List<TraitId> = emptyList(),
 
     /**
      * The id of the trait enabling the weapon associated with an elite specialization.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/traits">the wiki</a>
      */
     @SerialName("weapon_trait")
-    val weaponTraitId: Int = 0,
+    val weaponTraitId: TraitId = TraitId(),
 
     /**
      * The link to an icon for the elite specialization.

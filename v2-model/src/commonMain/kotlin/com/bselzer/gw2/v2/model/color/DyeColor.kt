@@ -1,13 +1,14 @@
 package com.bselzer.gw2.v2.model.color
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.item.ItemId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class DyeColor(
     @SerialName("id")
-    override val id: Int = 0,
+    override val id: DyeColorId = DyeColorId(),
 
     @SerialName("name")
     val name: String = "",
@@ -48,7 +49,7 @@ data class DyeColor(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
     @SerialName("item")
-    val itemId: Int = 0,
+    val itemId: ItemId = ItemId(),
 
     /**
      * The types of hue, material, and rarity.

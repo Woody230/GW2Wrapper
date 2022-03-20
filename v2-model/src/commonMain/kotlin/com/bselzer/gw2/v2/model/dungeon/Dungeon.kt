@@ -1,17 +1,14 @@
 package com.bselzer.gw2.v2.model.dungeon
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.dungeon.path.DungeonPath
+import com.bselzer.gw2.v2.model.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Dungeon(
-    /**
-     * The name of the dungeon.
-     */
-    // TODO enum and extension
     @SerialName("id")
-    override val id: String = "",
+    override val id: DungeonId = DungeonId(),
 
     @SerialName("paths")
     val paths: List<DungeonPath> = emptyList()

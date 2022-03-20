@@ -1,5 +1,7 @@
 package com.bselzer.gw2.v2.model.account.equipment
 
+import com.bselzer.gw2.v2.model.item.ItemId
+import com.bselzer.gw2.v2.model.pvp.amulet.PvpAmuletId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,14 +13,14 @@ data class EquipmentTemplatePvp(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/amulets">the wiki</a>
      */
     @SerialName("amulet")
-    val amuletId: Int = 0,
+    val amuletId: PvpAmuletId = PvpAmuletId(),
 
     /**
      * The id of the PvP rune.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
     @SerialName("rune")
-    val runeId: Int = 0,
+    val runeId: ItemId = ItemId(),
 
     /**
      * The ids of the PvP sigils. An id is null if it is not selected.
@@ -27,5 +29,5 @@ data class EquipmentTemplatePvp(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
     @SerialName("sigils")
-    val sigilIds: List<Int> = emptyList()
+    val sigilIds: List<ItemId> = emptyList()
 )

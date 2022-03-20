@@ -1,6 +1,8 @@
 package com.bselzer.gw2.v2.model.account
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.guild.GuildId
+import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.world.WorldId
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
@@ -23,7 +25,7 @@ data class Account(
      * The id in the form of a UUID.
      */
     @SerialName("id")
-    override val id: String = "",
+    override val id: AccountId = AccountId(),
 
     /**
      * The age in the form of seconds.
@@ -43,14 +45,14 @@ data class Account(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/worlds">the wiki</a>
      */
     @SerialName("world")
-    val world: Int = 0,
+    val world: WorldId = WorldId(),
 
     /**
      * The guild ids in the form of UUIDs.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/:id">the wiki</a>
      */
     @SerialName("guilds")
-    val guilds: List<String> = emptyList(),
+    val guilds: List<GuildId> = emptyList(),
 
     /**
      * The guilds ids that the account is a leader of, in the form of UUIDs.
@@ -59,7 +61,7 @@ data class Account(
      */
     @Scope(Requirement.REQUIRED, Permission.GUILDS)
     @SerialName("guild_leader")
-    val leaderGuilds: List<String> = emptyList(),
+    val leaderGuilds: List<GuildId> = emptyList(),
 
     /**
      * The date and time of account creation.

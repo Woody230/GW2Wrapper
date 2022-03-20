@@ -1,7 +1,10 @@
 package com.bselzer.gw2.v2.model.account.equipment
 
-import com.bselzer.gw2.v2.model.character.CharacterItemStat
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.character.pve.CharacterItemStat
+import com.bselzer.gw2.v2.model.color.DyeColorId
+import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.item.ItemId
+import com.bselzer.gw2.v2.model.skin.SkinId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,7 +15,7 @@ data class EquipmentTemplateItem(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
     @SerialName("id")
-    override val id: Int = 0,
+    override val id: ItemId = ItemId(),
 
     /**
      * The type of slot.
@@ -25,21 +28,21 @@ data class EquipmentTemplateItem(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
     @SerialName("infusions")
-    val infusions: List<Int> = emptyList(),
+    val infusions: List<ItemId> = emptyList(),
 
     /**
      * The ids of the equipped upgrade components.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
     @SerialName("upgrades")
-    val upgrades: List<Int> = emptyList(),
+    val upgrades: List<ItemId> = emptyList(),
 
     /**
      * The id of the equipped skin.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skins">the wiki</a>
      */
     @SerialName("skin")
-    val skin: Int = 0,
+    val skin: SkinId = SkinId(),
 
     /**
      * The stats of the item.
@@ -71,5 +74,5 @@ data class EquipmentTemplateItem(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/colors">the wiki</a>
      */
     @SerialName("dyes")
-    val dyes: List<Int?> = emptyList()
+    val dyes: List<DyeColorId?> = emptyList()
 ) : Identifiable<Int>

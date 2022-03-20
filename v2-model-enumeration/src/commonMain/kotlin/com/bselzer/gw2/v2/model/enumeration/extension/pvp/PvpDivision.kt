@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.enumeration.extension.pvp
 
 import com.bselzer.gw2.v2.model.enumeration.pvp.PvpDivisionFlag
-import com.bselzer.gw2.v2.model.pvp.season.PvpDivision
+import com.bselzer.gw2.v2.model.pvp.season.division.PvpDivision
 import com.bselzer.ktx.serialization.function.validEnumValues
 
 /**

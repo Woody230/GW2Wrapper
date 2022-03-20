@@ -1,46 +1,48 @@
 package com.bselzer.gw2.v2.model.legend
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.skill.PaletteId
+import com.bselzer.gw2.v2.model.skill.SkillId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Legend(
     @SerialName("id")
-    override val id: String = "",
+    override val id: LegendId = LegendId(),
 
     /**
      * The id used in build template chat links.
      * @see <a href="https://wiki.guildwars2.com/wiki/Chat_link_format#Build_template_link">the wiki</a>
      */
     @SerialName("code")
-    val buildTemplateId: Int = 0,
+    val paletteId: PaletteId = PaletteId(),
 
     /**
      * The id of the profession skill used to swap to this legend.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
      */
     @SerialName("swap")
-    val swapLegendSkillId: Int = 0,
+    val swapLegendId: SkillId = SkillId(),
 
     /**
      *  The id of the heal skill.
      *  @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
      */
     @SerialName("heal")
-    val healId: Int = 0,
+    val healId: SkillId = SkillId(),
 
     /**
      * The id of the elite skill.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
      */
     @SerialName("elite")
-    val eliteId: Int = 0,
+    val eliteId: SkillId = SkillId(),
 
     /**
      * The ids of the utility skills.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
      */
     @SerialName("utilities")
-    val utilityIds: List<Int> = emptyList()
+    val utilityIds: List<SkillId> = emptyList()
 ) : Identifiable<String>

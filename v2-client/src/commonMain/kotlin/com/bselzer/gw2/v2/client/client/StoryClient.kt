@@ -2,7 +2,7 @@ package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.extension.language
 import com.bselzer.gw2.v2.model.story.Story
-import com.bselzer.gw2.v2.model.story.StorySeason
+import com.bselzer.gw2.v2.model.story.season.StorySeason
 import io.ktor.client.*
 
 /**

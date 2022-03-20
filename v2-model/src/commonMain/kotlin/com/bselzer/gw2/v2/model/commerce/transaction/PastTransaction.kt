@@ -11,4 +11,4 @@ data class PastTransaction(
      */
     @SerialName("purchased")
     val purchasedAt: Instant = Instant.DISTANT_PAST
-) : BaseTransaction()
+) : Transaction()

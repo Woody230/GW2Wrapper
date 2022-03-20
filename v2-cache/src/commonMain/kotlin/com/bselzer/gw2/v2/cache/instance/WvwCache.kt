@@ -1,12 +1,12 @@
 package com.bselzer.gw2.v2.cache.instance
 
 import com.bselzer.gw2.v2.client.client.Gw2Client
-import com.bselzer.gw2.v2.model.extension.world.WorldId
 import com.bselzer.gw2.v2.model.extension.wvw.allWorlds
 import com.bselzer.gw2.v2.model.guild.upgrade.ClaimableUpgrade
 import com.bselzer.gw2.v2.model.guild.upgrade.DefaultUpgrade
 import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgrade
-import com.bselzer.gw2.v2.model.wvw.match.WvwMapObjective
+import com.bselzer.gw2.v2.model.world.WorldId
+import com.bselzer.gw2.v2.model.wvw.map.WvwMapObjective
 import com.bselzer.gw2.v2.model.wvw.match.WvwMatch
 import com.bselzer.gw2.v2.model.wvw.objective.WvwObjective
 import com.bselzer.gw2.v2.model.wvw.upgrade.WvwUpgrade

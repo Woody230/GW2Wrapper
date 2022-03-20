@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.model.enumeration.extension.itemstat
 
-import com.bselzer.gw2.v2.model.character.CharacterItemStat
+import com.bselzer.gw2.v2.model.character.pve.CharacterItemStat
 import com.bselzer.gw2.v2.model.enumeration.profession.AttributeName
 import com.bselzer.gw2.v2.model.itemstat.ItemAttribute
 import com.bselzer.ktx.serialization.function.enumValueOrNull

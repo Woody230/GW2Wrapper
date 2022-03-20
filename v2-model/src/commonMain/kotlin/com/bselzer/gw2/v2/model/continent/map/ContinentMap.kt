@@ -1,13 +1,24 @@
 package com.bselzer.gw2.v2.model.continent.map
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.continent.floor.FloorId
+import com.bselzer.gw2.v2.model.continent.map.adventure.Adventure
+import com.bselzer.gw2.v2.model.continent.map.challenge.HeroChallenge
+import com.bselzer.gw2.v2.model.continent.map.heart.RenownHeart
+import com.bselzer.gw2.v2.model.continent.map.heart.RenownHeartId
+import com.bselzer.gw2.v2.model.continent.map.mastery.MasteryPoint
+import com.bselzer.gw2.v2.model.continent.map.pointofinterest.PointOfInterest
+import com.bselzer.gw2.v2.model.continent.map.pointofinterest.PointOfInterestId
+import com.bselzer.gw2.v2.model.continent.map.sector.Sector
+import com.bselzer.gw2.v2.model.continent.map.sector.SectorId
+import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.map.MapId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class ContinentMap(
     @SerialName("id")
-    override val id: Int = 0,
+    override val id: MapId = MapId(),
 
     @SerialName("name")
     val name: String = "",
@@ -29,7 +40,7 @@ data class ContinentMap(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     @SerialName("default_floor")
-    val defaultFloorId: Int = 0,
+    val defaultFloorId: FloorId = FloorId(),
 
     /**
      * The map dimensions.
@@ -55,29 +66,29 @@ data class ContinentMap(
      * A map of the point of interest id to the point of interest object, which include landmarks, waypoints, and vistas.
      */
     @SerialName("points_of_interest")
-    val pointsOfInterest: Map<Int, MapPointOfInterest> = emptyMap(),
+    val pointsOfInterest: Map<PointOfInterestId, PointOfInterest> = emptyMap(),
 
     /**
      * A map of the renown heart id to the renown heart object.
      */
     @SerialName("tasks")
-    val renownHearts: Map<Int, MapRenownHeart> = emptyMap(),
+    val renownHearts: Map<RenownHeartId, RenownHeart> = emptyMap(),
 
     /**
      * The hero challenges. Previously known as skill challenges.
      */
     @SerialName("skill_challenges")
-    val heroChallenges: List<MapHeroChallenge> = emptyList(),
+    val heroChallenges: List<HeroChallenge> = emptyList(),
 
     /**
      * A map of the sector id to the sector object.
      */
     @SerialName("sectors")
-    val sectors: Map<Int, MapSector> = emptyMap(),
+    val sectors: Map<SectorId, Sector> = emptyMap(),
 
     @SerialName("adventures")
-    val adventures: List<MapAdventure> = emptyList(),
+    val adventures: List<Adventure> = emptyList(),
 
     @SerialName("mastery_points")
-    val masteryPoints: List<MapMasteryPoint> = emptyList()
+    val masteryPoints: List<MasteryPoint> = emptyList()
 ) : Identifiable<Int>

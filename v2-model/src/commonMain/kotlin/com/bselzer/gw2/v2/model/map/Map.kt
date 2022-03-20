@@ -1,13 +1,16 @@
 package com.bselzer.gw2.v2.model.map
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.continent.ContinentId
+import com.bselzer.gw2.v2.model.continent.floor.FloorId
+import com.bselzer.gw2.v2.model.continent.region.RegionId
+import com.bselzer.gw2.v2.model.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Map(
     @SerialName("id")
-    override val id: Int = 0,
+    override val id: MapId = MapId(),
 
     @SerialName("name")
     val name: String = "",
@@ -29,7 +32,7 @@ data class Map(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     @SerialName("default_floor")
-    val defaultFloorId: Int = 0,
+    val defaultFloorId: FloorId = FloorId(),
 
     /**
      * The map dimensions.
@@ -59,14 +62,14 @@ data class Map(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     @SerialName("floors")
-    val floorIds: List<Int> = emptyList(),
+    val floorIds: List<FloorId> = emptyList(),
 
     /**
      * The id of the region.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     @SerialName("region_id")
-    val regionId: Int = 0,
+    val regionId: RegionId = RegionId(),
 
     /**
      * The name of the region.
@@ -80,7 +83,7 @@ data class Map(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     @SerialName("continent_id")
-    val continentId: Int = 0,
+    val continentId: ContinentId = ContinentId(),
 
     /**
      * The name of the continent.

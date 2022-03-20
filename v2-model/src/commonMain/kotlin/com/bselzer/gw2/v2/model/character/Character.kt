@@ -1,6 +1,14 @@
 package com.bselzer.gw2.v2.model.character
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.character.bag.Bag
+import com.bselzer.gw2.v2.model.character.progression.CharacterCrafting
+import com.bselzer.gw2.v2.model.character.progression.CharacterTraining
+import com.bselzer.gw2.v2.model.character.pve.CharacterEquipment
+import com.bselzer.gw2.v2.model.character.pvp.CharacterPvpEquipment
+import com.bselzer.gw2.v2.model.character.skill.CharacterModeSkills
+import com.bselzer.gw2.v2.model.character.specialization.CharacterModeSpecializations
+import com.bselzer.gw2.v2.model.character.wvw.CharacterWvwAbility
+import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope

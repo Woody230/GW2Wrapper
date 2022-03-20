@@ -5,27 +5,33 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 enum class MountName {
-    @SerialName("Griffon")
+    @SerialName("griffon")
     GRIFFON,
 
-    @SerialName("Jackal")
+    @SerialName("jackal")
     JACKAL,
 
-    @SerialName("Raptor")
+    @SerialName("raptor")
     RAPTOR,
 
-    @SerialName("Roller Beetle")
+    @SerialName("roller_beetle")
     ROLLER_BEETLE,
 
-    @SerialName("Skimmer")
+    @SerialName("siege_turtle")
+    SIEGE_TURTLE,
+
+    @SerialName("skiff")
+    SKIFF,
+
+    @SerialName("skimmer")
     SKIMMER,
 
-    @SerialName("Skyscale")
+    @SerialName("skyscale")
     SKYSCALE,
 
-    @SerialName("Springer")
+    @SerialName("springer")
     SPRINGER,
 
-    @SerialName("Warclaw")
+    @SerialName("warclaw")
     WARCLAW
 }

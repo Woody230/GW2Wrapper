@@ -1,13 +1,14 @@
 package com.bselzer.gw2.v2.model.quest
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.story.StoryId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Quest(
     @SerialName("id")
-    override val id: Int = 0,
+    override val id: QuestId = QuestId(),
 
     @SerialName("name")
     val name: String = "",
@@ -23,7 +24,7 @@ data class Quest(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/stories">the wiki</a>
      */
     @SerialName("story")
-    val storyId: String = "",
+    val storyId: StoryId = StoryId(),
 
     @SerialName("goals")
     val goals: List<QuestGoal> = emptyList()

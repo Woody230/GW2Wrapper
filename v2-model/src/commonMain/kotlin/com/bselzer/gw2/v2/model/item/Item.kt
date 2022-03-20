@@ -1,13 +1,13 @@
 package com.bselzer.gw2.v2.model.item
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 abstract class Item(
     @SerialName("id")
-    override val id: Int = 0,
+    override val id: ItemId = ItemId(),
 
     /**
      * The chat link.
@@ -82,7 +82,7 @@ abstract class Item(
     }
 
     override fun hashCode(): Int {
-        var result = id
+        var result = id.hashCode()
         result = 31 * result + chatLink.hashCode()
         result = 31 * result + name.hashCode()
         result = 31 * result + iconLink.hashCode()

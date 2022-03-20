@@ -5,4 +5,4 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @SerialName("Default")
-class DefaultItem(private val identifier: Int = 0) : Item(id = identifier)
+class DefaultItem(private val identifier: ItemId = ItemId()) : Item(id = identifier)

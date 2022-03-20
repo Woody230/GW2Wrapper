@@ -2,7 +2,7 @@ package com.bselzer.gw2.v2.model.extension.wvw
 
 import com.bselzer.gw2.v2.model.enumeration.extension.wvw.owner
 import com.bselzer.gw2.v2.model.enumeration.wvw.ObjectiveOwner
-import com.bselzer.gw2.v2.model.wvw.match.WvwMap
+import com.bselzer.gw2.v2.model.wvw.map.WvwMap
 
 /**
  * @return the points that would currently be awarded to each [ObjectiveOwner] if a tick passed

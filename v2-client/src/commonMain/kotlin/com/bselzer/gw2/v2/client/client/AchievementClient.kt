@@ -2,9 +2,9 @@ package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.extension.language
 import com.bselzer.gw2.v2.model.achievement.Achievement
-import com.bselzer.gw2.v2.model.achievement.AchievementCategory
-import com.bselzer.gw2.v2.model.achievement.AchievementGroup
+import com.bselzer.gw2.v2.model.achievement.category.AchievementCategory
 import com.bselzer.gw2.v2.model.achievement.daily.Dailies
+import com.bselzer.gw2.v2.model.achievement.group.AchievementGroup
 import io.ktor.client.*
 
 /**

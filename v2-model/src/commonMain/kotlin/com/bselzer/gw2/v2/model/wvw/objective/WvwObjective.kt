@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.model.wvw.objective
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,7 +10,7 @@ data class WvwObjective(
      * The map identifier and objective identifier split by a dash (-).
      */
     @SerialName("id")
-    override val id: String = "",
+    override val id: WvwMapObjectiveId = WvwMapObjectiveId(),
 
     @SerialName("name")
     val name: String = "",

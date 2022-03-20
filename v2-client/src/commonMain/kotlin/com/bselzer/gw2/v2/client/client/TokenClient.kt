@@ -10,6 +10,8 @@ import com.bselzer.gw2.v2.scope.core.Scope
 import io.ktor.client.*
 import io.ktor.client.request.*
 import kotlinx.datetime.Instant
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.json.JsonObject
 
 /**
  * The token client.
@@ -50,10 +52,14 @@ class TokenClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
         permissions: List<String>,
         urls: List<String>,
         token: String? = null
-    ): SubToken = forceGetSingle(path = CREATE_SUBTOKEN) {
-        bearer(token)
-        parameter("expire", expiration)
-        parameter("permissions", permissions.joinToString())
-        parameter("urls", urls.joinToString())
+    ): SubToken {
+        val value = forceGetSingle<JsonObject>(path = CREATE_SUBTOKEN) {
+            bearer(token)
+            parameter("expire", expiration)
+            parameter("permissions", permissions.joinToString())
+            parameter("urls", urls.joinToString())
+        }["subtoken"]?.toString()
+
+        return value?.let { SubToken(it) } ?: throw SerializationException("Unable to create a SubToken because the subtoken key missing from the JsonObject.")
     }
 }

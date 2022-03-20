@@ -2,7 +2,8 @@ package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.client.ExceptionRecoveryMode.DEFAULT
 import com.bselzer.gw2.v2.client.client.ExceptionRecoveryMode.NONE
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.identifier.Identifier
 import io.ktor.client.*
 import io.ktor.client.request.*
 
@@ -23,12 +24,13 @@ abstract class BaseClient(
     /**
      * Adds the id.
      */
-    protected fun HttpRequestBuilder.idParameter(id: Any?) = parameter("id", id)
+    protected fun HttpRequestBuilder.idParameter(id: Identifier<*>) = parameter("id", id.value)
 
     /**
      * Adds the ids as a comma separated string.
      */
-    protected fun HttpRequestBuilder.idsParameter(ids: Collection<*>, parameterName: String = "ids") = parameter(parameterName, ids.asIdsParameter())
+    protected fun HttpRequestBuilder.idsParameter(ids: Collection<Identifier<*>>, parameterName: String = "ids") =
+        parameter(parameterName, ids.map { id -> id.value }.asIdsParameter())
 
     /**
      * Adds the ids as "all".

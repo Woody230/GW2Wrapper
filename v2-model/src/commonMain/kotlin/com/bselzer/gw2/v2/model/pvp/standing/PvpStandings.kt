@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.pvp.standing
 
+import com.bselzer.gw2.v2.model.pvp.season.PvpSeasonId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -16,5 +17,5 @@ data class PvpStandings(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">the wiki</a>
      */
     @SerialName("season_id")
-    val seasonId: String = ""
+    val seasonId: PvpSeasonId = PvpSeasonId()
 )

@@ -3,10 +3,10 @@ package com.bselzer.gw2.v2.client.client
 import com.bselzer.gw2.v2.client.extension.bearer
 import com.bselzer.gw2.v2.client.extension.language
 import com.bselzer.gw2.v2.model.guild.Guild
-import com.bselzer.gw2.v2.model.guild.GuildMember
-import com.bselzer.gw2.v2.model.guild.GuildPermission
-import com.bselzer.gw2.v2.model.guild.GuildRank
 import com.bselzer.gw2.v2.model.guild.log.GuildLog
+import com.bselzer.gw2.v2.model.guild.member.GuildMember
+import com.bselzer.gw2.v2.model.guild.permission.GuildPermission
+import com.bselzer.gw2.v2.model.guild.rank.GuildRank
 import com.bselzer.gw2.v2.model.guild.stash.GuildStash
 import com.bselzer.gw2.v2.model.guild.storage.GuildStorageSlot
 import com.bselzer.gw2.v2.model.guild.team.GuildTeam

@@ -1,7 +1,8 @@
 package com.bselzer.gw2.v2.model.pvp.leaderboard
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
-import com.bselzer.gw2.v2.model.pvp.season.leaderboard.PvpLadderScoring
+import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.pvp.season.leaderboard.ladder.score.PvpLadderScoring
+import com.bselzer.gw2.v2.model.pvp.season.leaderboard.ladder.score.PvpScoringId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -13,7 +14,7 @@ data class PvpLeaderboardScore(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">the wiki</a>
      */
     @SerialName("id")
-    override val id: String = "",
+    override val id: PvpScoringId = PvpScoringId(),
 
     @SerialName("value")
     val value: Int = 0

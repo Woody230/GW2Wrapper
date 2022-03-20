@@ -1,6 +1,8 @@
 package com.bselzer.gw2.v2.model.pvp.hero
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.pvp.hero.skin.PvpHeroSkin
+import com.bselzer.gw2.v2.model.pvp.hero.stat.PvpHeroStats
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,7 +12,7 @@ data class PvpHero(
      * The id of the hero in the form of a UUID.
      */
     @SerialName("id")
-    override val id: String = "",
+    override val id: PvpHeroId = PvpHeroId(),
 
     @SerialName("name")
     val name: String = "",

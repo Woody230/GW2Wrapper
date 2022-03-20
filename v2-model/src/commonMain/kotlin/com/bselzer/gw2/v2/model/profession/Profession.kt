@@ -1,6 +1,9 @@
 package com.bselzer.gw2.v2.model.profession
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.skill.PaletteId
+import com.bselzer.gw2.v2.model.skill.SkillId
+import com.bselzer.gw2.v2.model.specialization.SpecializationId
 import com.bselzer.ktx.serialization.serializer.MapArraySerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -8,7 +11,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Profession(
     @SerialName("id")
-    override val id: String = "",
+    override val id: ProfessionId = ProfessionId(),
 
     @SerialName("name")
     val name: String = "",
@@ -18,7 +21,7 @@ data class Profession(
      * @see <a href="https://wiki.guildwars2.com/wiki/Chat_link_format#Build_template_link">the wiki</a>
      */
     @SerialName("code")
-    val buildTemplateId: Int = 0,
+    val paletteId: PaletteId = PaletteId(),
 
     @SerialName("icon")
     val iconLink: String = "",
@@ -31,7 +34,7 @@ data class Profession(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/specializations">the wiki</a>
      */
     @SerialName("specializations")
-    val specializationIds: List<Int> = emptyList(),
+    val specializationIds: List<SpecializationId> = emptyList(),
 
     @SerialName("training")
     val trainings: List<Training> = emptyList(),
@@ -54,5 +57,5 @@ data class Profession(
      */
     @Serializable(with = MapArraySerializer::class)
     @SerialName("skills_by_palette")
-    val skillPaletteIds: Map<Int, Int> = emptyMap()
+    val skillPaletteIds: Map<SkillId, PaletteId> = emptyMap()
 ) : Identifiable<String>

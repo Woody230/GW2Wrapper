@@ -21,5 +21,8 @@ enum class LegendName {
     RENEGADE,
 
     @SerialName("Legend6")
-    CENTAUR
+    CENTAUR,
+
+    @SerialName("Legend7")
+    ALLIANCE
 }

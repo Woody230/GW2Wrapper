@@ -5,4 +5,4 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @SerialName("Default")
-class DefaultSkin(private val identifier: Int = 0) : Skin(id = identifier)
+class DefaultSkin(private val identifier: SkinId = SkinId()) : Skin(id = identifier)

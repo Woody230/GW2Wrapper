@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.enumeration.extension.pvp
 
 import com.bselzer.gw2.v2.model.enumeration.profession.AttributeName
-import com.bselzer.gw2.v2.model.pvp.PvpAmulet
+import com.bselzer.gw2.v2.model.pvp.amulet.PvpAmulet
 import com.bselzer.ktx.serialization.function.validEnumValues
 
 /**

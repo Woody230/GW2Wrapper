@@ -2,14 +2,15 @@ package com.bselzer.gw2.v2.model.achievement
 
 import com.bselzer.gw2.v2.model.achievement.bit.AchievementBit
 import com.bselzer.gw2.v2.model.achievement.reward.AchievementReward
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.achievement.tier.AchievementTier
+import com.bselzer.gw2.v2.model.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Achievement(
     @SerialName("id")
-    override val id: Int = 0,
+    override val id: AchievementId = AchievementId(),
 
     @SerialName("icon")
     val iconLink: String = "",
@@ -54,7 +55,7 @@ data class Achievement(
      * The ids of achievements needed to progress this achievement.
      */
     @SerialName("prerequisites")
-    val prerequisites: List<Int> = emptyList(),
+    val prerequisites: List<AchievementId> = emptyList(),
 
     /**
      * The rewards for completing this achievement.

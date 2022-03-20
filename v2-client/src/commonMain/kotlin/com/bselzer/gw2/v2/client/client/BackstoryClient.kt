@@ -1,8 +1,8 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.extension.language
-import com.bselzer.gw2.v2.model.backstory.BackstoryAnswer
-import com.bselzer.gw2.v2.model.backstory.BackstoryQuestion
+import com.bselzer.gw2.v2.model.backstory.answer.BackstoryAnswer
+import com.bselzer.gw2.v2.model.backstory.question.BackstoryQuestion
 import io.ktor.client.*
 
 /**

@@ -5,4 +5,4 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @SerialName("Default")
-class DefaultUpgrade(private val identifier: Int = 0) : GuildUpgrade(id = identifier)
+class DefaultUpgrade(private val identifier: GuildUpgradeId = GuildUpgradeId()) : GuildUpgrade(id = identifier)

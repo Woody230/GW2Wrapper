@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.client.client
 
-import com.bselzer.gw2.v2.model.home.Cat
-import com.bselzer.gw2.v2.model.home.Node
+import com.bselzer.gw2.v2.model.home.cat.Cat
+import com.bselzer.gw2.v2.model.home.node.Node
 import io.ktor.client.*
 
 /**

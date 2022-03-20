@@ -1,20 +1,21 @@
 package com.bselzer.gw2.v2.model.mini
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.item.ItemId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Mini(
     @SerialName("id")
-    override val id: Int = 0,
+    override val id: MiniId = MiniId(),
 
     /**
      * The id of the item used to unlock this mail carrier.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
     @SerialName("item_id")
-    val unlockItemId: Int = 0,
+    val unlockItemId: ItemId = ItemId(),
 
     /**
      * The description of how to unlock this mini.

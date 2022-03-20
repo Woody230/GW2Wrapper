@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.model.pvp.rank
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.finisher.FinisherId
+import com.bselzer.gw2.v2.model.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,14 +12,14 @@ data class PvpRank(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/ranks">the wiki</a>
      */
     @SerialName("id")
-    override val id: Int = 0,
+    override val id: PvpRankId = PvpRankId(),
 
     /**
      * The id of the finisher.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/finishers">the wiki</a>
      */
     @SerialName("finisher_id")
-    val finisherId: Int = 0,
+    val finisherId: FinisherId = FinisherId(),
 
     @SerialName("name")
     val name: String = "",

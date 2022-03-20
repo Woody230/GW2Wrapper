@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.profession
 
+import com.bselzer.gw2.v2.model.specialization.SpecializationId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -13,7 +14,7 @@ data class ProfessionWeapon(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/specializations">the wiki</a>
      */
     @SerialName("specialization")
-    val specializationId: Int = 0,
+    val specializationId: SpecializationId = SpecializationId(),
 
     @SerialName("skills")
     val skills: List<ProfessionWeaponSkill> = emptyList()

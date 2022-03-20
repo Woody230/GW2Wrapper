@@ -1,13 +1,13 @@
 package com.bselzer.gw2.v2.model.skin
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 abstract class Skin(
     @SerialName("id")
-    override val id: Int = 0,
+    override val id: SkinId = SkinId(),
 
     @SerialName("name")
     val name: String = "",
@@ -50,7 +50,7 @@ abstract class Skin(
     }
 
     override fun hashCode(): Int {
-        var result = id
+        var result = id.hashCode()
         result = 31 * result + name.hashCode()
         result = 31 * result + flags.hashCode()
         result = 31 * result + restrictions.hashCode()

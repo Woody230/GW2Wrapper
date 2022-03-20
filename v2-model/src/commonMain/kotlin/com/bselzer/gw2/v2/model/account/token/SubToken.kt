@@ -1,11 +1,11 @@
 package com.bselzer.gw2.v2.model.account.token
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.identifier.StringIdentifier
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmInline
 
 /**
  * The sub-token.
@@ -14,7 +14,5 @@ import kotlinx.serialization.Serializable
  */
 @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
 @Serializable
-data class SubToken(
-    @SerialName("subtoken")
-    override val id: String = ""
-) : Identifiable<String>
+@JvmInline
+value class SubToken(override val value: String) : StringIdentifier

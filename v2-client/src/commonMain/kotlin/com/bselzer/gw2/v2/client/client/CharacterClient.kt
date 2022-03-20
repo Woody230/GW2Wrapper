@@ -4,7 +4,13 @@ import com.bselzer.gw2.v2.client.extension.bearer
 import com.bselzer.gw2.v2.model.account.build.BuildTemplateTab
 import com.bselzer.gw2.v2.model.account.equipment.EquipmentTemplateTab
 import com.bselzer.gw2.v2.model.character.*
-import com.bselzer.gw2.v2.model.character.superadventurebox.SabProgress
+import com.bselzer.gw2.v2.model.character.bag.Bag
+import com.bselzer.gw2.v2.model.character.progression.CharacterCrafting
+import com.bselzer.gw2.v2.model.character.progression.CharacterTraining
+import com.bselzer.gw2.v2.model.character.pve.CharacterEquipment
+import com.bselzer.gw2.v2.model.character.skill.CharacterModeSkills
+import com.bselzer.gw2.v2.model.character.specialization.CharacterModeSpecializations
+import com.bselzer.gw2.v2.model.superadventurebox.SabProgress
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope

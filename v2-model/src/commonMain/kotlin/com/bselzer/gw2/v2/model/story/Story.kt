@@ -1,20 +1,21 @@
 package com.bselzer.gw2.v2.model.story
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.story.season.StorySeasonId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Story(
     @SerialName("id")
-    override val id: Int = 0,
+    override val id: StoryId = StoryId(),
 
     /**
      * The id of the story season.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/stories/seasons">the wiki</a>
      */
     @SerialName("season")
-    val seasonId: String = "",
+    val seasonId: StorySeasonId = StorySeasonId(),
 
     @SerialName("name")
     val name: String = "",

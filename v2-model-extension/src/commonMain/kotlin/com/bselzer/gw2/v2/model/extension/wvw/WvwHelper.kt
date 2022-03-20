@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.extension.wvw
 
 import com.bselzer.gw2.v2.model.enumeration.wvw.ObjectiveOwner
-import com.bselzer.gw2.v2.model.wvw.match.WvwWorldCount
+import com.bselzer.gw2.v2.model.wvw.world.WvwWorldCount
 
 /**
  * @return a mapping of the owner to the [WvwWorldCount] value

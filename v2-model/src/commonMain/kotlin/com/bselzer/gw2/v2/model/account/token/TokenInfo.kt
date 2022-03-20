@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.model.account.token
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
@@ -15,12 +15,6 @@ import kotlinx.serialization.Serializable
 @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
 @Serializable
 abstract class TokenInfo(
-    /**
-     * The requested token id.
-     */
-    @SerialName("id")
-    override val id: String = "",
-
     /**
      * The name of the token, given by the owner.
      */
@@ -39,7 +33,6 @@ abstract class TokenInfo(
 
         other as TokenInfo
 
-        if (id != other.id) return false
         if (name != other.name) return false
         if (permissions != other.permissions) return false
 
@@ -47,8 +40,7 @@ abstract class TokenInfo(
     }
 
     override fun hashCode(): Int {
-        var result = id.hashCode()
-        result = 31 * result + name.hashCode()
+        var result = name.hashCode()
         result = 31 * result + permissions.hashCode()
         return result
     }

@@ -1,8 +1,8 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.extension.language
-import com.bselzer.gw2.v2.model.mount.MountSkin
-import com.bselzer.gw2.v2.model.mount.MountType
+import com.bselzer.gw2.v2.model.mount.skin.MountSkin
+import com.bselzer.gw2.v2.model.mount.type.MountType
 import io.ktor.client.*
 
 /**

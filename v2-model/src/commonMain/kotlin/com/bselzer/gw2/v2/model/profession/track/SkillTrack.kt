@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.model.profession.track
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.skill.SkillId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,5 +13,5 @@ data class SkillTrack(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
      */
     @SerialName("skill_id")
-    override val id: Int = 0,
+    override val id: SkillId = SkillId(),
 ) : TrainingTrack(), Identifiable<Int>

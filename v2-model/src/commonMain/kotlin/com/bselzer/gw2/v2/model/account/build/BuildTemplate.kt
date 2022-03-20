@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.account.build
 
+import com.bselzer.gw2.v2.model.legend.LegendId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -45,11 +46,11 @@ data class BuildTemplate(
      * The selected legends on land. For Revenants only. A null indicates no selection.
      */
     @SerialName("legends")
-    val terrestrialLegends: List<String?> = emptyList(),
+    val terrestrialLegends: List<LegendId?> = emptyList(),
 
     /**
      * The selected legends underwater. For Revenants only. A null indicates no selection.
      */
     @SerialName("aquatic_legends")
-    val aquaticLegends: List<String?> = emptyList()
+    val aquaticLegends: List<LegendId?> = emptyList()
 )

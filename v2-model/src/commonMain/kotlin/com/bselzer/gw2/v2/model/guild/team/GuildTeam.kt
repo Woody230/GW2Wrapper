@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.guild.team
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
-import com.bselzer.gw2.v2.model.pvp.PvpGame
+import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.pvp.game.PvpGame
 import com.bselzer.gw2.v2.model.pvp.stat.StatAggregate
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -12,7 +12,7 @@ data class GuildTeam(
      * The id of the team unique to this guild only.
      */
     @SerialName("id")
-    override val id: Int = 0,
+    override val id: GuildTeamId = GuildTeamId(),
 
     @SerialName("members")
     val members: List<GuildTeamMember> = emptyList(),

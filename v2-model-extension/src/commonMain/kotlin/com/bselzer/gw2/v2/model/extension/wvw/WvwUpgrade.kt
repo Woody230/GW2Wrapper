@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.extension.wvw
 
 import com.bselzer.gw2.v2.model.wvw.upgrade.WvwUpgrade
-import com.bselzer.gw2.v2.model.wvw.upgrade.WvwUpgradeTier
+import com.bselzer.gw2.v2.model.wvw.upgrade.tier.WvwUpgradeTier
 import kotlin.math.min
 
 /**

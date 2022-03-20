@@ -1,5 +1,7 @@
 package com.bselzer.gw2.v2.model.guild.log
 
+import com.bselzer.gw2.v2.model.item.ItemId
+import com.bselzer.gw2.v2.model.recipe.RecipeId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -17,14 +19,14 @@ data class UpgradeLog(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/upgrades">the wiki</a>
      */
     @SerialName("upgrade_id")
-    val upgradeId: Int = 0,
+    val upgradeId: ItemId = ItemId(),
 
     /**
      * The id of the recipe.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/recipes">the wiki</a>
      */
     @SerialName("recipe_id")
-    val recipeId: Int = 0,
+    val recipeId: RecipeId = RecipeId(),
 
     /**
      * The number of upgrades.

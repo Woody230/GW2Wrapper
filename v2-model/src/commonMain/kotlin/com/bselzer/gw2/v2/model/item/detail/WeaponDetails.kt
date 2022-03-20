@@ -1,7 +1,9 @@
 package com.bselzer.gw2.v2.model.item.detail
 
+import com.bselzer.gw2.v2.model.item.ItemId
 import com.bselzer.gw2.v2.model.item.detail.infix.InfixUpgrade
 import com.bselzer.gw2.v2.model.item.detail.infusion.InfusionSlot
+import com.bselzer.gw2.v2.model.itemstat.ItemStatId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -39,19 +41,19 @@ data class WeaponDetails(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
     @SerialName("suffix_item_id")
-    val suffixItemId: Int = 0,
+    val suffixItemId: ItemId = ItemId(),
 
     /**
      * The id of the secondary suffix item.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
     @SerialName("secondary_suffix_item_id")
-    val secondarySuffixItemId: Int = 0,
+    val secondarySuffixItemId: ItemId = ItemId(),
 
     /**
      * The ids of the selectable stats.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/itemstats">the wiki</a>
      */
     @SerialName("stat_choices")
-    val statChoices: List<Int> = emptyList()
+    val statChoices: List<ItemStatId> = emptyList()
 )

@@ -1,10 +1,17 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.extension.bearer
-import com.bselzer.gw2.v2.model.account.*
+import com.bselzer.gw2.v2.model.account.Account
+import com.bselzer.gw2.v2.model.account.achievement.AccountAchievement
 import com.bselzer.gw2.v2.model.account.build.BuildTemplate
+import com.bselzer.gw2.v2.model.account.finisher.AccountFinisher
+import com.bselzer.gw2.v2.model.account.luck.AccountLuck
 import com.bselzer.gw2.v2.model.account.mastery.AccountMastery
 import com.bselzer.gw2.v2.model.account.mastery.AccountMasteryPoints
+import com.bselzer.gw2.v2.model.account.slot.AccountMaterial
+import com.bselzer.gw2.v2.model.account.slot.ArmoryItem
+import com.bselzer.gw2.v2.model.account.slot.BankSlot
+import com.bselzer.gw2.v2.model.account.slot.SharedSlot
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope

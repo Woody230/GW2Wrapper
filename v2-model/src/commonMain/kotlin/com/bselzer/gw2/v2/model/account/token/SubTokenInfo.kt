@@ -17,6 +17,12 @@ import kotlinx.serialization.Serializable
 @SerialName("Subtoken")
 data class SubTokenInfo(
     /**
+     * The requested token id.
+     */
+    @SerialName("id")
+    override val id: SubToken,
+
+    /**
      * The expiration date.
      */
     @SerialName("expires_at")

@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import com.bselzer.gw2.v2.model.continent.Continent
-import com.bselzer.gw2.v2.model.continent.ContinentFloor
+import com.bselzer.gw2.v2.model.continent.floor.Floor
 import com.bselzer.gw2.v2.tile.client.TileClient
 import com.bselzer.gw2.v2.tile.model.response.TileGrid
 import kotlinx.coroutines.coroutineScope
@@ -21,7 +21,7 @@ class ImageGenerator(
      * @param continent the continent
      * @param floor the floor within the [continent]
      */
-    suspend fun generateMap(continent: Continent, floor: ContinentFloor, outputDirectory: String) = coroutineScope {
+    suspend fun generateMap(continent: Continent, floor: Floor, outputDirectory: String) = coroutineScope {
         for (zoom in continent.minZoom..continent.maxZoom) {
             val grid = tile.grid(continent, floor, zoom)
             generateMap(outputDirectory, "Map$zoom", grid)

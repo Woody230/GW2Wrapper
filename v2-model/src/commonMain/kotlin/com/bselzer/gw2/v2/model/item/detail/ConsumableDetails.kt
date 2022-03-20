@@ -1,5 +1,9 @@
 package com.bselzer.gw2.v2.model.item.detail
 
+import com.bselzer.gw2.v2.model.color.DyeColorId
+import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgradeId
+import com.bselzer.gw2.v2.model.recipe.RecipeId
+import com.bselzer.gw2.v2.model.skin.SkinId
 import com.bselzer.ktx.datetime.serialization.MillisecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -32,28 +36,28 @@ data class ConsumableDetails(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/colors">the wiki</a>
      */
     @SerialName("color_id")
-    val colorId: Int = 0,
+    val colorId: DyeColorId = DyeColorId(),
 
     /**
      * The id of the recipe when the [unlockType] is for a recipe.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/recipes">the wiki</a>
      */
     @SerialName("recipe_id")
-    val recipeId: Int = 0,
+    val recipeId: RecipeId = RecipeId(),
 
     /**
      * The ids of the additional recipe unlocks.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/recipes">the wiki</a>
      */
     @SerialName("extra_recipe_ids")
-    val extraRecipeIds: List<Int> = emptyList(),
+    val extraRecipeIds: List<RecipeId> = emptyList(),
 
     /**
      * The id of the guild upgrade.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/upgrades">the wiki</a>
      */
     @SerialName("guild_upgrade_id")
-    val guildUpgradeId: Int = 0,
+    val guildUpgradeId: GuildUpgradeId = GuildUpgradeId(),
 
     /**
      * The number of stacks of the effect applied by this item.
@@ -78,5 +82,5 @@ data class ConsumableDetails(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skins">the wiki</a>
      */
     @SerialName("skins")
-    val skinIds: List<Int> = emptyList()
+    val skinIds: List<SkinId> = emptyList()
 )

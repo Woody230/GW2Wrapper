@@ -3,8 +3,8 @@ package com.bselzer.gw2.v2.model.extension.wvw
 import com.bselzer.gw2.v2.model.enumeration.wvw.ObjectiveOwner
 import com.bselzer.gw2.v2.model.enumeration.wvw.ObjectiveOwner.*
 import com.bselzer.gw2.v2.model.world.World
-import com.bselzer.gw2.v2.model.wvw.match.WvwMap
-import com.bselzer.gw2.v2.model.wvw.match.WvwMapObjective
+import com.bselzer.gw2.v2.model.wvw.map.WvwMap
+import com.bselzer.gw2.v2.model.wvw.map.WvwMapObjective
 import com.bselzer.gw2.v2.model.wvw.match.WvwMatch
 import com.bselzer.gw2.v2.model.wvw.objective.WvwObjective
 

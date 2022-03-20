@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.model.skill
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.skill.fact.SkillFact
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

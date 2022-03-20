@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.model.emote
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.item.ItemId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -9,9 +10,8 @@ data class Emote(
     /**
      * The name of the emote.
      */
-    // TODO enum and extension
     @SerialName("id")
-    override val id: String = "",
+    override val id: EmoteId = EmoteId(),
 
     /**
      * The unlocked commands associated with the emote.
@@ -24,5 +24,5 @@ data class Emote(
      * @see <a href="https://wiki.guildwars2.com/wiki/Item">the wiki</a>
      */
     @SerialName("unlock_items")
-    val unlockItems: List<Int> = emptyList()
+    val unlockItems: List<ItemId> = emptyList()
 ) : Identifiable<String>

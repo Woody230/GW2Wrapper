@@ -1,6 +1,10 @@
 package com.bselzer.gw2.v2.model.recipe
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgradeId
+import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.item.ItemId
+import com.bselzer.gw2.v2.model.recipe.ingredient.GuildRecipeIngredient
+import com.bselzer.gw2.v2.model.recipe.ingredient.RecipeIngredient
 import com.bselzer.ktx.datetime.serialization.MillisecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -11,7 +15,7 @@ import kotlin.time.ExperimentalTime
 @Serializable
 data class Recipe(
     @SerialName("id")
-    override val id: Int = 0,
+    override val id: RecipeId = RecipeId(),
 
     @SerialName("type")
     val type: String = "",
@@ -21,7 +25,7 @@ data class Recipe(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
     @SerialName("output_item_id")
-    val outputItemId: Int = 0,
+    val outputItemId: ItemId = ItemId(),
 
     /**
      * The number of the item associated with the [outputItemId] produced.
@@ -68,7 +72,7 @@ data class Recipe(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/upgrades">the wiki</a>
      */
     @SerialName("output_upgrade_id")
-    val outputUpgradeId: Int = 0,
+    val outputUpgradeId: GuildUpgradeId = GuildUpgradeId(),
 
     /**
      * The chat link.

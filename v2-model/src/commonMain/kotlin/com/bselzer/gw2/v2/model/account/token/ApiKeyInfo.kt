@@ -14,4 +14,10 @@ import kotlinx.serialization.Serializable
 @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
 @Serializable
 @SerialName("APIKey")
-class ApiKeyInfo : TokenInfo()
+data class ApiKeyInfo(
+    /**
+     * The requested token id.
+     */
+    @SerialName("id")
+    override val id: ApiKey
+) : TokenInfo()

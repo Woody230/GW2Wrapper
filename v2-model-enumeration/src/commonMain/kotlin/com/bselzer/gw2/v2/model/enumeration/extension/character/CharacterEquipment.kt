@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.model.enumeration.extension.character
 
-import com.bselzer.gw2.v2.model.character.CharacterEquipment
+import com.bselzer.gw2.v2.model.character.pve.CharacterEquipment
 import com.bselzer.gw2.v2.model.enumeration.character.EquipmentSlot
 import com.bselzer.gw2.v2.model.enumeration.scope.Binding
 import com.bselzer.ktx.serialization.function.enumValueOrNull

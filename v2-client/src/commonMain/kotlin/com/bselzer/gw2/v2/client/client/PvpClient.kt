@@ -2,8 +2,8 @@ package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.extension.bearer
 import com.bselzer.gw2.v2.client.extension.language
-import com.bselzer.gw2.v2.model.pvp.PvpAmulet
-import com.bselzer.gw2.v2.model.pvp.PvpGame
+import com.bselzer.gw2.v2.model.pvp.amulet.PvpAmulet
+import com.bselzer.gw2.v2.model.pvp.game.PvpGame
 import com.bselzer.gw2.v2.model.pvp.hero.PvpHero
 import com.bselzer.gw2.v2.model.pvp.leaderboard.PvpLeaderboard
 import com.bselzer.gw2.v2.model.pvp.rank.PvpRank

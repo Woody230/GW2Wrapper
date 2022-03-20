@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.guild.upgrade
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
 import com.bselzer.gw2.v2.model.guild.upgrade.cost.GuildUpgradeCost
+import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.ktx.datetime.serialization.SecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -12,7 +12,7 @@ import kotlin.time.ExperimentalTime
 @Serializable
 abstract class GuildUpgrade(
     @SerialName("id")
-    override val id: Int = 0,
+    override val id: GuildUpgradeId = GuildUpgradeId(),
 
     @SerialName("name")
     val name: String = "",
@@ -47,7 +47,7 @@ abstract class GuildUpgrade(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/guild/upgrades">the wiki</a>
      */
     @SerialName("prerequisites")
-    val prerequisites: List<Int> = emptyList(),
+    val prerequisites: List<GuildUpgradeId> = emptyList(),
 
     @SerialName("costs")
     val costs: List<GuildUpgradeCost> = emptyList()
@@ -72,7 +72,7 @@ abstract class GuildUpgrade(
     }
 
     override fun hashCode(): Int {
-        var result = id
+        var result = id.hashCode()
         result = 31 * result + name.hashCode()
         result = 31 * result + description.hashCode()
         result = 31 * result + iconLink.hashCode()

@@ -1,11 +1,11 @@
 package com.bselzer.gw2.v2.model.build
 
-import com.bselzer.gw2.v2.model.extension.base.Identifiable
+import com.bselzer.gw2.v2.model.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Build(
     @SerialName("id")
-    override val id: Int = 0
+    override val id: BuildId = BuildId()
 ) : Identifiable<Int>
