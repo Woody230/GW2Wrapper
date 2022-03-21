@@ -6,4 +6,6 @@ import kotlin.jvm.JvmInline
 
 @Serializable
 @JvmInline
-value class PvpHeroId(override val value: String = "") : StringIdentifier
+value class PvpHeroId(override val value: String = "") : StringIdentifier {
+    override fun toString(): String = value
+}

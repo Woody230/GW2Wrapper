@@ -10,4 +10,6 @@ import kotlin.jvm.JvmInline
  */
 @Serializable
 @JvmInline
-value class EmoteId(override val value: String = "") : StringIdentifier
+value class EmoteId(override val value: String = "") : StringIdentifier {
+    override fun toString(): String = value
+}

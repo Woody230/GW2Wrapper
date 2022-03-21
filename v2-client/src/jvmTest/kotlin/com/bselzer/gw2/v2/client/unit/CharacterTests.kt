@@ -1,5 +1,8 @@
 package com.bselzer.gw2.v2.client.unit
 
+import com.bselzer.gw2.v2.client.model.Token
+import com.bselzer.gw2.v2.model.backstory.answer.BackstoryAnswerId
+import com.bselzer.gw2.v2.model.character.CharacterName
 import io.ktor.client.engine.mock.*
 import org.junit.Test
 import kotlin.test.assertEquals
@@ -15,9 +18,9 @@ class CharacterTests : BaseUnitTests() {
     @Test
     fun backstory() {
         // Act
-        val ids = use { character.backstory("John Doe", "TEST") }
+        val ids = use { character.backstory(CharacterName("John Doe"), Token("TEST")) }
 
         // Assert
-        assertEquals(listOf("1-45", "180-99", "78-79"), ids)
+        assertEquals(listOf("1-45", "180-99", "78-79").map { BackstoryAnswerId(it) }, ids)
     }
 }

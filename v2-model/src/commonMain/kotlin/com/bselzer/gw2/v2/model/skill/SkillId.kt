@@ -10,4 +10,6 @@ import kotlin.jvm.JvmInline
  */
 @Serializable
 @JvmInline
-value class SkillId(override val value: Int = 0) : IntIdentifier
+value class SkillId(override val value: Int = 0) : IntIdentifier {
+    override fun toString(): String = value.toString()
+}

@@ -10,4 +10,6 @@ import kotlin.jvm.JvmInline
  */
 @Serializable
 @JvmInline
-value class HeroChallengeId(override val value: String = "") : StringIdentifier
+value class HeroChallengeId(override val value: String = "") : StringIdentifier {
+    override fun toString(): String = value
+}

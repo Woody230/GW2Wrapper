@@ -6,4 +6,6 @@ import kotlin.jvm.JvmInline
 
 @Serializable
 @JvmInline
-value class AssetId(override val value: String = "") : StringIdentifier
+value class AssetId(override val value: String = "") : StringIdentifier {
+    override fun toString(): String = value
+}

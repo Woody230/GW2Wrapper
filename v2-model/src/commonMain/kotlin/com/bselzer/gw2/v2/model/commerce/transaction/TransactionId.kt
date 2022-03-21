@@ -6,4 +6,6 @@ import kotlin.jvm.JvmInline
 
 @Serializable
 @JvmInline
-value class TransactionId(override val value: Long = 0) : LongIdentifier
+value class TransactionId(override val value: Long = 0) : LongIdentifier {
+    override fun toString(): String = value.toString()
+}

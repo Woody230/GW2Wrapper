@@ -1,6 +1,8 @@
 package com.bselzer.gw2.v2.tile
 
 import com.bselzer.gw2.v2.client.client.Gw2Client
+import com.bselzer.gw2.v2.model.continent.ContinentId
+import com.bselzer.gw2.v2.model.continent.floor.FloorId
 import com.bselzer.gw2.v2.tile.client.TileClient
 import com.bselzer.gw2.v2.tile.client.TileClientConfiguration
 import io.ktor.client.*
@@ -30,8 +32,8 @@ abstract class BaseTests {
         return runBlocking { tile.run { block(tile) } }
     }
 
-    protected fun wvwContinent() = getGw2 { continent.continent(2) }
-    protected fun wvwFloor() = getGw2 { continent.floor(2, 3) }
+    protected fun wvwContinent() = getGw2 { continent.continent(ContinentId(2)) }
+    protected fun wvwFloor() = getGw2 { continent.floor(ContinentId(2), FloorId(3)) }
 
     /**
      * Closes the GW2 client after getting the request response.

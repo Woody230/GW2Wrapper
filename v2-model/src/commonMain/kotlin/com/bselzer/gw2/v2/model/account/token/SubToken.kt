@@ -15,4 +15,6 @@ import kotlin.jvm.JvmInline
 @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
 @Serializable
 @JvmInline
-value class SubToken(override val value: String) : StringIdentifier
+value class SubToken(override val value: String) : StringIdentifier {
+    override fun toString(): String = value
+}

@@ -2,7 +2,7 @@ package com.bselzer.gw2.v2.model.extension.wvw
 
 import com.bselzer.gw2.v2.model.wvw.objective.WvwObjective
 import com.bselzer.ktx.geometry.dimension.bi.position.Point2D
-import org.junit.Test
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class WvwObjectiveTests {

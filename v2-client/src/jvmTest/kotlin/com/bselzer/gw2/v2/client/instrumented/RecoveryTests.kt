@@ -1,7 +1,9 @@
 package com.bselzer.gw2.v2.client.instrumented
 
+import com.bselzer.gw2.v2.model.achievement.AchievementId
 import com.bselzer.gw2.v2.model.guild.upgrade.DefaultUpgrade
 import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgrade
+import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgradeId
 import com.bselzer.gw2.v2.model.serialization.Modules
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -18,7 +20,7 @@ class RecoveryTests : BaseInstrumentedTests() {
     @Test
     fun getSingleById() {
         // Arrange
-        val id = -1
+        val id = AchievementId(-1)
 
         // Act / Assert
         testRecovery({ achievement.achievement(id) }) { result ->
@@ -36,7 +38,7 @@ class RecoveryTests : BaseInstrumentedTests() {
     @Test
     fun chunkedIds() {
         // Arrange
-        val id = -1
+        val id = AchievementId(-1)
 
         // Act / Assert
         testRecovery({ achievement.achievements(listOf(id)) }) { results ->
@@ -51,7 +53,7 @@ class RecoveryTests : BaseInstrumentedTests() {
     @Test
     fun polymorphism() {
         // Arrange
-        val id = -999
+        val id = GuildUpgradeId(-999)
 
         // Act / Assert
         testRecovery({ guild.upgrade(id) }) { result ->

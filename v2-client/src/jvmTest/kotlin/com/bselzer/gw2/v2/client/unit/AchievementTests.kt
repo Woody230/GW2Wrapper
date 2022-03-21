@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.client.unit
 
+import com.bselzer.gw2.v2.model.achievement.AchievementId
 import io.ktor.client.engine.mock.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -18,6 +19,6 @@ class AchievementTests : BaseUnitTests() {
         val ids = use { achievement.ids() }
 
         // Assert
-        assertEquals(listOf(1, 614, 1024, 29), ids)
+        assertEquals(listOf(1, 614, 1024, 29).map { AchievementId(it) }, ids)
     }
 }

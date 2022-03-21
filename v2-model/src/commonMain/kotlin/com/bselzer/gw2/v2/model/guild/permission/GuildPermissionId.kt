@@ -6,4 +6,6 @@ import kotlin.jvm.JvmInline
 
 @Serializable
 @JvmInline
-value class GuildPermissionId(override val value: String = "") : StringIdentifier
+value class GuildPermissionId(override val value: String = "") : StringIdentifier {
+    override fun toString(): String = value
+}

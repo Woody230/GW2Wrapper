@@ -2,8 +2,10 @@ package com.bselzer.gw2.v2.client.unit
 
 import com.bselzer.gw2.v2.model.guild.upgrade.BankTabUpgrade
 import com.bselzer.gw2.v2.model.guild.upgrade.ClaimableUpgrade
+import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgradeId
 import com.bselzer.gw2.v2.model.guild.upgrade.cost.CollectibleUpgradeCost
 import com.bselzer.gw2.v2.model.guild.upgrade.cost.ItemUpgradeCost
+import com.bselzer.gw2.v2.model.item.ItemId
 import io.ktor.client.engine.mock.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -25,7 +27,7 @@ class GuildTests : BaseUnitTests() {
         // Assert
 
         // Emergency Waypoint
-        val claimable = upgrades[178]
+        val claimable = upgrades[GuildUpgradeId(178)]
         assertTrue(claimable is ClaimableUpgrade)
         assertEquals("Emergency Waypoint", claimable.name)
 
@@ -33,10 +35,10 @@ class GuildTests : BaseUnitTests() {
         assertTrue(item is ItemUpgradeCost)
         assertEquals(1, item.count)
         assertEquals("Emergency Waypoint Tactic", item.name)
-        assertEquals(81488, item.itemId)
+        assertEquals(ItemId(81488), item.itemId)
 
         // Guild Treasure Trove
-        val bankBag = upgrades[55]
+        val bankBag = upgrades[GuildUpgradeId(55)]
         assertTrue(bankBag is BankTabUpgrade)
         assertEquals("Guild Treasure Trove", bankBag.name)
         assertEquals(100, bankBag.maxSlots)
@@ -45,6 +47,6 @@ class GuildTests : BaseUnitTests() {
         assertTrue(collectible is CollectibleUpgradeCost)
         assertEquals(1500, collectible.count)
         assertEquals("Guild Favor", collectible.name)
-        assertEquals(70701, collectible.itemId)
+        assertEquals(ItemId(70701), collectible.itemId)
     }
 }

@@ -26,4 +26,6 @@ value class WvwMapObjectiveId(override val value: String = "") : StringIdentifie
 
     override val isDefault: Boolean
         get() = mapId.isDefault || objectiveId.isDefault
+
+    override fun toString(): String = value
 }

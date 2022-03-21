@@ -3,6 +3,8 @@ package com.bselzer.gw2.v2.client
 import com.bselzer.gw2.v2.client.client.ExceptionRecoveryMode
 import com.bselzer.gw2.v2.client.client.Gw2Client
 import com.bselzer.gw2.v2.client.client.Gw2ClientConfiguration
+import com.bselzer.gw2.v2.client.model.Token
+import com.bselzer.gw2.v2.model.character.CharacterName
 import com.bselzer.gw2.v2.model.serialization.Modules
 import io.ktor.client.*
 import io.ktor.client.engine.mock.*
@@ -57,8 +59,8 @@ abstract class BaseTests {
      * @return the contents of the secrets file
      */
     private fun getSecretsResource(): Map<String, String> = "Secrets.json".getJsonResource()
-    protected fun Map<String, String>.token(): String = this.getValue("token")
-    protected fun Map<String, String>.characterName(): String = this.getValue("characterName")
+    protected fun Map<String, String>.token(): Token = Token(this.getValue("token"))
+    protected fun Map<String, String>.characterName(): CharacterName = CharacterName(this.getValue("characterName"))
 
     protected fun getProfessionResource(): String = "Profession.json".getResource()
     protected fun getGuildUpgradeResource(): String = "GuildUpgrade.json".getResource()

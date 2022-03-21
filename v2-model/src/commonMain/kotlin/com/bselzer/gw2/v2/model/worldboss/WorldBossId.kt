@@ -7,4 +7,6 @@ import kotlin.jvm.JvmInline
 // TODO enum/extension
 @Serializable
 @JvmInline
-value class WorldBossId(override val value: String = "") : StringIdentifier
+value class WorldBossId(override val value: String = "") : StringIdentifier {
+    override fun toString(): String = value
+}

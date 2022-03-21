@@ -3,6 +3,7 @@ package com.bselzer.gw2.v2.client.unit
 import com.bselzer.gw2.v2.client.BaseTests
 import com.bselzer.gw2.v2.client.asHeader
 import com.bselzer.gw2.v2.client.client.Gw2ClientConfiguration
+import com.bselzer.gw2.v2.client.model.Token
 import io.ktor.client.*
 import io.ktor.client.engine.mock.*
 import io.ktor.client.request.*
@@ -16,7 +17,7 @@ abstract class BaseUnitTests : BaseTests() {
      *
      * The token must be setup to be able to use the authenticated endpoints.
      */
-    override fun createConfiguration(): Gw2ClientConfiguration = Gw2ClientConfiguration(token = "")
+    override fun createConfiguration(): Gw2ClientConfiguration = Gw2ClientConfiguration(token = Token(""))
 
     /**
      * @return the block for setting up the HttpClient

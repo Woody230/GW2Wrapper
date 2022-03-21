@@ -6,4 +6,6 @@ import kotlin.jvm.JvmInline
 
 @Serializable
 @JvmInline
-value class SabSongId(override val value: Int = 0) : IntIdentifier
+value class SabSongId(override val value: Int = 0) : IntIdentifier {
+    override fun toString(): String = value.toString()
+}

@@ -6,4 +6,6 @@ import kotlin.jvm.JvmInline
 
 @Serializable
 @JvmInline
-value class AchievementGroupId(override val value: String = "") : StringIdentifier
+value class AchievementGroupId(override val value: String = "") : StringIdentifier {
+    override fun toString(): String = value
+}

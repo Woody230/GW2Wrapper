@@ -11,4 +11,6 @@ import kotlin.jvm.JvmInline
  */
 @Serializable
 @JvmInline
-value class PaletteId(override val value: Int = 0) : IntIdentifier
+value class PaletteId(override val value: Int = 0) : IntIdentifier {
+    override fun toString(): String = value.toString()
+}

@@ -10,4 +10,6 @@ import kotlin.jvm.JvmInline
 // TODO enum/extension
 @Serializable
 @JvmInline
-value class RaidEventId(override val value: String = "") : StringIdentifier
+value class RaidEventId(override val value: String = "") : StringIdentifier {
+    override fun toString(): String = value
+}

@@ -4,6 +4,8 @@ import android.os.Environment
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.bselzer.gw2.v2.client.client.Gw2Client
+import com.bselzer.gw2.v2.model.continent.ContinentId
+import com.bselzer.gw2.v2.model.continent.floor.FloorId
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,7 +21,7 @@ class ImageGeneratorTests {
         runBlocking {
             val gw2 = Gw2Client()
             val directory = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)!!.path
-            ImageGenerator().generateMap(gw2.continent.continent(2), gw2.continent.floor(2, 3), directory)
+            ImageGenerator().generateMap(gw2.continent.continent(ContinentId(2)), gw2.continent.floor(ContinentId(2), FloorId(3)), directory)
         }
     }
 }

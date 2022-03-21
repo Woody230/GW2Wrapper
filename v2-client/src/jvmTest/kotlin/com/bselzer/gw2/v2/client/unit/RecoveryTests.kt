@@ -1,6 +1,11 @@
 package com.bselzer.gw2.v2.client.unit
 
+import com.bselzer.gw2.v2.model.achievement.AchievementId
+import com.bselzer.gw2.v2.model.build.BuildId
 import com.bselzer.gw2.v2.model.character.Character
+import com.bselzer.gw2.v2.model.character.CharacterName
+import com.bselzer.gw2.v2.model.guild.GuildId
+import com.bselzer.gw2.v2.model.template.build.BuildTemplateTabId
 import io.ktor.client.engine.mock.*
 import kotlinx.datetime.Instant
 import kotlin.test.Test
@@ -30,7 +35,7 @@ class RecoveryTests : BaseUnitTests() {
      * Verifies that an allTabs call can be recovered.
      */
     @Test
-    fun allTabs() = testRecovery({ character.buildTabs("") }) { results ->
+    fun allTabs() = testRecovery({ character.buildTabs(CharacterName("")) }) { results ->
         assertEquals(0, results.size)
     }
 
@@ -47,8 +52,8 @@ class RecoveryTests : BaseUnitTests() {
      * Verifies that a getIdentifiableSingle call can be recovered.
      */
     @Test
-    fun getIdentifiableSingle() = testRecovery({ guild.guild("Test") }) { result ->
-        assertEquals("Test", result.id)
+    fun getIdentifiableSingle() = testRecovery({ guild.guild(GuildId("Test")) }) { result ->
+        assertEquals(GuildId("Test"), result.id)
         assertEquals(0, result.level)
     }
 
@@ -59,15 +64,15 @@ class RecoveryTests : BaseUnitTests() {
     fun character() {
         // Arrange
         val defaultAssertion: (Character) -> Unit = { result ->
-            assertEquals("Test", result.name)
+            assertEquals(CharacterName("Test"), result.name)
             assertEquals(1, result.level)
             assertEquals(0, result.deathCount)
             assertContentEquals(emptyList(), result.backstory)
         }
 
         // Act / Assert
-        testRecovery({ character.core("Test") }, defaultAssertion)
-        testRecovery({ character.overview("Test") }, defaultAssertion)
+        testRecovery({ character.core(CharacterName("Test")) }, defaultAssertion)
+        testRecovery({ character.overview(CharacterName("Test")) }, defaultAssertion)
     }
 
     /**
@@ -75,7 +80,7 @@ class RecoveryTests : BaseUnitTests() {
      */
     @Test
     fun build() = testRecovery({ build.buildId() }) { result ->
-        assertEquals(0, result)
+        assertEquals(BuildId(0), result)
     }
 
     /**
@@ -84,7 +89,7 @@ class RecoveryTests : BaseUnitTests() {
     @Test
     fun getSingleById() {
         // Arrange
-        val id = -1
+        val id = AchievementId(-1)
 
         // Act / Assert
         testRecovery({ achievement.achievement(id) }) { result ->
@@ -102,7 +107,7 @@ class RecoveryTests : BaseUnitTests() {
     @Test
     fun chunkedIds() {
         // Arrange
-        val id = -1
+        val id = AchievementId(-1)
 
         // Act / Assert
         testRecovery({ achievement.achievements(listOf(id)) }) { results ->
@@ -117,10 +122,10 @@ class RecoveryTests : BaseUnitTests() {
     @Test
     fun chunkedTabs() {
         // Arrange
-        val id = -1
+        val id = BuildTemplateTabId(-1)
 
         // Act / Assert
-        testRecovery({ character.buildTabs("", listOf(id)) }) { results ->
+        testRecovery({ character.buildTabs(CharacterName(""), listOf(id)) }) { results ->
             assertEquals(1, results.size)
             assertEquals(id, results.single().id)
         }

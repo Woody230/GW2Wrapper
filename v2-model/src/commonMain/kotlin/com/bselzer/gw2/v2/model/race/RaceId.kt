@@ -6,4 +6,6 @@ import kotlin.jvm.JvmInline
 
 @Serializable
 @JvmInline
-value class RaceId(override val value: String = "") : StringIdentifier
+value class RaceId(override val value: String = "") : StringIdentifier {
+    override fun toString(): String = value
+}

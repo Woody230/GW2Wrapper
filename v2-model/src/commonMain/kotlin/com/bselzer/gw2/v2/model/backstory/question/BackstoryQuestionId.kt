@@ -6,4 +6,6 @@ import kotlin.jvm.JvmInline
 
 @Serializable
 @JvmInline
-value class BackstoryQuestionId(override val value: Int = 0) : IntIdentifier
+value class BackstoryQuestionId(override val value: Int = 0) : IntIdentifier {
+    override fun toString(): String = value.toString()
+}
