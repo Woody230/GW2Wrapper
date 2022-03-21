@@ -1,7 +1,9 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.extension.language
+import com.bselzer.gw2.v2.client.model.Language
 import com.bselzer.gw2.v2.model.skill.Skill
+import com.bselzer.gw2.v2.model.skill.SkillId
 import io.ktor.client.*
 
 /**
@@ -17,13 +19,13 @@ class SkillClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the ids of the available skills
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
      */
-    suspend fun ids(): List<Int> = getList(path = SKILLS)
+    suspend fun ids(): List<SkillId> = getIds(path = SKILLS)
 
     /**
      * @return the skill associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
      */
-    suspend fun skill(id: Int, language: String? = null): Skill = getSingleById(id, SKILLS, instance = { Skill(id = it) }) {
+    suspend fun skill(id: SkillId, language: Language? = null): Skill = getSingleById(id, SKILLS, instance = { Skill(id = it) }) {
         language(language)
     }
 
@@ -31,7 +33,7 @@ class SkillClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the skills associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
      */
-    suspend fun skills(ids: Collection<Int>, language: String? = null): List<Skill> = chunkedIds(ids, SKILLS, instance = { Skill(id = it) }) {
+    suspend fun skills(ids: Collection<SkillId>, language: Language? = null): List<Skill> = chunkedIds(ids, SKILLS, instance = { Skill(id = it) }) {
         language(language)
     }
 
@@ -39,7 +41,7 @@ class SkillClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return all the skills
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
      */
-    suspend fun skills(language: String? = null): List<Skill> = allIds(SKILLS) {
+    suspend fun skills(language: Language? = null): List<Skill> = allIds(SKILLS) {
         language(language)
     }
 }

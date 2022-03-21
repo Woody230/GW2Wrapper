@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.cache.instance
 
 import com.bselzer.gw2.v2.client.client.Gw2Client
 import com.bselzer.gw2.v2.model.guild.Guild
+import com.bselzer.gw2.v2.model.guild.GuildId
 import com.bselzer.gw2.v2.model.guild.emblem.GuildEmblem
 import com.bselzer.gw2.v2.model.guild.log.GuildLog
 import com.bselzer.gw2.v2.model.guild.member.GuildMember
@@ -29,7 +30,7 @@ class GuildCache(transactionManager: TransactionManager, client: Gw2Client) : Gw
      * @param id the id of the guild
      * @return the guild
      */
-    suspend fun getGuild(id: String): Guild = transaction {
+    suspend fun getGuild(id: GuildId): Guild = transaction {
         getById(id, { client.guild.guild(id) })
     }
 

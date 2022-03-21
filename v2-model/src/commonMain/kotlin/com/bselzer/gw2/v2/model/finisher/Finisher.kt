@@ -1,13 +1,14 @@
 package com.bselzer.gw2.v2.model.finisher
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.item.ItemId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Finisher(
     @SerialName("id")
-    override val id: Int = 0,
+    override val id: FinisherId = FinisherId(),
 
     /**
      * The description of how to unlock this finisher.
@@ -20,7 +21,7 @@ data class Finisher(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
     @SerialName("unlock_items")
-    val unlockItemIds: List<Int> = emptyList(),
+    val unlockItemIds: List<ItemId> = emptyList(),
 
     /**
      * The order in which this finisher appears in a list.

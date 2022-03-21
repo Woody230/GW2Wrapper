@@ -1,16 +1,19 @@
-package com.bselzer.gw2.v2.model.account.equipment
+package com.bselzer.gw2.v2.model.template.equipment
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * The position of the tab.
+ */
 @Serializable
 data class EquipmentTemplateTab(
     /**
      * The id and index of the tab.
      */
     @SerialName("tab")
-    override val id: Int = 0,
+    override val id: EquipmentTemplateTabId = EquipmentTemplateTabId(),
 
     /**
      * The name of the tab given by the player.

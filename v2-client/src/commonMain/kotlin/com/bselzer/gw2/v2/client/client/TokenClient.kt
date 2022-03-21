@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.extension.bearer
+import com.bselzer.gw2.v2.client.model.Token
 import com.bselzer.gw2.v2.model.account.token.ApiKeyInfo
 import com.bselzer.gw2.v2.model.account.token.SubToken
 import com.bselzer.gw2.v2.model.account.token.TokenInfo
@@ -34,7 +35,7 @@ class TokenClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/tokeninfo">tokeninfo on the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
-    suspend fun information(token: String? = null): TokenInfo = getSingle(path = TOKEN_INFO, instance = { ApiKeyInfo() }) {
+    suspend fun information(token: Token? = null): TokenInfo = getSingle(path = TOKEN_INFO, instance = { ApiKeyInfo() }) {
         bearer(token)
     }
 
@@ -51,7 +52,7 @@ class TokenClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
         expiration: Instant,
         permissions: List<String>,
         urls: List<String>,
-        token: String? = null
+        token: Token? = null
     ): SubToken {
         val value = forceGetSingle<JsonObject>(path = CREATE_SUBTOKEN) {
             bearer(token)

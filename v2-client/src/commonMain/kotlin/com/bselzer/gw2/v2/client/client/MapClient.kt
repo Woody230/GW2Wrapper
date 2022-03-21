@@ -1,7 +1,9 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.extension.language
+import com.bselzer.gw2.v2.client.model.Language
 import com.bselzer.gw2.v2.model.map.Map
+import com.bselzer.gw2.v2.model.map.MapId
 import io.ktor.client.*
 
 /**
@@ -17,13 +19,13 @@ class MapClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the ids of the available maps
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/maps">the wiki</a>
      */
-    suspend fun ids(): List<Int> = getList(path = MAPS)
+    suspend fun ids(): List<MapId> = getIds(path = MAPS)
 
     /**
      * @return the map associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/maps">the wiki</a>
      */
-    suspend fun map(id: Int, language: String? = null): Map = getSingleById(id, MAPS, instance = { Map(id = it) }) {
+    suspend fun map(id: MapId, language: Language? = null): Map = getSingleById(id, MAPS, instance = { Map(id = it) }) {
         language(language)
     }
 
@@ -31,7 +33,7 @@ class MapClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the maps associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/maps">the wiki</a>
      */
-    suspend fun maps(ids: Collection<Int>, language: String? = null): List<Map> = chunkedIds(ids, MAPS, instance = { Map(id = it) }) {
+    suspend fun maps(ids: Collection<MapId>, language: Language? = null): List<Map> = chunkedIds(ids, MAPS, instance = { Map(id = it) }) {
         language(language)
     }
 
@@ -39,7 +41,7 @@ class MapClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return all the maps
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/maps">the wiki</a>
      */
-    suspend fun maps(language: String? = null): List<Map> = allIds(MAPS) {
+    suspend fun maps(language: Language? = null): List<Map> = allIds(MAPS) {
         language(language)
     }
 }

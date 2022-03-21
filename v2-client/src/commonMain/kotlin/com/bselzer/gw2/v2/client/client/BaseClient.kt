@@ -24,13 +24,13 @@ abstract class BaseClient(
     /**
      * Adds the id.
      */
-    protected fun HttpRequestBuilder.idParameter(id: Identifier<*>) = parameter("id", id.value)
+    protected fun HttpRequestBuilder.idParameter(id: Any?) = parameter("id", id)
 
     /**
      * Adds the ids as a comma separated string.
      */
-    protected fun HttpRequestBuilder.idsParameter(ids: Collection<Identifier<*>>, parameterName: String = "ids") =
-        parameter(parameterName, ids.map { id -> id.value }.asIdsParameter())
+    protected fun HttpRequestBuilder.idsParameter(ids: Collection<*>, parameterName: String = "ids") =
+        parameter(parameterName, ids.asIdsParameter())
 
     /**
      * Adds the ids as "all".
@@ -58,12 +58,23 @@ abstract class BaseClient(
      * Gets the identifiable object with recovery.
      * @return the identifiable object
      */
-    protected suspend inline fun <reified T : Identifiable<Id>, Id> getIdentifiableSingle(
+    protected suspend inline fun <reified T : Identifiable<Value>, Id : Identifier<Value>, Value> getIdentifiableSingle(
         id: Id,
         path: String,
         instance: (Id) -> T,
         block: HttpRequestBuilder.() -> Unit = {}
     ): T = tryOrRecover(default = { instance(id) }) { forceGetSingle(path, block) }
+
+    /**
+     * Gets the ids with recovery.
+     */
+    protected suspend inline fun <reified T : Identifier<Value>, Value> getIds(path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> = getList(path, block)
+
+    /**
+     * Gets the identifiable objects with recovery.
+     */
+    protected suspend inline fun <reified T : Identifiable<Value>, Value> getIdentifiableList(path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> =
+        getList(path, block)
 
     /**
      * Gets the objects with recovery.
@@ -83,43 +94,41 @@ abstract class BaseClient(
      *
      * @return the collection of objects represented by the ids
      */
-    protected suspend inline fun <reified T : Identifiable<Id>, Id> chunkedIds(
+    protected suspend inline fun <reified T : Identifiable<Value>, Id : Identifier<Value>, Value> chunkedIds(
         ids: Collection<Id>,
         path: String,
         instance: (Id) -> T,
         block: HttpRequestBuilder.() -> Unit = {}
-    ): List<T> =
-        chunked(ids, path, "ids", instance, block)
+    ): List<T> = chunked(ids, path, "ids", instance, block)
 
     /**
      * Chunks the ids into requests small enough for the API to accept, if there are more ids than the configuration page size.
      *
      * @return the collection of objects represented by the ids
      */
-    protected suspend inline fun <reified T : Identifiable<Id>, Id> chunkedTabs(
+    protected suspend inline fun <reified T : Identifiable<Value>, Id : Identifier<Value>, Value> chunkedTabs(
         ids: Collection<Id>,
         path: String,
         instance: (Id) -> T,
         block: HttpRequestBuilder.() -> Unit = {}
-    ): List<T> =
-        chunked(ids, path, "tabs", instance, block)
+    ): List<T> = chunked(ids, path, "tabs", instance, block)
 
     /**
      * @return all the objects
      */
-    protected suspend inline fun <reified T> allIds(path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> = all(path, "ids", block)
+    protected suspend inline fun <reified T : Identifiable<Value>, Value> allIds(path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> = all(path, "ids", block)
 
     /**
      * @return all the objects
      */
-    protected suspend inline fun <reified T> allTabs(path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> = all(path, "tabs", block)
+    protected suspend inline fun <reified T : Identifiable<Value>, Value> allTabs(path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> = all(path, "tabs", block)
 
     /**
      * Chunks the ids into requests small enough for the API to accept, if there are more ids than the configuration page size.
      *
      * @return the collection of objects represented by the ids
      */
-    protected suspend inline fun <reified T : Identifiable<Id>, Id> chunked(
+    protected suspend inline fun <reified T : Identifiable<Value>, Id : Identifier<Value>, Value> chunked(
         ids: Collection<Id>,
         path: String,
         idsParameterName: String,
@@ -160,7 +169,12 @@ abstract class BaseClient(
      *
      * @return a single object
      */
-    protected suspend inline fun <reified T : Identifiable<Id>, Id> getSingleById(id: Id, path: String, instance: (Id) -> T, block: HttpRequestBuilder.() -> Unit = {}): T =
+    protected suspend inline fun <reified T : Identifiable<Value>, Id : Identifier<Value>, Value> getSingleById(
+        id: Id,
+        path: String,
+        instance: (Id) -> T,
+        block: HttpRequestBuilder.() -> Unit = {}
+    ): T =
         tryOrRecover(
             default = { instance(id) }
         ) {

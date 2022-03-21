@@ -1,8 +1,8 @@
 package com.bselzer.gw2.v2.model.enumeration.extension.account
 
-import com.bselzer.gw2.v2.model.account.build.BuildTemplate
 import com.bselzer.gw2.v2.model.enumeration.profession.LegendName
 import com.bselzer.gw2.v2.model.enumeration.profession.ProfessionName
+import com.bselzer.gw2.v2.model.template.build.BuildTemplate
 import com.bselzer.ktx.serialization.function.enumValueOrNull
 import com.bselzer.ktx.serialization.function.validEnumValues
 
@@ -14,9 +14,9 @@ fun BuildTemplate.profession(): ProfessionName? = profession.enumValueOrNull<Pro
 /**
  * The [BuildTemplate.terrestrialLegends] with [LegendName] keys
  */
-fun BuildTemplate.terrestrialLegends(): List<LegendName> = terrestrialLegends.validEnumValues()
+fun BuildTemplate.terrestrialLegends(): List<LegendName> = terrestrialLegends.map { it?.value }.validEnumValues()
 
 /**
  * The [BuildTemplate.aquaticLegends] with [LegendName] keys
  */
-fun BuildTemplate.aquaticLegends(): List<LegendName> = aquaticLegends.validEnumValues()
+fun BuildTemplate.aquaticLegends(): List<LegendName> = aquaticLegends.map { it?.value }.validEnumValues()

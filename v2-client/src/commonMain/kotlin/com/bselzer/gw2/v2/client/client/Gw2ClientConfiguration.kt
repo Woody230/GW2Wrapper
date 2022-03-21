@@ -1,6 +1,8 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.constant.Endpoints
+import com.bselzer.gw2.v2.client.model.Language
+import com.bselzer.gw2.v2.client.model.Token
 
 /**
  * The configuration for the [Gw2Client]
@@ -20,14 +22,14 @@ data class Gw2ClientConfiguration(
      * If null, then no access token will be added.
      * Note that many endpoints do not need authorization.
      */
-    val token: String? = null,
+    val token: Token? = null,
 
     /**
      * The language to retrieve data for.
      *
      * If null, then no language will be specified.
      */
-    val language: String? = null,
+    val language: Language? = null,
 
     /**
      * The page size.

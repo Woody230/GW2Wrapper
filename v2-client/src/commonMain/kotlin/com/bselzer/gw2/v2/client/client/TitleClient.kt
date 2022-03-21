@@ -1,7 +1,9 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.extension.language
+import com.bselzer.gw2.v2.client.model.Language
 import com.bselzer.gw2.v2.model.title.Title
+import com.bselzer.gw2.v2.model.title.TitleId
 import io.ktor.client.*
 
 /**
@@ -17,13 +19,13 @@ class TitleClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the ids of the available titles
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/titles">the wiki</a>
      */
-    suspend fun ids(): List<Int> = getList(path = TITLES)
+    suspend fun ids(): List<TitleId> = getIds(path = TITLES)
 
     /**
      * @return the title associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/titles">the wiki</a>
      */
-    suspend fun title(id: Int, language: String? = null): Title = getSingleById(id, TITLES, instance = { Title(id = it) }) {
+    suspend fun title(id: TitleId, language: Language? = null): Title = getSingleById(id, TITLES, instance = { Title(id = it) }) {
         language(language)
     }
 
@@ -31,7 +33,7 @@ class TitleClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return the titles associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/titles">the wiki</a>
      */
-    suspend fun titles(ids: Collection<Int>, language: String? = null): List<Title> = chunkedIds(ids, TITLES, instance = { Title(id = it) }) {
+    suspend fun titles(ids: Collection<TitleId>, language: Language? = null): List<Title> = chunkedIds(ids, TITLES, instance = { Title(id = it) }) {
         language(language)
     }
 
@@ -39,7 +41,7 @@ class TitleClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @return all the titles
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/titles">the wiki</a>
      */
-    suspend fun titles(language: String? = null): List<Title> = allIds(TITLES) {
+    suspend fun titles(language: Language? = null): List<Title> = allIds(TITLES) {
         language(language)
     }
 }

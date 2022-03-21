@@ -6,4 +6,4 @@ import kotlin.jvm.JvmInline
 
 @Serializable
 @JvmInline
-value class AccountId(override val value: String) : StringIdentifier
+value class AccountId(override val value: String = "") : StringIdentifier

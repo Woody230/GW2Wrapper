@@ -1,7 +1,9 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.extension.language
+import com.bselzer.gw2.v2.client.model.Language
 import com.bselzer.gw2.v2.model.novelty.Novelty
+import com.bselzer.gw2.v2.model.novelty.NoveltyId
 import io.ktor.client.*
 
 /**
@@ -17,13 +19,13 @@ class NoveltyClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * @return the ids of the available novelties
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/novelties">the wiki</a>
      */
-    suspend fun ids(): List<Int> = getList(path = NOVELTIES)
+    suspend fun ids(): List<NoveltyId> = getIds(path = NOVELTIES)
 
     /**
      * @return the novelty associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/novelties">the wiki</a>
      */
-    suspend fun novelty(id: Int, language: String? = null): Novelty = getSingleById(id, NOVELTIES, instance = { Novelty(id = it) }) {
+    suspend fun novelty(id: NoveltyId, language: Language? = null): Novelty = getSingleById(id, NOVELTIES, instance = { Novelty(id = it) }) {
         language(language)
     }
 
@@ -31,7 +33,7 @@ class NoveltyClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * @return the novelties associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/novelties">the wiki</a>
      */
-    suspend fun novelties(ids: Collection<Int>, language: String? = null): List<Novelty> = chunkedIds(ids, NOVELTIES, instance = { Novelty(id = it) }) {
+    suspend fun novelties(ids: Collection<NoveltyId>, language: Language? = null): List<Novelty> = chunkedIds(ids, NOVELTIES, instance = { Novelty(id = it) }) {
         language(language)
     }
 
@@ -39,7 +41,7 @@ class NoveltyClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * @return all the novelties
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/novelties">the wiki</a>
      */
-    suspend fun novelties(language: String? = null): List<Novelty> = allIds(NOVELTIES) {
+    suspend fun novelties(language: Language? = null): List<Novelty> = allIds(NOVELTIES) {
         language(language)
     }
 }

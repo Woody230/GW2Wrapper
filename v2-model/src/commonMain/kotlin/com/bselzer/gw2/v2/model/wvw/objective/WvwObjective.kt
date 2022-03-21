@@ -1,6 +1,9 @@
 package com.bselzer.gw2.v2.model.wvw.objective
 
+import com.bselzer.gw2.v2.model.continent.map.sector.SectorId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.map.MapId
+import com.bselzer.gw2.v2.model.wvw.upgrade.WvwUpgradeId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -19,10 +22,10 @@ data class WvwObjective(
     val type: String = "",
 
     @SerialName("sector_id")
-    val mapSectorId: Int = 0,
+    val mapSectorId: SectorId = SectorId(),
 
     @SerialName("map_id")
-    val mapId: Int = 0,
+    val mapId: MapId = MapId(),
 
     @SerialName("map_type")
     val mapType: String = "",
@@ -50,5 +53,5 @@ data class WvwObjective(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/upgrades">the wiki</a>
      */
     @SerialName("upgrade_id")
-    val upgradeId: Int = 0
+    val upgradeId: WvwUpgradeId = WvwUpgradeId()
 ) : Identifiable<String>

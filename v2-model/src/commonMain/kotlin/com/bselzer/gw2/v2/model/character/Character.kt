@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.character
 
+import com.bselzer.gw2.v2.model.backstory.answer.BackstoryAnswerId
 import com.bselzer.gw2.v2.model.character.bag.Bag
 import com.bselzer.gw2.v2.model.character.progression.CharacterCrafting
 import com.bselzer.gw2.v2.model.character.progression.CharacterTraining
@@ -9,6 +10,7 @@ import com.bselzer.gw2.v2.model.character.skill.CharacterModeSkills
 import com.bselzer.gw2.v2.model.character.specialization.CharacterModeSpecializations
 import com.bselzer.gw2.v2.model.character.wvw.CharacterWvwAbility
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.recipe.RecipeId
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
@@ -17,9 +19,7 @@ import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 
-@OptIn(ExperimentalTime::class)
 @Serializable
 data class Character(
     /**
@@ -28,11 +28,11 @@ data class Character(
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     @SerialName("backstory")
-    val backstory: List<String> = emptyList(),
+    val backstory: List<BackstoryAnswerId> = emptyList(),
 
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     @SerialName("name")
-    val name: String = "",
+    val name: CharacterName = CharacterName(),
 
     /**
      * The name of the race.
@@ -133,7 +133,7 @@ data class Character(
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS, Permission.INVENTORIES)
     @SerialName("recipes")
-    val recipes: List<Int> = emptyList(),
+    val recipes: List<RecipeId> = emptyList(),
 
     /**
      * The skills in each game mode.
@@ -173,5 +173,5 @@ data class Character(
     @SerialName("flags")
     val flags: List<String> = emptyList()
 ) : Identifiable<String> {
-    override val id: String = name
+    override val id: CharacterName = name
 }

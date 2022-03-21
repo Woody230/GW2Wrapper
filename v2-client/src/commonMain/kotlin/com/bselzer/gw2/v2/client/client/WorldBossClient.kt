@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.client.client
 
+import com.bselzer.gw2.v2.model.worldboss.WorldBossId
 import io.ktor.client.*
 
 /**
@@ -15,6 +16,5 @@ class WorldBossClient(httpClient: HttpClient, configuration: Gw2ClientConfigurat
      * @return the ids of the daily world bosses
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/worldbosses">the wiki</a>
      */
-    // TODO enum and extension method
-    suspend fun ids(): List<String> = getList(path = WORLD_BOSSES)
+    suspend fun ids(): List<WorldBossId> = getIds(path = WORLD_BOSSES)
 }

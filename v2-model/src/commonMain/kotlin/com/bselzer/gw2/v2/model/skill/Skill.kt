@@ -2,13 +2,14 @@ package com.bselzer.gw2.v2.model.skill
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.skill.fact.SkillFact
+import com.bselzer.gw2.v2.model.specialization.SpecializationId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Skill(
     @SerialName("id")
-    override val id: Int = 0,
+    override val id: SkillId = SkillId(),
 
     @SerialName("name")
     val name: String = "",
@@ -87,7 +88,7 @@ data class Skill(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
      */
     @SerialName("flip_skill")
-    val flipId: Int = 0,
+    val flipId: SkillId = SkillId(),
 
     /**
      * The amount of initiative required and used to perform the skill. For Thieves only.
@@ -100,41 +101,41 @@ data class Skill(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
      */
     @SerialName("next_chain")
-    val nextChainId: Int = 0,
+    val nextChainId: SkillId = SkillId(),
 
     /**
      * The id of the previous skill in a chain of skills.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
      */
     @SerialName("prev_chain")
-    val previousChainId: Int = 0,
+    val previousChainId: SkillId = SkillId(),
 
     /**
      * The id of the elite specialization required.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/specializations">the wiki</a>
      */
     @SerialName("specialization")
-    val specializationId: Int = 0,
+    val specializationId: SpecializationId = SpecializationId(),
 
     /**
      * The ids of the transformation skills that replace the skill bar upon use of this skill.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
      */
     @SerialName("transform_skills")
-    val transformIds: List<Int> = emptyList(),
+    val transformIds: List<SkillId> = emptyList(),
 
     /**
      * The ids of the bundle skills that replace the skill bar upon use of this skill.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skills">the wiki</a>
      */
     @SerialName("bundle_skills")
-    val bundleIds: List<Int> = emptyList(),
+    val bundleIds: List<SkillId> = emptyList(),
 
     /**
      * The id of the associated toolbelt skill id. For Engineers only.
      */
     @SerialName("toolbelt_skill")
-    val toolbeltId: Int = 0,
+    val toolbeltId: SkillId = SkillId(),
 
     @SerialName("flags")
     val flags: List<String> = emptyList()

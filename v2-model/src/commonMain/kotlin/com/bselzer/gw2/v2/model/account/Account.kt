@@ -11,14 +11,12 @@ import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 
 /**
  * The account information.
  */
 @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
 @Scope(Requirement.OPTIONAL, Permission.GUILDS, Permission.PROGRESSION)
-@ExperimentalTime
 @Serializable
 data class Account(
     /**

@@ -1,7 +1,9 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.extension.language
+import com.bselzer.gw2.v2.client.model.Language
 import com.bselzer.gw2.v2.model.profession.Profession
+import com.bselzer.gw2.v2.model.profession.ProfessionId
 import io.ktor.client.*
 
 /**
@@ -18,13 +20,13 @@ class ProfessionClient(httpClient: HttpClient, configuration: Gw2ClientConfigura
      * @return the ids of the available professions
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/professions">the wiki</a>
      */
-    suspend fun ids(): List<String> = getList(path = PROFESSIONS)
+    suspend fun ids(): List<ProfessionId> = getList(path = PROFESSIONS)
 
     /**
      * @return the profession associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/professions">the wiki</a>
      */
-    suspend fun profession(id: String, language: String? = null): Profession = getSingleById(id, PROFESSIONS, instance = { Profession(id = it) }) {
+    suspend fun profession(id: ProfessionId, language: Language? = null): Profession = getSingleById(id, PROFESSIONS, instance = { Profession(id = it) }) {
         language(language)
     }
 
@@ -32,7 +34,7 @@ class ProfessionClient(httpClient: HttpClient, configuration: Gw2ClientConfigura
      * @return the professions associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/professions">the wiki</a>
      */
-    suspend fun professions(ids: Collection<String>, language: String? = null): List<Profession> = chunkedIds(ids, PROFESSIONS, instance = { Profession(id = it) }) {
+    suspend fun professions(ids: Collection<ProfessionId>, language: Language? = null): List<Profession> = chunkedIds(ids, PROFESSIONS, instance = { Profession(id = it) }) {
         language(language)
     }
 
@@ -40,7 +42,7 @@ class ProfessionClient(httpClient: HttpClient, configuration: Gw2ClientConfigura
      * @return all the professions
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/professions">the wiki</a>
      */
-    suspend fun professions(language: String? = null): List<Profession> = allIds(PROFESSIONS) {
+    suspend fun professions(language: Language? = null): List<Profession> = allIds(PROFESSIONS) {
         language(language)
     }
 }

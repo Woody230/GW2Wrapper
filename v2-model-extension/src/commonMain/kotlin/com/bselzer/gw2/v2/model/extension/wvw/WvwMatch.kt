@@ -2,7 +2,7 @@ package com.bselzer.gw2.v2.model.extension.wvw
 
 import com.bselzer.gw2.v2.model.enumeration.wvw.ObjectiveOwner
 import com.bselzer.gw2.v2.model.enumeration.wvw.ObjectiveOwner.*
-import com.bselzer.gw2.v2.model.world.World
+import com.bselzer.gw2.v2.model.world.WorldId
 import com.bselzer.gw2.v2.model.wvw.map.WvwMap
 import com.bselzer.gw2.v2.model.wvw.map.WvwMapObjective
 import com.bselzer.gw2.v2.model.wvw.match.WvwMatch
@@ -23,20 +23,17 @@ fun WvwMatch.map(objective: WvwObjective): WvwMap? = this.maps.firstOrNull { map
 /**
  * @return the [ObjectiveOwner] associated with the [world]
  */
-fun WvwMatch.owner(world: World): ObjectiveOwner {
-    val id = world.id
-    return when {
-        allWorlds.red.contains(id) -> RED
-        allWorlds.blue.contains(id) -> BLUE
-        allWorlds.green.contains(id) -> GREEN
-        else -> NEUTRAL
-    }
+fun WvwMatch.owner(world: WorldId): ObjectiveOwner = when {
+    allWorlds.red.contains(world) -> RED
+    allWorlds.blue.contains(world) -> BLUE
+    allWorlds.green.contains(world) -> GREEN
+    else -> NEUTRAL
 }
 
 /**
  * @return all the world ids associated with the match
  */
-fun WvwMatch.allWorlds(): List<Int> = allWorlds.red + allWorlds.blue + allWorlds.green
+fun WvwMatch.allWorlds(): List<WorldId> = allWorlds.red + allWorlds.blue + allWorlds.green
 
 /**
  * @return all the world ids linked together that are associated with the [owner]
@@ -51,7 +48,7 @@ fun WvwMatch.linkedWorlds(owner: ObjectiveOwner) = when (owner) {
 /**
  * @return the main world id associated with the [.owner]
  */
-fun WvwMatch.mainWorld(owner: ObjectiveOwner): Int? = when (owner) {
+fun WvwMatch.mainWorld(owner: ObjectiveOwner): WorldId? = when (owner) {
     RED -> worlds.red
     BLUE -> worlds.blue
     GREEN -> worlds.green

@@ -1,7 +1,9 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.extension.language
+import com.bselzer.gw2.v2.client.model.Language
 import com.bselzer.gw2.v2.model.glider.Glider
+import com.bselzer.gw2.v2.model.glider.GliderId
 import io.ktor.client.*
 
 /**
@@ -17,13 +19,13 @@ class GliderClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration
      * @return the ids of the available gliders
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/gliders">the wiki</a>
      */
-    suspend fun ids(): List<Int> = getList(path = GLIDERS)
+    suspend fun ids(): List<GliderId> = getIds(path = GLIDERS)
 
     /**
      * @return the glider associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/gliders">the wiki</a>
      */
-    suspend fun glider(id: Int, language: String? = null): Glider = getSingleById(id, GLIDERS, instance = { Glider(id = it) }) {
+    suspend fun glider(id: GliderId, language: Language? = null): Glider = getSingleById(id, GLIDERS, instance = { Glider(id = it) }) {
         language(language)
     }
 
@@ -31,7 +33,7 @@ class GliderClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration
      * @return the gliders associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/gliders">the wiki</a>
      */
-    suspend fun gliders(ids: Collection<Int>, language: String? = null): List<Glider> = chunkedIds(ids, GLIDERS, instance = { Glider(id = it) }) {
+    suspend fun gliders(ids: Collection<GliderId>, language: Language? = null): List<Glider> = chunkedIds(ids, GLIDERS, instance = { Glider(id = it) }) {
         language(language)
     }
 
@@ -39,7 +41,7 @@ class GliderClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration
      * @return all the gliders
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/gliders">the wiki</a>
      */
-    suspend fun gliders(language: String? = null): List<Glider> = allIds(GLIDERS) {
+    suspend fun gliders(language: Language? = null): List<Glider> = allIds(GLIDERS) {
         language(language)
     }
 }

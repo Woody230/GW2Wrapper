@@ -2,12 +2,19 @@ package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.extension.bearer
 import com.bselzer.gw2.v2.client.extension.language
+import com.bselzer.gw2.v2.client.model.Language
+import com.bselzer.gw2.v2.client.model.Token
 import com.bselzer.gw2.v2.model.pvp.amulet.PvpAmulet
+import com.bselzer.gw2.v2.model.pvp.amulet.PvpAmuletId
 import com.bselzer.gw2.v2.model.pvp.game.PvpGame
+import com.bselzer.gw2.v2.model.pvp.game.PvpGameId
 import com.bselzer.gw2.v2.model.pvp.hero.PvpHero
+import com.bselzer.gw2.v2.model.pvp.hero.PvpHeroId
 import com.bselzer.gw2.v2.model.pvp.leaderboard.PvpLeaderboard
 import com.bselzer.gw2.v2.model.pvp.rank.PvpRank
+import com.bselzer.gw2.v2.model.pvp.rank.PvpRankId
 import com.bselzer.gw2.v2.model.pvp.season.PvpSeason
+import com.bselzer.gw2.v2.model.pvp.season.PvpSeasonId
 import com.bselzer.gw2.v2.model.pvp.standing.PvpStandings
 import com.bselzer.gw2.v2.model.pvp.stat.PvpStats
 import com.bselzer.gw2.v2.scope.core.Permission
@@ -39,7 +46,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/stats">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PVP)
-    suspend fun stats(token: String? = null): PvpStats = getSingle(path = "${PVP}/${STATS}", instance = { PvpStats() }) {
+    suspend fun stats(token: Token? = null): PvpStats = getSingle(path = "${PVP}/${STATS}", instance = { PvpStats() }) {
         bearer(token)
     }
 
@@ -48,7 +55,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/games">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PVP)
-    suspend fun gameIds(token: String? = null): List<String> = getList(path = "${PVP}/${GAMES}") {
+    suspend fun gameIds(token: Token? = null): List<PvpGameId> = getList(path = "${PVP}/${GAMES}") {
         bearer(token)
     }
 
@@ -57,7 +64,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/games">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PVP)
-    suspend fun game(id: String, token: String? = null): PvpGame = getSingleById(id, "${PVP}/${GAMES}", instance = { PvpGame(id = it) }) {
+    suspend fun game(id: PvpGameId, token: Token? = null): PvpGame = getSingleById(id, "${PVP}/${GAMES}", instance = { PvpGame(id = it) }) {
         bearer(token)
     }
 
@@ -66,7 +73,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/games">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PVP)
-    suspend fun games(ids: Collection<String>, token: String? = null): List<PvpGame> = chunkedIds(ids, "${PVP}/${GAMES}", instance = { PvpGame(id = it) }) {
+    suspend fun games(ids: Collection<PvpGameId>, token: Token? = null): List<PvpGame> = chunkedIds(ids, "${PVP}/${GAMES}", instance = { PvpGame(id = it) }) {
         bearer(token)
     }
 
@@ -75,7 +82,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/games">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PVP)
-    suspend fun games(token: String? = null): List<PvpGame> = allIds("${PVP}/${GAMES}") {
+    suspend fun games(token: Token? = null): List<PvpGame> = allIds("${PVP}/${GAMES}") {
         bearer(token)
     }
 
@@ -84,7 +91,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/standings">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PVP)
-    suspend fun standings(token: String? = null): PvpStandings = getSingle(path = "${PVP}/${STANDINGS}", instance = { PvpStandings() }) {
+    suspend fun standings(token: Token? = null): PvpStandings = getSingle(path = "${PVP}/${STANDINGS}", instance = { PvpStandings() }) {
         bearer(token)
     }
 
@@ -92,13 +99,13 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the ids of the available ranks
      * @see <a href='https://wiki.guildwars2.com/wiki/API:2/pvp/ranks">the wiki</a>
      */
-    suspend fun rankIds(): List<Int> = getList(path = "${PVP}/${RANKS}")
+    suspend fun rankIds(): List<PvpRankId> = getIds(path = "${PVP}/${RANKS}")
 
     /**
      * @return the rank associated with the [id]
      * @see <a href='https://wiki.guildwars2.com/wiki/API:2/pvp/ranks">the wiki</a>
      */
-    suspend fun rank(id: Int, language: String? = null): PvpRank = getSingleById(id, "${PVP}/${RANKS}", instance = { PvpRank(id = it) }) {
+    suspend fun rank(id: PvpRankId, language: Language? = null): PvpRank = getSingleById(id, "${PVP}/${RANKS}", instance = { PvpRank(id = it) }) {
         language(language)
     }
 
@@ -106,7 +113,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the ranks associated with the [ids]
      * @see <a href='https://wiki.guildwars2.com/wiki/API:2/pvp/ranks">the wiki</a>
      */
-    suspend fun ranks(ids: Collection<Int>, language: String? = null): List<PvpRank> = chunkedIds(ids, "${PVP}/${RANKS}", instance = { PvpRank(id = it) }) {
+    suspend fun ranks(ids: Collection<PvpRankId>, language: Language? = null): List<PvpRank> = chunkedIds(ids, "${PVP}/${RANKS}", instance = { PvpRank(id = it) }) {
         language(language)
     }
 
@@ -114,7 +121,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return all the ranks
      * @see <a href='https://wiki.guildwars2.com/wiki/API:2/pvp/ranks">the wiki</a>
      */
-    suspend fun ranks(language: String? = null): List<PvpRank> = allIds("${PVP}/${RANKS}") {
+    suspend fun ranks(language: Language? = null): List<PvpRank> = allIds("${PVP}/${RANKS}") {
         language(language)
     }
 
@@ -122,13 +129,13 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the ids of all the PvP League seasons
      * @see <a href='https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">the wiki</a>
      */
-    suspend fun seasonsIds(): List<String> = getList(path = "${PVP}/${SEASONS}")
+    suspend fun seasonsIds(): List<PvpSeasonId> = getIds(path = "${PVP}/${SEASONS}")
 
     /**
      * @return the season associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">the wiki</a>
      */
-    suspend fun season(id: String, language: String? = null): PvpSeason = getSingleById(id, "${PVP}/${SEASONS}", instance = { PvpSeason(id = it) }) {
+    suspend fun season(id: PvpSeasonId, language: Language? = null): PvpSeason = getSingleById(id, "${PVP}/${SEASONS}", instance = { PvpSeason(id = it) }) {
         language(language)
     }
 
@@ -136,7 +143,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the seasons associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">the wiki</a>
      */
-    suspend fun seasons(ids: Collection<String>, language: String? = null): List<PvpSeason> = chunkedIds(ids, "${PVP}/${SEASONS}", instance = { PvpSeason(id = it) }) {
+    suspend fun seasons(ids: Collection<PvpSeasonId>, language: Language? = null): List<PvpSeason> = chunkedIds(ids, "${PVP}/${SEASONS}", instance = { PvpSeason(id = it) }) {
         language(language)
     }
 
@@ -144,7 +151,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return all the seasons
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">the wiki</a>
      */
-    suspend fun seasons(language: String? = null): List<PvpSeason> = allIds("${PVP}/${SEASONS}") {
+    suspend fun seasons(language: Language? = null): List<PvpSeason> = allIds("${PVP}/${SEASONS}") {
         language(language)
     }
 
@@ -152,15 +159,14 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the available regions with leaderboards
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons/:id/leaderboards>the wiki</a>
      */
-    // TODO enum and extension method
-    suspend fun leaderboardRegions(seasonId: String): List<PvpLeaderboard> = getList(path = "${PVP}/${SEASONS}/${seasonId}/${LEADERBOARDS}")
+    suspend fun leaderboardRegions(seasonId: PvpSeasonId): List<PvpLeaderboard> = getList(path = "${PVP}/${SEASONS}/${seasonId}/${LEADERBOARDS}")
 
     /**
      * @return the leaderboards for the [region] during the season with [seasonId]
-     * @see <a href='https://wiki.guildwars2.com/wiki/API:2/pvp/seasons/:id/leaderboards">the wiki</a>
+     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons/:id/leaderboards">the wiki</a>
      * @since season 5
      */
-    suspend fun leaderboards(seasonId: String, region: String, language: String? = null): List<PvpLeaderboard> =
+    suspend fun leaderboards(seasonId: PvpSeasonId, region: String, language: Language? = null): List<PvpLeaderboard> =
         getList(path = "${PVP}/${SEASONS}/${seasonId}/${LEADERBOARDS}/${LADDER}/${region}") {
             language(language)
         }
@@ -169,13 +175,13 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the ids of the heroes
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">the wiki</a>
      */
-    suspend fun heroIds(): List<String> = getList(path = "${PVP}/${HEROES}")
+    suspend fun heroIds(): List<PvpHeroId> = getIds(path = "${PVP}/${HEROES}")
 
     /**
      * @return the hero associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">the wiki</a>
      */
-    suspend fun hero(id: String, language: String? = null): PvpHero = getSingleById(id, "${PVP}/${HEROES}", instance = { PvpHero(id = it) }) {
+    suspend fun hero(id: PvpHeroId, language: Language? = null): PvpHero = getSingleById(id, "${PVP}/${HEROES}", instance = { PvpHero(id = it) }) {
         language(language)
     }
 
@@ -183,7 +189,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the heroes associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">the wiki</a>
      */
-    suspend fun heroes(ids: Collection<String>, language: String? = null): List<PvpHero> = chunkedIds(ids, "${PVP}/${HEROES}", instance = { PvpHero(id = it) }) {
+    suspend fun heroes(ids: Collection<PvpHeroId>, language: Language? = null): List<PvpHero> = chunkedIds(ids, "${PVP}/${HEROES}", instance = { PvpHero(id = it) }) {
         language(language)
     }
 
@@ -191,7 +197,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return all the heroes
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/heroes">the wiki</a>
      */
-    suspend fun heroes(language: String? = null): List<PvpHero> = allIds("${PVP}/${HEROES}") {
+    suspend fun heroes(language: Language? = null): List<PvpHero> = allIds("${PVP}/${HEROES}") {
         language(language)
     }
 
@@ -199,13 +205,13 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the ids of the amulets
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/amulets">the wiki</a>
      */
-    suspend fun amuletIds(): List<Int> = getList(path = "${PVP}/${AMULETS}")
+    suspend fun amuletIds(): List<PvpAmuletId> = getIds(path = "${PVP}/${AMULETS}")
 
     /**
      * @return the amulet associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/amulets">the wiki</a>
      */
-    suspend fun amulet(id: Int, language: String? = null): PvpAmulet = getSingleById(id, "${PVP}/${AMULETS}", instance = { PvpAmulet(id = it) }) {
+    suspend fun amulet(id: PvpAmuletId, language: Language? = null): PvpAmulet = getSingleById(id, "${PVP}/${AMULETS}", instance = { PvpAmulet(id = it) }) {
         language(language)
     }
 
@@ -213,7 +219,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the amulets associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/amulets">the wiki</a>
      */
-    suspend fun amulets(ids: Collection<Int>, language: String? = null): List<PvpAmulet> = chunkedIds(ids, "${PVP}/${AMULETS}", instance = { PvpAmulet(id = it) }) {
+    suspend fun amulets(ids: Collection<PvpAmuletId>, language: Language? = null): List<PvpAmulet> = chunkedIds(ids, "${PVP}/${AMULETS}", instance = { PvpAmulet(id = it) }) {
         language(language)
     }
 
@@ -221,7 +227,7 @@ class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return all the amulets
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/amulets">the wiki</a>
      */
-    suspend fun amulets(language: String? = null): List<PvpAmulet> = allIds("${PVP}/${AMULETS}") {
+    suspend fun amulets(language: Language? = null): List<PvpAmulet> = allIds("${PVP}/${AMULETS}") {
         language(language)
     }
 }

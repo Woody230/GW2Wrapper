@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.model.quaggan.Quaggan
+import com.bselzer.gw2.v2.model.quaggan.QuagganId
 import io.ktor.client.*
 
 /**
@@ -16,19 +17,19 @@ class QuagganClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * @return the ids of the available quaggans
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/quaggans">the wiki</a>
      */
-    suspend fun ids(): List<String> = getList(path = QUAGGANS)
+    suspend fun ids(): List<QuagganId> = getIds(path = QUAGGANS)
 
     /**
      * @return the quaggan associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/quaggans">the wiki</a>
      */
-    suspend fun quaggan(id: String): Quaggan = getSingleById(id, QUAGGANS, instance = { Quaggan(id = it) })
+    suspend fun quaggan(id: QuagganId): Quaggan = getSingleById(id, QUAGGANS, instance = { Quaggan(id = it) })
 
     /**
      * @return the quaggans associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/quaggans">the wiki</a>
      */
-    suspend fun quaggans(ids: Collection<String>): List<Quaggan> = chunkedIds(ids, QUAGGANS, instance = { Quaggan(id = it) })
+    suspend fun quaggans(ids: Collection<QuagganId>): List<Quaggan> = chunkedIds(ids, QUAGGANS, instance = { Quaggan(id = it) })
 
     /**
      * @return all the quaggans

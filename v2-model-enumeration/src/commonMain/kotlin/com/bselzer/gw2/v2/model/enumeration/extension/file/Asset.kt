@@ -7,4 +7,4 @@ import com.bselzer.ktx.serialization.function.enumValueOrNull
 /**
  * The [Asset.id] as an [AssetName]
  */
-fun Asset.id(): AssetName? = id.enumValueOrNull<AssetName>()
+fun Asset.id(): AssetName? = id.value.enumValueOrNull<AssetName>()

@@ -1,7 +1,9 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.model.home.cat.Cat
+import com.bselzer.gw2.v2.model.home.cat.CatId
 import com.bselzer.gw2.v2.model.home.node.Node
+import com.bselzer.gw2.v2.model.home.node.NodeId
 import io.ktor.client.*
 
 /**
@@ -18,19 +20,19 @@ class HomeClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
      * @return the ids of the available cats
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/home/cats">the wiki</a>
      */
-    suspend fun catIds(): List<Int> = getList(path = "${HOME}/${CATS}")
+    suspend fun catIds(): List<CatId> = getIds(path = "${HOME}/${CATS}")
 
     /**
      * @return the cat associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/home/cats">the wiki</a>
      */
-    suspend fun cat(id: Int): Cat = getSingleById(id, "${HOME}/${CATS}", instance = { Cat(id = it) })
+    suspend fun cat(id: CatId): Cat = getSingleById(id, "${HOME}/${CATS}", instance = { Cat(id = it) })
 
     /**
      * @return the cats associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/home/cats">the wiki</a>
      */
-    suspend fun cats(ids: Collection<Int>): List<Cat> = chunkedIds(ids, "${HOME}/${CATS}", instance = { Cat(id = it) })
+    suspend fun cats(ids: Collection<CatId>): List<Cat> = chunkedIds(ids, "${HOME}/${CATS}", instance = { Cat(id = it) })
 
     /**
      * @return all the cats
@@ -42,19 +44,19 @@ class HomeClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
      * @return the ids of the available nodes
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/home/nodes">the wiki</a>
      */
-    suspend fun nodeIds(): List<String> = getList(path = "${HOME}/${NODES}")
+    suspend fun nodeIds(): List<NodeId> = getIds(path = "${HOME}/${NODES}")
 
     /**
      * @return the node associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/home/nodes">the wiki</a>
      */
-    suspend fun node(id: String): Node = getSingleById(id, "${HOME}/${NODES}", instance = { Node(id = it) })
+    suspend fun node(id: NodeId): Node = getSingleById(id, "${HOME}/${NODES}", instance = { Node(id = it) })
 
     /**
      * @return the nodes associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/home/nodes">the wiki</a>
      */
-    suspend fun nodes(ids: Collection<String>): List<Node> = chunkedIds(ids, "${HOME}/${NODES}", instance = { Node(id = it) })
+    suspend fun nodes(ids: Collection<NodeId>): List<Node> = chunkedIds(ids, "${HOME}/${NODES}", instance = { Node(id = it) })
 
     /**
      * @return all the nodes

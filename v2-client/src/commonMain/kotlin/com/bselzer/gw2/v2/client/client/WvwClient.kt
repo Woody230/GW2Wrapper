@@ -1,14 +1,17 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.extension.language
+import com.bselzer.gw2.v2.client.model.Language
+import com.bselzer.gw2.v2.model.world.WorldId
 import com.bselzer.gw2.v2.model.wvw.ability.WvwAbility
-import com.bselzer.gw2.v2.model.wvw.match.WvwMatch
-import com.bselzer.gw2.v2.model.wvw.match.WvwMatchOverview
-import com.bselzer.gw2.v2.model.wvw.match.WvwMatchScore
-import com.bselzer.gw2.v2.model.wvw.match.WvwMatchStat
+import com.bselzer.gw2.v2.model.wvw.ability.WvwAbilityId
+import com.bselzer.gw2.v2.model.wvw.match.*
+import com.bselzer.gw2.v2.model.wvw.objective.WvwMapObjectiveId
 import com.bselzer.gw2.v2.model.wvw.objective.WvwObjective
 import com.bselzer.gw2.v2.model.wvw.rank.WvwRank
+import com.bselzer.gw2.v2.model.wvw.rank.WvwRankId
 import com.bselzer.gw2.v2.model.wvw.upgrade.WvwUpgrade
+import com.bselzer.gw2.v2.model.wvw.upgrade.WvwUpgradeId
 import io.ktor.client.*
 import io.ktor.client.request.*
 
@@ -32,12 +35,12 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
     /**
      * Adds the world id.
      */
-    private fun HttpRequestBuilder.world(world: Int) = parameter("world", world)
+    private fun HttpRequestBuilder.world(world: WorldId) = parameter("world", world.value)
 
     /**
      * @return a single object
      */
-    private suspend inline fun <reified T> getSingleByWorld(worldId: Int, basePath: String, instance: () -> T, block: HttpRequestBuilder.() -> Unit = {}): T =
+    private suspend inline fun <reified T> getSingleByWorld(worldId: WorldId, basePath: String, instance: () -> T, block: HttpRequestBuilder.() -> Unit = {}): T =
         getSingle(path = basePath, instance = instance) {
             world(worldId)
             apply(block)
@@ -47,13 +50,13 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the ids of the available abilities
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/abilities">the wiki</a>
      */
-    suspend fun abilityIds(): List<Int> = getList(path = "${WVW}/${ABILITIES}")
+    suspend fun abilityIds(): List<WvwAbilityId> = getIds(path = "${WVW}/${ABILITIES}")
 
     /**
      * @return the ability associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/abilities">the wiki</a>
      */
-    suspend fun ability(id: Int, language: String? = null): WvwAbility = getSingleById(id, "${WVW}/${ABILITIES}", instance = { WvwAbility(id = it) }) {
+    suspend fun ability(id: WvwAbilityId, language: Language? = null): WvwAbility = getSingleById(id, "${WVW}/${ABILITIES}", instance = { WvwAbility(id = it) }) {
         language(language)
     }
 
@@ -61,15 +64,16 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the abilities associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/abilities">the wiki</a>
      */
-    suspend fun abilities(ids: Collection<Int>, language: String? = null): List<WvwAbility> = chunkedIds(ids, "${WVW}/${ABILITIES}", instance = { WvwAbility(id = it) }) {
-        language(language)
-    }
+    suspend fun abilities(ids: Collection<WvwAbilityId>, language: Language? = null): List<WvwAbility> =
+        chunkedIds(ids, "${WVW}/${ABILITIES}", instance = { WvwAbility(id = it) }) {
+            language(language)
+        }
 
     /**
      * @return all the abilities
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/abilities">the wiki</a>
      */
-    suspend fun abilities(language: String? = null): List<WvwAbility> = allIds("${WVW}/${ABILITIES}") {
+    suspend fun abilities(language: Language? = null): List<WvwAbility> = allIds("${WVW}/${ABILITIES}") {
         language(language)
     }
 
@@ -77,25 +81,25 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the ids of the available matches
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun matchIds(): List<String> = getList(path = "${WVW}/${MATCHES}")
+    suspend fun matchIds(): List<WvwMatchId> = getIds(path = "${WVW}/${MATCHES}")
 
     /**
      * @return the match associated with the [worldId]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun match(worldId: Int): WvwMatch = getSingleByWorld(worldId, "${WVW}/${MATCHES}", instance = { WvwMatch() })
+    suspend fun match(worldId: WorldId): WvwMatch = getSingleByWorld(worldId, "${WVW}/${MATCHES}", instance = { WvwMatch() })
 
     /**
      * @return the match associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun match(id: String): WvwMatch = getSingleById(id, "${WVW}/${MATCHES}", instance = { WvwMatch(id = it) })
+    suspend fun match(id: WvwMatchId): WvwMatch = getSingleById(id, "${WVW}/${MATCHES}", instance = { WvwMatch(id = it) })
 
     /**
      * @return the matches associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun matches(ids: Collection<String>): List<WvwMatch> = chunkedIds(ids, "${WVW}/${MATCHES}", instance = { WvwMatch(id = it) })
+    suspend fun matches(ids: Collection<WvwMatchId>): List<WvwMatch> = chunkedIds(ids, "${WVW}/${MATCHES}", instance = { WvwMatch(id = it) })
 
     /**
      * @return all the matches
@@ -107,25 +111,25 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the ids of the available match overviews
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun overviewIds(): List<Int> = getList(path = "${WVW}/${MATCHES}/${OVERVIEW}")
+    suspend fun overviewIds(): List<WvwMatchId> = getIds(path = "${WVW}/${MATCHES}/${OVERVIEW}")
 
     /**
      * @return the match overview associated with the [worldId]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun overview(worldId: Int): WvwMatchOverview = getSingleByWorld(worldId, "${WVW}/${MATCHES}/${OVERVIEW}", instance = { WvwMatchOverview() })
+    suspend fun overview(worldId: WorldId): WvwMatchOverview = getSingleByWorld(worldId, "${WVW}/${MATCHES}/${OVERVIEW}", instance = { WvwMatchOverview() })
 
     /**
      * @return the match overview associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun overview(id: String): WvwMatchOverview = getSingleById(id, "${WVW}/${MATCHES}/${OVERVIEW}", instance = { WvwMatchOverview(id = it) })
+    suspend fun overview(id: WvwMatchId): WvwMatchOverview = getSingleById(id, "${WVW}/${MATCHES}/${OVERVIEW}", instance = { WvwMatchOverview(id = it) })
 
     /**
      * @return the match overviews associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun overviews(ids: Collection<String>): List<WvwMatchOverview> = chunkedIds(ids, "${WVW}/${MATCHES}/${OVERVIEW}", instance = { WvwMatchOverview(id = it) })
+    suspend fun overviews(ids: Collection<WvwMatchId>): List<WvwMatchOverview> = chunkedIds(ids, "${WVW}/${MATCHES}/${OVERVIEW}", instance = { WvwMatchOverview(id = it) })
 
     /**
      * @return all the match overviews
@@ -137,25 +141,25 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the ids of the available match scores
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun scoreIds(): List<Int> = getList(path = "${WVW}/${MATCHES}/${SCORES}")
+    suspend fun scoreIds(): List<WvwMatchId> = getIds(path = "${WVW}/${MATCHES}/${SCORES}")
 
     /**
      * @return the match score associated with the [worldId]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun score(worldId: Int): WvwMatchScore = getSingleByWorld(worldId, "${WVW}/${MATCHES}/${SCORES}", instance = { WvwMatchScore() })
+    suspend fun score(worldId: WorldId): WvwMatchScore = getSingleByWorld(worldId, "${WVW}/${MATCHES}/${SCORES}", instance = { WvwMatchScore() })
 
     /**
      * @return the match score associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun score(id: String): WvwMatchScore = getSingleById(id, "${WVW}/${MATCHES}/${SCORES}", instance = { WvwMatchScore(id = it) })
+    suspend fun score(id: WvwMatchId): WvwMatchScore = getSingleById(id, "${WVW}/${MATCHES}/${SCORES}", instance = { WvwMatchScore(id = it) })
 
     /**
      * @return the match scores associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun scores(ids: Collection<String>): List<WvwMatchScore> = chunkedIds(ids, "${WVW}/${MATCHES}/${SCORES}", instance = { WvwMatchScore(id = it) })
+    suspend fun scores(ids: Collection<WvwMatchId>): List<WvwMatchScore> = chunkedIds(ids, "${WVW}/${MATCHES}/${SCORES}", instance = { WvwMatchScore(id = it) })
 
     /**
      * @return all the match overviews
@@ -167,25 +171,25 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the ids of the available match stats
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun statIds(): List<String> = getList(path = "${WVW}/${MATCHES}/${STATS}")
+    suspend fun statIds(): List<WvwMatchId> = getIds(path = "${WVW}/${MATCHES}/${STATS}")
 
     /**
      * @return the match stat associated with the [worldId]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun stat(worldId: Int): WvwMatchStat = getSingleByWorld(worldId, "${WVW}/${MATCHES}/${STATS}", instance = { WvwMatchStat() })
+    suspend fun stat(worldId: WorldId): WvwMatchStat = getSingleByWorld(worldId, "${WVW}/${MATCHES}/${STATS}", instance = { WvwMatchStat() })
 
     /**
      * @return the match stat associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun stat(id: String): WvwMatchStat = getSingleById(id, "${WVW}/${MATCHES}/${STATS}", instance = { WvwMatchStat(id = it) })
+    suspend fun stat(id: WvwMatchId): WvwMatchStat = getSingleById(id, "${WVW}/${MATCHES}/${STATS}", instance = { WvwMatchStat(id = it) })
 
     /**
      * @return the match stats associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/matches">the wiki</a>
      */
-    suspend fun stats(ids: Collection<String>): List<WvwMatchStat> = chunkedIds(ids, "${WVW}/${MATCHES}/${STATS}", instance = { WvwMatchStat(id = it) })
+    suspend fun stats(ids: Collection<WvwMatchId>): List<WvwMatchStat> = chunkedIds(ids, "${WVW}/${MATCHES}/${STATS}", instance = { WvwMatchStat(id = it) })
 
     /**
      * @return all the match stats
@@ -197,13 +201,13 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the ids of the available objectives
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/objectives">the wiki</a>
      */
-    suspend fun objectiveIds(): List<String> = getList(path = "${WVW}/${OBJECTIVES}")
+    suspend fun objectiveIds(): List<WvwMapObjectiveId> = getIds(path = "${WVW}/${OBJECTIVES}")
 
     /**
      * @return the objective associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/objectives">the wiki</a>
      */
-    suspend fun objective(id: String, language: String? = null): WvwObjective = getSingleById(id, "${WVW}/${OBJECTIVES}", instance = { WvwObjective(id = it) }) {
+    suspend fun objective(id: WvwMapObjectiveId, language: Language? = null): WvwObjective = getSingleById(id, "${WVW}/${OBJECTIVES}", instance = { WvwObjective(id = it) }) {
         language(language)
     }
 
@@ -211,7 +215,7 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the objectives associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/objectives">the wiki</a>
      */
-    suspend fun objectives(ids: Collection<String>, language: String? = null): List<WvwObjective> =
+    suspend fun objectives(ids: Collection<WvwMapObjectiveId>, language: Language? = null): List<WvwObjective> =
         chunkedIds(ids, "${WVW}/${OBJECTIVES}", instance = { WvwObjective(id = it) }) {
             language(language)
         }
@@ -220,7 +224,7 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return all the objectives
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/objectives">the wiki</a>
      */
-    suspend fun objectives(language: String? = null): List<WvwObjective> = allIds("${WVW}/${OBJECTIVES}") {
+    suspend fun objectives(language: Language? = null): List<WvwObjective> = allIds("${WVW}/${OBJECTIVES}") {
         language(language)
     }
 
@@ -228,13 +232,13 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the ids of the available ranks
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/ranks">the wiki</a>
      */
-    suspend fun rankIds(): List<Int> = getList(path = "${WVW}/${RANKS}")
+    suspend fun rankIds(): List<WvwRankId> = getIds(path = "${WVW}/${RANKS}")
 
     /**
      * @return the rank associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/ranks">the wiki</a>
      */
-    suspend fun rank(id: Int, language: String? = null): WvwRank = getSingleById(id, "${WVW}/${RANKS}", instance = { WvwRank(id = it) }) {
+    suspend fun rank(id: WvwRankId, language: Language? = null): WvwRank = getSingleById(id, "${WVW}/${RANKS}", instance = { WvwRank(id = it) }) {
         language(language)
     }
 
@@ -242,7 +246,7 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the ranks associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/ranks">the wiki</a>
      */
-    suspend fun ranks(ids: Collection<Int>, language: String? = null): List<WvwRank> = chunkedIds(ids, "${WVW}/${RANKS}", instance = { WvwRank(id = it) }) {
+    suspend fun ranks(ids: Collection<WvwRankId>, language: Language? = null): List<WvwRank> = chunkedIds(ids, "${WVW}/${RANKS}", instance = { WvwRank(id = it) }) {
         language(language)
     }
 
@@ -250,7 +254,7 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return all the ranks
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/ranks">the wiki</a>
      */
-    suspend fun ranks(language: String? = null): List<WvwRank> = allIds("${WVW}/${RANKS}") {
+    suspend fun ranks(language: Language? = null): List<WvwRank> = allIds("${WVW}/${RANKS}") {
         language(language)
     }
 
@@ -258,13 +262,13 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the ids of the available upgrades
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/upgrades">the wiki</a>
      */
-    suspend fun upgradeIds(): List<Int> = getList(path = "${WVW}/${UPGRADES}")
+    suspend fun upgradeIds(): List<WvwUpgradeId> = getIds(path = "${WVW}/${UPGRADES}")
 
     /**
      * @return the upgrade associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/upgrades">the wiki</a>
      */
-    suspend fun upgrade(id: Int, language: String? = null): WvwUpgrade = getSingleById(id, "${WVW}/${UPGRADES}", instance = { WvwUpgrade(id = it) }) {
+    suspend fun upgrade(id: WvwUpgradeId, language: Language? = null): WvwUpgrade = getSingleById(id, "${WVW}/${UPGRADES}", instance = { WvwUpgrade(id = it) }) {
         language(language)
     }
 
@@ -272,15 +276,16 @@ class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) :
      * @return the upgrades associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/upgrades">the wiki</a>
      */
-    suspend fun upgrades(ids: Collection<Int>, language: String? = null): List<WvwUpgrade> = chunkedIds(ids, "${WVW}/${UPGRADES}", instance = { WvwUpgrade(id = it) }) {
-        language(language)
-    }
+    suspend fun upgrades(ids: Collection<WvwUpgradeId>, language: Language? = null): List<WvwUpgrade> =
+        chunkedIds(ids, "${WVW}/${UPGRADES}", instance = { WvwUpgrade(id = it) }) {
+            language(language)
+        }
 
     /**
      * @return all the upgrades
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/wvw/upgrades">the wiki</a>
      */
-    suspend fun upgrades(language: String? = null): List<WvwUpgrade> = allIds("${WVW}/${UPGRADES}") {
+    suspend fun upgrades(language: Language? = null): List<WvwUpgrade> = allIds("${WVW}/${UPGRADES}") {
         language(language)
     }
 }

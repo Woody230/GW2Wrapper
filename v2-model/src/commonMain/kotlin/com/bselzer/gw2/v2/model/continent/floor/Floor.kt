@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.model.continent.floor
 
 import com.bselzer.gw2.v2.model.continent.region.Region
+import com.bselzer.gw2.v2.model.continent.region.RegionId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -26,5 +27,5 @@ data class Floor(
      * A map of the region id to the region information.
      */
     @SerialName("regions")
-    val regions: Map<Int, Region> = emptyMap()
+    val regions: Map<RegionId, Region> = emptyMap()
 ) : Identifiable<Int>

@@ -11,4 +11,4 @@ import kotlin.jvm.JvmInline
 @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
 @Serializable
 @JvmInline
-value class ApiKey(override val value: String) : StringIdentifier
+value class ApiKey(override val value: String = "") : StringIdentifier

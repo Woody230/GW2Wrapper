@@ -1,7 +1,9 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.extension.language
+import com.bselzer.gw2.v2.client.model.Language
 import com.bselzer.gw2.v2.model.raid.Raid
+import com.bselzer.gw2.v2.model.raid.RaidId
 import io.ktor.client.*
 
 /**
@@ -17,13 +19,13 @@ class RaidClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
      * @return the ids of the available raids
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/raids">the wiki</a>
      */
-    suspend fun ids(): List<String> = getList(path = RAIDS)
+    suspend fun ids(): List<RaidId> = getIds(path = RAIDS)
 
     /**
      * @return the raid associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/raids">the wiki</a>
      */
-    suspend fun raid(id: String, language: String? = null): Raid = getSingleById(id, RAIDS, instance = { Raid(id = it) }) {
+    suspend fun raid(id: RaidId, language: Language? = null): Raid = getSingleById(id, RAIDS, instance = { Raid(id = it) }) {
         language(language)
     }
 
@@ -31,7 +33,7 @@ class RaidClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
      * @return the raids associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/raids">the wiki</a>
      */
-    suspend fun raids(ids: Collection<String>, language: String? = null): List<Raid> = chunkedIds(ids, RAIDS, instance = { Raid(id = it) }) {
+    suspend fun raids(ids: Collection<RaidId>, language: Language? = null): List<Raid> = chunkedIds(ids, RAIDS, instance = { Raid(id = it) }) {
         language(language)
     }
 
@@ -39,7 +41,7 @@ class RaidClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
      * @return all the raids
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/raids">the wiki</a>
      */
-    suspend fun raids(language: String? = null): List<Raid> = allIds(RAIDS) {
+    suspend fun raids(language: Language? = null): List<Raid> = allIds(RAIDS) {
         language(language)
     }
 }

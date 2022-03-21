@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.extension.bearer
+import com.bselzer.gw2.v2.client.model.Token
 import com.bselzer.gw2.v2.model.commerce.delivery.Delivery
 import com.bselzer.gw2.v2.model.commerce.exchange.CoinExchange
 import com.bselzer.gw2.v2.model.commerce.exchange.GemExchange
@@ -8,6 +9,7 @@ import com.bselzer.gw2.v2.model.commerce.listing.Listings
 import com.bselzer.gw2.v2.model.commerce.price.Prices
 import com.bselzer.gw2.v2.model.commerce.transaction.CurrentTransaction
 import com.bselzer.gw2.v2.model.commerce.transaction.PastTransaction
+import com.bselzer.gw2.v2.model.item.ItemId
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
@@ -40,7 +42,7 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/delivery">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.TRADING_POST)
-    suspend fun delivery(token: String? = null): Delivery = getSingle(path = "${COMMERCE}/${DELIVERY}", instance = { Delivery() }) {
+    suspend fun delivery(token: Token? = null): Delivery = getSingle(path = "${COMMERCE}/${DELIVERY}", instance = { Delivery() }) {
         bearer(token)
     }
 
@@ -64,45 +66,45 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the ids of the available listings
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/listings">the wiki</a>
      */
-    suspend fun listingIds(): List<Int> = getList(path = "${COMMERCE}/${LISTINGS}")
+    suspend fun listingIds(): List<ItemId> = getIds(path = "${COMMERCE}/${LISTINGS}")
 
     /**
      * @return the listing associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/listings">the wiki</a>
      */
-    suspend fun listing(id: Int): Listings = getSingleById(id, "${COMMERCE}/${LISTINGS}", instance = { Listings(id = it) })
+    suspend fun listing(id: ItemId): Listings = getSingleById(id, "${COMMERCE}/${LISTINGS}", instance = { Listings(id = it) })
 
 
     /**
      * @return the listings associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/listings">the wiki</a>
      */
-    suspend fun listings(ids: Collection<Int>): List<Listings> = chunkedIds(ids, "${COMMERCE}/${LISTINGS}", instance = { Listings(id = it) })
+    suspend fun listings(ids: Collection<ItemId>): List<Listings> = chunkedIds(ids, "${COMMERCE}/${LISTINGS}", instance = { Listings(id = it) })
 
     /**
      * @return the ids of the available prices
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/prices">the wiki</a>
      */
-    suspend fun priceIds(): List<Int> = getList(path = "${COMMERCE}/${PRICES}")
+    suspend fun priceIds(): List<ItemId> = getIds(path = "${COMMERCE}/${PRICES}")
 
     /**
      * @return the price associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/prices">the wiki</a>
      */
-    suspend fun price(id: Int): Prices = getSingleById(id, "${COMMERCE}/${PRICES}", instance = { Prices(id = it) })
+    suspend fun price(id: ItemId): Prices = getSingleById(id, "${COMMERCE}/${PRICES}", instance = { Prices(id = it) })
 
     /**
      * @return the prices associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/prices">the wiki</a>
      */
-    suspend fun prices(ids: Collection<Int>): List<Prices> = chunkedIds(ids, "${COMMERCE}/${PRICES}", instance = { Prices(id = it) })
+    suspend fun prices(ids: Collection<ItemId>): List<Prices> = chunkedIds(ids, "${COMMERCE}/${PRICES}", instance = { Prices(id = it) })
 
     /**
      * @return the current unfilled transactions for buy orders
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/transactions">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.TRADING_POST)
-    suspend fun currentBuys(token: String? = null): List<CurrentTransaction> =
+    suspend fun currentBuys(token: Token? = null): List<CurrentTransaction> =
         getList(path = "${COMMERCE}/${TRANSACTIONS}/${CURRENT}/${BUYS}") {
             bearer(token)
         }
@@ -111,7 +113,7 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the current unfilled transactions for sell offers
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/transactions">the wiki</a>
      */
-    suspend fun currentSells(token: String? = null): List<CurrentTransaction> =
+    suspend fun currentSells(token: Token? = null): List<CurrentTransaction> =
         getList(path = "${COMMERCE}/${TRANSACTIONS}/${CURRENT}/${BUYS}") {
             bearer(token)
         }
@@ -121,7 +123,7 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/transactions">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.TRADING_POST)
-    suspend fun pastBuys(token: String? = null): List<PastTransaction> =
+    suspend fun pastBuys(token: Token? = null): List<PastTransaction> =
         getList(path = "${COMMERCE}/${TRANSACTIONS}/${HISTORY}/${SELLS}") {
             bearer(token)
         }
@@ -130,7 +132,7 @@ class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfigurati
      * @return the filled transactions for sell offers within the last 90 days
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce/transactions">the wiki</a>
      */
-    suspend fun pastSells(token: String? = null): List<PastTransaction> =
+    suspend fun pastSells(token: Token? = null): List<PastTransaction> =
         getList(path = "${COMMERCE}/${TRANSACTIONS}/${HISTORY}/${SELLS}") {
             bearer(token)
         }

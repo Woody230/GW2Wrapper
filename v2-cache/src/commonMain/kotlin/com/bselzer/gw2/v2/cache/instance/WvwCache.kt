@@ -5,11 +5,13 @@ import com.bselzer.gw2.v2.model.extension.wvw.allWorlds
 import com.bselzer.gw2.v2.model.guild.upgrade.ClaimableUpgrade
 import com.bselzer.gw2.v2.model.guild.upgrade.DefaultUpgrade
 import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgrade
+import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgradeId
 import com.bselzer.gw2.v2.model.world.WorldId
 import com.bselzer.gw2.v2.model.wvw.map.WvwMapObjective
 import com.bselzer.gw2.v2.model.wvw.match.WvwMatch
 import com.bselzer.gw2.v2.model.wvw.objective.WvwObjective
 import com.bselzer.gw2.v2.model.wvw.upgrade.WvwUpgrade
+import com.bselzer.gw2.v2.model.wvw.upgrade.WvwUpgradeId
 import com.bselzer.ktx.kodein.db.operation.clear
 import com.bselzer.ktx.kodein.db.operation.putMissingById
 import com.bselzer.ktx.kodein.db.transaction.TransactionManager
@@ -30,9 +32,9 @@ class WvwCache(transactionManager: TransactionManager, client: Gw2Client) : Gw2C
      * @return the match
      */
     suspend fun findMatch(worldId: WorldId): WvwMatch = transaction { db ->
-        var stored = db.reader.find<WvwMatch>().all().useModels { it.firstOrNull { match -> match.allWorlds().contains(worldId.value) } }
+        var stored = db.reader.find<WvwMatch>().all().useModels { it.firstOrNull { match -> match.allWorlds().contains(worldId) } }
         if (stored == null) {
-            stored = client.wvw.match(worldId = worldId.value)
+            stored = client.wvw.match(worldId = worldId)
             db.writer.put(stored)
         }
         stored
@@ -96,7 +98,7 @@ class WvwCache(transactionManager: TransactionManager, client: Gw2Client) : Gw2C
      * @return the guild upgrades
      */
     @JvmName("findGuildUpgradesById")
-    suspend fun findGuildUpgrades(ids: Collection<Int>? = null): Collection<GuildUpgrade> {
+    suspend fun findGuildUpgrades(ids: Collection<GuildUpgradeId>? = null): Collection<GuildUpgrade> {
         val guildUpgradeIds = ids ?: client.guild.upgradeIds()
         putGuildUpgrades(guildUpgradeIds)
         return findByReferenceId(guildUpgradeIds) { this }
@@ -135,7 +137,7 @@ class WvwCache(transactionManager: TransactionManager, client: Gw2Client) : Gw2C
      * @param ids the ids of the upgrades
      */
     @JvmName("putUpgradesById")
-    private suspend fun putUpgrades(ids: Collection<Int>): Unit = transaction {
+    private suspend fun putUpgrades(ids: Collection<WvwUpgradeId>): Unit = transaction {
         putMissingById(
             requestIds = { ids },
             requestById = { ids -> client.wvw.upgrades(ids) },
@@ -159,7 +161,7 @@ class WvwCache(transactionManager: TransactionManager, client: Gw2Client) : Gw2C
      *
      * @param ids the ids of the guild upgrades
      */
-    private suspend fun putGuildUpgrades(ids: Collection<Int>) = transaction {
+    private suspend fun putGuildUpgrades(ids: Collection<GuildUpgradeId>) = transaction {
         putMissingById(
             requestIds = { ids },
             requestById = { ids -> client.guild.upgrades(ids) },

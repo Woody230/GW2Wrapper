@@ -1,4 +1,4 @@
-package com.bselzer.gw2.v2.model.account.build
+package com.bselzer.gw2.v2.model.template.build
 
 import com.bselzer.gw2.v2.model.skill.SkillId
 import kotlinx.serialization.SerialName

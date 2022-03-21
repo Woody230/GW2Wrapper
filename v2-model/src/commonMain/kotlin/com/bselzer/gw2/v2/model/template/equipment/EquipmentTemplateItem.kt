@@ -1,4 +1,4 @@
-package com.bselzer.gw2.v2.model.account.equipment
+package com.bselzer.gw2.v2.model.template.equipment
 
 import com.bselzer.gw2.v2.model.character.pve.CharacterItemStat
 import com.bselzer.gw2.v2.model.color.DyeColorId

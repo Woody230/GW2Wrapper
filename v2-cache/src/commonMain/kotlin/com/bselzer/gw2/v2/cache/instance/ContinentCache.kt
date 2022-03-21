@@ -2,10 +2,14 @@ package com.bselzer.gw2.v2.cache.instance
 
 import com.bselzer.gw2.v2.client.client.Gw2Client
 import com.bselzer.gw2.v2.model.continent.Continent
+import com.bselzer.gw2.v2.model.continent.ContinentId
 import com.bselzer.gw2.v2.model.continent.floor.Floor
+import com.bselzer.gw2.v2.model.continent.floor.FloorId
 import com.bselzer.gw2.v2.model.continent.map.ContinentMap
 import com.bselzer.gw2.v2.model.continent.region.Region
+import com.bselzer.gw2.v2.model.continent.region.RegionId
 import com.bselzer.gw2.v2.model.map.Map
+import com.bselzer.gw2.v2.model.map.MapId
 import com.bselzer.ktx.kodein.db.operation.clear
 import com.bselzer.ktx.kodein.db.operation.getById
 import com.bselzer.ktx.kodein.db.transaction.TransactionManager
@@ -19,7 +23,7 @@ class ContinentCache(transactionManager: TransactionManager, client: Gw2Client) 
      *
      * @param id the id of the map
      */
-    suspend fun putMap(id: Int): Unit = transaction {
+    suspend fun putMap(id: MapId): Unit = transaction {
         val map = getMap(id)
 
         // Set up or ensure the Continent and ContinentFloor exist.
@@ -36,7 +40,7 @@ class ContinentCache(transactionManager: TransactionManager, client: Gw2Client) 
      * @param id the id of the map
      * @return the map
      */
-    suspend fun getMap(id: Int): Map = transaction {
+    suspend fun getMap(id: MapId): Map = transaction {
         getById(id, { client.map.map(id) })
     }
 
@@ -82,7 +86,7 @@ class ContinentCache(transactionManager: TransactionManager, client: Gw2Client) 
      * @param id the id
      * @return the continent
      */
-    suspend fun getContinent(id: Int): Continent = transaction {
+    suspend fun getContinent(id: ContinentId): Continent = transaction {
         getById(id, { client.continent.continent(id) })
     }
 
@@ -93,7 +97,7 @@ class ContinentCache(transactionManager: TransactionManager, client: Gw2Client) 
      * @param floorId the floor id
      * @return the floor of the continent
      */
-    suspend fun getContinentFloor(continentId: Int, floorId: Int): Floor = transaction {
+    suspend fun getContinentFloor(continentId: ContinentId, floorId: FloorId): Floor = transaction {
         getById(floorId, { client.continent.floor(continentId, floorId) })
     }
 
@@ -105,7 +109,7 @@ class ContinentCache(transactionManager: TransactionManager, client: Gw2Client) 
      * @param regionId the region id
      * @return the region on the floor of the continent
      */
-    suspend fun getContinentRegion(continentId: Int, floorId: Int, regionId: Int): Region? = transaction {
+    suspend fun getContinentRegion(continentId: ContinentId, floorId: FloorId, regionId: RegionId): Region? = transaction {
         val floor = getContinentFloor(continentId, floorId)
         floor.regions[regionId]
     }
@@ -119,7 +123,7 @@ class ContinentCache(transactionManager: TransactionManager, client: Gw2Client) 
      * @param mapId the map id
      * @return the map in the region on the floor of the continent
      */
-    suspend fun getContinentMap(continentId: Int, floorId: Int, regionId: Int, mapId: Int): ContinentMap? = transaction {
+    suspend fun getContinentMap(continentId: ContinentId, floorId: FloorId, regionId: RegionId, mapId: MapId): ContinentMap? = transaction {
         val region = getContinentRegion(continentId, floorId, regionId)
         region?.maps?.get(mapId)
     }

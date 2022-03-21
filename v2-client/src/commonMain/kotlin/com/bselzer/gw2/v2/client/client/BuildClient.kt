@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.model.build.Build
+import com.bselzer.gw2.v2.model.build.BuildId
 import io.ktor.client.*
 
 /**
@@ -15,5 +16,5 @@ class BuildClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
     /**
      * @return the current build id
      */
-    suspend fun buildId(): Int = getSingle(path = BUILD, instance = { Build() }).id
+    suspend fun buildId(): BuildId = getSingle(path = BUILD, instance = { Build() }).id
 }

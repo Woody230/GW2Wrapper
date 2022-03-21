@@ -1,7 +1,9 @@
 package com.bselzer.gw2.v2.tile.client
 
 import com.bselzer.gw2.v2.model.continent.Continent
+import com.bselzer.gw2.v2.model.continent.ContinentId
 import com.bselzer.gw2.v2.model.continent.floor.Floor
+import com.bselzer.gw2.v2.model.continent.floor.FloorId
 import com.bselzer.gw2.v2.model.extension.continent.clampedView
 import com.bselzer.gw2.v2.model.extension.continent.textureDimensions
 import com.bselzer.gw2.v2.tile.constant.Endpoints
@@ -144,7 +146,7 @@ open class TileClient(
     /**
      * @return the tile url
      */
-    private fun String.constructUrl(continentId: Int, floorId: Int, zoom: Int, x: Int, y: Int) = "$this/$continentId/$floorId/$zoom/$x/$y.jpg"
+    private fun String.constructUrl(continentId: ContinentId, floorId: FloorId, zoom: Int, x: Int, y: Int) = "$this/${continentId.value}/${floorId.value}/$zoom/$x/$y.jpg"
 
     /**
      * Close the HTTP client.

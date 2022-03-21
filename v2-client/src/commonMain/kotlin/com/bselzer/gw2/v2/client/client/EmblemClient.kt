@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.model.emblem.Emblem
+import com.bselzer.gw2.v2.model.emblem.EmblemId
 import io.ktor.client.*
 
 /**
@@ -18,19 +19,19 @@ class EmblemClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration
      * @return the ids of the available foreground emblems
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/emblem/foregrounds">the wiki</a>
      */
-    suspend fun foregroundEmblemIds(): List<Int> = getList(path = "${EMBLEM}/${FOREGROUNDS}")
+    suspend fun foregroundEmblemIds(): List<EmblemId> = getIds(path = "${EMBLEM}/${FOREGROUNDS}")
 
     /**
      * @return the foreground emblem associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/emblem/foregrounds">the wiki</a>
      */
-    suspend fun foregroundEmblem(id: Int): Emblem = getSingleById(id, "${EMBLEM}/${FOREGROUNDS}", instance = { Emblem(id = it) })
+    suspend fun foregroundEmblem(id: EmblemId): Emblem = getSingleById(id, "${EMBLEM}/${FOREGROUNDS}", instance = { Emblem(id = it) })
 
     /**
      * @return the foreground emblems associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/emblem/foregrounds">the wiki</a>
      */
-    suspend fun foregroundEmblems(ids: Collection<Int>): List<Emblem> = chunkedIds(ids, "${EMBLEM}/${FOREGROUNDS}", instance = { Emblem(id = it) })
+    suspend fun foregroundEmblems(ids: Collection<EmblemId>): List<Emblem> = chunkedIds(ids, "${EMBLEM}/${FOREGROUNDS}", instance = { Emblem(id = it) })
 
     /**
      * @return all the foreground emblems
@@ -42,19 +43,19 @@ class EmblemClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration
      * @return the ids of the available background emblems
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/emblem/backgrounds">the wiki</a>
      */
-    suspend fun backgroundEmblemIds(): List<Int> = getList(path = "${EMBLEM}/${BACKGROUNDS}")
+    suspend fun backgroundEmblemIds(): List<EmblemId> = getIds(path = "${EMBLEM}/${BACKGROUNDS}")
 
     /**
      * @return the background emblem associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/emblem/backgrounds">the wiki</a>
      */
-    suspend fun backgroundEmblem(id: Int): Emblem = getSingleById(id, "${EMBLEM}/${BACKGROUNDS}", instance = { Emblem(id = it) })
+    suspend fun backgroundEmblem(id: EmblemId): Emblem = getSingleById(id, "${EMBLEM}/${BACKGROUNDS}", instance = { Emblem(id = it) })
 
     /**
      * @return the background emblems associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/emblem/backgrounds">the wiki</a>
      */
-    suspend fun backgroundEmblems(ids: Collection<Int>): List<Emblem> = chunkedIds(ids, "${EMBLEM}/${BACKGROUNDS}", instance = { Emblem(id = it) })
+    suspend fun backgroundEmblems(ids: Collection<EmblemId>): List<Emblem> = chunkedIds(ids, "${EMBLEM}/${BACKGROUNDS}", instance = { Emblem(id = it) })
 
     /**
      * @return all the background emblems

@@ -19,5 +19,5 @@ data class ApiKeyInfo(
      * The requested token id.
      */
     @SerialName("id")
-    override val id: ApiKey
+    override val id: ApiKey = ApiKey()
 ) : TokenInfo()

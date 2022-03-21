@@ -1,8 +1,10 @@
 package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.extension.language
+import com.bselzer.gw2.v2.client.model.Language
 import com.bselzer.gw2.v2.model.skin.DefaultSkin
 import com.bselzer.gw2.v2.model.skin.Skin
+import com.bselzer.gw2.v2.model.skin.SkinId
 import io.ktor.client.*
 
 /**
@@ -18,13 +20,13 @@ class SkinClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
      * @return the ids of the available skins
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skins">the wiki</a>
      */
-    suspend fun ids(): List<Int> = getList(path = SKINS)
+    suspend fun ids(): List<SkinId> = getIds(path = SKINS)
 
     /**
      * @return the skin associated with the [id]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skins">the wiki</a>
      */
-    suspend fun skin(id: Int, language: String? = null): Skin = getSingleById(id, SKINS, instance = { DefaultSkin(identifier = it) }) {
+    suspend fun skin(id: SkinId, language: Language? = null): Skin = getSingleById(id, SKINS, instance = { DefaultSkin(identifier = it) }) {
         language(language)
     }
 
@@ -32,7 +34,7 @@ class SkinClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) 
      * @return the skins associated with the [ids]
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skins">the wiki</a>
      */
-    suspend fun skins(ids: Collection<Int>, language: String? = null): List<Skin> = chunkedIds(ids, SKINS, instance = { DefaultSkin(identifier = it) }) {
+    suspend fun skins(ids: Collection<SkinId>, language: Language? = null): List<Skin> = chunkedIds(ids, SKINS, instance = { DefaultSkin(identifier = it) }) {
         language(language)
     }
 }
