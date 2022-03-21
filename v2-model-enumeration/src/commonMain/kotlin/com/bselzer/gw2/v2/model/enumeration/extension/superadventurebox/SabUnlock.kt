@@ -1,6 +1,6 @@
-package com.bselzer.gw2.v2.model.enumeration.extension.character
+package com.bselzer.gw2.v2.model.enumeration.extension.superadventurebox
 
-import com.bselzer.gw2.v2.model.enumeration.character.SabUnlockName
+import com.bselzer.gw2.v2.model.enumeration.superadventurebox.SabUnlockName
 import com.bselzer.gw2.v2.model.superadventurebox.unlock.SabUnlock
 import com.bselzer.ktx.serialization.function.enumValueOrNull
 

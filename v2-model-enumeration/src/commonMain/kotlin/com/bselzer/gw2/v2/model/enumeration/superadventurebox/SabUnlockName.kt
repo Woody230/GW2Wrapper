@@ -1,4 +1,4 @@
-package com.bselzer.gw2.v2.model.enumeration.character
+package com.bselzer.gw2.v2.model.enumeration.superadventurebox
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

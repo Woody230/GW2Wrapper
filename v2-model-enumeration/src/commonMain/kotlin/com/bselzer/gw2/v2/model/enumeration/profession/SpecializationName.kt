@@ -27,6 +27,9 @@ enum class SpecializationName {
     @SerialName("Firebrand")
     FIREBRAND,
 
+    @SerialName("Willbender")
+    WILLBENDER,
+
     // Revenant
     @SerialName("Corruption")
     CORRUPTION,
@@ -48,6 +51,9 @@ enum class SpecializationName {
 
     @SerialName("Renegade")
     RENEGADE,
+
+    @SerialName("Vindicator")
+    VINDICATOR,
 
     // Warrior
     @SerialName("Strength")
@@ -71,6 +77,9 @@ enum class SpecializationName {
     @SerialName("Spellbreaker")
     SPELLBREAKER,
 
+    @SerialName("Bladesworn")
+    BLADESWORN,
+
     // Engineer
     @SerialName("Explosives")
     EXPLOSIVES,
@@ -92,6 +101,9 @@ enum class SpecializationName {
 
     @SerialName("Holosmith")
     HOLOSMITH,
+
+    @SerialName("Mechanist")
+    MECHANIST,
 
     // Ranger
     @SerialName("Marksmanship")
@@ -115,6 +127,9 @@ enum class SpecializationName {
     @SerialName("Soulbeast")
     SOULBEAST,
 
+    @SerialName("Untamed")
+    UNTAMED,
+
     // Thief
     @SerialName("Deadly Arts")
     DEADLY_ARTS,
@@ -136,6 +151,9 @@ enum class SpecializationName {
 
     @SerialName("Deadeye")
     DEADEYE,
+
+    @SerialName("Specter")
+    SPECTER,
 
     // Elementalist
     @SerialName("Fire")
@@ -159,6 +177,9 @@ enum class SpecializationName {
     @SerialName("Weaver")
     WEAVER,
 
+    @SerialName("Catalyst")
+    CATALYST,
+
     // Mesmer
     @SerialName("Domination")
     DOMINATION,
@@ -181,6 +202,9 @@ enum class SpecializationName {
     @SerialName("Mirage")
     MIRAGE,
 
+    @SerialName("Virtuoso")
+    VIRTUOSO,
+
     // Necromancer
     @SerialName("Spite")
     SPITE,
@@ -201,5 +225,8 @@ enum class SpecializationName {
     REAPER,
 
     @SerialName("Scourge")
-    SCOURGE
+    SCOURGE,
+
+    @SerialName("Harbinger")
+    HARBINGER,
 }
