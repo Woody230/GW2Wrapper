@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.skill.fact
 
+import com.bselzer.gw2.v2.model.wrapper.AttributeName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -16,5 +17,5 @@ data class SkillAttributeAdjustFact(
      * The name of the attribute to adjust.
      */
     @SerialName("target")
-    val target: com.bselzer.gw2.v2.model.wrapper.AttributeName = com.bselzer.gw2.v2.model.wrapper.AttributeName()
+    val target: AttributeName = AttributeName()
 ) : SkillFact()

@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.model.mount.skin
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.mount.type.MountTypeId
+import com.bselzer.gw2.v2.model.wrapper.MountName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,7 +12,7 @@ data class MountSkin(
     override val id: MountSkinId = MountSkinId(),
 
     @SerialName("name")
-    val name: com.bselzer.gw2.v2.model.wrapper.MountName = com.bselzer.gw2.v2.model.wrapper.MountName(),
+    val name: MountName = MountName(),
 
     @SerialName("icon")
     val iconLink: String = "",

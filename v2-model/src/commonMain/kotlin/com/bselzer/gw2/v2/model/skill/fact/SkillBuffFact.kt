@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.skill.fact
 
+import com.bselzer.gw2.v2.model.wrapper.EffectName
 import com.bselzer.ktx.datetime.serialization.SecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -12,7 +13,7 @@ data class SkillBuffFact(
      * The boon or condition affected by this fact.
      */
     @SerialName("status")
-    val status: com.bselzer.gw2.v2.model.wrapper.EffectName = com.bselzer.gw2.v2.model.wrapper.EffectName(),
+    val status: EffectName = EffectName(),
 
     /**
      * The description of the effect.

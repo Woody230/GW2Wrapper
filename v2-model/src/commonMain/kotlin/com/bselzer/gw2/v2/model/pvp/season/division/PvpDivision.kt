@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.pvp.season.division
 
+import com.bselzer.gw2.v2.model.wrapper.PvpDivisionFlag
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -9,7 +10,7 @@ data class PvpDivision(
     val name: String = "",
 
     @SerialName("flags")
-    val flags: List<com.bselzer.gw2.v2.model.wrapper.PvpDivisionFlag> = emptyList(),
+    val flags: List<PvpDivisionFlag> = emptyList(),
 
     @SerialName("large_icon")
     val iconLinkBig: String = "",

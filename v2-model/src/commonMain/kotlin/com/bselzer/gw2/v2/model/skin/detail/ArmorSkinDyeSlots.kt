@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.skin.detail
 
+import com.bselzer.gw2.v2.model.wrapper.RaceGender
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,5 +13,5 @@ data class ArmorSkinDyeSlots(
      * A map of the race/gender names to the dye slot override.
      */
     @SerialName("overrides")
-    val overrides: Map<com.bselzer.gw2.v2.model.wrapper.RaceGender, ArmorSkinDyeSlot> = emptyMap()
+    val overrides: Map<RaceGender, ArmorSkinDyeSlot> = emptyMap()
 )

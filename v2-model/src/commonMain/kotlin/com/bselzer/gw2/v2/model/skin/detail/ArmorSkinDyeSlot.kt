@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.model.skin.detail
 
 import com.bselzer.gw2.v2.model.color.DyeColorId
+import com.bselzer.gw2.v2.model.wrapper.MaterialType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -17,5 +18,5 @@ data class ArmorSkinDyeSlot(
      * The type of material.
      */
     @SerialName("material")
-    val material: com.bselzer.gw2.v2.model.wrapper.MaterialType = com.bselzer.gw2.v2.model.wrapper.MaterialType()
+    val material: MaterialType = MaterialType()
 )

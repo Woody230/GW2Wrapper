@@ -3,6 +3,8 @@ package com.bselzer.gw2.v2.model.wvw.objective
 import com.bselzer.gw2.v2.model.continent.map.sector.SectorId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.map.MapId
+import com.bselzer.gw2.v2.model.wrapper.WvwMapType
+import com.bselzer.gw2.v2.model.wrapper.WvwObjectiveType
 import com.bselzer.gw2.v2.model.wvw.upgrade.WvwUpgradeId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -19,7 +21,7 @@ data class WvwObjective(
     val name: String = "",
 
     @SerialName("type")
-    val type: com.bselzer.gw2.v2.model.wrapper.WvwObjectiveType = com.bselzer.gw2.v2.model.wrapper.WvwObjectiveType(),
+    val type: WvwObjectiveType = WvwObjectiveType(),
 
     @SerialName("sector_id")
     val mapSectorId: SectorId = SectorId(),
@@ -28,7 +30,7 @@ data class WvwObjective(
     val mapId: MapId = MapId(),
 
     @SerialName("map_type")
-    val mapType: com.bselzer.gw2.v2.model.wrapper.WvwMapType = com.bselzer.gw2.v2.model.wrapper.WvwMapType(),
+    val mapType: WvwMapType = WvwMapType(),
 
     /**
      * The three-dimensional position of the objective within the texture.

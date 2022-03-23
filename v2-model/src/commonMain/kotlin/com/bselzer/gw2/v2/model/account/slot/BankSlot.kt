@@ -6,6 +6,7 @@ import com.bselzer.gw2.v2.model.color.DyeColorId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.item.ItemId
 import com.bselzer.gw2.v2.model.skin.SkinId
+import com.bselzer.gw2.v2.model.wrapper.Binding
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
@@ -78,7 +79,7 @@ data class BankSlot(
      * What owns this item. Null if there is no binding.
      */
     @SerialName("binding")
-    val binding: com.bselzer.gw2.v2.model.wrapper.Binding? = null,
+    val binding: Binding? = null,
 
     /**
      * Who owns this item. Null if the binding is NOT for a character.

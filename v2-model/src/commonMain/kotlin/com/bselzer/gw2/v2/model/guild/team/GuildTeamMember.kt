@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.guild.team
 
+import com.bselzer.gw2.v2.model.wrapper.TeamMemberRole
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -13,5 +14,5 @@ data class GuildTeamMember(
     val name: String = "",
 
     @SerialName("role")
-    val role: com.bselzer.gw2.v2.model.wrapper.TeamMemberRole = com.bselzer.gw2.v2.model.wrapper.TeamMemberRole()
+    val role: TeamMemberRole = TeamMemberRole()
 )

@@ -4,9 +4,7 @@ import com.bselzer.ktx.datetime.serialization.SecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 
-@OptIn(ExperimentalTime::class)
 @Serializable
 @SerialName("Duration")
 data class SkillDurationFact(

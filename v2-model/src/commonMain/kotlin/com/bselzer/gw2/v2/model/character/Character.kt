@@ -16,6 +16,8 @@ import com.bselzer.gw2.v2.model.profession.ProfessionId
 import com.bselzer.gw2.v2.model.race.RaceId
 import com.bselzer.gw2.v2.model.recipe.RecipeId
 import com.bselzer.gw2.v2.model.title.TitleId
+import com.bselzer.gw2.v2.model.wrapper.CharacterFlag
+import com.bselzer.gw2.v2.model.wrapper.Gender
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
@@ -48,7 +50,7 @@ data class Character(
 
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     @SerialName("gender")
-    val gender: com.bselzer.gw2.v2.model.wrapper.Gender = com.bselzer.gw2.v2.model.wrapper.Gender(),
+    val gender: Gender = Gender(),
 
     /**
      * The name of the profession.
@@ -176,7 +178,7 @@ data class Character(
     val pvpEquipment: CharacterPvpEquipment = CharacterPvpEquipment(),
 
     @SerialName("flags")
-    val flags: List<com.bselzer.gw2.v2.model.wrapper.CharacterFlag> = emptyList()
+    val flags: List<CharacterFlag> = emptyList()
 ) : Identifiable<String> {
     override val id: CharacterName = name
 }

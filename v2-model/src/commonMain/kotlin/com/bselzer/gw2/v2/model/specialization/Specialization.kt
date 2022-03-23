@@ -3,6 +3,7 @@ package com.bselzer.gw2.v2.model.specialization
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.profession.ProfessionId
 import com.bselzer.gw2.v2.model.trait.TraitId
+import com.bselzer.gw2.v2.model.wrapper.SpecializationName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,7 +13,7 @@ data class Specialization(
     override val id: SpecializationId = SpecializationId(),
 
     @SerialName("name")
-    val name: com.bselzer.gw2.v2.model.wrapper.SpecializationName = com.bselzer.gw2.v2.model.wrapper.SpecializationName(),
+    val name: SpecializationName = SpecializationName(),
 
     /**
      * The name of the profession this specialization belongs to.

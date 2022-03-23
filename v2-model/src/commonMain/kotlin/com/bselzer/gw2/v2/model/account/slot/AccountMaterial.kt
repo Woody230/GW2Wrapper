@@ -3,6 +3,7 @@ package com.bselzer.gw2.v2.model.account.slot
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.item.ItemId
 import com.bselzer.gw2.v2.model.material.MaterialId
+import com.bselzer.gw2.v2.model.wrapper.Binding
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -26,7 +27,7 @@ data class AccountMaterial(
      * What owns this item. Null if there is no binding.
      */
     @SerialName("binding")
-    val binding: com.bselzer.gw2.v2.model.wrapper.Binding? = null,
+    val binding: Binding? = null,
 
     /**
      * The number of the material in the account vault.

@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.model.character.equipment
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.itemstat.ItemStatId
+import com.bselzer.gw2.v2.model.wrapper.AttributeName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -19,5 +20,5 @@ data class CharacterItemStat(
      * @see <a href="https://wiki.guildwars2.com/wiki/Attribute">the wiki</a>
      */
     @SerialName("attributes")
-    val attributes: Map<com.bselzer.gw2.v2.model.wrapper.AttributeName, Double> = emptyMap()
+    val attributes: Map<AttributeName, Double> = emptyMap()
 ) : Identifiable<Int>
