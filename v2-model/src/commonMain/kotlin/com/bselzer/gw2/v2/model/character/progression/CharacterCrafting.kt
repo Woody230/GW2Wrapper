@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.model.character.progression
 
-import com.bselzer.gw2.v2.model.wrapper.CraftingDiscipline
+import com.bselzer.gw2.v2.model.enumeration.wrapper.CraftingDiscipline
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

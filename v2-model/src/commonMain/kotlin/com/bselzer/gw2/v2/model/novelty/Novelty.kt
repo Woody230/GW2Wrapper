@@ -1,8 +1,8 @@
 package com.bselzer.gw2.v2.model.novelty
 
+import com.bselzer.gw2.v2.model.enumeration.wrapper.NoveltySlot
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.item.ItemId
-import com.bselzer.gw2.v2.model.wrapper.NoveltySlot
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

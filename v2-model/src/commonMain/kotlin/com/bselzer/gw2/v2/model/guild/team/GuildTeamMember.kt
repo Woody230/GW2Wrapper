@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.model.guild.team
 
-import com.bselzer.gw2.v2.model.wrapper.TeamMemberRole
+import com.bselzer.gw2.v2.model.enumeration.wrapper.TeamMemberRole
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

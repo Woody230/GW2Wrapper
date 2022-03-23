@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.achievement.daily
 
-import com.bselzer.gw2.v2.model.wrapper.Accessibility
-import com.bselzer.gw2.v2.model.wrapper.Product
+import com.bselzer.gw2.v2.model.enumeration.wrapper.Accessibility
+import com.bselzer.gw2.v2.model.enumeration.wrapper.Product
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

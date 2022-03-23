@@ -1,11 +1,11 @@
 package com.bselzer.gw2.v2.model.item.detail
 
 import com.bselzer.gw2.v2.model.color.DyeColorId
+import com.bselzer.gw2.v2.model.enumeration.wrapper.ConsumableDetailType
+import com.bselzer.gw2.v2.model.enumeration.wrapper.ConsumableUnlockType
 import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgradeId
 import com.bselzer.gw2.v2.model.recipe.RecipeId
 import com.bselzer.gw2.v2.model.skin.SkinId
-import com.bselzer.gw2.v2.model.wrapper.ConsumableDetailType
-import com.bselzer.gw2.v2.model.wrapper.ConsumableUnlockType
 import com.bselzer.ktx.datetime.serialization.MillisecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

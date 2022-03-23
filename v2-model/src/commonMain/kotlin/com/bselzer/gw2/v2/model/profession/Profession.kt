@@ -1,11 +1,11 @@
 package com.bselzer.gw2.v2.model.profession
 
+import com.bselzer.gw2.v2.model.enumeration.wrapper.ProfessionFlag
+import com.bselzer.gw2.v2.model.enumeration.wrapper.WeaponType
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.skill.PaletteId
 import com.bselzer.gw2.v2.model.skill.SkillId
 import com.bselzer.gw2.v2.model.specialization.SpecializationId
-import com.bselzer.gw2.v2.model.wrapper.ProfessionFlag
-import com.bselzer.gw2.v2.model.wrapper.WeaponType
 import com.bselzer.ktx.serialization.serializer.MapArraySerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

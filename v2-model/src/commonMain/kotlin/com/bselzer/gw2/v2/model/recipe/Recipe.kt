@@ -1,13 +1,13 @@
 package com.bselzer.gw2.v2.model.recipe
 
+import com.bselzer.gw2.v2.model.enumeration.wrapper.CraftingDiscipline
+import com.bselzer.gw2.v2.model.enumeration.wrapper.RecipeFlag
+import com.bselzer.gw2.v2.model.enumeration.wrapper.RecipeType
 import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgradeId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.item.ItemId
 import com.bselzer.gw2.v2.model.recipe.ingredient.GuildRecipeIngredient
 import com.bselzer.gw2.v2.model.recipe.ingredient.RecipeIngredient
-import com.bselzer.gw2.v2.model.wrapper.CraftingDiscipline
-import com.bselzer.gw2.v2.model.wrapper.RecipeFlag
-import com.bselzer.gw2.v2.model.wrapper.RecipeType
 import com.bselzer.ktx.datetime.serialization.MillisecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

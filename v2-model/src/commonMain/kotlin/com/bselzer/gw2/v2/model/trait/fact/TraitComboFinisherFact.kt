@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.model.trait.fact
 
-import com.bselzer.gw2.v2.model.wrapper.ComboFinisherType
+import com.bselzer.gw2.v2.model.enumeration.wrapper.ComboFinisherType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

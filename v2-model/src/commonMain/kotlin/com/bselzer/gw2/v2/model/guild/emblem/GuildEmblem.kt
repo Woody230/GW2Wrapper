@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.model.guild.emblem
 
-import com.bselzer.gw2.v2.model.wrapper.GuildEmblemFlag
+import com.bselzer.gw2.v2.model.enumeration.wrapper.GuildEmblemFlag
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

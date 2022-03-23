@@ -1,10 +1,10 @@
 package com.bselzer.gw2.v2.model.item.detail
 
+import com.bselzer.gw2.v2.model.enumeration.wrapper.TrinketDetailType
 import com.bselzer.gw2.v2.model.item.ItemId
 import com.bselzer.gw2.v2.model.item.detail.infix.InfixUpgrade
 import com.bselzer.gw2.v2.model.item.detail.infusion.InfusionSlot
 import com.bselzer.gw2.v2.model.itemstat.ItemStatId
-import com.bselzer.gw2.v2.model.wrapper.TrinketDetailType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

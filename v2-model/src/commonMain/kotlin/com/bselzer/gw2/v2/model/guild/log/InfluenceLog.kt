@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.model.guild.log
 
-import com.bselzer.gw2.v2.model.wrapper.InfluenceActivity
+import com.bselzer.gw2.v2.model.account.AccountName
+import com.bselzer.gw2.v2.model.enumeration.wrapper.InfluenceActivity
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -17,5 +18,5 @@ data class InfluenceLog(
      * The account names of the participants.
      */
     @SerialName("participants")
-    val participants: List<String> = emptyList()
+    val participants: List<AccountName> = emptyList()
 ) : GuildLog()

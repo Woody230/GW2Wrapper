@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.guild.log
 
+import com.bselzer.gw2.v2.model.account.AccountName
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
@@ -25,7 +26,7 @@ abstract class GuildLog(
      * Null if there is no player associated with the log.
      */
     @SerialName("user")
-    val user: String? = null
+    val user: AccountName? = null
 ) : Identifiable<Int> {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

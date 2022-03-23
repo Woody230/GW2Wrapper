@@ -1,8 +1,8 @@
 package com.bselzer.gw2.v2.model.guild.log
 
+import com.bselzer.gw2.v2.model.enumeration.wrapper.UpgradeAction
 import com.bselzer.gw2.v2.model.item.ItemId
 import com.bselzer.gw2.v2.model.recipe.RecipeId
-import com.bselzer.gw2.v2.model.wrapper.UpgradeAction
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

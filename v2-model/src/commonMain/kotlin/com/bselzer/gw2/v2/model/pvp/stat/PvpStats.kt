@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.pvp.stat
 
+import com.bselzer.gw2.v2.model.enumeration.wrapper.PvpLadderType
 import com.bselzer.gw2.v2.model.profession.ProfessionId
-import com.bselzer.gw2.v2.model.wrapper.PvpLadderType
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope

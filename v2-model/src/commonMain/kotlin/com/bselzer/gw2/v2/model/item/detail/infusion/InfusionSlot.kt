@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.item.detail.infusion
 
+import com.bselzer.gw2.v2.model.enumeration.wrapper.InfusionUpgradeFlag
 import com.bselzer.gw2.v2.model.item.ItemId
-import com.bselzer.gw2.v2.model.wrapper.InfusionUpgradeFlag
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

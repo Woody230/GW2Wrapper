@@ -1,8 +1,8 @@
 package com.bselzer.gw2.v2.model.world
 
+import com.bselzer.gw2.v2.model.enumeration.wrapper.WorldName
+import com.bselzer.gw2.v2.model.enumeration.wrapper.WorldPopulationLevel
 import com.bselzer.gw2.v2.model.identifier.Identifiable
-import com.bselzer.gw2.v2.model.wrapper.WorldName
-import com.bselzer.gw2.v2.model.wrapper.WorldPopulationLevel
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

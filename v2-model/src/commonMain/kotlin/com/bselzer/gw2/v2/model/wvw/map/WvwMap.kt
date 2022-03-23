@@ -1,8 +1,8 @@
 package com.bselzer.gw2.v2.model.wvw.map
 
+import com.bselzer.gw2.v2.model.enumeration.wrapper.WvwMapType
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.map.MapId
-import com.bselzer.gw2.v2.model.wrapper.WvwMapType
 import com.bselzer.gw2.v2.model.wvw.match.skirmish.WvwSkirmish
 import com.bselzer.gw2.v2.model.wvw.world.WvwWorldCount
 import kotlinx.serialization.SerialName

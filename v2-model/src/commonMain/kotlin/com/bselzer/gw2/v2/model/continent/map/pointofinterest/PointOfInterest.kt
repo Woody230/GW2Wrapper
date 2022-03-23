@@ -1,8 +1,8 @@
 package com.bselzer.gw2.v2.model.continent.map.pointofinterest
 
 import com.bselzer.gw2.v2.model.continent.floor.FloorId
+import com.bselzer.gw2.v2.model.enumeration.wrapper.PointOfInterestType
 import com.bselzer.gw2.v2.model.identifier.Identifiable
-import com.bselzer.gw2.v2.model.wrapper.PointOfInterestType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

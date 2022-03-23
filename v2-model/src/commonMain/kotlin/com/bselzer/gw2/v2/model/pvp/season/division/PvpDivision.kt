@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.model.pvp.season.division
 
-import com.bselzer.gw2.v2.model.wrapper.PvpDivisionFlag
+import com.bselzer.gw2.v2.model.enumeration.wrapper.PvpDivisionFlag
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

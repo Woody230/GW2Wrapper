@@ -1,10 +1,10 @@
 package com.bselzer.gw2.v2.model.wvw.objective
 
 import com.bselzer.gw2.v2.model.continent.map.sector.SectorId
+import com.bselzer.gw2.v2.model.enumeration.wrapper.WvwMapType
+import com.bselzer.gw2.v2.model.enumeration.wrapper.WvwObjectiveType
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.map.MapId
-import com.bselzer.gw2.v2.model.wrapper.WvwMapType
-import com.bselzer.gw2.v2.model.wrapper.WvwObjectiveType
 import com.bselzer.gw2.v2.model.wvw.upgrade.WvwUpgradeId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

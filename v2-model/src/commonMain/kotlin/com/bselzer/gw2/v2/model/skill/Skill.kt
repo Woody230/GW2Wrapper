@@ -1,10 +1,10 @@
 package com.bselzer.gw2.v2.model.skill
 
+import com.bselzer.gw2.v2.model.enumeration.wrapper.*
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.profession.ProfessionId
 import com.bselzer.gw2.v2.model.skill.fact.SkillFact
 import com.bselzer.gw2.v2.model.specialization.SpecializationId
-import com.bselzer.gw2.v2.model.wrapper.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

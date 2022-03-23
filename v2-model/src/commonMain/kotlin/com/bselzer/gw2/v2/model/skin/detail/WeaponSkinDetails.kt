@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.skin.detail
 
-import com.bselzer.gw2.v2.model.wrapper.WeaponDamageType
-import com.bselzer.gw2.v2.model.wrapper.WeaponDetailType
+import com.bselzer.gw2.v2.model.enumeration.wrapper.WeaponDamageType
+import com.bselzer.gw2.v2.model.enumeration.wrapper.WeaponDetailType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.model.account.mastery
 
-import com.bselzer.gw2.v2.model.wrapper.RegionType
+import com.bselzer.gw2.v2.model.enumeration.wrapper.RegionType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

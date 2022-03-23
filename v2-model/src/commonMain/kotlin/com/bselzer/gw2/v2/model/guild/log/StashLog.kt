@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.guild.log
 
+import com.bselzer.gw2.v2.model.enumeration.wrapper.StashOperation
 import com.bselzer.gw2.v2.model.item.ItemId
-import com.bselzer.gw2.v2.model.wrapper.StashOperation
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

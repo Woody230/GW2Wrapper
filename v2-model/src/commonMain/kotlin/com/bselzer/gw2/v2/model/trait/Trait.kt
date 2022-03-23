@@ -1,9 +1,9 @@
 package com.bselzer.gw2.v2.model.trait
 
+import com.bselzer.gw2.v2.model.enumeration.wrapper.TraitSlot
+import com.bselzer.gw2.v2.model.enumeration.wrapper.TraitTier
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.trait.fact.TraitFact
-import com.bselzer.gw2.v2.model.wrapper.TraitSlot
-import com.bselzer.gw2.v2.model.wrapper.TraitTier
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

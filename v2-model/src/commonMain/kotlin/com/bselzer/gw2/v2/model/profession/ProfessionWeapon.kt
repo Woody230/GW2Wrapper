@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.profession
 
+import com.bselzer.gw2.v2.model.enumeration.wrapper.WeaponFlag
 import com.bselzer.gw2.v2.model.specialization.SpecializationId
-import com.bselzer.gw2.v2.model.wrapper.WeaponFlag
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

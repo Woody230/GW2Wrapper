@@ -10,14 +10,14 @@ import com.bselzer.gw2.v2.model.character.skill.CharacterModeSkills
 import com.bselzer.gw2.v2.model.character.specialization.CharacterModeSpecializations
 import com.bselzer.gw2.v2.model.character.wvw.CharacterWvwAbility
 import com.bselzer.gw2.v2.model.continent.map.challenge.HeroChallengeId
+import com.bselzer.gw2.v2.model.enumeration.wrapper.CharacterFlag
+import com.bselzer.gw2.v2.model.enumeration.wrapper.Gender
 import com.bselzer.gw2.v2.model.guild.GuildId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.profession.ProfessionId
 import com.bselzer.gw2.v2.model.race.RaceId
 import com.bselzer.gw2.v2.model.recipe.RecipeId
 import com.bselzer.gw2.v2.model.title.TitleId
-import com.bselzer.gw2.v2.model.wrapper.CharacterFlag
-import com.bselzer.gw2.v2.model.wrapper.Gender
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope

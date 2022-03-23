@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.model.itemstat
 
-import com.bselzer.gw2.v2.model.wrapper.AttributeName
+import com.bselzer.gw2.v2.model.enumeration.wrapper.AttributeName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

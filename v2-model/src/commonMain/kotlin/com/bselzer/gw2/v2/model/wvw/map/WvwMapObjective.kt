@@ -1,10 +1,10 @@
 package com.bselzer.gw2.v2.model.wvw.map
 
+import com.bselzer.gw2.v2.model.enumeration.wrapper.WvwObjectiveOwner
+import com.bselzer.gw2.v2.model.enumeration.wrapper.WvwObjectiveType
 import com.bselzer.gw2.v2.model.guild.GuildId
 import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgradeId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
-import com.bselzer.gw2.v2.model.wrapper.WvwObjectiveOwner
-import com.bselzer.gw2.v2.model.wrapper.WvwObjectiveType
 import com.bselzer.gw2.v2.model.wvw.objective.WvwMapObjectiveId
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName

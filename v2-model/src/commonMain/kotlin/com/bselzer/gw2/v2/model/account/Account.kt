@@ -1,9 +1,9 @@
 package com.bselzer.gw2.v2.model.account
 
+import com.bselzer.gw2.v2.model.enumeration.wrapper.AccountAccess
 import com.bselzer.gw2.v2.model.guild.GuildId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.world.WorldId
-import com.bselzer.gw2.v2.model.wrapper.AccountAccess
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
@@ -37,7 +37,7 @@ data class Account(
      * The name in the form of "DisplayName.####" where # are numbers.
      */
     @SerialName("name")
-    val name: String = "",
+    val name: AccountName = AccountName(),
 
     /**
      * The id of the world (server).
