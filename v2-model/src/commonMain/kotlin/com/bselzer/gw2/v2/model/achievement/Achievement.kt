@@ -4,8 +4,6 @@ import com.bselzer.gw2.v2.model.achievement.bit.AchievementBit
 import com.bselzer.gw2.v2.model.achievement.reward.AchievementReward
 import com.bselzer.gw2.v2.model.achievement.tier.AchievementTier
 import com.bselzer.gw2.v2.model.identifier.Identifiable
-import com.bselzer.gw2.v2.model.value.AchievementFlag
-import com.bselzer.gw2.v2.model.value.AchievementType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -39,13 +37,13 @@ data class Achievement(
     val lockedDescription: String = "",
 
     @SerialName("type")
-    val type: AchievementType = AchievementType(),
+    val type: com.bselzer.gw2.v2.model.wrapper.AchievementType = com.bselzer.gw2.v2.model.wrapper.AchievementType(),
 
     /**
      * The flags indicating the categories this achievement belongs to.
      */
     @SerialName("flags")
-    val flags: List<AchievementFlag> = emptyList(),
+    val flags: List<com.bselzer.gw2.v2.model.wrapper.AchievementFlag> = emptyList(),
 
     /**
      * The progression tiers.

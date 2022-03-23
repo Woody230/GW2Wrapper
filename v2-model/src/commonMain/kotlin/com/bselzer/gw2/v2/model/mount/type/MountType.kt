@@ -3,7 +3,6 @@ package com.bselzer.gw2.v2.model.mount.type
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.mount.skill.MountSkill
 import com.bselzer.gw2.v2.model.mount.skin.MountSkinId
-import com.bselzer.gw2.v2.model.value.MountName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -13,7 +12,7 @@ data class MountType(
     override val id: MountTypeId = MountTypeId(),
 
     @SerialName("name")
-    val name: MountName = MountName(),
+    val name: com.bselzer.gw2.v2.model.wrapper.MountName = com.bselzer.gw2.v2.model.wrapper.MountName(),
 
     /**
      * The id of the default skin.

@@ -2,7 +2,6 @@ package com.bselzer.gw2.v2.model.color
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.item.ItemId
-import com.bselzer.gw2.v2.model.value.ColorCategory
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -56,5 +55,5 @@ data class DyeColor(
      * The types of hue, material, and rarity.
      */
     @SerialName("categories")
-    val categories: List<ColorCategory> = emptyList()
+    val categories: List<com.bselzer.gw2.v2.model.wrapper.ColorCategory> = emptyList()
 ) : Identifiable<Int>

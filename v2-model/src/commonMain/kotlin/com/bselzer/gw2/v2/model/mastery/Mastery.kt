@@ -1,7 +1,6 @@
 package com.bselzer.gw2.v2.model.mastery
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
-import com.bselzer.gw2.v2.model.value.RegionType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -29,7 +28,7 @@ data class Mastery(
     val backgroundLink: String = "",
 
     @SerialName("region")
-    val region: RegionType = RegionType(),
+    val region: com.bselzer.gw2.v2.model.wrapper.RegionType = com.bselzer.gw2.v2.model.wrapper.RegionType(),
 
     @SerialName("levels")
     val levels: List<MasteryLevel> = emptyList()

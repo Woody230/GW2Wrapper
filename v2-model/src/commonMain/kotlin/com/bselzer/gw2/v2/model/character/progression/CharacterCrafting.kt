@@ -1,6 +1,5 @@
 package com.bselzer.gw2.v2.model.character.progression
 
-import com.bselzer.gw2.v2.model.value.CraftingDiscipline
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,7 +10,7 @@ data class CharacterCrafting(
      * @see <a href="https://wiki.guildwars2.com/wiki/Crafting">the wiki</a>
      */
     @SerialName("discipline")
-    val discipline: CraftingDiscipline = CraftingDiscipline(),
+    val discipline: com.bselzer.gw2.v2.model.wrapper.CraftingDiscipline = com.bselzer.gw2.v2.model.wrapper.CraftingDiscipline(),
 
     /**
      * The discipline level.

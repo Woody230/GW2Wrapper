@@ -1,6 +1,5 @@
 package com.bselzer.gw2.v2.model.trait.fact
 
-import com.bselzer.gw2.v2.model.value.ComboFieldType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,5 +10,5 @@ data class TraitComboFieldFact(
      * The type of combo field.
      */
     @SerialName("field_type")
-    val fieldType: ComboFieldType = ComboFieldType()
+    val fieldType: com.bselzer.gw2.v2.model.wrapper.ComboFieldType = com.bselzer.gw2.v2.model.wrapper.ComboFieldType()
 ) : TraitFact()

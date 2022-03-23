@@ -1,7 +1,6 @@
 package com.bselzer.gw2.v2.model.raid.event
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
-import com.bselzer.gw2.v2.model.value.RaidEventType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -14,5 +13,5 @@ data class RaidEvent(
     override val id: RaidEventId = RaidEventId(),
 
     @SerialName("type")
-    val type: RaidEventType = RaidEventType()
+    val type: com.bselzer.gw2.v2.model.wrapper.RaidEventType = com.bselzer.gw2.v2.model.wrapper.RaidEventType()
 ) : Identifiable<String>

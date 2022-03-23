@@ -4,9 +4,6 @@ import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.map.MapId
 import com.bselzer.gw2.v2.model.profession.ProfessionId
 import com.bselzer.gw2.v2.model.pvp.season.PvpSeasonId
-import com.bselzer.gw2.v2.model.value.PvpRatingType
-import com.bselzer.gw2.v2.model.value.PvpResult
-import com.bselzer.gw2.v2.model.value.PvpTeam
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -42,13 +39,13 @@ data class PvpGame(
      * The result of the match.
      */
     @SerialName("result")
-    val result: PvpResult = PvpResult(),
+    val result: com.bselzer.gw2.v2.model.wrapper.PvpResult = com.bselzer.gw2.v2.model.wrapper.PvpResult(),
 
     /**
      * The name of the team the player was on.
      */
     @SerialName("team")
-    val team: PvpTeam = PvpTeam(),
+    val team: com.bselzer.gw2.v2.model.wrapper.PvpTeam = com.bselzer.gw2.v2.model.wrapper.PvpTeam(),
 
     /**
      * The name of the profession the player used.
@@ -60,13 +57,13 @@ data class PvpGame(
      * The scores for each team.
      */
     @SerialName("scores")
-    val scores: Map<PvpTeam, Int> = emptyMap(),
+    val scores: Map<com.bselzer.gw2.v2.model.wrapper.PvpTeam, Int> = emptyMap(),
 
     /**
      * The type of game mode.
      */
     @SerialName("rating_type")
-    val ratingType: PvpRatingType = PvpRatingType(),
+    val ratingType: com.bselzer.gw2.v2.model.wrapper.PvpRatingType = com.bselzer.gw2.v2.model.wrapper.PvpRatingType(),
 
     /**
      * The change in rating. Positive for a win and negative for a loss.

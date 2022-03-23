@@ -1,13 +1,12 @@
 package com.bselzer.gw2.v2.model.account.mastery
 
-import com.bselzer.gw2.v2.model.value.RegionType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class AccountMasteryRegion(
     @SerialName("region")
-    val name: RegionType = RegionType(),
+    val name: com.bselzer.gw2.v2.model.wrapper.RegionType = com.bselzer.gw2.v2.model.wrapper.RegionType(),
 
     /**
      * The number of points sent in this region.

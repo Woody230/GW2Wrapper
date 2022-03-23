@@ -1,8 +1,6 @@
 package com.bselzer.gw2.v2.model.world
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
-import com.bselzer.gw2.v2.model.value.WorldName
-import com.bselzer.gw2.v2.model.value.WorldPopulationLevel
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,8 +10,8 @@ data class World(
     override val id: WorldId = WorldId(),
 
     @SerialName("name")
-    val name: WorldName = WorldName(),
+    val name: com.bselzer.gw2.v2.model.wrapper.WorldName = com.bselzer.gw2.v2.model.wrapper.WorldName(),
 
     @SerialName("population")
-    val population: WorldPopulationLevel = WorldPopulationLevel()
+    val population: com.bselzer.gw2.v2.model.wrapper.WorldPopulationLevel = com.bselzer.gw2.v2.model.wrapper.WorldPopulationLevel()
 ) : Identifiable<Int>

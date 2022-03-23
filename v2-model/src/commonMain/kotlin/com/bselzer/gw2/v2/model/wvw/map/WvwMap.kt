@@ -2,7 +2,6 @@ package com.bselzer.gw2.v2.model.wvw.map
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.map.MapId
-import com.bselzer.gw2.v2.model.value.WvwMapType
 import com.bselzer.gw2.v2.model.wvw.match.skirmish.WvwSkirmish
 import com.bselzer.gw2.v2.model.wvw.world.WvwWorldCount
 import kotlinx.serialization.SerialName
@@ -14,7 +13,7 @@ data class WvwMap(
     override val id: MapId = MapId(),
 
     @SerialName("type")
-    val type: WvwMapType = WvwMapType(),
+    val type: com.bselzer.gw2.v2.model.wrapper.WvwMapType = com.bselzer.gw2.v2.model.wrapper.WvwMapType(),
 
     @SerialName("scores")
     val scores: WvwWorldCount = WvwWorldCount(),

@@ -1,14 +1,13 @@
 package com.bselzer.gw2.v2.model.item.detail
 
 import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgradeId
-import com.bselzer.gw2.v2.model.value.GizmoDetailType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class GizmoDetails(
     @SerialName("type")
-    val type: GizmoDetailType = GizmoDetailType(),
+    val type: com.bselzer.gw2.v2.model.wrapper.GizmoDetailType = com.bselzer.gw2.v2.model.wrapper.GizmoDetailType(),
 
     /**
      * The id of the guild upgrade.

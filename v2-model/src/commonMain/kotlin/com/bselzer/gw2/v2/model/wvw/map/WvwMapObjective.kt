@@ -3,8 +3,6 @@ package com.bselzer.gw2.v2.model.wvw.map
 import com.bselzer.gw2.v2.model.guild.GuildId
 import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgradeId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
-import com.bselzer.gw2.v2.model.value.WvwObjectiveOwner
-import com.bselzer.gw2.v2.model.value.WvwObjectiveType
 import com.bselzer.gw2.v2.model.wvw.objective.WvwMapObjectiveId
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
@@ -19,10 +17,10 @@ data class WvwMapObjective(
     override val id: WvwMapObjectiveId = WvwMapObjectiveId(),
 
     @SerialName("type")
-    val type: WvwObjectiveType = WvwObjectiveType(),
+    val type: com.bselzer.gw2.v2.model.wrapper.WvwObjectiveType = com.bselzer.gw2.v2.model.wrapper.WvwObjectiveType(),
 
     @SerialName("owner")
-    val owner: WvwObjectiveOwner = WvwObjectiveOwner(),
+    val owner: com.bselzer.gw2.v2.model.wrapper.WvwObjectiveOwner = com.bselzer.gw2.v2.model.wrapper.WvwObjectiveOwner(),
 
     @SerialName("last_flipped")
     val lastFlippedAt: Instant? = null,

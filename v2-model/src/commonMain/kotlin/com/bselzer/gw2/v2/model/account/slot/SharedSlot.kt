@@ -3,7 +3,6 @@ package com.bselzer.gw2.v2.model.account.slot
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.item.ItemId
 import com.bselzer.gw2.v2.model.skin.SkinId
-import com.bselzer.gw2.v2.model.value.Binding
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -54,5 +53,5 @@ data class SharedSlot(
      * What owns this item. Null if there is no binding.
      */
     @SerialName("binding")
-    val binding: Binding? = null
+    val binding: com.bselzer.gw2.v2.model.wrapper.Binding? = null
 ) : Identifiable<Int>

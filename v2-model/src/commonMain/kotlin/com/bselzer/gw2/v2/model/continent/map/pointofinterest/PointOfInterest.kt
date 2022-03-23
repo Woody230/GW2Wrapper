@@ -2,7 +2,6 @@ package com.bselzer.gw2.v2.model.continent.map.pointofinterest
 
 import com.bselzer.gw2.v2.model.continent.floor.FloorId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
-import com.bselzer.gw2.v2.model.value.PointOfInterestType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -15,7 +14,7 @@ data class PointOfInterest(
     val name: String = "",
 
     @SerialName("type")
-    val type: PointOfInterestType = PointOfInterestType(),
+    val type: com.bselzer.gw2.v2.model.wrapper.PointOfInterestType = com.bselzer.gw2.v2.model.wrapper.PointOfInterestType(),
 
     /**
      * The id of the floor this point of interest is located on.

@@ -5,8 +5,6 @@ import com.bselzer.gw2.v2.model.color.DyeColorId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.item.ItemId
 import com.bselzer.gw2.v2.model.skin.SkinId
-import com.bselzer.gw2.v2.model.value.Binding
-import com.bselzer.gw2.v2.model.value.EquipmentSlot
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -23,7 +21,7 @@ data class CharacterEquipment(
      * The type of slot.
      */
     @SerialName("slot")
-    val slot: EquipmentSlot = EquipmentSlot(),
+    val slot: com.bselzer.gw2.v2.model.wrapper.EquipmentSlot = com.bselzer.gw2.v2.model.wrapper.EquipmentSlot(),
 
     /**
      * The ids of the equipped infusions.
@@ -57,7 +55,7 @@ data class CharacterEquipment(
      * What owns this item. Null if there is no binding.
      */
     @SerialName("binding")
-    val binding: Binding? = null,
+    val binding: com.bselzer.gw2.v2.model.wrapper.Binding? = null,
 
     /**
      * The number of charges left.
