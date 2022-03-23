@@ -2,6 +2,11 @@ package com.bselzer.gw2.v2.model.pvp.game
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.map.MapId
+import com.bselzer.gw2.v2.model.profession.ProfessionId
+import com.bselzer.gw2.v2.model.pvp.season.PvpSeasonId
+import com.bselzer.gw2.v2.model.value.PvpRatingType
+import com.bselzer.gw2.v2.model.value.PvpResult
+import com.bselzer.gw2.v2.model.value.PvpTeam
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -37,31 +42,31 @@ data class PvpGame(
      * The result of the match.
      */
     @SerialName("result")
-    val result: String = "",
+    val result: PvpResult = PvpResult(),
 
     /**
      * The name of the team the player was on.
      */
     @SerialName("team")
-    val team: String = "",
+    val team: PvpTeam = PvpTeam(),
 
     /**
      * The name of the profession the player used.
      */
     @SerialName("profession")
-    val profession: String = "",
+    val profession: ProfessionId = ProfessionId(),
 
     /**
      * The scores for each team.
      */
     @SerialName("scores")
-    val scores: Map<String, Int> = emptyMap(),
+    val scores: Map<PvpTeam, Int> = emptyMap(),
 
     /**
      * The type of game mode.
      */
     @SerialName("rating_type")
-    val ratingType: String = "",
+    val ratingType: PvpRatingType = PvpRatingType(),
 
     /**
      * The change in rating. Positive for a win and negative for a loss.
@@ -74,5 +79,5 @@ data class PvpGame(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp/seasons">the wiki</a>
      */
     @SerialName("season")
-    val season: String = ""
+    val season: PvpSeasonId = PvpSeasonId()
 ) : Identifiable<String>

@@ -4,16 +4,18 @@ import com.bselzer.gw2.v2.model.item.ItemId
 import com.bselzer.gw2.v2.model.item.detail.infix.InfixUpgrade
 import com.bselzer.gw2.v2.model.item.detail.infusion.InfusionSlot
 import com.bselzer.gw2.v2.model.itemstat.ItemStatId
+import com.bselzer.gw2.v2.model.value.WeaponDamageType
+import com.bselzer.gw2.v2.model.value.WeaponDetailType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class WeaponDetails(
     @SerialName("type")
-    val type: String = "",
+    val type: WeaponDetailType = WeaponDetailType(),
 
     @SerialName("damage_type")
-    val damageType: String = "",
+    val damageType: WeaponDamageType = WeaponDamageType(),
 
     @SerialName("min_power")
     val minPower: Int = 0,

@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.model.achievement.reward
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.mastery.MasteryId
+import com.bselzer.gw2.v2.model.value.RegionType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -16,5 +17,5 @@ data class MasteryReward(
     override val id: MasteryId = MasteryId(),
 
     @SerialName("region")
-    val region: String = ""
+    val region: RegionType = RegionType()
 ) : AchievementReward(), Identifiable<Int>

@@ -1,5 +1,7 @@
 package com.bselzer.gw2.v2.model.pvp.stat
 
+import com.bselzer.gw2.v2.model.profession.ProfessionId
+import com.bselzer.gw2.v2.model.value.PvpLadderType
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
@@ -37,11 +39,11 @@ data class PvpStats(
      * The profession names mapped to an aggregate.
      */
     @SerialName("professions")
-    val professionAggregate: Map<String, StatAggregate> = emptyMap(),
+    val professionAggregate: Map<ProfessionId, StatAggregate> = emptyMap(),
 
     /**
      * The ladder types mapped to an aggregate.
      */
     @SerialName("ladders")
-    val ladderAggregate: Map<String, StatAggregate> = emptyMap()
+    val ladderAggregate: Map<PvpLadderType, StatAggregate> = emptyMap()
 )

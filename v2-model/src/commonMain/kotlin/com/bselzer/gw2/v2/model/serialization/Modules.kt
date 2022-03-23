@@ -174,6 +174,7 @@ object Modules {
             subclass(SkillRadiusFact::class)
             subclass(SkillRangeFact::class)
             subclass(SkillRechargeFact::class)
+            subclass(SkillStunBreakFact::class)
             subclass(SkillTimeFact::class)
             subclass(SkillUnblockableFact::class)
         }

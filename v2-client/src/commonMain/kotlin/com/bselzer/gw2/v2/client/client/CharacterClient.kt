@@ -6,9 +6,9 @@ import com.bselzer.gw2.v2.model.backstory.answer.BackstoryAnswerId
 import com.bselzer.gw2.v2.model.character.Character
 import com.bselzer.gw2.v2.model.character.CharacterName
 import com.bselzer.gw2.v2.model.character.bag.Bag
+import com.bselzer.gw2.v2.model.character.equipment.CharacterEquipment
 import com.bselzer.gw2.v2.model.character.progression.CharacterCrafting
 import com.bselzer.gw2.v2.model.character.progression.CharacterTraining
-import com.bselzer.gw2.v2.model.character.pve.CharacterEquipment
 import com.bselzer.gw2.v2.model.character.skill.CharacterModeSkills
 import com.bselzer.gw2.v2.model.character.specialization.CharacterModeSpecializations
 import com.bselzer.gw2.v2.model.continent.map.challenge.HeroChallengeId

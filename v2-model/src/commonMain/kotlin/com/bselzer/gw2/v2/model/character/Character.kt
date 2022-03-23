@@ -2,15 +2,22 @@ package com.bselzer.gw2.v2.model.character
 
 import com.bselzer.gw2.v2.model.backstory.answer.BackstoryAnswerId
 import com.bselzer.gw2.v2.model.character.bag.Bag
+import com.bselzer.gw2.v2.model.character.equipment.CharacterEquipment
 import com.bselzer.gw2.v2.model.character.progression.CharacterCrafting
 import com.bselzer.gw2.v2.model.character.progression.CharacterTraining
-import com.bselzer.gw2.v2.model.character.pve.CharacterEquipment
 import com.bselzer.gw2.v2.model.character.pvp.CharacterPvpEquipment
 import com.bselzer.gw2.v2.model.character.skill.CharacterModeSkills
 import com.bselzer.gw2.v2.model.character.specialization.CharacterModeSpecializations
 import com.bselzer.gw2.v2.model.character.wvw.CharacterWvwAbility
+import com.bselzer.gw2.v2.model.continent.map.challenge.HeroChallengeId
+import com.bselzer.gw2.v2.model.guild.GuildId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.profession.ProfessionId
+import com.bselzer.gw2.v2.model.race.RaceId
 import com.bselzer.gw2.v2.model.recipe.RecipeId
+import com.bselzer.gw2.v2.model.title.TitleId
+import com.bselzer.gw2.v2.model.value.CharacterFlag
+import com.bselzer.gw2.v2.model.value.Gender
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
@@ -39,18 +46,18 @@ data class Character(
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     @SerialName("race")
-    val race: String = "",
+    val race: RaceId = RaceId(),
 
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     @SerialName("gender")
-    val gender: String = "",
+    val gender: Gender = Gender(),
 
     /**
      * The name of the profession.
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     @SerialName("profession")
-    val profession: String = "",
+    val profession: ProfessionId = ProfessionId(),
 
     /**
      * The level from 1 to 80.
@@ -64,7 +71,7 @@ data class Character(
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     @SerialName("guild")
-    val guild: String = "",
+    val guild: GuildId = GuildId(),
 
     /**
      * The amount of seconds the character has been played.
@@ -93,7 +100,7 @@ data class Character(
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     @SerialName("title")
-    val title: Int = 0,
+    val title: TitleId = TitleId(),
 
     /**
      * The crafting disciplines the character has unlocked.
@@ -117,7 +124,7 @@ data class Character(
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS, Permission.PROGRESSION)
     @SerialName("heropoints")
-    val heropoints: List<String> = emptyList(),
+    val heropoints: List<HeroChallengeId> = emptyList(),
 
     /**
      * The equipped bags.
@@ -171,7 +178,7 @@ data class Character(
     val pvpEquipment: CharacterPvpEquipment = CharacterPvpEquipment(),
 
     @SerialName("flags")
-    val flags: List<String> = emptyList()
+    val flags: List<CharacterFlag> = emptyList()
 ) : Identifiable<String> {
     override val id: CharacterName = name
 }

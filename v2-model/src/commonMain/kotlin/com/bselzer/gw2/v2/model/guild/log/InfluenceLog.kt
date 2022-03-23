@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.guild.log
 
+import com.bselzer.gw2.v2.model.value.InfluenceActivity
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -7,7 +8,7 @@ import kotlinx.serialization.Serializable
 @SerialName("influence")
 data class InfluenceLog(
     @SerialName("activity")
-    val activity: String = "",
+    val activity: InfluenceActivity = InfluenceActivity(),
 
     @SerialName("total_participants")
     val totalParticipants: Int = 0,

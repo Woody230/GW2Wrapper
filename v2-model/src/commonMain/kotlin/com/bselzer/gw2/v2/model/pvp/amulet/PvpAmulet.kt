@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.model.pvp.amulet
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.value.AttributeName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -19,5 +20,5 @@ data class PvpAmulet(
      * The name of the attribute mapped to the amount it is increased by.
      */
     @SerialName("attributes")
-    val attributes: Map<String, Int> = emptyMap()
+    val attributes: Map<AttributeName, Int> = emptyMap()
 ) : Identifiable<Int>

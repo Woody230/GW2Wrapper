@@ -4,6 +4,8 @@ import com.bselzer.gw2.v2.model.color.DyeColorId
 import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgradeId
 import com.bselzer.gw2.v2.model.recipe.RecipeId
 import com.bselzer.gw2.v2.model.skin.SkinId
+import com.bselzer.gw2.v2.model.value.ConsumableDetailType
+import com.bselzer.gw2.v2.model.value.ConsumableUnlockType
 import com.bselzer.ktx.datetime.serialization.MillisecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -14,7 +16,7 @@ import kotlin.time.ExperimentalTime
 @Serializable
 data class ConsumableDetails(
     @SerialName("type")
-    val type: String = "",
+    val type: ConsumableDetailType = ConsumableDetailType(),
 
     @SerialName("description")
     val description: String = "",
@@ -29,7 +31,7 @@ data class ConsumableDetails(
      * Null if this consumable is not unlockable.
      */
     @SerialName("unlock_type")
-    val unlockType: String? = null,
+    val unlockType: ConsumableUnlockType? = null,
 
     /**
      * The id of the dye color when the [unlockType] is for a dye.

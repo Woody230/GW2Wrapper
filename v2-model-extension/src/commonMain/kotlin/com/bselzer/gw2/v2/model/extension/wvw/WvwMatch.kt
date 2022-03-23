@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.extension.wvw
 
-import com.bselzer.gw2.v2.model.enumeration.wvw.ObjectiveOwner
-import com.bselzer.gw2.v2.model.enumeration.wvw.ObjectiveOwner.*
+import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner
+import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner.*
 import com.bselzer.gw2.v2.model.world.WorldId
 import com.bselzer.gw2.v2.model.wvw.map.WvwMap
 import com.bselzer.gw2.v2.model.wvw.map.WvwMapObjective
@@ -21,9 +21,9 @@ fun WvwMatch?.objective(objective: WvwObjective?): WvwMapObjective? = objective?
 fun WvwMatch.map(objective: WvwObjective): WvwMap? = this.maps.firstOrNull { map -> map.id == objective.mapId }
 
 /**
- * @return the [ObjectiveOwner] associated with the [world]
+ * @return the [WvwObjectiveOwner] associated with the [world]
  */
-fun WvwMatch.owner(world: WorldId): ObjectiveOwner = when {
+fun WvwMatch.owner(world: WorldId): WvwObjectiveOwner = when {
     allWorlds.red.contains(world) -> RED
     allWorlds.blue.contains(world) -> BLUE
     allWorlds.green.contains(world) -> GREEN
@@ -38,7 +38,7 @@ fun WvwMatch.allWorlds(): List<WorldId> = allWorlds.red + allWorlds.blue + allWo
 /**
  * @return all the world ids linked together that are associated with the [owner]
  */
-fun WvwMatch.linkedWorlds(owner: ObjectiveOwner) = when (owner) {
+fun WvwMatch.linkedWorlds(owner: WvwObjectiveOwner) = when (owner) {
     RED -> allWorlds.red
     BLUE -> allWorlds.blue
     GREEN -> allWorlds.green
@@ -48,7 +48,7 @@ fun WvwMatch.linkedWorlds(owner: ObjectiveOwner) = when (owner) {
 /**
  * @return the main world id associated with the [.owner]
  */
-fun WvwMatch.mainWorld(owner: ObjectiveOwner): WorldId? = when (owner) {
+fun WvwMatch.mainWorld(owner: WvwObjectiveOwner): WorldId? = when (owner) {
     RED -> worlds.red
     BLUE -> worlds.blue
     GREEN -> worlds.green
@@ -56,30 +56,30 @@ fun WvwMatch.mainWorld(owner: ObjectiveOwner): WorldId? = when (owner) {
 }
 
 /**
- * @return the points that would currently be awarded to each [ObjectiveOwner] if a tick passed
+ * @return the points that would currently be awarded to each [WvwObjectiveOwner] if a tick passed
  */
-fun WvwMatch.pointsPerTick(): Map<ObjectiveOwner?, Int> {
-    val ppt = mutableMapOf<ObjectiveOwner?, Int>()
+fun WvwMatch.pointsPerTick(): Map<WvwObjectiveOwner?, Int> {
+    val ppt = mutableMapOf<WvwObjectiveOwner?, Int>()
     maps.forEach { map -> ppt.merge(map.pointsPerTick()) }
     return ppt
 }
 
 /**
- * @return the total number of victory points earned through all of the skirmishes for each [ObjectiveOwner]
+ * @return the total number of victory points earned through all of the skirmishes for each [WvwObjectiveOwner]
  */
-fun WvwMatch.victoryPoints(): Map<ObjectiveOwner, Int> = victoryPoints.count()
+fun WvwMatch.victoryPoints(): Map<WvwObjectiveOwner, Int> = victoryPoints.count()
 
 /**
- * @return the score within the [WvwMatch.scores] for each [ObjectiveOwner]
+ * @return the score within the [WvwMatch.scores] for each [WvwObjectiveOwner]
  */
-fun WvwMatch.scores(): Map<ObjectiveOwner, Int> = scores.count()
+fun WvwMatch.scores(): Map<WvwObjectiveOwner, Int> = scores.count()
 
 /**
- * @return the deaths within the [WvwMatch.deaths] for each [ObjectiveOwner]
+ * @return the deaths within the [WvwMatch.deaths] for each [WvwObjectiveOwner]
  */
-fun WvwMatch.deaths(): Map<ObjectiveOwner, Int> = deaths.count()
+fun WvwMatch.deaths(): Map<WvwObjectiveOwner, Int> = deaths.count()
 
 /**
- * @return the kills within the [WvwMatch.kills] for each [ObjectiveOwner]
+ * @return the kills within the [WvwMatch.kills] for each [WvwObjectiveOwner]
  */
-fun WvwMatch.kills(): Map<ObjectiveOwner, Int> = kills.count()
+fun WvwMatch.kills(): Map<WvwObjectiveOwner, Int> = kills.count()

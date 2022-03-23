@@ -1,10 +1,14 @@
 package com.bselzer.gw2.v2.model.template.equipment
 
-import com.bselzer.gw2.v2.model.character.pve.CharacterItemStat
+import com.bselzer.gw2.v2.model.character.CharacterName
+import com.bselzer.gw2.v2.model.character.equipment.CharacterItemStat
 import com.bselzer.gw2.v2.model.color.DyeColorId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.item.ItemId
 import com.bselzer.gw2.v2.model.skin.SkinId
+import com.bselzer.gw2.v2.model.value.Binding
+import com.bselzer.gw2.v2.model.value.EquipmentLocation
+import com.bselzer.gw2.v2.model.value.EquipmentSlot
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -21,7 +25,7 @@ data class EquipmentTemplateItem(
      * The type of slot.
      */
     @SerialName("slot")
-    val slot: String = "",
+    val slot: EquipmentSlot = EquipmentSlot(),
 
     /**
      * The ids of the equipped infusions.
@@ -55,19 +59,19 @@ data class EquipmentTemplateItem(
      * What owns this item. Null if there is no binding.
      */
     @SerialName("binding")
-    val binding: String? = null,
+    val binding: Binding? = null,
 
     /**
      * Who owns this item. Null if the binding is NOT for a character.
      */
     @SerialName("bound_to")
-    val boundTo: String? = null,
+    val boundTo: CharacterName? = null,
 
     /**
      * Where the item is stored.
      */
     @SerialName("location")
-    val location: String = "",
+    val location: EquipmentLocation = EquipmentLocation(),
 
     /**
      * The ids of the dyes. An id will be null if there is no selection.

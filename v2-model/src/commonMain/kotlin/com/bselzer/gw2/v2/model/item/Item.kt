@@ -1,6 +1,10 @@
 package com.bselzer.gw2.v2.model.item
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.value.ItemFlag
+import com.bselzer.gw2.v2.model.value.ItemGameType
+import com.bselzer.gw2.v2.model.value.ItemRarity
+import com.bselzer.gw2.v2.model.value.ItemRestriction
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -26,7 +30,7 @@ abstract class Item(
     val description: String = "",
 
     @SerialName("rarity")
-    val rarity: String = "",
+    val rarity: ItemRarity = ItemRarity(),
 
     /**
      * The level required to use this item.
@@ -48,16 +52,16 @@ abstract class Item(
     val defaultSkinId: Int = 0,
 
     @SerialName("flags")
-    val flags: List<String> = emptyList(),
+    val flags: List<ItemFlag> = emptyList(),
 
     /**
      * The game types this item is usable in.
      */
     @SerialName("game_types")
-    val gameTypes: List<String> = emptyList(),
+    val gameTypes: List<ItemGameType> = emptyList(),
 
     @SerialName("restrictions")
-    val restrictions: List<String> = emptyList()
+    val restrictions: List<ItemRestriction> = emptyList()
 ) : Identifiable<Int> {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

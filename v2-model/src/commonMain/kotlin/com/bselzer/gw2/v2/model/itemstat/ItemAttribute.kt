@@ -1,12 +1,13 @@
 package com.bselzer.gw2.v2.model.itemstat
 
+import com.bselzer.gw2.v2.model.value.AttributeName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class ItemAttribute(
     @SerialName("attribute")
-    val name: String = "",
+    val name: AttributeName = AttributeName(),
 
     @SerialName("multiplier")
     val multiplier: Double = 0.0,

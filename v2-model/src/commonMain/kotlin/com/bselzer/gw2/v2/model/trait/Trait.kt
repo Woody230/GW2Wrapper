@@ -2,6 +2,8 @@ package com.bselzer.gw2.v2.model.trait
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.trait.fact.TraitFact
+import com.bselzer.gw2.v2.model.value.TraitSlot
+import com.bselzer.gw2.v2.model.value.TraitTier
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -27,10 +29,10 @@ data class Trait(
     val specializationId: Int = 0,
 
     @SerialName("tier")
-    val tier: Int = Int.MIN_VALUE,
+    val tier: TraitTier = TraitTier(),
 
     @SerialName("slot")
-    val slot: String = "",
+    val slot: TraitSlot = TraitSlot(),
 
     /**
      * The position of this trait within the [tier].

@@ -1,10 +1,12 @@
 package com.bselzer.gw2.v2.model.account.slot
 
-import com.bselzer.gw2.v2.model.character.pve.CharacterItemStat
+import com.bselzer.gw2.v2.model.character.CharacterName
+import com.bselzer.gw2.v2.model.character.equipment.CharacterItemStat
 import com.bselzer.gw2.v2.model.color.DyeColorId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.item.ItemId
 import com.bselzer.gw2.v2.model.skin.SkinId
+import com.bselzer.gw2.v2.model.value.Binding
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
@@ -77,13 +79,13 @@ data class BankSlot(
      * What owns this item. Null if there is no binding.
      */
     @SerialName("binding")
-    val binding: String? = null,
+    val binding: Binding? = null,
 
     /**
      * Who owns this item. Null if the binding is NOT for a character.
      */
     @SerialName("bound_to")
-    val boundTo: String? = null,
+    val boundTo: CharacterName? = null,
 
     /**
      * The stats of the item.

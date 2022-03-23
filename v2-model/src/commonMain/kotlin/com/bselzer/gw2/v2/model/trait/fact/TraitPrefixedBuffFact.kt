@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.trait.fact
 
+import com.bselzer.gw2.v2.model.value.EffectName
 import com.bselzer.ktx.datetime.serialization.SecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -14,7 +15,7 @@ data class TraitPrefixedBuffFact(
      * The boon or condition affected by this fact.
      */
     @SerialName("status")
-    val status: String = "",
+    val status: EffectName = EffectName(),
 
     /**
      * The description of the effect.

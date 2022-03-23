@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.model.template.build
 
 import com.bselzer.gw2.v2.model.legend.LegendId
+import com.bselzer.gw2.v2.model.profession.ProfessionId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -16,7 +17,7 @@ data class BuildTemplate(
      * The profession the build template is for.
      */
     @SerialName("profession")
-    val profession: String = "",
+    val profession: ProfessionId = ProfessionId(),
 
     /**
      * The selected specializations and traits.

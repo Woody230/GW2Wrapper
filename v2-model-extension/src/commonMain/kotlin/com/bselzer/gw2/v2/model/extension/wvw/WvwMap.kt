@@ -1,14 +1,14 @@
 package com.bselzer.gw2.v2.model.extension.wvw
 
-import com.bselzer.gw2.v2.model.enumeration.extension.wvw.owner
-import com.bselzer.gw2.v2.model.enumeration.wvw.ObjectiveOwner
+import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner
+import com.bselzer.gw2.v2.model.enumeration.extension.owner
 import com.bselzer.gw2.v2.model.wvw.map.WvwMap
 
 /**
- * @return the points that would currently be awarded to each [ObjectiveOwner] if a tick passed
+ * @return the points that would currently be awarded to each [WvwObjectiveOwner] if a tick passed
  */
-fun WvwMap.pointsPerTick(): Map<ObjectiveOwner?, Int> {
-    val ppt = mutableMapOf<ObjectiveOwner?, Int>()
+fun WvwMap.pointsPerTick(): Map<WvwObjectiveOwner?, Int> {
+    val ppt = mutableMapOf<WvwObjectiveOwner?, Int>()
     objectives.forEach { objective ->
         val owner = objective.owner()
         ppt[owner] = ppt.getOrElse(owner) { 0 }.plus(objective.pointsPerTick)
@@ -17,16 +17,16 @@ fun WvwMap.pointsPerTick(): Map<ObjectiveOwner?, Int> {
 }
 
 /**
- * @return the score within the [WvwMap.scores] for each [ObjectiveOwner]
+ * @return the score within the [WvwMap.scores] for each [WvwObjectiveOwner]
  */
-fun WvwMap.scores(): Map<ObjectiveOwner, Int> = scores.count()
+fun WvwMap.scores(): Map<WvwObjectiveOwner, Int> = scores.count()
 
 /**
- * @return the deaths within the [WvwMap.deaths] for each [ObjectiveOwner]
+ * @return the deaths within the [WvwMap.deaths] for each [WvwObjectiveOwner]
  */
-fun WvwMap.deaths(): Map<ObjectiveOwner, Int> = deaths.count()
+fun WvwMap.deaths(): Map<WvwObjectiveOwner, Int> = deaths.count()
 
 /**
- * @return the kills within the [WvwMap.kills] for each [ObjectiveOwner]
+ * @return the kills within the [WvwMap.kills] for each [WvwObjectiveOwner]
  */
-fun WvwMap.kills(): Map<ObjectiveOwner, Int> = kills.count()
+fun WvwMap.kills(): Map<WvwObjectiveOwner, Int> = kills.count()

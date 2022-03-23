@@ -1,5 +1,7 @@
 package com.bselzer.gw2.v2.model.achievement.daily
 
+import com.bselzer.gw2.v2.model.value.Accessibility
+import com.bselzer.gw2.v2.model.value.Product
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -9,11 +11,11 @@ data class DailyAccess(
      * The required product.
      */
     @SerialName("product")
-    val product: String = "",
+    val product: Product = Product(),
 
     /**
      * Whether the account needs to have or not have access to the product to be able to access the achievement.
      */
     @SerialName("condition")
-    val accessibility: String = ""
+    val accessibility: Accessibility = Accessibility()
 )

@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.model.guild.log
 
 import com.bselzer.gw2.v2.model.item.ItemId
 import com.bselzer.gw2.v2.model.recipe.RecipeId
+import com.bselzer.gw2.v2.model.value.UpgradeAction
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,7 +13,7 @@ data class UpgradeLog(
      * The type of interaction.
      */
     @SerialName("action")
-    val action: String = "",
+    val action: UpgradeAction = UpgradeAction(),
 
     /**
      * The id of the upgrade.

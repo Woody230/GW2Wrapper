@@ -5,6 +5,9 @@ import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.item.ItemId
 import com.bselzer.gw2.v2.model.recipe.ingredient.GuildRecipeIngredient
 import com.bselzer.gw2.v2.model.recipe.ingredient.RecipeIngredient
+import com.bselzer.gw2.v2.model.value.CraftingDiscipline
+import com.bselzer.gw2.v2.model.value.RecipeFlag
+import com.bselzer.gw2.v2.model.value.RecipeType
 import com.bselzer.ktx.datetime.serialization.MillisecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -18,7 +21,7 @@ data class Recipe(
     override val id: RecipeId = RecipeId(),
 
     @SerialName("type")
-    val type: String = "",
+    val type: RecipeType = RecipeType(),
 
     /**
      * The id of the item produced by this recipe.
@@ -44,7 +47,7 @@ data class Recipe(
      * The names of the crafting disciplines that can use this recipe.
      */
     @SerialName("disciplines")
-    val disciplines: List<String> = emptyList(),
+    val disciplines: List<CraftingDiscipline> = emptyList(),
 
     /**
      * The minimum crafting discipline level required to craft this recipe.
@@ -53,7 +56,7 @@ data class Recipe(
     val minRating: Int = 0,
 
     @SerialName("flags")
-    val flags: List<String> = emptyList(),
+    val flags: List<RecipeFlag> = emptyList(),
 
     /**
      * The ingredients required in the recipe.

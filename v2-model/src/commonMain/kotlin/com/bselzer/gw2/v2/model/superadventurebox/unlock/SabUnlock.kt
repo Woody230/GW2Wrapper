@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.model.superadventurebox.unlock
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.value.SabUnlockName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -16,5 +17,5 @@ data class SabUnlock(
      * The name of the upgrade.
      */
     @SerialName("name")
-    val name: String = ""
+    val name: SabUnlockName = SabUnlockName()
 ) : Identifiable<Int>

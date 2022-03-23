@@ -4,6 +4,8 @@ import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.skill.PaletteId
 import com.bselzer.gw2.v2.model.skill.SkillId
 import com.bselzer.gw2.v2.model.specialization.SpecializationId
+import com.bselzer.gw2.v2.model.value.ProfessionFlag
+import com.bselzer.gw2.v2.model.value.WeaponType
 import com.bselzer.ktx.serialization.serializer.MapArraySerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -43,10 +45,10 @@ data class Profession(
      * The weapon types mapped to its details.
      */
     @SerialName("weapons")
-    val weapons: Map<String, ProfessionWeapon> = emptyMap(),
+    val weapons: Map<WeaponType, ProfessionWeapon> = emptyMap(),
 
     @SerialName("flags")
-    val flags: List<String> = emptyList(),
+    val flags: List<ProfessionFlag> = emptyList(),
 
     @SerialName("skills")
     val skills: List<ProfessionSkill> = emptyList(),

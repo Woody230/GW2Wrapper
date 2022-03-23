@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.model.character.bag
 
-import com.bselzer.gw2.v2.model.character.pve.CharacterItemStat
+import com.bselzer.gw2.v2.model.character.equipment.CharacterItemStat
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.item.ItemId
 import com.bselzer.gw2.v2.model.skin.SkinId

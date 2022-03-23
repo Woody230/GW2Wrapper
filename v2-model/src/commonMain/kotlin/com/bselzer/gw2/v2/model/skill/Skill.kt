@@ -1,8 +1,10 @@
 package com.bselzer.gw2.v2.model.skill
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.profession.ProfessionId
 import com.bselzer.gw2.v2.model.skill.fact.SkillFact
 import com.bselzer.gw2.v2.model.specialization.SpecializationId
+import com.bselzer.gw2.v2.model.value.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -24,25 +26,25 @@ data class Skill(
     val chatLink: String = "",
 
     @SerialName("type")
-    val type: String = "",
+    val type: SkillType = SkillType(),
 
     /**
      * The required weapon type.
      */
     @SerialName("weapon_type")
-    val weaponType: String = "None",
+    val weaponType: WeaponType = WeaponType(),
 
     /**
      * The professions that can use this skill.
      */
     @SerialName("professions")
-    val professions: List<String> = emptyList(),
+    val professions: List<ProfessionId> = emptyList(),
 
     /**
      * The slot and/or slot number this skill belongs to.
      */
     @SerialName("slot")
-    val slot: String = "",
+    val slot: SkillSlot = SkillSlot(),
 
     /**
      * The information about this skill's effects.
@@ -57,19 +59,19 @@ data class Skill(
     val traitedFacts: List<SkillFact> = emptyList(),
 
     @SerialName("categories")
-    val categories: List<String> = emptyList(),
+    val categories: List<SkillCategory> = emptyList(),
 
     /**
      * The required attunement. For Elementalists only.
      */
     @SerialName("attunement")
-    val attunement: String = "",
+    val attunement: AttunementName = AttunementName(),
 
     /**
      * The required secondary attunement. For Weavers only.
      */
     @SerialName("dual_attunement")
-    val dualAttunement: String = "",
+    val dualAttunement: AttunementName = AttunementName(),
 
     /**
      * The energy cost. For Revenants, Warriors, and Druids only.
@@ -81,7 +83,7 @@ data class Skill(
      * The weapon type of the required offhand. For Thieves only.
      */
     @SerialName("dual_wield")
-    val dualWield: String = "",
+    val dualWield: WeaponType = WeaponType(),
 
     /**
      * The id of the skill that "flips over" when this skill is used. Examples include Engineer toolkits and Herald facets.
@@ -138,5 +140,5 @@ data class Skill(
     val toolbeltId: SkillId = SkillId(),
 
     @SerialName("flags")
-    val flags: List<String> = emptyList()
+    val flags: List<SkillFlag> = emptyList()
 ) : Identifiable<Int>

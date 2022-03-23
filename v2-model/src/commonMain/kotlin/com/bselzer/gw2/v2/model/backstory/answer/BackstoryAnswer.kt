@@ -2,6 +2,8 @@ package com.bselzer.gw2.v2.model.backstory.answer
 
 import com.bselzer.gw2.v2.model.backstory.question.BackstoryQuestionId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.profession.ProfessionId
+import com.bselzer.gw2.v2.model.race.RaceId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -35,7 +37,7 @@ data class BackstoryAnswer(
      * Empty if there are no profession requirements.
      */
     @SerialName("professions")
-    val professions: List<String> = emptyList(),
+    val professions: List<ProfessionId> = emptyList(),
 
     /**
      * The names of the races that can choose this answer.
@@ -43,5 +45,5 @@ data class BackstoryAnswer(
      * Empty if there are no race requirements.
      */
     @SerialName("races")
-    val races: List<String> = emptyList()
+    val races: List<RaceId> = emptyList()
 ) : Identifiable<String>

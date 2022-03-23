@@ -1,6 +1,9 @@
 package com.bselzer.gw2.v2.model.skin
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.race.RaceId
+import com.bselzer.gw2.v2.model.value.ItemRarity
+import com.bselzer.gw2.v2.model.value.SkinFlag
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -13,7 +16,7 @@ abstract class Skin(
     val name: String = "",
 
     @SerialName("flags")
-    val flags: List<String> = emptyList(),
+    val flags: List<SkinFlag> = emptyList(),
 
     /**
      * The names of the races that are able to apply the skin.
@@ -21,13 +24,13 @@ abstract class Skin(
      * Empty if there are no restrictions.
      */
     @SerialName("restrictions")
-    val restrictions: List<String> = emptyList(),
+    val restrictions: List<RaceId> = emptyList(),
 
     @SerialName("icon")
     val iconLink: String = "",
 
     @SerialName("rarity")
-    val rarity: String = "",
+    val rarity: ItemRarity = ItemRarity(),
 
     @SerialName("description")
     val description: String = ""

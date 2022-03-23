@@ -1,15 +1,17 @@
 package com.bselzer.gw2.v2.model.skin.detail
 
+import com.bselzer.gw2.v2.model.value.ArmorDetailType
+import com.bselzer.gw2.v2.model.value.ArmorWeight
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class ArmorSkinDetails(
     @SerialName("type")
-    val type: String = "",
+    val type: ArmorDetailType = ArmorDetailType(),
 
     @SerialName("weight_class")
-    val weightClass: String = "",
+    val weightClass: ArmorWeight = ArmorWeight(),
 
     @SerialName("dye_slots")
     val dyeSlots: ArmorSkinDyeSlots = ArmorSkinDyeSlots()

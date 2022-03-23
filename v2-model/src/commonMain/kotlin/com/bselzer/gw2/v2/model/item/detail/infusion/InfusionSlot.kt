@@ -1,13 +1,14 @@
 package com.bselzer.gw2.v2.model.item.detail.infusion
 
 import com.bselzer.gw2.v2.model.item.ItemId
+import com.bselzer.gw2.v2.model.value.InfusionUpgradeFlag
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class InfusionSlot(
     @SerialName("flags")
-    val flags: List<String> = emptyList(),
+    val flags: List<InfusionUpgradeFlag> = emptyList(),
 
     /**
      * The id of the infusion item.

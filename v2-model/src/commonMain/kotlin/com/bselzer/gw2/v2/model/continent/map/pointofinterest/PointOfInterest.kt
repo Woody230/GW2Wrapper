@@ -1,6 +1,8 @@
 package com.bselzer.gw2.v2.model.continent.map.pointofinterest
 
+import com.bselzer.gw2.v2.model.continent.floor.FloorId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.value.PointOfInterestType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -13,14 +15,14 @@ data class PointOfInterest(
     val name: String = "",
 
     @SerialName("type")
-    val type: String = "",
+    val type: PointOfInterestType = PointOfInterestType(),
 
     /**
      * The id of the floor this point of interest is located on.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/continents">the wiki</a>
      */
     @SerialName("floor")
-    val floorId: Int = 0,
+    val floorId: FloorId = FloorId(),
 
     /**
      * The two-dimensional coordinates within the texture.

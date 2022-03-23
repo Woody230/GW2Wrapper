@@ -148,6 +148,7 @@ fun TypeTable.Builder.skillFact(): Unit = root<SkillFact>().run {
     sub<SkillPercentFact>()
     sub<SkillRadiusFact>()
     sub<SkillRechargeFact>()
+    sub<SkillStunBreakFact>()
     sub<SkillTimeFact>()
     sub<SkillUnblockableFact>()
 }

@@ -2,6 +2,8 @@ package com.bselzer.gw2.v2.model.profession
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.skill.SkillId
+import com.bselzer.gw2.v2.model.value.AttunementName
+import com.bselzer.gw2.v2.model.value.SkillSlot
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -18,17 +20,17 @@ data class ProfessionSkill(
      * The skill slot the skill belongs to.
      */
     @SerialName("slot")
-    val slot: String = "",
+    val slot: SkillSlot = SkillSlot(),
 
     /**
      * The name of the required attunement. Used by Elementalists.
      */
     @SerialName("attunement")
-    val attunement: String = "",
+    val attunement: AttunementName = AttunementName(),
 
     /**
      * The name of the profession that the skill is stolen from. Used by Thieves for their Steal skill.
      */
     @SerialName("source")
-    val source: String = ""
+    val source: ProfessionId = ProfessionId()
 ) : Identifiable<Int>

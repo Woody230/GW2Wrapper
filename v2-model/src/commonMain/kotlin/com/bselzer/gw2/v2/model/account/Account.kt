@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.model.account
 
 import com.bselzer.gw2.v2.model.guild.GuildId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.value.AccountAccess
 import com.bselzer.gw2.v2.model.world.WorldId
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
@@ -71,7 +72,7 @@ data class Account(
      * The types of access, indicating no access, free to play access, or base/expansion content access.
      */
     @SerialName("access")
-    val access: List<String> = emptyList(),
+    val access: List<AccountAccess> = emptyList(),
 
     /**
      * Whether the account has bought a commander tag.

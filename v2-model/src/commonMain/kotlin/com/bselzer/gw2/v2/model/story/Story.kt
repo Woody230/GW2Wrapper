@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.model.story
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.race.RaceId
 import com.bselzer.gw2.v2.model.story.season.StorySeasonId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -50,7 +51,7 @@ data class Story(
      * Empty if there are no race requirements.
      */
     @SerialName("races")
-    val races: List<String> = emptyList(),
+    val races: List<RaceId> = emptyList(),
 
     /**
      * The flags for additional requirements for being able to participate in this story.

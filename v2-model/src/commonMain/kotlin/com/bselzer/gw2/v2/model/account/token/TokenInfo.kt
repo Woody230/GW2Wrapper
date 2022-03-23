@@ -25,7 +25,7 @@ abstract class TokenInfo(
      * The permissions accessible by the token.
      */
     @SerialName("permissions")
-    val permissions: List<String> = emptyList()
+    val permissions: List<Permission> = emptyList()
 ) : Identifiable<String> {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
