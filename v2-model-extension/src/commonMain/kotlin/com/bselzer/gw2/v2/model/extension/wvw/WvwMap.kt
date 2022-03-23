@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.extension.wvw
 
 import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner
-import com.bselzer.gw2.v2.model.enumeration.extension.owner
+import com.bselzer.gw2.v2.model.enumeration.extension.enumValueOrNull
 import com.bselzer.gw2.v2.model.wvw.map.WvwMap
 
 /**
@@ -10,7 +10,7 @@ import com.bselzer.gw2.v2.model.wvw.map.WvwMap
 fun WvwMap.pointsPerTick(): Map<WvwObjectiveOwner?, Int> {
     val ppt = mutableMapOf<WvwObjectiveOwner?, Int>()
     objectives.forEach { objective ->
-        val owner = objective.owner()
+        val owner = objective.owner.enumValueOrNull()
         ppt[owner] = ppt.getOrElse(owner) { 0 }.plus(objective.pointsPerTick)
     }
     return ppt

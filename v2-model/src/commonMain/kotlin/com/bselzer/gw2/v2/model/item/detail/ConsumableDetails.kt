@@ -10,9 +10,7 @@ import com.bselzer.ktx.datetime.serialization.MillisecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 
-@OptIn(ExperimentalTime::class)
 @Serializable
 data class ConsumableDetails(
     @SerialName("type")
