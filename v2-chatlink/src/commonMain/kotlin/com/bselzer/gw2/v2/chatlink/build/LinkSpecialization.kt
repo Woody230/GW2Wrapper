@@ -58,7 +58,7 @@ data class LinkSpecialization(
     }
 
     /**
-     * Converts the
+     * Converts the bit flags into a full byte.
      * @return the decoded trait
      */
     private fun List<Boolean>.decodeTrait(fromIndex: Int, toIndex: Int): Byte {

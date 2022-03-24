@@ -62,8 +62,7 @@ class BuildTemplateLink(
      * The elite skill ids.
      */
     var eliteSkill: LinkSkill = LinkSkill(),
-
-    ) : ChatLink() {
+) : ChatLink() {
     override val header: Byte = 13
 
     /**
