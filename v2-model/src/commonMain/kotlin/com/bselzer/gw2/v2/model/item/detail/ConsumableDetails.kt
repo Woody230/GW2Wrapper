@@ -6,6 +6,7 @@ import com.bselzer.gw2.v2.model.enumeration.wrapper.ConsumableUnlockType
 import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgradeId
 import com.bselzer.gw2.v2.model.recipe.RecipeId
 import com.bselzer.gw2.v2.model.skin.SkinId
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import com.bselzer.ktx.datetime.serialization.MillisecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -75,7 +76,7 @@ data class ConsumableDetails(
      * The link to the effect icon.
      */
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     /**
      * The ids of the skins this item unlocks.

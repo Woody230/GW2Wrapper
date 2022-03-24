@@ -8,6 +8,7 @@ import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.item.ItemId
 import com.bselzer.gw2.v2.model.recipe.ingredient.GuildRecipeIngredient
 import com.bselzer.gw2.v2.model.recipe.ingredient.RecipeIngredient
+import com.bselzer.gw2.v2.model.wrapper.ChatLink
 import com.bselzer.ktx.datetime.serialization.MillisecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -80,5 +81,5 @@ data class Recipe(
      * @see <a href="https://wiki.guildwars2.com/wiki/Chat_link_format#Recipe_link">the wiki</a>
      */
     @SerialName("chat_link")
-    val chatLink: String = ""
+    val chatLink: ChatLink = ChatLink()
 ) : Identifiable<Int>

@@ -8,8 +8,8 @@ import com.bselzer.gw2.v2.model.account.finisher.AccountFinisher
 import com.bselzer.gw2.v2.model.account.luck.AccountLuck
 import com.bselzer.gw2.v2.model.account.mastery.AccountMastery
 import com.bselzer.gw2.v2.model.account.mastery.AccountMasteryPoints
+import com.bselzer.gw2.v2.model.account.slot.AccountArmoryItem
 import com.bselzer.gw2.v2.model.account.slot.AccountMaterial
-import com.bselzer.gw2.v2.model.account.slot.ArmoryItem
 import com.bselzer.gw2.v2.model.account.slot.BankSlot
 import com.bselzer.gw2.v2.model.account.slot.SharedSlot
 import com.bselzer.gw2.v2.model.color.DyeColorId
@@ -218,7 +218,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/legendaryarmory">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.INVENTORIES, Permission.UNLOCKS)
-    suspend fun legendaryArmory(token: Token? = null): List<ArmoryItem> = getIdentifiableList(path = "$ACCOUNT/$LEGENDARY_ARMORY") {
+    suspend fun legendaryArmory(token: Token? = null): List<AccountArmoryItem> = getIdentifiableList(path = "$ACCOUNT/$LEGENDARY_ARMORY") {
         bearer(token)
     }
 

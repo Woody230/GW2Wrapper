@@ -5,6 +5,8 @@ import com.bselzer.gw2.v2.model.enumeration.wrapper.WvwMapType
 import com.bselzer.gw2.v2.model.enumeration.wrapper.WvwObjectiveType
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.map.MapId
+import com.bselzer.gw2.v2.model.wrapper.ChatLink
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import com.bselzer.gw2.v2.model.wvw.upgrade.WvwUpgradeId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -45,10 +47,10 @@ data class WvwObjective(
     val labelCoordinates: List<Double> = emptyList(),
 
     @SerialName("marker")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     @SerialName("chatLink")
-    val chatLink: String = "",
+    val chatLink: ChatLink = ChatLink(),
 
     /**
      * The id of the upgrade.

@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
  * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/legendaryarmory">the wiki</a>
  */
 @Serializable
-data class ArmoryItem(
+data class AccountArmoryItem(
     /**
      * The id of the item.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki: items</a>

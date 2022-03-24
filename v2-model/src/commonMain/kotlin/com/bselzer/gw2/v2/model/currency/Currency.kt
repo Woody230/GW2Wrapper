@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.model.currency
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -17,7 +18,7 @@ data class Currency(
     val description: String = "",
 
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     /**
      * The order of appearance among all currencies. A collection of currencies should be ordered from least to greatest.

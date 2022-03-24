@@ -3,6 +3,7 @@ package com.bselzer.gw2.v2.model.trait
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.skill.SkillId
 import com.bselzer.gw2.v2.model.trait.fact.TraitFact
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -18,7 +19,7 @@ data class TraitSkill(
     val description: String = "",
 
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     @SerialName("facts")
     val facts: List<TraitFact> = emptyList(),

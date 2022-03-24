@@ -1,9 +1,11 @@
 package com.bselzer.gw2.v2.model.account
 
+import com.bselzer.gw2.v2.model.achievement.AchievementPoints
 import com.bselzer.gw2.v2.model.enumeration.wrapper.AccountAccess
 import com.bselzer.gw2.v2.model.guild.GuildId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.world.WorldId
+import com.bselzer.gw2.v2.model.wvw.rank.WvwLevel
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
@@ -92,21 +94,21 @@ data class Account(
      */
     @Scope(Requirement.REQUIRED, Permission.PROGRESSION)
     @SerialName("daily_ap")
-    val dailyAp: Int = 0,
+    val dailyAp: AchievementPoints = AchievementPoints(),
 
     /**
      * The number of monthly achievement points earned.
      */
     @Scope(Requirement.REQUIRED, Permission.PROGRESSION)
     @SerialName("monthly_ap")
-    val monthlyAp: Int = 0,
+    val monthlyAp: AchievementPoints = AchievementPoints(),
 
     /**
      * The personal WvW rank.
      */
     @Scope(Requirement.REQUIRED, Permission.PROGRESSION)
     @SerialName("wvw_rank")
-    val wvwRank: Int = 0,
+    val wvwRank: WvwLevel = WvwLevel(),
 
     /**
      * The date and time of when the account information last changed.

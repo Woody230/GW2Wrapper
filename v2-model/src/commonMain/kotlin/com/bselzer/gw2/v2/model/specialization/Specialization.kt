@@ -4,6 +4,7 @@ import com.bselzer.gw2.v2.model.enumeration.wrapper.SpecializationName
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.profession.ProfessionId
 import com.bselzer.gw2.v2.model.trait.TraitId
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -28,10 +29,10 @@ data class Specialization(
     val isElite: Boolean = false,
 
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     @SerialName("background")
-    val backgroundLink: String = "",
+    val backgroundLink: ImageLink = ImageLink(),
 
     /**
      * The ids of the minor traits.
@@ -58,11 +59,11 @@ data class Specialization(
      * The link to an icon for the elite specialization.
      */
     @SerialName("profession_icon")
-    val eliteIconLink: String = "",
+    val eliteIconLink: ImageLink = ImageLink(),
 
     /**
      * The link to an icon for the elite specialization.
      */
     @SerialName("profession_icon_big")
-    val eliteIconLinkBig: String = ""
+    val eliteIconLinkBig: ImageLink = ImageLink()
 ) : Identifiable<Int>

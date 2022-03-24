@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.map
 
+import com.bselzer.gw2.v2.model.character.CharacterLevel
 import com.bselzer.gw2.v2.model.continent.ContinentId
 import com.bselzer.gw2.v2.model.continent.floor.FloorId
 import com.bselzer.gw2.v2.model.continent.region.RegionId
@@ -20,13 +21,13 @@ data class Map(
      * The minimum recommended level of this map.
      */
     @SerialName("min_level")
-    val minLevel: Int = 0,
+    val minLevel: CharacterLevel = CharacterLevel(),
 
     /**
      * The maximum recommended level of this map.
      */
     @SerialName("max_level")
-    val maxLevel: Int = 0,
+    val maxLevel: CharacterLevel = CharacterLevel(),
 
     /**
      * The id of the default floor.

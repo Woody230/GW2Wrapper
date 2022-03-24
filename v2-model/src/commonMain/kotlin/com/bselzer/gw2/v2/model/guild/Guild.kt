@@ -19,7 +19,7 @@ data class Guild(
 
     @Scope(Requirement.REQUIRED, Permission.GUILDS)
     @SerialName("level")
-    val level: Int = 0,
+    val level: GuildLevel = GuildLevel(),
 
     /**
      * The message of the day for guild members.

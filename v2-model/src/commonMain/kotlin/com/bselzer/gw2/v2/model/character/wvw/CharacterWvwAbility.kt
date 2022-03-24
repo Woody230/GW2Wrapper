@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.model.character.wvw
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.wvw.ability.WvwAbilityId
+import com.bselzer.gw2.v2.model.wvw.rank.WvwLevel
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -15,5 +16,5 @@ data class CharacterWvwAbility(
     /**
      * The rank of the ability.
      */
-    val rank: Int = 0
+    val rank: WvwLevel = WvwLevel()
 ) : Identifiable<Int>

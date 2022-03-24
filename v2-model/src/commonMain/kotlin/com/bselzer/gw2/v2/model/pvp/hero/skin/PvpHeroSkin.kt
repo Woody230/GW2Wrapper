@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.model.pvp.hero.skin
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.item.ItemId
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -14,7 +15,7 @@ data class PvpHeroSkin(
     val name: String = "",
 
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     @SerialName("default")
     val isDefault: Boolean = false,

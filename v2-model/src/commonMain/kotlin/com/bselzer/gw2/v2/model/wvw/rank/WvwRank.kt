@@ -13,5 +13,5 @@ data class WvwRank(
     val title: String = "",
 
     @SerialName("min_rank")
-    val minRank: Int = 0
+    val minRank: WvwLevel = WvwLevel()
 ) : Identifiable<Int>

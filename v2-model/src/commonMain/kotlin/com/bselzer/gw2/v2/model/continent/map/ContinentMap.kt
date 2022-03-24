@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.continent.map
 
+import com.bselzer.gw2.v2.model.character.CharacterLevel
 import com.bselzer.gw2.v2.model.continent.floor.FloorId
 import com.bselzer.gw2.v2.model.continent.map.adventure.Adventure
 import com.bselzer.gw2.v2.model.continent.map.challenge.HeroChallenge
@@ -27,13 +28,13 @@ data class ContinentMap(
      * The minimum recommended level of this map.
      */
     @SerialName("min_level")
-    val minLevel: Int = 0,
+    val minLevel: CharacterLevel = CharacterLevel(),
 
     /**
      * The maximum recommended level of this map.
      */
     @SerialName("max_level")
-    val maxLevel: Int = 0,
+    val maxLevel: CharacterLevel = CharacterLevel(),
 
     /**
      * The id of the default floor.

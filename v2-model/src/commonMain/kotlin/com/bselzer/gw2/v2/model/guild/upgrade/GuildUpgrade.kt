@@ -1,7 +1,9 @@
 package com.bselzer.gw2.v2.model.guild.upgrade
 
+import com.bselzer.gw2.v2.model.guild.GuildLevel
 import com.bselzer.gw2.v2.model.guild.upgrade.cost.GuildUpgradeCost
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import com.bselzer.ktx.datetime.serialization.SecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -19,7 +21,7 @@ abstract class GuildUpgrade(
     val description: String = "",
 
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     /**
      * The build time in seconds.
@@ -32,7 +34,7 @@ abstract class GuildUpgrade(
      * The guild level required to build the upgrade.
      */
     @SerialName("required_level")
-    val requiredLevel: Int = 0,
+    val requiredLevel: GuildLevel = GuildLevel(),
 
     /**
      * The amount of guild experience that will be awarded upon building the upgrade.
@@ -75,8 +77,8 @@ abstract class GuildUpgrade(
         result = 31 * result + description.hashCode()
         result = 31 * result + iconLink.hashCode()
         result = 31 * result + buildTime.hashCode()
-        result = 31 * result + requiredLevel
-        result = 31 * result + experience
+        result = 31 * result + requiredLevel.hashCode()
+        result = 31 * result + experience.hashCode()
         result = 31 * result + prerequisites.hashCode()
         result = 31 * result + costs.hashCode()
         return result

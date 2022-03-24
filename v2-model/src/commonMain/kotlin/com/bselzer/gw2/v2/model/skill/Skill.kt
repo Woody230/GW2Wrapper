@@ -5,6 +5,8 @@ import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.profession.ProfessionId
 import com.bselzer.gw2.v2.model.skill.fact.SkillFact
 import com.bselzer.gw2.v2.model.specialization.SpecializationId
+import com.bselzer.gw2.v2.model.wrapper.ChatLink
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -20,10 +22,10 @@ data class Skill(
     val description: String = "",
 
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     @SerialName("chat_link")
-    val chatLink: String = "",
+    val chatLink: ChatLink = ChatLink(),
 
     @SerialName("type")
     val type: SkillType = SkillType(),

@@ -6,6 +6,7 @@ import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.skill.PaletteId
 import com.bselzer.gw2.v2.model.skill.SkillId
 import com.bselzer.gw2.v2.model.specialization.SpecializationId
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import com.bselzer.ktx.serialization.serializer.MapArraySerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -26,10 +27,10 @@ data class Profession(
     val paletteId: PaletteId = PaletteId(),
 
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     @SerialName("icon_big")
-    val iconLinkBig: String = "",
+    val iconLinkBig: ImageLink = ImageLink(),
 
     /**
      * The ids of the specializations that can be chosen.

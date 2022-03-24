@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.model.outfit
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.item.ItemId
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -18,7 +19,7 @@ data class Outfit(
     val unlockItemIds: List<ItemId> = emptyList(),
 
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     @SerialName("name")
     val name: String = ""

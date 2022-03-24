@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.account.token
 
+import com.bselzer.gw2.v2.model.wrapper.Url
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
@@ -38,5 +39,5 @@ data class SubTokenInfo(
      * The collection of available endpoints if the token is restricted.
      */
     @SerialName("urls")
-    val urls: List<String> = emptyList()
+    val urls: List<Url> = emptyList()
 ) : TokenInfo()

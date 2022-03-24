@@ -9,7 +9,7 @@ data class ColorAppearance(
     val brightness: Int = 0,
 
     @SerialName("contrast")
-    val contrast: Int = 0,
+    val contrast: Double = 0.0,
 
     /**
      * The hue in the HSL color space.
@@ -21,13 +21,13 @@ data class ColorAppearance(
      * The saturation in the HSL color space.
      */
     @SerialName("saturation")
-    val saturation: Int = 0,
+    val saturation: Double = 0.0,
 
     /**
      * The lightness in the HSL color space.
      */
     @SerialName("lightness")
-    val lightness: Int = 0,
+    val lightness: Double = 0.0,
 
     /**
      * The red, green, and blue values.

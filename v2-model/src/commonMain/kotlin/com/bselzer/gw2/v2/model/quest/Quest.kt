@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.quest
 
+import com.bselzer.gw2.v2.model.character.CharacterLevel
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.story.StoryId
 import kotlinx.serialization.SerialName
@@ -17,7 +18,7 @@ data class Quest(
      * The minimum level required to begin this quest.
      */
     @SerialName("level")
-    val level: Int = 0,
+    val level: CharacterLevel = CharacterLevel(),
 
     /**
      * The id of the story.

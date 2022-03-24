@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.model.trait.fact
 
 import com.bselzer.gw2.v2.model.trait.Trait
 import com.bselzer.gw2.v2.model.trait.TraitId
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -14,7 +15,7 @@ abstract class TraitFact(
     val description: String = "",
 
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     /**
      * The id of the required trait.

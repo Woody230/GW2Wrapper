@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.guild.team
 
+import com.bselzer.gw2.v2.model.enumeration.wrapper.PvpLadderType
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.pvp.game.PvpGame
 import com.bselzer.gw2.v2.model.pvp.stat.StatAggregate
@@ -30,7 +31,7 @@ data class GuildTeam(
      * The ladder types mapped to an aggregate.
      */
     @SerialName("ladders")
-    val ladderAggregate: Map<String, StatAggregate> = emptyMap(),
+    val ladderAggregate: Map<PvpLadderType, StatAggregate> = emptyMap(),
 
     /**
      * The games. The profession will always be omitted.

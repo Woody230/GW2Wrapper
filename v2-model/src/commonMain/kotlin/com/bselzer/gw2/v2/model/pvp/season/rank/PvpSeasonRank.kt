@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.pvp.season.rank
 
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -15,13 +16,13 @@ data class PvpSeasonRank(
      * The link to the badge icon on the nameplate.
      */
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     @SerialName("overlay")
-    val overlayLinkBig: String = "",
+    val overlayLinkBig: ImageLink = ImageLink(),
 
     @SerialName("overlay_small")
-    val overlayLink: String = "",
+    val overlayLink: ImageLink = ImageLink(),
 
     @SerialName("tiers")
     val tiers: List<PvpSeasonRankTier> = emptyList()

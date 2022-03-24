@@ -64,7 +64,7 @@ data class Character(
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
     @SerialName("level")
-    val level: Int = 1,
+    val level: CharacterLevel = CharacterLevel(),
 
     /**
      * The guild id in the form of a UUID.

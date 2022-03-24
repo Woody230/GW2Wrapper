@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.wvw.upgrade.tier
 
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,5 +13,5 @@ data class WvwTierUpgrade(
     val description: String = "",
 
     @SerialName("icon")
-    val iconLink: String = ""
+    val iconLink: ImageLink = ImageLink()
 )

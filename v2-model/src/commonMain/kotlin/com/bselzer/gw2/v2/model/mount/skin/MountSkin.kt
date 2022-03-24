@@ -3,6 +3,7 @@ package com.bselzer.gw2.v2.model.mount.skin
 import com.bselzer.gw2.v2.model.enumeration.wrapper.MountName
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.mount.type.MountTypeId
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -15,7 +16,7 @@ data class MountSkin(
     val name: MountName = MountName(),
 
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     /**
      * The id of the mount type.

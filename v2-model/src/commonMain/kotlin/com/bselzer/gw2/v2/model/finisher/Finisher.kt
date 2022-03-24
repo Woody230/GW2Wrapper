@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.model.finisher
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.item.ItemId
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -30,7 +31,7 @@ data class Finisher(
     val order: Int = 0,
 
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     @SerialName("name")
     val name: String = ""

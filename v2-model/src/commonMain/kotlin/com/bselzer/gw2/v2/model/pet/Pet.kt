@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.model.pet
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -16,7 +17,7 @@ data class Pet(
     val description: String = "",
 
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     @SerialName("skills")
     val skills: List<PetSkill> = emptyList()

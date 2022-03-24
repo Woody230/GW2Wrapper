@@ -6,6 +6,7 @@ import com.bselzer.gw2.v2.model.achievement.tier.AchievementTier
 import com.bselzer.gw2.v2.model.enumeration.wrapper.AchievementFlag
 import com.bselzer.gw2.v2.model.enumeration.wrapper.AchievementType
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -15,7 +16,7 @@ data class Achievement(
     override val id: AchievementId = AchievementId(),
 
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     @SerialName("name")
     val name: String = "",
@@ -75,5 +76,5 @@ data class Achievement(
      * The maximum number of achievement points that can be rewarded by repeatable achievements.
      */
     @SerialName("point_cap")
-    val pointCap: Int = 0
+    val pointCap: AchievementPoints = AchievementPoints()
 ) : Identifiable<Int>

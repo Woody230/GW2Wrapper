@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.model.pvp.rank
 
 import com.bselzer.gw2.v2.model.finisher.FinisherId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -25,7 +26,7 @@ data class PvpRank(
     val name: String = "",
 
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     /**
      * The minimum PvP level to be at this rank.

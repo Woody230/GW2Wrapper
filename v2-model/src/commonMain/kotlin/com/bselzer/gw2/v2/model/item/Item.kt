@@ -1,10 +1,14 @@
 package com.bselzer.gw2.v2.model.item
 
+import com.bselzer.gw2.v2.model.character.CharacterLevel
 import com.bselzer.gw2.v2.model.enumeration.wrapper.ItemFlag
 import com.bselzer.gw2.v2.model.enumeration.wrapper.ItemGameType
 import com.bselzer.gw2.v2.model.enumeration.wrapper.ItemRarity
 import com.bselzer.gw2.v2.model.enumeration.wrapper.ItemRestriction
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.skin.SkinId
+import com.bselzer.gw2.v2.model.wrapper.ChatLink
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -18,13 +22,13 @@ abstract class Item(
      * @see <a href="https://wiki.guildwars2.com/wiki/Chat_link_format#Item_link">the wiki</a>
      */
     @SerialName("chat_link")
-    val chatLink: String = "",
+    val chatLink: ChatLink = ChatLink(),
 
     @SerialName("name")
     val name: String = "",
 
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     @SerialName("description")
     val description: String = "",
@@ -36,7 +40,7 @@ abstract class Item(
      * The level required to use this item.
      */
     @SerialName("level")
-    val level: Int = 0,
+    val level: CharacterLevel = CharacterLevel(),
 
     /**
      * The coin value when selling to a vendor.
@@ -49,7 +53,7 @@ abstract class Item(
      * @see <a href="https://wiki.guildwars2.com/wiki/Skin">the wiki</a>
      */
     @SerialName("default_skin")
-    val defaultSkinId: Int = 0,
+    val defaultSkinId: SkinId = SkinId(),
 
     @SerialName("flags")
     val flags: List<ItemFlag> = emptyList(),
@@ -92,9 +96,9 @@ abstract class Item(
         result = 31 * result + iconLink.hashCode()
         result = 31 * result + description.hashCode()
         result = 31 * result + rarity.hashCode()
-        result = 31 * result + level
-        result = 31 * result + vendorValue
-        result = 31 * result + defaultSkinId
+        result = 31 * result + level.hashCode()
+        result = 31 * result + vendorValue.hashCode()
+        result = 31 * result + defaultSkinId.hashCode()
         result = 31 * result + flags.hashCode()
         result = 31 * result + gameTypes.hashCode()
         result = 31 * result + restrictions.hashCode()

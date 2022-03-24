@@ -5,6 +5,7 @@ import com.bselzer.gw2.v2.model.enumeration.wrapper.PvpHeroType
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.pvp.hero.skin.PvpHeroSkin
 import com.bselzer.gw2.v2.model.pvp.hero.stat.PvpHeroStats
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -29,10 +30,10 @@ data class PvpHero(
     val stats: PvpHeroStats = PvpHeroStats(),
 
     @SerialName("overlay")
-    val overlayLink: String = "",
+    val overlayLink: ImageLink = ImageLink(),
 
     @SerialName("underlay")
-    val underlayLink: String = "",
+    val underlayLink: ImageLink = ImageLink(),
 
     @SerialName("skins")
     val skins: List<PvpHeroSkin> = emptyList()

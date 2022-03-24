@@ -1,6 +1,8 @@
 package com.bselzer.gw2.v2.model.continent.map.heart
 
+import com.bselzer.gw2.v2.model.character.CharacterLevel
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.wrapper.ChatLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -19,7 +21,7 @@ data class RenownHeart(
      * The recommended level of the heart.
      */
     @SerialName("level")
-    val level: Int = 0,
+    val level: CharacterLevel = CharacterLevel(),
 
     /**
      * The two-dimensional coordinates within the texture.
@@ -38,5 +40,5 @@ data class RenownHeart(
      * @see <a href="https://wiki.guildwars2.com/wiki/Chat_link_format#Map_link">the wiki</a>
      */
     @SerialName("chat_link")
-    val chatLink: String = ""
+    val chatLink: ChatLink = ChatLink()
 ) : Identifiable<Int>

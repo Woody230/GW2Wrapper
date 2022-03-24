@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.model.achievement.category
 
 import com.bselzer.gw2.v2.model.achievement.AchievementId
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -23,7 +24,7 @@ data class AchievementCategory(
     val order: Int = Int.MAX_VALUE,
 
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     /**
      * The ids of achievements this category contains.

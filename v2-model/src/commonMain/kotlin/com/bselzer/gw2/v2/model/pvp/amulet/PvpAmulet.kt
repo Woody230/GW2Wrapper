@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.model.pvp.amulet
 
 import com.bselzer.gw2.v2.model.enumeration.wrapper.AttributeName
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -14,7 +15,7 @@ data class PvpAmulet(
     val name: String = "",
 
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     /**
      * The name of the attribute mapped to the amount it is increased by.

@@ -3,7 +3,9 @@ package com.bselzer.gw2.v2.model.trait
 import com.bselzer.gw2.v2.model.enumeration.wrapper.TraitSlot
 import com.bselzer.gw2.v2.model.enumeration.wrapper.TraitTier
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.specialization.SpecializationId
 import com.bselzer.gw2.v2.model.trait.fact.TraitFact
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -16,7 +18,7 @@ data class Trait(
     val name: String = "",
 
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     @SerialName("description")
     val description: String = "",
@@ -26,7 +28,7 @@ data class Trait(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/specializations">the wiki</a>
      */
     @SerialName("specialization")
-    val specializationId: Int = 0,
+    val specializationId: SpecializationId = SpecializationId(),
 
     @SerialName("tier")
     val tier: TraitTier = TraitTier(),

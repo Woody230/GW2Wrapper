@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.achievement.tier
 
+import com.bselzer.gw2.v2.model.achievement.AchievementPoints
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -15,5 +16,5 @@ data class AchievementTier(
      * The amount of achievement points (AP) awarded for completing this tier.
      */
     @SerialName("points")
-    val points: Int = 0
+    val points: AchievementPoints = AchievementPoints()
 )

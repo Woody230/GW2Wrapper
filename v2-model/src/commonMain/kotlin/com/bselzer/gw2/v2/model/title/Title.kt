@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.model.title
 
 import com.bselzer.gw2.v2.model.achievement.AchievementId
+import com.bselzer.gw2.v2.model.achievement.AchievementPoints
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -26,5 +27,5 @@ data class Title(
      * Null if achievement points are not required
      */
     @SerialName("ap_required")
-    val achievementPointsRequired: Int? = null
+    val achievementPointsRequired: AchievementPoints? = null
 ) : Identifiable<Int>

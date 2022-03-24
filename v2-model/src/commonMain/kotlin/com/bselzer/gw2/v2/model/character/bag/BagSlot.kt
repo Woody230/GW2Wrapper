@@ -1,6 +1,8 @@
 package com.bselzer.gw2.v2.model.character.bag
 
+import com.bselzer.gw2.v2.model.character.CharacterName
 import com.bselzer.gw2.v2.model.character.equipment.CharacterItemStat
+import com.bselzer.gw2.v2.model.enumeration.wrapper.Binding
 import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.item.ItemId
 import com.bselzer.gw2.v2.model.skin.SkinId
@@ -54,11 +56,11 @@ data class BagSlot(
      * What owns this item. Null if there is no binding.
      */
     @SerialName("binding")
-    val binding: String? = null,
+    val binding: Binding? = null,
 
     /**
      * Who owns this item. Null if the binding is NOT for a character.
      */
     @SerialName("bound_to")
-    val boundTo: String? = null,
+    val boundTo: CharacterName? = null,
 ) : Identifiable<Int>

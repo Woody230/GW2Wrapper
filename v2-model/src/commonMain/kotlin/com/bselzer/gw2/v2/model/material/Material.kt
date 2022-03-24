@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.model.material
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.gw2.v2.model.item.ItemId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -20,7 +21,7 @@ data class Material(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
     @SerialName("items")
-    val itemIds: List<Int> = emptyList(),
+    val itemIds: List<ItemId> = emptyList(),
 
     /**
      * The order in which this category appears in material storage.

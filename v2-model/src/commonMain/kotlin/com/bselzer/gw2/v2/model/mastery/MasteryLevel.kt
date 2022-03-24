@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.mastery
 
+import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -15,7 +16,7 @@ data class MasteryLevel(
     val instructions: String = "",
 
     @SerialName("icon")
-    val iconLink: String = "",
+    val iconLink: ImageLink = ImageLink(),
 
     /**
      * The number of mastery points required to unlock this level.
