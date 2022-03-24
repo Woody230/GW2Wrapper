@@ -1,5 +1,7 @@
 package com.bselzer.gw2.v2.chatlink
 
+import com.bselzer.gw2.v2.model.item.ItemId
+import com.bselzer.gw2.v2.model.skin.SkinId
 import com.bselzer.ktx.function.collection.fill
 import com.bselzer.ktx.function.collection.removeFirst
 import com.bselzer.ktx.function.collection.toByteArray
@@ -20,25 +22,25 @@ class ItemLink(
      * The id of the item.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
-    var itemId: Int = 0,
+    var itemId: ItemId = ItemId(),
 
     /**
      * The id of the skin.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skins">the wiki</a>
      */
-    var skinId: Int = 0,
+    var skinId: SkinId = SkinId(),
 
     /**
      * The id of the first upgrade component.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
-    var firstUpgradeId: Int = 0,
+    var firstUpgradeId: ItemId = ItemId(),
 
     /**
      * The id of the second upgrade component.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
      */
-    var secondUpgradeId: Int = 0
+    var secondUpgradeId: ItemId = ItemId()
 ) : ChatLink() {
     override val header: Byte = 2
 
@@ -47,13 +49,13 @@ class ItemLink(
         val hasFirstUpgradeSlot = firstUpgradeId > 0
         val hasSecondUpgradeSlot = secondUpgradeId > 0
         val flags = listOf(isSkinned, hasFirstUpgradeSlot, hasSecondUpgradeSlot).toByte()
-        var bytes = byteArrayOf(count) + itemId.toByteArray(take = 3, capacity = 3) + byteArrayOf(flags)
+        var bytes = byteArrayOf(count) + itemId.value.toByteArray(take = 3, capacity = 3) + byteArrayOf(flags)
 
         // Only include the skin and upgrade slots if the flags exist.
         // Consequently, the link can have a variable length instead of being fixed and zeroed out.
-        if (isSkinned) bytes += skinId.toByteArray(take = 3, capacity = 4)
-        if (hasFirstUpgradeSlot) bytes += firstUpgradeId.toByteArray(take = 3, capacity = 4)
-        if (hasSecondUpgradeSlot) bytes += secondUpgradeId.toByteArray(take = 3, capacity = 4)
+        if (isSkinned) bytes += skinId.value.toByteArray(take = 3, capacity = 4)
+        if (hasFirstUpgradeSlot) bytes += firstUpgradeId.value.toByteArray(take = 3, capacity = 4)
+        if (hasSecondUpgradeSlot) bytes += secondUpgradeId.value.toByteArray(take = 3, capacity = 4)
         return bytes
     }
 
@@ -63,7 +65,7 @@ class ItemLink(
         }
 
         count = bytes.removeFirst()
-        itemId = bytes.removeFirst(take = 3).toInt()
+        itemId = ItemId(bytes.removeFirst(take = 3).toInt())
 
         val flags = bytes.removeFirstOrNull()?.toBits() ?: return
         val isSkinned = flags[0]
@@ -73,13 +75,13 @@ class ItemLink(
         // Additional data may contain up to 12 bytes, so fill it to be consistent.
         val additionalData = ArrayDeque(bytes.fill(12) { 0 })
         if (isSkinned) {
-            skinId = additionalData.removeFirst(take = 4).toInt()
+            skinId = SkinId(additionalData.removeFirst(take = 4).toInt())
         }
         if (hasFirstUpgradeSlot) {
-            firstUpgradeId = additionalData.removeFirst(take = 4).toInt()
+            firstUpgradeId = ItemId(additionalData.removeFirst(take = 4).toInt())
         }
         if (hasSecondUpgradeSlot) {
-            secondUpgradeId = additionalData.removeFirst(take = 4).toInt()
+            secondUpgradeId = ItemId(additionalData.removeFirst(take = 4).toInt())
         }
     }
 }
