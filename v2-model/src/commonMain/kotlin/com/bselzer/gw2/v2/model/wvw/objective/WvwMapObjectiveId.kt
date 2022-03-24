@@ -11,7 +11,9 @@ import kotlin.jvm.JvmInline
  */
 @Serializable
 @JvmInline
-value class WvwMapObjectiveId(override val value: String = "") : StringIdentifier {
+value class WvwMapObjectiveId(override val value: String = "0-0") : StringIdentifier {
+    constructor(mapId: MapId, objectiveId: WvwObjectiveId) : this("$mapId-$objectiveId")
+
     /**
      * The id of the [WvwMap] that the [WvwObjective] is on.
      */
