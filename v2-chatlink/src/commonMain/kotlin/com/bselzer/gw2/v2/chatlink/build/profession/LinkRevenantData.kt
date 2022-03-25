@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.chatlink.build.profession
 
-import com.bselzer.gw2.v2.chatlink.build.LinkSkill
+import com.bselzer.gw2.v2.chatlink.build.skill.LinkSkill
 import com.bselzer.gw2.v2.model.legend.LegendCode
 import com.bselzer.gw2.v2.model.skill.SkillCode
 import com.bselzer.ktx.function.collection.removeFirst

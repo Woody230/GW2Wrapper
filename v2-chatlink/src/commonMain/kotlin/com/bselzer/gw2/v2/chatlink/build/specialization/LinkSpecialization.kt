@@ -1,5 +1,6 @@
-package com.bselzer.gw2.v2.chatlink.build
+package com.bselzer.gw2.v2.chatlink.build.specialization
 
+import com.bselzer.gw2.v2.chatlink.build.LinkComponent
 import com.bselzer.gw2.v2.model.specialization.SpecializationId
 import com.bselzer.ktx.function.collection.fill
 import com.bselzer.ktx.function.objects.toBits
@@ -20,7 +21,7 @@ data class LinkSpecialization(
      * 0 for no selection, 1 for top, 2 for middle, 3 for bottom
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/traits">the wiki</a>
      */
-    var trait1: Byte = 0,
+    var trait1: TraitChoice = TraitChoice(),
 
     /**
      * The major trait choice 2.
@@ -28,7 +29,7 @@ data class LinkSpecialization(
      * 0 for no selection, 1 for top, 2 for middle, 3 for bottom
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/traits">the wiki</a>
      */
-    var trait2: Byte = 0,
+    var trait2: TraitChoice = TraitChoice(),
 
     /**
      * The major trait choice 3.
@@ -36,13 +37,13 @@ data class LinkSpecialization(
      * 0 for no selection, 1 for top, 2 for middle, 3 for bottom
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/traits">the wiki</a>
      */
-    var trait3: Byte = 0,
+    var trait3: TraitChoice = TraitChoice(),
 ) : LinkComponent() {
     override val size: Int = 2
 
     override fun getData(): ByteArray {
         // First 2 bits are unused since there are only 3 major trait selections.
-        val flags = listOf(false, false) + trait3.toBits().takeLast(2) + trait2.toBits().takeLast(2) + trait1.toBits().takeLast(2)
+        val flags = listOf(false, false) + trait3.value.toBits().takeLast(2) + trait2.value.toBits().takeLast(2) + trait1.value.toBits().takeLast(2)
         return byteArrayOf(specializationId.value, flags.toByte())
     }
 
@@ -62,8 +63,8 @@ data class LinkSpecialization(
      * Converts the bit flags into a full byte.
      * @return the decoded trait
      */
-    private fun List<Boolean>.decodeTrait(fromIndex: Int, toIndex: Int): Byte {
+    private fun List<Boolean>.decodeTrait(fromIndex: Int, toIndex: Int): TraitChoice {
         val flags = listOf<Boolean>().fill(6) { false } + subList(fromIndex, toIndex)
-        return flags.toByte()
+        return TraitChoice(flags.toByte())
     }
 }

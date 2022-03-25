@@ -1,9 +1,10 @@
 package com.bselzer.gw2.v2.chatlink
 
 import com.bselzer.gw2.v2.chatlink.build.BuildTemplateLink
-import com.bselzer.gw2.v2.chatlink.build.LinkSkill
-import com.bselzer.gw2.v2.chatlink.build.LinkSpecialization
 import com.bselzer.gw2.v2.chatlink.build.profession.*
+import com.bselzer.gw2.v2.chatlink.build.skill.LinkSkill
+import com.bselzer.gw2.v2.chatlink.build.specialization.LinkSpecialization
+import com.bselzer.gw2.v2.chatlink.build.specialization.TraitChoice
 import com.bselzer.gw2.v2.model.legend.LegendCode
 import com.bselzer.gw2.v2.model.pet.PetId
 import com.bselzer.gw2.v2.model.skill.SkillCode
@@ -21,15 +22,15 @@ class BuildTemplateLinkTests : ChatLinkTests<BuildTemplateLink>() {
         val NECROMANCER_SPEC1 = SpecializationId(53)
         val NECROMANCER_SPEC2 = SpecializationId(50)
         val NECROMANCER_SPEC3 = SpecializationId(34)
-        val NECROMANCER_SPEC1_TRAIT1: Byte = 1
-        val NECROMANCER_SPEC1_TRAIT2: Byte = 2
-        val NECROMANCER_SPEC1_TRAIT3: Byte = 2
-        val NECROMANCER_SPEC2_TRAIT1: Byte = 1
-        val NECROMANCER_SPEC2_TRAIT2: Byte = 2
-        val NECROMANCER_SPEC2_TRAIT3: Byte = 2
-        val NECROMANCER_SPEC3_TRAIT1: Byte = 1
-        val NECROMANCER_SPEC3_TRAIT2: Byte = 1
-        val NECROMANCER_SPEC3_TRAIT3: Byte = 3
+        val NECROMANCER_SPEC1_TRAIT1 = TraitChoice(1)
+        val NECROMANCER_SPEC1_TRAIT2 = TraitChoice(2)
+        val NECROMANCER_SPEC1_TRAIT3 = TraitChoice(2)
+        val NECROMANCER_SPEC2_TRAIT1 = TraitChoice(1)
+        val NECROMANCER_SPEC2_TRAIT2 = TraitChoice(2)
+        val NECROMANCER_SPEC2_TRAIT3 = TraitChoice(2)
+        val NECROMANCER_SPEC3_TRAIT1 = TraitChoice(1)
+        val NECROMANCER_SPEC3_TRAIT2 = TraitChoice(1)
+        val NECROMANCER_SPEC3_TRAIT3 = TraitChoice(3)
         val NECROMANCER_LAND_HEAL = SkillCode(4801)
         val NECROMANCER_WATER_HEAL = SkillCode(162)
         val NECROMANCER_LAND_UTILITY1 = SkillCode(129)
@@ -48,15 +49,15 @@ class BuildTemplateLinkTests : ChatLinkTests<BuildTemplateLink>() {
         val REVENANT_SPEC1 = SpecializationId(14)
         val REVENANT_SPEC2 = SpecializationId(9)
         val REVENANT_SPEC3 = SpecializationId(63)
-        val REVENANT_SPEC1_TRAIT1: Byte = 1
-        val REVENANT_SPEC1_TRAIT2: Byte = 1
-        val REVENANT_SPEC1_TRAIT3: Byte = 1
-        val REVENANT_SPEC2_TRAIT1: Byte = 1
-        val REVENANT_SPEC2_TRAIT2: Byte = 1
-        val REVENANT_SPEC2_TRAIT3: Byte = 2
-        val REVENANT_SPEC3_TRAIT1: Byte = 2
-        val REVENANT_SPEC3_TRAIT2: Byte = 2
-        val REVENANT_SPEC3_TRAIT3: Byte = 3
+        val REVENANT_SPEC1_TRAIT1 = TraitChoice(1)
+        val REVENANT_SPEC1_TRAIT2 = TraitChoice(1)
+        val REVENANT_SPEC1_TRAIT3 = TraitChoice(1)
+        val REVENANT_SPEC2_TRAIT1 = TraitChoice(1)
+        val REVENANT_SPEC2_TRAIT2 = TraitChoice(1)
+        val REVENANT_SPEC2_TRAIT3 = TraitChoice(2)
+        val REVENANT_SPEC3_TRAIT1 = TraitChoice(2)
+        val REVENANT_SPEC3_TRAIT2 = TraitChoice(2)
+        val REVENANT_SPEC3_TRAIT3 = TraitChoice(3)
         val REVENANT_LAND_HEAL = SkillCode(4572)
         val REVENANT_WATER_HEAL = SkillCode(4572)
         val REVENANT_LAND_UTILITY1 = SkillCode(4651)
@@ -87,15 +88,15 @@ class BuildTemplateLinkTests : ChatLinkTests<BuildTemplateLink>() {
         val RANGER_SPEC1 = SpecializationId(33)
         val RANGER_SPEC2 = SpecializationId(30)
         val RANGER_SPEC3 = SpecializationId(55)
-        val RANGER_SPEC1_TRAIT1: Byte = 2
-        val RANGER_SPEC1_TRAIT2: Byte = 1
-        val RANGER_SPEC1_TRAIT3: Byte = 3
-        val RANGER_SPEC2_TRAIT1: Byte = 3
-        val RANGER_SPEC2_TRAIT2: Byte = 3
-        val RANGER_SPEC2_TRAIT3: Byte = 2
-        val RANGER_SPEC3_TRAIT1: Byte = 2
-        val RANGER_SPEC3_TRAIT2: Byte = 3
-        val RANGER_SPEC3_TRAIT3: Byte = 2
+        val RANGER_SPEC1_TRAIT1 = TraitChoice(2)
+        val RANGER_SPEC1_TRAIT2 = TraitChoice(1)
+        val RANGER_SPEC1_TRAIT3 = TraitChoice(3)
+        val RANGER_SPEC2_TRAIT1 = TraitChoice(3)
+        val RANGER_SPEC2_TRAIT2 = TraitChoice(3)
+        val RANGER_SPEC2_TRAIT3 = TraitChoice(2)
+        val RANGER_SPEC3_TRAIT1 = TraitChoice(2)
+        val RANGER_SPEC3_TRAIT2 = TraitChoice(3)
+        val RANGER_SPEC3_TRAIT3 = TraitChoice(2)
         val RANGER_LAND_HEAL = SkillCode(161)
         val RANGER_WATER_HEAL = SkillCode(120)
         val RANGER_LAND_UTILITY1 = SkillCode(186)

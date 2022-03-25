@@ -1,5 +1,6 @@
-package com.bselzer.gw2.v2.chatlink.build
+package com.bselzer.gw2.v2.chatlink.build.skill
 
+import com.bselzer.gw2.v2.chatlink.build.LinkComponent
 import com.bselzer.gw2.v2.model.skill.SkillCode
 import com.bselzer.ktx.function.collection.removeFirst
 import com.bselzer.ktx.function.collection.toByteArray

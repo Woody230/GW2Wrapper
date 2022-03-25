@@ -5,6 +5,8 @@ import com.bselzer.gw2.v2.chatlink.build.profession.LinkProfessionData
 import com.bselzer.gw2.v2.chatlink.build.profession.LinkRangerData
 import com.bselzer.gw2.v2.chatlink.build.profession.LinkRevenantData
 import com.bselzer.gw2.v2.chatlink.build.profession.ProfessionCode
+import com.bselzer.gw2.v2.chatlink.build.skill.LinkSkill
+import com.bselzer.gw2.v2.chatlink.build.specialization.LinkSpecialization
 import com.bselzer.gw2.v2.model.enumeration.ProfessionName
 
 /**
