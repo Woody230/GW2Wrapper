@@ -26,8 +26,8 @@ class RecoveryTests : BaseInstrumentedTests() {
         testRecovery({ achievement.achievement(id) }) { result ->
             // Result should be defaulted, except for the id.
             assertEquals(id, result.id)
-            assertEquals("", result.iconLink)
-            assertEquals(0, result.pointCap)
+            assertEquals("", result.iconLink.value)
+            assertEquals(0, result.pointCap.value)
             assertContentEquals(emptyList(), result.tiers)
         }
     }
@@ -59,8 +59,8 @@ class RecoveryTests : BaseInstrumentedTests() {
         testRecovery({ guild.upgrade(id) }) { result ->
             // Result should be defaulted, except for the id.
             assertEquals(id, result.id)
-            assertEquals("", result.iconLink)
-            assertEquals(0, result.requiredLevel)
+            assertEquals("", result.iconLink.value)
+            assertEquals(0, result.requiredLevel.value)
             assertContentEquals(emptyList(), result.prerequisites)
 
             // The identifier parameter should not interfere with retaining the actual id parameter when encoding/decoding.
@@ -69,8 +69,8 @@ class RecoveryTests : BaseInstrumentedTests() {
             val decoded = json.decodeFromString<GuildUpgrade>(encoded)
             assertTrue { decoded is DefaultUpgrade }
             assertEquals(id, decoded.id)
-            assertEquals("", decoded.iconLink)
-            assertEquals(0, decoded.requiredLevel)
+            assertEquals("", decoded.iconLink.value)
+            assertEquals(0, decoded.requiredLevel.value)
             assertContentEquals(emptyList(), decoded.prerequisites)
         }
     }

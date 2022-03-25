@@ -54,7 +54,7 @@ class RecoveryTests : BaseUnitTests() {
     @Test
     fun getIdentifiableSingle() = testRecovery({ guild.guild(GuildId("Test")) }) { result ->
         assertEquals(GuildId("Test"), result.id)
-        assertEquals(0, result.level)
+        assertEquals(0, result.level.value)
     }
 
     /**
@@ -65,7 +65,7 @@ class RecoveryTests : BaseUnitTests() {
         // Arrange
         val defaultAssertion: (Character) -> Unit = { result ->
             assertEquals(CharacterName("Test"), result.name)
-            assertEquals(1, result.level)
+            assertEquals(1, result.level.value)
             assertEquals(0, result.deathCount)
             assertContentEquals(emptyList(), result.backstory)
         }
@@ -95,8 +95,8 @@ class RecoveryTests : BaseUnitTests() {
         testRecovery({ achievement.achievement(id) }) { result ->
             // Result should be defaulted, except for the id.
             assertEquals(id, result.id)
-            assertEquals("", result.iconLink)
-            assertEquals(0, result.pointCap)
+            assertEquals("", result.iconLink.value)
+            assertEquals(0, result.pointCap.value)
             assertContentEquals(emptyList(), result.tiers)
         }
     }
