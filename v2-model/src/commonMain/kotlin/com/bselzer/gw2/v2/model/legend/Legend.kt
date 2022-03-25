@@ -1,7 +1,6 @@
 package com.bselzer.gw2.v2.model.legend
 
 import com.bselzer.gw2.v2.model.identifier.Identifiable
-import com.bselzer.gw2.v2.model.skill.PaletteId
 import com.bselzer.gw2.v2.model.skill.SkillId
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -16,7 +15,7 @@ data class Legend(
      * @see <a href="https://wiki.guildwars2.com/wiki/Chat_link_format#Build_template_link">the wiki</a>
      */
     @SerialName("code")
-    val paletteId: PaletteId = PaletteId(),
+    val code: LegendCode = LegendCode(),
 
     /**
      * The id of the profession skill used to swap to this legend.

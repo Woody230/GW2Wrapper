@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.chatlink.build.profession
 
+import com.bselzer.gw2.v2.model.pet.PetId
 import com.bselzer.ktx.function.collection.fill
 import kotlinx.serialization.Serializable
 
@@ -15,12 +16,8 @@ data class LinkRangerData(
      */
     var inactivePet: LinkPet = LinkPet()
 ) : LinkProfessionData() {
-    companion object {
-        const val CODE: Byte = 4
-    }
-
     override fun getData(): ByteArray {
-        val pets = byteArrayOf(activePet.terrestrialId, inactivePet.terrestrialId, activePet.aquaticId, inactivePet.aquaticId)
+        val pets = byteArrayOf(activePet.terrestrialId.value, inactivePet.terrestrialId.value, activePet.aquaticId.value, inactivePet.aquaticId.value)
         val filler = listOf<Byte>().fill(12) { 0 }
         return pets + filler
     }
@@ -29,9 +26,9 @@ data class LinkRangerData(
         // Ensure bytes size.
         super.decode(bytes)
 
-        activePet.terrestrialId = bytes.removeFirst()
-        inactivePet.terrestrialId = bytes.removeFirst()
-        activePet.aquaticId = bytes.removeFirst()
-        inactivePet.aquaticId = bytes.removeFirst()
+        activePet.terrestrialId = PetId(bytes.removeFirst())
+        inactivePet.terrestrialId = PetId(bytes.removeFirst())
+        activePet.aquaticId = PetId(bytes.removeFirst())
+        inactivePet.aquaticId = PetId(bytes.removeFirst())
     }
 }

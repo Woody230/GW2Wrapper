@@ -1,15 +1,11 @@
-package com.bselzer.gw2.v2.model.pet
+package com.bselzer.gw2.v2.model.legend
 
 import com.bselzer.gw2.v2.model.identifier.ByteIdentifier
 import kotlinx.serialization.Serializable
 import kotlin.jvm.JvmInline
 
-/**
- * The id of a pet.
- * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pets">the wiki</a>
- */
 @Serializable
 @JvmInline
-value class PetId(override val value: Byte = 0) : ByteIdentifier {
+value class LegendCode(override val value: Byte = 0) : ByteIdentifier {
     override fun toString(): String = value.toString()
 }

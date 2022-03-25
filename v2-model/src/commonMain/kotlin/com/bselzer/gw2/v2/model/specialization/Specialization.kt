@@ -66,4 +66,4 @@ data class Specialization(
      */
     @SerialName("profession_icon_big")
     val eliteIconLinkBig: ImageLink = ImageLink()
-) : Identifiable<Int>
+) : Identifiable<Byte>

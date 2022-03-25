@@ -4,6 +4,10 @@ import com.bselzer.gw2.v2.chatlink.build.BuildTemplateLink
 import com.bselzer.gw2.v2.chatlink.build.LinkSkill
 import com.bselzer.gw2.v2.chatlink.build.LinkSpecialization
 import com.bselzer.gw2.v2.chatlink.build.profession.*
+import com.bselzer.gw2.v2.model.legend.LegendCode
+import com.bselzer.gw2.v2.model.pet.PetId
+import com.bselzer.gw2.v2.model.skill.SkillCode
+import com.bselzer.gw2.v2.model.specialization.SpecializationId
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -13,99 +17,99 @@ class BuildTemplateLinkTests : ChatLinkTests<BuildTemplateLink>() {
     private companion object {
         const val NECROMANCER_BLANK_LINK = "[&DQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=]"
         const val NECROMANCER_LINK: String = "[&DQg1KTIpIjXBEqIAgQD6AEABphK9AYAAAxOSAAAAAAAAAAAAAAAAAAAAAAA=]"
-        const val NECROMANCER_PROFESSION: Byte = 8
-        const val NECROMANCER_SPEC1: Byte = 53
-        const val NECROMANCER_SPEC2: Byte = 50
-        const val NECROMANCER_SPEC3: Byte = 34
-        const val NECROMANCER_SPEC1_TRAIT1: Byte = 1
-        const val NECROMANCER_SPEC1_TRAIT2: Byte = 2
-        const val NECROMANCER_SPEC1_TRAIT3: Byte = 2
-        const val NECROMANCER_SPEC2_TRAIT1: Byte = 1
-        const val NECROMANCER_SPEC2_TRAIT2: Byte = 2
-        const val NECROMANCER_SPEC2_TRAIT3: Byte = 2
-        const val NECROMANCER_SPEC3_TRAIT1: Byte = 1
-        const val NECROMANCER_SPEC3_TRAIT2: Byte = 1
-        const val NECROMANCER_SPEC3_TRAIT3: Byte = 3
-        const val NECROMANCER_LAND_HEAL: Short = 4801.toShort()
-        const val NECROMANCER_WATER_HEAL: Short = 162.toShort()
-        const val NECROMANCER_LAND_UTILITY1: Short = 129.toShort()
-        const val NECROMANCER_WATER_UTILITY1: Short = 250.toShort()
-        const val NECROMANCER_LAND_UTILITY2: Short = 320.toShort()
-        const val NECROMANCER_WATER_UTILITY2: Short = 4774.toShort()
-        const val NECROMANCER_LAND_UTILITY3: Short = 445.toShort()
-        const val NECROMANCER_WATER_UTILITY3: Short = 128.toShort()
-        const val NECROMANCER_LAND_ELITE: Short = 4867.toShort()
-        const val NECROMANCER_WATER_ELITE: Short = 146.toShort()
+        val NECROMANCER_PROFESSION = ProfessionCode(8)
+        val NECROMANCER_SPEC1 = SpecializationId(53)
+        val NECROMANCER_SPEC2 = SpecializationId(50)
+        val NECROMANCER_SPEC3 = SpecializationId(34)
+        val NECROMANCER_SPEC1_TRAIT1: Byte = 1
+        val NECROMANCER_SPEC1_TRAIT2: Byte = 2
+        val NECROMANCER_SPEC1_TRAIT3: Byte = 2
+        val NECROMANCER_SPEC2_TRAIT1: Byte = 1
+        val NECROMANCER_SPEC2_TRAIT2: Byte = 2
+        val NECROMANCER_SPEC2_TRAIT3: Byte = 2
+        val NECROMANCER_SPEC3_TRAIT1: Byte = 1
+        val NECROMANCER_SPEC3_TRAIT2: Byte = 1
+        val NECROMANCER_SPEC3_TRAIT3: Byte = 3
+        val NECROMANCER_LAND_HEAL = SkillCode(4801)
+        val NECROMANCER_WATER_HEAL = SkillCode(162)
+        val NECROMANCER_LAND_UTILITY1 = SkillCode(129)
+        val NECROMANCER_WATER_UTILITY1 = SkillCode(250)
+        val NECROMANCER_LAND_UTILITY2 = SkillCode(320)
+        val NECROMANCER_WATER_UTILITY2 = SkillCode(4774)
+        val NECROMANCER_LAND_UTILITY3 = SkillCode(445)
+        val NECROMANCER_WATER_UTILITY3 = SkillCode(128)
+        val NECROMANCER_LAND_ELITE = SkillCode(4867)
+        val NECROMANCER_WATER_ELITE = SkillCode(146)
 
         // The skill palette ids may be the same if they align with the same slot, regardless of legend.
         // Consequently, the inactive heal/elite get ignored since they are always the same.
         const val REVENANT_LINK = "[&DQkOFQklPzrcEdwRKxIrEtQR1BEGEgYSyhHKEQQDBAIGEisS1BEGEisS1BE=]"
-        const val REVENANT_PROFESSION: Byte = 9
-        const val REVENANT_SPEC1: Byte = 14
-        const val REVENANT_SPEC2: Byte = 9
-        const val REVENANT_SPEC3: Byte = 63
-        const val REVENANT_SPEC1_TRAIT1: Byte = 1
-        const val REVENANT_SPEC1_TRAIT2: Byte = 1
-        const val REVENANT_SPEC1_TRAIT3: Byte = 1
-        const val REVENANT_SPEC2_TRAIT1: Byte = 1
-        const val REVENANT_SPEC2_TRAIT2: Byte = 1
-        const val REVENANT_SPEC2_TRAIT3: Byte = 2
-        const val REVENANT_SPEC3_TRAIT1: Byte = 2
-        const val REVENANT_SPEC3_TRAIT2: Byte = 2
-        const val REVENANT_SPEC3_TRAIT3: Byte = 3
-        const val REVENANT_LAND_HEAL: Short = 4572.toShort()
-        const val REVENANT_WATER_HEAL: Short = 4572.toShort()
-        const val REVENANT_LAND_UTILITY1: Short = 4651.toShort()
-        const val REVENANT_WATER_UTILITY1: Short = 4651.toShort()
-        const val REVENANT_LAND_UTILITY2: Short = 4564.toShort()
-        const val REVENANT_WATER_UTILITY2: Short = 4564.toShort()
-        const val REVENANT_LAND_UTILITY3: Short = 4614.toShort()
-        const val REVENANT_WATER_UTILITY3: Short = 4614.toShort()
-        const val REVENANT_LAND_ELITE: Short = 4554.toShort()
-        const val REVENANT_WATER_ELITE: Short = 4554.toShort()
-        const val REVENANT_ACTIVE_LAND_LEGEND: Byte = 4
-        const val REVENANT_ACTIVE_WATER_LEGEND: Byte = 4
-        const val REVENANT_INACTIVE_LAND_LEGEND: Byte = 3
-        const val REVENANT_INACTIVE_WATER_LEGEND: Byte = 2
-        const val REVENANT_INACTIVE_LAND_HEAL: Short = 4572.toShort()
-        const val REVENANT_INACTIVE_WATER_HEAL: Short = 4572.toShort()
-        const val REVENANT_INACTIVE_LAND_UTILITY1: Short = 4614.toShort()
-        const val REVENANT_INACTIVE_WATER_UTILITY1: Short = 4614.toShort()
-        const val REVENANT_INACTIVE_LAND_UTILITY2: Short = 4651.toShort()
-        const val REVENANT_INACTIVE_WATER_UTILITY2: Short = 4651.toShort()
-        const val REVENANT_INACTIVE_LAND_UTILITY3: Short = 4564.toShort()
-        const val REVENANT_INACTIVE_WATER_UTILITY3: Short = 4564.toShort()
-        const val REVENANT_INACTIVE_LAND_ELITE: Short = 4554.toShort()
-        const val REVENANT_INACTIVE_WATER_ELITE: Short = 4554.toShort()
+        val REVENANT_PROFESSION = ProfessionCode(9)
+        val REVENANT_SPEC1 = SpecializationId(14)
+        val REVENANT_SPEC2 = SpecializationId(9)
+        val REVENANT_SPEC3 = SpecializationId(63)
+        val REVENANT_SPEC1_TRAIT1: Byte = 1
+        val REVENANT_SPEC1_TRAIT2: Byte = 1
+        val REVENANT_SPEC1_TRAIT3: Byte = 1
+        val REVENANT_SPEC2_TRAIT1: Byte = 1
+        val REVENANT_SPEC2_TRAIT2: Byte = 1
+        val REVENANT_SPEC2_TRAIT3: Byte = 2
+        val REVENANT_SPEC3_TRAIT1: Byte = 2
+        val REVENANT_SPEC3_TRAIT2: Byte = 2
+        val REVENANT_SPEC3_TRAIT3: Byte = 3
+        val REVENANT_LAND_HEAL = SkillCode(4572)
+        val REVENANT_WATER_HEAL = SkillCode(4572)
+        val REVENANT_LAND_UTILITY1 = SkillCode(4651)
+        val REVENANT_WATER_UTILITY1 = SkillCode(4651)
+        val REVENANT_LAND_UTILITY2 = SkillCode(4564)
+        val REVENANT_WATER_UTILITY2 = SkillCode(4564)
+        val REVENANT_LAND_UTILITY3 = SkillCode(4614)
+        val REVENANT_WATER_UTILITY3 = SkillCode(4614)
+        val REVENANT_LAND_ELITE = SkillCode(4554)
+        val REVENANT_WATER_ELITE = SkillCode(4554)
+        val REVENANT_ACTIVE_LAND_LEGEND = LegendCode(4)
+        val REVENANT_ACTIVE_WATER_LEGEND = LegendCode(4)
+        val REVENANT_INACTIVE_LAND_LEGEND = LegendCode(3)
+        val REVENANT_INACTIVE_WATER_LEGEND = LegendCode(2)
+        val REVENANT_INACTIVE_LAND_HEAL = SkillCode(4572)
+        val REVENANT_INACTIVE_WATER_HEAL = SkillCode(4572)
+        val REVENANT_INACTIVE_LAND_UTILITY1 = SkillCode(4614)
+        val REVENANT_INACTIVE_WATER_UTILITY1 = SkillCode(4614)
+        val REVENANT_INACTIVE_LAND_UTILITY2 = SkillCode(4651)
+        val REVENANT_INACTIVE_WATER_UTILITY2 = SkillCode(4651)
+        val REVENANT_INACTIVE_LAND_UTILITY3 = SkillCode(4564)
+        val REVENANT_INACTIVE_WATER_UTILITY3 = SkillCode(4564)
+        val REVENANT_INACTIVE_LAND_ELITE = SkillCode(4554)
+        val REVENANT_INACTIVE_WATER_ELITE = SkillCode(4554)
 
         const val RANGER_LINK = "[&DQQhNh4vNy6hAHgAugC+AL4AGwD6FpoAwADtAD0iFRQAAAAAAAAAAAAAAAA=]"
-        const val RANGER_PROFESSION: Byte = 4
-        const val RANGER_SPEC1: Byte = 33
-        const val RANGER_SPEC2: Byte = 30
-        const val RANGER_SPEC3: Byte = 55
-        const val RANGER_SPEC1_TRAIT1: Byte = 2
-        const val RANGER_SPEC1_TRAIT2: Byte = 1
-        const val RANGER_SPEC1_TRAIT3: Byte = 3
-        const val RANGER_SPEC2_TRAIT1: Byte = 3
-        const val RANGER_SPEC2_TRAIT2: Byte = 3
-        const val RANGER_SPEC2_TRAIT3: Byte = 2
-        const val RANGER_SPEC3_TRAIT1: Byte = 2
-        const val RANGER_SPEC3_TRAIT2: Byte = 3
-        const val RANGER_SPEC3_TRAIT3: Byte = 2
-        const val RANGER_LAND_HEAL: Short = 161.toShort()
-        const val RANGER_WATER_HEAL: Short = 120.toShort()
-        const val RANGER_LAND_UTILITY1: Short = 186.toShort()
-        const val RANGER_WATER_UTILITY1: Short = 190.toShort()
-        const val RANGER_LAND_UTILITY2: Short = 190.toShort()
-        const val RANGER_WATER_UTILITY2: Short = 27.toShort()
-        const val RANGER_LAND_UTILITY3: Short = 5882.toShort()
-        const val RANGER_WATER_UTILITY3: Short = 154.toShort()
-        const val RANGER_LAND_ELITE: Short = 192.toShort()
-        const val RANGER_WATER_ELITE: Short = 237.toShort()
-        const val RANGER_LAND_PET1: Byte = 61
-        const val RANGER_WATER_PET1: Byte = 21
-        const val RANGER_LAND_PET2: Byte = 34
-        const val RANGER_WATER_PET2: Byte = 20
+        val RANGER_PROFESSION = ProfessionCode(4)
+        val RANGER_SPEC1 = SpecializationId(33)
+        val RANGER_SPEC2 = SpecializationId(30)
+        val RANGER_SPEC3 = SpecializationId(55)
+        val RANGER_SPEC1_TRAIT1: Byte = 2
+        val RANGER_SPEC1_TRAIT2: Byte = 1
+        val RANGER_SPEC1_TRAIT3: Byte = 3
+        val RANGER_SPEC2_TRAIT1: Byte = 3
+        val RANGER_SPEC2_TRAIT2: Byte = 3
+        val RANGER_SPEC2_TRAIT3: Byte = 2
+        val RANGER_SPEC3_TRAIT1: Byte = 2
+        val RANGER_SPEC3_TRAIT2: Byte = 3
+        val RANGER_SPEC3_TRAIT3: Byte = 2
+        val RANGER_LAND_HEAL = SkillCode(161)
+        val RANGER_WATER_HEAL = SkillCode(120)
+        val RANGER_LAND_UTILITY1 = SkillCode(186)
+        val RANGER_WATER_UTILITY1 = SkillCode(190)
+        val RANGER_LAND_UTILITY2 = SkillCode(190)
+        val RANGER_WATER_UTILITY2 = SkillCode(27)
+        val RANGER_LAND_UTILITY3 = SkillCode(5882)
+        val RANGER_WATER_UTILITY3 = SkillCode(154)
+        val RANGER_LAND_ELITE = SkillCode(192)
+        val RANGER_WATER_ELITE = SkillCode(237)
+        val RANGER_LAND_PET1 = PetId(61)
+        val RANGER_WATER_PET1 = PetId(21)
+        val RANGER_LAND_PET2 = PetId(34)
+        val RANGER_WATER_PET2 = PetId(20)
     }
 
     override val instance: BuildTemplateLink = BuildTemplateLink()
@@ -129,11 +133,11 @@ class BuildTemplateLinkTests : ChatLinkTests<BuildTemplateLink>() {
 
         // Assert
         assertEquals(NECROMANCER_PROFESSION, output.profession)
-        assertEquals(0, output.specialization1.specializationId)
-        assertEquals(0, output.specialization2.specializationId)
-        assertEquals(0, output.specialization3.specializationId)
-        assertEquals(0, output.healSkill.terrestrialId)
-        assertEquals(0, output.eliteSkill.aquaticId)
+        assertEquals(0, output.specialization1.specializationId.value)
+        assertEquals(0, output.specialization2.specializationId.value)
+        assertEquals(0, output.specialization3.specializationId.value)
+        assertEquals(0, output.healSkill.terrestrialId.value)
+        assertEquals(0, output.eliteSkill.aquaticId.value)
         assertTrue(output.professionData.getData().all { data -> data == 0.toByte() })
     }
 

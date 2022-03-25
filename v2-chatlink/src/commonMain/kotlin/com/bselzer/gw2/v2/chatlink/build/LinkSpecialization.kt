@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.chatlink.build
 
+import com.bselzer.gw2.v2.model.specialization.SpecializationId
 import com.bselzer.ktx.function.collection.fill
 import com.bselzer.ktx.function.objects.toBits
 import com.bselzer.ktx.function.objects.toByte
@@ -11,7 +12,7 @@ data class LinkSpecialization(
      * The id of the specialization.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/specializations">the wiki</a>
      */
-    var specializationId: Byte = 0,
+    var specializationId: SpecializationId = SpecializationId(),
 
     /**
      * The major trait choice 1.
@@ -42,14 +43,14 @@ data class LinkSpecialization(
     override fun getData(): ByteArray {
         // First 2 bits are unused since there are only 3 major trait selections.
         val flags = listOf(false, false) + trait3.toBits().takeLast(2) + trait2.toBits().takeLast(2) + trait1.toBits().takeLast(2)
-        return byteArrayOf(specializationId, flags.toByte())
+        return byteArrayOf(specializationId.value, flags.toByte())
     }
 
     override fun decode(bytes: ArrayDeque<Byte>) {
         // Ensure bytes size.
         super.decode(bytes)
 
-        specializationId = bytes.removeFirst()
+        specializationId = SpecializationId(bytes.removeFirst())
 
         val flags = bytes.removeFirst().toBits()
         trait3 = flags.decodeTrait(2, 4)

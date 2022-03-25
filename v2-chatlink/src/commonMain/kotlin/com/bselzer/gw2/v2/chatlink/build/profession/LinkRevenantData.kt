@@ -1,6 +1,8 @@
 package com.bselzer.gw2.v2.chatlink.build.profession
 
 import com.bselzer.gw2.v2.chatlink.build.LinkSkill
+import com.bselzer.gw2.v2.model.legend.LegendCode
+import com.bselzer.gw2.v2.model.skill.SkillCode
 import com.bselzer.ktx.function.collection.removeFirst
 import com.bselzer.ktx.function.collection.toByteArray
 import com.bselzer.ktx.function.collection.toShort
@@ -33,14 +35,10 @@ data class LinkRevenantData(
      */
     var utilitySkill3: LinkSkill = LinkSkill(),
 ) : LinkProfessionData() {
-    companion object {
-        const val CODE: Byte = 9
-    }
-
     override fun getData(): ByteArray {
-        val legends = byteArrayOf(activeLegend.terrestrialId, inactiveLegend.terrestrialId, activeLegend.aquaticId, inactiveLegend.aquaticId)
-        val landSkills = utilitySkill1.terrestrialId.toByteArray() + utilitySkill2.terrestrialId.toByteArray() + utilitySkill3.terrestrialId.toByteArray()
-        val waterSkills = utilitySkill1.aquaticId.toByteArray() + utilitySkill2.aquaticId.toByteArray() + utilitySkill3.aquaticId.toByteArray()
+        val legends = byteArrayOf(activeLegend.terrestrialId.value, inactiveLegend.terrestrialId.value, activeLegend.aquaticId.value, inactiveLegend.aquaticId.value)
+        val landSkills = utilitySkill1.terrestrialId.value.toByteArray() + utilitySkill2.terrestrialId.value.toByteArray() + utilitySkill3.terrestrialId.value.toByteArray()
+        val waterSkills = utilitySkill1.aquaticId.value.toByteArray() + utilitySkill2.aquaticId.value.toByteArray() + utilitySkill3.aquaticId.value.toByteArray()
         return legends + landSkills + waterSkills
     }
 
@@ -48,15 +46,25 @@ data class LinkRevenantData(
         // Ensure bytes size.
         super.decode(bytes)
 
-        activeLegend.terrestrialId = bytes.removeFirst()
-        inactiveLegend.terrestrialId = bytes.removeFirst()
-        activeLegend.aquaticId = bytes.removeFirst()
-        inactiveLegend.aquaticId = bytes.removeFirst()
-        utilitySkill1.terrestrialId = bytes.removeFirst(take = 2).toShort()
-        utilitySkill2.terrestrialId = bytes.removeFirst(take = 2).toShort()
-        utilitySkill3.terrestrialId = bytes.removeFirst(take = 2).toShort()
-        utilitySkill1.aquaticId = bytes.removeFirst(take = 2).toShort()
-        utilitySkill2.aquaticId = bytes.removeFirst(take = 2).toShort()
-        utilitySkill3.aquaticId = bytes.removeFirst(take = 2).toShort()
+        activeLegend.terrestrialId = bytes.takeLegend()
+        inactiveLegend.terrestrialId = bytes.takeLegend()
+        activeLegend.aquaticId = bytes.takeLegend()
+        inactiveLegend.aquaticId = bytes.takeLegend()
+        utilitySkill1.terrestrialId = bytes.takeSkill()
+        utilitySkill2.terrestrialId = bytes.takeSkill()
+        utilitySkill3.terrestrialId = bytes.takeSkill()
+        utilitySkill1.aquaticId = bytes.takeSkill()
+        utilitySkill2.aquaticId = bytes.takeSkill()
+        utilitySkill3.aquaticId = bytes.takeSkill()
     }
+
+    /**
+     * Takes the first bytes as a [LegendCode].
+     */
+    private fun ArrayDeque<Byte>.takeLegend() = LegendCode(removeFirst())
+
+    /**
+     * Takes the first bytes as a [SkillCode].
+     */
+    private fun ArrayDeque<Byte>.takeSkill() = SkillCode(removeFirst(take = 2).toShort())
 }

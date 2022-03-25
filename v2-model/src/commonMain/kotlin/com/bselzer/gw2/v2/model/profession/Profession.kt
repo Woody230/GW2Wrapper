@@ -3,7 +3,7 @@ package com.bselzer.gw2.v2.model.profession
 import com.bselzer.gw2.v2.model.enumeration.wrapper.ProfessionFlag
 import com.bselzer.gw2.v2.model.enumeration.wrapper.WeaponType
 import com.bselzer.gw2.v2.model.identifier.Identifiable
-import com.bselzer.gw2.v2.model.skill.PaletteId
+import com.bselzer.gw2.v2.model.skill.SkillCode
 import com.bselzer.gw2.v2.model.skill.SkillId
 import com.bselzer.gw2.v2.model.specialization.SpecializationId
 import com.bselzer.gw2.v2.model.wrapper.ImageLink
@@ -24,7 +24,7 @@ data class Profession(
      * @see <a href="https://wiki.guildwars2.com/wiki/Chat_link_format#Build_template_link">the wiki</a>
      */
     @SerialName("code")
-    val paletteId: PaletteId = PaletteId(),
+    val code: SkillCode = SkillCode(),
 
     @SerialName("icon")
     val iconLink: ImageLink = ImageLink(),
@@ -60,5 +60,5 @@ data class Profession(
      */
     @Serializable(with = MapArraySerializer::class)
     @SerialName("skills_by_palette")
-    val skillPaletteIds: Map<SkillId, PaletteId> = emptyMap()
+    val skillPaletteIds: Map<SkillId, SkillCode> = emptyMap()
 ) : Identifiable<String>

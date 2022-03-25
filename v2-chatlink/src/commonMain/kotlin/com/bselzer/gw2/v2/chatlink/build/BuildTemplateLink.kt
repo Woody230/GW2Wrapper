@@ -4,13 +4,18 @@ import com.bselzer.gw2.v2.chatlink.ChatLink
 import com.bselzer.gw2.v2.chatlink.build.profession.LinkProfessionData
 import com.bselzer.gw2.v2.chatlink.build.profession.LinkRangerData
 import com.bselzer.gw2.v2.chatlink.build.profession.LinkRevenantData
+import com.bselzer.gw2.v2.chatlink.build.profession.ProfessionCode
+import com.bselzer.gw2.v2.model.enumeration.ProfessionName
 
+/**
+ * @see <a href="https://wiki.guildwars2.com/wiki/Chat_link_format#Build_template_link">the wiki</a>
+ */
 class BuildTemplateLink(
     /**
      * The id of the profession code.
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/professions">the wiki</a>
      */
-    var profession: Byte = 0,
+    var profession: ProfessionCode = ProfessionCode(),
 
     /**
      * The additional data about the profession.
@@ -73,7 +78,7 @@ class BuildTemplateLink(
     override fun getData(): ByteArray {
         val specs = specialization1.getData() + specialization2.getData() + specialization3.getData()
         val skills = healSkill.getData() + utilitySkill1.getData() + utilitySkill2.getData() + utilitySkill3.getData() + eliteSkill.getData()
-        return byteArrayOf(profession) + specs + skills + professionData.getData()
+        return byteArrayOf(profession.value) + specs + skills + professionData.getData()
     }
 
     override fun decode(bytes: ArrayDeque<Byte>) {
@@ -81,7 +86,7 @@ class BuildTemplateLink(
             throw IllegalArgumentException("Unable to decode build template link: exactly $size data bytes are required")
         }
 
-        profession = bytes.removeFirst()
+        profession = ProfessionCode(bytes.removeFirst())
         specialization1.decode(bytes)
         specialization2.decode(bytes)
         specialization3.decode(bytes)
@@ -91,9 +96,9 @@ class BuildTemplateLink(
         utilitySkill3.decode(bytes)
         eliteSkill.decode(bytes)
 
-        professionData = when (profession) {
-            LinkRangerData.CODE -> LinkRangerData()
-            LinkRevenantData.CODE -> LinkRevenantData()
+        professionData = when (profession.name) {
+            ProfessionName.RANGER -> LinkRangerData()
+            ProfessionName.REVENANT -> LinkRevenantData()
             else -> LinkProfessionData()
         }
         professionData.decode(bytes)

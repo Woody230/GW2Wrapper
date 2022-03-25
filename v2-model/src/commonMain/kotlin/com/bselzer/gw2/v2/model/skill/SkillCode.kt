@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.model.skill
 
-import com.bselzer.gw2.v2.model.identifier.IntIdentifier
+import com.bselzer.gw2.v2.model.identifier.ShortIdentifier
 import kotlinx.serialization.Serializable
 import kotlin.jvm.JvmInline
 
@@ -11,6 +11,6 @@ import kotlin.jvm.JvmInline
  */
 @Serializable
 @JvmInline
-value class PaletteId(override val value: Int = 0) : IntIdentifier {
+value class SkillCode(override val value: Short = 0) : ShortIdentifier {
     override fun toString(): String = value.toString()
 }

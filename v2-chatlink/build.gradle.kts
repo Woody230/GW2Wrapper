@@ -11,6 +11,7 @@ android.setup()
 kotlin.setup {
     commonMain {
         v2Model()
+        v2ModelEnumeration()
         ktxSerialization()
         extBase64()
     }
