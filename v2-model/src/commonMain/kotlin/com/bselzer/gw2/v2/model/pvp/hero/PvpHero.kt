@@ -2,10 +2,10 @@ package com.bselzer.gw2.v2.model.pvp.hero
 
 import com.bselzer.gw2.v2.model.enumeration.wrapper.PvpHeroName
 import com.bselzer.gw2.v2.model.enumeration.wrapper.PvpHeroType
-import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.pvp.hero.skin.PvpHeroSkin
 import com.bselzer.gw2.v2.model.pvp.hero.stat.PvpHeroStats
 import com.bselzer.gw2.v2.model.wrapper.ImageLink
+import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

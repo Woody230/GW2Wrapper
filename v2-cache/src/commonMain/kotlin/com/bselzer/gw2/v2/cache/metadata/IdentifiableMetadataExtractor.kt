@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.cache.metadata
 
-import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.ktx.value.identifier.Identifiable
 import org.kodein.db.Options
 import org.kodein.db.model.orm.Metadata
 import org.kodein.db.model.orm.MetadataExtractor

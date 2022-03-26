@@ -13,7 +13,6 @@ import com.bselzer.gw2.v2.model.continent.map.challenge.HeroChallengeId
 import com.bselzer.gw2.v2.model.enumeration.wrapper.CharacterFlag
 import com.bselzer.gw2.v2.model.enumeration.wrapper.Gender
 import com.bselzer.gw2.v2.model.guild.GuildId
-import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.profession.ProfessionId
 import com.bselzer.gw2.v2.model.race.RaceId
 import com.bselzer.gw2.v2.model.recipe.RecipeId
@@ -22,6 +21,7 @@ import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
 import com.bselzer.ktx.datetime.serialization.SecondDurationSerializer
+import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -1,8 +1,8 @@
 package com.bselzer.gw2.v2.model.character.wvw
 
-import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.wvw.ability.WvwAbilityId
 import com.bselzer.gw2.v2.model.wvw.rank.WvwLevel
+import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.Serializable
 
 @Serializable

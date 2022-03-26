@@ -1,8 +1,8 @@
 package com.bselzer.gw2.v2.model.wvw.match.skirmish
 
-import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.wvw.map.WvwMapScore
 import com.bselzer.gw2.v2.model.wvw.world.WvwWorldCount
+import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.model.commerce.transaction
 
-import com.bselzer.gw2.v2.model.identifier.LongIdentifier
+import com.bselzer.ktx.value.identifier.LongIdentifier
 import kotlinx.serialization.Serializable
 import kotlin.jvm.JvmInline
 

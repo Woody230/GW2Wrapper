@@ -5,8 +5,8 @@ import com.bselzer.gw2.v2.model.achievement.reward.AchievementReward
 import com.bselzer.gw2.v2.model.achievement.tier.AchievementTier
 import com.bselzer.gw2.v2.model.enumeration.wrapper.AchievementFlag
 import com.bselzer.gw2.v2.model.enumeration.wrapper.AchievementType
-import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.wrapper.ImageLink
+import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

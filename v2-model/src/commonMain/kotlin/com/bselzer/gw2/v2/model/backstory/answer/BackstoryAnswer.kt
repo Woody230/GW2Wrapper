@@ -1,9 +1,9 @@
 package com.bselzer.gw2.v2.model.backstory.answer
 
 import com.bselzer.gw2.v2.model.backstory.question.BackstoryQuestionId
-import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.profession.ProfessionId
 import com.bselzer.gw2.v2.model.race.RaceId
+import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

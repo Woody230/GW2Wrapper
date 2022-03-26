@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.continent
 
 import com.bselzer.gw2.v2.model.continent.floor.FloorId
-import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

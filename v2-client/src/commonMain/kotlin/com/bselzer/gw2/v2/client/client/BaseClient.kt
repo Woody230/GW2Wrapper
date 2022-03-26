@@ -2,8 +2,8 @@ package com.bselzer.gw2.v2.client.client
 
 import com.bselzer.gw2.v2.client.client.ExceptionRecoveryMode.DEFAULT
 import com.bselzer.gw2.v2.client.client.ExceptionRecoveryMode.NONE
-import com.bselzer.gw2.v2.model.identifier.Identifiable
-import com.bselzer.gw2.v2.model.identifier.Identifier
+import com.bselzer.ktx.value.identifier.Identifiable
+import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
 import io.ktor.client.request.*
 

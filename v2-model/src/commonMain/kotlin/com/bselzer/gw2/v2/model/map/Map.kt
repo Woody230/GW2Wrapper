@@ -5,7 +5,7 @@ import com.bselzer.gw2.v2.model.continent.ContinentId
 import com.bselzer.gw2.v2.model.continent.floor.FloorId
 import com.bselzer.gw2.v2.model.continent.region.RegionId
 import com.bselzer.gw2.v2.model.enumeration.wrapper.MapType
-import com.bselzer.gw2.v2.model.identifier.Identifiable
+import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

@@ -3,10 +3,10 @@ package com.bselzer.gw2.v2.model.pvp.game
 import com.bselzer.gw2.v2.model.enumeration.wrapper.PvpRatingType
 import com.bselzer.gw2.v2.model.enumeration.wrapper.PvpResult
 import com.bselzer.gw2.v2.model.enumeration.wrapper.PvpTeam
-import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.map.MapId
 import com.bselzer.gw2.v2.model.profession.ProfessionId
 import com.bselzer.gw2.v2.model.pvp.season.PvpSeasonId
+import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

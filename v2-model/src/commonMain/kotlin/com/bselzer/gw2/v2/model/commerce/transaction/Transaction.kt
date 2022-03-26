@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.commerce.transaction
 
-import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.item.ItemId
+import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -3,13 +3,13 @@ package com.bselzer.gw2.v2.model.account
 import com.bselzer.gw2.v2.model.achievement.AchievementPoints
 import com.bselzer.gw2.v2.model.enumeration.wrapper.AccountAccess
 import com.bselzer.gw2.v2.model.guild.GuildId
-import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.world.WorldId
 import com.bselzer.gw2.v2.model.wvw.rank.WvwLevel
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
 import com.bselzer.ktx.datetime.serialization.SecondDurationSerializer
+import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

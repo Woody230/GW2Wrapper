@@ -1,10 +1,10 @@
 package com.bselzer.gw2.v2.cache.instance
 
 import com.bselzer.gw2.v2.client.client.Gw2Client
-import com.bselzer.gw2.v2.model.identifier.Identifiable
-import com.bselzer.gw2.v2.model.identifier.Identifier
 import com.bselzer.ktx.kodein.db.cache.DBCache
 import com.bselzer.ktx.kodein.db.transaction.TransactionManager
+import com.bselzer.ktx.value.identifier.Identifiable
+import com.bselzer.ktx.value.identifier.Identifier
 import org.kodein.db.Value
 import org.kodein.db.find
 import org.kodein.db.useModels

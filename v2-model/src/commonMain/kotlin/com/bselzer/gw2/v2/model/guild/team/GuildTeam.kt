@@ -1,9 +1,9 @@
 package com.bselzer.gw2.v2.model.guild.team
 
 import com.bselzer.gw2.v2.model.enumeration.wrapper.PvpLadderType
-import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.pvp.game.PvpGame
 import com.bselzer.gw2.v2.model.pvp.stat.StatAggregate
+import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

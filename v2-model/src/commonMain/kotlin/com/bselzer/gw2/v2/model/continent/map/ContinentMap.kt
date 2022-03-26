@@ -11,8 +11,8 @@ import com.bselzer.gw2.v2.model.continent.map.pointofinterest.PointOfInterest
 import com.bselzer.gw2.v2.model.continent.map.pointofinterest.PointOfInterestId
 import com.bselzer.gw2.v2.model.continent.map.sector.Sector
 import com.bselzer.gw2.v2.model.continent.map.sector.SectorId
-import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.map.MapId
+import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

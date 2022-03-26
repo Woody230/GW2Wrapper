@@ -1,10 +1,10 @@
 package com.bselzer.gw2.v2.model.wvw.map
 
 import com.bselzer.gw2.v2.model.enumeration.wrapper.WvwMapType
-import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.map.MapId
 import com.bselzer.gw2.v2.model.wvw.match.skirmish.WvwSkirmish
 import com.bselzer.gw2.v2.model.wvw.world.WvwWorldCount
+import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

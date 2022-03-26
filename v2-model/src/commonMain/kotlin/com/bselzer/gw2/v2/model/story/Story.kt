@@ -1,8 +1,8 @@
 package com.bselzer.gw2.v2.model.story
 
-import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.race.RaceId
 import com.bselzer.gw2.v2.model.story.season.StorySeasonId
+import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

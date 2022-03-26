@@ -3,11 +3,11 @@ package com.bselzer.gw2.v2.model.wvw.objective
 import com.bselzer.gw2.v2.model.continent.map.sector.SectorId
 import com.bselzer.gw2.v2.model.enumeration.wrapper.WvwMapType
 import com.bselzer.gw2.v2.model.enumeration.wrapper.WvwObjectiveType
-import com.bselzer.gw2.v2.model.identifier.Identifiable
 import com.bselzer.gw2.v2.model.map.MapId
 import com.bselzer.gw2.v2.model.wrapper.ChatLink
 import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import com.bselzer.gw2.v2.model.wvw.upgrade.WvwUpgradeId
+import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
