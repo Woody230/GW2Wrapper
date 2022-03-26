@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.continent.map.challenge
 
+import com.bselzer.ktx.geometry.dimension.bi.position.Point2D
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -14,5 +15,5 @@ data class HeroChallenge(
      * The two-dimensional coordinates within the texture.
      */
     @SerialName("coord")
-    val coordinates: List<Double> = emptyList()
+    val coordinates: Point2D = Point2D()
 ) : Identifiable<String>

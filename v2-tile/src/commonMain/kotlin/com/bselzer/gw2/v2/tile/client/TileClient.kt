@@ -4,8 +4,6 @@ import com.bselzer.gw2.v2.model.continent.Continent
 import com.bselzer.gw2.v2.model.continent.ContinentId
 import com.bselzer.gw2.v2.model.continent.floor.Floor
 import com.bselzer.gw2.v2.model.continent.floor.FloorId
-import com.bselzer.gw2.v2.model.extension.continent.clampedView
-import com.bselzer.gw2.v2.model.extension.continent.textureDimensions
 import com.bselzer.gw2.v2.tile.constant.Endpoints
 import com.bselzer.gw2.v2.tile.model.request.TileGridRequest
 import com.bselzer.gw2.v2.tile.model.request.TileRequest
@@ -95,14 +93,14 @@ open class TileClient(
         val maxZoomTiles = 2.0.pow(continent.maxZoom)
 
         // Get the dimensions of each individual tile.
-        val textureDimensions = floor.textureDimensions()
+        val textureDimensions = floor.textureDimensions
         val textureWidth = textureDimensions.width.toInt()
         val textureHeight = textureDimensions.height.toInt()
         val tileWidth = (textureWidth / maxZoomTiles).toInt()
         val tileHeight = (textureHeight / maxZoomTiles).toInt()
 
         // Get the tile position bounds within the grid.
-        val clampedView = floor.clampedView()
+        val clampedView = floor.clampedView
         val startX = floor(clampedView.point1.x * requestedZoomTiles / textureWidth).toInt()
         val endX = floor(clampedView.point2.x * requestedZoomTiles / textureWidth).toInt()
         val startY = floor(clampedView.point1.y * requestedZoomTiles / textureHeight).toInt()

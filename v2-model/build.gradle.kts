@@ -16,6 +16,7 @@ kotlin.setup {
         extSerialization()
         extDateTime()
         extValue()
+        extGeometry()
     }
     commonTest()
 }

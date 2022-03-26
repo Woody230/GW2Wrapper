@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.model.continent
 
 import com.bselzer.gw2.v2.model.continent.floor.FloorId
+import com.bselzer.ktx.geometry.dimension.bi.Dimension2D
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -17,7 +18,7 @@ data class Continent(
      * The width and height of the continent.
      */
     @SerialName("continent_dims")
-    val dimensions: List<Double> = emptyList(),
+    val dimensions: Dimension2D = Dimension2D(),
 
     @SerialName("min_zoom")
     val minZoom: Int = 0,
