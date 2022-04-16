@@ -3,6 +3,7 @@ package com.bselzer.gw2.v2.tile.instrumented
 import com.bselzer.gw2.v2.tile.BaseTests
 import com.bselzer.gw2.v2.tile.constant.Endpoints
 import io.ktor.client.*
+import io.ktor.client.call.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
@@ -20,7 +21,7 @@ class TileServiceTests : BaseTests() {
         val client = HttpClient()
 
         // Act
-        val content = runBlocking { client.use { it.get<ByteArray>("${Endpoints.BASE_URL}/2/3/0/0/0.jpg") } }
+        val content = runBlocking { client.use { it.get("${Endpoints.BASE_URL}/2/3/0/0/0.jpg").body<ByteArray>() } }
 
         // Assert
         assertNotNull(content)

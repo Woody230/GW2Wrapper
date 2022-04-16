@@ -6,6 +6,7 @@ import com.bselzer.gw2.v2.emblem.extension.options
 import com.bselzer.gw2.v2.emblem.request.EmblemRequest
 import com.bselzer.gw2.v2.emblem.request.EmblemRequestOptions
 import io.ktor.client.*
+import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.utils.io.core.*
 import kotlinx.coroutines.Deferred
@@ -53,7 +54,7 @@ open class EmblemClient(
             return@async try {
                 httpClient.get(request.constructBaseUrl()) {
                     options(request.options)
-                }
+                }.body()
             } catch (ex: Exception) {
                 ByteArray(0)
             }

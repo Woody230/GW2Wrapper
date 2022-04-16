@@ -5,7 +5,11 @@ import com.bselzer.gw2.v2.client.client.ExceptionRecoveryMode.NONE
 import com.bselzer.ktx.value.identifier.Identifiable
 import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.plugins.*
 import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
 
 abstract class BaseClient(
     protected val httpClient: HttpClient,
@@ -42,9 +46,7 @@ abstract class BaseClient(
      *
      * @return the object
      */
-    protected suspend inline fun <reified T> forceGetSingle(path: String, block: HttpRequestBuilder.() -> Unit = {}): T = httpClient.get(path = path) {
-        apply(block)
-    }
+    protected suspend inline fun <reified T> forceGetSingle(path: String, block: HttpRequestBuilder.() -> Unit = {}): T = request(path, block)
 
     /**
      * Gets the object with recovery.
@@ -84,9 +86,7 @@ abstract class BaseClient(
     protected suspend inline fun <reified T> getList(path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> = tryOrRecover(
         { emptyList() }
     ) {
-        httpClient.get(path = path) {
-            apply(block)
-        }
+        request(path, block)
     }
 
     /**
@@ -116,12 +116,14 @@ abstract class BaseClient(
     /**
      * @return all the objects
      */
-    protected suspend inline fun <reified T : Identifiable<Value>, Value> allIds(path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> = all(path, "ids", block)
+    protected suspend inline fun <reified T : Identifiable<Value>, Value> allIds(path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> =
+        all(path, "ids", block)
 
     /**
      * @return all the objects
      */
-    protected suspend inline fun <reified T : Identifiable<Value>, Value> allTabs(path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> = all(path, "tabs", block)
+    protected suspend inline fun <reified T : Identifiable<Value>, Value> allTabs(path: String, block: HttpRequestBuilder.() -> Unit = {}): List<T> =
+        all(path, "tabs", block)
 
     /**
      * Chunks the ids into requests small enough for the API to accept, if there are more ids than the configuration page size.
@@ -139,7 +141,7 @@ abstract class BaseClient(
     ) {
         val responses = mutableListOf<T>()
         for (chunk in ids.toHashSet().chunked(configuration.pageSize)) {
-            responses.addAll(httpClient.get(path = path) {
+            responses.addAll(request(path) {
                 idsParameter(chunk, idsParameterName)
                 apply(block)
             })
@@ -158,7 +160,7 @@ abstract class BaseClient(
         // Don't know the associated ids so can't do proper defaulting.
         { emptyList() }
     ) {
-        httpClient.get(path = path) {
+        request(path) {
             allIdsParameter(idParameterName)
             apply(block)
         }
@@ -174,15 +176,14 @@ abstract class BaseClient(
         path: String,
         instance: (Id) -> T,
         block: HttpRequestBuilder.() -> Unit = {}
-    ): T =
-        tryOrRecover(
-            default = { instance(id) }
-        ) {
-            httpClient.get(path = path) {
-                idParameter(id)
-                apply(block)
-            }
+    ): T = tryOrRecover(
+        default = { instance(id) }
+    ) {
+        request(path) {
+            idParameter(id)
+            apply(block)
         }
+    }
 
     /**
      * Attempts to call the [block]. If the [block] fails and the recovery mode is [DEFAULT], then the [default] is called.
@@ -195,6 +196,21 @@ abstract class BaseClient(
         when (configuration.exceptionRecoveryMode) {
             NONE -> throw exception
             DEFAULT -> default()
+        }
+    }
+
+    /**
+     * Makes the request for the object and verifies the status code.
+     */
+    protected suspend inline fun <reified T> request(path: String, block: HttpRequestBuilder.() -> Unit): T {
+        val response = httpClient.get(path, block)
+
+        // In the case where we are getting a 404, an empty default may be deserialized.
+        // Consequently, throw and potentially let a tryOrRecover catch to properly construct a default.
+        return if (!response.status.isSuccess()) {
+            throw ClientRequestException(response, response.bodyAsText())
+        } else {
+            response.body()
         }
     }
 }

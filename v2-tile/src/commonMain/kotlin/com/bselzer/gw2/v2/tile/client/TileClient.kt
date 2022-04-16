@@ -10,6 +10,7 @@ import com.bselzer.gw2.v2.tile.model.request.TileRequest
 import com.bselzer.gw2.v2.tile.model.response.Tile
 import com.bselzer.gw2.v2.tile.model.response.TileGrid
 import io.ktor.client.*
+import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.utils.io.core.*
 import kotlinx.coroutines.Deferred
@@ -66,7 +67,7 @@ open class TileClient(
         // Use async for parallelism.
         async {
             val content: ByteArray = try {
-                httpClient.get(request.url)
+                httpClient.get(request.url).body()
             } catch (ex: Exception) {
                 ByteArray(0)
             }

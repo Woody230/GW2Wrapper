@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.emblem
 
 import com.bselzer.gw2.v2.emblem.request.EmblemRequestOptions
+import io.ktor.client.call.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -52,7 +53,7 @@ class EmblemServiceTests : BaseTests() {
         val url = get { emblemUrl(request) }
 
         // Act
-        val content = runBlocking { createHttpClient().get<ByteArray>(url) }
+        val content = runBlocking { createHttpClient().get(url).body<ByteArray>() }
 
         // Assert
         assertNotNull(content)

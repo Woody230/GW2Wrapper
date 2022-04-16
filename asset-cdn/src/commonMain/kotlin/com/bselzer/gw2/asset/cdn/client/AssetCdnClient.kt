@@ -2,9 +2,9 @@ package com.bselzer.gw2.asset.cdn.client
 
 import com.bselzer.gw2.asset.cdn.model.Build
 import io.ktor.client.*
-import io.ktor.client.features.*
+import io.ktor.client.call.*
+import io.ktor.client.plugins.*
 import io.ktor.client.request.*
-import io.ktor.http.*
 import io.ktor.utils.io.core.*
 
 /**
@@ -17,9 +17,11 @@ class AssetCdnClient(
     private companion object {
         const val CORE_ID = "101"
         const val CHINESE_ID = "111"
-        const val BASE_CORE = "assetcdn.${CORE_ID}.arenanetworks.com"
-        const val BASE_CHINESE = "assetcdn.${CHINESE_ID}.cgw2.com"
         const val LATEST = "latest"
+
+        // These sites are not secured.
+        const val BASE_CORE = "http://assetcdn.${CORE_ID}.arenanetworks.com"
+        const val BASE_CHINESE = "http://assetcdn.${CHINESE_ID}.cgw2.com"
     }
 
     init {
@@ -44,17 +46,13 @@ class AssetCdnClient(
      * @return a new http client with the configuration applied
      */
     private fun HttpClient.setup(configuration: AssetCdnClientConfiguration): HttpClient = config {
-        // NOTE: this default request is applied last.
         defaultRequest {
-            host = when (configuration.type) {
-                AssetCdnType.CORE -> BASE_CORE
-                AssetCdnType.CHINESE -> BASE_CHINESE
-            }
-
-            url {
-                // These sites are not secured.
-                protocol = URLProtocol.HTTP
-            }
+            url(
+                when (configuration.type) {
+                    AssetCdnType.CORE -> BASE_CORE
+                    AssetCdnType.CHINESE -> BASE_CHINESE
+                }
+            )
         }
     }
 
@@ -65,7 +63,7 @@ class AssetCdnClient(
      */
     suspend fun latest(): Build {
         val content = try {
-            httpClient.get(path = "${LATEST}/${getId()}")
+            httpClient.get("${LATEST}/${getId()}").body()
         } catch (ex: Exception) {
             ""
         }.split(' ')

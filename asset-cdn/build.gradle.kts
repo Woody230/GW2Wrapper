@@ -11,7 +11,7 @@ android.setup()
 kotlin.setup {
     commonMain {
         ktorClient()
-        ktorClientSerialization()
+        ktorSerialization()
     }
     commonTest {
         mockKtorClient()

@@ -12,9 +12,9 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
 private const val BASE_PUBLISHING_NAME = "gw2"
 private const val EXTENSION = "4.0.0"
-private const val KTX_DATETIME = "0.3.1"
-private const val KTX_SERIALIZATION = "1.3.1"
-private const val KTOR = "1.6.7"
+private const val KTX_DATETIME = "0.3.2"
+private const val KTX_SERIALIZATION = "1.3.2"
+private const val KTOR = "2.0.0"
 private const val ANDROID_TEST = "1.1.0"
 private const val ROBOLECTRIC = "4.6.1"
 private const val COROUTINE = "1.5.2"
@@ -24,7 +24,11 @@ const val KOTLIN = "1.6.10"
 fun KotlinDependencyHandler.ktxDateTime() = api("org.jetbrains.kotlinx:kotlinx-datetime:$KTX_DATETIME")
 fun KotlinDependencyHandler.ktxSerialization() = api("org.jetbrains.kotlinx:kotlinx-serialization-json:$KTX_SERIALIZATION")
 fun KotlinDependencyHandler.ktorClient() = api("io.ktor:ktor-client-core:$KTOR")
-fun KotlinDependencyHandler.ktorClientSerialization() = api("io.ktor:ktor-client-serialization:$KTOR")
+fun KotlinDependencyHandler.ktorSerialization() {
+    api("io.ktor:ktor-client-content-negotiation:$KTOR")
+    api("io.ktor:ktor-serialization-kotlinx-json:$KTOR")
+}
+
 fun KotlinDependencyHandler.coroutine() = api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINE")
 
 fun KotlinDependencyHandler.v2Client() = api(project(":v2-client"))

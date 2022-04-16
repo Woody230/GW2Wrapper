@@ -6,11 +6,9 @@ import com.bselzer.gw2.v2.client.extension.language
 import com.bselzer.gw2.v2.client.extension.schemaVersion
 import com.bselzer.gw2.v2.model.serialization.Modules
 import io.ktor.client.*
-import io.ktor.client.features.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.json.serializer.*
-import io.ktor.client.request.*
-import io.ktor.http.*
+import io.ktor.client.plugins.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.serialization.kotlinx.json.*
 import io.ktor.utils.io.core.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonBuilder
@@ -391,17 +389,12 @@ open class Gw2Client(
      */
     private fun HttpClient.setup(json: Json, configuration: Gw2ClientConfiguration): HttpClient = config {
         // Enable kotlinx.serialization
-        install(JsonFeature) {
-            serializer = KotlinxSerializer(json)
+        install(ContentNegotiation) {
+            json(json)
         }
 
-        // NOTE: this default request is applied last.
         defaultRequest {
-            host = Endpoints.BASE_URL
-
-            url {
-                protocol = URLProtocol.HTTPS
-            }
+            url(Endpoints.BASE_URL)
 
             // Set up the headers.
             configuration.schemaVersion?.let { version ->
