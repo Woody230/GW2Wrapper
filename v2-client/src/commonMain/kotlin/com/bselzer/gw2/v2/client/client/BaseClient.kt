@@ -208,7 +208,7 @@ abstract class BaseClient(
         // In the case where we are getting a 404, an empty default may be deserialized.
         // Consequently, throw and potentially let a tryOrRecover catch to properly construct a default.
         return if (!response.status.isSuccess()) {
-            throw ClientRequestException(response, response.bodyAsText())
+            throw ResponseException(response, response.bodyAsText())
         } else {
             response.body()
         }
