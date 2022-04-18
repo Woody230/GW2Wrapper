@@ -5,7 +5,6 @@ import com.bselzer.gw2.v2.model.enumeration.wrapper.RecipeFlag
 import com.bselzer.gw2.v2.model.enumeration.wrapper.RecipeType
 import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgradeId
 import com.bselzer.gw2.v2.model.item.ItemId
-import com.bselzer.gw2.v2.model.recipe.ingredient.GuildRecipeIngredient
 import com.bselzer.gw2.v2.model.recipe.ingredient.RecipeIngredient
 import com.bselzer.gw2.v2.model.wrapper.ChatLink
 import com.bselzer.ktx.datetime.serialization.MillisecondDurationSerializer
@@ -62,12 +61,6 @@ data class Recipe(
      */
     @SerialName("ingredients")
     val ingredients: List<RecipeIngredient> = emptyList(),
-
-    /**
-     * The ingredients required in the recipe that come from the guild.
-     */
-    @SerialName("guild_ingredients")
-    val guildIngredients: List<GuildRecipeIngredient> = emptyList(),
 
     /**
      * The id of the guild upgrade produced by the recipe.

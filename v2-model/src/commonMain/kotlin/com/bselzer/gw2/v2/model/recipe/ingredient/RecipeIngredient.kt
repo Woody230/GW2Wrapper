@@ -1,21 +1,26 @@
 package com.bselzer.gw2.v2.model.recipe.ingredient
 
-import com.bselzer.gw2.v2.model.item.ItemId
+import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RecipeIngredient(
-    /**
-     * The id of the ingredient item.
-     * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
-     */
-    @SerialName("item_id")
-    val itemId: ItemId = ItemId(),
-
-    /**
-     * The number of the item associated with the [itemId] required.
-     */
+abstract class RecipeIngredient(
     @SerialName("count")
     val count: Int = 0
-)
+) : Identifiable<Int> {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || this::class != other::class) return false
+
+        other as RecipeIngredient
+
+        if (count != other.count) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return count
+    }
+}

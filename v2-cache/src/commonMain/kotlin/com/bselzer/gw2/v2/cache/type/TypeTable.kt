@@ -15,6 +15,10 @@ import com.bselzer.gw2.v2.model.profession.track.TraitTrack
 import com.bselzer.gw2.v2.model.pvp.standing.BestStanding
 import com.bselzer.gw2.v2.model.pvp.standing.CurrentStanding
 import com.bselzer.gw2.v2.model.pvp.standing.PvpStanding
+import com.bselzer.gw2.v2.model.recipe.ingredient.CurrencyRecipeIngredient
+import com.bselzer.gw2.v2.model.recipe.ingredient.GuildUpgradeRecipeIngredient
+import com.bselzer.gw2.v2.model.recipe.ingredient.ItemRecipeIngredient
+import com.bselzer.gw2.v2.model.recipe.ingredient.RecipeIngredient
 import com.bselzer.gw2.v2.model.skill.fact.*
 import com.bselzer.gw2.v2.model.skin.*
 import com.bselzer.gw2.v2.model.trait.fact.*
@@ -131,6 +135,15 @@ fun TypeTable.Builder.trainingTrack(): Unit = root<TrainingTrack>().run {
 }
 
 /**
+ * Injects the [RecipeIngredient] types.
+ */
+fun TypeTable.Builder.recipeIngredient(): Unit = root<RecipeIngredient>().run {
+    sub<CurrencyRecipeIngredient>()
+    sub<GuildUpgradeRecipeIngredient>()
+    sub<ItemRecipeIngredient>()
+}
+
+/**
  * Injects the [SkillFact] types.
  */
 fun TypeTable.Builder.skillFact(): Unit = root<SkillFact>().run {
@@ -199,6 +212,7 @@ fun TypeTable.Builder.gw2() {
     item()
     pvpStanding()
     trainingTrack()
+    recipeIngredient()
     skillFact()
     skin()
     traitFact()

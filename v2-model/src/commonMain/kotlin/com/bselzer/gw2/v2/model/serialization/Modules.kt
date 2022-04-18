@@ -15,6 +15,10 @@ import com.bselzer.gw2.v2.model.profession.track.TraitTrack
 import com.bselzer.gw2.v2.model.pvp.standing.BestStanding
 import com.bselzer.gw2.v2.model.pvp.standing.CurrentStanding
 import com.bselzer.gw2.v2.model.pvp.standing.PvpStanding
+import com.bselzer.gw2.v2.model.recipe.ingredient.CurrencyRecipeIngredient
+import com.bselzer.gw2.v2.model.recipe.ingredient.GuildUpgradeRecipeIngredient
+import com.bselzer.gw2.v2.model.recipe.ingredient.ItemRecipeIngredient
+import com.bselzer.gw2.v2.model.recipe.ingredient.RecipeIngredient
 import com.bselzer.gw2.v2.model.skill.fact.*
 import com.bselzer.gw2.v2.model.skin.*
 import com.bselzer.gw2.v2.model.trait.fact.*
@@ -154,6 +158,17 @@ object Modules {
     }
 
     /**
+     * The [RecipeIngredient] serializers module.
+     */
+    val RECIPE_INGREDIENT = SerializersModule {
+        polymorphic(RecipeIngredient::class) {
+            subclass(CurrencyRecipeIngredient::class)
+            subclass(GuildUpgradeRecipeIngredient::class)
+            subclass(ItemRecipeIngredient::class)
+        }
+    }
+
+    /**
      * The [SkillFact] serializers module.
      */
     val SKILL_FACT = SerializersModule {
@@ -220,8 +235,8 @@ object Modules {
     /**
      * All of the serializer modules.
      */
-    val ALL: SerializersModule =
-        TOKEN_INFO + ACHIEVEMENT_REWARD + ACHIEVEMENT_BIT + GUILD_LOG + GUILD_UPGRADE + GUILD_UPGRADE_COST + ITEM + PVP_STANDING + TRAINING_TRACK + SKILL_FACT + SKIN + TRAIT_FACT
+    val ALL: SerializersModule = TOKEN_INFO + ACHIEVEMENT_REWARD + ACHIEVEMENT_BIT + GUILD_LOG + GUILD_UPGRADE + GUILD_UPGRADE_COST +
+            ITEM + PVP_STANDING + TRAINING_TRACK + RECIPE_INGREDIENT + SKILL_FACT + SKIN + TRAIT_FACT
 
     /**
      * The model [Json] instance.
