@@ -1,11 +1,11 @@
-package com.bselzer.gw2.v2.model.achievement.daily
+package com.bselzer.gw2.v2.model.achievement
 
 import com.bselzer.gw2.v2.model.character.CharacterLevel
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class DailyLevel(
+data class AchievementLevel(
     /**
      * The minimum level requirement.
      */

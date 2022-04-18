@@ -14,7 +14,7 @@ data class Gw2ClientConfiguration(
      * An ISO 8601 datetime to specify a particular schema, or "latest" to use the latest schema.
      * If null, then no schema version will be added.
      */
-    val schemaVersion: String? = "2021-08-01T00:00:00Z", // TODO 2022-03-09T02:00:00.000Z update https://api.guildwars2.com/v2.json?v=latest
+    val schemaVersion: String? = "2022-03-24T00:00:00Z", // https://api.guildwars2.com/v2.json?v=latest
 
     /**
      * The access token.

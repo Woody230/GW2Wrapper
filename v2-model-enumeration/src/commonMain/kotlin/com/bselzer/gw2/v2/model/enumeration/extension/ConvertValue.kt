@@ -13,6 +13,9 @@ fun com.bselzer.gw2.v2.model.enumeration.wrapper.ArmorWeight.enumValueOrNull() =
 fun com.bselzer.gw2.v2.model.enumeration.wrapper.AttributeName.enumValueOrNull() = value.enumValueOrNull<com.bselzer.gw2.v2.model.enumeration.AttributeName>()
 fun com.bselzer.gw2.v2.model.enumeration.wrapper.AttunementName.enumValueOrNull() = value.enumValueOrNull<com.bselzer.gw2.v2.model.enumeration.AttunementName>()
 fun com.bselzer.gw2.v2.model.enumeration.wrapper.Binding.enumValueOrNull() = value.enumValueOrNull<com.bselzer.gw2.v2.model.enumeration.Binding>()
+fun com.bselzer.gw2.v2.model.enumeration.wrapper.CategoryAchievementFlag.enumValueOrNull() =
+    value.enumValueOrNull<com.bselzer.gw2.v2.model.enumeration.CategoryAchievementFlag>()
+
 fun com.bselzer.gw2.v2.model.enumeration.wrapper.CharacterFlag.enumValueOrNull() = value.enumValueOrNull<com.bselzer.gw2.v2.model.enumeration.CharacterFlag>()
 fun com.bselzer.gw2.v2.model.enumeration.wrapper.ColorCategory.enumValueOrNull() = value.enumValueOrNull<com.bselzer.gw2.v2.model.enumeration.ColorCategory>()
 fun com.bselzer.gw2.v2.model.enumeration.wrapper.ComboFieldType.enumValueOrNull() = value.enumValueOrNull<com.bselzer.gw2.v2.model.enumeration.ComboFieldType>()

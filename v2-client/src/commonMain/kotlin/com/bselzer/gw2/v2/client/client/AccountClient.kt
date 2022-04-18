@@ -185,7 +185,7 @@ class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguratio
 
     /**
      * @return the ids of the unlocked home instance cats
-     * @since 2019-03-22T00:00:00Z or later
+     * @since 2019-03-22T00:00:00.000Z
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/account/home/cats">the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.PROGRESSION, Permission.UNLOCKS)

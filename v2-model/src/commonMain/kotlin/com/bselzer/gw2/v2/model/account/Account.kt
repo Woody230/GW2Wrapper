@@ -113,7 +113,7 @@ data class Account(
     /**
      * The date and time of when the account information last changed.
      *
-     * @since 2019-02-21T00:00:00Z or later
+     * @since 2019-02-21T00:00:00.000Z
      */
     @SerialName("last_modified")
     val lastModifiedAt: Instant = Instant.DISTANT_PAST,
@@ -121,7 +121,7 @@ data class Account(
     /**
      * The number of build storage slots.
      *
-     * @since 2019-12-19T00:00:00Z or later
+     * @since 2019-12-19T00:00:00.000Z
      * @see <a href="https://wiki.guildwars2.com/wiki/Template#Build_Storage">the wiki</a>
      */
     @SerialName("build_storage_slots")

@@ -1,6 +1,5 @@
 package com.bselzer.gw2.v2.model.achievement.category
 
-import com.bselzer.gw2.v2.model.achievement.AchievementId
 import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
@@ -27,9 +26,12 @@ data class AchievementCategory(
     val iconLink: ImageLink = ImageLink(),
 
     /**
-     * The ids of achievements this category contains.
+     * The cu
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/achievements">the wiki</a>
      */
     @SerialName("achievements")
-    val achievements: List<AchievementId> = emptyList()
+    val achievements: List<CategoryAchievement> = emptyList(),
+
+    @SerialName("tomorrow")
+    val tomorrow: List<CategoryAchievement> = emptyList()
 ) : Identifiable<Int>

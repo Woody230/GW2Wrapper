@@ -1,4 +1,4 @@
-package com.bselzer.gw2.v2.model.achievement.daily
+package com.bselzer.gw2.v2.model.achievement
 
 import com.bselzer.gw2.v2.model.enumeration.wrapper.Accessibility
 import com.bselzer.gw2.v2.model.enumeration.wrapper.Product
@@ -6,7 +6,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class DailyAccess(
+data class AchievementAccess(
     /**
      * The required product.
      */

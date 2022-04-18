@@ -8,14 +8,14 @@ import kotlinx.serialization.Serializable
 data class CurrentStanding(
     /**
      * The current rating level.
-     * @since season 5 or after
+     * @since season 5
      */
     @SerialName("rating")
     val rating: Int = 0,
 
     /**
      * The number of points decayed.
-     * @since season 5 or after
+     * @since season 5
      */
     @SerialName("decay")
     val decay: Int = 0

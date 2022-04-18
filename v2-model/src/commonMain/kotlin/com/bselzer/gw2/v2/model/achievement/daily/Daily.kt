@@ -1,5 +1,7 @@
 package com.bselzer.gw2.v2.model.achievement.daily
 
+import com.bselzer.gw2.v2.model.achievement.AchievementAccess
+import com.bselzer.gw2.v2.model.achievement.AchievementLevel
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -13,13 +15,13 @@ data class Daily(
      * The level requirements.
      */
     @SerialName("level")
-    val level: DailyLevel = DailyLevel(),
+    val level: AchievementLevel = AchievementLevel(),
 
     /**
      * The access requirement.
      *
-     * @since 2019-05-16T00:00:00.000Z or later, the access object before this schema date is NOT supported by this wrapper
+     * @since 2019-05-16T00:00:00.000Z
      */
     @SerialName("access")
-    val access: DailyAccess = DailyAccess()
+    val access: AchievementAccess = AchievementAccess()
 ) : Identifiable<Int>
