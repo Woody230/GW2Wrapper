@@ -12,6 +12,7 @@ kotlin.setup {
     commonMain {
         ktorClient()
         ktorSerialization()
+        v2Model()
     }
     commonTest {
         mockKtorClient()

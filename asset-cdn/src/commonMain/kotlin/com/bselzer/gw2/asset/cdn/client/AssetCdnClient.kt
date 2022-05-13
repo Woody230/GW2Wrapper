@@ -1,6 +1,7 @@
 package com.bselzer.gw2.asset.cdn.client
 
 import com.bselzer.gw2.asset.cdn.model.Build
+import com.bselzer.gw2.v2.model.build.BuildId
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.*
@@ -69,7 +70,7 @@ class AssetCdnClient(
         }.split(' ')
 
         return Build(
-            id = content.extract(0),
+            id = BuildId(content.extract(0)),
             executableFileId = content.extract(1),
             executableFileSize = content.extract(2),
             manifestFileId = content.extract(3),

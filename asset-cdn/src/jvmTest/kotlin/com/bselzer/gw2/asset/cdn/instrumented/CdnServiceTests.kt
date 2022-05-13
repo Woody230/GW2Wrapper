@@ -16,7 +16,7 @@ class CdnServiceTests : BaseTests() {
 
         // Assert
         assertNotNull(content)
-        assertTrue { content.id > 0 }
+        assertTrue { content.id.value > 0 }
         assertTrue { content.executableFileId > 0 }
         assertTrue { content.executableFileSize > 0 }
         assertTrue { content.manifestFileId > 0 }
