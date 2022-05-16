@@ -10,20 +10,21 @@ import com.bselzer.gw2.v2.model.continent.region.Region
 import com.bselzer.gw2.v2.model.continent.region.RegionId
 import com.bselzer.gw2.v2.model.map.Map
 import com.bselzer.gw2.v2.model.map.MapId
+import com.bselzer.ktx.kodein.db.cache.Cache
 import com.bselzer.ktx.kodein.db.operation.clear
 import com.bselzer.ktx.kodein.db.operation.getById
-import com.bselzer.ktx.kodein.db.transaction.TransactionManager
+import com.bselzer.ktx.kodein.db.transaction.Transaction
 
 /**
  * Represents a cache for models related to [Continent].
  */
-class ContinentCache(transactionManager: TransactionManager, client: Gw2Client) : Gw2Cache(transactionManager, client) {
+class ContinentCache(private val client: Gw2Client) : Cache {
     /**
      * Puts the map with the given [id] and its associated continent and default floor.
      *
      * @param id the id of the map
      */
-    suspend fun putMap(id: MapId): Unit = transaction {
+    suspend fun Transaction.putMap(id: MapId): Unit {
         val map = getMap(id)
 
         // Set up or ensure the Continent and ContinentFloor exist.
@@ -40,8 +41,8 @@ class ContinentCache(transactionManager: TransactionManager, client: Gw2Client) 
      * @param id the id of the map
      * @return the map
      */
-    suspend fun getMap(id: MapId): Map = transaction {
-        getById(id, { client.map.map(id) })
+    suspend fun Transaction.getMap(id: MapId): Map {
+        return getById(id, { client.map.map(id) })
     }
 
     /**
@@ -52,7 +53,7 @@ class ContinentCache(transactionManager: TransactionManager, client: Gw2Client) 
      * @param map the map
      * @return the continent
      */
-    suspend fun getContinent(map: Map): Continent = getContinent(map.continentId)
+    suspend fun Transaction.getContinent(map: Map): Continent = getContinent(map.continentId)
 
     /**
      * Gets the default floor associated with the map.
@@ -62,7 +63,7 @@ class ContinentCache(transactionManager: TransactionManager, client: Gw2Client) 
      * @param map the map
      * @return the default floor
      */
-    suspend fun getContinentFloor(map: Map): Floor = getContinentFloor(map.continentId, map.defaultFloorId)
+    suspend fun Transaction.getContinentFloor(map: Map): Floor = getContinentFloor(map.continentId, map.defaultFloorId)
 
     /**
      * Gets the region from the default floor associated with the map.
@@ -70,7 +71,7 @@ class ContinentCache(transactionManager: TransactionManager, client: Gw2Client) 
      * @param map the map
      * @return the region from the default floor
      */
-    suspend fun getContinentRegion(map: Map): Region? = getContinentRegion(map.continentId, map.defaultFloorId, map.regionId)
+    suspend fun Transaction.getContinentRegion(map: Map): Region? = getContinentRegion(map.continentId, map.defaultFloorId, map.regionId)
 
     /**
      * Gets the map from the continents endpoint associated with the map from the maps endpoint.
@@ -78,7 +79,7 @@ class ContinentCache(transactionManager: TransactionManager, client: Gw2Client) 
      * @param map the map
      * @return the continent map
      */
-    suspend fun getContinentMap(map: Map): ContinentMap? = getContinentMap(map.continentId, map.defaultFloorId, map.regionId, map.id)
+    suspend fun Transaction.getContinentMap(map: Map): ContinentMap? = getContinentMap(map.continentId, map.defaultFloorId, map.regionId, map.id)
 
     /**
      * Gets the continent with the given [id].
@@ -86,8 +87,8 @@ class ContinentCache(transactionManager: TransactionManager, client: Gw2Client) 
      * @param id the id
      * @return the continent
      */
-    suspend fun getContinent(id: ContinentId): Continent = transaction {
-        getById(id, { client.continent.continent(id) })
+    suspend fun Transaction.getContinent(id: ContinentId): Continent {
+        return getById(id, { client.continent.continent(id) })
     }
 
     /**
@@ -97,8 +98,8 @@ class ContinentCache(transactionManager: TransactionManager, client: Gw2Client) 
      * @param floorId the floor id
      * @return the floor of the continent
      */
-    suspend fun getContinentFloor(continentId: ContinentId, floorId: FloorId): Floor = transaction {
-        getById(floorId, { client.continent.floor(continentId, floorId) })
+    suspend fun Transaction.getContinentFloor(continentId: ContinentId, floorId: FloorId): Floor {
+        return getById(floorId, { client.continent.floor(continentId, floorId) })
     }
 
     /**
@@ -109,9 +110,9 @@ class ContinentCache(transactionManager: TransactionManager, client: Gw2Client) 
      * @param regionId the region id
      * @return the region on the floor of the continent
      */
-    suspend fun getContinentRegion(continentId: ContinentId, floorId: FloorId, regionId: RegionId): Region? = transaction {
+    suspend fun Transaction.getContinentRegion(continentId: ContinentId, floorId: FloorId, regionId: RegionId): Region? {
         val floor = getContinentFloor(continentId, floorId)
-        floor.regions[regionId]
+        return floor.regions[regionId]
     }
 
     /**
@@ -123,20 +124,20 @@ class ContinentCache(transactionManager: TransactionManager, client: Gw2Client) 
      * @param mapId the map id
      * @return the map in the region on the floor of the continent
      */
-    suspend fun getContinentMap(continentId: ContinentId, floorId: FloorId, regionId: RegionId, mapId: MapId): ContinentMap? = transaction {
+    suspend fun Transaction.getContinentMap(continentId: ContinentId, floorId: FloorId, regionId: RegionId, mapId: MapId): ContinentMap? {
         val region = getContinentRegion(continentId, floorId, regionId)
-        region?.maps?.get(mapId)
+        return region?.maps?.get(mapId)
     }
 
     /**
      * Clears the [Continent], [Floor], [Region], [ContinentMap], and [Map] models.
      */
-    override suspend fun clear(): Unit = transaction {
+    override fun Transaction.clear() {
         clear<Continent>()
         clear<Floor>()
         clear<Map>()
 
-        // These models are currently not populated by this cache since they come from ContinentFloor, but they are related so they should be deleted.
+        // These models come from ContinentFloor and thus shouldn't be in the cache, but they are related so they should be deleted.
         clear<Region>()
         clear<ContinentMap>()
     }

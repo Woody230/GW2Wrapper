@@ -14,14 +14,15 @@ import com.bselzer.gw2.v2.model.guild.team.GuildTeam
 import com.bselzer.gw2.v2.model.guild.treasury.GuildTreasurySlot
 import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgrade
 import com.bselzer.gw2.v2.model.guild.upgrade.cost.GuildUpgradeCost
+import com.bselzer.ktx.kodein.db.cache.Cache
 import com.bselzer.ktx.kodein.db.operation.clear
 import com.bselzer.ktx.kodein.db.operation.getById
-import com.bselzer.ktx.kodein.db.transaction.TransactionManager
+import com.bselzer.ktx.kodein.db.transaction.Transaction
 
 /**
  * Represents a cache for models related to a [Guild].
  */
-class GuildCache(transactionManager: TransactionManager, client: Gw2Client) : Gw2Cache(transactionManager, client) {
+class GuildCache(private val client: Gw2Client) : Cache {
     /**
      * Gets the guild with the given [id].
      *
@@ -30,11 +31,11 @@ class GuildCache(transactionManager: TransactionManager, client: Gw2Client) : Gw
      * @param id the id of the guild
      * @return the guild
      */
-    suspend fun getGuild(id: GuildId): Guild = transaction {
-        getById(id, { client.guild.guild(id) })
+    suspend fun Transaction.getGuild(id: GuildId): Guild {
+        return getById(id, { client.guild.guild(id) })
     }
 
-    override suspend fun clear() = transaction {
+    override fun Transaction.clear() {
         clear<Guild>()
         clear<GuildLog>()
         clear<GuildMember>()

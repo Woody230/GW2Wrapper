@@ -2,14 +2,15 @@ package com.bselzer.gw2.v2.cache.instance
 
 import com.bselzer.gw2.v2.client.client.Gw2Client
 import com.bselzer.gw2.v2.model.world.World
+import com.bselzer.ktx.kodein.db.cache.Cache
 import com.bselzer.ktx.kodein.db.operation.clear
 import com.bselzer.ktx.kodein.db.operation.findAllOnce
-import com.bselzer.ktx.kodein.db.transaction.TransactionManager
+import com.bselzer.ktx.kodein.db.transaction.Transaction
 
 /**
  * Represents a cache related to the [World] model.
  */
-class WorldCache(transactionManager: TransactionManager, client: Gw2Client) : Gw2Cache(transactionManager, client) {
+class WorldCache(private val client: Gw2Client) : Cache {
     /**
      * Finds the worlds.
      *
@@ -17,14 +18,14 @@ class WorldCache(transactionManager: TransactionManager, client: Gw2Client) : Gw
      *
      * @return the worlds
      */
-    suspend fun findWorlds(): Collection<World> = transaction {
-        findAllOnce { client.world.worlds() }
+    suspend fun Transaction.findWorlds(): Collection<World> {
+        return findAllOnce { client.world.worlds() }
     }
 
     /**
      * Clears the [World] models.
      */
-    override suspend fun clear(): Unit = transaction {
+    override fun Transaction.clear() {
         clear<World>()
     }
 }
