@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.model.enumeration.extension
 
-import com.bselzer.ktx.serialization.json.function.enumValueOrNull
+import com.bselzer.ktx.serialization.json.JsonContext
 
 // Wrappers are used instead of the enums directly since while enums can help for pinpointing a specific type...
 // There may be a missing or inconsistent enum sent by the API which will be no problem for deserialization because it will exist in its original form in the wrapper.
@@ -85,3 +85,5 @@ fun com.bselzer.gw2.v2.model.enumeration.wrapper.WvwMapBonusType.enumValueOrNull
 fun com.bselzer.gw2.v2.model.enumeration.wrapper.WvwMapType.enumValueOrNull() = value.enumValueOrNull<com.bselzer.gw2.v2.model.enumeration.WvwMapType>()
 fun com.bselzer.gw2.v2.model.enumeration.wrapper.WvwObjectiveOwner.enumValueOrNull() = value.enumValueOrNull<com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner>()
 fun com.bselzer.gw2.v2.model.enumeration.wrapper.WvwObjectiveType.enumValueOrNull() = value.enumValueOrNull<com.bselzer.gw2.v2.model.enumeration.WvwObjectiveType>()
+
+internal inline fun <reified E : Enum<E>> String.enumValueOrNull(): E? = with(JsonContext) { enumValueOrNull<E>() }
