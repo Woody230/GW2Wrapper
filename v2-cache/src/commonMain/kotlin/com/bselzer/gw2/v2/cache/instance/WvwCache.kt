@@ -2,7 +2,7 @@ package com.bselzer.gw2.v2.cache.instance
 
 import com.bselzer.gw2.v2.cache.operation.findByReferenceId
 import com.bselzer.gw2.v2.cache.operation.findByReferenceIds
-import com.bselzer.gw2.v2.client.client.Gw2Client
+import com.bselzer.gw2.v2.client.instance.Gw2Client
 import com.bselzer.gw2.v2.model.extension.wvw.allWorlds
 import com.bselzer.gw2.v2.model.guild.upgrade.ClaimableUpgrade
 import com.bselzer.gw2.v2.model.guild.upgrade.DefaultUpgrade

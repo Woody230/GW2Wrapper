@@ -1,8 +1,8 @@
 package com.bselzer.gw2.v2.client
 
-import com.bselzer.gw2.v2.client.client.ExceptionRecoveryMode
-import com.bselzer.gw2.v2.client.client.Gw2Client
-import com.bselzer.gw2.v2.client.client.Gw2ClientConfiguration
+import com.bselzer.gw2.v2.client.instance.ExceptionRecoveryMode
+import com.bselzer.gw2.v2.client.instance.Gw2Client
+import com.bselzer.gw2.v2.client.instance.Gw2ClientConfiguration
 import com.bselzer.gw2.v2.client.model.Token
 import com.bselzer.gw2.v2.model.character.CharacterName
 import com.bselzer.gw2.v2.model.serialization.Modules

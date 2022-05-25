@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.cache.instance
 
-import com.bselzer.gw2.v2.client.client.Gw2Client
+import com.bselzer.gw2.v2.client.instance.Gw2Client
 import com.bselzer.gw2.v2.model.guild.Guild
 import com.bselzer.gw2.v2.model.guild.GuildId
 import com.bselzer.gw2.v2.model.guild.emblem.GuildEmblem

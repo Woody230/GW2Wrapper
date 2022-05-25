@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.tile
 
-import com.bselzer.gw2.v2.client.client.Gw2Client
+import com.bselzer.gw2.v2.client.instance.Gw2Client
 import com.bselzer.gw2.v2.model.continent.ContinentId
 import com.bselzer.gw2.v2.model.continent.floor.FloorId
 import com.bselzer.gw2.v2.tile.client.TileClient

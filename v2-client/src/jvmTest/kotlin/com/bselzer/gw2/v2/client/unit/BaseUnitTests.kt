@@ -2,7 +2,7 @@ package com.bselzer.gw2.v2.client.unit
 
 import com.bselzer.gw2.v2.client.BaseTests
 import com.bselzer.gw2.v2.client.asHeader
-import com.bselzer.gw2.v2.client.client.Gw2ClientConfiguration
+import com.bselzer.gw2.v2.client.instance.Gw2ClientConfiguration
 import com.bselzer.gw2.v2.client.model.Token
 import io.ktor.client.*
 import io.ktor.client.engine.mock.*

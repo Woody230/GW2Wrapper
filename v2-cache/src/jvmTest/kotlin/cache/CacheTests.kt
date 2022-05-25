@@ -3,10 +3,10 @@ package cache
 import com.bselzer.gw2.v2.cache.instance.GuildCache
 import com.bselzer.gw2.v2.cache.metadata.IdentifiableMetadataExtractor
 import com.bselzer.gw2.v2.cache.type.gw2
-import com.bselzer.gw2.v2.client.client.Gw2Client
+import com.bselzer.gw2.v2.client.instance.Gw2Client
 import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgrade
 import com.bselzer.gw2.v2.model.serialization.Modules
-import com.bselzer.ktx.kodein.db.cache.GlobalCacheProvider
+import com.bselzer.ktx.kodein.db.transaction.transaction
 import io.ktor.client.*
 import io.ktor.client.engine.mock.*
 import io.ktor.http.*
@@ -48,8 +48,7 @@ class CacheTests {
             TypeTable { gw2() }
         )
 
-        val cache = GlobalCacheProvider(db)
-        val guild = GuildCache(cache, client)
+        val guild = GuildCache(client)
 
         val upgrades = runBlocking { client.guild.upgrades() }
         db.newBatch().apply {
@@ -62,7 +61,11 @@ class CacheTests {
         assertEquals(upgrades.count(), stored.count())
 
         // Act
-        runBlocking { guild.clear() }
+        runBlocking {
+            db.transaction().use {
+                with(guild) { clear() }
+            }
+        }
 
         // Assert
         assertEquals(0, db.find<GuildUpgrade>().all().asModelSequence().count())

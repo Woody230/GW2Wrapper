@@ -3,7 +3,7 @@ package com.bselzer.gw2.v2.tile.image
 import android.os.Environment
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.bselzer.gw2.v2.client.client.Gw2Client
+import com.bselzer.gw2.v2.client.instance.Gw2Client
 import com.bselzer.gw2.v2.model.continent.ContinentId
 import com.bselzer.gw2.v2.model.continent.floor.FloorId
 import kotlinx.coroutines.runBlocking
