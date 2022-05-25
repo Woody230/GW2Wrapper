@@ -11,7 +11,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 
-abstract class BaseClient(
+sealed class BaseClient(
     protected val httpClient: HttpClient,
     protected val configuration: Gw2ClientConfiguration
 ) {

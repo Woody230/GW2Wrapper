@@ -37,6 +37,7 @@ fun KotlinDependencyHandler.v2ModelEnumeration() = api(project(":v2-model-enumer
 fun KotlinDependencyHandler.v2ModelExtension() = api(project(":v2-model-extension"))
 fun KotlinDependencyHandler.v2Scope() = api(project(":v2-scope"))
 fun KotlinDependencyHandler.v2Tile() = api(project(":v2-tile"))
+fun KotlinDependencyHandler.v2Intl() = api(project(":v2-intl"))
 
 fun KotlinDependencyHandler.extSerialization() = api("com.bselzer.ktx:serialization:$EXTENSION")
 fun KotlinDependencyHandler.extFunction() = api("com.bselzer.ktx:function:$EXTENSION")
