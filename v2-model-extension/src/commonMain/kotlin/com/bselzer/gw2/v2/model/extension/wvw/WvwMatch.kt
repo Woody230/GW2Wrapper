@@ -58,33 +58,9 @@ fun WvwMatch.mainWorld(owner: WvwObjectiveOwner): WorldId? = when (owner) {
 }
 
 /**
- * @return the points that would currently be awarded to each [WvwObjectiveOwner] if a tick passed
+ * @return the counts for each objective owner.
  */
-fun WvwMatch.pointsPerTick(): Map<WvwObjectiveOwner?, Int> {
-    val ppt = mutableMapOf<WvwObjectiveOwner?, Int>()
-    maps.forEach { map -> ppt.merge(map.pointsPerTick()) }
-    return ppt
-}
-
-/**
- * @return the total number of victory points earned through all of the skirmishes for each [WvwObjectiveOwner]
- */
-fun WvwMatch.victoryPoints(): Map<WvwObjectiveOwner, Int> = victoryPoints.count()
-
-/**
- * @return the score within the [WvwMatch.scores] for each [WvwObjectiveOwner]
- */
-fun WvwMatch.scores(): Map<WvwObjectiveOwner, Int> = scores.count()
-
-/**
- * @return the deaths within the [WvwMatch.deaths] for each [WvwObjectiveOwner]
- */
-fun WvwMatch.deaths(): Map<WvwObjectiveOwner, Int> = deaths.count()
-
-/**
- * @return the kills within the [WvwMatch.kills] for each [WvwObjectiveOwner]
- */
-fun WvwMatch.kills(): Map<WvwObjectiveOwner, Int> = kills.count()
+fun WvwMatch.objectiveOwnerCount(): WvwMatchObjectiveOwnerCount = WvwMatchObjectiveOwnerCount(this)
 
 /**
  * @return the objectives from all the maps
