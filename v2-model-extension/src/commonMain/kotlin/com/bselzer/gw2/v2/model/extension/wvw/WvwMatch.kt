@@ -2,10 +2,12 @@ package com.bselzer.gw2.v2.model.extension.wvw
 
 import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner
 import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner.*
+import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgradeId
 import com.bselzer.gw2.v2.model.world.WorldId
 import com.bselzer.gw2.v2.model.wvw.map.WvwMap
 import com.bselzer.gw2.v2.model.wvw.map.WvwMapObjective
 import com.bselzer.gw2.v2.model.wvw.match.WvwMatch
+import com.bselzer.gw2.v2.model.wvw.objective.WvwMapObjectiveId
 import com.bselzer.gw2.v2.model.wvw.objective.WvwObjective
 
 /**
@@ -83,3 +85,22 @@ fun WvwMatch.deaths(): Map<WvwObjectiveOwner, Int> = deaths.count()
  * @return the kills within the [WvwMatch.kills] for each [WvwObjectiveOwner]
  */
 fun WvwMatch.kills(): Map<WvwObjectiveOwner, Int> = kills.count()
+
+/**
+ * @return the objectives from all the maps
+ */
+fun WvwMatch.mapObjectives(): Collection<WvwMapObjective> = maps.flatMap { map ->
+    map.objectives
+}
+
+/**
+ * @return the ids of all the objectives from all maps
+ */
+fun WvwMatch.objectiveIds(): Collection<WvwMapObjectiveId> = mapObjectives().map { objective -> objective.id }
+
+/**
+ * @return the ids of all the guild upgrades associated with the objectives from all maps
+ */
+fun WvwMatch.guildUpgradeIds(): Collection<GuildUpgradeId> = maps.flatMap { map ->
+    map.objectives.flatMap { objective -> objective.guildUpgradeIds }
+}

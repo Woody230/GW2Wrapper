@@ -55,31 +55,34 @@ open class TileClient(
      * @param request the request to get the grid and tile content from
      */
     suspend fun grid(request: TileGridRequest): TileGrid {
-        val tiles = request.tileRequests.map { tileRequest -> tileAsync(tileRequest) }.map { deferred -> deferred.await() }
+        val tiles = tilesAsync(request.tileRequests).map { deferred -> deferred.await() }
         return TileGrid(request, tiles)
-    }
-
-    /**
-     * @return the deferred tile from the [TileRequest.url]
-     * @param request the request to get the tile content from
-     */
-    suspend fun tileAsync(request: TileRequest): Deferred<Tile> = coroutineScope {
-        // Use async for parallelism.
-        async {
-            val content: ByteArray = try {
-                httpClient.get(request.url).body()
-            } catch (ex: Exception) {
-                ByteArray(0)
-            }
-            return@async Tile(request, content)
-        }
     }
 
     /**
      * @return the tile from the [TileRequest.url]
      * @param request the request to get the tile content from
      */
-    suspend fun tile(request: TileRequest) = tileAsync(request).await()
+    suspend fun tile(request: TileRequest): Tile {
+        val content: ByteArray = try {
+            httpClient.get(request.url).body()
+        } catch (ex: Exception) {
+            ByteArray(0)
+        }
+
+        return Tile(request, content)
+    }
+
+    /**
+     * @return the deferred tiles from the [TileRequest.url]
+     * @param requests the requests to get the tile content from
+     */
+    suspend fun tilesAsync(requests: Collection<TileRequest>): Collection<Deferred<Tile>> = coroutineScope {
+        // Use async for parallelism.
+        requests.map { request ->
+            async { tile(request) }
+        }
+    }
 
     /**
      * @return the requests for tiles on the [floor] within the [continent] at the given [zoom] level
