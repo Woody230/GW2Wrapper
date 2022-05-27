@@ -1,12 +1,13 @@
 package cache
 
 import com.bselzer.gw2.v2.cache.instance.GuildCache
-import com.bselzer.gw2.v2.cache.metadata.IdentifiableMetadataExtractor
 import com.bselzer.gw2.v2.cache.type.gw2
 import com.bselzer.gw2.v2.client.instance.Gw2Client
 import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgrade
 import com.bselzer.gw2.v2.model.serialization.Modules
+import com.bselzer.ktx.kodein.db.metadata.IdentifiableMetadataExtractor
 import com.bselzer.ktx.kodein.db.transaction.transaction
+import com.bselzer.ktx.kodein.db.value.IdentifierValueConverter
 import io.ktor.client.*
 import io.ktor.client.engine.mock.*
 import io.ktor.http.*
@@ -44,7 +45,8 @@ class CacheTests {
         val client = Gw2Client(http)
         val db = DB.inMemory.open("test",
             KotlinxSerializer(Modules.ALL),
-            IdentifiableMetadataExtractor() as org.kodein.db.Options.Open,
+            IdentifiableMetadataExtractor(),
+            IdentifierValueConverter(),
             TypeTable { gw2() }
         )
 
