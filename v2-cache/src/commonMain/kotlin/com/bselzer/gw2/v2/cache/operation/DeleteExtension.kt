@@ -24,9 +24,9 @@ import com.bselzer.gw2.v2.model.wvw.objective.WvwObjective
 import com.bselzer.gw2.v2.model.wvw.upgrade.WvwUpgrade
 import com.bselzer.ktx.kodein.db.operation.clear
 import com.bselzer.ktx.kodein.db.transaction.Transaction
-import org.kodein.db.asModelSequence
 import org.kodein.db.deleteFrom
 import org.kodein.db.find
+import org.kodein.db.useModels
 
 /**
  * Clears the [Continent], [Floor], [Region], [ContinentMap], and [Map] models.
@@ -72,6 +72,6 @@ fun Transaction.clearWvw() {
     // Since guild upgrades are not completely WvW specific, need to delete the specific upgrades.
     // Ids are only dynamically found through the match so using it wouldn't be comprehensive.
     // Therefore, the only resolution is to delete any ClaimableUpgrade, which should only be tactics.
-    val tactics = find<GuildUpgrade>().all().asModelSequence().filter { guildUpgrade -> guildUpgrade is ClaimableUpgrade }
+    val tactics = find<GuildUpgrade>().all().useModels { models -> models.filter { guildUpgrade -> guildUpgrade is ClaimableUpgrade } }
     tactics.forEach { tactic -> deleteFrom(tactic) }
 }
