@@ -72,6 +72,7 @@ fun Transaction.clearWvw() {
     // Since guild upgrades are not completely WvW specific, need to delete the specific upgrades.
     // Ids are only dynamically found through the match so using it wouldn't be comprehensive.
     // Therefore, the only resolution is to delete any ClaimableUpgrade, which should only be tactics.
-    val tactics = find<GuildUpgrade>().all().useModels { models -> models.filter { guildUpgrade -> guildUpgrade is ClaimableUpgrade } }
-    tactics.forEach { tactic -> deleteFrom(tactic) }
+    find<GuildUpgrade>().all().useModels { models ->
+        models.filter { guildUpgrade -> guildUpgrade is ClaimableUpgrade }.forEach { tactic -> deleteFrom(tactic) }
+    }
 }
