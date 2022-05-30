@@ -60,7 +60,7 @@ data class Recipe(
      * The ingredients required in the recipe.
      */
     @SerialName("ingredients")
-    val ingredients: List<RecipeIngredient> = emptyList(),
+    val ingredients: List<RecipeIngredient<*>> = emptyList(),
 
     /**
      * The id of the guild upgrade produced by the recipe.
@@ -75,4 +75,4 @@ data class Recipe(
      */
     @SerialName("chat_link")
     val chatLink: ChatLink = ChatLink()
-) : Identifiable<Int>
+) : Identifiable<RecipeId, Int>

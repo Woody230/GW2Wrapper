@@ -31,4 +31,4 @@ data class MountType(
 
     @SerialName("skills")
     val skills: List<MountSkill> = emptyList()
-) : Identifiable<String>
+) : Identifiable<MountTypeId, String>

@@ -13,4 +13,4 @@ data class CurrencyRecipeIngredient(
      */
     @SerialName("id")
     override val id: CurrencyId = CurrencyId(),
-) : RecipeIngredient()
+) : RecipeIngredient<CurrencyId>()

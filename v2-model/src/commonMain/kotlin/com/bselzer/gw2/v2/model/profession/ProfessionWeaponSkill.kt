@@ -27,4 +27,4 @@ data class ProfessionWeaponSkill(
      */
     @SerialName("offhand")
     val offhand: WeaponType = WeaponType()
-) : Identifiable<Int>
+) : Identifiable<SkillId, Int>

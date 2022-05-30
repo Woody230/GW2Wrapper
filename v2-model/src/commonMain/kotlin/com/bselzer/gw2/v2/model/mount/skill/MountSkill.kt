@@ -14,4 +14,4 @@ data class MountSkill(
 
     @SerialName("slot")
     val slot: SkillSlot = SkillSlot()
-) : Identifiable<Int>
+) : Identifiable<SkillId, Int>

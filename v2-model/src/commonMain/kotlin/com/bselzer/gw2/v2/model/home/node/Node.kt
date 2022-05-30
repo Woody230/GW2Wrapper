@@ -8,4 +8,4 @@ import kotlinx.serialization.Serializable
 data class Node(
     @SerialName("id")
     override val id: NodeId = NodeId()
-) : Identifiable<String>
+) : Identifiable<NodeId, String>

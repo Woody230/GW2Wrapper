@@ -29,4 +29,4 @@ data class GuildRank(
 
     @SerialName("icon")
     val iconLink: ImageLink = ImageLink()
-) : Identifiable<String>
+) : Identifiable<GuildRankId, String>

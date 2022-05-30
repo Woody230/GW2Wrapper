@@ -32,4 +32,4 @@ data class Continent(
      */
     @SerialName("floors")
     val floorIds: List<FloorId> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<ContinentId, Int>

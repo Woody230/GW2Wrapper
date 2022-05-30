@@ -66,7 +66,7 @@ abstract class Item(
 
     @SerialName("restrictions")
     val restrictions: List<ItemRestriction> = emptyList()
-) : Identifiable<Int> {
+) : Identifiable<ItemId, Int> {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || this::class != other::class) return false

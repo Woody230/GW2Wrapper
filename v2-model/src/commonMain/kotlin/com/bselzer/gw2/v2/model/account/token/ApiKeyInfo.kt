@@ -20,4 +20,4 @@ data class ApiKeyInfo(
      */
     @SerialName("id")
     override val id: ApiKey = ApiKey()
-) : TokenInfo()
+) : TokenInfo<ApiKey>()

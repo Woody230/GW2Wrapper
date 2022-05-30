@@ -16,4 +16,4 @@ data class World(
 
     @SerialName("population")
     val population: WorldPopulationLevel = WorldPopulationLevel()
-) : Identifiable<Int>
+) : Identifiable<WorldId, Int>

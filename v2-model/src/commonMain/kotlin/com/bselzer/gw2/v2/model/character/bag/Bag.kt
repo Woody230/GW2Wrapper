@@ -24,4 +24,4 @@ data class Bag(
      */
     @SerialName("inventory")
     val slots: List<BagSlot?> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<BagId, Int>

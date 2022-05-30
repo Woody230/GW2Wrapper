@@ -143,4 +143,4 @@ data class Skill(
 
     @SerialName("flags")
     val flags: List<SkillFlag> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<SkillId, Int>

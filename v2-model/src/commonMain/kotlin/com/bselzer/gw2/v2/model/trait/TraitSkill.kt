@@ -26,4 +26,4 @@ data class TraitSkill(
 
     @SerialName("traited_facts")
     val traitedFacts: List<TraitFact> = emptyList(),
-) : Identifiable<Int>
+) : Identifiable<SkillId, Int>

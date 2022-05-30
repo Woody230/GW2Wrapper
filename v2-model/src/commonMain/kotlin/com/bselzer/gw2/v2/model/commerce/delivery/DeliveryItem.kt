@@ -19,4 +19,4 @@ data class DeliveryItem(
      */
     @SerialName("count")
     val count: Int = 0
-) : Identifiable<Int>
+) : Identifiable<ItemId, Int>

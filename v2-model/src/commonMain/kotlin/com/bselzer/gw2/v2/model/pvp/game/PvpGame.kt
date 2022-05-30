@@ -80,4 +80,4 @@ data class PvpGame(
      */
     @SerialName("season")
     val season: PvpSeasonId = PvpSeasonId()
-) : Identifiable<String>
+) : Identifiable<PvpGameId, String>

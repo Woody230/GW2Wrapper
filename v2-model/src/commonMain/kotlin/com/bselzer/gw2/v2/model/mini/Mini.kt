@@ -35,4 +35,4 @@ data class Mini(
 
     @SerialName("name")
     val name: String = "",
-) : Identifiable<Int>
+) : Identifiable<MiniId, Int>

@@ -20,4 +20,4 @@ data class AccountMastery(
      */
     @SerialName("level")
     val level: Int = 0
-) : Identifiable<Int>
+) : Identifiable<MasteryId, Int>

@@ -12,4 +12,4 @@ data class Asset(
 
     @SerialName("icon")
     val iconLink: ImageLink = ImageLink()
-) : Identifiable<String>
+) : Identifiable<AssetId, String>

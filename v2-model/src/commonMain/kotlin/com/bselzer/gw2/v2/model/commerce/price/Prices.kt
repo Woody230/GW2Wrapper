@@ -25,4 +25,4 @@ data class Prices(
 
     @SerialName("sells")
     val sells: Price = Price()
-) : Identifiable<Int>
+) : Identifiable<ItemId, Int>

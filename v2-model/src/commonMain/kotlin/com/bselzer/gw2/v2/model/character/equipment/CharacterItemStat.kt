@@ -21,4 +21,4 @@ data class CharacterItemStat(
      */
     @SerialName("attributes")
     val attributes: Map<AttributeName, Double> = emptyMap()
-) : Identifiable<Int>
+) : Identifiable<ItemStatId, Int>

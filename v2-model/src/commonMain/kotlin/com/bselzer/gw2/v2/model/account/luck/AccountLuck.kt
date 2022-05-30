@@ -14,4 +14,4 @@ data class AccountLuck(
      */
     @SerialName("value")
     val value: Int = 0
-) : Identifiable<String>
+) : Identifiable<LuckId, String>

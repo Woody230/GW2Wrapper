@@ -93,4 +93,4 @@ data class Map(
      */
     @SerialName("continent_name")
     val continentName: String = ""
-) : Identifiable<Int>
+) : Identifiable<MapId, Int>

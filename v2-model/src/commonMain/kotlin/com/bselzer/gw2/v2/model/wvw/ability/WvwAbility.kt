@@ -21,4 +21,4 @@ data class WvwAbility(
 
     @SerialName("ranks")
     val ranks: List<WvwAbilityRank> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<WvwAbilityId, Int>

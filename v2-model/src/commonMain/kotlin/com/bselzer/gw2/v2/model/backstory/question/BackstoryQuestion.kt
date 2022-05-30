@@ -46,4 +46,4 @@ data class BackstoryQuestion(
      */
     @SerialName("races")
     val races: List<RaceId> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<BackstoryQuestionId, Int>

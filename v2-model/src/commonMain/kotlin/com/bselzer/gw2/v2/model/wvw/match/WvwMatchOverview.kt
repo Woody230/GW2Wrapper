@@ -27,4 +27,4 @@ data class WvwMatchOverview(
 
     @SerialName("all_worlds")
     val allWorlds: WvwWorldIds = WvwWorldIds(),
-) : Identifiable<String>
+) : Identifiable<WvwMatchId, String>

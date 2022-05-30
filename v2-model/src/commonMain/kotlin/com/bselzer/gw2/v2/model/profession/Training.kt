@@ -22,4 +22,4 @@ data class Training(
 
     @SerialName("track")
     val tracks: List<TrainingTrack> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<TrainingId, Int>

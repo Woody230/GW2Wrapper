@@ -21,4 +21,4 @@ data class CharacterSpecialization(
      */
     @SerialName("traits")
     val traits: List<TraitId?> = emptyList()
-) : Identifiable<Byte>
+) : Identifiable<SpecializationId, Byte>

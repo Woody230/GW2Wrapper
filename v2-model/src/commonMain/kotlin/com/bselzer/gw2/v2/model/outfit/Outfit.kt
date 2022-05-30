@@ -23,4 +23,4 @@ data class Outfit(
 
     @SerialName("name")
     val name: String = ""
-) : Identifiable<Int>
+) : Identifiable<OutfitId, Int>

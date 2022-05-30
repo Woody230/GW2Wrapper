@@ -33,4 +33,4 @@ data class WvwMap(
 
     @SerialName("skirmishes")
     val skirmishes: List<WvwSkirmish> = emptyList(),
-) : Identifiable<Int>
+) : Identifiable<MapId, Int>

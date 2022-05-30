@@ -27,7 +27,7 @@ abstract class GuildLog(
      */
     @SerialName("user")
     val user: AccountName? = null
-) : Identifiable<Int> {
+) : Identifiable<GuildLogId, Int> {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || this::class != other::class) return false

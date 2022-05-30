@@ -15,4 +15,4 @@ data class Raid(
 
     @SerialName("wings")
     val wings: List<RaidWing> = emptyList()
-) : Identifiable<String>
+) : Identifiable<RaidId, String>

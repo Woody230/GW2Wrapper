@@ -19,4 +19,4 @@ data class InfixUpgrade(
 
     @SerialName("buff")
     val buff: InfixBuff = InfixBuff()
-) : Identifiable<Int>
+) : Identifiable<ItemStatId, Int>

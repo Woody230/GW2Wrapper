@@ -8,4 +8,4 @@ import kotlinx.serialization.Serializable
 data class Build(
     @SerialName("id")
     override val id: BuildId = BuildId()
-) : Identifiable<Int>
+) : Identifiable<BuildId, Int>

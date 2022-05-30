@@ -60,4 +60,4 @@ data class Story(
      */
     @SerialName("flags")
     val flags: List<String> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<StoryId, Int>

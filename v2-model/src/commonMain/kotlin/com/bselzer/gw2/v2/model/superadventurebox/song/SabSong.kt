@@ -14,4 +14,4 @@ data class SabSong(
 
     @SerialName("name")
     val name: String = ""
-) : Identifiable<Int>
+) : Identifiable<SabSongId, Int>

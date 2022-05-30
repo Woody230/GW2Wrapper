@@ -29,4 +29,4 @@ data class Quest(
 
     @SerialName("goals")
     val goals: List<QuestGoal> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<QuestId, Int>

@@ -14,4 +14,4 @@ data class TraitTrack(
      */
     @SerialName("trait_id")
     override val id: TraitId = TraitId()
-) : TrainingTrack(), Identifiable<Int>
+) : TrainingTrack(), Identifiable<TraitId, Int>

@@ -18,4 +18,4 @@ data class PvpLeaderboardScore(
 
     @SerialName("value")
     val value: Int = 0
-) : Identifiable<String>
+) : Identifiable<PvpScoringId, String>

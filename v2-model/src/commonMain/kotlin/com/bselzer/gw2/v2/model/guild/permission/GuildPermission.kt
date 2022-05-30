@@ -14,4 +14,4 @@ data class GuildPermission(
 
     @SerialName("description")
     val description: String = ""
-) : Identifiable<String>
+) : Identifiable<GuildPermissionId, String>

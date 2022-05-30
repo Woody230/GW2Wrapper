@@ -63,4 +63,4 @@ data class BagSlot(
      */
     @SerialName("bound_to")
     val boundTo: CharacterName? = null,
-) : Identifiable<Int>
+) : Identifiable<ItemId, Int>

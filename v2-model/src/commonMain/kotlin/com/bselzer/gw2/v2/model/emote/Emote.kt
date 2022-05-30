@@ -25,4 +25,4 @@ data class Emote(
      */
     @SerialName("unlock_items")
     val unlockItems: List<ItemId> = emptyList()
-) : Identifiable<String>
+) : Identifiable<EmoteId, String>

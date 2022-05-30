@@ -37,4 +37,4 @@ data class Region(
      */
     @SerialName("maps")
     val maps: Map<MapId, ContinentMap> = emptyMap()
-) : Identifiable<Int>
+) : Identifiable<RegionId, Int>

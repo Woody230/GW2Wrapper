@@ -13,4 +13,4 @@ data class ItemRecipeIngredient(
      */
     @SerialName("id")
     override val id: ItemId = ItemId(),
-) : RecipeIngredient()
+) : RecipeIngredient<ItemId>()

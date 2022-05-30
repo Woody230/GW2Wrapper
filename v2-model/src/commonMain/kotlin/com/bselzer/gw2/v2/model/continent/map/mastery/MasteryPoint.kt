@@ -23,4 +23,4 @@ data class MasteryPoint(
      */
     @SerialName("region")
     val region: RegionType = RegionType()
-) : Identifiable<Int>
+) : Identifiable<MasteryId, Int>

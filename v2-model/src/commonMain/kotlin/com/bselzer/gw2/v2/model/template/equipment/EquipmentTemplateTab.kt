@@ -38,4 +38,4 @@ data class EquipmentTemplateTab(
      */
     @SerialName("equipment_pvp")
     val pvpEquipment: EquipmentTemplatePvp = EquipmentTemplatePvp()
-) : Identifiable<Int>
+) : Identifiable<EquipmentTemplateTabId, Int>

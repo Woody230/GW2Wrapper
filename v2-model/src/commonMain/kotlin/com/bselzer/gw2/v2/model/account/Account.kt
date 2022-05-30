@@ -126,4 +126,4 @@ data class Account(
      */
     @SerialName("build_storage_slots")
     val buildStorageSlots: Int = 0
-) : Identifiable<String>
+) : Identifiable<AccountId, String>

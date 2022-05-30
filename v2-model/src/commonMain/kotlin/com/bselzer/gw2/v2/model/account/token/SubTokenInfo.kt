@@ -40,4 +40,4 @@ data class SubTokenInfo(
      */
     @SerialName("urls")
     val urls: List<Url> = emptyList()
-) : TokenInfo()
+) : TokenInfo<SubToken>()

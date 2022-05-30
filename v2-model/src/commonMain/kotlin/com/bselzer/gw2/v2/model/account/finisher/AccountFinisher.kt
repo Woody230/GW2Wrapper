@@ -25,4 +25,4 @@ data class AccountFinisher(
      */
     @SerialName("quantity")
     val count: Int = 0
-) : Identifiable<Int>
+) : Identifiable<FinisherId, Int>

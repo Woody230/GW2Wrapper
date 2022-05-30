@@ -15,4 +15,4 @@ data class Emblem(
      */
     @SerialName("layers")
     val layers: List<Url> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<EmblemId, Int>

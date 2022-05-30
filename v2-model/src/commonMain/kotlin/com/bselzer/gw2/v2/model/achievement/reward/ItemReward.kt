@@ -17,4 +17,4 @@ data class ItemReward(
 
     @SerialName("count")
     val count: Int = 0
-) : AchievementReward(), Identifiable<Int>
+) : AchievementReward(), Identifiable<ItemId, Int>

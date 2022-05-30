@@ -14,4 +14,4 @@ data class ItemBit(
      */
     @SerialName("id")
     override val id: ItemId = ItemId()
-) : AchievementBit(), Identifiable<Int>
+) : AchievementBit(), Identifiable<ItemId, Int>

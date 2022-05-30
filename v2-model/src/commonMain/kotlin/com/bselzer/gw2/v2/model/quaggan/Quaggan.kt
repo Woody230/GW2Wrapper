@@ -12,4 +12,4 @@ data class Quaggan(
 
     @SerialName("url")
     val iconLink: ImageLink = ImageLink()
-) : Identifiable<String>
+) : Identifiable<QuagganId, String>

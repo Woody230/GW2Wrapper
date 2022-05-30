@@ -25,4 +25,4 @@ data class CharacterTraining(
      */
     @SerialName("done")
     val isDone: Boolean = false
-) : Identifiable<Int>
+) : Identifiable<TrainingId, Int>

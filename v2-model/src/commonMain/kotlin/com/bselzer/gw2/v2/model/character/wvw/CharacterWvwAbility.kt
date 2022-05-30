@@ -17,4 +17,4 @@ data class CharacterWvwAbility(
      * The rank of the ability.
      */
     val rank: WvwLevel = WvwLevel()
-) : Identifiable<Int>
+) : Identifiable<WvwAbilityId, Int>

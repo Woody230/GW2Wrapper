@@ -39,4 +39,4 @@ data class PvpSeason(
 
     @SerialName("ranks")
     val ranks: List<PvpSeasonRank> = emptyList()
-) : Identifiable<String>
+) : Identifiable<PvpSeasonId, String>

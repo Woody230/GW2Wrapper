@@ -28,4 +28,4 @@ data class Material(
      */
     @SerialName("order")
     val order: Int = 0
-) : Identifiable<Int>
+) : Identifiable<MaterialId, Int>

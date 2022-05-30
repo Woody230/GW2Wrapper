@@ -35,7 +35,7 @@ class TokenClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration)
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/tokeninfo">tokeninfo on the wiki</a>
      */
     @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
-    suspend fun information(token: Token? = null): TokenInfo = getSingle(path = TOKEN_INFO, instance = { ApiKeyInfo() }) {
+    suspend fun information(token: Token? = null): TokenInfo<*> = getSingle(path = TOKEN_INFO, instance = { ApiKeyInfo() }) {
         bearer(token)
     }
 

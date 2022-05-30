@@ -35,7 +35,7 @@ abstract class Transaction(
      */
     @SerialName("created")
     val createdAt: Instant = Instant.DISTANT_PAST
-) : Identifiable<Long> {
+) : Identifiable<TransactionId, Long> {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || this::class != other::class) return false

@@ -31,4 +31,4 @@ data class AchievementGroup(
      */
     @SerialName("categories")
     val categories: List<AchievementCategoryId> = emptyList()
-) : Identifiable<String>
+) : Identifiable<AchievementGroupId, String>

@@ -12,4 +12,4 @@ data class Dungeon(
 
     @SerialName("paths")
     val paths: List<DungeonPath> = emptyList()
-) : Identifiable<String>
+) : Identifiable<DungeonId, String>

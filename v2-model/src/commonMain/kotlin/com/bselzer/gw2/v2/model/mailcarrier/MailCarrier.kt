@@ -32,4 +32,4 @@ data class MailCarrier(
 
     @SerialName("flags")
     val flags: List<String> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<MailCarrierId, Int>

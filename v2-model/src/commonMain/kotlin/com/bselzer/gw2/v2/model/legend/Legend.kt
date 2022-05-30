@@ -44,4 +44,4 @@ data class Legend(
      */
     @SerialName("utilities")
     val utilityIds: List<SkillId> = emptyList()
-) : Identifiable<String>
+) : Identifiable<LegendId, String>

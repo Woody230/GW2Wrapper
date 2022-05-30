@@ -179,6 +179,6 @@ data class Character(
 
     @SerialName("flags")
     val flags: List<CharacterFlag> = emptyList()
-) : Identifiable<String> {
+) : Identifiable<CharacterName, String> {
     override val id: CharacterName = name
 }

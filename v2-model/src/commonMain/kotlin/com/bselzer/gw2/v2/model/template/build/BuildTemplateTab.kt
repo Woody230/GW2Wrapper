@@ -20,4 +20,4 @@ data class BuildTemplateTab(
 
     @SerialName("build")
     val build: BuildTemplate = BuildTemplate()
-) : Identifiable<Int>
+) : Identifiable<BuildTemplateTabId, Int>

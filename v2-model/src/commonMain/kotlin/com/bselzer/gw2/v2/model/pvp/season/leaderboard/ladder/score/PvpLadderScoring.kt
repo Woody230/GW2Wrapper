@@ -35,4 +35,4 @@ data class PvpLadderScoring(
      */
     @SerialName("ordering")
     val ordering: String = ""
-) : Identifiable<String>
+) : Identifiable<PvpScoringId, String>

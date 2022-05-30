@@ -33,4 +33,4 @@ data class CategoryAchievement(
      */
     @SerialName("flags")
     val flags: List<CategoryAchievementFlag> = emptyList(),
-) : Identifiable<Int>
+) : Identifiable<AchievementId, Int>

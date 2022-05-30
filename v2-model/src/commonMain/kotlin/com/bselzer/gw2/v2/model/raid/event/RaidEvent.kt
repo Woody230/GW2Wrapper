@@ -15,4 +15,4 @@ data class RaidEvent(
 
     @SerialName("type")
     val type: RaidEventType = RaidEventType()
-) : Identifiable<String>
+) : Identifiable<RaidEventId, String>

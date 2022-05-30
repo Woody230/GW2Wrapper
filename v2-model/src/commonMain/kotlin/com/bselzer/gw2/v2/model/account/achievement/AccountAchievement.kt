@@ -52,4 +52,4 @@ data class AccountAchievement(
      */
     @SerialName("unlocked")
     val unlocked: Boolean? = null
-) : Identifiable<Int>
+) : Identifiable<AchievementId, Int>

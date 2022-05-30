@@ -57,4 +57,4 @@ data class DyeColor(
      */
     @SerialName("categories")
     val categories: List<ColorCategory> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<DyeColorId, Int>

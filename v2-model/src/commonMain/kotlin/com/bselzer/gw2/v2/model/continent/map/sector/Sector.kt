@@ -35,4 +35,4 @@ data class Sector(
      */
     @SerialName("chat_link")
     val chatLink: ChatLink = ChatLink()
-) : Identifiable<Int>
+) : Identifiable<SectorId, Int>

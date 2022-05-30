@@ -22,4 +22,4 @@ data class PvpAmulet(
      */
     @SerialName("attributes")
     val attributes: Map<AttributeName, Int> = emptyMap()
-) : Identifiable<Int>
+) : Identifiable<PvpAmuletId, Int>

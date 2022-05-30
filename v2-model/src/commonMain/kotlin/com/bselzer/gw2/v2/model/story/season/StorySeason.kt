@@ -28,4 +28,4 @@ data class StorySeason(
      */
     @SerialName("stories")
     val storyIds: List<StoryId> = emptyList()
-) : Identifiable<String>
+) : Identifiable<StorySeasonId, String>

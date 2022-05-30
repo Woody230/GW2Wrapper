@@ -33,4 +33,4 @@ data class ProfessionSkill(
      */
     @SerialName("source")
     val source: ProfessionId = ProfessionId()
-) : Identifiable<Int>
+) : Identifiable<SkillId, Int>

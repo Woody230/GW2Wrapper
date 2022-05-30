@@ -16,4 +16,4 @@ data class WvwSkirmish(
 
     @SerialName("map_scores")
     val mapScores: List<WvwMapScore> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<WvwSkirmishId, Int>

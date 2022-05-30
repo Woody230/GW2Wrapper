@@ -30,4 +30,4 @@ data class Floor(
      */
     @SerialName("regions")
     val regions: Map<RegionId, Region> = emptyMap()
-) : Identifiable<Int>
+) : Identifiable<FloorId, Int>

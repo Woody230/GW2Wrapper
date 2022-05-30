@@ -12,4 +12,4 @@ data class DungeonPath(
 
     @SerialName("type")
     val type: DungeonPathType = DungeonPathType()
-) : Identifiable<String>
+) : Identifiable<DungeonPathId, String>

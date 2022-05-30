@@ -19,4 +19,4 @@ data class AccountCurrency(
      */
     @SerialName("value")
     val count: Int = 0
-) : Identifiable<Int>
+) : Identifiable<CurrencyId, Int>

@@ -42,4 +42,4 @@ data class PvpRank(
 
     @SerialName("levels")
     val levels: List<PvpLevel> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<PvpRankId, Int>

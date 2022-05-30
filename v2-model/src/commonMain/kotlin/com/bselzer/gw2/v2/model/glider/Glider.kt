@@ -40,4 +40,4 @@ data class Glider(
      */
     @SerialName("default_dyes")
     val defaultDyeIds: List<DyeColorId> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<GliderId, Int>

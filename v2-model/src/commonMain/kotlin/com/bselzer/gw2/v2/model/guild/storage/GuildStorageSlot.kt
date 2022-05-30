@@ -18,4 +18,4 @@ data class GuildStorageSlot(
      */
     @SerialName("count")
     val count: Int = 0
-) : Identifiable<Int>
+) : Identifiable<ItemId, Int>

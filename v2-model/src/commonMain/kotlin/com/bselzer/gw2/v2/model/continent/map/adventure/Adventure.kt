@@ -24,4 +24,4 @@ data class Adventure(
      */
     @SerialName("coord")
     val coordinates: Point2D = Point2D()
-) : Identifiable<String>
+) : Identifiable<AdventureId, String>

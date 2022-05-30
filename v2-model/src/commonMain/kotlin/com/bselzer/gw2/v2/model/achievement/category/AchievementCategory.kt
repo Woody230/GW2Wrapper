@@ -34,4 +34,4 @@ data class AchievementCategory(
 
     @SerialName("tomorrow")
     val tomorrow: List<CategoryAchievement> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<AchievementCategoryId, Int>

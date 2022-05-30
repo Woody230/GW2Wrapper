@@ -93,4 +93,4 @@ data class BankSlot(
      */
     @SerialName("stats")
     val stats: List<CharacterItemStat> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<ItemId, Int>

@@ -37,4 +37,4 @@ data class PvpHero(
 
     @SerialName("skins")
     val skins: List<PvpHeroSkin> = emptyList()
-) : Identifiable<String>
+) : Identifiable<PvpHeroId, String>

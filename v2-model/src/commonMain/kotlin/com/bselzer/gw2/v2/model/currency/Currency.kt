@@ -25,4 +25,4 @@ data class Currency(
      */
     @SerialName("order")
     val order: Int = 0
-) : Identifiable<Int>
+) : Identifiable<CurrencyId, Int>

@@ -74,4 +74,4 @@ data class Guild(
 
     @SerialName("emblem")
     val emblem: GuildEmblem? = null
-) : Identifiable<String>
+) : Identifiable<GuildId, String>

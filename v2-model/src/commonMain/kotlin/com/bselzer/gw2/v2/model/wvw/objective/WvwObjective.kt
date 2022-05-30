@@ -60,4 +60,4 @@ data class WvwObjective(
      */
     @SerialName("upgrade_id")
     val upgradeId: WvwUpgradeId = WvwUpgradeId()
-) : Identifiable<String>
+) : Identifiable<WvwMapObjectiveId, String>

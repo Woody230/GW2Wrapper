@@ -44,4 +44,4 @@ data class WvwMapObjective(
 
     @SerialName("yaks_delivered")
     val yaksDelivered: Int = 0
-) : Identifiable<String>
+) : Identifiable<WvwMapObjectiveId, String>

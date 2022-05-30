@@ -13,4 +13,4 @@ data class PetSkill(
      */
     @SerialName("id")
     override val id: SkillId = SkillId()
-) : Identifiable<Int>
+) : Identifiable<SkillId, Int>

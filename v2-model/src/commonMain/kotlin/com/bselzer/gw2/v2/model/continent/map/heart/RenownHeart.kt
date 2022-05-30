@@ -42,4 +42,4 @@ data class RenownHeart(
      */
     @SerialName("chat_link")
     val chatLink: ChatLink = ChatLink()
-) : Identifiable<Int>
+) : Identifiable<RenownHeartId, Int>

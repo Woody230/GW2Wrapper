@@ -31,4 +31,4 @@ data class MountSkin(
      */
     @SerialName("dye_slots")
     val dyeSlots: List<MountDyeSlot> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<MountSkinId, Int>

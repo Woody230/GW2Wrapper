@@ -19,4 +19,4 @@ data class Race(
      */
     @SerialName("skills")
     val skillIds: List<SkillId> = emptyList()
-) : Identifiable<String>
+) : Identifiable<RaceId, String>

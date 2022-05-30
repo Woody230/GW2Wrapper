@@ -46,4 +46,4 @@ data class WvwMatch(
 
     @SerialName("maps")
     val maps: List<WvwMap> = emptyList()
-) : Identifiable<String>
+) : Identifiable<WvwMatchId, String>

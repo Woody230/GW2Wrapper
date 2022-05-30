@@ -14,4 +14,4 @@ data class MiniBit(
      */
     @SerialName("id")
     override val id: MiniId = MiniId()
-) : AchievementBit(), Identifiable<Int>
+) : AchievementBit(), Identifiable<MiniId, Int>

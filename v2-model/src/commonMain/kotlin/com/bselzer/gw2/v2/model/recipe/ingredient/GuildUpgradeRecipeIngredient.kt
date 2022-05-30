@@ -13,4 +13,4 @@ data class GuildUpgradeRecipeIngredient(
      */
     @SerialName("id")
     override val id: GuildUpgradeId = GuildUpgradeId(),
-) : RecipeIngredient()
+) : RecipeIngredient<GuildUpgradeId>()

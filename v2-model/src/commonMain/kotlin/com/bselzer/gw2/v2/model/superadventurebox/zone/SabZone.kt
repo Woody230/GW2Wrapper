@@ -29,4 +29,4 @@ data class SabZone(
      */
     @SerialName("zone")
     val zone: Int = 0
-) : Identifiable<Int>
+) : Identifiable<SabZoneId, Int>

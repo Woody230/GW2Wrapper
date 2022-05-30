@@ -14,4 +14,4 @@ data class Cat(
      */
     @SerialName("hint")
     val hint: String = ""
-) : Identifiable<Int>
+) : Identifiable<CatId, Int>

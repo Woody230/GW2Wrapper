@@ -35,7 +35,7 @@ abstract class Skin(
 
     @SerialName("description")
     val description: String = ""
-) : Identifiable<Int> {
+) : Identifiable<SkinId, Int> {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || this::class != other::class) return false

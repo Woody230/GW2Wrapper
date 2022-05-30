@@ -24,4 +24,4 @@ data class Daily(
      */
     @SerialName("access")
     val access: AchievementAccess = AchievementAccess()
-) : Identifiable<Int>
+) : Identifiable<DailyId, Int>

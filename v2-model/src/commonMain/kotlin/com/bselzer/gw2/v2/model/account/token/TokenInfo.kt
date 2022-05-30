@@ -4,6 +4,7 @@ import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
 import com.bselzer.ktx.value.identifier.Identifiable
+import com.bselzer.ktx.value.identifier.Identifier
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -14,7 +15,7 @@ import kotlinx.serialization.Serializable
  */
 @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
 @Serializable
-abstract class TokenInfo(
+abstract class TokenInfo<Id : Identifier<String>>(
     /**
      * The name of the token, given by the owner.
      */
@@ -26,12 +27,12 @@ abstract class TokenInfo(
      */
     @SerialName("permissions")
     val permissions: List<Permission> = emptyList()
-) : Identifiable<String> {
+) : Identifiable<Id, String> {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || this::class != other::class) return false
 
-        other as TokenInfo
+        other as TokenInfo<*>
 
         if (name != other.name) return false
         if (permissions != other.permissions) return false

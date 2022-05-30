@@ -41,4 +41,4 @@ data class GuildTeam(
 
     @SerialName("seasons")
     val seasons: List<GuildTeamSeason> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<GuildTeamId, Int>

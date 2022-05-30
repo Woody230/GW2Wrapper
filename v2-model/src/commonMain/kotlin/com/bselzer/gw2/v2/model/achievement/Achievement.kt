@@ -77,4 +77,4 @@ data class Achievement(
      */
     @SerialName("point_cap")
     val pointCap: AchievementPoints = AchievementPoints()
-) : Identifiable<Int>
+) : Identifiable<AchievementId, Int>

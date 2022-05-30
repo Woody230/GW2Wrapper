@@ -50,4 +50,4 @@ data class Trait(
 
     @SerialName("skills")
     val skills: List<TraitSkill> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<TraitId, Int>

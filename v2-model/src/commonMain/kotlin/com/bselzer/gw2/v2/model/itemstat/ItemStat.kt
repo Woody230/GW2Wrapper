@@ -14,4 +14,4 @@ data class ItemStat(
 
     @SerialName("attributes")
     val attributes: List<ItemAttribute> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<ItemStatId, Int>

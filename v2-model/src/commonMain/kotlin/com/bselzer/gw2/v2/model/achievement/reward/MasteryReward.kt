@@ -18,4 +18,4 @@ data class MasteryReward(
 
     @SerialName("region")
     val region: RegionType = RegionType()
-) : AchievementReward(), Identifiable<Int>
+) : AchievementReward(), Identifiable<MasteryId, Int>

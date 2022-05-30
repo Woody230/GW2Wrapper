@@ -35,4 +35,4 @@ data class Finisher(
 
     @SerialName("name")
     val name: String = ""
-) : Identifiable<Int>
+) : Identifiable<FinisherId, Int>

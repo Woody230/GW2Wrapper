@@ -55,4 +55,4 @@ data class SharedSlot(
      */
     @SerialName("binding")
     val binding: Binding? = null
-) : Identifiable<Int>
+) : Identifiable<ItemId, Int>

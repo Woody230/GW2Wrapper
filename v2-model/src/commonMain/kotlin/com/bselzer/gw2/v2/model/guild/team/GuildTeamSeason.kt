@@ -22,4 +22,4 @@ data class GuildTeamSeason(
 
     @SerialName("rating")
     val rating: Int = 0
-) : Identifiable<String>
+) : Identifiable<PvpSeasonId, String>

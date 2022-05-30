@@ -45,4 +45,4 @@ data class PointOfInterest(
      */
     @SerialName("icon")
     val iconLink: ImageLink = ImageLink()
-) : Identifiable<Int>
+) : Identifiable<PointOfInterestId, Int>

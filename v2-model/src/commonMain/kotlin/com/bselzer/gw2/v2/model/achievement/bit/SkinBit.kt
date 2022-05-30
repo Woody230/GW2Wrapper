@@ -13,4 +13,4 @@ data class SkinBit(
      * @see <a href="https://wiki.guildwars2.com/wiki/API:2/skins">the wiki</a>
      */
     override val id: SkinId = SkinId()
-) : AchievementBit(), Identifiable<Int>
+) : AchievementBit(), Identifiable<SkinId, Int>

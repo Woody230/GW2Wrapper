@@ -28,4 +28,4 @@ data class Title(
      */
     @SerialName("ap_required")
     val achievementPointsRequired: AchievementPoints? = null
-) : Identifiable<Int>
+) : Identifiable<TitleId, Int>

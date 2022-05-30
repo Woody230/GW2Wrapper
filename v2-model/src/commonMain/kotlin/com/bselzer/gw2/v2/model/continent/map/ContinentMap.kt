@@ -93,4 +93,4 @@ data class ContinentMap(
 
     @SerialName("mastery_points")
     val masteryPoints: List<MasteryPoint> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<MapId, Int>

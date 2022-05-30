@@ -14,4 +14,4 @@ data class TitleReward(
      */
     @SerialName("id")
     override val id: TitleId = TitleId()
-) : AchievementReward(), Identifiable<Int>
+) : AchievementReward(), Identifiable<TitleId, Int>

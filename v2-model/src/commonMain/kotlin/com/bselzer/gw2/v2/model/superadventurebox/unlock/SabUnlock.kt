@@ -18,4 +18,4 @@ data class SabUnlock(
      */
     @SerialName("name")
     val name: SabUnlockName = SabUnlockName()
-) : Identifiable<Int>
+) : Identifiable<SabUnlockId, Int>

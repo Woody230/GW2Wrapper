@@ -14,4 +14,4 @@ data class WvwRank(
 
     @SerialName("min_rank")
     val minRank: WvwLevel = WvwLevel()
-) : Identifiable<Int>
+) : Identifiable<WvwRankId, Int>

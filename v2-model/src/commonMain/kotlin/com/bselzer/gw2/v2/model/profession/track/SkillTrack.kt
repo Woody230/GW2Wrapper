@@ -14,4 +14,4 @@ data class SkillTrack(
      */
     @SerialName("skill_id")
     override val id: SkillId = SkillId(),
-) : TrainingTrack(), Identifiable<Int>
+) : TrainingTrack(), Identifiable<SkillId, Int>

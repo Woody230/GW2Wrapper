@@ -34,4 +34,4 @@ data class Mastery(
 
     @SerialName("levels")
     val levels: List<MasteryLevel> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<MasteryId, Int>

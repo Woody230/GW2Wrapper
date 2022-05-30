@@ -27,7 +27,7 @@ import org.kodein.db.TypeTable
 /**
  * Injects the [TokenInfo] types.
  */
-fun TypeTable.Builder.tokenInfo(): Unit = root<TokenInfo>().run {
+fun TypeTable.Builder.tokenInfo(): Unit = root<TokenInfo<*>>().run {
     sub<ApiKeyInfo>()
     sub<SubTokenInfo>()
 }
@@ -137,7 +137,7 @@ fun TypeTable.Builder.trainingTrack(): Unit = root<TrainingTrack>().run {
 /**
  * Injects the [RecipeIngredient] types.
  */
-fun TypeTable.Builder.recipeIngredient(): Unit = root<RecipeIngredient>().run {
+fun TypeTable.Builder.recipeIngredient(): Unit = root<RecipeIngredient<*>>().run {
     sub<CurrencyRecipeIngredient>()
     sub<GuildUpgradeRecipeIngredient>()
     sub<ItemRecipeIngredient>()

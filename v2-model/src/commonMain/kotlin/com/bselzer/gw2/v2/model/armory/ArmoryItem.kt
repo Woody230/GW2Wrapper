@@ -19,4 +19,4 @@ data class ArmoryItem(
      */
     @SerialName("max_count")
     val maxCount: Int = 0
-) : Identifiable<Int>
+) : Identifiable<ItemId, Int>

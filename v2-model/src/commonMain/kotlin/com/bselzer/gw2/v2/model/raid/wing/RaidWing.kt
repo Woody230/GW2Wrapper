@@ -15,4 +15,4 @@ data class RaidWing(
 
     @SerialName("events")
     val events: List<RaidEvent> = emptyList()
-) : Identifiable<String>
+) : Identifiable<RaidWingId, String>

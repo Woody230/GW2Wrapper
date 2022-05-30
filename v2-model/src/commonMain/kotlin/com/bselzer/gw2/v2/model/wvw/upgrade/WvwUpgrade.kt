@@ -12,4 +12,4 @@ data class WvwUpgrade(
 
     @SerialName("tiers")
     val tiers: List<WvwUpgradeTier> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<WvwUpgradeId, Int>

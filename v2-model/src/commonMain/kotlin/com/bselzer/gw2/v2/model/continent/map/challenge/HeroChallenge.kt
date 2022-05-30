@@ -16,4 +16,4 @@ data class HeroChallenge(
      */
     @SerialName("coord")
     val coordinates: Point2D = Point2D()
-) : Identifiable<String>
+) : Identifiable<HeroChallengeId, String>

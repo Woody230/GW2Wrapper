@@ -51,7 +51,7 @@ abstract class GuildUpgrade(
 
     @SerialName("costs")
     val costs: List<GuildUpgradeCost> = emptyList()
-) : Identifiable<Int> {
+) : Identifiable<GuildUpgradeId, Int> {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || this::class != other::class) return false

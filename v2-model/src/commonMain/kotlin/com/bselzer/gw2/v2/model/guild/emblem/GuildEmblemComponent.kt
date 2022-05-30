@@ -21,4 +21,4 @@ data class GuildEmblemComponent(
      */
     @SerialName("colors")
     val colors: List<DyeColorId> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<GuildEmblemComponentId, Int>

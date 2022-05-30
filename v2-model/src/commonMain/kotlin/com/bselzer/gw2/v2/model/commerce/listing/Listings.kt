@@ -25,4 +25,4 @@ data class Listings(
      */
     @SerialName("sells")
     val sells: List<Listing> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<ItemId, Int>

@@ -79,4 +79,4 @@ data class EquipmentTemplateItem(
      */
     @SerialName("dyes")
     val dyes: List<DyeColorId?> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<ItemId, Int>

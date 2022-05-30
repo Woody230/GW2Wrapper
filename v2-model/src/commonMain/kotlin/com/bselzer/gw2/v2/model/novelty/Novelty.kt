@@ -30,4 +30,4 @@ data class Novelty(
 
     @SerialName("slot")
     val slot: NoveltySlot = NoveltySlot()
-) : Identifiable<Int>
+) : Identifiable<NoveltyId, Int>

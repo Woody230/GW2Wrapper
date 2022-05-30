@@ -33,4 +33,4 @@ data class AccountMaterial(
      * The number of the material in the account vault.
      */
     val count: Int = 0
-) : Identifiable<Int>
+) : Identifiable<ItemId, Int>

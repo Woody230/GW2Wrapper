@@ -26,4 +26,4 @@ data class PvpHeroSkin(
      */
     @SerialName("unlock_items")
     val unlockItems: List<ItemId> = emptyList()
-) : Identifiable<Int>
+) : Identifiable<PvpHeroSkinId, Int>

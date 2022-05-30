@@ -21,4 +21,4 @@ data class Pet(
 
     @SerialName("skills")
     val skills: List<PetSkill> = emptyList()
-) : Identifiable<Byte>
+) : Identifiable<PetId, Byte>
