@@ -7,7 +7,7 @@ import com.bselzer.gw2.v2.model.guild.upgrade.cost.ItemUpgradeCost
 import com.bselzer.ktx.function.collection.addTo
 
 class GuildUpgradeTranslator : Translator<GuildUpgrade> {
-    override fun text(model: GuildUpgrade): List<String> = buildList {
+    override fun texts(model: GuildUpgrade): List<String> = buildList {
         add(model.name)
         model.costs.forEach { cost ->
             when (cost) {

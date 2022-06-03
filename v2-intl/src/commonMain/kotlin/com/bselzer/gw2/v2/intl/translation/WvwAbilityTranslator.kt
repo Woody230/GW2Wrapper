@@ -5,7 +5,7 @@ import com.bselzer.gw2.v2.model.wvw.ability.WvwAbility
 import com.bselzer.ktx.function.collection.addTo
 
 class WvwAbilityTranslator : Translator<WvwAbility> {
-    override fun text(model: WvwAbility): List<String> = buildList {
+    override fun texts(model: WvwAbility): List<String> = buildList {
         add(model.name)
         add(model.description)
         model.ranks.forEach { rank -> add(rank.effect) }

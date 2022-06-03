@@ -5,7 +5,7 @@ import com.bselzer.gw2.v2.model.continent.floor.Floor
 import com.bselzer.ktx.function.collection.addTo
 
 class FloorTranslator : Translator<Floor> {
-    override fun text(model: Floor): List<String> = buildList {
+    override fun texts(model: Floor): List<String> = buildList {
         model.regions.values.forEach { region ->
             add(region.name)
 

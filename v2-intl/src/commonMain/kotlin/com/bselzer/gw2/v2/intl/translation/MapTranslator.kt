@@ -5,7 +5,7 @@ import com.bselzer.gw2.v2.model.map.Map
 import com.bselzer.ktx.function.collection.addTo
 
 class MapTranslator : Translator<Map> {
-    override fun text(model: Map): List<String> = listOf(model.name)
+    override fun texts(model: Map): List<String> = listOf(model.name)
 
     override fun translations(default: Map, translated: Map, language: String) = buildList {
         Translation(

@@ -8,7 +8,7 @@ interface Translator<Model> {
     /**
      * Finds the translatable texts associated with the [model].
      */
-    fun text(model: Model): List<String>
+    fun texts(model: Model): List<String>
 
     /**
      * Creates the translations for the text found in the [default] model to the text found in the [translated] model in the given [language].

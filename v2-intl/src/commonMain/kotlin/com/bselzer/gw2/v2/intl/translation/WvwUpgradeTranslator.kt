@@ -5,7 +5,7 @@ import com.bselzer.gw2.v2.model.wvw.upgrade.WvwUpgrade
 import com.bselzer.ktx.function.collection.addTo
 
 class WvwUpgradeTranslator : Translator<WvwUpgrade> {
-    override fun text(model: WvwUpgrade): List<String> = buildList {
+    override fun texts(model: WvwUpgrade): List<String> = buildList {
         model.tiers.forEach { tier ->
             add(tier.name)
             tier.upgrades.forEach { upgrade ->
