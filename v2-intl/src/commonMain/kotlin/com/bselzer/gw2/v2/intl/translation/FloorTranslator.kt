@@ -5,6 +5,21 @@ import com.bselzer.gw2.v2.model.continent.floor.Floor
 import com.bselzer.ktx.function.collection.addTo
 
 class FloorTranslator : Translator<Floor> {
+    override fun text(model: Floor): List<String> = buildList {
+        model.regions.values.forEach { region ->
+            add(region.name)
+
+            region.maps.values.forEach { map ->
+                add(map.name)
+
+                map.pointsOfInterest.values.forEach { poi -> add(poi.name) }
+                map.renownHearts.values.forEach { heart -> add(heart.objective) }
+                map.sectors.values.forEach { sector -> add(sector.name) }
+                map.adventures.forEach { adventure -> add(adventure.name) }
+            }
+        }
+    }
+
     override fun translations(default: Floor, translated: Floor, language: String) = buildList {
         default.regions.values.zip(translated.regions.values) { defaultRegion, translatedRegion ->
             Translation(

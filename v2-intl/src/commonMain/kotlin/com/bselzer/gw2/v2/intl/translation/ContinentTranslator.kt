@@ -5,6 +5,8 @@ import com.bselzer.gw2.v2.model.continent.Continent
 import com.bselzer.ktx.function.collection.addTo
 
 class ContinentTranslator : Translator<Continent> {
+    override fun text(model: Continent): List<String> = listOf(model.name)
+
     override fun translations(default: Continent, translated: Continent, language: String) = buildList {
         Translation(
             default = default.name,
