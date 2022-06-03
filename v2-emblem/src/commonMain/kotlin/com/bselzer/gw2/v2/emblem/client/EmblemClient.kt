@@ -9,9 +9,6 @@ import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.utils.io.core.*
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
 
 /**
  * The emblem client using the service provided by Werdes.
@@ -46,26 +43,15 @@ open class EmblemClient(
 
     /**
      * @param request the request to get the emblem content from
-     * @return the deferred emblem
-     */
-    suspend fun emblemAsync(request: EmblemRequest): Deferred<ByteArray> = coroutineScope {
-        // Use async for parallelism.
-        async {
-            return@async try {
-                httpClient.get(request.constructBaseUrl()) {
-                    options(request.options)
-                }.body()
-            } catch (ex: Exception) {
-                ByteArray(0)
-            }
-        }
-    }
-
-    /**
-     * @param request the request to get the emblem content from
      * @return the emblem
      */
-    suspend fun emblem(request: EmblemRequest) = emblemAsync(request).await()
+    suspend fun emblem(request: EmblemRequest) = try {
+        httpClient.get(request.constructBaseUrl()) {
+            options(request.options)
+        }.body()
+    } catch (ex: Exception) {
+        ByteArray(0)
+    }
 
     /**
      * Gets the base url built upon the [EmblemClientConfiguration.baseUrl].
