@@ -1,27 +1,27 @@
 package com.bselzer.gw2.v2.intl.translation
 
-import com.bselzer.gw2.v2.intl.model.Translations
+import com.bselzer.gw2.v2.intl.model.Translation
 import com.bselzer.gw2.v2.model.continent.floor.Floor
 import com.bselzer.ktx.function.collection.addTo
 
 class FloorTranslator : Translator<Floor> {
     override fun translations(default: Floor, translated: Floor, language: String) = buildList {
         default.regions.values.zip(translated.regions.values) { defaultRegion, translatedRegion ->
-            Translations(
+            Translation(
                 default = defaultRegion.name,
                 translated = translatedRegion.name,
                 language = language
             ).addTo(this)
 
             defaultRegion.maps.values.zip(translatedRegion.maps.values) { defaultMap, translatedMap ->
-                Translations(
+                Translation(
                     default = defaultMap.name,
                     translated = translatedMap.name,
                     language = language
                 ).addTo(this)
 
                 defaultMap.pointsOfInterest.values.zip(translatedMap.pointsOfInterest.values) { defaultPoi, translatedPoi ->
-                    Translations(
+                    Translation(
                         default = defaultPoi.name,
                         translated = translatedPoi.name,
                         language = language
@@ -29,7 +29,7 @@ class FloorTranslator : Translator<Floor> {
                 }
 
                 defaultMap.renownHearts.values.zip(translatedMap.renownHearts.values) { defaultHeart, translatedHeart ->
-                    Translations(
+                    Translation(
                         default = defaultHeart.objective,
                         translated = translatedHeart.objective,
                         language = language
@@ -37,7 +37,7 @@ class FloorTranslator : Translator<Floor> {
                 }
 
                 defaultMap.sectors.values.zip(translatedMap.sectors.values) { defaultSector, translatedSector ->
-                    Translations(
+                    Translation(
                         default = defaultSector.name,
                         translated = translatedSector.name,
                         language = language
@@ -45,7 +45,7 @@ class FloorTranslator : Translator<Floor> {
                 }
 
                 defaultMap.adventures.zip(translatedMap.adventures) { defaultAdventure, translatedAdventure ->
-                    Translations(
+                    Translation(
                         default = defaultAdventure.name,
                         translated = translatedAdventure.name,
                         language = language

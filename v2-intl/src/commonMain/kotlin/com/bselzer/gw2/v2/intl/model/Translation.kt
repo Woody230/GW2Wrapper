@@ -4,27 +4,36 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Translation(
-    val text: String,
+    /**
+     * The default English text.
+     */
+    val default: String,
 
     /**
-     * The language the [text] is in.
+     * The translated version of the [default] text.
+     */
+    val translated: String,
+
+    /**
+     * The language the [translated] text is in.
      */
     val language: String,
-) : Comparable<Translation> {
-    override fun compareTo(other: Translation): Int = language.compareTo(other.language)
-
+) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other == null || this::class != other::class) return false
 
         other as Translation
 
+        if (default != other.default) return false
         if (language != other.language) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        return language.hashCode()
+        var result = default.hashCode()
+        result = 31 * result + language.hashCode()
+        return result
     }
 }

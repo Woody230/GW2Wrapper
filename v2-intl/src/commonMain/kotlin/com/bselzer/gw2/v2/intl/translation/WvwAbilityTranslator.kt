@@ -1,25 +1,25 @@
 package com.bselzer.gw2.v2.intl.translation
 
-import com.bselzer.gw2.v2.intl.model.Translations
+import com.bselzer.gw2.v2.intl.model.Translation
 import com.bselzer.gw2.v2.model.wvw.ability.WvwAbility
 import com.bselzer.ktx.function.collection.addTo
 
 class WvwAbilityTranslator : Translator<WvwAbility> {
     override fun translations(default: WvwAbility, translated: WvwAbility, language: String) = buildList {
-        Translations(
+        Translation(
             default = default.name,
             translated = translated.name,
             language = language
         ).addTo(this)
 
-        Translations(
+        Translation(
             default = default.description,
             translated = translated.description,
             language = language
         ).addTo(this)
 
         default.ranks.zip(translated.ranks) { defaultRank, translatedRank ->
-            Translations(
+            Translation(
                 default = defaultRank.effect,
                 translated = translatedRank.effect,
                 language = language
