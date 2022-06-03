@@ -43,15 +43,30 @@ open class EmblemClient(
 
     /**
      * @param request the request to get the emblem content from
-     * @return the emblem
+     * @return the byte content of the emblem
      */
-    suspend fun emblem(request: EmblemRequest) = try {
+    suspend fun emblem(request: EmblemRequest): ByteArray {
+        val url = request.constructBaseUrl()
+        return httpClient.get(url) { options(request.options) }.body()
+    }
+
+    /**
+     * @param request the request to get the emblem content from
+     * @return the byte content of the emblem, or null if unable to retrieve the emblem
+     */
+    suspend fun emblemOrNull(request: EmblemRequest): ByteArray? = try {
         httpClient.get(request.constructBaseUrl()) {
             options(request.options)
         }.body()
     } catch (ex: Exception) {
-        ByteArray(0)
+        null
     }
+
+    /**
+     * @param request the request to get the emblem content from
+     * @return the byte content of the emblem, or an empty byte array if unable to retrieve the emblem
+     */
+    suspend fun emblemOrDefault(request: EmblemRequest): ByteArray = emblemOrNull(request) ?: ByteArray(0)
 
     /**
      * Gets the base url built upon the [EmblemClientConfiguration.baseUrl].
