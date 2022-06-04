@@ -24,7 +24,7 @@ suspend fun <Model : Identifiable<Id, Value>, Id : Identifier<Value>, Value> Tra
     translator: Translator<Model>,
     defaults: Collection<Model>,
     language: Language,
-    requestTranslated: suspend (Collection<Model>, Language) -> Collection<Model>
+    requestTranslated: suspend (Collection<Id>, Language) -> Collection<Model>
 ): Map<String, String> {
     val defaultToTranslation = mutableMapOf<String, String>()
 
@@ -46,7 +46,7 @@ suspend fun <Model : Identifiable<Id, Value>, Id : Identifier<Value>, Value> Tra
     }
 
     if (missing.isNotEmpty()) {
-        val translated = requestTranslated(missing.keys, language).associateBy { translated -> translated.id }
+        val translated = requestTranslated(missing.keys.map { default -> default.id }, language).associateBy { translated -> translated.id }
         missing.keys.associateWith { default -> translated[default.id] }.forEach { (default, translated) ->
             if (translated != null) {
                 translator.translations(default = default, translated = translated, language = language.value).forEach { translation ->
