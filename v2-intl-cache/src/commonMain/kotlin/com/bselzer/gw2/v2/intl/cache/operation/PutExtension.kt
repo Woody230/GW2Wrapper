@@ -20,11 +20,11 @@ import org.kodein.db.getById
  * @param requestTranslated a block for retrieving a map of the default model to the translated model
  * @return the default text mapped to the translated text
  */
-fun <Model : Identifiable<Id, Value>, Id : Identifier<Value>, Value> Transaction.putMissingTranslations(
+suspend fun <Model : Identifiable<Id, Value>, Id : Identifier<Value>, Value> Transaction.putMissingTranslations(
     translator: Translator<Model>,
     defaults: Collection<Model>,
     language: Language,
-    requestTranslated: (Collection<Model>, Language) -> Collection<Model>
+    requestTranslated: suspend (Collection<Model>, Language) -> Collection<Model>
 ): Map<String, String> {
     val defaultToTranslation = mutableMapOf<String, String>()
 
