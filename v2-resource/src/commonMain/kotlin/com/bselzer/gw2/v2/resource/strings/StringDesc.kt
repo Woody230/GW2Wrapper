@@ -12,5 +12,5 @@ fun WvwObjectiveOwner.stringDesc(): StringDesc = when (this) {
     WvwObjectiveOwner.RED -> KtxResources.strings.red
     WvwObjectiveOwner.BLUE -> KtxResources.strings.blue
     WvwObjectiveOwner.GREEN -> KtxResources.strings.green
-    WvwObjectiveOwner.NEUTRAL -> KtxResources.strings.gray
+    WvwObjectiveOwner.NEUTRAL -> KtxResources.strings.neutral
 }.desc()
