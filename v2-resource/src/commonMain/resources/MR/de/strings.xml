@@ -1,26 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="automatic_upgrades">Automatische Aufwertungen</string>
     <string name="blue_borderlands">Blaue Grenzlande</string>
     <string name="build_number">Build-Nummer</string>
+    <string name="camp">Lager</string>
+    <string name="castle">Schloss</string>
     <string name="continents">Kontinents</string>
     <string name="edge_of_the_mists">Rand der Nebel</string>
     <string name="eternal_battlegrounds">Ewige Schlachtfelder</string>
+    <string name="generic">Generisch</string>
     <string name="green_borderlands">Grüne Grenzlande</string>
+    <string name="guild_improvements">Gilde Verbesserungen</string>
+    <string name="guild_tactics">Gilde Taktiken</string>
     <string name="guilds">Gilden</string>
+    <string name="keep">Feste</string>
     <string name="map">Karte</string>
     <string name="match">Match</string>
+    <string name="mercenary">Söldner</string>
     <string name="ncsoft_notice">© 2021 NCSOFT Corporation. Alle Rechte vorbehalten. NCSOFT, ArenaNet, das ineinandergreifende NC-Logo, Aion, Lineage II, Guild Wars, Guild
         Wars 2: Heart of Thorns, Guild Wars 2: Path of Fire, Blade &amp; Soul und alle zugehörigen Logos, Designs und kombinierten Marken sind (eingetragene) Marken der NCSOFT
         Corporation. Alle sonstigen Marken sind das Eigentum ihrer jeweiligen Eigentümer.
     </string>
     <string name="neutral">Neutral</string>
     <string name="objective">Befestigung</string>
+    <string name="points_per_capture">Punkte pro Eroberung</string>
     <string name="points_per_tick">Punkte pro Tick</string>
     <string name="red_borderlands">Rote Grenzlande</string>
+    <string name="resource">Ressource</string>
+    <string name="ruins">Ruinen</string>
     <string name="skirmish">Gefecht</string>
+    <string name="spawn">Einstiegspunkt</string>
     <string name="total_deaths">Tode (Gesamt)</string>
     <string name="total_kills">Feinde Besiegt (Gesamt)</string>
     <string name="total_score">Kriegspunktzahl (Gesamt)</string>
+    <string name="tower">Turm</string>
     <string name="victory_points">Siegpunkte</string>
     <string name="war_score">Kriegspunktzahl</string>
     <string name="world">Welt</string>

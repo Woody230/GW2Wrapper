@@ -1,26 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="automatic_upgrades">Mejoras Automáticas</string>
     <string name="blue_borderlands">Tierras Fronterizas Azules</string>
     <string name="build_number">Número de Compilación</string>
+    <string name="camp">Campamento</string>
+    <string name="castle">Castillo</string>
     <string name="continents">Continentes</string>
     <string name="edge_of_the_mists">El Borde de la Niebla</string>
     <string name="eternal_battlegrounds">Campos de Batalla Eternos</string>
+    <string name="generic">Genérico</string>
     <string name="green_borderlands">Tierras Fronterizas Verdes</string>
+    <string name="guild_improvements">Perfeccionamientos de Clanes</string>
+    <string name="guild_tactics">Tácticas de Clanes</string>
     <string name="guilds">Clanes</string>
+    <string name="keep">Fortaleza</string>
     <string name="map">Mapa</string>
     <string name="match">Combate</string>
+    <string name="mercenary">Mercenario</string>
     <string name="ncsoft_notice">© 2021 NCSOFT Corporation. Todos los derechos reservados. NCSOFT, ArenaNet, el logotipo NC entrelazado, Aion, Lineage II, Guild Wars, Guild
         Wars 2: Heart of Thorns, Guild Wars 2: Path of Fire, Blade &amp; Soul y todos los logotipos, diseños y marcas compuestas asociados son marcas comerciales o marcas
         comerciales registradas de NCSOFT Corporation. Todas las demás marcas comerciales son propiedad de sus respectivos propietarios.
     </string>
     <string name="neutral">Neutral</string>
     <string name="objective">Objetivo</string>
-    <string name="points_per_tick">Puntos por Período</string>
+    <string name="points_per_capture">Puntos por Captura</string>
+    <string name="points_per_tick">Puntos por Tic</string>
     <string name="red_borderlands">Tierras Fronterizas Rojas</string>
+    <string name="resource">Recurso</string>
+    <string name="ruins">Ruinas</string>
     <string name="skirmish">Escaramuza</string>
+    <string name="spawn">Punto de Aparición</string>
     <string name="total_deaths">Muertes (Total)</string>
     <string name="total_kills">Eliminados (Total)</string>
     <string name="total_score">Puntuación de Guerra (Total)</string>
+    <string name="tower">Torre</string>
     <string name="victory_points">Puntos de Victoria</string>
     <string name="war_score">Puntuación de Guerra</string>
     <string name="world">Mundo</string>

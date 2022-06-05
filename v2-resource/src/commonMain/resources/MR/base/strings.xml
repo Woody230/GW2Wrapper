@@ -1,26 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="automatic_upgrades">Automatic Upgrades</string>
     <string name="blue_borderlands">Blue Borderlands</string>
     <string name="build_number">Build Number</string>
+    <string name="camp">Camp</string>
+    <string name="castle">Castle</string>
     <string name="continents">Continents</string>
     <string name="edge_of_the_mists">Edge of the Mists</string>
     <string name="eternal_battlegrounds">Eternal Battlegrounds</string>
+    <string name="generic">Generic</string>
     <string name="green_borderlands">Green Borderlands</string>
+    <string name="guild_improvements">Guild Improvements</string>
+    <string name="guild_tactics">Guild Tactics</string>
     <string name="guilds">Guilds</string>
+    <string name="keep">Keep</string>
     <string name="map">Map</string>
     <string name="match">Match</string>
+    <string name="mercenary">Mercenary</string>
     <string name="ncsoft_notice">© 2021 NCSOFT Corporation. All rights reserved. NCSOFT, ArenaNet, the interlocking NC logo, Aion, Lineage II, Guild Wars, Guild Wars 2: Heart
         of Thorns, Guild Wars 2: Path of Fire, Blade &amp; Soul, and all associated logos, designs, and composite marks are trademarks or registered trademarks of NCSOFT
         Corporation. All other trademarks are the property of their respective owners.
     </string>
     <string name="neutral">Neutral</string>
     <string name="objective">Objective</string>
+    <string name="points_per_capture">Points Per Capture</string>
     <string name="points_per_tick">Points Per Tick</string>
     <string name="red_borderlands">Red Borderlands</string>
+    <string name="resource">Resource</string>
+    <string name="ruins">Ruins</string>
     <string name="skirmish">Skirmish</string>
-    <string name="total_deaths">Total Deaths</string>
-    <string name="total_kills">Total Kills</string>
-    <string name="total_score">Total War Score</string>
+    <string name="spawn">Spawn</string>
+    <string name="total_deaths">Deaths (Total)</string>
+    <string name="total_kills">Kills (Total)</string>
+    <string name="total_score">War Score (Total)</string>
+    <string name="tower">Tower</string>
     <string name="victory_points">Victory Points</string>
     <string name="war_score">War Score</string>
     <string name="world">World</string>
