@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="blue_borderlands">Blue Borderlands</string>
     <string name="build_number">Build Number</string>
     <string name="continents">Continents</string>
+    <string name="edge_of_the_mists">Edge of the Mists</string>
+    <string name="eternal_battlegrounds">Eternal Battlegrounds</string>
+    <string name="green_borderlands">Green Borderlands</string>
     <string name="guilds">Guilds</string>
     <string name="map">Map</string>
     <string name="match">Match</string>
@@ -12,6 +16,7 @@
     <string name="neutral">Neutral</string>
     <string name="objective">Objective</string>
     <string name="points_per_tick">Points Per Tick</string>
+    <string name="red_borderlands">Red Borderlands</string>
     <string name="skirmish">Skirmish</string>
     <string name="total_deaths">Total Deaths</string>
     <string name="total_kills">Total Kills</string>

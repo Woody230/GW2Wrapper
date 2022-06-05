@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="blue_borderlands">Blaue Grenzlande</string>
     <string name="build_number">Build-Nummer</string>
     <string name="continents">Kontinents</string>
+    <string name="edge_of_the_mists">Rand der Nebel</string>
+    <string name="eternal_battlegrounds">Ewige Schlachtfelder</string>
+    <string name="green_borderlands">Grüne Grenzlande</string>
     <string name="guilds">Gilden</string>
     <string name="map">Karte</string>
     <string name="match">Match</string>
@@ -12,10 +16,11 @@
     <string name="neutral">Neutral</string>
     <string name="objective">Befestigung</string>
     <string name="points_per_tick">Punkte pro Tick</string>
+    <string name="red_borderlands">Rote Grenzlande</string>
     <string name="skirmish">Gefecht</string>
-    <string name="total_deaths">Tode (gesamt)</string>
-    <string name="total_kills">Feinde besiegt (gesamt)</string>
-    <string name="total_score">Kriegspunktzahl (gesamt)</string>
+    <string name="total_deaths">Tode (Gesamt)</string>
+    <string name="total_kills">Feinde Besiegt (Gesamt)</string>
+    <string name="total_score">Kriegspunktzahl (Gesamt)</string>
     <string name="victory_points">Siegpunkte</string>
     <string name="war_score">Kriegspunktzahl</string>
     <string name="world">Welt</string>

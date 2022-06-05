@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="blue_borderlands">Territoires Bleus</string>
     <string name="build_number">Numéro de Build</string>
     <string name="continents">Continents</string>
+    <string name="edge_of_the_mists">La Lisière des Brumes</string>
+    <string name="eternal_battlegrounds">Champs de Bataille Éternels</string>
+    <string name="green_borderlands">Territoires Vertes</string>
     <string name="guilds">Guildes</string>
     <string name="map">Carte</string>
     <string name="match">Match</string>
@@ -11,13 +15,14 @@
     </string>
     <string name="neutral">Neutre</string>
     <string name="objective">Objectif</string>
-    <string name="points_per_tick">Points par chronos</string>
+    <string name="points_per_tick">Points par Chronos</string>
+    <string name="red_borderlands">Territoires Rouges</string>
     <string name="skirmish">Escarmouche</string>
-    <string name="total_deaths">Morts (total)</string>
-    <string name="total_kills">Victimes (total)</string>
-    <string name="total_score">Score de guerre (total)</string>
-    <string name="victory_points">Points de victorie</string>
-    <string name="war_score">Score de guerre</string>
+    <string name="total_deaths">Morts (Total)</string>
+    <string name="total_kills">Victimes (Total)</string>
+    <string name="total_score">Score de Guerre (Total)</string>
+    <string name="victory_points">Points de Victorie</string>
+    <string name="war_score">Score de Guerre</string>
     <string name="world">Monde</string>
     <string name="worlds">Mondes</string>
     <string name="wvw">Monde contre Monde</string>

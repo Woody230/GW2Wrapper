@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="blue_borderlands">Tierras Fronterizas Azules</string>
     <string name="build_number">Número de Compilación</string>
     <string name="continents">Continentes</string>
+    <string name="edge_of_the_mists">El Borde de la Niebla</string>
+    <string name="eternal_battlegrounds">Campos de Batalla Eternos</string>
+    <string name="green_borderlands">Tierras Fronterizas Verdes</string>
     <string name="guilds">Clanes</string>
     <string name="map">Mapa</string>
     <string name="match">Combate</string>
@@ -11,13 +15,14 @@
     </string>
     <string name="neutral">Neutral</string>
     <string name="objective">Objetivo</string>
-    <string name="points_per_tick">Puntos por período</string>
+    <string name="points_per_tick">Puntos por Período</string>
+    <string name="red_borderlands">Tierras Fronterizas Rojas</string>
     <string name="skirmish">Escaramuza</string>
-    <string name="total_deaths">Muertes (total)</string>
-    <string name="total_kills">Eliminados (total)</string>
-    <string name="total_score">Puntuación de guerra (total)</string>
-    <string name="victory_points">Puntos de victoria</string>
-    <string name="war_score">Puntuación de guerra</string>
+    <string name="total_deaths">Muertes (Total)</string>
+    <string name="total_kills">Eliminados (Total)</string>
+    <string name="total_score">Puntuación de Guerra (Total)</string>
+    <string name="victory_points">Puntos de Victoria</string>
+    <string name="war_score">Puntuación de Guerra</string>
     <string name="world">Mundo</string>
     <string name="worlds">Mundos</string>
     <string name="wvw">Mundo contra Mundo</string>
