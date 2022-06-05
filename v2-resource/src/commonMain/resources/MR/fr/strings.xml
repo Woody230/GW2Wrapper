@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="build_number">Numéro de Build</string>
+    <string name="continents">Continents</string>
+    <string name="guilds">Guildes</string>
+    <string name="map">Carte</string>
+    <string name="match">Match</string>
+    <string name="ncsoft_notice">© 2021 NCSOFT Corporation. Tous droits réservés. NCSOFT, ArenaNet, le logo NC imbriqué, Aion, Lineage II, Guild Wars, Guild Wars 2 : Heart of
+        Thorns, Guild Wars 2 : Path of Fire, Blade &amp; Soul et tous les logos, dessins et marques composites associés sont des marques ou des marques déposées de NCSOFT
+        Corporation. Toutes les autres marques de commerce appartiennent à leurs propriétaires respectifs.
+    </string>
+    <string name="neutral">Neutre</string>
+    <string name="objective">Objectif</string>
+    <string name="points_per_tick">Points par chronos</string>
+    <string name="skirmish">Escarmouche</string>
+    <string name="total_deaths">Morts (total)</string>
+    <string name="total_kills">Victimes (total)</string>
+    <string name="total_score">Score de guerre (total)</string>
+    <string name="victory_points">Points de victorie</string>
+    <string name="war_score">Score de guerre</string>
+    <string name="world">Monde</string>
+    <string name="worlds">Mondes</string>
+    <string name="wvw">Monde contre Monde</string>
+</resources>

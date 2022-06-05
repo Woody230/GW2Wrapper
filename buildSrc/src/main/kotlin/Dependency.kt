@@ -20,6 +20,7 @@ private const val ROBOLECTRIC = "4.6.1"
 private const val COROUTINE = "1.5.2"
 private const val KODEIN_DB = "0.9.0-beta"
 const val KOTLIN = "1.6.10"
+const val RESOURCE = "0.19.0"
 
 fun KotlinDependencyHandler.ktxDateTime() = api("org.jetbrains.kotlinx:kotlinx-datetime:$KTX_DATETIME")
 fun KotlinDependencyHandler.ktxSerialization() = api("org.jetbrains.kotlinx:kotlinx-serialization-json:$KTX_SERIALIZATION")
