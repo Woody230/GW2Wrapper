@@ -23,8 +23,8 @@
     </string>
     <string name="neutral">Neutral</string>
     <string name="objective">Objective</string>
-    <string name="points_per_capture">Points Per Capture</string>
-    <string name="points_per_tick">Points Per Tick</string>
+    <string name="points_per_capture">Points per Capture</string>
+    <string name="points_per_tick">Points per Tick</string>
     <string name="red_borderlands">Red Borderlands</string>
     <string name="resource">Resource</string>
     <string name="ruins">Ruins</string>
