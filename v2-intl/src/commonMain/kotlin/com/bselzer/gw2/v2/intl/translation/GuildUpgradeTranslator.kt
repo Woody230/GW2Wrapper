@@ -9,6 +9,7 @@ import com.bselzer.ktx.function.collection.addTo
 class GuildUpgradeTranslator : Translator<GuildUpgrade> {
     override fun texts(model: GuildUpgrade): List<String> = buildList {
         add(model.name)
+        add(model.description)
         model.costs.forEach { cost ->
             when (cost) {
                 is CollectibleUpgradeCost -> add(cost.name)
@@ -22,6 +23,12 @@ class GuildUpgradeTranslator : Translator<GuildUpgrade> {
         Translation(
             default = default.name,
             translated = translated.name,
+            language = language
+        ).addTo(this)
+
+        Translation(
+            default = default.description,
+            translated = translated.description,
             language = language
         ).addTo(this)
 
