@@ -65,6 +65,11 @@ data class TileGrid(
     val rows: List<List<Tile>> = createRows()
 
     /**
+     * All of the tiles within the boundary by columns.
+     */
+    val columns: List<List<Tile>> = createColumns()
+
+    /**
      * The number of columns within the grid.
      */
     val columnCount: Int = endX - startX + 1
@@ -125,17 +130,41 @@ data class TileGrid(
     }
 
     /**
-     * @return the grid from the [tiles] with missing tiles created with empty content
+     * @return the grid, organized by row from the [tiles] with missing tiles created with empty content
      */
     private fun createRows(): List<List<Tile>> {
         val grouped = tiles.groupBy { it.gridY }
         val grid = mutableListOf<List<Tile>>()
+
         for (y in startY..endY) {
             val group = grouped[y] ?: emptyList()
-            val row =
-                (startX..endX).map { x -> group.firstOrNull { tile -> tile.gridX == x } ?: Tile(gridX = x, gridY = y, width = tileWidth, height = tileHeight, zoom = zoom) }
+
+            val row = (startX..endX).map { x ->
+                group.firstOrNull { tile -> tile.gridX == x } ?: Tile(gridX = x, gridY = y, width = tileWidth, height = tileHeight, zoom = zoom)
+            }
+
             grid.add(row)
         }
+        return grid
+    }
+
+    /**
+     * @return the grid, organized by column, from the [tiles] with missing tiles created with empty content
+     */
+    private fun createColumns(): List<List<Tile>> {
+        val grouped = tiles.groupBy { it.gridX }
+        val grid = mutableListOf<List<Tile>>()
+
+        for (x in startX..endX) {
+            val group = grouped[x] ?: emptyList()
+
+            val column = (startY..endY).map { y ->
+                group.firstOrNull { tile -> tile.gridY == y } ?: Tile(gridX = x, gridY = y, width = tileWidth, height = tileHeight, zoom = zoom)
+            }
+
+            grid.add(column)
+        }
+
         return grid
     }
 }
