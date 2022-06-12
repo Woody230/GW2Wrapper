@@ -16,4 +16,6 @@ data class GridPosition(
      * The row.
      */
     val y: Int = 0
-)
+) {
+    override fun toString(): String = "[$x,$y]"
+}

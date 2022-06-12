@@ -16,4 +16,6 @@ value class BoundedPosition(private val value: Point2D) : Coordinates2D {
 
     override val y: Double
         get() = value.y
+
+    override fun toString(): String = value.toString()
 }

@@ -16,4 +16,6 @@ value class NormalizedPosition(private val value: Point2D) : Coordinates2D {
 
     override val y: Double
         get() = value.y.coerceIn(0.0, 1.0)
+
+    override fun toString(): String = "[$x,$y]"
 }
