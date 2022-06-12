@@ -25,10 +25,10 @@ class TileGridMetadataExtractor : MetadataExtractor {
  * Creates an id using the zoom and bounds of the grid.
  * @return the id
  */
-fun TileGrid.id() = Value.of(zoom, startX, startY, endX, endY)
+fun TileGrid.id() = Value.of(zoom, topLeft.x, topLeft.y, bottomRight.x, bottomRight.y)
 
 /**
  * Creates an id using the zoom and bounds of the grid.
  * @return the id
  */
-fun TileGridRequest.id() = Value.of(zoom, startX, startY, endX, endY)
+fun TileGridRequest.id() = Value.of(zoom, topLeft.x, topLeft.y, bottomRight.x, bottomRight.y)
