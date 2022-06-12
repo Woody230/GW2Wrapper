@@ -108,10 +108,10 @@ open class TileClient(
 
         // Get the tile position bounds within the grid.
         val clampedView = floor.clampedView
-        val startX = floor(clampedView.point1.x * requestedZoomTiles / textureWidth).toInt()
-        val endX = floor(clampedView.point2.x * requestedZoomTiles / textureWidth).toInt()
-        val startY = floor(clampedView.point1.y * requestedZoomTiles / textureHeight).toInt()
-        val endY = floor(clampedView.point2.x * requestedZoomTiles / textureHeight).toInt()
+        val startX = floor(clampedView.topLeft.x * requestedZoomTiles / textureWidth).toInt()
+        val endX = floor(clampedView.bottomRight.x * requestedZoomTiles / textureWidth).toInt()
+        val startY = floor(clampedView.topLeft.y * requestedZoomTiles / textureHeight).toInt()
+        val endY = floor(clampedView.bottomRight.y * requestedZoomTiles / textureHeight).toInt()
 
         // Create the requests for tile content.
         val requests = mutableListOf<TileRequest>()

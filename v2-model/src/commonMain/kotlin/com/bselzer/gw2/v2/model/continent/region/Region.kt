@@ -3,7 +3,7 @@ package com.bselzer.gw2.v2.model.continent.region
 import com.bselzer.gw2.v2.model.continent.map.ContinentMap
 import com.bselzer.gw2.v2.model.map.MapId
 import com.bselzer.gw2.v2.tile.model.position.TexturePosition
-import com.bselzer.ktx.geometry.dimension.bi.polygon.Digon
+import com.bselzer.gw2.v2.tile.model.position.TopLeftTextureBound
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -30,7 +30,7 @@ data class Region(
      * The second sublist contains the bottom-right coordinates.
      */
     @SerialName("continent_rect")
-    val continentRectangle: Digon = Digon(),
+    val continentRectangle: TopLeftTextureBound = TopLeftTextureBound(),
 
     /**
      * A map of the map id to the map information.

@@ -12,7 +12,8 @@ import com.bselzer.gw2.v2.model.continent.map.pointofinterest.PointOfInterestId
 import com.bselzer.gw2.v2.model.continent.map.sector.Sector
 import com.bselzer.gw2.v2.model.continent.map.sector.SectorId
 import com.bselzer.gw2.v2.model.map.MapId
-import com.bselzer.ktx.geometry.dimension.bi.polygon.Digon
+import com.bselzer.gw2.v2.tile.model.position.BottomLeftTextureBound
+import com.bselzer.gw2.v2.tile.model.position.TopLeftTextureBound
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -52,7 +53,7 @@ data class ContinentMap(
      * The second sublist contains the top-right coordinates.
      */
     @SerialName("map_rect")
-    val mapRectangle: Digon = Digon(),
+    val mapRectangle: BottomLeftTextureBound = BottomLeftTextureBound(),
 
     /**
      * The continent dimensions.
@@ -62,7 +63,7 @@ data class ContinentMap(
      * The second sublist contains the bottom-right coordinates.
      */
     @SerialName("continent_rect")
-    val continentRectangle: Digon = Digon(),
+    val continentRectangle: TopLeftTextureBound = TopLeftTextureBound(),
 
     /**
      * A map of the point of interest id to the point of interest object, which include landmarks, waypoints, and vistas.

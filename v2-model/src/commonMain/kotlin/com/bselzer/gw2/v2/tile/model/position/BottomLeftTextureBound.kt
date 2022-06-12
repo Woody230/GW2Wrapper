@@ -1,0 +1,26 @@
+package com.bselzer.gw2.v2.tile.model.position
+
+import com.bselzer.ktx.geometry.dimension.bi.polygon.Digon
+import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmInline
+
+/**
+ * The bounds of a rectangle formed by the [bottomLeft] and [topRight] coordinates.
+ */
+@Serializable
+@JvmInline
+value class BottomLeftTextureBound(
+    private val value: Digon = Digon()
+) : TextureBound {
+    override val bottomLeft: TexturePosition
+        get() = TexturePosition(value.point1)
+
+    override val topRight: TexturePosition
+        get() = TexturePosition(value.point2)
+
+    override val bottomRight: TexturePosition
+        get() = TexturePosition(x = topRight.x, y = bottomLeft.y)
+
+    override val topLeft: TexturePosition
+        get() = TexturePosition(x = bottomLeft.x, y = topRight.y)
+}
