@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.model.continent.map.adventure
 
-import com.bselzer.ktx.geometry.dimension.bi.position.Point2D
+import com.bselzer.gw2.v2.tile.model.position.TexturePosition
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -23,5 +23,5 @@ data class Adventure(
      * The two-dimensional position within the texture.
      */
     @SerialName("coord")
-    val coordinates: Point2D = Point2D()
+    val coordinates: TexturePosition = TexturePosition()
 ) : Identifiable<AdventureId, String>

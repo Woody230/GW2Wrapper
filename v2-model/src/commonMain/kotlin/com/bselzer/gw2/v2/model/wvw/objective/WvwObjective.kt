@@ -7,7 +7,7 @@ import com.bselzer.gw2.v2.model.map.MapId
 import com.bselzer.gw2.v2.model.wrapper.ChatLink
 import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import com.bselzer.gw2.v2.model.wvw.upgrade.WvwUpgradeId
-import com.bselzer.ktx.geometry.dimension.bi.position.Point2D
+import com.bselzer.gw2.v2.tile.model.position.TexturePosition
 import com.bselzer.ktx.geometry.dimension.tri.position.Point3D
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
@@ -46,7 +46,7 @@ data class WvwObjective(
      * The two-dimensional position of the label within the texture.
      */
     @SerialName("label_coord")
-    val labelCoordinates: Point2D = Point2D(),
+    val labelCoordinates: TexturePosition = TexturePosition(),
 
     @SerialName("marker")
     val iconLink: ImageLink = ImageLink(),

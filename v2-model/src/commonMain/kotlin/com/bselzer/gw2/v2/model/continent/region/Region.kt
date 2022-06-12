@@ -2,8 +2,8 @@ package com.bselzer.gw2.v2.model.continent.region
 
 import com.bselzer.gw2.v2.model.continent.map.ContinentMap
 import com.bselzer.gw2.v2.model.map.MapId
+import com.bselzer.gw2.v2.tile.model.position.TexturePosition
 import com.bselzer.ktx.geometry.dimension.bi.polygon.Digon
-import com.bselzer.ktx.geometry.dimension.bi.position.Point2D
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -20,7 +20,7 @@ data class Region(
      * The two-dimensional coordinates of the region label.
      */
     @SerialName("label_coord")
-    val labelCoordinates: Point2D = Point2D(),
+    val labelCoordinates: TexturePosition = TexturePosition(),
 
     /**
      * The continent dimensions.

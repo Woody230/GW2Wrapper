@@ -10,7 +10,11 @@ import kotlin.jvm.JvmInline
  */
 @Serializable
 @JvmInline
-value class NormalizedPosition(private val value: Point2D) : Coordinates2D {
+value class NormalizedPosition(
+    private val value: Coordinates2D = Point2D()
+) : Coordinates2D {
+    constructor(x: Double, y: Double) : this(Point2D(x, y))
+
     override val x: Double
         get() = value.x.coerceIn(0.0, 1.0)
 

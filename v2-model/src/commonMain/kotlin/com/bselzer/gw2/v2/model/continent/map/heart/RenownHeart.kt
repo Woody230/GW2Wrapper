@@ -2,7 +2,7 @@ package com.bselzer.gw2.v2.model.continent.map.heart
 
 import com.bselzer.gw2.v2.model.character.CharacterLevel
 import com.bselzer.gw2.v2.model.wrapper.ChatLink
-import com.bselzer.ktx.geometry.dimension.bi.position.Point2D
+import com.bselzer.gw2.v2.tile.model.position.TexturePosition
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -28,13 +28,13 @@ data class RenownHeart(
      * The two-dimensional coordinates within the texture.
      */
     @SerialName("coord")
-    val coordinates: Point2D = Point2D(),
+    val coordinates: TexturePosition = TexturePosition(),
 
     /**
      * The boundary of where the player can complete the heart represented by two-dimensional coordinates.
      */
     @SerialName("bounds")
-    val bounds: List<Point2D> = emptyList(),
+    val bounds: List<TexturePosition> = emptyList(),
 
     /**
      * The id of the chat link.
