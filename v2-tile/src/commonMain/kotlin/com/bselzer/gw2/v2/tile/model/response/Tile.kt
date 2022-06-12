@@ -1,6 +1,10 @@
 package com.bselzer.gw2.v2.tile.model.response
 
+import com.bselzer.gw2.v2.tile.model.position.GridPosition
+import com.bselzer.gw2.v2.tile.model.position.TexturePosition
 import com.bselzer.gw2.v2.tile.model.request.TileRequest
+import com.bselzer.ktx.geometry.dimension.bi.Dimension2D
+import com.bselzer.ktx.geometry.dimension.bi.position.Point2D
 import kotlinx.serialization.Serializable
 
 /**
@@ -9,24 +13,14 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Tile(
     /**
-     * The relative horizontal position within the texture.
+     * The relative position within the grid.
      */
-    val gridX: Int,
+    val gridPosition: GridPosition,
 
     /**
-     * The relative vertical position within the texture.
+     * The width and height.
      */
-    val gridY: Int,
-
-    /**
-     * The width.
-     */
-    val width: Int,
-
-    /**
-     * The height.
-     */
-    val height: Int,
+    val size: Dimension2D,
 
     /**
      * The zoom level.
@@ -34,41 +28,32 @@ data class Tile(
     val zoom: Int,
 
     /**
-     * The content.
+     * The image content.
      */
     val content: ByteArray = ByteArray(0)
 ) {
     /**
      * Creates a new instance using the data from the [request].
      */
-    constructor(request: TileRequest, content: ByteArray = ByteArray(0)) : this(request.gridX, request.gridY, request.width, request.height, request.zoom, content)
+    constructor(
+        request: TileRequest,
+        content: ByteArray = ByteArray(0)
+    ) : this(
+        gridPosition = request.gridPosition,
+        size = request.size,
+        zoom = request.zoom,
+        content = content
+    )
 
     /**
-     * The absolute horizontal position within the texture.
+     * The absolute position within the texture.
      */
-    val textureX: Int = gridX * width
-
-    /**
-     * The absolute vertical position within the texture.
-     */
-    val textureY: Int = gridY * height
-
-    /**
-     * @return true if the texture position is within the bounds of this tile
-     */
-    fun absoluteContains(x: Int, y: Int): Boolean {
-        val startX = textureX
-        val startY = textureY
-        val endX = textureX + width
-        val endY = textureY + height
-        return x in startX..endX && y in startY..endY
-    }
-
-    /**
-     * @return the relative position within the bounds of the tile of a texture position
-     * @see [absoluteContains] to determine if the position exists within the bounds of the tile
-     */
-    fun absoluteBounded(x: Int, y: Int): Pair<Int, Int> = Pair(x % width, y % height)
+    val texturePosition: TexturePosition = TexturePosition(
+        value = Point2D(
+            x = gridPosition.x * size.width,
+            y = gridPosition.y * size.height
+        )
+    )
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -76,16 +61,14 @@ data class Tile(
 
         other as Tile
 
-        if (gridX != other.gridX) return false
-        if (gridY != other.gridY) return false
+        if (gridPosition != other.gridPosition) return false
         if (zoom != other.zoom) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        var result = gridX
-        result = 31 * result + gridY
+        var result = gridPosition.hashCode()
         result = 31 * result + zoom
         return result
     }

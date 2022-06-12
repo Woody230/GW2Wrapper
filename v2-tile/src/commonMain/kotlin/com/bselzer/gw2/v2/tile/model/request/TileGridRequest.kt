@@ -1,6 +1,8 @@
 package com.bselzer.gw2.v2.tile.model.request
 
+import com.bselzer.gw2.v2.tile.model.position.GridPosition
 import com.bselzer.gw2.v2.tile.model.response.TileGrid
+import com.bselzer.ktx.geometry.dimension.bi.Dimension2D
 import kotlinx.serialization.Serializable
 
 /**
@@ -9,44 +11,24 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class TileGridRequest(
     /**
-     * The starting horizontal tile position.
+     * The size of each individual tile.
      */
-    val startX: Int,
+    val tileSize: Dimension2D,
 
     /**
-     * The ending horizontal tile position.
+     * The full dimensions of the texture, equivalent to the size at the max zoom level.
      */
-    val endX: Int,
+    val textureSize: Dimension2D,
 
     /**
-     * The starting vertical tile position.
+     * The starting coordinates of the bound, representing the top left corner of the rectangle.
      */
-    val startY: Int,
+    val topLeft: GridPosition,
 
     /**
-     * The ending vertical tile position.
+     * The ending coordinates of the bound, representing the bottom right corner of the rectangle.
      */
-    val endY: Int,
-
-    /**
-     * The width of each individual tile.
-     */
-    val tileWidth: Int,
-
-    /**
-     * The height of each individual tile.
-     */
-    val tileHeight: Int,
-
-    /**
-     * The width of the texture.
-     */
-    val textureWidth: Int,
-
-    /**
-     * The height of the texture.
-     */
-    val textureHeight: Int,
+    val bottomRight: GridPosition,
 
     /**
      * The zoom level.
@@ -63,11 +45,13 @@ data class TileGridRequest(
      *
      * @return a request with existing tiles clamped by the given bounds
      */
-    fun bounded(startX: Int = this.startX, endX: Int = this.endX, startY: Int = this.startY, endY: Int = this.endY): TileGridRequest = copy(
-        startX = startX,
-        endX = endX,
-        startY = startY,
-        endY = endY,
-        tileRequests = tileRequests.filter { tileRequest -> tileRequest.gridX in startX..endX && tileRequest.gridY in startY..endY }
+    fun bounded(topLeft: GridPosition, bottomRight: GridPosition): TileGridRequest = copy(
+        topLeft = topLeft,
+        bottomRight = bottomRight,
+        tileRequests = tileRequests.filter { tileRequest ->
+            val column = tileRequest.gridPosition.x
+            val row = tileRequest.gridPosition.y
+            column in topLeft.x..bottomRight.x && row in topLeft.y..bottomRight.y
+        }
     )
 }

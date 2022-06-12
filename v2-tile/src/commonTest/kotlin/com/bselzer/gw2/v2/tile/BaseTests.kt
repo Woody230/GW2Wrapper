@@ -6,6 +6,7 @@ import com.bselzer.gw2.v2.model.continent.floor.FloorId
 import com.bselzer.gw2.v2.tile.client.TileClient
 import com.bselzer.gw2.v2.tile.client.TileClientConfiguration
 import io.ktor.client.*
+import io.ktor.utils.io.core.*
 import kotlinx.coroutines.runBlocking
 
 abstract class BaseTests {

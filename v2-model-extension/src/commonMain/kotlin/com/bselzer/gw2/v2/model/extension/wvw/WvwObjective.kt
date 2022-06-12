@@ -8,7 +8,7 @@ import com.bselzer.ktx.geometry.dimension.bi.position.Point2D
  */
 fun WvwObjective.position(): Point2D {
     val coordinates = coordinates.toPoint2D()
-    return if (!coordinates.isDefault()) {
+    return if (!coordinates.isDefault) {
         coordinates
     } else {
         labelCoordinates

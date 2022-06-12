@@ -5,10 +5,12 @@ import com.bselzer.gw2.v2.model.continent.ContinentId
 import com.bselzer.gw2.v2.model.continent.floor.Floor
 import com.bselzer.gw2.v2.model.continent.floor.FloorId
 import com.bselzer.gw2.v2.tile.constant.Endpoints
+import com.bselzer.gw2.v2.tile.model.position.GridPosition
 import com.bselzer.gw2.v2.tile.model.request.TileGridRequest
 import com.bselzer.gw2.v2.tile.model.request.TileRequest
 import com.bselzer.gw2.v2.tile.model.response.Tile
 import com.bselzer.gw2.v2.tile.model.response.TileGrid
+import com.bselzer.ktx.geometry.dimension.bi.Dimension2D
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
@@ -99,10 +101,10 @@ open class TileClient(
 
         // Get the dimensions of each individual tile.
         val textureDimensions = floor.textureDimensions
-        val textureWidth = textureDimensions.width.toInt()
-        val textureHeight = textureDimensions.height.toInt()
-        val tileWidth = (textureWidth / maxZoomTiles).toInt()
-        val tileHeight = (textureHeight / maxZoomTiles).toInt()
+        val textureWidth = textureDimensions.width
+        val textureHeight = textureDimensions.height
+        val tileWidth = textureWidth / maxZoomTiles
+        val tileHeight = textureHeight / maxZoomTiles
 
         // Get the tile position bounds within the grid.
         val clampedView = floor.clampedView
@@ -116,19 +118,20 @@ open class TileClient(
         for (gridY in startY..endY) {
             for (gridX in startX..endX) {
                 val url = baseUrls.random().constructUrl(continent.id, floor.id, requestedZoom, gridX, gridY)
-                requests.add(TileRequest(url = url, gridX = gridX, gridY = gridY, width = tileWidth, height = tileHeight, zoom = zoom))
+                requests += TileRequest(
+                    url = url,
+                    gridPosition = GridPosition(x = gridX, y = gridY),
+                    size = Dimension2D(width = tileWidth, height = tileHeight),
+                    zoom = zoom
+                )
             }
         }
 
         return TileGridRequest(
-            startX = startX,
-            endX = endX,
-            startY = startY,
-            endY = endY,
-            tileWidth = tileWidth,
-            tileHeight = tileHeight,
-            textureWidth = textureWidth,
-            textureHeight = textureHeight,
+            tileSize = Dimension2D(width = tileWidth, height = tileHeight),
+            textureSize = Dimension2D(width = textureWidth, height = textureHeight),
+            topLeft = GridPosition(x = startX, y = startY),
+            bottomRight = GridPosition(x = endX, y = endY),
             zoom = zoom,
             tileRequests = requests
         )

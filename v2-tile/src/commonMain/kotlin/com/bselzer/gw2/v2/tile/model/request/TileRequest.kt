@@ -1,6 +1,8 @@
 package com.bselzer.gw2.v2.tile.model.request
 
+import com.bselzer.gw2.v2.tile.model.position.GridPosition
 import com.bselzer.gw2.v2.tile.model.response.Tile
+import com.bselzer.ktx.geometry.dimension.bi.Dimension2D
 import kotlinx.serialization.Serializable
 
 /**
@@ -14,24 +16,14 @@ data class TileRequest(
     val url: String,
 
     /**
-     * The relative horizontal position within the texture.
+     * The relative position within the grid.
      */
-    val gridX: Int,
+    val gridPosition: GridPosition,
 
     /**
-     * The relative vertical position within the texture.
+     * The width and height.
      */
-    val gridY: Int,
-
-    /**
-     * The width.
-     */
-    val width: Int,
-
-    /**
-     * The height.
-     */
-    val height: Int,
+    val size: Dimension2D,
 
     /**
      * The zoom level.

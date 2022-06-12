@@ -43,12 +43,12 @@ class TileServiceTests : BaseTests() {
 
         // Assert
         assertEquals(1, grid.tiles.size)
-        assertEquals(256, grid.tileWidth)
-        assertEquals(256, grid.tileHeight)
+        assertEquals(256.0, grid.tileSize.width)
+        assertEquals(256.0, grid.tileSize.height)
 
         val tile = grid.tiles[0]
-        assertEquals(0, tile.gridX)
-        assertEquals(0, tile.gridY)
+        assertEquals(0, tile.gridPosition.x)
+        assertEquals(0, tile.gridPosition.y)
         assertTrue(tile.content.isNotEmpty())
     }
 
