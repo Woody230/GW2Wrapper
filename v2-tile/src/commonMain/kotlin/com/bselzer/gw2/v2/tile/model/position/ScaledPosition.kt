@@ -11,7 +11,7 @@ import kotlin.jvm.JvmInline
 @Serializable
 @JvmInline
 value class ScaledPosition(
-    private val value: Coordinates2D = Point2D()
+    private val value: Point2D = Point2D()
 ) : Coordinates2D {
     constructor(x: Double, y: Double) : this(Point2D(x, y))
 
