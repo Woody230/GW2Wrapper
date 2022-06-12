@@ -30,22 +30,22 @@ data class TileGrid(
     val textureHeight: Int = 0,
 
     /**
-     * The starting horizontal tile position.
+     * The relative starting horizontal tile position.
      */
     val startX: Int = 0,
 
     /**
-     * The ending horizontal tile position.
+     * The relative ending horizontal tile position.
      */
     val endX: Int = 0,
 
     /**
-     * The starting vertical tile position.
+     * The relative starting vertical tile position.
      */
     val startY: Int = 0,
 
     /**
-     * The ending vertical tile position.
+     * The relative ending vertical tile position.
      */
     val endY: Int = 0,
 
@@ -106,10 +106,36 @@ data class TileGrid(
     )
 
     /**
-     * @return the position scaled to the bounds of the grid within the [zoom] level
+     * @return the tile at the relative [x] and [y] position within the [zoom] level, or null if it does not exist
      */
-    fun scale(x: Int, y: Int): Pair<Int, Int> {
-        val zoom = textureScale(x, y)
+    fun getTileOrNull(x: Int, y: Int, zoom: Int): Tile? = tiles.firstOrNull { tile -> tile.gridX == x && tile.gridY == y && tile.zoom == zoom }
+
+    /**
+     * @return the tile at the relative [x] and [y] position within the [zoom] level, or a tile with empty content if it does not exist
+     */
+    fun getTileOrDefault(x: Int, y: Int, zoom: Int): Tile = getTileOrNull(x, y, zoom) ?: Tile(gridX = x, gridY = y, zoom = zoom, width = tileWidth, height = tileHeight)
+
+    /**
+     * @return the absolute position normalized to a range of 0 to 1 within the bounds of the grid
+     */
+    fun boundedNormalizeAbsolutePosition(x: Int, y: Int): Pair<Double, Double> {
+        // NOTE: avoiding int division
+        return x.toDouble() / width to y.toDouble() / height
+    }
+
+    /**
+     * @return the absolute position normalized to a range of 0 to 1
+     */
+    fun normalizeAbsolutePosition(x: Int, y: Int): Pair<Double, Double> {
+        // NOTE: avoiding int division
+        return x.toDouble() / textureWidth to y.toDouble() / textureHeight
+    }
+
+    /**
+     * @return the absolute position scaled to the bounds of the grid within the [zoom] level
+     */
+    fun boundedScaleAbsolutePosition(x: Int, y: Int): Pair<Int, Int> {
+        val zoom = scaleAbsolutePosition(x, y)
 
         // Remove the excluded starting tiles.
         val scaledX = zoom.first - (startX * tileWidth)
@@ -118,9 +144,9 @@ data class TileGrid(
     }
 
     /**
-     * @return the position scaled to the absolute coordinates within the [zoom] level
+     * @return the absolute position scaled to the absolute coordinates within the [zoom] level
      */
-    fun textureScale(x: Int, y: Int): Pair<Int, Int> {
+    fun scaleAbsolutePosition(x: Int, y: Int): Pair<Int, Int> {
         // Scale the coordinates to the current zoom level.
         val zoomWidth = 2.0.pow(zoom) * tileWidth
         val zoomHeight = 2.0.pow(zoom) * tileHeight

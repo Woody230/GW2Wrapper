@@ -55,7 +55,6 @@ data class Tile(
 
     /**
      * @return true if the texture position is within the bounds of this tile
-     * @see [TileGrid.absoluteContains] for a coordinate scaled check
      */
     fun absoluteContains(x: Int, y: Int): Boolean {
         val startX = textureX
