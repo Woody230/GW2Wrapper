@@ -5,6 +5,8 @@ import com.bselzer.gw2.v2.model.continent.ContinentId
 import com.bselzer.gw2.v2.model.continent.floor.FloorId
 import com.bselzer.gw2.v2.model.continent.region.RegionId
 import com.bselzer.gw2.v2.model.enumeration.wrapper.MapType
+import com.bselzer.gw2.v2.tile.model.position.BottomLeftTextureBound
+import com.bselzer.gw2.v2.tile.model.position.TopLeftTextureBound
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -44,7 +46,7 @@ data class Map(
      * The second sublist contains the top-right coordinates.
      */
     @SerialName("map_rect")
-    val mapRectangle: List<List<Double>> = emptyList(),
+    val mapRectangle: BottomLeftTextureBound = BottomLeftTextureBound(),
 
     /**
      * The continent dimensions.
@@ -54,7 +56,7 @@ data class Map(
      * The second sublist contains are the bottom-right coordinates.
      */
     @SerialName("continent_rect")
-    val continentRectangle: List<List<Double>> = emptyList(),
+    val continentRectangle: TopLeftTextureBound = TopLeftTextureBound(),
 
     @SerialName("type")
     val type: MapType = MapType(),
