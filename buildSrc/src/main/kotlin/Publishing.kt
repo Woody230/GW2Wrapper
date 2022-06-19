@@ -30,7 +30,7 @@ fun PublishingExtension.publish(project: Project, devs: MavenPomDeveloperSpec.()
         artifact(project.extra.get("jar"))
 
         pom {
-            name.set(project.name)
+            name(project)
             description()
             licenses()
             developers(devs = devs)
@@ -85,6 +85,7 @@ private fun MavenArtifactRepository.signing(project: Project) {
 }
 
 
+private fun MavenPom.name(project: Project) = name.set("${Metadata.SUBGROUP_ID}-${project.name}")
 private fun MavenPom.description() = description.set("Kotlin Multiplatform wrapper of the GW2 API.")
 private fun MavenPom.licenses() = licenses {
     license {
