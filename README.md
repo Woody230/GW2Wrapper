@@ -1,7 +1,7 @@
 ![](https://img.shields.io/badge/targets-Android%2FJVM-informational)
 ![](https://img.shields.io/github/v/release/Woody230/GW2Wrapper)
 ![](https://img.shields.io/github/license/Woody230/GW2Wrapper)
-[![](https://img.shields.io/maven-central/v/io.github.woody230.gw2/v2-client)](https://search.maven.org/artifact/io.github.woody230.gw2)
+[![](https://img.shields.io/maven-central/v/io.github.woody230.gw2/v2-client)](https://search.maven.org/search?q=io.github.woody230.gw2)
 
 # GW2 Wrapper
 
@@ -28,7 +28,7 @@ Kotlin Multiplatform wrapper of the [GW2 API](https://wiki.guildwars2.com/wiki/A
 | v2-tile-image | v2-tile image generator primarily for testing purposes |
 
 ## Gradle
-Published to [Maven Central](https://search.maven.org/artifact/io.github.woody230.gw2).
+Published to [Maven Central](https://search.maven.org/search?q=io.github.woody230.gw2).
 
 ```kotlin
 repositories {
