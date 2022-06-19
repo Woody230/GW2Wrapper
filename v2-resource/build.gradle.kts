@@ -1,7 +1,12 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    id("dev.icerock.mobile.multiplatform-resources") version RESOURCE
+    id("dev.icerock.mobile.multiplatform-resources") version Versions.RESOURCE
+}
+
+multiplatformResources {
+    multiplatformResourcesPackage = "com.bselzer.gw2.v2.resource"
+    multiplatformResourcesClassName = "Gw2Resources"
 }
 
 publishing.publish(project)
@@ -14,9 +19,4 @@ kotlin.setup {
         extResource()
     }
     commonTest()
-}
-
-multiplatformResources {
-    multiplatformResourcesPackage = "com.bselzer.gw2.v2.resource"
-    multiplatformResourcesClassName = "Gw2Resources"
 }
