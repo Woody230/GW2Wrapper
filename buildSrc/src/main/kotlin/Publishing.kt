@@ -1,11 +1,12 @@
+
 import org.gradle.api.Project
 import org.gradle.api.artifacts.repositories.MavenArtifactRepository
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPom
 import org.gradle.api.publish.maven.MavenPomDeveloperSpec
 import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.kotlin.dsl.extra
 import org.gradle.kotlin.dsl.findByType
-import org.gradle.kotlin.dsl.registering
 import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.SigningExtension
 
@@ -26,18 +27,10 @@ fun PublishingExtension.publish(project: Project, devs: MavenPomDeveloperSpec.()
     }
 
     publications.withType<MavenPublication>().configureEach {
-        val fullArtifactId = artifactId(project)
-        groupId = Metadata.GROUP_ID
-        artifactId = fullArtifactId
-        version = Metadata.VERSION
-
-        project.tasks.registering(org.gradle.api.tasks.bundling.Jar::class) {
-            archiveClassifier.set("javadoc")
-            artifact(this)
-        }
+        artifact(project.extra.get("jar"))
 
         pom {
-            name.set(fullArtifactId)
+            name.set(project.name)
             description()
             licenses()
             developers(devs = devs)
@@ -92,7 +85,6 @@ private fun MavenArtifactRepository.signing(project: Project) {
 }
 
 
-private fun artifactId(project: Project): String = "${Metadata.BASE_ARTIFACT_ID}-${project.name}"
 private fun MavenPom.description() = description.set("Kotlin Multiplatform wrapper of the GW2 API.")
 private fun MavenPom.licenses() = licenses {
     license {

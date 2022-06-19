@@ -22,7 +22,7 @@ object Versions {
 
 object Metadata {
     const val GROUP_ID = "io.github.woody230"
-    const val BASE_ARTIFACT_ID = "gw2"
+    const val SUBGROUP_ID = "gw2"
     const val VERSION = "2.0.1"
     const val JVM_TARGET = "1.8"
 }
@@ -53,14 +53,14 @@ fun KotlinDependencyHandler.v2Scope() = api(project(":v2-scope"))
 fun KotlinDependencyHandler.v2Tile() = api(project(":v2-tile"))
 fun KotlinDependencyHandler.v2Intl() = api(project(":v2-intl"))
 
-fun KotlinDependencyHandler.extSerialization() = api("io.github.woody230:ktx-serialization:$EXTENSION")
-fun KotlinDependencyHandler.extFunction() = api("io.github.woody230:ktx-function:$EXTENSION")
-fun KotlinDependencyHandler.extBase64() = api("io.github.woody230:ktx-base64:$EXTENSION")
-fun KotlinDependencyHandler.extDateTime() = api("io.github.woody230:ktx-datetime:$EXTENSION")
-fun KotlinDependencyHandler.extGeometry() = api("io.github.woody230:ktx-geometry:$EXTENSION")
-fun KotlinDependencyHandler.extKodeinDb() = api("io.github.woody230:ktx-kodein-db:$EXTENSION")
-fun KotlinDependencyHandler.extValue() = api("io.github.woody230:ktx-value:$EXTENSION")
-fun KotlinDependencyHandler.extResource() = api("io.github.woody230:ktx-resource:$EXTENSION")
+fun KotlinDependencyHandler.extSerialization() = api("io.github.woody230.ktx:serialization:$EXTENSION")
+fun KotlinDependencyHandler.extFunction() = api("io.github.woody230.ktx:function:$EXTENSION")
+fun KotlinDependencyHandler.extBase64() = api("io.github.woody230.ktx:base64:$EXTENSION")
+fun KotlinDependencyHandler.extDateTime() = api("io.github.woody230.ktx:datetime:$EXTENSION")
+fun KotlinDependencyHandler.extGeometry() = api("io.github.woody230.ktx:geometry:$EXTENSION")
+fun KotlinDependencyHandler.extKodeinDb() = api("io.github.woody230.ktx:kodein-db:$EXTENSION")
+fun KotlinDependencyHandler.extValue() = api("io.github.woody230.ktx:value:$EXTENSION")
+fun KotlinDependencyHandler.extResource() = api("io.github.woody230.ktx:resource:$EXTENSION")
 
 // Test
 fun KotlinDependencyHandler.androidKtorClient() = implementation("io.ktor:ktor-client-android:$KTOR")
