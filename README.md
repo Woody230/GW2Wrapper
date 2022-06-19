@@ -1,16 +1,11 @@
 ![](https://img.shields.io/badge/targets-Android%2FJVM-informational)
 ![](https://img.shields.io/github/v/release/Woody230/GW2Wrapper)
 ![](https://img.shields.io/github/license/Woody230/GW2Wrapper)
+[![](https://img.shields.io/maven-central/v/io.github.woody230.gw2/v2-client)](https://search.maven.org/artifact/io.github.woody230.gw2)
 
 # GW2 Wrapper
 
 Kotlin Multiplatform wrapper of the [GW2 API](https://wiki.guildwars2.com/wiki/API:Main).
-
-This repository is partially tailored to the needs of the [GW2Manager](https://github.com/Woody230/GW2Manager) project and may not be suitable for general use as is and in the
-future.
-
-While all v2 endpoints have been implemented, they have not all been appropriately tested. Additionally, some modules may only be partially fleshed out such as v2-cache and
-v2-model-extension.
 
 ## Modules
 
@@ -19,7 +14,7 @@ v2-model-extension.
 | asset-cdn | Build information from ArenaNet's [asset-cdn](http://assetcdn.101.arenanetworks.com/latest/101). | 
 | v2-cache  | [Kodein-DB](https://github.com/Kodein-Framework/Kodein-DB) caching framework for v2-client. |
 | v2-chatlink | Base64 chatlink encoding and decoding. |
-| v2-client | All v2 endpoints of the [GW2 API](https://wiki.guildwars2.com/wiki/API:Main). |
+| v2-client | All v2 endpoints of the [GW2 API](https://wiki.guildwars2.com/wiki/API:Main) as of 2022-03-24T00:00:00Z. |
 | v2-emblem | Guild emblem images courtesy of [Werdes](https://emblem.werdes.net/). |
 | v2-intl | Internationalization support by mapping translations from GW2 API models. The default English request is mapped to another supported language, which include French, German, Spanish, and Chinese. |
 | v2-intl-cache |  [Kodein-DB](https://github.com/Kodein-Framework/Kodein-DB) extensions for storing the v2-intl translations. |
@@ -33,7 +28,14 @@ v2-model-extension.
 | v2-tile-image | v2-tile image generator primarily for testing purposes |
 
 ## Gradle
+Published to [Maven Central](https://search.maven.org/artifact/io.github.woody230.gw2).
 
 ```kotlin
-implementation("com.bselzer.gw2:$Module:$Version")
+repositories {
+    mavenCentral()
+}
+```
+
+```kotlin
+implementation("io.github.woody230.gw2:$Module:2.0.1")
 ```
