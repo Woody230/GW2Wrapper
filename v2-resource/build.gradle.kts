@@ -9,7 +9,10 @@ multiplatformResources {
     multiplatformResourcesClassName = "Gw2Resources"
 }
 
-publishing.publish(project)
+publishing.publish(
+    project = project,
+    description = "Guild Wars 2 moko-resources strings and images"
+)
 
 android.setup()
 

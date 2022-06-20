@@ -4,7 +4,10 @@ plugins {
     kotlin("plugin.serialization") version Versions.KOTLIN
 }
 
-publishing.publish(project)
+publishing.publish(
+    project = project,
+    description = "Tiling service for Guild Wars 2 map images."
+)
 
 android.setup()
 

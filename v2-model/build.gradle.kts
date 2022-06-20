@@ -4,7 +4,10 @@ plugins {
     kotlin("plugin.serialization") version Versions.KOTLIN
 }
 
-publishing.publish(project)
+publishing.publish(
+    project = project,
+    description = "Guild Wars 2 API models for v2-client."
+)
 
 android.setup()
 

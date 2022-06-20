@@ -4,7 +4,10 @@ plugins {
     kotlin("plugin.serialization") version Versions.KOTLIN
 }
 
-publishing.publish(project)
+publishing.publish(
+    project = project,
+    description = "Guild emblem image fetching from https://emblem.werdes.net/"
+)
 
 android.setup()
 

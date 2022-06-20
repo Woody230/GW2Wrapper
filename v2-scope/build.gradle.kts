@@ -4,7 +4,10 @@ plugins {
     kotlin("plugin.serialization") version Versions.KOTLIN
 }
 
-publishing.publish(project)
+publishing.publish(
+    project = project,
+    description = "Annotations for permissions required to access Guild Wars 2 API endpoints."
+)
 
 android.setup()
 

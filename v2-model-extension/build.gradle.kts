@@ -3,7 +3,10 @@ plugins {
     id("com.android.library")
 }
 
-publishing.publish(project)
+publishing.publish(
+    project = project,
+    description = "Extensions for Guild Wars 2 API models."
+)
 
 android.setup()
 

@@ -4,7 +4,10 @@ plugins {
     kotlin("plugin.serialization") version Versions.KOTLIN
 }
 
-publishing.publish(project)
+publishing.publish(
+    project = project,
+    description = "Ktor client for v2 endpoints of the Guild Wars 2 API."
+)
 
 android.setup()
 

@@ -4,7 +4,10 @@ plugins {
     kotlin("plugin.serialization") version Versions.KOTLIN
 }
 
-publishing.publish(project)
+publishing.publish(
+    project = project,
+    description = "Internalization support by mapping translations from Guild Wars 2 API models."
+)
 
 android.setup()
 

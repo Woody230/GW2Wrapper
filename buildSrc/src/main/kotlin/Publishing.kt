@@ -16,7 +16,11 @@ import org.gradle.plugins.signing.SigningExtension
  * @see <a href="https://docs.gradle.org/current/userguide/publishing_customization.html">gradle</a>
  * @see <a href="https://maven.apache.org/pom.html">pom.xml</a>
  */
-fun PublishingExtension.publish(project: Project, devs: MavenPomDeveloperSpec.() -> Unit = {}) {
+fun PublishingExtension.publish(
+    project: Project,
+    description: String,
+    devs: MavenPomDeveloperSpec.() -> Unit = {}
+) = project.afterEvaluate {
     val releaseType = releaseType(Metadata.VERSION)
     repositories {
         maven {
@@ -30,8 +34,8 @@ fun PublishingExtension.publish(project: Project, devs: MavenPomDeveloperSpec.()
         artifact(project.extra.get("jar"))
 
         pom {
-            name(project)
-            description()
+            this@pom.name.set("${Metadata.SUBGROUP_ID}-${project.name}")
+            this@pom.description.set(description)
             licenses()
             developers(devs = devs)
             scm()
@@ -85,8 +89,6 @@ private fun MavenArtifactRepository.signing(project: Project) {
 }
 
 
-private fun MavenPom.name(project: Project) = name.set("${Metadata.SUBGROUP_ID}-${project.name}")
-private fun MavenPom.description() = description.set("Kotlin Multiplatform wrapper of the GW2 API.")
 private fun MavenPom.licenses() = licenses {
     license {
         this.name.set("The Apache Software License, Version 2.0")

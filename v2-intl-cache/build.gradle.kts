@@ -3,7 +3,10 @@ plugins {
     id("com.android.library")
 }
 
-publishing.publish(project)
+publishing.publish(
+    project = project,
+    description = "Kodein-DB caching framework extensions for storing v2-intl translations."
+)
 
 android.setup()
 

@@ -4,7 +4,10 @@ plugins {
     kotlin("plugin.serialization") version Versions.KOTLIN
 }
 
-publishing.publish(project)
+publishing.publish(
+    project = project,
+    description = "Base64 Guild Wars 2 chat link encoding and decoding."
+)
 
 android.setup()
 
