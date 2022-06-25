@@ -11,5 +11,5 @@ abstract class ContestedAreasCounts(
      *
      * This sample can be used to cherry pick common objective information by mapping it to a [WvwObjective].
      */
-    val sample: WvwMapObjective? = counts.flatten().firstOrNull()
+    val sample: WvwMapObjective? = counts.firstNotNullOfOrNull { count -> count.firstOrNull() }
 }
