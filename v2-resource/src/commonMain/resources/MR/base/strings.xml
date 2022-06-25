@@ -6,6 +6,7 @@
     <string name="camp">Camp</string>
     <string name="castle">Castle</string>
     <string name="continents">Continents</string>
+    <string name="deaths">Deaths</string>
     <string name="edge_of_the_mists">Edge of the Mists</string>
     <string name="eternal_battlegrounds">Eternal Battlegrounds</string>
     <string name="generic">Generic</string>
@@ -14,6 +15,7 @@
     <string name="guild_tactics">Guild Tactics</string>
     <string name="guilds">Guilds</string>
     <string name="keep">Keep</string>
+    <string name="kills">Kills</string>
     <string name="map">Map</string>
     <string name="match">Match</string>
     <string name="mercenary">Mercenary</string>

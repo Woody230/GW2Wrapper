@@ -6,6 +6,7 @@
     <string name="camp">Campamento</string>
     <string name="castle">Castillo</string>
     <string name="continents">Continentes</string>
+    <string name="deaths">Muertes</string>
     <string name="edge_of_the_mists">El Borde de la Niebla</string>
     <string name="eternal_battlegrounds">Campos de Batalla Eternos</string>
     <string name="generic">Genérico</string>
@@ -14,6 +15,7 @@
     <string name="guild_tactics">Tácticas de Clanes</string>
     <string name="guilds">Clanes</string>
     <string name="keep">Fortaleza</string>
+    <string name="kills">Eliminados</string>
     <string name="map">Mapa</string>
     <string name="match">Combate</string>
     <string name="mercenary">Mercenario</string>
