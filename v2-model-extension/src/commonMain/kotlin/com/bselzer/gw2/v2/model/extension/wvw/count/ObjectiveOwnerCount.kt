@@ -1,6 +1,9 @@
-package com.bselzer.gw2.v2.model.extension.wvw
+package com.bselzer.gw2.v2.model.extension.wvw.count
 
 import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner
+import com.bselzer.gw2.v2.model.enumeration.extension.enumValueOrNull
+import com.bselzer.gw2.v2.model.extension.wvw.count.contestedarea.ContestedAreas
+import com.bselzer.gw2.v2.model.wvw.map.WvwMapObjective
 import com.bselzer.gw2.v2.model.wvw.world.WvwWorldCount
 
 interface ObjectiveOwnerCount {
@@ -23,6 +26,11 @@ interface ObjectiveOwnerCount {
      * The kills for each [WvwObjectiveOwner]
      */
     val kills: Map<WvwObjectiveOwner, Int>
+
+    /**
+     * The objectives collected based on their owner and type.
+     */
+    val contestedAreas: ContestedAreas
 }
 
 /**
@@ -34,10 +42,12 @@ fun WvwWorldCount.count(): Map<WvwObjectiveOwner, Int> = mapOf(
     WvwObjectiveOwner.RED to red
 )
 
-/**
- * Sums the values in the given [data] with the receiving data values.
- */
-fun MutableMap<WvwObjectiveOwner, Int>.merge(data: Map<WvwObjectiveOwner, Int>) = data.forEach { entry ->
-    val owner = entry.key
-    this[owner] = this.getOrElse(owner) { 0 }.plus(entry.value)
+internal fun Collection<WvwMapObjective>.pointsPerTick(): Map<WvwObjectiveOwner, Int> {
+    val ppt = mutableMapOf<WvwObjectiveOwner, Int>()
+    forEach { objective ->
+        val owner = objective.owner.enumValueOrNull() ?: WvwObjectiveOwner.NEUTRAL
+        ppt[owner] = ppt.getOrElse(owner) { 0 } + objective.pointsPerTick
+    }
+
+    return ppt
 }

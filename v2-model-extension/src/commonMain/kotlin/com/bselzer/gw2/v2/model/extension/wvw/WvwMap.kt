@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.model.extension.wvw
 
+import com.bselzer.gw2.v2.model.extension.wvw.count.WvwMapObjectiveOwnerCount
 import com.bselzer.gw2.v2.model.wvw.map.WvwMap
 
 /**

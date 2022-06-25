@@ -1,10 +1,11 @@
-package com.bselzer.gw2.v2.model.extension.wvw
+package com.bselzer.gw2.v2.model.extension.wvw.count
 
 import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner
-import com.bselzer.gw2.v2.model.extension.wvw.WvwMapObjectiveOwnerCount.Companion.pointsPerTick
+import com.bselzer.gw2.v2.model.extension.wvw.count.contestedarea.ContestedAreas
+import com.bselzer.gw2.v2.model.extension.wvw.mapObjectives
 import com.bselzer.gw2.v2.model.wvw.match.WvwMatch
 
-data class WvwMatchObjectiveOwnerCount(
+data class WvwMatchObjectiveOwnerCount internal constructor(
     /**
      * The points that would currently be awarded to each [WvwObjectiveOwner] if a tick passed
      */
@@ -26,26 +27,21 @@ data class WvwMatchObjectiveOwnerCount(
     override val kills: Map<WvwObjectiveOwner, Int>,
 
     /**
+     * The objectives collected based on their owner and type.
+     */
+    override val contestedAreas: ContestedAreas,
+
+    /**
      * The total number of victory points earned through all of the skirmishes for each [WvwObjectiveOwner]
      */
     val victoryPoints: Map<WvwObjectiveOwner, Int>,
 ) : ObjectiveOwnerCount {
     constructor(match: WvwMatch) : this(
-        pointsPerTick = match.pointsPerTick(),
+        pointsPerTick = match.mapObjectives().pointsPerTick(),
         scores = match.scores.count(),
         deaths = match.deaths.count(),
         kills = match.kills.count(),
+        contestedAreas = ContestedAreas(match.mapObjectives()),
         victoryPoints = match.victoryPoints.count(),
     )
-
-    private companion object {
-        /**
-         * @return the points that would currently be awarded to each [WvwObjectiveOwner] if a tick passed
-         */
-        fun WvwMatch.pointsPerTick(): Map<WvwObjectiveOwner, Int> {
-            val ppt = mutableMapOf<WvwObjectiveOwner, Int>()
-            maps.forEach { map -> ppt.merge(map.pointsPerTick()) }
-            return ppt
-        }
-    }
 }

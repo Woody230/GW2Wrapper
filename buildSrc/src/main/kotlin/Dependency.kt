@@ -23,7 +23,7 @@ object Versions {
 object Metadata {
     const val GROUP_ID = "io.github.woody230"
     const val SUBGROUP_ID = "gw2"
-    const val VERSION = "2.0.2"
+    const val VERSION = "2.1.0"
     const val JVM_TARGET = "1.8"
 }
 
