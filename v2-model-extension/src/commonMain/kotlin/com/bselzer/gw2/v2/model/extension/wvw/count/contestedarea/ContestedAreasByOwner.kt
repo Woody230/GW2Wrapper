@@ -6,31 +6,28 @@ import com.bselzer.gw2.v2.model.wvw.map.WvwMapObjective
 
 /**
  * Represents the contested areas by a grid of counts where the x-axis is the [WvwObjectiveType] and y-axis is the [WvwObjectiveOwner].
- *
- * The [counts] is a two-dimensional list of counts where the outer list represents the counts per [WvwObjectiveOwner]
- * and the inner list represents the counts per [WvwObjectiveType].
  */
-class ContestedAreasByOwner internal constructor(objectives: Collection<WvwMapObjective>) : ContestedAreasGrid(objectives.contestedAreas()) {
-    private companion object {
-        fun Collection<WvwMapObjective>.contestedAreas() = WVW_OBJECTIVE_OWNERS.map { owner ->
-            WVW_OBJECTIVE_TYPES.map { type -> createCount(owner, type) }
-        }
-    }
-
+class ContestedAreasByOwner internal constructor(
+    private val objectives: Map<WvwObjectiveOwner, Map<WvwObjectiveType, Collection<WvwMapObjective>>>
+) {
     /**
      * Finds the [ContestedAreasCount] for the given [owner] and [type].
      */
-    fun find(owner: WvwObjectiveOwner, type: WvwObjectiveType): ContestedAreasCount = counts[owner.ordinal][type.ordinal]
+    fun get(owner: WvwObjectiveOwner, type: WvwObjectiveType): ContestedAreasCount = ContestedAreasCount(
+        owner = owner,
+        type = type,
+        objectives = objectives[owner]?.get(type) ?: emptyList()
+    )
 
     /**
      * Finds the [ContestedAreasCount]s for all [WvwObjectiveOwner]s and the given [types].
      */
-    fun filter(vararg types: WvwObjectiveType): List<ContestedAreasCountByOwner> = filter(WVW_OBJECTIVE_OWNERS, types.toList())
+    fun filter(vararg types: WvwObjectiveType): List<ContestedAreasCountByOwner> = filter(WvwObjectiveOwner.values().toList(), types.toList())
 
     /**
      * Finds the [ContestedAreasCount]s for the given [owners] and for all [WvwObjectiveType]s.
      */
-    fun filter(vararg owners: WvwObjectiveOwner): List<ContestedAreasCountByOwner> = filter(owners.toList(), WVW_OBJECTIVE_TYPES)
+    fun filter(vararg owners: WvwObjectiveOwner): List<ContestedAreasCountByOwner> = filter(owners.toList(), WvwObjectiveType.values().toList())
 
     /**
      * Finds the [ContestedAreasCount]s for the given [owner] and [types].
@@ -43,7 +40,7 @@ class ContestedAreasByOwner internal constructor(objectives: Collection<WvwMapOb
     fun filter(owners: Collection<WvwObjectiveOwner>, types: Collection<WvwObjectiveType>): List<ContestedAreasCountByOwner> = owners.map { owner ->
         ContestedAreasCountByOwner(
             owner = owner,
-            counts = types.map { type -> find(owner, type) }
+            counts = types.map { type -> get(owner, type) }
         )
     }
 }

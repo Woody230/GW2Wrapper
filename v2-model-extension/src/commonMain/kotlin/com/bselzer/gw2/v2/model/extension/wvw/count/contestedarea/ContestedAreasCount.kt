@@ -2,7 +2,6 @@ package com.bselzer.gw2.v2.model.extension.wvw.count.contestedarea
 
 import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner
 import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveType
-import com.bselzer.gw2.v2.model.enumeration.extension.enumValueOrNull
 import com.bselzer.gw2.v2.model.wvw.map.WvwMapObjective
 
 class ContestedAreasCount internal constructor(
@@ -20,16 +19,7 @@ class ContestedAreasCount internal constructor(
      * The objectives to filter for the particular [owner] and [type].
      */
     objectives: Collection<WvwMapObjective> = emptyList()
-) : Collection<WvwMapObjective> by objectives.filtered(owner, type) {
-    private companion object {
-        /**
-         * The objectives of [type] that are owned by [owner].
-         */
-        fun Collection<WvwMapObjective>.filtered(owner: WvwObjectiveOwner, type: WvwObjectiveType): Collection<WvwMapObjective> {
-            return filter { objective -> objective.owner.enumValueOrNull() == owner && objective.type.enumValueOrNull() == type }
-        }
-    }
-
+) : Collection<WvwMapObjective> by objectives {
     /**
      * The points that would currently be awarded to the [owner] if a tick passed
      */
