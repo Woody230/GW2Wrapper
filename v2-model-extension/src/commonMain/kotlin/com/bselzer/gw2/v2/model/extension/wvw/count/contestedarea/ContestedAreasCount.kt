@@ -20,19 +20,23 @@ class ContestedAreasCount(
      * The objectives to filter for the particular [owner] and [type].
      */
     objectives: Collection<WvwMapObjective> = emptyList()
-) {
-    /**
-     * The objectives of [type] that are owned by [owner].
-     */
-    val objectives: Collection<WvwMapObjective> = objectives.filter { objective -> objective.owner.enumValueOrNull() == owner && objective.type.enumValueOrNull() == type }
+) : Collection<WvwMapObjective> by objectives.filtered(owner, type) {
+    private companion object {
+        /**
+         * The objectives of [type] that are owned by [owner].
+         */
+        fun Collection<WvwMapObjective>.filtered(owner: WvwObjectiveOwner, type: WvwObjectiveType): Collection<WvwMapObjective> {
+            return filter { objective -> objective.owner.enumValueOrNull() == owner && objective.type.enumValueOrNull() == type }
+        }
+    }
 
     /**
      * The points that would currently be awarded to the [owner] if a tick passed
      */
-    val pointsPerTick: Int = objectives.sumOf { objective -> objective.pointsPerTick }
+    val pointsPerTick: Int = sumOf { objective -> objective.pointsPerTick }
 
     /**
-     * The total number of yaks delivered to the [objectives].
+     * The total number of yaks delivered to the objectives.
      */
-    val yaksDelivered: Int = objectives.sumOf { objective -> objective.yaksDelivered }
+    val yaksDelivered: Int = sumOf { objective -> objective.yaksDelivered }
 }
