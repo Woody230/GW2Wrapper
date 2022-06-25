@@ -3,7 +3,7 @@ package com.bselzer.gw2.v2.model.extension.wvw.count.contestedarea
 import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner
 import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveType
 
-data class ContestedAreasCountByOwner(
+class ContestedAreasCountByOwner(
     /**
      * The owner of the contested area and the objectives being counted.
      */
@@ -12,5 +12,5 @@ data class ContestedAreasCountByOwner(
     /**
      * The counts for objectives owned by the [owner] for a range of [WvwObjectiveType]s.
      */
-    val counts: List<ContestedAreasCount>
-) : List<ContestedAreasCount> by counts
+    counts: List<ContestedAreasCount>
+) : ContestedAreasCounts(counts)
