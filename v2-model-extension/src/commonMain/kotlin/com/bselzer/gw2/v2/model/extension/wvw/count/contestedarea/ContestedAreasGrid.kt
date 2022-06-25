@@ -19,8 +19,7 @@ abstract class ContestedAreasGrid(
             ContestedAreasCount(
                 owner = owner,
                 type = type,
-                objectives = objectives.count(),
-                pointsPerTick = objectives.sumOf { objective -> objective.pointsPerTick }
+                objectives = objectives,
             )
         }
     }
