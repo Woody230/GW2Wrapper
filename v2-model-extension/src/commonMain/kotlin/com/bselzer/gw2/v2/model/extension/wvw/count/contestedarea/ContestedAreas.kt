@@ -4,7 +4,7 @@ import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner
 import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveType
 import com.bselzer.gw2.v2.model.wvw.map.WvwMapObjective
 
-class ContestedAreas(objectives: Collection<WvwMapObjective>) {
+class ContestedAreas internal constructor(objectives: Collection<WvwMapObjective>) {
     /**
      * A [ContestedAreasGrid] where the count prioritizes the [WvwObjectiveOwner].
      */

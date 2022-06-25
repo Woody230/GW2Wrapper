@@ -10,7 +10,7 @@ import com.bselzer.gw2.v2.model.wvw.map.WvwMapObjective
  * The [counts] represents is a two-dimensional list of counts where the outer list represents the counts per [WvwObjectiveType]
  * and the inner list represents the counts per [WvwObjectiveOwner].
  */
-class ContestedAreasByType(objectives: Collection<WvwMapObjective>) : ContestedAreasGrid(objectives.contestedAreas()) {
+class ContestedAreasByType internal constructor(objectives: Collection<WvwMapObjective>) : ContestedAreasGrid(objectives.contestedAreas()) {
     private companion object {
         fun Collection<WvwMapObjective>.contestedAreas() = WVW_OBJECTIVE_TYPES.map { type ->
             WVW_OBJECTIVE_OWNERS.map { owner -> createCount(owner, type) }

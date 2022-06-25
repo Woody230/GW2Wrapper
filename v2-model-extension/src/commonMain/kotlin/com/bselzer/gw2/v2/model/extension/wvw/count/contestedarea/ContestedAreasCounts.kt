@@ -3,7 +3,7 @@ package com.bselzer.gw2.v2.model.extension.wvw.count.contestedarea
 import com.bselzer.gw2.v2.model.wvw.map.WvwMapObjective
 import com.bselzer.gw2.v2.model.wvw.objective.WvwObjective
 
-abstract class ContestedAreasCounts(
+abstract class ContestedAreasCounts internal constructor(
     val counts: List<ContestedAreasCount>
 ) : List<ContestedAreasCount> by counts {
     /**

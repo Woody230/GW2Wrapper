@@ -5,7 +5,7 @@ import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveType
 import com.bselzer.gw2.v2.model.enumeration.extension.enumValueOrNull
 import com.bselzer.gw2.v2.model.wvw.map.WvwMapObjective
 
-class ContestedAreasCount(
+class ContestedAreasCount internal constructor(
     /**
      * The owner of the contested area and the objectives being counted.
      */

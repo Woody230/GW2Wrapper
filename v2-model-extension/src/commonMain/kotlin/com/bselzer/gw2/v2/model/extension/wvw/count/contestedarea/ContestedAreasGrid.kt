@@ -5,7 +5,7 @@ import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveType
 import com.bselzer.gw2.v2.model.wvw.map.WvwMapObjective
 import kotlin.jvm.JvmStatic
 
-abstract class ContestedAreasGrid(
+abstract class ContestedAreasGrid internal constructor(
     val counts: List<List<ContestedAreasCount>>
 ) : List<List<ContestedAreasCount>> by counts {
     protected companion object {

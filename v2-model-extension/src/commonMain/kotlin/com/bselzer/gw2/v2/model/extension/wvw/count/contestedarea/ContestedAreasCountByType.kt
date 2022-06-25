@@ -3,7 +3,7 @@ package com.bselzer.gw2.v2.model.extension.wvw.count.contestedarea
 import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner
 import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveType
 
-class ContestedAreasCountByType(
+class ContestedAreasCountByType internal constructor(
     /**
      * The type of objective being counted.
      */
