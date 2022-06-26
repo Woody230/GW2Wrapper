@@ -139,7 +139,7 @@ val objective = Gw2Client().wvw.objective(id)
 val type: com.bselzer.gw2.v2.model.enumeration.wrapper.WvwObjectiveType = objective.type
 
 // The associated enums are found within model.enumeration
-val enumType: com.bselzer.gw2.v2.model.enumeration.WvwObjectiveType = type.enumValueOrNull()
+val enumType: com.bselzer.gw2.v2.model.enumeration.WvwObjectiveType = type.decodeOrNull()
 ```
 
 ## v2-model-extension
