@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.extension.wvw.count
 
 import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner
-import com.bselzer.gw2.v2.model.enumeration.extension.enumValueOrNull
+import com.bselzer.gw2.v2.model.enumeration.extension.decodeOrNull
 import com.bselzer.gw2.v2.model.extension.wvw.count.contestedarea.ContestedAreas
 import com.bselzer.gw2.v2.model.wvw.map.WvwMapObjective
 import com.bselzer.gw2.v2.model.wvw.world.WvwWorldCount
@@ -45,7 +45,7 @@ fun WvwWorldCount.count(): Map<WvwObjectiveOwner, Int> = mapOf(
 internal fun Collection<WvwMapObjective>.pointsPerTick(): Map<WvwObjectiveOwner, Int> {
     val ppt = mutableMapOf<WvwObjectiveOwner, Int>()
     forEach { objective ->
-        val owner = objective.owner.enumValueOrNull() ?: WvwObjectiveOwner.NEUTRAL
+        val owner = objective.owner.decodeOrNull() ?: WvwObjectiveOwner.NEUTRAL
         ppt[owner] = ppt.getOrElse(owner) { 0 } + objective.pointsPerTick
     }
 

@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.client.instrumented
 
-import com.bselzer.gw2.v2.model.enumeration.extension.enumValueOrNull
+import com.bselzer.gw2.v2.model.enumeration.extension.decodeOrNull
 import com.bselzer.gw2.v2.model.profession.Profession
 import com.bselzer.gw2.v2.model.profession.ProfessionId
 import com.bselzer.gw2.v2.model.profession.track.SkillTrack
@@ -20,7 +20,7 @@ class ProfessionTests : BaseInstrumentedTests() {
 
         // Assert
         assertProfession(profession)
-        assertTrue(profession.skills.any { skill -> skill.attunement.enumValueOrNull() != null && !skill.id.isDefault })
+        assertTrue(profession.skills.any { skill -> skill.attunement.decodeOrNull() != null && !skill.id.isDefault })
     }
 
     @Test
@@ -30,8 +30,8 @@ class ProfessionTests : BaseInstrumentedTests() {
 
         // Assert
         assertProfession(profession)
-        assertTrue(profession.skills.any { skill -> skill.source.enumValueOrNull() != null && !skill.id.isDefault })
-        assertTrue(profession.weapons.values.flatMap { weapon -> weapon.skills }.any { skill -> skill.offhand.enumValueOrNull() != null && !skill.id.isDefault })
+        assertTrue(profession.skills.any { skill -> skill.source.decodeOrNull() != null && !skill.id.isDefault })
+        assertTrue(profession.weapons.values.flatMap { weapon -> weapon.skills }.any { skill -> skill.offhand.decodeOrNull() != null && !skill.id.isDefault })
     }
 
     @Test
@@ -51,7 +51,7 @@ class ProfessionTests : BaseInstrumentedTests() {
         assertTrue(tracks.any { track -> track is SkillTrack && !track.id.isDefault })
         assertTrue(tracks.any { track -> track is TraitTrack && !track.id.isDefault })
         assertTrue(profession.skills.isNotEmpty())
-        assertTrue(profession.skills.any { skill -> skill.slot.enumValueOrNull() != null })
+        assertTrue(profession.skills.any { skill -> skill.slot.decodeOrNull() != null })
         assertTrue(profession.weapons.isNotEmpty())
         assertTrue(profession.weapons.values.flatMap { weapon -> weapon.skills }.isNotEmpty())
     }

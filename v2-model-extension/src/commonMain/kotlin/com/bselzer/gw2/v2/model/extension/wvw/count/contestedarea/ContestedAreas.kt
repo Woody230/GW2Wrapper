@@ -2,7 +2,7 @@ package com.bselzer.gw2.v2.model.extension.wvw.count.contestedarea
 
 import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner
 import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveType
-import com.bselzer.gw2.v2.model.enumeration.extension.enumValueOrNull
+import com.bselzer.gw2.v2.model.enumeration.extension.decodeOrNull
 import com.bselzer.gw2.v2.model.wvw.map.WvwMapObjective
 
 class ContestedAreas internal constructor(objectives: Collection<WvwMapObjective>) {
@@ -11,10 +11,10 @@ class ContestedAreas internal constructor(objectives: Collection<WvwMapObjective
      */
     val byOwner = ContestedAreasByOwner(
         objectives.groupBy { objective ->
-            objective.owner.enumValueOrNull() ?: WvwObjectiveOwner.NEUTRAL
+            objective.owner.decodeOrNull() ?: WvwObjectiveOwner.NEUTRAL
         }.mapValues { (_, objectives) ->
             objectives.groupBy { objective ->
-                objective.type.enumValueOrNull() ?: WvwObjectiveType.GENERIC
+                objective.type.decodeOrNull() ?: WvwObjectiveType.GENERIC
             }
         }
     )
@@ -24,10 +24,10 @@ class ContestedAreas internal constructor(objectives: Collection<WvwMapObjective
      */
     val byType = ContestedAreasByType(
         objectives.groupBy { objective ->
-            objective.type.enumValueOrNull() ?: WvwObjectiveType.GENERIC
+            objective.type.decodeOrNull() ?: WvwObjectiveType.GENERIC
         }.mapValues { (_, objectives) ->
             objectives.groupBy { objective ->
-                objective.owner.enumValueOrNull() ?: WvwObjectiveOwner.NEUTRAL
+                objective.owner.decodeOrNull() ?: WvwObjectiveOwner.NEUTRAL
             }
         }
     )
