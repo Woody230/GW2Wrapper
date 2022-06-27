@@ -31,6 +31,14 @@ interface ObjectiveOwnerCount {
      * The objectives collected based on their owner and type.
      */
     val contestedAreas: ContestedAreas
+
+    companion object : ObjectiveOwnerCount {
+        override val contestedAreas: ContestedAreas = ContestedAreas(emptyList())
+        override val deaths: Map<WvwObjectiveOwner, Int> = emptyMap()
+        override val kills: Map<WvwObjectiveOwner, Int> = emptyMap()
+        override val pointsPerTick: Map<WvwObjectiveOwner, Int> = emptyMap()
+        override val scores: Map<WvwObjectiveOwner, Int> = emptyMap()
+    }
 }
 
 /**
