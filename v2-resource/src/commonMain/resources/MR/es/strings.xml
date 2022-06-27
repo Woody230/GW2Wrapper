@@ -5,6 +5,7 @@
     <string name="build_number">Número de Compilación</string>
     <string name="camp">Campamento</string>
     <string name="castle">Castillo</string>
+    <string name="contested_areas">Zonas Disputadas</string>
     <string name="continents">Continentes</string>
     <string name="deaths">Muertes</string>
     <string name="edge_of_the_mists">El Borde de la Niebla</string>
