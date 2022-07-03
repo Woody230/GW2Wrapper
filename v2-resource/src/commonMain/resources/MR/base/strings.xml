@@ -32,6 +32,7 @@
     <string name="resource">Resource</string>
     <string name="ruins">Ruins</string>
     <string name="skirmish">Skirmish</string>
+    <string name="skirmish_score">War Score (Skirmish)</string>
     <string name="spawn">Spawn</string>
     <string name="total_deaths">Deaths (Total)</string>
     <string name="total_kills">Kills (Total)</string>

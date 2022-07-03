@@ -32,6 +32,7 @@
     <string name="resource">Ressource</string>
     <string name="ruins">Ruinen</string>
     <string name="skirmish">Gefecht</string>
+    <string name="skirmish_score">Kriegspunktzahl (Gefecht)</string>
     <string name="spawn">Einstiegspunkt</string>
     <string name="total_deaths">Tode (Gesamt)</string>
     <string name="total_kills">Feinde Besiegt (Gesamt)</string>

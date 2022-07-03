@@ -32,6 +32,7 @@
     <string name="resource">Ressource</string>
     <string name="ruins">Ruines</string>
     <string name="skirmish">Escarmouche</string>
+    <string name="skirmish_score">Score de Guerre (Escarmouche)</string>
     <string name="spawn">Lieu d’Apparition</string>
     <string name="total_deaths">Morts (Total)</string>
     <string name="total_kills">Victimes (Total)</string>

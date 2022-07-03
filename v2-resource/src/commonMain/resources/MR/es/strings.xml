@@ -32,6 +32,7 @@
     <string name="resource">Recurso</string>
     <string name="ruins">Ruinas</string>
     <string name="skirmish">Escaramuza</string>
+    <string name="skirmish_score">Puntuación de Guerra (Escaramuza)</string>
     <string name="spawn">Punto de Aparición</string>
     <string name="total_deaths">Muertes (Total)</string>
     <string name="total_kills">Eliminados (Total)</string>
