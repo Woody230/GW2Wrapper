@@ -2,7 +2,6 @@ package com.bselzer.gw2.v2.model.wvw.map
 
 import com.bselzer.gw2.v2.model.enumeration.wrapper.WvwMapType
 import com.bselzer.gw2.v2.model.map.MapId
-import com.bselzer.gw2.v2.model.wvw.match.skirmish.WvwSkirmish
 import com.bselzer.gw2.v2.model.wvw.world.WvwWorldCount
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
@@ -29,8 +28,5 @@ data class WvwMap(
     val objectives: List<WvwMapObjective> = emptyList(),
 
     @SerialName("bonuses")
-    val bonuses: List<WvwMapBonus> = emptyList(),
-
-    @SerialName("skirmishes")
-    val skirmishes: List<WvwSkirmish> = emptyList(),
+    val bonuses: List<WvwMapBonus> = emptyList()
 ) : Identifiable<MapId, Int>

@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.model.wvw.match
 
 import com.bselzer.gw2.v2.model.wvw.map.WvwMap
+import com.bselzer.gw2.v2.model.wvw.match.skirmish.WvwSkirmish
 import com.bselzer.gw2.v2.model.wvw.world.WvwWorldCount
 import com.bselzer.gw2.v2.model.wvw.world.WvwWorldId
 import com.bselzer.gw2.v2.model.wvw.world.WvwWorldIds
@@ -45,5 +46,8 @@ data class WvwMatch(
     val victoryPoints: WvwWorldCount = WvwWorldCount(),
 
     @SerialName("maps")
-    val maps: List<WvwMap> = emptyList()
+    val maps: List<WvwMap> = emptyList(),
+
+    @SerialName("skirmishes")
+    val skirmishes: List<WvwSkirmish> = emptyList()
 ) : Identifiable<WvwMatchId, String>

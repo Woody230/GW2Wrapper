@@ -6,16 +6,11 @@ import com.bselzer.gw2.v2.model.extension.wvw.count.contestedarea.ContestedAreas
 import com.bselzer.gw2.v2.model.wvw.map.WvwMapObjective
 import com.bselzer.gw2.v2.model.wvw.world.WvwWorldCount
 
-interface ObjectiveOwnerCount {
+interface ObjectiveOwnerCount : ObjectiveOwnerScore {
     /**
      * The points that would currently be awarded to each [WvwObjectiveOwner] if a tick passed
      */
     val pointsPerTick: Map<WvwObjectiveOwner, Int>
-
-    /**
-     * The score for each [WvwObjectiveOwner]
-     */
-    val scores: Map<WvwObjectiveOwner, Int>
 
     /**
      * The deaths for each [WvwObjectiveOwner]
@@ -44,7 +39,7 @@ interface ObjectiveOwnerCount {
 /**
  * @return a mapping of the owner to the [WvwWorldCount] value
  */
-fun WvwWorldCount.count(): Map<WvwObjectiveOwner, Int> = mapOf(
+internal fun WvwWorldCount.count(): Map<WvwObjectiveOwner, Int> = mapOf(
     WvwObjectiveOwner.BLUE to blue,
     WvwObjectiveOwner.GREEN to green,
     WvwObjectiveOwner.RED to red
