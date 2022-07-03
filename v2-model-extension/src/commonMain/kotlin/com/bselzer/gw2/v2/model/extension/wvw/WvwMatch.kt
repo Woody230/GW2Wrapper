@@ -3,11 +3,13 @@ package com.bselzer.gw2.v2.model.extension.wvw
 import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner
 import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner.*
 import com.bselzer.gw2.v2.model.extension.wvw.count.WvwMatchObjectiveOwnerCount
+import com.bselzer.gw2.v2.model.extension.wvw.count.WvwSkirmishObjectiveOwnerCount
 import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgradeId
 import com.bselzer.gw2.v2.model.world.WorldId
 import com.bselzer.gw2.v2.model.wvw.map.WvwMap
 import com.bselzer.gw2.v2.model.wvw.map.WvwMapObjective
 import com.bselzer.gw2.v2.model.wvw.match.WvwMatch
+import com.bselzer.gw2.v2.model.wvw.match.skirmish.WvwSkirmishId
 import com.bselzer.gw2.v2.model.wvw.objective.WvwMapObjectiveId
 import com.bselzer.gw2.v2.model.wvw.objective.WvwObjective
 
@@ -62,6 +64,13 @@ fun WvwMatch.mainWorld(owner: WvwObjectiveOwner): WorldId? = when (owner) {
  * @return the counts for each objective owner.
  */
 fun WvwMatch.objectiveOwnerCount(): WvwMatchObjectiveOwnerCount = WvwMatchObjectiveOwnerCount(this)
+
+/**
+ * @return the counts for each skirmish
+ */
+fun WvwMatch.skirmishObjectiveOwnerCounts(): Map<WvwSkirmishId, WvwSkirmishObjectiveOwnerCount> {
+    return skirmishes.associate { skirmish -> skirmish.id to WvwSkirmishObjectiveOwnerCount(skirmish) }
+}
 
 /**
  * @return the objectives from all the maps

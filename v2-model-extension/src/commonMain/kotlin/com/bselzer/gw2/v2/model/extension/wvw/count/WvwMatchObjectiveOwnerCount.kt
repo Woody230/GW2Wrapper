@@ -4,7 +4,6 @@ import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner
 import com.bselzer.gw2.v2.model.extension.wvw.count.contestedarea.ContestedAreas
 import com.bselzer.gw2.v2.model.extension.wvw.mapObjectives
 import com.bselzer.gw2.v2.model.wvw.match.WvwMatch
-import com.bselzer.gw2.v2.model.wvw.match.skirmish.WvwSkirmishId
 
 data class WvwMatchObjectiveOwnerCount internal constructor(
     /**
@@ -36,11 +35,6 @@ data class WvwMatchObjectiveOwnerCount internal constructor(
      * The total number of victory points earned through all of the skirmishes for each [WvwObjectiveOwner]
      */
     val victoryPoints: Map<WvwObjectiveOwner, Int>,
-
-    /**
-     * The count for the [WvwMatch.skirmishes].
-     */
-    val skirmishes: Map<WvwSkirmishId, WvwSkirmishObjectiveOwnerCount>,
 ) : ObjectiveOwnerCount {
     constructor(match: WvwMatch) : this(
         pointsPerTick = match.mapObjectives().pointsPerTick(),
@@ -49,6 +43,5 @@ data class WvwMatchObjectiveOwnerCount internal constructor(
         kills = match.kills.count(),
         contestedAreas = ContestedAreas(match.mapObjectives()),
         victoryPoints = match.victoryPoints.count(),
-        skirmishes = match.skirmishes.associate { skirmish -> skirmish.id to WvwSkirmishObjectiveOwnerCount(skirmish) }
     )
 }
