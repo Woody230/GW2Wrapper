@@ -6,6 +6,8 @@ import com.bselzer.gw2.v2.model.enumeration.extension.decodeOrNull
 import com.bselzer.gw2.v2.model.wvw.map.WvwMapObjective
 
 class ContestedAreas internal constructor(objectives: Collection<WvwMapObjective>) {
+    constructor() : this(emptyList())
+
     /**
      * The contested areas prioritized by the [WvwObjectiveOwner].
      */

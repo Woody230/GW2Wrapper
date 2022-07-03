@@ -7,4 +7,8 @@ interface ObjectiveOwnerScore {
      * The score for each [WvwObjectiveOwner]
      */
     val scores: Map<WvwObjectiveOwner, Int>
+
+    companion object : ObjectiveOwnerScore {
+        override val scores: Map<WvwObjectiveOwner, Int> = emptyMap()
+    }
 }

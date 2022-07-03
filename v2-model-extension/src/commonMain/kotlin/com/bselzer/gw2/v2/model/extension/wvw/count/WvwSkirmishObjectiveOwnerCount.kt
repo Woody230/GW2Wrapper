@@ -5,7 +5,7 @@ import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner
 import com.bselzer.gw2.v2.model.enumeration.extension.decodeOrNull
 import com.bselzer.gw2.v2.model.wvw.match.skirmish.WvwSkirmish
 
-data class WvwSkirmishObjectiveOwnerCount internal constructor(
+class WvwSkirmishObjectiveOwnerCount internal constructor(
     /**
      * The score within the [WvwSkirmish.scores] for each [WvwObjectiveOwner]
      */
@@ -16,6 +16,11 @@ data class WvwSkirmishObjectiveOwnerCount internal constructor(
      */
     val mapScores: Map<WvwMapType, Map<WvwObjectiveOwner, Int>>
 ) : ObjectiveOwnerScore {
+    constructor() : this(
+        emptyMap(),
+        emptyMap()
+    )
+
     @Suppress("UNCHECKED_CAST")
     constructor(skirmish: WvwSkirmish) : this(
         scores = skirmish.scores.count(),

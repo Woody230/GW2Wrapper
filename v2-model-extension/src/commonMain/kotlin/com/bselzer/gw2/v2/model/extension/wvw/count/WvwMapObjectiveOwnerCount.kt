@@ -4,7 +4,7 @@ import com.bselzer.gw2.v2.model.enumeration.WvwObjectiveOwner
 import com.bselzer.gw2.v2.model.extension.wvw.count.contestedarea.ContestedAreas
 import com.bselzer.gw2.v2.model.wvw.map.WvwMap
 
-data class WvwMapObjectiveOwnerCount internal constructor(
+class WvwMapObjectiveOwnerCount internal constructor(
     /**
      * The points that would currently be awarded to each [WvwObjectiveOwner] if a tick passed
      */
@@ -30,6 +30,14 @@ data class WvwMapObjectiveOwnerCount internal constructor(
      */
     override val contestedAreas: ContestedAreas,
 ) : ObjectiveOwnerCount {
+    constructor() : this(
+        emptyMap(),
+        emptyMap(),
+        emptyMap(),
+        emptyMap(),
+        ContestedAreas()
+    )
+
     constructor(map: WvwMap) : this(
         pointsPerTick = map.objectives.pointsPerTick(),
         scores = map.scores.count(),
