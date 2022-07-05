@@ -30,7 +30,7 @@ val buildId = AssetCdnClient().latest().id
 ```
 
 ## v2-cache
-[Kodein-DB](https://github.com/Kodein-Framework/Kodein-DB) caching framework extensions for [v2-client](#v2-client).
+[Kodein-DB](https://github.com/Kodein-Framework/Kodein-DB) extensions for [v2-client](#v2-client).
 
 ```kotlin
 val typeTable = TypeTable { gw2() }
@@ -104,7 +104,8 @@ val bytes: ByteArray = emblem.emblem(request)
  ```
 
  ## v2-intl-cache
-[Kodein-DB](https://github.com/Kodein-Framework/Kodein-DB) caching framework extensions for storing the [v2-intl](#v2-intl) translations.
+
+[Kodein-DB](https://github.com/Kodein-Framework/Kodein-DB) extensions for storing the [v2-intl](#v2-intl) translations.
 
 ```kotlin
 // You will likely want to check that the language is not for English before trying to request translations.
@@ -177,7 +178,8 @@ val grid = tile.grid(continent, floor, zoom)
 ```
 
 ## v2-tile-cache
-[Kodein-DB](https://github.com/Kodein-Framework/Kodein-DB) caching framework extensions for [v2-tile](#v2-tile).
+
+[Kodein-DB](https://github.com/Kodein-Framework/Kodein-DB) extensions for [v2-tile](#v2-tile).
 
 * `TileGridMetadataExtractor`
 * `TileMetadataExtractor`
