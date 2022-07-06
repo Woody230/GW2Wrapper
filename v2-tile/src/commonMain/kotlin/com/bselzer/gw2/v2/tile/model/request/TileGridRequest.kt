@@ -3,6 +3,7 @@ package com.bselzer.gw2.v2.tile.model.request
 import com.bselzer.gw2.v2.tile.model.position.GridPosition
 import com.bselzer.gw2.v2.tile.model.response.TileGrid
 import com.bselzer.ktx.geometry.dimension.bi.Dimension2D
+import com.bselzer.ktx.serialization.serializer.Dimension2DSerializer
 import kotlinx.serialization.Serializable
 
 /**
@@ -13,11 +14,13 @@ data class TileGridRequest(
     /**
      * The size of each individual tile.
      */
+    @Serializable(with = Dimension2DSerializer::class)
     val tileSize: Dimension2D,
 
     /**
      * The full dimensions of the texture, equivalent to the size at the max zoom level.
      */
+    @Serializable(with = Dimension2DSerializer::class)
     val textureSize: Dimension2D,
 
     /**

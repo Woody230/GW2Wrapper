@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.skill.fact
 
 import com.bselzer.gw2.v2.model.enumeration.wrapper.EffectName
-import com.bselzer.ktx.datetime.serialization.SecondDurationSerializer
+import com.bselzer.ktx.serialization.serializer.SecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.time.Duration

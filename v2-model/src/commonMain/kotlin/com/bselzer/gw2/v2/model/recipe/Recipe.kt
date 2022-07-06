@@ -7,7 +7,7 @@ import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgradeId
 import com.bselzer.gw2.v2.model.item.ItemId
 import com.bselzer.gw2.v2.model.recipe.ingredient.RecipeIngredient
 import com.bselzer.gw2.v2.model.wrapper.ChatLink
-import com.bselzer.ktx.datetime.serialization.MillisecondDurationSerializer
+import com.bselzer.ktx.serialization.serializer.MillisecondDurationSerializer
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

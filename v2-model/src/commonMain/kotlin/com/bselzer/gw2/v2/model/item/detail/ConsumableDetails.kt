@@ -7,7 +7,7 @@ import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgradeId
 import com.bselzer.gw2.v2.model.recipe.RecipeId
 import com.bselzer.gw2.v2.model.skin.SkinId
 import com.bselzer.gw2.v2.model.wrapper.ImageLink
-import com.bselzer.ktx.datetime.serialization.MillisecondDurationSerializer
+import com.bselzer.ktx.serialization.serializer.MillisecondDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlin.time.Duration

@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.tile.model.position
 
 import com.bselzer.ktx.geometry.dimension.bi.polygon.Digon
+import com.bselzer.ktx.serialization.serializer.DigonSerializer
 import kotlinx.serialization.Serializable
 import kotlin.jvm.JvmInline
 
@@ -10,6 +11,7 @@ import kotlin.jvm.JvmInline
 @Serializable
 @JvmInline
 value class BottomLeftTextureBound(
+    @Serializable(with = DigonSerializer::class)
     private val value: Digon = Digon()
 ) : TextureBound {
     override val bottomLeft: TexturePosition

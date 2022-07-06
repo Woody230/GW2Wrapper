@@ -22,8 +22,8 @@ import com.bselzer.gw2.v2.model.world.World
 import com.bselzer.gw2.v2.model.wvw.match.WvwMatch
 import com.bselzer.gw2.v2.model.wvw.objective.WvwObjective
 import com.bselzer.gw2.v2.model.wvw.upgrade.WvwUpgrade
-import com.bselzer.ktx.kodein.db.operation.clear
-import com.bselzer.ktx.kodein.db.transaction.Transaction
+import com.bselzer.ktx.db.operation.clear
+import com.bselzer.ktx.db.transaction.Transaction
 import org.kodein.db.deleteFrom
 import org.kodein.db.find
 import org.kodein.db.useModels

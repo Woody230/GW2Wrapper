@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.model.continent
 
 import com.bselzer.gw2.v2.model.continent.floor.FloorId
 import com.bselzer.ktx.geometry.dimension.bi.Dimension2D
+import com.bselzer.ktx.serialization.serializer.Dimension2DSerializer
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -17,6 +18,7 @@ data class Continent(
     /**
      * The width and height of the continent.
      */
+    @Serializable(with = Dimension2DSerializer::class)
     @SerialName("continent_dims")
     val dimensions: Dimension2D = Dimension2D(),
 

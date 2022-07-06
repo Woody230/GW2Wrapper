@@ -20,7 +20,7 @@ import com.bselzer.gw2.v2.model.title.TitleId
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
-import com.bselzer.ktx.datetime.serialization.SecondDurationSerializer
+import com.bselzer.ktx.serialization.serializer.SecondDurationSerializer
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName

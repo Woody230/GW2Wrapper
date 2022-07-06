@@ -3,7 +3,7 @@ package com.bselzer.gw2.v2.intl.cache.operation
 import com.bselzer.gw2.v2.client.model.Language
 import com.bselzer.gw2.v2.intl.model.Translation
 import com.bselzer.gw2.v2.intl.translation.Translator
-import com.bselzer.ktx.kodein.db.transaction.Transaction
+import com.bselzer.ktx.db.transaction.Transaction
 import com.bselzer.ktx.value.identifier.Identifiable
 import com.bselzer.ktx.value.identifier.Identifier
 import org.kodein.db.getById

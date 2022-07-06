@@ -4,6 +4,7 @@ import com.bselzer.gw2.v2.model.continent.region.Region
 import com.bselzer.gw2.v2.model.continent.region.RegionId
 import com.bselzer.gw2.v2.tile.model.position.TopLeftTextureBound
 import com.bselzer.ktx.geometry.dimension.bi.Dimension2D
+import com.bselzer.ktx.serialization.serializer.Dimension2DSerializer
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -16,6 +17,7 @@ data class Floor(
     /**
      * The width and height of the texture.
      */
+    @Serializable(with = Dimension2DSerializer::class)
     @SerialName("texture_dims")
     val textureDimensions: Dimension2D = Dimension2D(),
 

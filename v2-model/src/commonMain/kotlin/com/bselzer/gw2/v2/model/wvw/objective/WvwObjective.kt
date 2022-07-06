@@ -9,6 +9,7 @@ import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import com.bselzer.gw2.v2.model.wvw.upgrade.WvwUpgradeId
 import com.bselzer.gw2.v2.tile.model.position.TexturePosition
 import com.bselzer.ktx.geometry.dimension.tri.position.Point3D
+import com.bselzer.ktx.serialization.serializer.Point3DSerializer
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -39,6 +40,7 @@ data class WvwObjective(
     /**
      * The three-dimensional position of the objective within the texture.
      */
+    @Serializable(with = Point3DSerializer::class)
     @SerialName("coord")
     val coordinates: Point3D = Point3D(),
 

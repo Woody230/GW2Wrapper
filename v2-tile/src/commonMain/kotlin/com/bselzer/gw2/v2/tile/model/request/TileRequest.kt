@@ -3,6 +3,7 @@ package com.bselzer.gw2.v2.tile.model.request
 import com.bselzer.gw2.v2.tile.model.position.GridPosition
 import com.bselzer.gw2.v2.tile.model.response.Tile
 import com.bselzer.ktx.geometry.dimension.bi.Dimension2D
+import com.bselzer.ktx.serialization.serializer.Dimension2DSerializer
 import kotlinx.serialization.Serializable
 
 /**
@@ -23,6 +24,7 @@ data class TileRequest(
     /**
      * The width and height.
      */
+    @Serializable(with = Dimension2DSerializer::class)
     val size: Dimension2D,
 
     /**
