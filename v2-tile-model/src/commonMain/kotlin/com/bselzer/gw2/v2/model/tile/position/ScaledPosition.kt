@@ -1,0 +1,27 @@
+package com.bselzer.gw2.v2.model.tile.position
+
+import com.bselzer.ktx.geometry.dimension.bi.position.Coordinates2D
+import com.bselzer.ktx.geometry.dimension.bi.position.Point2D
+import com.bselzer.ktx.serialization.serializer.Point2DSerializer
+import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmInline
+
+/**
+ * The absolute position within the dimensions of the texture for the grid's zoom level.
+ */
+@Serializable
+@JvmInline
+value class ScaledPosition(
+    @Serializable(with = Point2DSerializer::class)
+    private val value: Point2D = Point2D()
+) : Coordinates2D {
+    constructor(x: Double, y: Double) : this(Point2D(x, y))
+
+    override val x: Double
+        get() = value.x
+
+    override val y: Double
+        get() = value.y
+
+    override fun toString(): String = value.toString()
+}

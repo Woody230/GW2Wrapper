@@ -1,19 +1,20 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    kotlin("plugin.serialization") version Versions.KOTLIN
 }
 
 publishing.publish(
     project = project,
-    description = "Kodein-DB extensions for v2-tile-model."
+    description = "Tiling service models for Guild Wars 2 map images."
 )
 
 android.setup()
 
 kotlin.setup {
     commonMain {
-        v2TileModel()
-        extKodeinDb()
+        v2Model()
+        ktxSerialization()
     }
     commonTest()
 }

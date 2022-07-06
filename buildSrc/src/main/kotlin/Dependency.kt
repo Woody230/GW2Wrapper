@@ -50,7 +50,7 @@ fun KotlinDependencyHandler.v2Model() = api(project(":v2-model"))
 fun KotlinDependencyHandler.v2ModelEnumeration() = api(project(":v2-model-enumeration"))
 fun KotlinDependencyHandler.v2ModelExtension() = api(project(":v2-model-extension"))
 fun KotlinDependencyHandler.v2Scope() = api(project(":v2-scope"))
-fun KotlinDependencyHandler.v2Tile() = api(project(":v2-tile"))
+fun KotlinDependencyHandler.v2TileModel() = api(project(":v2-tile-model"))
 fun KotlinDependencyHandler.v2Intl() = api(project(":v2-intl"))
 
 fun KotlinDependencyHandler.extSerialization() = api("io.github.woody230.ktx:serialization:$EXTENSION")

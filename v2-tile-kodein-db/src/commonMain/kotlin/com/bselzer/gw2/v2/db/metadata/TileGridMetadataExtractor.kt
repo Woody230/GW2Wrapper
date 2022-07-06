@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.db.metadata
 
-import com.bselzer.gw2.v2.tile.model.request.TileGridRequest
-import com.bselzer.gw2.v2.tile.model.response.TileGrid
+import com.bselzer.gw2.v2.model.tile.request.TileGridRequest
+import com.bselzer.gw2.v2.model.tile.response.TileGrid
 import org.kodein.db.Options
 import org.kodein.db.Value
 import org.kodein.db.model.orm.Metadata
