@@ -29,13 +29,6 @@ Build information from ArenaNet's [asset-cdn](http://assetcdn.101.arenanetworks.
 val buildId = AssetCdnClient().latest().id
 ```
 
-## v2-cache
-[Kodein-DB](https://github.com/Kodein-Framework/Kodein-DB) extensions for [v2-client](#v2-client).
-
-```kotlin
-val typeTable = TypeTable { gw2() }
-```
-
 ## v2-chatlink
 Base64 [chat link](https://wiki.guildwars2.com/wiki/Chat_link_format) encoding and decoding.
 
@@ -103,7 +96,7 @@ val bytes: ByteArray = emblem.emblem(request)
  val translations = translator.translations(defaultWorld, spanishWorld, "es")
  ```
 
- ## v2-intl-cache
+## v2-intl-kodein-db
 
 [Kodein-DB](https://github.com/Kodein-Framework/Kodein-DB) extensions for storing the [v2-intl](#v2-intl) translations.
 
@@ -144,14 +137,25 @@ val enumType: com.bselzer.gw2.v2.model.enumeration.WvwObjectiveType = type.decod
 ```
 
 ## v2-model-extension
+
 Extensions for [v2-model](#v2-model) classes. Currently these are focused on World. vs World. related models.
 
+## v2-model-kodein-db
+
+[Kodein-DB](https://github.com/Kodein-Framework/Kodein-DB) extensions for [v2-client](#v2-client).
+
+```kotlin
+val typeTable = TypeTable { gw2() }
+```
+
 ## v2-resource
-Strings and images using [moko-resources](https://github.com/icerockdev/moko-resources). 
+
+Strings and images using [moko-resources](https://github.com/icerockdev/moko-resources).
 
 Strings are available for the German, English, French, and Spanish languages.
 
 Resources are generated with the name `Gw2Resources`:
+
 ```kotlin
 val eternalBattlegrounds = Gw2Resources.strings.eternal_battlegrounds
 ```
@@ -160,7 +164,7 @@ val eternalBattlegrounds = Gw2Resources.strings.eternal_battlegrounds
 Annotations for permissions required to access GW2 API endpoints.
 Currently these are only for informational purposes.
 
-## v2-tile
+## v2-tile-client
 [Tiling service](https://wiki.guildwars2.com/wiki/API:Tile_service) for map images.
 
 ```kotlin
@@ -177,12 +181,13 @@ val zoom = 3
 val grid = tile.grid(continent, floor, zoom)
 ```
 
-## v2-tile-cache
+## v2-tile-kodein-db
 
-[Kodein-DB](https://github.com/Kodein-Framework/Kodein-DB) extensions for [v2-tile](#v2-tile).
+[Kodein-DB](https://github.com/Kodein-Framework/Kodein-DB) extensions for [v2-tile](#v2-tile-model).
 
 * `TileGridMetadataExtractor`
 * `TileMetadataExtractor`
 
-## v2-tile-image
-[v2-tile](#v2-tile) image generator currently only implemented in Android for testing purposes only. This module may be removed or changed at any time.
+## v2-tile-model
+
+Models for the [v2-tile-client](#v2-tile-client).
