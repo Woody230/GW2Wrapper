@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.model.continent.map.challenge
 
-import com.bselzer.gw2.v2.tile.model.position.TexturePosition
+import com.bselzer.gw2.v2.model.tile.position.TexturePosition
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

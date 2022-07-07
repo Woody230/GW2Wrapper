@@ -1,4 +1,4 @@
-package com.bselzer.gw2.v2.tile.model.position
+package com.bselzer.gw2.v2.model.tile.position
 
 import com.bselzer.ktx.geometry.dimension.bi.position.Coordinates2D
 import com.bselzer.ktx.geometry.dimension.bi.position.Point2D

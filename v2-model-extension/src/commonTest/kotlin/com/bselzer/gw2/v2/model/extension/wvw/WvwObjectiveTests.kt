@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.extension.wvw
 
+import com.bselzer.gw2.v2.model.tile.position.TexturePosition
 import com.bselzer.gw2.v2.model.wvw.objective.WvwObjective
-import com.bselzer.gw2.v2.tile.model.position.TexturePosition
 import com.bselzer.ktx.geometry.dimension.bi.position.Point2D
 import com.bselzer.ktx.geometry.dimension.tri.position.Point3D
 import kotlin.test.Test

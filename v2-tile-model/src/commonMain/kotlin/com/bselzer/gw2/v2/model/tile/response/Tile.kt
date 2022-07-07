@@ -1,8 +1,8 @@
 package com.bselzer.gw2.v2.model.tile.response
 
 import com.bselzer.gw2.v2.model.tile.position.GridPosition
+import com.bselzer.gw2.v2.model.tile.position.TexturePosition
 import com.bselzer.gw2.v2.model.tile.request.TileRequest
-import com.bselzer.gw2.v2.tile.model.position.TexturePosition
 import com.bselzer.ktx.geometry.dimension.bi.Dimension2D
 import com.bselzer.ktx.geometry.dimension.bi.position.Point2D
 import com.bselzer.ktx.serialization.serializer.Dimension2DSerializer

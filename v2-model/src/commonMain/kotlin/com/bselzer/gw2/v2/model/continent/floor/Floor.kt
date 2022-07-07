@@ -2,7 +2,7 @@ package com.bselzer.gw2.v2.model.continent.floor
 
 import com.bselzer.gw2.v2.model.continent.region.Region
 import com.bselzer.gw2.v2.model.continent.region.RegionId
-import com.bselzer.gw2.v2.tile.model.position.TopLeftTextureBound
+import com.bselzer.gw2.v2.model.tile.position.TopLeftTextureBound
 import com.bselzer.ktx.geometry.dimension.bi.Dimension2D
 import com.bselzer.ktx.serialization.serializer.Dimension2DSerializer
 import com.bselzer.ktx.value.identifier.Identifiable

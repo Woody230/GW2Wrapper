@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.client.instance
 
-import com.bselzer.gw2.v2.client.constant.Endpoints
+import com.bselzer.gw2.v2.client.constant.TileEndpoints
 import com.bselzer.gw2.v2.model.continent.Continent
 import com.bselzer.gw2.v2.model.continent.ContinentId
 import com.bselzer.gw2.v2.model.continent.floor.Floor
@@ -36,7 +36,7 @@ open class TileClient(
     init {
         // Default to the main url if no urls are provided.
         if (baseUrls.isEmpty()) {
-            baseUrls.add(Endpoints.BASE_URL)
+            baseUrls.add(TileEndpoints.BASE_URL)
         }
     }
 

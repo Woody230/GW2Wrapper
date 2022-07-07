@@ -1,4 +1,4 @@
-package com.bselzer.gw2.v2.tile.model.position
+package com.bselzer.gw2.v2.model.tile.position
 
 import com.bselzer.ktx.geometry.dimension.bi.polygon.Digon
 import com.bselzer.ktx.serialization.serializer.DigonSerializer

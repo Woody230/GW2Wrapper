@@ -3,7 +3,7 @@ package com.bselzer.gw2.v2.client.constant
 /**
  * Common endpoint constants.
  */
-internal object Endpoints {
+internal object TileEndpoints {
     /**
      * The base url.
      */

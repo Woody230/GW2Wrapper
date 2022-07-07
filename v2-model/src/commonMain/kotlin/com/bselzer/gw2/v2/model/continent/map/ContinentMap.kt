@@ -12,8 +12,8 @@ import com.bselzer.gw2.v2.model.continent.map.pointofinterest.PointOfInterestId
 import com.bselzer.gw2.v2.model.continent.map.sector.Sector
 import com.bselzer.gw2.v2.model.continent.map.sector.SectorId
 import com.bselzer.gw2.v2.model.map.MapId
-import com.bselzer.gw2.v2.tile.model.position.BottomLeftTextureBound
-import com.bselzer.gw2.v2.tile.model.position.TopLeftTextureBound
+import com.bselzer.gw2.v2.model.tile.position.BottomLeftTextureBound
+import com.bselzer.gw2.v2.model.tile.position.TopLeftTextureBound
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

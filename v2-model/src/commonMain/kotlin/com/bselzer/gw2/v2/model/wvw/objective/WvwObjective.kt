@@ -4,10 +4,10 @@ import com.bselzer.gw2.v2.model.continent.map.sector.SectorId
 import com.bselzer.gw2.v2.model.enumeration.wrapper.WvwMapType
 import com.bselzer.gw2.v2.model.enumeration.wrapper.WvwObjectiveType
 import com.bselzer.gw2.v2.model.map.MapId
+import com.bselzer.gw2.v2.model.tile.position.TexturePosition
 import com.bselzer.gw2.v2.model.wrapper.ChatLink
 import com.bselzer.gw2.v2.model.wrapper.ImageLink
 import com.bselzer.gw2.v2.model.wvw.upgrade.WvwUpgradeId
-import com.bselzer.gw2.v2.tile.model.position.TexturePosition
 import com.bselzer.ktx.geometry.dimension.tri.position.Point3D
 import com.bselzer.ktx.serialization.serializer.Point3DSerializer
 import com.bselzer.ktx.value.identifier.Identifiable

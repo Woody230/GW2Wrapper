@@ -2,8 +2,8 @@ package com.bselzer.gw2.v2.model.continent.region
 
 import com.bselzer.gw2.v2.model.continent.map.ContinentMap
 import com.bselzer.gw2.v2.model.map.MapId
-import com.bselzer.gw2.v2.tile.model.position.TexturePosition
-import com.bselzer.gw2.v2.tile.model.position.TopLeftTextureBound
+import com.bselzer.gw2.v2.model.tile.position.TexturePosition
+import com.bselzer.gw2.v2.model.tile.position.TopLeftTextureBound
 import com.bselzer.ktx.value.identifier.Identifiable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.tile.instrumented
 
-import com.bselzer.gw2.v2.client.constant.Endpoints
+import com.bselzer.gw2.v2.client.constant.TileEndpoints
 import com.bselzer.gw2.v2.tile.BaseTests
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -21,7 +21,7 @@ class TileServiceTests : BaseTests() {
         val client = HttpClient()
 
         // Act
-        val content = runBlocking { client.use { it.get("${Endpoints.BASE_URL}/2/3/0/0/0.jpg").body<ByteArray>() } }
+        val content = runBlocking { client.use { it.get("${TileEndpoints.BASE_URL}/2/3/0/0/0.jpg").body<ByteArray>() } }
 
         // Assert
         assertNotNull(content)
