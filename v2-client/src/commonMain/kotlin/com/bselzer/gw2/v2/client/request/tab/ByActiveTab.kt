@@ -1,4 +1,4 @@
-package com.bselzer.gw2.v2.client.request.tabs
+package com.bselzer.gw2.v2.client.request.tab
 
 import com.bselzer.gw2.v2.client.request.GetModel
 import com.bselzer.gw2.v2.client.request.options.Gw2HttpOptions

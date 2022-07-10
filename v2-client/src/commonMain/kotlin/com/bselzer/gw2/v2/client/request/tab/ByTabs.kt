@@ -1,4 +1,4 @@
-package com.bselzer.gw2.v2.client.request.ids
+package com.bselzer.gw2.v2.client.request.tab
 
 import com.bselzer.gw2.v2.client.request.GetModel
 import com.bselzer.gw2.v2.client.request.options.Gw2HttpOptions
@@ -9,7 +9,7 @@ import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 
-interface ByIds<Id, Value, Model> : GetModel where Id : Identifier<Value>, Model : Identifiable<Id, Value> {
+interface ByTabs<Id, Value, Model> : GetModel where Id : Identifier<Value>, Model : Identifiable<Id, Value> {
     /**
      * Gets the [Model]s associated with the [ids].
      */
@@ -20,7 +20,7 @@ interface ByIds<Id, Value, Model> : GetModel where Id : Identifier<Value>, Model
         val chunks = ids.chunked(options.coercedPageSize()).filter { chunk -> chunk.isNotEmpty() }
         return chunks.flatMap { chunk ->
             get(options) {
-                parameter("ids", chunk.joinToString(separator = ","))
+                parameter("tabs", chunk.joinToString(separator = ","))
             }.body<List<Model>>()
         }
     }
