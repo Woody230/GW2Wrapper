@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.client.instance
 
 import com.bselzer.gw2.v2.client.extension.language
 import com.bselzer.gw2.v2.client.model.Language
+import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.mount.skin.MountSkin
 import com.bselzer.gw2.v2.model.mount.skin.MountSkinId
 import com.bselzer.gw2.v2.model.mount.type.MountType
@@ -12,7 +13,7 @@ import io.ktor.client.*
  * The mount client.
  * @see <a href='https://wiki.guildwars2.com/wiki/API:2/mounts">the wiki</a>
  */
-class MountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration) {
+class MountClient(httpClient: HttpClient, configuration: DefaultGw2HttpOptions) : BaseClient(httpClient, configuration) {
     private companion object {
         const val MOUNTS = "mounts"
         const val SKINS = "skins"

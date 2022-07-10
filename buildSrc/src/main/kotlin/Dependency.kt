@@ -5,12 +5,15 @@ import Versions.KODEIN_DB
 import Versions.KTOR
 import Versions.KTX_DATETIME
 import Versions.KTX_SERIALIZATION
+import Versions.POET
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 
 object Versions {
     const val KTX_DATETIME = "0.3.2"
     const val KTX_SERIALIZATION = "1.3.2"
     const val KTOR = "2.0.1"
+    const val POET = "1.12.0"
+    const val BUILD_CONFIG = "0.11.0"
     const val ANDROID_TEST = "1.1.0"
     const val ROBOLECTRIC = "4.6.1"
     const val COROUTINE = "1.5.2"
@@ -25,6 +28,7 @@ object Metadata {
     const val SUBGROUP_ID = "gw2"
     const val VERSION = "4.0.0"
     const val JVM_TARGET = "1.8"
+    const val ROOT = "GW2Wrapper"
 }
 
 object LocalProperty {
@@ -44,6 +48,10 @@ fun KotlinDependencyHandler.ktorSerialization() {
 }
 
 fun KotlinDependencyHandler.coroutine() = api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINE")
+fun KotlinDependencyHandler.poet() {
+    implementation("com.squareup:kotlinpoet:$POET")
+    implementation("com.squareup:kotlinpoet-ksp:$POET")
+}
 
 fun KotlinDependencyHandler.v2Client() = api(project(":v2-client"))
 fun KotlinDependencyHandler.v2Model() = api(project(":v2-model"))
@@ -69,6 +77,7 @@ fun KotlinDependencyHandler.extGeometry() {
 fun KotlinDependencyHandler.extKodeinDb() = api("io.github.woody230.ktx:kodein-db:$EXTENSION")
 fun KotlinDependencyHandler.extValue() = api("io.github.woody230.ktx:value:$EXTENSION")
 fun KotlinDependencyHandler.extResource() = api("io.github.woody230.ktx:resource:$EXTENSION")
+fun KotlinDependencyHandler.extLogging() = implementation("io.github.woody230.ktx:logging:$EXTENSION")
 
 // Test
 fun KotlinDependencyHandler.androidKtorClient() = implementation("io.ktor:ktor-client-android:$KTOR")

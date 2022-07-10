@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.client.instance
 
 import com.bselzer.gw2.v2.client.extension.language
 import com.bselzer.gw2.v2.client.model.Language
+import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.mini.Mini
 import com.bselzer.gw2.v2.model.mini.MiniId
 import io.ktor.client.*
@@ -10,7 +11,7 @@ import io.ktor.client.*
  * The mini-pet client.
  * @see <a href="https://wiki.guildwars2.com/wiki/API:2/minis">the wiki</a>
  */
-class MiniClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration) {
+class MiniClient(httpClient: HttpClient, configuration: DefaultGw2HttpOptions) : BaseClient(httpClient, configuration) {
     private companion object {
         const val MINIS = "minis"
     }

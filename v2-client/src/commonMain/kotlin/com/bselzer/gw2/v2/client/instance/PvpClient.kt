@@ -4,6 +4,7 @@ import com.bselzer.gw2.v2.client.extension.bearer
 import com.bselzer.gw2.v2.client.extension.language
 import com.bselzer.gw2.v2.client.model.Language
 import com.bselzer.gw2.v2.client.model.Token
+import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.pvp.amulet.PvpAmulet
 import com.bselzer.gw2.v2.model.pvp.amulet.PvpAmuletId
 import com.bselzer.gw2.v2.model.pvp.game.PvpGame
@@ -27,7 +28,7 @@ import io.ktor.client.*
  * @see <a href="https://wiki.guildwars2.com/wiki/API:2/pvp">the wiki</a>
  */
 @Scope(Requirement.OPTIONAL, Permission.ACCOUNT, Permission.PVP)
-class PvpClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration) {
+class PvpClient(httpClient: HttpClient, configuration: DefaultGw2HttpOptions) : BaseClient(httpClient, configuration) {
     private companion object {
         const val PVP = "pvp"
         const val STATS = "stats"

@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.client.instance
 
 import com.bselzer.gw2.v2.client.instance.ExceptionRecoveryMode.DEFAULT
-import com.bselzer.gw2.v2.client.instance.ExceptionRecoveryMode.NONE
+import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
 import com.bselzer.ktx.value.identifier.Identifiable
 import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
@@ -10,10 +10,11 @@ import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
+import kotlinx.coroutines.CoroutineStart
 
-sealed class BaseClient(
+open class BaseClient(
     protected val httpClient: HttpClient,
-    protected val configuration: Gw2ClientConfiguration
+    protected val configuration: DefaultGw2HttpOptions
 ) {
     /**
      * @return the ids as a comma separated string or "-1" if there are no ids
@@ -203,8 +204,8 @@ sealed class BaseClient(
         block()
     } catch (exception: Exception) {
         when (configuration.exceptionRecoveryMode) {
-            NONE -> throw exception
-            DEFAULT -> default()
+            LazyThreadSafetyMode.NONE -> throw exception
+            CoroutineStart.DEFAULT -> default()
         }
     }
 

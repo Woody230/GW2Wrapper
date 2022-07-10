@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.client.instance
 
 import com.bselzer.gw2.v2.client.extension.bearer
 import com.bselzer.gw2.v2.client.model.Token
+import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.backstory.answer.BackstoryAnswerId
 import com.bselzer.gw2.v2.model.character.Character
 import com.bselzer.gw2.v2.model.character.CharacterName
@@ -31,7 +32,7 @@ import io.ktor.client.*
  */
 @Scope(Requirement.REQUIRED, Permission.ACCOUNT, Permission.CHARACTERS)
 @Scope(Requirement.OPTIONAL, Permission.BUILDS, Permission.INVENTORIES, Permission.PROGRESSION)
-class CharacterClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration) {
+class CharacterClient(httpClient: HttpClient, configuration: DefaultGw2HttpOptions) : BaseClient(httpClient, configuration) {
     private companion object {
         const val CHARACTERS = "characters"
         const val BUILD_TABS = "buildtabs"

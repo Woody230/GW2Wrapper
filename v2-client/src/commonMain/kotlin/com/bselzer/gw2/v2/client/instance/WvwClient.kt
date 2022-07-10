@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.client.instance
 
 import com.bselzer.gw2.v2.client.extension.language
 import com.bselzer.gw2.v2.client.model.Language
+import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.world.WorldId
 import com.bselzer.gw2.v2.model.wvw.ability.WvwAbility
 import com.bselzer.gw2.v2.model.wvw.ability.WvwAbilityId
@@ -19,7 +20,7 @@ import io.ktor.client.request.*
  * The world vs. world client.
  * @see <a href='https://wiki.guildwars2.com/wiki/API:2/wvw">the wiki</a>
  */
-class WvwClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration) {
+class WvwClient(httpClient: HttpClient, configuration: DefaultGw2HttpOptions) : BaseClient(httpClient, configuration) {
     private companion object {
         const val WVW = "wvw"
         const val ABILITIES = "abilities"

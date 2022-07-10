@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.client.instance
 
+import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.home.cat.Cat
 import com.bselzer.gw2.v2.model.home.cat.CatId
 import com.bselzer.gw2.v2.model.home.node.Node
@@ -9,7 +10,7 @@ import io.ktor.client.*
 /**
  * The home instance client.
  */
-class HomeClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration) {
+class HomeClient(httpClient: HttpClient, configuration: DefaultGw2HttpOptions) : BaseClient(httpClient, configuration) {
     private companion object {
         const val HOME = "home"
         const val CATS = "cats"

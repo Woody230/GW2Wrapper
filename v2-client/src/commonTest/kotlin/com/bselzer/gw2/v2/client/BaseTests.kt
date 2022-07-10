@@ -2,8 +2,8 @@ package com.bselzer.gw2.v2.client
 
 import com.bselzer.gw2.v2.client.instance.ExceptionRecoveryMode
 import com.bselzer.gw2.v2.client.instance.Gw2Client
-import com.bselzer.gw2.v2.client.instance.Gw2ClientConfiguration
 import com.bselzer.gw2.v2.client.model.Token
+import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.character.CharacterName
 import com.bselzer.gw2.v2.model.serialization.Modules
 import io.ktor.client.*
@@ -27,7 +27,7 @@ abstract class BaseTests {
     private fun createGw2Client(): Gw2Client = Gw2Client(createHttpClient(), createJson(), createConfiguration())
     open fun createHttpClient(): HttpClient = HttpClient()
     open fun createJson(): Json = Modules.JSON
-    open fun createConfiguration(): Gw2ClientConfiguration = Gw2ClientConfiguration()
+    open fun createConfiguration(): DefaultGw2HttpOptions = DefaultGw2HttpOptions()
 
     /**
      * Closes the GW2 client after getting the request response.
@@ -78,7 +78,7 @@ abstract class BaseTests {
             use { callEndpoint(this) }
             expectedException()
         } catch (exception: Exception) {
-            Gw2Client(createHttpClient(), createJson(), Gw2ClientConfiguration(exceptionRecoveryMode = ExceptionRecoveryMode.DEFAULT)).use {
+            Gw2Client(createHttpClient(), createJson(), DefaultGw2HttpOptions(exceptionRecoveryMode = ExceptionRecoveryMode.DEFAULT)).use {
                 val result = runBlocking { callEndpoint(it) }
                 defaultAssertion(result)
             }
@@ -92,7 +92,7 @@ abstract class BaseTests {
         expectedException()
     } catch (exception: Exception) {
         try {
-            Gw2Client(createHttpClient(), createJson(), Gw2ClientConfiguration(exceptionRecoveryMode = ExceptionRecoveryMode.DEFAULT)).use {
+            Gw2Client(createHttpClient(), createJson(), DefaultGw2HttpOptions(exceptionRecoveryMode = ExceptionRecoveryMode.DEFAULT)).use {
                 runBlocking { callEndpoint(it) }
                 expectedException()
             }

@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.client.instance
 
 import com.bselzer.gw2.v2.client.extension.bearer
 import com.bselzer.gw2.v2.client.model.Token
+import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.account.token.ApiKeyInfo
 import com.bselzer.gw2.v2.model.account.token.SubToken
 import com.bselzer.gw2.v2.model.account.token.TokenInfo
@@ -21,7 +22,7 @@ import kotlinx.serialization.json.JsonObject
  * @see <a href="https://wiki.guildwars2.com/wiki/API:2/createsubtoken">createsubtoken on the wiki</a>
  */
 @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
-class TokenClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration) {
+class TokenClient(httpClient: HttpClient, configuration: DefaultGw2HttpOptions) : BaseClient(httpClient, configuration) {
     private companion object {
         const val TOKEN_INFO = "tokeninfo"
         const val CREATE_SUBTOKEN = "createsubtoken"

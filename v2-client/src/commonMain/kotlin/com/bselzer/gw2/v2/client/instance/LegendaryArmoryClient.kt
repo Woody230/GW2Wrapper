@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.client.instance
 
+import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.armory.ArmoryItem
 import com.bselzer.gw2.v2.model.item.ItemId
 import io.ktor.client.*
@@ -8,7 +9,7 @@ import io.ktor.client.*
  * The legendary armory client.
  * @see <a href="https://wiki.guildwars2.com/wiki/API:2/legendaryarmory">the wiki</a>
  */
-class LegendaryArmoryClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration) {
+class LegendaryArmoryClient(httpClient: HttpClient, configuration: DefaultGw2HttpOptions) : BaseClient(httpClient, configuration) {
     private companion object {
         const val LEGENDARY_ARMORY = "legendaryarmory"
     }

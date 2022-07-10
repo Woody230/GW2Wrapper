@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.client.instance
 
 import com.bselzer.gw2.v2.client.extension.language
 import com.bselzer.gw2.v2.client.model.Language
+import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.world.World
 import com.bselzer.gw2.v2.model.world.WorldId
 import io.ktor.client.*
@@ -10,7 +11,7 @@ import io.ktor.client.*
  * The world client.
  * @see <a href="https://wiki.guildwars2.com/wiki/API:2/worlds">the wiki</a>
  */
-class WorldClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration) {
+class WorldClient(httpClient: HttpClient, configuration: DefaultGw2HttpOptions) : BaseClient(httpClient, configuration) {
     private companion object {
         const val WORLDS = "worlds"
     }

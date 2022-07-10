@@ -4,6 +4,7 @@ import com.bselzer.gw2.v2.client.constant.Endpoints
 import com.bselzer.gw2.v2.client.extension.bearer
 import com.bselzer.gw2.v2.client.extension.language
 import com.bselzer.gw2.v2.client.extension.schemaVersion
+import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.serialization.Modules
 import io.ktor.client.*
 import io.ktor.client.plugins.*
@@ -20,7 +21,7 @@ import kotlinx.serialization.json.JsonBuilder
 open class Gw2Client(
     private var httpClient: HttpClient = HttpClient(),
     private var json: Json = Modules.JSON,
-    private var configuration: Gw2ClientConfiguration = Gw2ClientConfiguration()
+    private var configuration: DefaultGw2HttpOptions = DefaultGw2HttpOptions()
 ) : Closeable {
     /**
      * The account client.
@@ -316,7 +317,7 @@ open class Gw2Client(
     /**
      * Sets up the underlying clients.
      */
-    private fun setupClients(httpClient: HttpClient, json: Json, configuration: Gw2ClientConfiguration) {
+    private fun setupClients(httpClient: HttpClient, json: Json, configuration: DefaultGw2HttpOptions) {
         val newClient = httpClient.setup(json, configuration)
         this.httpClient = newClient
         account = AccountClient(newClient, configuration)
@@ -370,9 +371,9 @@ open class Gw2Client(
     }
 
     /**
-     * @return a new [Gw2Client] with an updated [Gw2ClientConfiguration]
+     * @return a new [Gw2Client] with an updated [DefaultGw2HttpOptions]
      */
-    fun config(block: Gw2ClientConfiguration.() -> Gw2ClientConfiguration): Unit = setupClients(httpClient, json, block(configuration))
+    fun config(block: DefaultGw2HttpOptions.() -> DefaultGw2HttpOptions): Unit = setupClients(httpClient, json, block(configuration))
 
     /**
      * @return a new [Gw2Client] with an updated [Json]
@@ -387,7 +388,7 @@ open class Gw2Client(
     /**
      * @return a new http client with the configuration applied
      */
-    private fun HttpClient.setup(json: Json, configuration: Gw2ClientConfiguration): HttpClient = config {
+    private fun HttpClient.setup(json: Json, configuration: DefaultGw2HttpOptions): HttpClient = config {
         // Enable kotlinx.serialization
         install(ContentNegotiation) {
             json(json)

@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.client.instance
 
 import com.bselzer.gw2.v2.client.extension.bearer
 import com.bselzer.gw2.v2.client.model.Token
+import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.commerce.delivery.Delivery
 import com.bselzer.gw2.v2.model.commerce.exchange.CoinExchange
 import com.bselzer.gw2.v2.model.commerce.exchange.GemExchange
@@ -21,7 +22,7 @@ import io.ktor.client.request.*
  * @see <a href="https://wiki.guildwars2.com/wiki/API:2/commerce">the wiki</a>
  */
 @Scope(Requirement.OPTIONAL, Permission.ACCOUNT, Permission.TRADING_POST)
-class CommerceClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration) {
+class CommerceClient(httpClient: HttpClient, configuration: DefaultGw2HttpOptions) : BaseClient(httpClient, configuration) {
     private companion object {
         const val COMMERCE = "commerce"
         const val DELIVERY = "delivery"

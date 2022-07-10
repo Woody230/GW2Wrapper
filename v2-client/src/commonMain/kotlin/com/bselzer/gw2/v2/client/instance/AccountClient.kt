@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.client.instance
 
 import com.bselzer.gw2.v2.client.extension.bearer
 import com.bselzer.gw2.v2.client.model.Token
+import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.account.Account
 import com.bselzer.gw2.v2.model.account.achievement.AccountAchievement
 import com.bselzer.gw2.v2.model.account.finisher.AccountFinisher
@@ -46,7 +47,7 @@ import io.ktor.client.*
  */
 @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
 @Scope(Requirement.OPTIONAL, Permission.GUILDS, Permission.PROGRESSION)
-class AccountClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration) {
+class AccountClient(httpClient: HttpClient, configuration: DefaultGw2HttpOptions) : BaseClient(httpClient, configuration) {
     private companion object {
         const val ACCOUNT = "account"
         const val ACHIEVEMENTS = "achievements"

@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.client.instance
 
+import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.file.Asset
 import com.bselzer.gw2.v2.model.file.AssetId
 import io.ktor.client.*
@@ -8,7 +9,7 @@ import io.ktor.client.*
  * The file client for commonly requests in-game assets.
  * @see <a href="https://wiki.guildwars2.com/wiki/API:2/files">the wiki</a>
  */
-class FileClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration) {
+class FileClient(httpClient: HttpClient, configuration: DefaultGw2HttpOptions) : BaseClient(httpClient, configuration) {
     private companion object {
         const val FILES = "files"
     }

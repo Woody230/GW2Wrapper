@@ -2,6 +2,18 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions.jvmTarget = Metadata.JVM_TARGET
 }
 
+buildscript {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:${Versions.BUILD_CONFIG}")
+    }
+}
+
 allprojects {
     group = "${Metadata.GROUP_ID}.${Metadata.SUBGROUP_ID}"
     version = Metadata.VERSION

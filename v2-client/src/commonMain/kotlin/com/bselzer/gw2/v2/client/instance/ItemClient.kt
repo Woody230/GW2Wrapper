@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.client.instance
 
 import com.bselzer.gw2.v2.client.extension.language
 import com.bselzer.gw2.v2.client.model.Language
+import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.item.DefaultItem
 import com.bselzer.gw2.v2.model.item.Item
 import com.bselzer.gw2.v2.model.item.ItemId
@@ -11,7 +12,7 @@ import io.ktor.client.*
  * The item client.
  * @see <a href="https://wiki.guildwars2.com/wiki/API:2/items">the wiki</a>
  */
-class ItemClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration) {
+class ItemClient(httpClient: HttpClient, configuration: DefaultGw2HttpOptions) : BaseClient(httpClient, configuration) {
     private companion object {
         const val ITEMS = "items"
     }

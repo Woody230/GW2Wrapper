@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.client.instance
 
+import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.emblem.Emblem
 import com.bselzer.gw2.v2.model.emblem.EmblemId
 import io.ktor.client.*
@@ -8,7 +9,7 @@ import io.ktor.client.*
  * The emblem client.
  * @see <a href="https://wiki.guildwars2.com/wiki/API:2/emblem">the wiki</a>
  */
-class EmblemClient(httpClient: HttpClient, configuration: Gw2ClientConfiguration) : BaseClient(httpClient, configuration) {
+class EmblemClient(httpClient: HttpClient, configuration: DefaultGw2HttpOptions) : BaseClient(httpClient, configuration) {
     private companion object {
         const val EMBLEM = "emblem"
         const val FOREGROUNDS = "foregrounds"
