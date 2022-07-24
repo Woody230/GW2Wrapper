@@ -13,11 +13,28 @@ interface ById<Id, Value, Model> : GetModel where Id : Identifier<Value>, Model 
     /**
      * Gets the [Model] associated with the [id].
      */
+    suspend fun byId(id: Id, options: Gw2HttpOptions): Model
+
+    /**
+     * Gets the [Model] associated with the [id], or null if unable to fulfill the request.
+     */
+    suspend fun byIdOrNull(id: Id, options: Gw2HttpOptions): Model?
+
+    /**
+     * Gets the [Model] associated with the [id], or the [default] model if unable to fulfill the request.
+     */
+    suspend fun byIdOrDefault(id: Id, default: (Id) -> Model, options: Gw2HttpOptions): Model
+
+    /**
+     * Gets the [Model] associated with the [id].
+     */
     suspend fun HttpClient.byId(
         id: Id,
         options: Gw2HttpOptions,
+        customizations: HttpRequestBuilder.() -> Unit = {}
     ): Model = get(options) {
         parameter("id", id.value)
+        apply(customizations)
     }.body(modelTypeInfo)
 
     /**
@@ -25,9 +42,10 @@ interface ById<Id, Value, Model> : GetModel where Id : Identifier<Value>, Model 
      */
     suspend fun HttpClient.byIdOrNull(
         id: Id,
-        options: Gw2HttpOptions
+        options: Gw2HttpOptions,
+        customizations: HttpRequestBuilder.() -> Unit = {}
     ): Model? = try {
-        byId(id, options)
+        byId(id, options, customizations)
     } catch (ex: Exception) {
         Logger.e(ex) { "Failed to request ${modelTypeInfo.type.simpleName} with id $id." }
         null
@@ -38,7 +56,8 @@ interface ById<Id, Value, Model> : GetModel where Id : Identifier<Value>, Model 
      */
     suspend fun HttpClient.byIdOrDefault(
         id: Id,
+        default: (Id) -> Model,
         options: Gw2HttpOptions,
-        default: (Id) -> Model
-    ): Model = byIdOrNull(id, options) ?: default(id)
+        customizations: HttpRequestBuilder.() -> Unit = {}
+    ): Model = byIdOrNull(id, options, customizations) ?: default(id)
 }

@@ -13,19 +13,32 @@ interface ByAllIds<Id, Value, Model> : GetModel where Id : Identifier<Value>, Mo
     /**
      * Gets the [Model]s using all ids.
      */
+    suspend fun byAllIds(options: Gw2HttpOptions): List<Model>
+
+    /**
+     * Gets the [Model]s using all ids, or an empty list if unable to fulfill the request.
+     */
+    suspend fun byAllIdsOrEmpty(options: Gw2HttpOptions): List<Model>
+
+    /**
+     * Gets the [Model]s using all ids.
+     */
     suspend fun HttpClient.byAllIds(
-        options: Gw2HttpOptions
+        options: Gw2HttpOptions,
+        customizations: HttpRequestBuilder.() -> Unit = {}
     ): List<Model> = get(options) {
         parameter("ids", "all")
+        apply(customizations)
     }.body()
 
     /**
      * Gets the [Model]s using all ids, or an empty list if unable to fulfill the request.
      */
     suspend fun HttpClient.byAllIdsOrEmpty(
-        options: Gw2HttpOptions
+        options: Gw2HttpOptions,
+        customizations: HttpRequestBuilder.() -> Unit = {}
     ): List<Model> = try {
-        byAllIds(options)
+        byAllIds(options, customizations)
     } catch (ex: Exception) {
         Logger.e(ex) { "Failed to request ${modelTypeInfo.type.simpleName} with all ids." }
         emptyList()

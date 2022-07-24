@@ -1,7 +1,5 @@
 package com.bselzer.gw2.v2.client.request.options
 
-import com.bselzer.gw2.v2.client.model.Language
-import com.bselzer.gw2.v2.client.model.Token
 import io.ktor.client.request.*
 
 interface Gw2RequestOptions {
@@ -21,14 +19,14 @@ interface Gw2RequestOptions {
      * If null, then no access token will be added.
      * Note that many endpoints do not need authorization.
      */
-    val token: Token?
+    val token: String?
 
     /**
      * The language to retrieve data for.
      *
      * If null, then no language will be specified.
      */
-    val language: Language?
+    val language: String?
 
     /**
      * The page size.
@@ -42,8 +40,8 @@ interface Gw2RequestOptions {
 
     companion object : Gw2RequestOptions {
         override val schemaVersion: String? = null
-        override val token: Token? = null
-        override val language: Language? = null
+        override val token: String? = null
+        override val language: String? = null
         override val pageSize: Int? = null
         override val customizations: HttpRequestBuilder.() -> Unit = {}
     }

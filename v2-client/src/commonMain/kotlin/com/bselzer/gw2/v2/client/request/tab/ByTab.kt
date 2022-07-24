@@ -13,11 +13,28 @@ interface ByTab<Tab, Value, Model> : GetModel where Tab : Identifier<Value>, Mod
     /**
      * Gets the [Model] associated with the [tab].
      */
+    suspend fun byTab(tab: Tab, options: Gw2HttpOptions): Model
+
+    /**
+     * Gets the [Model] associated with the [tab], or null if unable to fulfill the request.
+     */
+    suspend fun byTabOrNull(tab: Tab, options: Gw2HttpOptions): Model?
+
+    /**
+     * Gets the [Model] associated with the [tab], or the [default] model if unable to fulfill the request.
+     */
+    suspend fun byTabOrDefault(tab: Tab, default: (Tab) -> Model, options: Gw2HttpOptions): Model
+
+    /**
+     * Gets the [Model] associated with the [tab].
+     */
     suspend fun HttpClient.byTab(
         tab: Tab,
         options: Gw2HttpOptions,
+        customizations: HttpRequestBuilder.() -> Unit = {}
     ): Model = get(options) {
         parameter("tab", tab.value)
+        apply(customizations)
     }.body(modelTypeInfo)
 
     /**
@@ -25,9 +42,10 @@ interface ByTab<Tab, Value, Model> : GetModel where Tab : Identifier<Value>, Mod
      */
     suspend fun HttpClient.byTabOrNull(
         tab: Tab,
-        options: Gw2HttpOptions
+        options: Gw2HttpOptions,
+        customizations: HttpRequestBuilder.() -> Unit = {}
     ): Model? = try {
-        byTab(tab, options)
+        byTab(tab, options, customizations)
     } catch (ex: Exception) {
         Logger.e(ex) { "Failed to request ${modelTypeInfo.type.simpleName} with tab $tab." }
         null
@@ -38,7 +56,8 @@ interface ByTab<Tab, Value, Model> : GetModel where Tab : Identifier<Value>, Mod
      */
     suspend fun HttpClient.byTabOrDefault(
         tab: Tab,
+        default: (Tab) -> Model,
         options: Gw2HttpOptions,
-        default: (Tab) -> Model
-    ): Model = byTabOrNull(tab, options) ?: default(tab)
+        customizations: HttpRequestBuilder.() -> Unit = {}
+    ): Model = byTabOrNull(tab, options, customizations) ?: default(tab)
 }

@@ -6,6 +6,7 @@ import com.bselzer.ktx.logging.Logger
 import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
 import io.ktor.client.call.*
+import io.ktor.client.request.*
 import io.ktor.util.reflect.*
 
 interface Ids<Id> : Gw2GetRequest where Id : Identifier<*> {
@@ -14,13 +15,29 @@ interface Ids<Id> : Gw2GetRequest where Id : Identifier<*> {
     /**
      * Gets the [Id]s of the available models.
      */
-    suspend fun HttpClient.ids(options: Gw2HttpOptions): List<Id> = get(options).body()
+    suspend fun ids(options: Gw2HttpOptions): List<Id>
 
     /**
      * Gets the [Id]s of the available models, or an empty list if unable to fulfill the request.
      */
-    suspend fun HttpClient.idsOrEmpty(options: Gw2HttpOptions): List<Id> = try {
-        ids(options)
+    suspend fun idsOrEmpty(options: Gw2HttpOptions): List<Id>
+
+    /**
+     * Gets the [Id]s of the available models.
+     */
+    suspend fun HttpClient.ids(
+        options: Gw2HttpOptions,
+        customizations: HttpRequestBuilder.() -> Unit = {}
+    ): List<Id> = get(options, customizations).body()
+
+    /**
+     * Gets the [Id]s of the available models, or an empty list if unable to fulfill the request.
+     */
+    suspend fun HttpClient.idsOrEmpty(
+        options: Gw2HttpOptions,
+        customizations: HttpRequestBuilder.() -> Unit = {}
+    ): List<Id> = try {
+        ids(options, customizations)
     } catch (ex: Exception) {
         Logger.e(ex) { "Failed to request ${idTypeInfo.type.simpleName}s." }
         emptyList()

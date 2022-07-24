@@ -26,9 +26,9 @@ interface Gw2Request {
     fun Gw2RequestOptions.configure(customizations: HttpRequestBuilder.() -> Unit = {}): HttpRequestBuilder.() -> Unit = defaultOptions.configure {
         url(path)
         setHeader(Headers.SCHEMA_VERSION, schemaVersion)
-        setHeader(HttpHeaders.AcceptLanguage, language?.value)
-        token?.value?.let {
-            setHeader(HttpHeaders.Authorization, "${Headers.BEARER} $it")
+        setHeader(HttpHeaders.AcceptLanguage, language)
+        token?.let { token ->
+            setHeader(HttpHeaders.Authorization, "${Headers.BEARER} $token")
         }
 
         apply(customizations)

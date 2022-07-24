@@ -13,19 +13,32 @@ interface ByAllTabs<Id, Value, Model> : GetModel where Id : Identifier<Value>, M
     /**
      * Gets the [Model]s using all tabs.
      */
+    suspend fun byAllTabs(options: Gw2HttpOptions): List<Model>
+
+    /**
+     * Gets the [Model]s using all tabs, or an empty list if unable to fulfill the request.
+     */
+    suspend fun byAllTabsOrEmpty(options: Gw2HttpOptions): List<Model>
+
+    /**
+     * Gets the [Model]s using all tabs.
+     */
     suspend fun HttpClient.byAllTabs(
-        options: Gw2HttpOptions
+        options: Gw2HttpOptions,
+        customizations: HttpRequestBuilder.() -> Unit = {}
     ): List<Model> = get(options) {
         parameter("tabs", "all")
+        apply(customizations)
     }.body()
 
     /**
      * Gets the [Model]s using all tabs, or an empty list if unable to fulfill the request.
      */
     suspend fun HttpClient.byAllTabsOrEmpty(
-        options: Gw2HttpOptions
+        options: Gw2HttpOptions,
+        customizations: HttpRequestBuilder.() -> Unit = {}
     ): List<Model> = try {
-        byAllTabs(options)
+        byAllTabs(options, customizations)
     } catch (ex: Exception) {
         Logger.e(ex) { "Failed to request ${modelTypeInfo.type.simpleName} with all tabs." }
         emptyList()
