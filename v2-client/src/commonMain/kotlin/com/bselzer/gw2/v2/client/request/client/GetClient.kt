@@ -15,8 +15,8 @@ interface GetClient : Gw2Client {
     suspend fun HttpClient.get(
         options: Gw2HttpOptions,
         customizations: HttpRequestBuilder.() -> Unit = {}
-    ): HttpResponse = get(options.configure(customizations)).apply {
-        when (val result = options.validate(this)) {
+    ): HttpResponse = get(options.configure(customizations)).also { response ->
+        when (val result = options.validate(response)) {
             is SuccessfulResult -> {}
             is UnsuccessfulResult -> {
                 throw ValidationException(message = result.message)
