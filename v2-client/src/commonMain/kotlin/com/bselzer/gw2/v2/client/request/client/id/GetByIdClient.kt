@@ -1,6 +1,7 @@
-package com.bselzer.gw2.v2.client.request.id
+package com.bselzer.gw2.v2.client.request.client.id
 
-import com.bselzer.gw2.v2.client.request.model.GetModel
+import com.bselzer.gw2.v2.client.request.client.model.GetModelClient
+import com.bselzer.gw2.v2.client.request.id.GetById
 import com.bselzer.gw2.v2.client.request.options.Gw2HttpOptions
 import com.bselzer.ktx.logging.Logger
 import com.bselzer.ktx.value.identifier.Identifiable
@@ -9,22 +10,7 @@ import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 
-interface ById<Id, Value, Model> : GetModel where Id : Identifier<Value>, Model : Identifiable<Id, Value> {
-    /**
-     * Gets the [Model] associated with the [id].
-     */
-    suspend fun byId(id: Id, options: Gw2HttpOptions): Model
-
-    /**
-     * Gets the [Model] associated with the [id], or null if unable to fulfill the request.
-     */
-    suspend fun byIdOrNull(id: Id, options: Gw2HttpOptions): Model?
-
-    /**
-     * Gets the [Model] associated with the [id], or the [default] model if unable to fulfill the request.
-     */
-    suspend fun byIdOrDefault(id: Id, default: (Id) -> Model, options: Gw2HttpOptions): Model
-
+interface GetByIdClient<Model, Id, Value> : GetModelClient<Model>, GetById<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> {
     /**
      * Gets the [Model] associated with the [id].
      */

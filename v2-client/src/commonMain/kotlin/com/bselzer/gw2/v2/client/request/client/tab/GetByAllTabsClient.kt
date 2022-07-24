@@ -1,24 +1,18 @@
-package com.bselzer.gw2.v2.client.request.tab
+package com.bselzer.gw2.v2.client.request.client.tab
 
-import com.bselzer.gw2.v2.client.request.model.GetModel
+import com.bselzer.gw2.v2.client.request.client.GetClient
 import com.bselzer.gw2.v2.client.request.options.Gw2HttpOptions
+import com.bselzer.gw2.v2.client.request.tab.GetByAllTabs
 import com.bselzer.ktx.logging.Logger
 import com.bselzer.ktx.value.identifier.Identifiable
 import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
+import io.ktor.util.reflect.*
 
-interface ByAllTabs<Id, Value, Model> : GetModel where Id : Identifier<Value>, Model : Identifiable<Id, Value> {
-    /**
-     * Gets the [Model]s using all tabs.
-     */
-    suspend fun byAllTabs(options: Gw2HttpOptions): List<Model>
-
-    /**
-     * Gets the [Model]s using all tabs, or an empty list if unable to fulfill the request.
-     */
-    suspend fun byAllTabsOrEmpty(options: Gw2HttpOptions): List<Model>
+interface GetByAllTabsClient<Model, Tab, Value> : GetClient, GetByAllTabs<Model, Tab, Value> where Tab : Identifier<Value>, Model : Identifiable<Tab, Value> {
+    val modelTypeInfo: TypeInfo
 
     /**
      * Gets the [Model]s using all tabs.

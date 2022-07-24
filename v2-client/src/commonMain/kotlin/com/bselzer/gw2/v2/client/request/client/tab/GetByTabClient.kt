@@ -1,29 +1,18 @@
-package com.bselzer.gw2.v2.client.request.tab
+package com.bselzer.gw2.v2.client.request.client.tab
 
-import com.bselzer.gw2.v2.client.request.model.GetModel
+import com.bselzer.gw2.v2.client.request.client.GetClient
 import com.bselzer.gw2.v2.client.request.options.Gw2HttpOptions
+import com.bselzer.gw2.v2.client.request.tab.GetByTab
 import com.bselzer.ktx.logging.Logger
 import com.bselzer.ktx.value.identifier.Identifiable
 import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
+import io.ktor.util.reflect.*
 
-interface ByTab<Tab, Value, Model> : GetModel where Tab : Identifier<Value>, Model : Identifiable<Tab, Value> {
-    /**
-     * Gets the [Model] associated with the [tab].
-     */
-    suspend fun byTab(tab: Tab, options: Gw2HttpOptions): Model
-
-    /**
-     * Gets the [Model] associated with the [tab], or null if unable to fulfill the request.
-     */
-    suspend fun byTabOrNull(tab: Tab, options: Gw2HttpOptions): Model?
-
-    /**
-     * Gets the [Model] associated with the [tab], or the [default] model if unable to fulfill the request.
-     */
-    suspend fun byTabOrDefault(tab: Tab, default: (Tab) -> Model, options: Gw2HttpOptions): Model
+interface GetByTabClient<Model, Tab, Value> : GetClient, GetByTab<Model, Tab, Value> where Tab : Identifier<Value>, Model : Identifiable<Tab, Value> {
+    val modelTypeInfo: TypeInfo
 
     /**
      * Gets the [Model] associated with the [tab].

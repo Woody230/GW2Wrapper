@@ -1,23 +1,17 @@
-package com.bselzer.gw2.v2.client.request.world
+package com.bselzer.gw2.v2.client.request.client.world
 
-import com.bselzer.gw2.v2.client.request.model.GetModel
+import com.bselzer.gw2.v2.client.request.client.GetClient
 import com.bselzer.gw2.v2.client.request.options.Gw2HttpOptions
+import com.bselzer.gw2.v2.client.request.world.GetByWorld
 import com.bselzer.gw2.v2.model.world.WorldId
 import com.bselzer.ktx.logging.Logger
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
+import io.ktor.util.reflect.*
 
-interface ByWorld<Model> : GetModel {
-    /**
-     * Gets the [Model] associated with the world that has id [worldId].
-     */
-    suspend fun byWorld(worldId: WorldId, options: Gw2HttpOptions): Model
-
-    /**
-     * Gets the [Model] associated with the world that has id [worldId], or null if unable to fulfill the request.
-     */
-    suspend fun byWorldOrNull(worldId: WorldId, options: Gw2HttpOptions): Model?
+interface GetByWorldClient<Model> : GetClient, GetByWorld<Model> {
+    val modelTypeInfo: TypeInfo
 
     /**
      * Gets the [Model] associated with the world that has id [worldId].

@@ -1,4 +1,4 @@
-package com.bselzer.gw2.v2.client.request
+package com.bselzer.gw2.v2.client.request.client
 
 import com.bselzer.gw2.v2.client.constant.Headers
 import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
@@ -6,7 +6,7 @@ import com.bselzer.gw2.v2.client.request.options.Gw2RequestOptions
 import io.ktor.client.request.*
 import io.ktor.http.*
 
-interface Gw2Request {
+interface Gw2Client {
     val path: String
     val defaultOptions: DefaultGw2HttpOptions
 

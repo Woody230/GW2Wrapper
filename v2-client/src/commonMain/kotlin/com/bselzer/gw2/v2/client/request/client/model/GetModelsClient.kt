@@ -1,21 +1,16 @@
-package com.bselzer.gw2.v2.client.request.model
+package com.bselzer.gw2.v2.client.request.client.model
 
+import com.bselzer.gw2.v2.client.request.client.GetClient
+import com.bselzer.gw2.v2.client.request.model.GetModels
 import com.bselzer.gw2.v2.client.request.options.Gw2HttpOptions
 import com.bselzer.ktx.logging.Logger
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
+import io.ktor.util.reflect.*
 
-interface Models<T> : GetModel {
-    /**
-     * Gets the models.
-     */
-    suspend fun models(options: Gw2HttpOptions): List<T>
-
-    /**
-     * Gets the models, or an empty list if unable to fulfill the request.
-     */
-    suspend fun modelsOrEmpty(options: Gw2HttpOptions): List<T>
+interface GetModelsClient<Model> : GetClient, GetModels<Model> where Model : Any {
+    val modelTypeInfo: TypeInfo
 
     /**
      * Gets the models.
@@ -23,7 +18,7 @@ interface Models<T> : GetModel {
     suspend fun HttpClient.models(
         options: Gw2HttpOptions,
         customizations: HttpRequestBuilder.() -> Unit = {}
-    ): List<T> = get(options, customizations).body()
+    ): List<Model> = get(options, customizations).body()
 
     /**
      * Gets the models, or an empty list if unable to fulfill the request.
@@ -31,7 +26,7 @@ interface Models<T> : GetModel {
     suspend fun HttpClient.modelsOrEmpty(
         options: Gw2HttpOptions,
         customizations: HttpRequestBuilder.() -> Unit = {}
-    ): List<T> = try {
+    ): List<Model> = try {
         models(options, customizations)
     } catch (ex: Exception) {
         Logger.e(ex) { "Failed to request ${modelTypeInfo.type.simpleName}s." }

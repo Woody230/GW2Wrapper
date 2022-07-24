@@ -1,4 +1,4 @@
-package com.bselzer.gw2.v2.client.request
+package com.bselzer.gw2.v2.client.request.client
 
 import com.bselzer.gw2.v2.client.request.exception.ValidationException
 import com.bselzer.gw2.v2.client.request.options.Gw2HttpOptions
@@ -8,7 +8,7 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 
-interface Gw2GetRequest : Gw2Request {
+interface GetClient : Gw2Client {
     /**
      * Gets the [HttpResponse] using the [configure]d [options] and validates the response.
      */

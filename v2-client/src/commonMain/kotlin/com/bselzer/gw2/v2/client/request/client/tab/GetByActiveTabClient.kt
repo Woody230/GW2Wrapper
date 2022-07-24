@@ -1,7 +1,8 @@
-package com.bselzer.gw2.v2.client.request.tab
+package com.bselzer.gw2.v2.client.request.client.tab
 
-import com.bselzer.gw2.v2.client.request.model.GetModel
+import com.bselzer.gw2.v2.client.request.client.GetClient
 import com.bselzer.gw2.v2.client.request.options.Gw2HttpOptions
+import com.bselzer.gw2.v2.client.request.tab.GetByActiveTab
 import com.bselzer.ktx.logging.Logger
 import com.bselzer.ktx.value.identifier.Identifiable
 import com.bselzer.ktx.value.identifier.Identifier
@@ -9,22 +10,10 @@ import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.http.*
+import io.ktor.util.reflect.*
 
-interface ByActiveTab<Tab, Value, Model> : GetModel where Tab : Identifier<Value>, Model : Identifiable<Tab, Value> {
-    /**
-     * Gets the [Model] associated with the active tab.
-     */
-    suspend fun byActiveTab(options: Gw2HttpOptions): Model
-
-    /**
-     * Gets the [Model] associated with the active tab, or null if unable to fulfill the request.
-     */
-    suspend fun byActiveTabOrNull(options: Gw2HttpOptions): Model?
-
-    /**
-     * Gets the [Model] associated with the active tab, or the [default] model if unable to fulfill the request.
-     */
-    suspend fun byActiveTabOrDefault(default: () -> Model, options: Gw2HttpOptions): Model
+interface GetByActiveTabClient<Model, Tab, Value> : GetClient, GetByActiveTab<Model, Tab, Value> where Tab : Identifier<Value>, Model : Identifiable<Tab, Value> {
+    val modelTypeInfo: TypeInfo
 
     /**
      * Gets the [Model] associated with the active tab.
