@@ -8,10 +8,13 @@ import io.ktor.http.*
 
 interface Gw2Client {
     val path: String
+    val customizations: HttpRequestBuilder.() -> Unit
+        get() = {}
+
     val defaultOptions: DefaultGw2HttpOptions
 
     /**
-     * Creates the [HttpRequestBuilder] block with:
+     * Creates the [HttpRequestBuilder] block in the following order:
      *
      * The [path] applied to the url.
      *
@@ -21,9 +24,15 @@ interface Gw2Client {
      *
      * [Gw2RequestOptions.token] as a header if it exists.
      *
-     * The given [customizations] applied last.
+     * The given [customizations].
+     *
+     * The [Gw2Client.customizations].
+     *
+     * The given [Gw2RequestOptions.customizations].
+     *
+     * The [Gw2Client.defaultOptions] customizations.
      */
-    fun Gw2RequestOptions.configure(customizations: HttpRequestBuilder.() -> Unit = {}): HttpRequestBuilder.() -> Unit = defaultOptions.configure {
+    fun Gw2RequestOptions.configure(customizations: HttpRequestBuilder.() -> Unit = {}): HttpRequestBuilder.() -> Unit = {
         url(path)
         setHeader(Headers.SCHEMA_VERSION, schemaVersion)
         setHeader(HttpHeaders.AcceptLanguage, language)
@@ -32,6 +41,9 @@ interface Gw2Client {
         }
 
         apply(customizations)
+        apply(this@Gw2Client.customizations)
+        apply(this@configure.customizations)
+        apply(this@Gw2Client.defaultOptions.customizations)
     }
 
     /**
