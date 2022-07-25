@@ -1,6 +1,5 @@
 package com.bselzer.gw2.v2.db.operation
 
-import com.bselzer.gw2.v2.client.model.Language
 import com.bselzer.gw2.v2.intl.model.Translation
 import com.bselzer.gw2.v2.intl.translation.Translator
 import com.bselzer.ktx.db.transaction.Transaction

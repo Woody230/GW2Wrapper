@@ -1,4 +1,4 @@
-package com.bselzer.gw2.v2.client.request.client
+package com.bselzer.gw2.v2.client
 
 import com.bselzer.gw2.v2.client.constant.Headers
 import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions

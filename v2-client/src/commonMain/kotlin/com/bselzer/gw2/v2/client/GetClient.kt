@@ -1,4 +1,4 @@
-package com.bselzer.gw2.v2.client.request.client
+package com.bselzer.gw2.v2.client
 
 import com.bselzer.gw2.v2.client.request.exception.ValidationException
 import com.bselzer.gw2.v2.client.request.options.Gw2HttpOptions
