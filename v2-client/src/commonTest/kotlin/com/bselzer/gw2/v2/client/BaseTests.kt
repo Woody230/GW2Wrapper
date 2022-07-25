@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.client
 
 import com.bselzer.gw2.v2.client.instance.ExceptionRecoveryMode
-import com.bselzer.gw2.v2.client.instance.Gw2Client
+import com.bselzer.gw2.v2.client.instance.Gw2Clients
 import com.bselzer.gw2.v2.client.model.Token
 import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.character.CharacterName
@@ -24,7 +24,7 @@ abstract class BaseTests {
      */
     protected val secrets = getSecretsResource()
 
-    private fun createGw2Client(): Gw2Client = Gw2Client(createHttpClient(), createJson(), createConfiguration())
+    private fun createGw2Client(): Gw2Clients = Gw2Clients(createHttpClient(), createJson(), createConfiguration())
     open fun createHttpClient(): HttpClient = HttpClient()
     open fun createJson(): Json = Modules.JSON
     open fun createConfiguration(): DefaultGw2HttpOptions = DefaultGw2HttpOptions()
@@ -33,7 +33,7 @@ abstract class BaseTests {
      * Closes the GW2 client after getting the request response.
      * @return the response of the request performed by the [block]
      */
-    protected fun <T> use(block: suspend Gw2Client.() -> T): T {
+    protected fun <T> use(block: suspend Gw2Clients.() -> T): T {
         return runBlocking { gw2.use { block(gw2) } }
     }
 
@@ -41,7 +41,7 @@ abstract class BaseTests {
      * Gets the request response.
      * @return the response of the request performed by the [block]
      */
-    protected fun <T> get(block: suspend Gw2Client.() -> T): T {
+    protected fun <T> get(block: suspend Gw2Clients.() -> T): T {
         return runBlocking { gw2.run { block(gw2) } }
     }
 
@@ -73,12 +73,12 @@ abstract class BaseTests {
     /**
      * Asserts that recovery can be performed.
      */
-    protected fun <R> testRecovery(callEndpoint: suspend Gw2Client.() -> R, defaultAssertion: (R) -> Unit) =
+    protected fun <R> testRecovery(callEndpoint: suspend Gw2Clients.() -> R, defaultAssertion: (R) -> Unit) =
         try {
             use { callEndpoint(this) }
             expectedException()
         } catch (exception: Exception) {
-            Gw2Client(createHttpClient(), createJson(), DefaultGw2HttpOptions(exceptionRecoveryMode = ExceptionRecoveryMode.DEFAULT)).use {
+            Gw2Clients(createHttpClient(), createJson(), DefaultGw2HttpOptions(exceptionRecoveryMode = ExceptionRecoveryMode.DEFAULT)).use {
                 val result = runBlocking { callEndpoint(it) }
                 defaultAssertion(result)
             }
@@ -87,12 +87,12 @@ abstract class BaseTests {
     /**
      * Asserts that recovery cannot be performed.
      */
-    protected fun <R> failedRecovery(callEndpoint: suspend Gw2Client.() -> R) = try {
+    protected fun <R> failedRecovery(callEndpoint: suspend Gw2Clients.() -> R) = try {
         use { callEndpoint(this) }
         expectedException()
     } catch (exception: Exception) {
         try {
-            Gw2Client(createHttpClient(), createJson(), DefaultGw2HttpOptions(exceptionRecoveryMode = ExceptionRecoveryMode.DEFAULT)).use {
+            Gw2Clients(createHttpClient(), createJson(), DefaultGw2HttpOptions(exceptionRecoveryMode = ExceptionRecoveryMode.DEFAULT)).use {
                 runBlocking { callEndpoint(it) }
                 expectedException()
             }

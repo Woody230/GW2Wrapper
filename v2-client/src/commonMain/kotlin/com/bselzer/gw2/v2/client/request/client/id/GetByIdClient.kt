@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.client.request.client.id
 
-import com.bselzer.gw2.v2.client.request.client.model.GetModelClient
+import com.bselzer.gw2.v2.client.request.client.GetClient
 import com.bselzer.gw2.v2.client.request.id.GetById
 import com.bselzer.gw2.v2.client.request.options.Gw2HttpOptions
 import com.bselzer.ktx.logging.Logger
@@ -9,8 +9,11 @@ import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
+import io.ktor.util.reflect.*
 
-interface GetByIdClient<Model, Id, Value> : GetModelClient<Model>, GetById<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> {
+interface GetByIdClient<Model, Id, Value> : GetClient, GetById<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> {
+    val modelTypeInfo: TypeInfo
+
     /**
      * Gets the [Model] associated with the [id].
      */

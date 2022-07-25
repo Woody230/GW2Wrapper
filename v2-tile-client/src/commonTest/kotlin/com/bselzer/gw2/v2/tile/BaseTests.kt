@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.tile
 
-import com.bselzer.gw2.v2.client.instance.Gw2Client
+import com.bselzer.gw2.v2.client.instance.Gw2Clients
 import com.bselzer.gw2.v2.client.instance.TileClient
 import com.bselzer.gw2.v2.client.instance.TileClientConfiguration
 import com.bselzer.gw2.v2.model.continent.ContinentId
@@ -10,7 +10,7 @@ import io.ktor.utils.io.core.*
 import kotlinx.coroutines.runBlocking
 
 abstract class BaseTests {
-    private val gw2 = Gw2Client()
+    private val gw2 = Gw2Clients()
     private val tile = createTileClient()
 
     private fun createTileClient(): TileClient = TileClient(createHttpClient(), createConfiguration())
@@ -40,7 +40,7 @@ abstract class BaseTests {
      * Closes the GW2 client after getting the request response.
      * @return the response of the request performed by the [block]
      */
-    protected fun <T> useGw2(block: suspend Gw2Client.() -> T): T {
+    protected fun <T> useGw2(block: suspend Gw2Clients.() -> T): T {
         return runBlocking { gw2.use { block(gw2) } }
     }
 
@@ -48,7 +48,7 @@ abstract class BaseTests {
      * Gets the request response.
      * @return the response of the request performed by the [block]
      */
-    protected fun <T> getGw2(block: suspend Gw2Client.() -> T): T {
+    protected fun <T> getGw2(block: suspend Gw2Clients.() -> T): T {
         return runBlocking { gw2.run { block(gw2) } }
     }
 }

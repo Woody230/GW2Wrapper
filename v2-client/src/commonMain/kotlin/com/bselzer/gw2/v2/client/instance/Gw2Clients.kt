@@ -1,13 +1,8 @@
 package com.bselzer.gw2.v2.client.instance
 
-import com.bselzer.gw2.v2.client.constant.Endpoints
-import com.bselzer.gw2.v2.client.extension.bearer
-import com.bselzer.gw2.v2.client.extension.language
-import com.bselzer.gw2.v2.client.extension.schemaVersion
 import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.serialization.Modules
 import io.ktor.client.*
-import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.utils.io.core.*
@@ -18,10 +13,10 @@ import kotlinx.serialization.json.JsonBuilder
  * The GW2 client.
  * @see <a href="https://wiki.guildwars2.com/wiki/API:Main">the wiki</a>
  */
-open class Gw2Client(
+open class Gw2Clients(
     private var httpClient: HttpClient = HttpClient(),
     private var json: Json = Modules.JSON,
-    private var configuration: DefaultGw2HttpOptions = DefaultGw2HttpOptions()
+    private var configuration: DefaultGw2HttpOptions = DefaultGw2HttpOptions
 ) : Closeable {
     /**
      * The account client.
@@ -318,7 +313,7 @@ open class Gw2Client(
      * Sets up the underlying clients.
      */
     private fun setupClients(httpClient: HttpClient, json: Json, configuration: DefaultGw2HttpOptions) {
-        val newClient = httpClient.setup(json, configuration)
+        val newClient = httpClient.setup(json)
         this.httpClient = newClient
         account = AccountClient(newClient, configuration)
         achievement = AchievementClient(newClient, configuration)
@@ -371,44 +366,27 @@ open class Gw2Client(
     }
 
     /**
-     * @return a new [Gw2Client] with an updated [DefaultGw2HttpOptions]
+     * @return a new [Gw2Clients] with an updated [DefaultGw2HttpOptions]
      */
     fun config(block: DefaultGw2HttpOptions.() -> DefaultGw2HttpOptions): Unit = setupClients(httpClient, json, block(configuration))
 
     /**
-     * @return a new [Gw2Client] with an updated [Json]
+     * @return a new [Gw2Clients] with an updated [Json]
      */
     fun json(block: JsonBuilder.() -> Unit): Unit = setupClients(httpClient, Json(json, block), configuration)
 
     /**
-     * @return a new [Gw2Client] with an updated [HttpClientConfig]
+     * @return a new [Gw2Clients] with an updated [HttpClientConfig]
      */
     fun httpClient(block: HttpClientConfig<*>.() -> Unit): Unit = setupClients(httpClient.config(block), json, configuration)
 
     /**
      * @return a new http client with the configuration applied
      */
-    private fun HttpClient.setup(json: Json, configuration: DefaultGw2HttpOptions): HttpClient = config {
+    private fun HttpClient.setup(json: Json): HttpClient = config {
         // Enable kotlinx.serialization
         install(ContentNegotiation) {
             json(json)
-        }
-
-        defaultRequest {
-            url(Endpoints.BASE_URL)
-
-            // Set up the headers.
-            configuration.schemaVersion?.let { version ->
-                schemaVersion(version)
-            }
-
-            configuration.token?.let { token ->
-                bearer(token)
-            }
-
-            configuration.language?.let { language ->
-                language(language)
-            }
         }
     }
 
