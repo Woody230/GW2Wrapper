@@ -19,10 +19,8 @@ interface GetByAllIdsClient<Model, Id, Value> : GetClient, GetByAllIds<Model, Id
      */
     suspend fun HttpClient.byAllIds(
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
     ): List<Model> = get(options) {
         parameter("ids", "all")
-        apply(customizations)
     }.body()
 
     /**
@@ -30,9 +28,8 @@ interface GetByAllIdsClient<Model, Id, Value> : GetClient, GetByAllIds<Model, Id
      */
     suspend fun HttpClient.byAllIdsOrEmpty(
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
     ): List<Model> = try {
-        byAllIds(options, customizations)
+        byAllIds(options)
     } catch (ex: Exception) {
         Logger.e(ex) { "Failed to request ${modelTypeInfo.type.simpleName} with all ids." }
         emptyList()

@@ -16,9 +16,8 @@ interface GetModelClient<Model> : GetClient, GetModel<Model> where Model : Any {
      * Gets the model.
      */
     suspend fun HttpClient.model(
-        options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
-    ): Model = get(options, customizations).body(modelTypeInfo)
+        options: Gw2HttpOptions
+    ): Model = get(options).body(modelTypeInfo)
 
     /**
      * Gets the model, or null if unable to fulfill the request.
@@ -27,7 +26,7 @@ interface GetModelClient<Model> : GetClient, GetModel<Model> where Model : Any {
         options: Gw2HttpOptions,
         customizations: HttpRequestBuilder.() -> Unit = {}
     ): Model? = try {
-        model(options, customizations)
+        model(options)
     } catch (ex: Exception) {
         Logger.e(ex) { "Failed to request ${modelTypeInfo.type.simpleName}." }
         null

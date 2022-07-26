@@ -6,7 +6,6 @@ import com.bselzer.gw2.v2.client.request.model.GetModels
 import com.bselzer.ktx.logging.Logger
 import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.request.*
 import io.ktor.util.reflect.*
 
 interface GetModelsClient<Model> : GetClient, GetModels<Model> where Model : Any {
@@ -17,17 +16,15 @@ interface GetModelsClient<Model> : GetClient, GetModels<Model> where Model : Any
      */
     suspend fun HttpClient.models(
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
-    ): List<Model> = get(options, customizations).body()
+    ): List<Model> = get(options).body()
 
     /**
      * Gets the models, or an empty list if unable to fulfill the request.
      */
     suspend fun HttpClient.modelsOrEmpty(
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
     ): List<Model> = try {
-        models(options, customizations)
+        models(options)
     } catch (ex: Exception) {
         Logger.e(ex) { "Failed to request ${modelTypeInfo.type.simpleName}s." }
         emptyList()

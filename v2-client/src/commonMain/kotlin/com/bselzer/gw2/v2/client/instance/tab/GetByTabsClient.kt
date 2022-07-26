@@ -20,13 +20,11 @@ interface GetByTabsClient<Model, Tab, Value> : GetClient, GetByTabs<Model, Tab, 
     suspend fun HttpClient.byIds(
         tabs: Collection<Tab>,
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
     ): List<Model> {
         val chunks = tabs.chunked(options.coercedPageSize()).filter { chunk -> chunk.isNotEmpty() }
         return chunks.flatMap { chunk ->
             get(options) {
                 parameter("tabs", chunk.joinToString(separator = ","))
-                apply(customizations)
             }.body<List<Model>>()
         }
     }
@@ -37,9 +35,8 @@ interface GetByTabsClient<Model, Tab, Value> : GetClient, GetByTabs<Model, Tab, 
     suspend fun HttpClient.byIdsOrEmpty(
         tabs: Collection<Tab>,
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
     ): List<Model> = try {
-        byIds(tabs, options, customizations)
+        byIds(tabs, options)
     } catch (ex: Exception) {
         Logger.e(ex) { "Failed to request ${modelTypeInfo.type.simpleName} with ids ${tabs.joinToString()}." }
         emptyList()
@@ -52,9 +49,8 @@ interface GetByTabsClient<Model, Tab, Value> : GetClient, GetByTabs<Model, Tab, 
         tabs: Collection<Tab>,
         default: (Tab) -> Model,
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
     ): List<Model> {
-        val models = byIdsOrEmpty(tabs, options, customizations).associateBy { model -> model.id }
+        val models = byIdsOrEmpty(tabs, options).associateBy { model -> model.id }
         return tabs.map { id -> models[id] ?: default(id) }
     }
 }

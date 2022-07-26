@@ -7,7 +7,6 @@ import com.bselzer.ktx.logging.Logger
 import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.request.*
 import io.ktor.util.reflect.*
 
 interface GetIdsClient<Id> : GetClient, GetIds<Id> where Id : Identifier<*> {
@@ -18,17 +17,15 @@ interface GetIdsClient<Id> : GetClient, GetIds<Id> where Id : Identifier<*> {
      */
     suspend fun HttpClient.ids(
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
-    ): List<Id> = get(options, customizations).body()
+    ): List<Id> = get(options).body()
 
     /**
      * Gets the [Id]s of the available models, or an empty list if unable to fulfill the request.
      */
     suspend fun HttpClient.idsOrEmpty(
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
     ): List<Id> = try {
-        ids(options, customizations)
+        ids(options)
     } catch (ex: Exception) {
         Logger.e(ex) { "Failed to request ${idTypeInfo.type.simpleName}s." }
         emptyList()

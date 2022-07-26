@@ -8,7 +8,6 @@ import com.bselzer.ktx.value.identifier.Identifiable
 import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.util.reflect.*
 
@@ -20,10 +19,8 @@ interface GetByActiveTabClient<Model, Tab, Value> : GetClient, GetByActiveTab<Mo
      */
     suspend fun HttpClient.byActiveTab(
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
     ): Model = get(options) {
         url { appendPathSegments("active") }
-        apply(customizations)
     }.body(modelTypeInfo)
 
     /**
@@ -31,9 +28,8 @@ interface GetByActiveTabClient<Model, Tab, Value> : GetClient, GetByActiveTab<Mo
      */
     suspend fun HttpClient.byActiveTabOrNull(
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
     ): Model? = try {
-        byActiveTab(options, customizations)
+        byActiveTab(options)
     } catch (ex: Exception) {
         Logger.e(ex) { "Failed to request ${modelTypeInfo.type.simpleName} with the active tab." }
         null
@@ -45,6 +41,5 @@ interface GetByActiveTabClient<Model, Tab, Value> : GetClient, GetByActiveTab<Mo
     suspend fun HttpClient.byActiveTabOrDefault(
         default: () -> Model,
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
-    ): Model = byActiveTabOrNull(options, customizations) ?: default()
+    ): Model = byActiveTabOrNull(options) ?: default()
 }

@@ -20,13 +20,11 @@ interface GetByIdsClient<Model, Id, Value> : GetClient, GetByIds<Model, Id, Valu
     suspend fun HttpClient.byIds(
         ids: Collection<Id>,
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
     ): List<Model> {
         val chunks = ids.chunked(options.coercedPageSize()).filter { chunk -> chunk.isNotEmpty() }
         return chunks.flatMap { chunk ->
             get(options) {
                 parameter("ids", chunk.joinToString(separator = ","))
-                apply(customizations)
             }.body<List<Model>>()
         }
     }
@@ -37,9 +35,8 @@ interface GetByIdsClient<Model, Id, Value> : GetClient, GetByIds<Model, Id, Valu
     suspend fun HttpClient.byIdsOrEmpty(
         ids: Collection<Id>,
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
     ): List<Model> = try {
-        byIds(ids, options, customizations)
+        byIds(ids, options)
     } catch (ex: Exception) {
         Logger.e(ex) { "Failed to request ${modelTypeInfo.type.simpleName} with ids ${ids.joinToString()}." }
         emptyList()
@@ -52,9 +49,8 @@ interface GetByIdsClient<Model, Id, Value> : GetClient, GetByIds<Model, Id, Valu
         ids: Collection<Id>,
         default: (Id) -> Model,
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
     ): List<Model> {
-        val models = byIdsOrEmpty(ids, options, customizations).associateBy { model -> model.id }
+        val models = byIdsOrEmpty(ids, options).associateBy { model -> model.id }
         return ids.map { id -> models[id] ?: default(id) }
     }
 }

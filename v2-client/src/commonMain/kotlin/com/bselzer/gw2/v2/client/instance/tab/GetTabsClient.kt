@@ -18,8 +18,7 @@ interface GetTabsClient<Tab> : GetClient, GetTabs<Tab> where Tab : Identifier<*>
      */
     suspend fun HttpClient.tabs(
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
-    ): List<Tab> = get(options, customizations).body()
+    ): List<Tab> = get(options).body()
 
     /**
      * Gets the [tabs]s of the available models, or an empty list if unable to fulfill the request.
@@ -28,7 +27,7 @@ interface GetTabsClient<Tab> : GetClient, GetTabs<Tab> where Tab : Identifier<*>
         options: Gw2HttpOptions,
         customizations: HttpRequestBuilder.() -> Unit = {}
     ): List<Tab> = try {
-        tabs(options, customizations)
+        tabs(options)
     } catch (ex: Exception) {
         Logger.e(ex) { "Failed to request ${tabTypeInfo.type.simpleName}s." }
         emptyList()

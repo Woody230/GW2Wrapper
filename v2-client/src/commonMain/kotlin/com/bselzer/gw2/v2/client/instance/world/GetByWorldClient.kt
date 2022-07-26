@@ -19,10 +19,8 @@ interface GetByWorldClient<Model> : GetClient, GetByWorld<Model> {
     suspend fun HttpClient.byWorld(
         worldId: WorldId,
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
     ): Model = get(options) {
         parameter("world", worldId.value)
-        apply(customizations)
     }.body(modelTypeInfo)
 
     /**
@@ -31,9 +29,8 @@ interface GetByWorldClient<Model> : GetClient, GetByWorld<Model> {
     suspend fun HttpClient.byWorldOrNull(
         worldId: WorldId,
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
     ): Model? = try {
-        byWorld(worldId, options, customizations)
+        byWorld(worldId, options)
     } catch (ex: Exception) {
         Logger.e(ex) { "Failed to request ${modelTypeInfo.type.simpleName} for the world with id $worldId." }
         null

@@ -19,10 +19,8 @@ interface GetByAllTabsClient<Model, Tab, Value> : GetClient, GetByAllTabs<Model,
      */
     suspend fun HttpClient.byAllTabs(
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
     ): List<Model> = get(options) {
         parameter("tabs", "all")
-        apply(customizations)
     }.body()
 
     /**
@@ -30,9 +28,8 @@ interface GetByAllTabsClient<Model, Tab, Value> : GetClient, GetByAllTabs<Model,
      */
     suspend fun HttpClient.byAllTabsOrEmpty(
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
     ): List<Model> = try {
-        byAllTabs(options, customizations)
+        byAllTabs(options)
     } catch (ex: Exception) {
         Logger.e(ex) { "Failed to request ${modelTypeInfo.type.simpleName} with all tabs." }
         emptyList()

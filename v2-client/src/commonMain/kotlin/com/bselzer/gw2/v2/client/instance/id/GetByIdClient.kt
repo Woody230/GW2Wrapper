@@ -20,7 +20,6 @@ interface GetByIdClient<Model, Id, Value> : GetClient, GetById<Model, Id, Value>
     suspend fun HttpClient.byId(
         id: Id,
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
     ): Model = get(options) {
         parameter("id", id.value)
         apply(customizations)
@@ -32,9 +31,8 @@ interface GetByIdClient<Model, Id, Value> : GetClient, GetById<Model, Id, Value>
     suspend fun HttpClient.byIdOrNull(
         id: Id,
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
     ): Model? = try {
-        byId(id, options, customizations)
+        byId(id, options)
     } catch (ex: Exception) {
         Logger.e(ex) { "Failed to request ${modelTypeInfo.type.simpleName} with id $id." }
         null
@@ -47,6 +45,5 @@ interface GetByIdClient<Model, Id, Value> : GetClient, GetById<Model, Id, Value>
         id: Id,
         default: (Id) -> Model,
         options: Gw2HttpOptions,
-        customizations: HttpRequestBuilder.() -> Unit = {}
-    ): Model = byIdOrNull(id, options, customizations) ?: default(id)
+    ): Model = byIdOrNull(id, options) ?: default(id)
 }
