@@ -42,17 +42,16 @@ interface Gw2Client {
             appendPathSegments(path)
         }
 
-        val merged = defaultOptions.merge(options)
+        val merged = defaultOptions.merge(options) {
+            apply(this@Gw2Client.customizations)
+            apply(customizations)
+        }
+
         appendIfNameAbsent(Headers.SCHEMA_VERSION, merged.schemaVersion)
         appendIfNameAbsent(HttpHeaders.AcceptLanguage, merged.language)
         merged.token?.let { token ->
             appendIfNameAbsent(HttpHeaders.Authorization, "${Headers.BEARER} $token")
         }
-
-        apply(defaultOptions.customizations)
-        apply(this@Gw2Client.customizations)
-        apply(customizations)
-        apply(options.customizations)
     }
 
     /**

@@ -40,14 +40,15 @@ interface Gw2RequestOptions {
 
     /**
      * Takes the [schemaVersion], [token], [language], and [pageSize] from the [other] [Gw2HttpOptions], defaulting to these options.
-     * These [customizations] are applied first and then the [other] [customizations] are applied.
+     * These [customizations] are applied first, then the given [customizations], and then the [other] [customizations].
      */
-    fun merge(other: Gw2RequestOptions): Gw2RequestOptions = RequestOptions(
+    fun merge(other: Gw2RequestOptions, customizations: HttpRequestBuilder.() -> Unit = {}): Gw2RequestOptions = RequestOptions(
         schemaVersion = other.schemaVersion ?: schemaVersion,
         token = other.token ?: token,
         language = other.language ?: language,
         pageSize = other.pageSize ?: pageSize,
         customizations = {
+            apply(this@Gw2RequestOptions.customizations)
             apply(customizations)
             apply(other.customizations)
         }
