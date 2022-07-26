@@ -1,4 +1,4 @@
-package com.bselzer.gw2.v2.client.request.options
+package com.bselzer.gw2.v2.client.options
 
 import io.ktor.client.request.*
 

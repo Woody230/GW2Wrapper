@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.client.request.world
 
-import com.bselzer.gw2.v2.client.request.options.Gw2HttpOptions
+import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.model.world.WorldId
 
 interface GetByWorld<Model> {

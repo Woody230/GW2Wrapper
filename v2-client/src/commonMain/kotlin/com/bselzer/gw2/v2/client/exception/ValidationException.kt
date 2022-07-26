@@ -1,4 +1,4 @@
-package com.bselzer.gw2.v2.client.request.exception
+package com.bselzer.gw2.v2.client.exception
 
 class ValidationException : Gw2ClientException {
     constructor() : super()

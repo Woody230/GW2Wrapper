@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.client.instance
 
-import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
+import com.bselzer.gw2.v2.client.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.race.Race
 import com.bselzer.gw2.v2.model.race.RaceId
 import io.ktor.client.*

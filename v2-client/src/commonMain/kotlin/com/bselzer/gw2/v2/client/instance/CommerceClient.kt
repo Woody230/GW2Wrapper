@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.client.instance
 
 import com.bselzer.gw2.v2.client.extension.bearer
-import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
+import com.bselzer.gw2.v2.client.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.commerce.delivery.Delivery
 import com.bselzer.gw2.v2.model.commerce.exchange.CoinExchange
 import com.bselzer.gw2.v2.model.commerce.exchange.GemExchange

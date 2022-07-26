@@ -3,7 +3,7 @@ package com.bselzer.gw2.v2.client.generator.instance
 import com.bselzer.gw2.v2.client.generator.BuildKonfig
 import com.bselzer.gw2.v2.client.generator.query.Query
 import com.bselzer.gw2.v2.client.instance.BaseClient
-import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
+import com.bselzer.gw2.v2.client.options.DefaultGw2HttpOptions
 import com.bselzer.ktx.poet.file.ClassImport
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec

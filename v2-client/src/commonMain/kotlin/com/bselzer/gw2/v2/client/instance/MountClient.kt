@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.client.instance
 
 import com.bselzer.gw2.v2.client.extension.language
-import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
+import com.bselzer.gw2.v2.client.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.mount.skin.MountSkin
 import com.bselzer.gw2.v2.model.mount.skin.MountSkinId
 import com.bselzer.gw2.v2.model.mount.type.MountType

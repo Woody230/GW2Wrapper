@@ -1,8 +1,8 @@
 package com.bselzer.gw2.v2.client
 
 import com.bselzer.gw2.v2.client.constant.Headers
-import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
-import com.bselzer.gw2.v2.client.request.options.Gw2RequestOptions
+import com.bselzer.gw2.v2.client.options.DefaultGw2HttpOptions
+import com.bselzer.gw2.v2.client.options.Gw2RequestOptions
 import io.ktor.client.request.*
 import io.ktor.http.*
 

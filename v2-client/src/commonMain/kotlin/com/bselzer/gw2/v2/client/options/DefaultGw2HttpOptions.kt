@@ -1,8 +1,8 @@
-package com.bselzer.gw2.v2.client.request.options
+package com.bselzer.gw2.v2.client.options
 
-import com.bselzer.gw2.v2.client.request.options.validation.SuccessfulResult
-import com.bselzer.gw2.v2.client.request.options.validation.UnsuccessfulResult
-import com.bselzer.gw2.v2.client.request.options.validation.ValidationResult
+import com.bselzer.gw2.v2.client.validation.SuccessfulResult
+import com.bselzer.gw2.v2.client.validation.UnsuccessfulResult
+import com.bselzer.gw2.v2.client.validation.ValidationResult
 import io.ktor.client.statement.*
 import io.ktor.http.*
 

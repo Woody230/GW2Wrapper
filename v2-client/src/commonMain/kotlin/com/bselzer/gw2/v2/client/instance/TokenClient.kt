@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.client.instance
 
 import com.bselzer.gw2.v2.client.extension.bearer
-import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
+import com.bselzer.gw2.v2.client.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.account.token.ApiKeyInfo
 import com.bselzer.gw2.v2.model.account.token.SubToken
 import com.bselzer.gw2.v2.model.account.token.TokenInfo

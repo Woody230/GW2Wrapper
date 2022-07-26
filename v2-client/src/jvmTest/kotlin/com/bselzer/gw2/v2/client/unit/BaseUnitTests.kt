@@ -3,7 +3,7 @@ package com.bselzer.gw2.v2.client.unit
 import com.bselzer.gw2.v2.client.BaseTests
 import com.bselzer.gw2.v2.client.asHeader
 import com.bselzer.gw2.v2.client.model.Token
-import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
+import com.bselzer.gw2.v2.client.options.DefaultGw2HttpOptions
 import io.ktor.client.*
 import io.ktor.client.engine.mock.*
 import io.ktor.client.request.*

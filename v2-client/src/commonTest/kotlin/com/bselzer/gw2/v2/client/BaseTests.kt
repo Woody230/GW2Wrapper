@@ -2,7 +2,7 @@ package com.bselzer.gw2.v2.client
 
 import com.bselzer.gw2.v2.client.instance.ExceptionRecoveryMode
 import com.bselzer.gw2.v2.client.instance.Gw2Clients
-import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
+import com.bselzer.gw2.v2.client.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.character.CharacterName
 import com.bselzer.gw2.v2.model.serialization.Modules
 import io.ktor.client.*

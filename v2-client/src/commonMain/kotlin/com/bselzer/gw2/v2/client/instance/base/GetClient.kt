@@ -1,9 +1,10 @@
-package com.bselzer.gw2.v2.client
+package com.bselzer.gw2.v2.client.instance.base
 
-import com.bselzer.gw2.v2.client.request.exception.ValidationException
-import com.bselzer.gw2.v2.client.request.options.Gw2HttpOptions
-import com.bselzer.gw2.v2.client.request.options.validation.SuccessfulResult
-import com.bselzer.gw2.v2.client.request.options.validation.UnsuccessfulResult
+import com.bselzer.gw2.v2.client.Gw2Client
+import com.bselzer.gw2.v2.client.exception.ValidationException
+import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
+import com.bselzer.gw2.v2.client.validation.SuccessfulResult
+import com.bselzer.gw2.v2.client.validation.UnsuccessfulResult
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*

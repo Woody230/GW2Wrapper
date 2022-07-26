@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.client.instance
 
 import com.bselzer.gw2.v2.client.extension.language
-import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
+import com.bselzer.gw2.v2.client.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.story.Story
 import com.bselzer.gw2.v2.model.story.StoryId
 import com.bselzer.gw2.v2.model.story.season.StorySeason

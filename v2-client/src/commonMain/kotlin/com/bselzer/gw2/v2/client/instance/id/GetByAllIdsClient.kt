@@ -1,7 +1,7 @@
-package com.bselzer.gw2.v2.client
+package com.bselzer.gw2.v2.client.instance.id
 
+import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.id.GetByAllIds
-import com.bselzer.gw2.v2.client.request.options.Gw2HttpOptions
 import com.bselzer.ktx.logging.Logger
 import com.bselzer.ktx.value.identifier.Identifiable
 import com.bselzer.ktx.value.identifier.Identifier

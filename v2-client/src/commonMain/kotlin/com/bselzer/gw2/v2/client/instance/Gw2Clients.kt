@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.client.instance
 
-import com.bselzer.gw2.v2.client.request.options.DefaultGw2HttpOptions
+import com.bselzer.gw2.v2.client.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.serialization.Modules
 import io.ktor.client.*
 import io.ktor.client.plugins.contentnegotiation.*

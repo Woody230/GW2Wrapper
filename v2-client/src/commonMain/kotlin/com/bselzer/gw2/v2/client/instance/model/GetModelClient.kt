@@ -1,8 +1,8 @@
-package com.bselzer.gw2.v2.client.request.client.model
+package com.bselzer.gw2.v2.client.instance.model
 
+import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.client.GetClient
 import com.bselzer.gw2.v2.client.request.model.GetModel
-import com.bselzer.gw2.v2.client.request.options.Gw2HttpOptions
 import com.bselzer.ktx.logging.Logger
 import io.ktor.client.*
 import io.ktor.client.call.*
