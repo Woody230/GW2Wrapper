@@ -1,8 +1,10 @@
 package com.bselzer.gw2.v2.client.instance
 
+import com.bselzer.gw2.v2.client.constant.Endpoints
 import com.bselzer.gw2.v2.client.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.model.serialization.Modules
 import io.ktor.client.*
+import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.utils.io.core.*
@@ -387,6 +389,10 @@ open class Gw2Clients(
         // Enable kotlinx.serialization
         install(ContentNegotiation) {
             json(json)
+        }
+
+        defaultRequest {
+            url(Endpoints.BASE_URL)
         }
     }
 

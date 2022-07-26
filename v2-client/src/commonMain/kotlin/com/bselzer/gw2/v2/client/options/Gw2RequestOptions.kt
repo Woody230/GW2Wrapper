@@ -38,11 +38,28 @@ interface Gw2RequestOptions {
      */
     val customizations: HttpRequestBuilder.() -> Unit
 
-    companion object : Gw2RequestOptions {
-        override val schemaVersion: String? = null
-        override val token: String? = null
-        override val language: String? = null
-        override val pageSize: Int? = null
-        override val customizations: HttpRequestBuilder.() -> Unit = {}
-    }
+    /**
+     * Takes the [schemaVersion], [token], [language], and [pageSize] from the [other] [Gw2HttpOptions], defaulting to these options.
+     * These [customizations] are applied first and then the [other] [customizations] are applied.
+     */
+    fun merge(other: Gw2RequestOptions): Gw2RequestOptions = RequestOptions(
+        schemaVersion = other.schemaVersion ?: schemaVersion,
+        token = other.token ?: token,
+        language = other.language ?: language,
+        pageSize = other.pageSize ?: pageSize,
+        customizations = {
+            apply(customizations)
+            apply(other.customizations)
+        }
+    )
+
+    companion object : Gw2RequestOptions by RequestOptions()
 }
+
+data class RequestOptions(
+    override val schemaVersion: String? = null,
+    override val token: String? = null,
+    override val language: String? = null,
+    override val pageSize: Int? = null,
+    override val customizations: HttpRequestBuilder.() -> Unit = {}
+) : Gw2RequestOptions
