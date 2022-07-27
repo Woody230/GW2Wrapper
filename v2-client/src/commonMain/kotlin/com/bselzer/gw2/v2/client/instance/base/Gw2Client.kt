@@ -2,18 +2,36 @@ package com.bselzer.gw2.v2.client.instance.base
 
 import com.bselzer.gw2.v2.client.constant.Headers
 import com.bselzer.gw2.v2.client.options.DefaultGw2HttpOptions
-import com.bselzer.gw2.v2.client.options.DefaultGw2HttpOptions.Companion.baseUrl
 import com.bselzer.gw2.v2.client.options.Gw2RequestOptions
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.util.*
 
 interface Gw2Client {
+    /**
+     * The path relative to the base url.
+     */
     val path: String
+
+    /**
+     * The customizations specific to the endpoint.
+     */
     val customizations: HttpRequestBuilder.() -> Unit
         get() = {}
 
+    /**
+     * The options to use by default if they are not provided with the request.
+     */
     val defaultOptions: DefaultGw2HttpOptions
+
+    /**
+     * The [DefaultGw2HttpOptions.baseUrl] and the [path].
+     */
+    val url: Url
+        get() = URLBuilder().apply {
+            takeFrom(defaultOptions.baseUrl)
+            appendPathSegments(path)
+        }.build()
 
     /**
      * Creates the [HttpRequestBuilder] block in the following order:
@@ -37,10 +55,7 @@ interface Gw2Client {
      * The [Gw2RequestOptions.customizations].
      */
     fun configure(options: Gw2RequestOptions, customizations: HttpRequestBuilder.() -> Unit): HttpRequestBuilder.() -> Unit = {
-        url {
-            takeFrom(baseUrl)
-            appendPathSegments(path)
-        }
+        url(this@Gw2Client.url)
 
         val merged = defaultOptions.merge(options) {
             apply(this@Gw2Client.customizations)

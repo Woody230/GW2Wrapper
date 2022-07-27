@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.client.options
 
+import com.bselzer.gw2.v2.client.request.token.Token
 import io.ktor.client.request.*
 
 interface Gw2RequestOptions {
@@ -19,7 +20,7 @@ interface Gw2RequestOptions {
      * If null, then no access token will be added.
      * Note that many endpoints do not need authorization.
      */
-    val token: String?
+    val token: Token?
 
     /**
      * The language to retrieve data for.
@@ -59,7 +60,7 @@ interface Gw2RequestOptions {
 
 data class RequestOptions(
     override val schemaVersion: String? = null,
-    override val token: String? = null,
+    override val token: Token? = null,
     override val language: String? = null,
     override val pageSize: Int? = null,
     override val customizations: HttpRequestBuilder.() -> Unit = {}

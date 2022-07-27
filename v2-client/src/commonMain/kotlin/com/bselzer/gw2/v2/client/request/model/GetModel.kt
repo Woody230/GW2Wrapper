@@ -2,14 +2,14 @@ package com.bselzer.gw2.v2.client.request.model
 
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 
-interface GetModel<T> {
+interface GetModel<Model> {
     /**
-     * Gets the model.
+     * Gets the [Model].
      */
-    suspend fun model(options: Gw2HttpOptions): T
+    suspend fun model(options: Gw2HttpOptions): Model
 
     /**
-     * Gets the model, or null if unable to fulfill the request.
+     * Gets the [Model], or null if unable to fulfill the request.
      */
-    suspend fun modelOrNull(options: Gw2HttpOptions): T?
+    suspend fun modelOrNull(options: Gw2HttpOptions): Model?
 }
