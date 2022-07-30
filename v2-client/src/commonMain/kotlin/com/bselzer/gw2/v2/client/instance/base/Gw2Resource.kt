@@ -19,7 +19,7 @@ abstract class Gw2Resource : Gw2ResourceOptions {
             httpClient.request(configure(customizations))
         } catch (ex: Exception) {
             val cause = if (ex is RequestException) ex else RequestException(ex)
-            return null to UnsuccessfulResult(cause) { "Failed to make the request to ${url}. ${context()}" }.also { it.log() }
+            return null to UnsuccessfulResult(cause) { "${context()} Failed to make the request to ${url}.".trimStart() }.also { it.log() }
         }
 
         return try {
@@ -27,12 +27,12 @@ abstract class Gw2Resource : Gw2ResourceOptions {
                 is SuccessfulResult -> response to result
                 is UnsuccessfulResult -> {
                     val cause = if (result.cause is ValidationException) result.cause else ValidationException(result.cause)
-                    response to UnsuccessfulResult(cause) { "${result.message} ${context()}" }.also { it.log() }
+                    response to UnsuccessfulResult(cause) { "${context()} ${result.message}".trimStart() }.also { it.log() }
                 }
             }
         } catch (ex: Exception) {
             val cause = if (ex is ValidationException) ex else ValidationException(ex)
-            null to UnsuccessfulResult(cause) { "Failed to validate the response and create a result. ${context()}" }.also { it.log() }
+            null to UnsuccessfulResult(cause) { "${context()} Failed to validate the response and create a result.".trimStart() }.also { it.log() }
         }
     }
 
