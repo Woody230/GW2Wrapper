@@ -45,7 +45,6 @@ class CreateSubTokenResource(
     }
 
     override suspend fun createOrNull(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2HttpOptions): Token? {
-        options.validate()
         return options.get(expiration.context(), parameters(expiration, permissions, urls)).extractToken()
     }
 }
