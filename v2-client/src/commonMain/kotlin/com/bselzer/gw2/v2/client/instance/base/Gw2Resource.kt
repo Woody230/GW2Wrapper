@@ -15,7 +15,7 @@ import io.ktor.util.reflect.*
 abstract class Gw2Resource : Gw2ResourceOptions {
     abstract val httpClient: HttpClient
 
-    protected fun TypeInfo.toDisplayableString() = kotlinType ?: type.simpleName
+    internal fun TypeInfo.toDisplayableString() = kotlinType ?: type.simpleName
 
     private suspend fun Gw2HttpOptions.request(context: () -> String, customizations: HttpRequestBuilder.() -> Unit): Pair<HttpResponse?, ValidationResult> {
         val response = try {
