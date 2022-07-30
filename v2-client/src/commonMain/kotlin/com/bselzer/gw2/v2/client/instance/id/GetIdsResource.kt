@@ -14,7 +14,7 @@ class GetIdsResource<Id>(
     options: Gw2ResourceOptions,
     private val idTypeInfo: TypeInfo,
 ) : GetResource<List<Id>>(typeInfo<List<Id>>()), Gw2ResourceOptions by options, GetIds<Id> where Id : Identifier<*> {
-    private val context: () -> String = { "Request for ${idTypeInfo.type.simpleName}s." }
+    private val context: () -> String = { "Request for ${idTypeInfo.toDisplayableString()}s." }
     private val parameters: HttpRequestBuilder.() -> Unit = {}
 
     override suspend fun ids(options: Gw2HttpOptions): List<Id> = options.get(context, parameters)

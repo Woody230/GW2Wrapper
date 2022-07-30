@@ -14,7 +14,7 @@ class GetByOutputResource<Model, Output>(
     options: Gw2ResourceOptions,
     private val modelTypeInfo: TypeInfo,
 ) : GetResource<List<Model>>(typeInfo<List<Model>>()), Gw2ResourceOptions by options, GetByOutput<Model, Output> {
-    private fun Output.context(): () -> String = { "Request for ${modelTypeInfo.type.simpleName}s with output $this." }
+    private fun Output.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}s with output $this." }
     private fun Output.parameters(): HttpRequestBuilder.() -> Unit = { parameter("output", this@parameters) }
 
     override suspend fun byOutput(output: Output, options: Gw2HttpOptions): List<Model> = options.get(output.context(), output.parameters())

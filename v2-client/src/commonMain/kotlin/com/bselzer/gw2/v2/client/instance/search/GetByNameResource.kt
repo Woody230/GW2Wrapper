@@ -13,7 +13,7 @@ class GetByNameResource<Model>(
     options: Gw2ResourceOptions,
     private val modelTypeInfo: TypeInfo,
 ) : GetResource<List<Model>>(typeInfo<List<Model>>()), Gw2ResourceOptions by options, GetByName<Model> {
-    private fun String.context(): () -> String = { "Request for ${modelTypeInfo.type.simpleName}s with name $this." }
+    private fun String.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}s with name $this." }
     private fun String.parameters(): HttpRequestBuilder.() -> Unit = { parameter("name", this@parameters) }
 
     override suspend fun byName(name: String, options: Gw2HttpOptions): List<Model> = options.get(name.context(), name.parameters())

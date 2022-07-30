@@ -16,7 +16,7 @@ class GetSinceIdResource<Model, Id, Value>(
     private val modelTypeInfo: TypeInfo,
 ) : GetResource<List<Model>>(typeInfo<List<Model>>()), Gw2ResourceOptions by options,
     GetSinceId<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> {
-    private fun Id.context(): () -> String = { "Request for ${modelTypeInfo.type.simpleName}s newer than $this." }
+    private fun Id.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}s newer than $this." }
     private fun Id.parameters(): HttpRequestBuilder.() -> Unit = { parameter("since", value) }
 
     override suspend fun since(id: Id, options: Gw2HttpOptions): List<Model> = options.get(id.context(), id.parameters())

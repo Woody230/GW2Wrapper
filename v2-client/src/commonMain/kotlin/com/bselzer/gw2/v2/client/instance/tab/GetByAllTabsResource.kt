@@ -16,7 +16,7 @@ class GetByAllTabsResource<Model, Tab, Value>(
     private val modelTypeInfo: TypeInfo,
 ) : GetResource<List<Model>>(typeInfo<List<Model>>()), Gw2ResourceOptions by options,
     GetByAllTabs<Model, Tab, Value> where Tab : Identifier<Value>, Model : Identifiable<Tab, Value> {
-    private val context: () -> String = { "Request for ${modelTypeInfo.type.simpleName} associated with all tabs." }
+    private val context: () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} associated with all tabs." }
     private val parameters: HttpRequestBuilder.() -> Unit = { parameter("tabs", "all") }
 
     override suspend fun byAllTabs(options: Gw2HttpOptions): List<Model> = options.get(context, parameters)

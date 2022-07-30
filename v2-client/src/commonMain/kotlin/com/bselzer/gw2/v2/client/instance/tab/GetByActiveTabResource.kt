@@ -16,7 +16,7 @@ class GetByActiveTabResource<Model, Tab, Value>(
     options: Gw2ResourceOptions,
     private val modelTypeInfo: TypeInfo,
 ) : GetResource<Model>(modelTypeInfo), Gw2ResourceOptions by options, GetByActiveTab<Model, Tab, Value> where Tab : Identifier<Value>, Model : Identifiable<Tab, Value> {
-    private val context: () -> String = { "Request for ${modelTypeInfo.type.simpleName} associated with the active tab." }
+    private val context: () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} associated with the active tab." }
     private val parameters: HttpRequestBuilder.() -> Unit = {
         url { appendPathSegments("active") }
     }

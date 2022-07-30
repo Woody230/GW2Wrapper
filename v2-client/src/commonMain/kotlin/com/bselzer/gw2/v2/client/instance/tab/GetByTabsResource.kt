@@ -16,7 +16,7 @@ class GetByTabsResource<Model, Tab, Value>(
     private val modelTypeInfo: TypeInfo,
 ) : GetResource<List<Model>>(typeInfo<List<Model>>()), Gw2ResourceOptions by options,
     GetByTabs<Model, Tab, Value> where Tab : Identifier<Value>, Model : Identifiable<Tab, Value> {
-    private fun Collection<Tab>.context(): () -> String = { "Request for ${modelTypeInfo.type.simpleName}s associated with tabs ${joinToString(separator = ",")}." }
+    private fun Collection<Tab>.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}s associated with tabs ${joinToString(separator = ",")}." }
     private fun Collection<Tab>.parameters(): HttpRequestBuilder.() -> Unit = { parameter("tabs", joinToString(separator = ",")) }
 
     override suspend fun byTabs(

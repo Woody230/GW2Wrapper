@@ -15,7 +15,7 @@ class GetByIdResource<Model, Id, Value>(
     options: Gw2ResourceOptions,
     private val modelTypeInfo: TypeInfo,
 ) : GetResource<Model>(modelTypeInfo), Gw2ResourceOptions by options, GetById<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> {
-    private fun Id.context(): () -> String = { "Request for ${modelTypeInfo.type.simpleName} with id $this." }
+    private fun Id.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} with id $this." }
     private fun Id.parameters(): HttpRequestBuilder.() -> Unit = { parameter("id", value) }
 
     override suspend fun byId(id: Id, options: Gw2HttpOptions): Model = options.get(id.context(), id.parameters())

@@ -14,7 +14,7 @@ class GetByWorldResource<Model>(
     options: Gw2ResourceOptions,
     private val modelTypeInfo: TypeInfo,
 ) : GetResource<Model>(modelTypeInfo), Gw2ResourceOptions by options, GetByWorld<Model> {
-    private fun WorldId.context(): () -> String = { "Request for ${modelTypeInfo.type.simpleName} associated with the world with id $this." }
+    private fun WorldId.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} associated with the world with id $this." }
     private fun WorldId.parameters(): HttpRequestBuilder.() -> Unit = { parameter("world", value) }
 
     override suspend fun byWorld(worldId: WorldId, options: Gw2HttpOptions): Model = options.get(worldId.context(), worldId.parameters())

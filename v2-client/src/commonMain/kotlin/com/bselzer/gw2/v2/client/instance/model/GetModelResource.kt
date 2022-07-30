@@ -13,7 +13,7 @@ class GetModelResource<Model>(
     options: Gw2ResourceOptions,
     private val modelTypeInfo: TypeInfo,
 ) : GetResource<Model>(modelTypeInfo), Gw2ResourceOptions by options, GetModel<Model> where Model : Any {
-    private val context: () -> String = { "Request for ${modelTypeInfo.type.simpleName}." }
+    private val context: () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}." }
     private val parameters: HttpRequestBuilder.() -> Unit = { }
 
     override suspend fun model(options: Gw2HttpOptions): Model = options.get(context, parameters)

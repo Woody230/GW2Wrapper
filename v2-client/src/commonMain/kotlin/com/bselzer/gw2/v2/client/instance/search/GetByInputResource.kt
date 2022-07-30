@@ -13,7 +13,7 @@ class GetByInputResource<Model, Input>(
     options: Gw2ResourceOptions,
     private val modelTypeInfo: TypeInfo,
 ) : GetResource<List<Model>>(typeInfo<List<Model>>()), Gw2ResourceOptions by options, GetByInput<Model, Input> {
-    private fun Input.context(): () -> String = { "Request for ${modelTypeInfo.type.simpleName}s with input $this." }
+    private fun Input.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}s with input $this." }
     private fun Input.parameters(): HttpRequestBuilder.() -> Unit = { parameter("input", this@parameters) }
 
     override suspend fun byInput(input: Input, options: Gw2HttpOptions): List<Model> = options.get(input.context(), input.parameters())

@@ -16,7 +16,7 @@ class GetByAllIdsResource<Model, Id, Value>(
     private val modelTypeInfo: TypeInfo,
 ) : GetResource<List<Model>>(typeInfo<List<Model>>()), Gw2ResourceOptions by options,
     GetByAllIds<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> {
-    private val context: () -> String = { "Request for ${modelTypeInfo.type.simpleName} with all ids." }
+    private val context: () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} with all ids." }
     private val parameters: HttpRequestBuilder.() -> Unit = { parameter("ids", "all") }
 
     override suspend fun byAllIds(options: Gw2HttpOptions): List<Model> = options.get(context, parameters)

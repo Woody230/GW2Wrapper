@@ -17,7 +17,7 @@ abstract class GetResource<Model>(
         try {
             body<Model>(typeInfo)
         } catch (ex: Exception) {
-            throw ResponseException("${context()} Unable to convert the response body into ${typeInfo.type.simpleName}.".trimStart(), ex)
+            throw ResponseException("${context()} Unable to convert the response body into ${typeInfo.toDisplayableString()}.".trimStart(), ex)
         }
     }
 
@@ -28,7 +28,7 @@ abstract class GetResource<Model>(
         try {
             body<Model>(typeInfo)
         } catch (ex: Exception) {
-            Logger.e(ResponseException(ex), "${context()} Unable to convert the response body into ${typeInfo.type.simpleName}.".trimStart())
+            Logger.e(ResponseException(ex), "${context()} Unable to convert the response body into ${typeInfo.toDisplayableString()}.".trimStart())
             null
         }
     }
