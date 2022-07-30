@@ -10,6 +10,9 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.util.reflect.*
 
+/**
+ * A resource that supports getting a single [Model] by a single [Id].
+ */
 class GetByIdResource<Model, Id, Value>(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions,

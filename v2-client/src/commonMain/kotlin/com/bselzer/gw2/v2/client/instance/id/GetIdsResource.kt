@@ -9,6 +9,9 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.util.reflect.*
 
+/**
+ * A resource that supports getting all [Id]s.
+ */
 class GetIdsResource<Id>(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions,

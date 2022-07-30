@@ -84,3 +84,8 @@ interface Gw2ResourceOptions {
         return pageSize.coerceAtLeast(1).coerceAtMost(DefaultGw2HttpOptions.pageSize)
     }
 }
+
+data class ResourceOptions(
+    override val path: String,
+    override val defaultOptions: DefaultGw2HttpOptions
+) : Gw2ResourceOptions

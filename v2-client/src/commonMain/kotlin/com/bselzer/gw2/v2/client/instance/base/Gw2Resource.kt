@@ -13,7 +13,7 @@ import io.ktor.client.statement.*
 import io.ktor.util.reflect.*
 
 abstract class Gw2Resource : Gw2ResourceOptions {
-    abstract val httpClient: HttpClient
+    protected abstract val httpClient: HttpClient
 
     internal fun TypeInfo.toDisplayableString() = kotlinType ?: type.simpleName
 
