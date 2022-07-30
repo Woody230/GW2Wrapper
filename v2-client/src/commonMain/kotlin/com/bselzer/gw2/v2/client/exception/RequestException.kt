@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.client.exception
 
 /**
- * An exception that occurs when processing the request.
+ * An exception that occurs while trying to make a request.
  */
 class RequestException : Gw2ClientException {
     constructor() : super()

@@ -7,7 +7,7 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.util.*
 
-interface Gw2Client {
+interface Gw2ResourceOptions {
     /**
      * The path relative to the base url.
      */
@@ -48,17 +48,17 @@ interface Gw2Client {
      *
      * [DefaultGw2HttpOptions.customizations]
      *
-     * The [Gw2Client.customizations].
+     * The [Gw2ResourceOptions.customizations].
      *
      * The given [customizations].
      *
      * The [Gw2RequestOptions.customizations].
      */
-    fun configure(options: Gw2RequestOptions, customizations: HttpRequestBuilder.() -> Unit): HttpRequestBuilder.() -> Unit = {
-        url(this@Gw2Client.url)
+    fun Gw2RequestOptions.configure(customizations: HttpRequestBuilder.() -> Unit): HttpRequestBuilder.() -> Unit = {
+        url(this@Gw2ResourceOptions.url)
 
-        val merged = defaultOptions.merge(options) {
-            apply(this@Gw2Client.customizations)
+        val merged = defaultOptions.merge(this@configure) {
+            apply(this@Gw2ResourceOptions.customizations)
             apply(customizations)
         }
 

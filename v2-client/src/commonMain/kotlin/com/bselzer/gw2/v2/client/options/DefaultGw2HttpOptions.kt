@@ -22,7 +22,7 @@ interface DefaultGw2HttpOptions : Gw2HttpOptions {
             // Consequently, we should fail validation in order to properly construct a default instead.
             when (status.isSuccess()) {
                 true -> SuccessfulResult
-                false -> UnsuccessfulResult("Unsuccessful status code of $status.")
+                false -> UnsuccessfulResult { "Unsuccessful status code of $status." }
             }
         }
     }
