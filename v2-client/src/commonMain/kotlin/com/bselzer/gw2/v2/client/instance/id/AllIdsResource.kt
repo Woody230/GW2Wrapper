@@ -14,10 +14,11 @@ class AllIdsResource<Model, Id, Value>(
     httpClient: HttpClient,
     options: Gw2ResourceOptions,
     modelTypeInfo: TypeInfo,
-    idTypeInfo: TypeInfo
+    idTypeInfo: TypeInfo,
+    defaultById: (Id) -> Model
 ) : AllIds<Model, Id, Value>,
     GetByAllIds<Model, Id, Value> by GetByAllIdsResource(httpClient, options, modelTypeInfo),
-    GetById<Model, Id, Value> by GetByIdResource(httpClient, options, modelTypeInfo),
-    GetByIds<Model, Id, Value> by GetByIdsResource(httpClient, options, modelTypeInfo),
+    GetById<Model, Id, Value> by GetByIdResource(httpClient, options, modelTypeInfo, defaultById),
+    GetByIds<Model, Id, Value> by GetByIdsResource(httpClient, options, modelTypeInfo, defaultById),
     GetIds<Id> by GetIdsResource(httpClient, options, idTypeInfo)
         where Id : Identifier<Value>, Model : Identifiable<Id, Value>

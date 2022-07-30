@@ -16,7 +16,7 @@ interface GetByTab<Model, Tab, Value> where Tab : Identifier<Value>, Model : Ide
     suspend fun byTabOrNull(tab: Tab, options: Gw2HttpOptions): Model?
 
     /**
-     * Gets the [Model] associated with the [tab], or the [default] model if unable to fulfill the request.
+     * Gets the [Model] associated with the [tab], or a defaulted [Model] with the [Tab] populated if unable to fulfill the request.
      */
-    suspend fun byTabOrDefault(tab: Tab, default: (Tab) -> Model, options: Gw2HttpOptions): Model
+    suspend fun byTabOrDefault(tab: Tab, options: Gw2HttpOptions): Model
 }

@@ -14,11 +14,12 @@ class GetByTabResource<Model, Tab, Value>(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions,
     private val modelTypeInfo: TypeInfo,
+    private val defaultByTab: (Tab) -> Model
 ) : GetResource<Model>(modelTypeInfo), Gw2ResourceOptions by options, GetByTab<Model, Tab, Value> where Tab : Identifier<Value>, Model : Identifiable<Tab, Value> {
     private fun Tab.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} associated with tab $this." }
     private fun Tab.parameters(): HttpRequestBuilder.() -> Unit = { parameter("tab", value) }
 
     override suspend fun byTab(tab: Tab, options: Gw2HttpOptions): Model = options.get(tab.context(), tab.parameters())
     override suspend fun byTabOrNull(tab: Tab, options: Gw2HttpOptions): Model? = options.getOrNull(tab.context(), tab.parameters())
-    override suspend fun byTabOrDefault(tab: Tab, default: (Tab) -> Model, options: Gw2HttpOptions): Model = byTabOrNull(tab, options) ?: default(tab)
+    override suspend fun byTabOrDefault(tab: Tab, options: Gw2HttpOptions): Model = byTabOrNull(tab, options) ?: defaultByTab(tab)
 }

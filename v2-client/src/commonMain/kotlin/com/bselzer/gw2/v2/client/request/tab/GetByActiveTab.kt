@@ -14,9 +14,4 @@ interface GetByActiveTab<Model, Tab, Value> where Tab : Identifier<Value>, Model
      * Gets the [Model] associated with the active tab, or null if unable to fulfill the request.
      */
     suspend fun byActiveTabOrNull(options: Gw2HttpOptions): Model?
-
-    /**
-     * Gets the [Model] associated with the active tab, or the [default] model if unable to fulfill the request.
-     */
-    suspend fun byActiveTabOrDefault(default: () -> Model, options: Gw2HttpOptions): Model
 }

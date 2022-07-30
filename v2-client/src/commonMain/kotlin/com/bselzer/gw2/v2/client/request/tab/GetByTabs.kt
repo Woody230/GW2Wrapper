@@ -16,7 +16,7 @@ interface GetByTabs<Model, Tab, Value> where Tab : Identifier<Value>, Model : Id
     suspend fun byTabsOrEmpty(tabs: Collection<Tab>, options: Gw2HttpOptions): List<Model>
 
     /**
-     * Gets the [Model]s associated with the [tabs], or a [default] model if it is missing from the response.
+     * Gets the [Model]s associated with the [tabs], or a defaulted [Model] with the [Tab] populated if it is missing from the response.
      */
-    suspend fun byTabsOrDefault(tabs: Collection<Tab>, default: (Tab) -> Model, options: Gw2HttpOptions): List<Model>
+    suspend fun byTabsOrDefault(tabs: Collection<Tab>, options: Gw2HttpOptions): List<Model>
 }

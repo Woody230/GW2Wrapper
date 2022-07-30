@@ -23,5 +23,4 @@ class GetByActiveTabResource<Model, Tab, Value>(
 
     override suspend fun byActiveTab(options: Gw2HttpOptions): Model = options.get(context, parameters)
     override suspend fun byActiveTabOrNull(options: Gw2HttpOptions): Model? = options.getOrNull(context, parameters)
-    override suspend fun byActiveTabOrDefault(default: () -> Model, options: Gw2HttpOptions): Model = byActiveTabOrNull(options) ?: default()
 }

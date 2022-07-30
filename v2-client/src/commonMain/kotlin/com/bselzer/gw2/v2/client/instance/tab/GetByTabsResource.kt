@@ -14,6 +14,7 @@ class GetByTabsResource<Model, Tab, Value>(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions,
     private val modelTypeInfo: TypeInfo,
+    private val defaultByTab: (Tab) -> Model
 ) : GetResource<List<Model>>(typeInfo<List<Model>>()), Gw2ResourceOptions by options,
     GetByTabs<Model, Tab, Value> where Tab : Identifier<Value>, Model : Identifiable<Tab, Value> {
     private fun Collection<Tab>.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}s associated with tabs ${joinToString(separator = ",")}." }
@@ -35,11 +36,10 @@ class GetByTabsResource<Model, Tab, Value>(
 
     override suspend fun byTabsOrDefault(
         tabs: Collection<Tab>,
-        default: (Tab) -> Model,
         options: Gw2HttpOptions
     ): List<Model> {
         val models = byTabsOrEmpty(tabs, options).associateBy { model -> model.id }
-        return tabs.map { tab -> models[tab] ?: default(tab) }
+        return tabs.map { tab -> models[tab] ?: defaultByTab(tab) }
     }
 
     private suspend fun chunked(tabs: Collection<Tab>, options: Gw2HttpOptions, get: suspend (Collection<Tab>) -> List<Model>): List<Model> {

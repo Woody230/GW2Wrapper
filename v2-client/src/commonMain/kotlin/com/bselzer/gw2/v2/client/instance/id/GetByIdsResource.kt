@@ -17,6 +17,7 @@ class GetByIdsResource<Model, Id, Value>(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions,
     private val modelTypeInfo: TypeInfo,
+    private val defaultById: (Id) -> Model
 ) : GetResource<List<Model>>(typeInfo<List<Model>>()), Gw2ResourceOptions by options,
     GetByIds<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> {
     private fun Collection<Id>.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} with ids ${joinToString(separator = ",")}." }
@@ -38,11 +39,10 @@ class GetByIdsResource<Model, Id, Value>(
 
     override suspend fun byIdsOrDefault(
         ids: Collection<Id>,
-        default: (Id) -> Model,
         options: Gw2HttpOptions
     ): List<Model> {
         val models = byIdsOrEmpty(ids, options).associateBy { model -> model.id }
-        return ids.map { id -> models[id] ?: default(id) }
+        return ids.map { id -> models[id] ?: defaultById(id) }
     }
 
     private suspend fun chunked(ids: Collection<Id>, options: Gw2HttpOptions, get: suspend (Collection<Id>) -> List<Model>): List<Model> {

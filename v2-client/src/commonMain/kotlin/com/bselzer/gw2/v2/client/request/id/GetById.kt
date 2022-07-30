@@ -16,7 +16,7 @@ interface GetById<Model, Id, Value> where Id : Identifier<Value>, Model : Identi
     suspend fun byIdOrNull(id: Id, options: Gw2HttpOptions): Model?
 
     /**
-     * Gets the [Model] associated with the [id], or the [default] model if unable to fulfill the request.
+     * Gets the [Model] associated with the [id], or a defaulted model with the id populated if unable to fulfill the request.
      */
-    suspend fun byIdOrDefault(id: Id, default: (Id) -> Model, options: Gw2HttpOptions): Model
+    suspend fun byIdOrDefault(id: Id, options: Gw2HttpOptions): Model
 }
