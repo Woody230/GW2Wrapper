@@ -24,7 +24,9 @@ class CreateSubTokenResource(
         defaultOptions.merge(this as Gw2RequestOptions).token ?: throw RequestException("A token is required in order to create a sub-token.")
     }
 
-    private fun Instant.context(): () -> String = { "Request for a sub-token expiring at $this." }
+    private fun context(expiration: Instant, permissions: List<Permission>, urls: List<String>): () -> String = {
+        "Request for a sub-token expiring at $expiration with ${permissions.count()} permissions and ${urls.count()} urls."
+    }
 
     private fun parameters(
         expiration: Instant,
@@ -39,12 +41,16 @@ class CreateSubTokenResource(
     private fun JsonObject?.extractToken(): Token? = this?.get("subtoken")?.toString()?.let { Token(it) }
 
     override suspend fun create(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2HttpOptions): Token {
+        val context = context(expiration, permissions, urls)
+        val parameters = parameters(expiration, permissions, urls)
+
         options.validate()
-        return options.get(expiration.context(), parameters(expiration, permissions, urls)).extractToken()
-            ?: throw RequestException("subtoken key missing from the JsonObject")
+        return options.get(context, parameters).extractToken() ?: throw RequestException("${context()} subtoken key missing from the JsonObject")
     }
 
     override suspend fun createOrNull(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2HttpOptions): Token? {
-        return options.get(expiration.context(), parameters(expiration, permissions, urls)).extractToken()
+        val context = context(expiration, permissions, urls)
+        val parameters = parameters(expiration, permissions, urls)
+        return options.get(context, parameters).extractToken()
     }
 }
