@@ -11,7 +11,7 @@ interface Gw2ResponseOptions {
     /**
      * This validation is performed first, then the given [validate] block, then the [other] validation.
      */
-    fun merge(other: Gw2ResponseOptions, validate: (HttpResponse) -> Result<HttpResponse> = DefaultGw2HttpOptions.validate): Gw2ResponseOptions = ResponseOptions(
+    fun merge(other: Gw2ResponseOptions, validate: (HttpResponse) -> Result<HttpResponse> = { response -> Result.success(response) }): Gw2ResponseOptions = ResponseOptions(
         validate = { response ->
             listOf(this@Gw2ResponseOptions.validate, validate, other.validate).fold(Result.success(response)) { result, block ->
                 result.fold(
