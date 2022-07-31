@@ -1,15 +1,15 @@
 package com.bselzer.gw2.v2.client.instance.base
 
+import com.bselzer.gw2.v2.client.GenericTypeInfo
 import com.bselzer.gw2.v2.client.exception.ResponseException
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.ktx.logging.Logger
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-import io.ktor.util.reflect.*
 
 abstract class GetResource<Model>(
-    private val typeInfo: TypeInfo
+    private val typeInfo: GenericTypeInfo<Model>
 ) : Gw2Resource() {
     protected suspend fun Gw2HttpOptions.get(
         context: () -> String,
@@ -20,9 +20,10 @@ abstract class GetResource<Model>(
     }.fold(
         onSuccess = { response ->
             try {
-                response.body<Model>(typeInfo).successResult()
+                response.body<Model>(typeInfo.value).successResult()
             } catch (ex: Exception) {
-                ResponseException("${context()} Unable to convert the response body into ${typeInfo.toDisplayableString()}.".trimStart(), ex).failureResult()
+                val message = context.message("Unable to convert the response body into ${typeInfo.toDisplayableString()}.")
+                ResponseException(message, ex).failureResult()
             }
         },
         onFailure = { exception -> exception.failureResult() }

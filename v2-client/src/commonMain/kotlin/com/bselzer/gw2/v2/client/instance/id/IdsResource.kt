@@ -1,5 +1,6 @@
 package com.bselzer.gw2.v2.client.instance.id
 
+import com.bselzer.gw2.v2.client.GenericTypeInfo
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.request.id.GetById
 import com.bselzer.gw2.v2.client.request.id.GetByIds
@@ -8,7 +9,6 @@ import com.bselzer.gw2.v2.client.request.id.Ids
 import com.bselzer.ktx.value.identifier.Identifiable
 import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
-import io.ktor.util.reflect.*
 
 /**
  * A resource that supports getting a single [Model] by a single [Id] and multiple [Model]s by multiple [Id]s.
@@ -16,8 +16,8 @@ import io.ktor.util.reflect.*
 class IdsResource<Model, Id, Value>(
     httpClient: HttpClient,
     options: Gw2ResourceOptions,
-    modelTypeInfo: TypeInfo,
-    idTypeInfo: TypeInfo,
+    modelTypeInfo: GenericTypeInfo<Model>,
+    idTypeInfo: GenericTypeInfo<Id>,
     defaultById: (Id) -> Model
 ) : Ids<Model, Id, Value>,
     GetById<Model, Id, Value> by GetByIdResource(httpClient, options, modelTypeInfo, defaultById),
