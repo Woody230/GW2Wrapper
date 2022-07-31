@@ -14,16 +14,29 @@ abstract class Gw2Resource : Gw2ResourceOptions {
     internal fun <T> Throwable.failureResult(): Result<T> = Result.failure(this)
     internal fun <T> T.successResult(): Result<T> = Result.success(this)
 
+    /**
+     * [configure]s the [HttpClient] customizations and executes the request.
+     * If an exception occurs during this process, then the result fails with a [RequestException].
+     *
+     * If the response is able to be obtained, then it is validated according to the given [Gw2HttpOptions].
+     * If an exception occurs during this process, then the result fails with a [ValidationException].
+     *
+     * If validation is successful, then the result succeeds with the [HttpResponse].
+     *
+     * @param context The type of request being made, which should include any important information being used in the request.
+     * @param customizations The [HttpClient] customizations specific to this implementation of the request.
+     * @return The result of the request. On success, the [HttpResponse]. On failure, a [RequestException] or [ValidationException].
+     * @see [configure]
+     */
     protected suspend fun Gw2HttpOptions.response(context: () -> String, customizations: HttpRequestBuilder.() -> Unit): Result<HttpResponse> {
         val configured = try {
             configure(customizations)
         } catch (ex: Exception) {
-            val message = context.message("Failed to configure the customizations.")
+            val message = context.message("Failed to configure the HttpClient customizations.")
             return RequestException(message, ex).failureResult()
         }
 
         val response = try {
-            HttpRequestBuilder().apply(configured).build()
             httpClient.request(configured)
         } catch (ex: Exception) {
             val message = context.message("Failed to make the request to ${url}.")
@@ -32,12 +45,11 @@ abstract class Gw2Resource : Gw2ResourceOptions {
 
         return try {
             val result = validate(response)
+            val cause = result.exceptionOrNull()
             return when {
                 result.isSuccess -> result
-                else -> {
-                    val message = context.message("${result.exceptionOrNull()?.message}")
-                    ValidationException(message).failureResult()
-                }
+                cause is ValidationException -> cause.failureResult()
+                else -> ValidationException(cause).failureResult()
             }
         } catch (ex: Exception) {
             val message = context.message("Failed to validate the response and create a result.")
