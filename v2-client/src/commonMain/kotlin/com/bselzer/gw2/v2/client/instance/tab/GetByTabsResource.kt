@@ -11,7 +11,7 @@ import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
 import io.ktor.client.request.*
 
-class GetByTabsResource<Model, Tab, Value>(
+class GetByTabsResource<Model, Tab, Value> @PublishedApi internal constructor(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions,
     private val modelTypeInfo: GenericTypeInfo<Model>,
@@ -48,3 +48,10 @@ class GetByTabsResource<Model, Tab, Value>(
         return chunks.flatMap { chunk -> get(chunk) }
     }
 }
+
+inline fun <reified Model, Tab, Value> getByTabsResource(
+    httpClient: HttpClient,
+    options: Gw2ResourceOptions,
+    noinline defaultByTab: (Tab) -> Model
+): GetByTabsResource<Model, Tab, Value> where Tab : Identifier<Value>, Model : Identifiable<Tab, Value> =
+    GetByTabsResource(httpClient, options, genericTypeInfo(), defaultByTab)

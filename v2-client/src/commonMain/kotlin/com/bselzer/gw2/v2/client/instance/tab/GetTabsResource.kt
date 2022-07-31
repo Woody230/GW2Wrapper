@@ -10,7 +10,7 @@ import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
 import io.ktor.client.request.*
 
-class GetTabsResource<Tab>(
+class GetTabsResource<Tab> @PublishedApi internal constructor(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions,
     private val tabTypeInfo: GenericTypeInfo<Tab>,
@@ -21,3 +21,8 @@ class GetTabsResource<Tab>(
     override suspend fun tabs(options: Gw2HttpOptions): List<Tab> = options.getOrThrow(context, parameters)
     override suspend fun tabsOrEmpty(options: Gw2HttpOptions): List<Tab> = options.getOrNull(context, parameters) ?: emptyList()
 }
+
+inline fun <reified Tab> getTabsResource(
+    httpClient: HttpClient,
+    options: Gw2ResourceOptions
+): GetTabsResource<Tab> where Tab : Identifier<*> = GetTabsResource(httpClient, options, genericTypeInfo())

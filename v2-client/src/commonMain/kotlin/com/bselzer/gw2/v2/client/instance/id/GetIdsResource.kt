@@ -13,7 +13,7 @@ import io.ktor.client.request.*
 /**
  * A resource that supports getting all [Id]s.
  */
-class GetIdsResource<Id>(
+class GetIdsResource<Id> @PublishedApi internal constructor(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions,
     private val idTypeInfo: GenericTypeInfo<Id>,
@@ -24,3 +24,8 @@ class GetIdsResource<Id>(
     override suspend fun ids(options: Gw2HttpOptions): List<Id> = options.getOrThrow(context, parameters)
     override suspend fun idsOrEmpty(options: Gw2HttpOptions): List<Id> = options.getOrNull(context, parameters) ?: emptyList()
 }
+
+inline fun <reified Id> getIdsResource(
+    httpClient: HttpClient,
+    options: Gw2ResourceOptions
+): GetIdsResource<Id> where Id : Identifier<*> = GetIdsResource(httpClient, options, genericTypeInfo())

@@ -14,7 +14,7 @@ import io.ktor.client.request.*
 /**
  * A resource that supports getting all [Model]s using all [Id]s.
  */
-class GetByAllIdsResource<Model, Id, Value>(
+class GetByAllIdsResource<Model, Id, Value> @PublishedApi internal constructor(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions,
     private val modelTypeInfo: GenericTypeInfo<Model>,
@@ -26,3 +26,8 @@ class GetByAllIdsResource<Model, Id, Value>(
     override suspend fun byAllIds(options: Gw2HttpOptions): List<Model> = options.getOrThrow(context, parameters)
     override suspend fun byAllIdsOrEmpty(options: Gw2HttpOptions): List<Model> = options.getOrNull(context, customizations) ?: emptyList()
 }
+
+inline fun <reified Model, Id, Value> getByAllIdsResource(
+    httpClient: HttpClient,
+    options: Gw2ResourceOptions
+): GetByAllIdsResource<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> = GetByAllIdsResource(httpClient, options, genericTypeInfo())

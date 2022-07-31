@@ -14,7 +14,7 @@ import io.ktor.client.request.*
 /**
  * A resource that supports getting multiple [Model]s using multiple [Id]s.
  */
-class GetByIdsResource<Model, Id, Value>(
+class GetByIdsResource<Model, Id, Value> @PublishedApi internal constructor(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions,
     private val modelTypeInfo: GenericTypeInfo<Model>,
@@ -51,3 +51,9 @@ class GetByIdsResource<Model, Id, Value>(
         return chunks.flatMap { chunk -> get(chunk) }
     }
 }
+
+inline fun <reified Model, Id, Value> getByIdsResource(
+    httpClient: HttpClient,
+    options: Gw2ResourceOptions,
+    noinline defaultById: (Id) -> Model,
+): GetByIdsResource<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> = GetByIdsResource(httpClient, options, genericTypeInfo(), defaultById)

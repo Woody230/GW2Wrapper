@@ -16,7 +16,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 
-class CreateSubTokenResource(
+class CreateSubTokenResource @PublishedApi internal constructor(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions
 ) : GetResource<JsonObject>(genericTypeInfo()), Gw2ResourceOptions by options, CreateSubToken {
@@ -54,3 +54,5 @@ class CreateSubTokenResource(
         return options.getOrNull(context, parameters).extractToken()
     }
 }
+
+fun createSubTokenResource(httpClient: HttpClient, options: Gw2ResourceOptions): CreateSubTokenResource = CreateSubTokenResource(httpClient, options)

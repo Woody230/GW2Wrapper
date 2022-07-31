@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.client.instance.id
 
 import com.bselzer.gw2.v2.client.GenericTypeInfo
+import com.bselzer.gw2.v2.client.genericTypeInfo
 import com.bselzer.gw2.v2.client.instance.base.GetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
@@ -13,7 +14,7 @@ import io.ktor.client.request.*
 /**
  * A resource that supports getting a single [Model] by a single [Id].
  */
-class GetByIdResource<Model, Id, Value>(
+class GetByIdResource<Model, Id, Value> @PublishedApi internal constructor(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions,
     private val modelTypeInfo: GenericTypeInfo<Model>,
@@ -26,3 +27,9 @@ class GetByIdResource<Model, Id, Value>(
     override suspend fun byIdOrDefault(id: Id, options: Gw2HttpOptions): Model = byIdOrNull(id, options) ?: defaultById(id)
     override suspend fun byIdOrNull(id: Id, options: Gw2HttpOptions): Model? = options.getOrNull(id.context(), id.parameters())
 }
+
+inline fun <reified Model, Id, Value> getByIdResource(
+    httpClient: HttpClient,
+    options: Gw2ResourceOptions,
+    noinline defaultById: (Id) -> Model,
+): GetByIdResource<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> = GetByIdResource(httpClient, options, genericTypeInfo(), defaultById)

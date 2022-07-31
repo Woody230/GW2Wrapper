@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.client.instance.tab
 
 import com.bselzer.gw2.v2.client.GenericTypeInfo
+import com.bselzer.gw2.v2.client.genericTypeInfo
 import com.bselzer.gw2.v2.client.instance.base.GetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
@@ -10,7 +11,7 @@ import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
 import io.ktor.client.request.*
 
-class GetByTabResource<Model, Tab, Value>(
+class GetByTabResource<Model, Tab, Value> @PublishedApi internal constructor(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions,
     private val modelTypeInfo: GenericTypeInfo<Model>,
@@ -23,3 +24,9 @@ class GetByTabResource<Model, Tab, Value>(
     override suspend fun byTabOrNull(tab: Tab, options: Gw2HttpOptions): Model? = options.getOrNull(tab.context(), tab.parameters())
     override suspend fun byTabOrDefault(tab: Tab, options: Gw2HttpOptions): Model = byTabOrNull(tab, options) ?: defaultByTab(tab)
 }
+
+inline fun <reified Model, Tab, Value> getByTabResource(
+    httpClient: HttpClient,
+    options: Gw2ResourceOptions,
+    noinline defaultByTab: (Tab) -> Model
+): GetByTabResource<Model, Tab, Value> where Tab : Identifier<Value>, Model : Identifiable<Tab, Value> = GetByTabResource(httpClient, options, genericTypeInfo(), defaultByTab)

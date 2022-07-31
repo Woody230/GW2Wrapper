@@ -9,7 +9,7 @@ import com.bselzer.gw2.v2.client.request.search.GetByName
 import io.ktor.client.*
 import io.ktor.client.request.*
 
-class GetByNameResource<Model>(
+class GetByNameResource<Model> @PublishedApi internal constructor(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions,
     private val modelTypeInfo: GenericTypeInfo<Model>,
@@ -20,3 +20,8 @@ class GetByNameResource<Model>(
     override suspend fun byName(name: String, options: Gw2HttpOptions): List<Model> = options.getOrThrow(name.context(), name.parameters())
     override suspend fun byNameOrEmpty(name: String, options: Gw2HttpOptions): List<Model> = options.getOrNull(name.context(), name.parameters()) ?: emptyList()
 }
+
+inline fun <reified Model> getByNameResource(
+    httpClient: HttpClient,
+    options: Gw2ResourceOptions
+): GetByNameResource<Model> = GetByNameResource(httpClient, options, genericTypeInfo())

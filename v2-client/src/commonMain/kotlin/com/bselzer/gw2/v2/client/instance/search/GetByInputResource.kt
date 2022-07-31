@@ -9,7 +9,7 @@ import com.bselzer.gw2.v2.client.request.search.GetByInput
 import io.ktor.client.*
 import io.ktor.client.request.*
 
-class GetByInputResource<Model, Input>(
+class GetByInputResource<Model, Input> @PublishedApi internal constructor(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions,
     private val modelTypeInfo: GenericTypeInfo<Model>,
@@ -20,3 +20,8 @@ class GetByInputResource<Model, Input>(
     override suspend fun byInput(input: Input, options: Gw2HttpOptions): List<Model> = options.getOrThrow(input.context(), input.parameters())
     override suspend fun byInputOrEmpty(input: Input, options: Gw2HttpOptions): List<Model> = options.getOrNull(input.context(), input.parameters()) ?: emptyList()
 }
+
+inline fun <reified Model, Input> getByInputResource(
+    httpClient: HttpClient,
+    options: Gw2ResourceOptions
+): GetByInputResource<Model, Input> = GetByInputResource(httpClient, options, genericTypeInfo())

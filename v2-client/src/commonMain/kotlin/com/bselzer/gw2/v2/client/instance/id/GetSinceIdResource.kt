@@ -11,7 +11,7 @@ import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
 import io.ktor.client.request.*
 
-class GetSinceIdResource<Model, Id, Value>(
+class GetSinceIdResource<Model, Id, Value> @PublishedApi internal constructor(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions,
     private val modelTypeInfo: GenericTypeInfo<Model>,
@@ -23,3 +23,8 @@ class GetSinceIdResource<Model, Id, Value>(
     override suspend fun since(id: Id, options: Gw2HttpOptions): List<Model> = options.getOrThrow(id.context(), id.parameters())
     override suspend fun sinceOrEmpty(id: Id, options: Gw2HttpOptions): List<Model> = options.getOrNull(id.context(), id.parameters()) ?: emptyList()
 }
+
+inline fun <reified Model, Id, Value> getSinceIdResource(
+    httpClient: HttpClient,
+    options: Gw2ResourceOptions
+): GetSinceIdResource<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> = GetSinceIdResource(httpClient, options, genericTypeInfo())

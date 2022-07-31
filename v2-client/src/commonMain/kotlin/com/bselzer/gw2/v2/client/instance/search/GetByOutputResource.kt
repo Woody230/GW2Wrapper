@@ -10,7 +10,7 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.utils.io.core.*
 
-class GetByOutputResource<Model, Output>(
+class GetByOutputResource<Model, Output> @PublishedApi internal constructor(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions,
     private val modelTypeInfo: GenericTypeInfo<Model>,
@@ -21,3 +21,8 @@ class GetByOutputResource<Model, Output>(
     override suspend fun byOutput(output: Output, options: Gw2HttpOptions): List<Model> = options.getOrThrow(output.context(), output.parameters())
     override suspend fun byOutputOrEmpty(output: Output, options: Gw2HttpOptions): List<Model> = options.getOrNull(output.context(), output.parameters()) ?: emptyList()
 }
+
+inline fun <reified Model, Output> getByOutputResource(
+    httpClient: HttpClient,
+    options: Gw2ResourceOptions
+): GetByOutputResource<Model, Input> = GetByOutputResource(httpClient, options, genericTypeInfo())
