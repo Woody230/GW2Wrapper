@@ -5,6 +5,7 @@ import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.ktx.logging.Logger
 import io.ktor.client.call.*
 import io.ktor.client.request.*
+import io.ktor.http.*
 import io.ktor.util.reflect.*
 
 abstract class GetResource<Model>(
@@ -13,7 +14,10 @@ abstract class GetResource<Model>(
     protected suspend fun Gw2HttpOptions.get(
         context: () -> String,
         customizations: HttpRequestBuilder.() -> Unit
-    ): Result<Model> = response(context, customizations).fold(
+    ): Result<Model> = response(context) {
+        method = HttpMethod.Get
+        apply(customizations)
+    }.fold(
         onSuccess = { response ->
             try {
                 response.body<Model>(typeInfo).successResult()
