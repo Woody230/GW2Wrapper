@@ -19,7 +19,7 @@ class GetByTabResource<Model, Tab, Value>(
     private fun Tab.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} associated with tab $this." }
     private fun Tab.parameters(): HttpRequestBuilder.() -> Unit = { parameter("tab", value) }
 
-    override suspend fun byTab(tab: Tab, options: Gw2HttpOptions): Model = options.get(tab.context(), tab.parameters())
+    override suspend fun byTab(tab: Tab, options: Gw2HttpOptions): Model = options.getOrThrow(tab.context(), tab.parameters())
     override suspend fun byTabOrNull(tab: Tab, options: Gw2HttpOptions): Model? = options.getOrNull(tab.context(), tab.parameters())
     override suspend fun byTabOrDefault(tab: Tab, options: Gw2HttpOptions): Model = byTabOrNull(tab, options) ?: defaultByTab(tab)
 }

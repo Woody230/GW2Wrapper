@@ -16,6 +16,6 @@ class GetModelResource<Model>(
     private val context: () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}." }
     private val parameters: HttpRequestBuilder.() -> Unit = { }
 
-    override suspend fun model(options: Gw2HttpOptions): Model = options.get(context, parameters)
+    override suspend fun model(options: Gw2HttpOptions): Model = options.getOrThrow(context, parameters)
     override suspend fun modelOrNull(options: Gw2HttpOptions): Model? = options.getOrNull(context, parameters)
 }

@@ -45,12 +45,12 @@ class CreateSubTokenResource(
         val parameters = parameters(expiration, permissions, urls)
 
         options.validate()
-        return options.get(context, parameters).extractToken() ?: throw RequestException("${context()} subtoken key missing from the JsonObject")
+        return options.getOrThrow(context, parameters).extractToken() ?: throw RequestException("${context()} subtoken key missing from the JsonObject")
     }
 
     override suspend fun createOrNull(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2HttpOptions): Token? {
         val context = context(expiration, permissions, urls)
         val parameters = parameters(expiration, permissions, urls)
-        return options.get(context, parameters).extractToken()
+        return options.getOrNull(context, parameters).extractToken()
     }
 }

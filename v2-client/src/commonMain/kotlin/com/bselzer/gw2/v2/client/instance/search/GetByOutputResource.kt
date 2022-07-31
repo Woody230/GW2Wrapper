@@ -17,6 +17,6 @@ class GetByOutputResource<Model, Output>(
     private fun Output.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}s with output $this." }
     private fun Output.parameters(): HttpRequestBuilder.() -> Unit = { parameter("output", this@parameters) }
 
-    override suspend fun byOutput(output: Output, options: Gw2HttpOptions): List<Model> = options.get(output.context(), output.parameters())
+    override suspend fun byOutput(output: Output, options: Gw2HttpOptions): List<Model> = options.getOrThrow(output.context(), output.parameters())
     override suspend fun byOutputOrEmpty(output: Output, options: Gw2HttpOptions): List<Model> = options.getOrNull(output.context(), output.parameters()) ?: emptyList()
 }

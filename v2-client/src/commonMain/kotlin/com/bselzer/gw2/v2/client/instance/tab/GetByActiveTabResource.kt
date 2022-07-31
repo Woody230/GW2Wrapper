@@ -21,6 +21,6 @@ class GetByActiveTabResource<Model, Tab, Value>(
         url { appendPathSegments("active") }
     }
 
-    override suspend fun byActiveTab(options: Gw2HttpOptions): Model = options.get(context, parameters)
+    override suspend fun byActiveTab(options: Gw2HttpOptions): Model = options.getOrThrow(context, parameters)
     override suspend fun byActiveTabOrNull(options: Gw2HttpOptions): Model? = options.getOrNull(context, parameters)
 }

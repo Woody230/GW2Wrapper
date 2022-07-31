@@ -16,6 +16,6 @@ class GetByNameResource<Model>(
     private fun String.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}s with name $this." }
     private fun String.parameters(): HttpRequestBuilder.() -> Unit = { parameter("name", this@parameters) }
 
-    override suspend fun byName(name: String, options: Gw2HttpOptions): List<Model> = options.get(name.context(), name.parameters())
+    override suspend fun byName(name: String, options: Gw2HttpOptions): List<Model> = options.getOrThrow(name.context(), name.parameters())
     override suspend fun byNameOrEmpty(name: String, options: Gw2HttpOptions): List<Model> = options.getOrNull(name.context(), name.parameters()) ?: emptyList()
 }

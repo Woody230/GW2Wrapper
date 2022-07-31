@@ -13,23 +13,24 @@ abstract class GetResource<Model>(
     protected suspend fun Gw2HttpOptions.get(
         context: () -> String,
         customizations: HttpRequestBuilder.() -> Unit
-    ): Model = response(context, customizations).run {
-        try {
-            body<Model>(typeInfo)
-        } catch (ex: Exception) {
-            throw ResponseException("${context()} Unable to convert the response body into ${typeInfo.toDisplayableString()}.".trimStart(), ex)
-        }
-    }
+    ): Result<Model> = response(context, customizations).fold(
+        onSuccess = { response ->
+            try {
+                response.body<Model>(typeInfo).successResult()
+            } catch (ex: Exception) {
+                ResponseException("${context()} Unable to convert the response body into ${typeInfo.toDisplayableString()}.".trimStart(), ex).failureResult()
+            }
+        },
+        onFailure = { exception -> exception.failureResult() }
+    ).onFailure { exception -> Logger.e(exception) }
+
+    protected suspend fun Gw2HttpOptions.getOrThrow(
+        context: () -> String,
+        customizations: HttpRequestBuilder.() -> Unit
+    ): Model = get(context, customizations).getOrThrow()
 
     protected suspend fun Gw2HttpOptions.getOrNull(
         context: () -> String,
         customizations: HttpRequestBuilder.() -> Unit
-    ): Model? = responseOrNull(context, customizations)?.run {
-        try {
-            body<Model>(typeInfo)
-        } catch (ex: Exception) {
-            Logger.e(ResponseException(ex), "${context()} Unable to convert the response body into ${typeInfo.toDisplayableString()}.".trimStart())
-            null
-        }
-    }
+    ): Model? = get(context, customizations).getOrNull()
 }

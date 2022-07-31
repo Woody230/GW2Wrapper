@@ -17,6 +17,6 @@ class GetByWorldResource<Model>(
     private fun WorldId.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} associated with the world with id $this." }
     private fun WorldId.parameters(): HttpRequestBuilder.() -> Unit = { parameter("world", value) }
 
-    override suspend fun byWorld(worldId: WorldId, options: Gw2HttpOptions): Model = options.get(worldId.context(), worldId.parameters())
+    override suspend fun byWorld(worldId: WorldId, options: Gw2HttpOptions): Model = options.getOrThrow(worldId.context(), worldId.parameters())
     override suspend fun byWorldOrNull(worldId: WorldId, options: Gw2HttpOptions): Model? = options.getOrNull(worldId.context(), worldId.parameters())
 }

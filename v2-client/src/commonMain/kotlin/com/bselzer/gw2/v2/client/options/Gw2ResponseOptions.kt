@@ -1,26 +1,23 @@
 package com.bselzer.gw2.v2.client.options
 
-import com.bselzer.gw2.v2.client.validation.SuccessfulResult
-import com.bselzer.gw2.v2.client.validation.UnsuccessfulResult
-import com.bselzer.gw2.v2.client.validation.ValidationResult
 import io.ktor.client.statement.*
 
 interface Gw2ResponseOptions {
     /**
      * The block for performing validation on the response.
      */
-    val validate: HttpResponse.() -> ValidationResult
+    val validate: (HttpResponse) -> Result<HttpResponse>
 
     /**
-     * [validate] is a [SuccessfulResult] if this [validate] and the [other] [validate] produce a [SuccessfulResult], otherwise the result is [UnsuccessfulResult]
+     * This validation is performed first, then the given [validate] block, then the [other] validation.
      */
-    fun merge(other: Gw2ResponseOptions): Gw2ResponseOptions = ResponseOptions(
-        validate = {
-            val failed = listOf(validate(this), other.validate(this)).filterIsInstance<UnsuccessfulResult>()
-            if (failed.any()) {
-                UnsuccessfulResult(failed.joinToString("\n") { result -> result.message })
-            } else {
-                SuccessfulResult
+    fun merge(other: Gw2ResponseOptions, validate: (HttpResponse) -> Result<HttpResponse> = DefaultGw2HttpOptions.validate): Gw2ResponseOptions = ResponseOptions(
+        validate = { response ->
+            listOf(this@Gw2ResponseOptions.validate, validate, other.validate).fold(Result.success(response)) { result, block ->
+                result.fold(
+                    onSuccess = { newResponse -> block(newResponse) },
+                    onFailure = { exception -> Result.failure(exception) }
+                )
             }
         }
     )
@@ -29,5 +26,5 @@ interface Gw2ResponseOptions {
 }
 
 data class ResponseOptions(
-    override val validate: HttpResponse.() -> ValidationResult = { SuccessfulResult }
+    override val validate: (HttpResponse) -> Result<HttpResponse> = { response -> Result.success(response) }
 ) : Gw2ResponseOptions

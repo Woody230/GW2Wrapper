@@ -27,7 +27,7 @@ class GetByIdsResource<Model, Id, Value>(
         ids: Collection<Id>,
         options: Gw2HttpOptions
     ): List<Model> = chunked(ids, options) { chunk ->
-        options.get(chunk.context(), chunk.parameters())
+        options.getOrThrow(chunk.context(), chunk.parameters())
     }
 
     override suspend fun byIdsOrEmpty(

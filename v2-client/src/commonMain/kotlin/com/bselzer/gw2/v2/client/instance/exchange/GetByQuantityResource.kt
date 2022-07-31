@@ -17,6 +17,6 @@ class GetByQuantityResource<Model, Quantity>(
     private fun Quantity.context(): () -> String = { "Request for ${modelTypeInfo.type.simpleName} in an exchange of $this ${quantityTypeInfo.type.simpleName}." }
     private fun Quantity.parameters(): HttpRequestBuilder.() -> Unit = { parameter("quantity", this@parameters) }
 
-    override suspend fun byQuantity(quantity: Quantity, options: Gw2HttpOptions): Model = options.get(quantity.context(), quantity.parameters())
+    override suspend fun byQuantity(quantity: Quantity, options: Gw2HttpOptions): Model = options.getOrThrow(quantity.context(), quantity.parameters())
     override suspend fun byQuantityOrNull(quantity: Quantity, options: Gw2HttpOptions): Model? = options.getOrNull(quantity.context(), quantity.parameters())
 }

@@ -22,7 +22,7 @@ class GetByIdResource<Model, Id, Value>(
     private fun Id.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} with id $this." }
     private fun Id.parameters(): HttpRequestBuilder.() -> Unit = { parameter("id", value) }
 
-    override suspend fun byId(id: Id, options: Gw2HttpOptions): Model = options.get(id.context(), id.parameters())
+    override suspend fun byId(id: Id, options: Gw2HttpOptions): Model = options.getOrThrow(id.context(), id.parameters())
     override suspend fun byIdOrDefault(id: Id, options: Gw2HttpOptions): Model = byIdOrNull(id, options) ?: defaultById(id)
     override suspend fun byIdOrNull(id: Id, options: Gw2HttpOptions): Model? = options.getOrNull(id.context(), id.parameters())
 }

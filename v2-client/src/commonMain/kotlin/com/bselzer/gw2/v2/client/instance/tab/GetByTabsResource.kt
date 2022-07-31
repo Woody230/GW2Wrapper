@@ -24,7 +24,7 @@ class GetByTabsResource<Model, Tab, Value>(
         tabs: Collection<Tab>,
         options: Gw2HttpOptions
     ): List<Model> = chunked(tabs, options) { chunk ->
-        options.get(chunk.context(), chunk.parameters())
+        options.getOrThrow(chunk.context(), chunk.parameters())
     }
 
     override suspend fun byTabsOrEmpty(

@@ -1,9 +1,7 @@
 package com.bselzer.gw2.v2.client.options
 
 import com.bselzer.gw2.v2.client.constant.Endpoints
-import com.bselzer.gw2.v2.client.validation.SuccessfulResult
-import com.bselzer.gw2.v2.client.validation.UnsuccessfulResult
-import com.bselzer.gw2.v2.client.validation.ValidationResult
+import com.bselzer.gw2.v2.client.exception.ValidationException
 import io.ktor.client.statement.*
 import io.ktor.http.*
 
@@ -17,12 +15,13 @@ interface DefaultGw2HttpOptions : Gw2HttpOptions {
         override val baseUrl: String = Endpoints.BASE_URL
         override val schemaVersion: String = Endpoints.SCHEMA_VERSION
         override val pageSize: Int = Endpoints.MAXIMUM_PAGE_SIZE
-        override val validate: HttpResponse.() -> ValidationResult = {
+        override val validate: (HttpResponse) -> Result<HttpResponse> = { response ->
             // In the case where we are getting a 404, an empty default may be deserialized.
             // Consequently, we should fail validation in order to properly construct a default instead.
-            when (status.isSuccess()) {
-                true -> SuccessfulResult
-                false -> UnsuccessfulResult { "Unsuccessful status code of $status." }
+            val status = response.status
+            when {
+                status.isSuccess() -> Result.success(response)
+                else -> Result.failure(ValidationException("Unsuccessful status code of $status."))
             }
         }
     }
