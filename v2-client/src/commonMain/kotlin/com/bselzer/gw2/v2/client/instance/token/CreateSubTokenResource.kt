@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.client.instance.token
 
 import com.bselzer.gw2.v2.client.exception.RequestException
+import com.bselzer.gw2.v2.client.exception.ResponseException
 import com.bselzer.gw2.v2.client.genericTypeInfo
 import com.bselzer.gw2.v2.client.instance.base.GetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
@@ -20,10 +21,6 @@ class CreateSubTokenResource @PublishedApi internal constructor(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions
 ) : GetResource<JsonObject>(genericTypeInfo()), Gw2ResourceOptions by options, CreateSubToken {
-    private fun Gw2HttpOptions.validate() {
-        defaultOptions.merge(this as Gw2RequestOptions).token ?: throw RequestException("A token is required in order to create a sub-token.")
-    }
-
     private fun context(expiration: Instant, permissions: List<Permission>, urls: List<String>): () -> String = {
         "Request for a sub-token expiring at $expiration with ${permissions.count()} permissions and ${urls.count()} urls."
     }
@@ -38,20 +35,31 @@ class CreateSubTokenResource @PublishedApi internal constructor(
         parameter("urls", urls.joinToString(","))
     }
 
-    private fun JsonObject?.extractToken(): Token? = this?.get("subtoken")?.toString()?.let { Token(it) }
+    private fun JsonObject.extractToken(): Token? = this["subtoken"]?.toString()?.let { Token(it) }
 
-    override suspend fun create(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2HttpOptions): Token {
+    override suspend fun create(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2HttpOptions): Result<Token> {
+        // Validate that the token exists.
+        defaultOptions.merge(options as Gw2RequestOptions).token ?: return RequestException("A token is required in order to create a sub-token.").failureResult()
+
         val context = context(expiration, permissions, urls)
         val parameters = parameters(expiration, permissions, urls)
+        return options.get(context, parameters).fold(
+            onSuccess = { json ->
+                when (val token = json.extractToken()) {
+                    null -> ResponseException(context.message("subtoken key missing from the JsonObject")).failureResult()
+                    else -> token.successResult()
+                }
+            },
+            onFailure = { exception -> exception.failureResult() }
+        )
+    }
 
-        options.validate()
-        return options.getOrThrow(context, parameters).extractToken() ?: throw RequestException("${context()} subtoken key missing from the JsonObject")
+    override suspend fun createOrThrow(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2HttpOptions): Token {
+        return create(expiration, permissions, urls, options).getOrThrow()
     }
 
     override suspend fun createOrNull(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2HttpOptions): Token? {
-        val context = context(expiration, permissions, urls)
-        val parameters = parameters(expiration, permissions, urls)
-        return options.getOrNull(context, parameters).extractToken()
+        return create(expiration, permissions, urls, options).getOrNull()
     }
 }
 

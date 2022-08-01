@@ -1,12 +1,18 @@
 package com.bselzer.gw2.v2.client.request.search
 
+import com.bselzer.gw2.v2.client.exception.Gw2ClientException
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 
 interface GetByInput<Model, Input> {
     /**
-     * Gets the [Model]s that require the given [input].
+     * Gets the [Model]s that require the given [input, or a [Gw2ClientException] if unable to fulfill the request.
      */
-    suspend fun byInput(input: Input, options: Gw2HttpOptions): List<Model>
+    suspend fun byInput(input: Input, options: Gw2HttpOptions): Result<List<Model>>
+
+    /**
+     * Gets the [Model]s that require the given [input], or throws a [Gw2ClientException] if unable to fulfill the request.
+     */
+    suspend fun byInputOrThrow(input: Input, options: Gw2HttpOptions): List<Model>
 
     /**
      * Gets the [Model]s that require the given [input], or an empty list if unable to fulfill the request.

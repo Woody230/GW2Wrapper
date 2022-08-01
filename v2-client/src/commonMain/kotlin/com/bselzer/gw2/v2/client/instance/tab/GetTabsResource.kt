@@ -18,8 +18,9 @@ class GetTabsResource<Tab> @PublishedApi internal constructor(
     private val context: () -> String = { "Request for ${tabTypeInfo.toDisplayableString()}s." }
     private val parameters: HttpRequestBuilder.() -> Unit = {}
 
-    override suspend fun tabs(options: Gw2HttpOptions): List<Tab> = options.getOrThrow(context, parameters)
-    override suspend fun tabsOrEmpty(options: Gw2HttpOptions): List<Tab> = options.getOrNull(context, parameters) ?: emptyList()
+    override suspend fun tabs(options: Gw2HttpOptions): Result<List<Tab>> = options.get(context, parameters)
+    override suspend fun tabsOrThrow(options: Gw2HttpOptions): List<Tab> = tabs(options).getOrThrow()
+    override suspend fun tabsOrEmpty(options: Gw2HttpOptions): List<Tab> = tabs(options).getOrNull() ?: emptyList()
 }
 
 inline fun <reified Tab> getTabsResource(

@@ -1,14 +1,20 @@
 package com.bselzer.gw2.v2.client.request.id
 
+import com.bselzer.gw2.v2.client.exception.Gw2ClientException
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.ktx.value.identifier.Identifiable
 import com.bselzer.ktx.value.identifier.Identifier
 
 interface GetByAllIds<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> {
     /**
-     * Gets the [Model]s using all ids.
+     * Gets the [Model]s using all ids, or a [Gw2ClientException] if unable to fulfill the request.
      */
-    suspend fun byAllIds(options: Gw2HttpOptions): List<Model>
+    suspend fun byAllIds(options: Gw2HttpOptions): Result<List<Model>>
+
+    /**
+     * Gets the [Model]s using all ids, or throws a [Gw2ClientException] if unable to fulfill the request.
+     */
+    suspend fun byAllIdsOrThrow(options: Gw2HttpOptions): List<Model>
 
     /**
      * Gets the [Model]s using all ids, or an empty list if unable to fulfill the request.

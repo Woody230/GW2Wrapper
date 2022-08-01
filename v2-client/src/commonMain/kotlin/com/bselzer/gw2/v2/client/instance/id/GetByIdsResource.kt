@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.client.instance.id
 
 import com.bselzer.gw2.v2.client.GenericTypeInfo
 import com.bselzer.gw2.v2.client.genericTypeInfo
+import com.bselzer.gw2.v2.client.instance.base.AggregateListResult
 import com.bselzer.gw2.v2.client.instance.base.GetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
@@ -24,19 +25,21 @@ class GetByIdsResource<Model, Id, Value> @PublishedApi internal constructor(
     private fun Collection<Id>.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} with ids ${joinToString(separator = ",")}." }
     private fun Collection<Id>.parameters(): HttpRequestBuilder.() -> Unit = { parameter("ids", joinToString(separator = ",")) }
 
-    override suspend fun byIds(
+    override suspend fun byIds(ids: Collection<Id>, options: Gw2HttpOptions): AggregateListResult<Model> {
+        val chunks = ids.chunked(options.coercedPageSize()).filter { chunk -> chunk.isNotEmpty() }
+        val results = chunks.map { chunk -> options.get(chunk.context(), chunk.parameters()) }
+        return AggregateListResult(results)
+    }
+
+    override suspend fun byIdsOrThrow(
         ids: Collection<Id>,
         options: Gw2HttpOptions
-    ): List<Model> = chunked(ids, options) { chunk ->
-        options.getOrThrow(chunk.context(), chunk.parameters())
-    }
+    ): List<Model> = byIds(ids, options).getOrThrow()
 
     override suspend fun byIdsOrEmpty(
         ids: Collection<Id>,
         options: Gw2HttpOptions
-    ): List<Model> = chunked(ids, options) { chunk ->
-        options.getOrNull(chunk.context(), chunk.parameters()) ?: emptyList()
-    }
+    ): List<Model> = byIds(ids, options).getOrEmpty()
 
     override suspend fun byIdsOrDefault(
         ids: Collection<Id>,
@@ -44,11 +47,6 @@ class GetByIdsResource<Model, Id, Value> @PublishedApi internal constructor(
     ): List<Model> {
         val models = byIdsOrEmpty(ids, options).associateBy { model -> model.id }
         return ids.map { id -> models[id] ?: defaultById(id) }
-    }
-
-    private suspend fun chunked(ids: Collection<Id>, options: Gw2HttpOptions, get: suspend (Collection<Id>) -> List<Model>): List<Model> {
-        val chunks = ids.chunked(options.coercedPageSize()).filter { chunk -> chunk.isNotEmpty() }
-        return chunks.flatMap { chunk -> get(chunk) }
     }
 }
 

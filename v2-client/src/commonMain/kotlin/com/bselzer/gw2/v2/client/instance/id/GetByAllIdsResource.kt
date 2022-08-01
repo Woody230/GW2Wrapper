@@ -23,8 +23,9 @@ class GetByAllIdsResource<Model, Id, Value> @PublishedApi internal constructor(
     private val context: () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} with all ids." }
     private val parameters: HttpRequestBuilder.() -> Unit = { parameter("ids", "all") }
 
-    override suspend fun byAllIds(options: Gw2HttpOptions): List<Model> = options.getOrThrow(context, parameters)
-    override suspend fun byAllIdsOrEmpty(options: Gw2HttpOptions): List<Model> = options.getOrNull(context, customizations) ?: emptyList()
+    override suspend fun byAllIds(options: Gw2HttpOptions): Result<List<Model>> = options.get(context, parameters)
+    override suspend fun byAllIdsOrThrow(options: Gw2HttpOptions): List<Model> = byAllIds(options).getOrThrow()
+    override suspend fun byAllIdsOrEmpty(options: Gw2HttpOptions): List<Model> = byAllIds(options).getOrNull() ?: emptyList()
 }
 
 inline fun <reified Model, Id, Value> getByAllIdsResource(

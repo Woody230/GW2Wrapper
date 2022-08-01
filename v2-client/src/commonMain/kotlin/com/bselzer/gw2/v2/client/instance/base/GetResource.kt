@@ -46,31 +46,4 @@ abstract class GetResource<Model>(
         },
         onFailure = { exception -> exception.failureResult() }
     ).onFailure { exception -> Logger.e(exception) }
-
-    /**
-     * @param context The type of request being made, which should include any important information being used in the request.
-     * @param customizations The [HttpClient] customizations specific to this implementation of the request.
-     * @return The response body converted into the [Model].
-     * @see [get]
-     * @see [configure]
-     * @throws RequestException If the request is not able to be fulfilled.
-     * @throws ResponseException If the response body is not able to be converted into the [Model].
-     * @throws ValidationException If validation of the response fails.
-     */
-    protected suspend fun Gw2HttpOptions.getOrThrow(
-        context: () -> String,
-        customizations: HttpRequestBuilder.() -> Unit
-    ): Model = get(context, customizations).getOrThrow()
-
-    /**
-     * @param context The type of request being made, which should include any important information being used in the request.
-     * @param customizations The [HttpClient] customizations specific to this implementation of the request.
-     * @return The response body converted into the [Model], or null if an exception occurs during the process.
-     * @see [get]
-     * @see [configure]
-     */
-    protected suspend fun Gw2HttpOptions.getOrNull(
-        context: () -> String,
-        customizations: HttpRequestBuilder.() -> Unit
-    ): Model? = get(context, customizations).getOrNull()
 }

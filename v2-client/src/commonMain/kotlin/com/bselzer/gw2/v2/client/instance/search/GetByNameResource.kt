@@ -17,8 +17,9 @@ class GetByNameResource<Model> @PublishedApi internal constructor(
     private fun String.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}s with name $this." }
     private fun String.parameters(): HttpRequestBuilder.() -> Unit = { parameter("name", this@parameters) }
 
-    override suspend fun byName(name: String, options: Gw2HttpOptions): List<Model> = options.getOrThrow(name.context(), name.parameters())
-    override suspend fun byNameOrEmpty(name: String, options: Gw2HttpOptions): List<Model> = options.getOrNull(name.context(), name.parameters()) ?: emptyList()
+    override suspend fun byName(name: String, options: Gw2HttpOptions): Result<List<Model>> = options.get(name.context(), name.parameters())
+    override suspend fun byNameOrThrow(name: String, options: Gw2HttpOptions): List<Model> = byName(name, options).getOrThrow()
+    override suspend fun byNameOrEmpty(name: String, options: Gw2HttpOptions): List<Model> = byName(name, options).getOrNull() ?: emptyList()
 }
 
 inline fun <reified Model> getByNameResource(

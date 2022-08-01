@@ -23,9 +23,10 @@ class GetByIdResource<Model, Id, Value> @PublishedApi internal constructor(
     private fun Id.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} with id $this." }
     private fun Id.parameters(): HttpRequestBuilder.() -> Unit = { parameter("id", value) }
 
-    override suspend fun byId(id: Id, options: Gw2HttpOptions): Model = options.getOrThrow(id.context(), id.parameters())
+    override suspend fun byId(id: Id, options: Gw2HttpOptions): Result<Model> = options.get(id.context(), id.parameters())
+    override suspend fun byIdOrThrow(id: Id, options: Gw2HttpOptions): Model = byId(id, options).getOrThrow()
     override suspend fun byIdOrDefault(id: Id, options: Gw2HttpOptions): Model = byIdOrNull(id, options) ?: defaultById(id)
-    override suspend fun byIdOrNull(id: Id, options: Gw2HttpOptions): Model? = options.getOrNull(id.context(), id.parameters())
+    override suspend fun byIdOrNull(id: Id, options: Gw2HttpOptions): Model? = byId(id, options).getOrNull()
 }
 
 inline fun <reified Model, Id, Value> getByIdResource(

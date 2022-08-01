@@ -20,8 +20,9 @@ class GetSinceIdResource<Model, Id, Value> @PublishedApi internal constructor(
     private fun Id.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}s newer than $this." }
     private fun Id.parameters(): HttpRequestBuilder.() -> Unit = { parameter("since", value) }
 
-    override suspend fun since(id: Id, options: Gw2HttpOptions): List<Model> = options.getOrThrow(id.context(), id.parameters())
-    override suspend fun sinceOrEmpty(id: Id, options: Gw2HttpOptions): List<Model> = options.getOrNull(id.context(), id.parameters()) ?: emptyList()
+    override suspend fun since(id: Id, options: Gw2HttpOptions): Result<List<Model>> = options.get(id.context(), id.parameters())
+    override suspend fun sinceOrThrow(id: Id, options: Gw2HttpOptions): List<Model> = since(id, options).getOrThrow()
+    override suspend fun sinceOrEmpty(id: Id, options: Gw2HttpOptions): List<Model> = since(id, options).getOrNull() ?: emptyList()
 }
 
 inline fun <reified Model, Id, Value> getSinceIdResource(

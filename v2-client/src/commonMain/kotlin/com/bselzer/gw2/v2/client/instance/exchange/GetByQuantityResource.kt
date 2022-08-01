@@ -18,8 +18,9 @@ class GetByQuantityResource<Model, Quantity> @PublishedApi internal constructor(
     private fun Quantity.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} in an exchange of $this ${quantityTypeInfo.toDisplayableString()}." }
     private fun Quantity.parameters(): HttpRequestBuilder.() -> Unit = { parameter("quantity", this@parameters) }
 
-    override suspend fun byQuantity(quantity: Quantity, options: Gw2HttpOptions): Model = options.getOrThrow(quantity.context(), quantity.parameters())
-    override suspend fun byQuantityOrNull(quantity: Quantity, options: Gw2HttpOptions): Model? = options.getOrNull(quantity.context(), quantity.parameters())
+    override suspend fun byQuantity(quantity: Quantity, options: Gw2HttpOptions): Result<Model> = options.get(quantity.context(), quantity.parameters())
+    override suspend fun byQuantityOrThrow(quantity: Quantity, options: Gw2HttpOptions): Model = byQuantity(quantity, options).getOrThrow()
+    override suspend fun byQuantityOrNull(quantity: Quantity, options: Gw2HttpOptions): Model? = byQuantity(quantity, options).getOrNull()
 }
 
 inline fun <reified Model, reified Quantity> getByQuantityResource(

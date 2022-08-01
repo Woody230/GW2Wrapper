@@ -2,6 +2,7 @@ package com.bselzer.gw2.v2.client.instance.tab
 
 import com.bselzer.gw2.v2.client.GenericTypeInfo
 import com.bselzer.gw2.v2.client.genericTypeInfo
+import com.bselzer.gw2.v2.client.instance.base.AggregateListResult
 import com.bselzer.gw2.v2.client.instance.base.GetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
@@ -21,19 +22,21 @@ class GetByTabsResource<Model, Tab, Value> @PublishedApi internal constructor(
     private fun Collection<Tab>.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}s associated with tabs ${joinToString(separator = ",")}." }
     private fun Collection<Tab>.parameters(): HttpRequestBuilder.() -> Unit = { parameter("tabs", joinToString(separator = ",")) }
 
-    override suspend fun byTabs(
+    override suspend fun byTabs(tabs: Collection<Tab>, options: Gw2HttpOptions): AggregateListResult<Model> {
+        val chunks = tabs.chunked(options.coercedPageSize()).filter { chunk -> chunk.isNotEmpty() }
+        val results = chunks.map { chunk -> options.get(chunk.context(), chunk.parameters()) }
+        return AggregateListResult(results)
+    }
+
+    override suspend fun byTabsOrThrow(
         tabs: Collection<Tab>,
         options: Gw2HttpOptions
-    ): List<Model> = chunked(tabs, options) { chunk ->
-        options.getOrThrow(chunk.context(), chunk.parameters())
-    }
+    ): List<Model> = byTabs(tabs, options).getOrThrow()
 
     override suspend fun byTabsOrEmpty(
         tabs: Collection<Tab>,
         options: Gw2HttpOptions
-    ): List<Model> = chunked(tabs, options) { chunk ->
-        options.getOrNull(chunk.context(), chunk.parameters()) ?: emptyList()
-    }
+    ): List<Model> = byTabs(tabs, options).getOrEmpty()
 
     override suspend fun byTabsOrDefault(
         tabs: Collection<Tab>,
@@ -41,11 +44,6 @@ class GetByTabsResource<Model, Tab, Value> @PublishedApi internal constructor(
     ): List<Model> {
         val models = byTabsOrEmpty(tabs, options).associateBy { model -> model.id }
         return tabs.map { tab -> models[tab] ?: defaultByTab(tab) }
-    }
-
-    private suspend fun chunked(tabs: Collection<Tab>, options: Gw2HttpOptions, get: suspend (Collection<Tab>) -> List<Model>): List<Model> {
-        val chunks = tabs.chunked(options.coercedPageSize()).filter { chunk -> chunk.isNotEmpty() }
-        return chunks.flatMap { chunk -> get(chunk) }
     }
 }
 

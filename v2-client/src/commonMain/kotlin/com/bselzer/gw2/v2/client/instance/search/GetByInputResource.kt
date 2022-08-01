@@ -17,8 +17,9 @@ class GetByInputResource<Model, Input> @PublishedApi internal constructor(
     private fun Input.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}s with input $this." }
     private fun Input.parameters(): HttpRequestBuilder.() -> Unit = { parameter("input", this@parameters) }
 
-    override suspend fun byInput(input: Input, options: Gw2HttpOptions): List<Model> = options.getOrThrow(input.context(), input.parameters())
-    override suspend fun byInputOrEmpty(input: Input, options: Gw2HttpOptions): List<Model> = options.getOrNull(input.context(), input.parameters()) ?: emptyList()
+    override suspend fun byInput(input: Input, options: Gw2HttpOptions): Result<List<Model>> = options.get(input.context(), input.parameters())
+    override suspend fun byInputOrThrow(input: Input, options: Gw2HttpOptions): List<Model> = byInput(input, options).getOrThrow()
+    override suspend fun byInputOrEmpty(input: Input, options: Gw2HttpOptions): List<Model> = byInput(input, options).getOrNull() ?: emptyList()
 }
 
 inline fun <reified Model, Input> getByInputResource(

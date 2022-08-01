@@ -21,8 +21,9 @@ class GetIdsResource<Id> @PublishedApi internal constructor(
     private val context: () -> String = { "Request for ${idTypeInfo.toDisplayableString()}s." }
     private val parameters: HttpRequestBuilder.() -> Unit = {}
 
-    override suspend fun ids(options: Gw2HttpOptions): List<Id> = options.getOrThrow(context, parameters)
-    override suspend fun idsOrEmpty(options: Gw2HttpOptions): List<Id> = options.getOrNull(context, parameters) ?: emptyList()
+    override suspend fun ids(options: Gw2HttpOptions): Result<List<Id>> = options.get(context, parameters)
+    override suspend fun idsOrThrow(options: Gw2HttpOptions): List<Id> = ids(options).getOrThrow()
+    override suspend fun idsOrEmpty(options: Gw2HttpOptions): List<Id> = ids(options).getOrNull() ?: emptyList()
 }
 
 inline fun <reified Id> getIdsResource(

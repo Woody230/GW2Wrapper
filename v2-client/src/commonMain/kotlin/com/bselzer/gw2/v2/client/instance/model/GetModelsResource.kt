@@ -17,8 +17,9 @@ class GetModelsResource<Model> @PublishedApi internal constructor(
     private val context: () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}s." }
     private val parameters: HttpRequestBuilder.() -> Unit = { }
 
-    override suspend fun models(options: Gw2HttpOptions): List<Model> = options.getOrThrow(context, parameters)
-    override suspend fun modelsOrEmpty(options: Gw2HttpOptions): List<Model> = options.getOrNull(context, parameters) ?: emptyList()
+    override suspend fun models(options: Gw2HttpOptions): Result<List<Model>> = options.get(context, parameters)
+    override suspend fun modelsOrThrow(options: Gw2HttpOptions): List<Model> = models(options).getOrThrow()
+    override suspend fun modelsOrEmpty(options: Gw2HttpOptions): List<Model> = models(options).getOrNull() ?: emptyList()
 }
 
 inline fun <reified Model> getModelsResource(
