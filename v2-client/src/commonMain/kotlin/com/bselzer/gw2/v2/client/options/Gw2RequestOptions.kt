@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.client.options
 
-import com.bselzer.gw2.v2.client.request.token.Token
+import com.bselzer.gw2.v2.model.account.token.Token
 import io.ktor.client.request.*
 
 interface Gw2RequestOptions {

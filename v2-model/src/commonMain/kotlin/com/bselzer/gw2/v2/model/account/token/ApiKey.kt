@@ -3,7 +3,6 @@ package com.bselzer.gw2.v2.model.account.token
 import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
-import com.bselzer.ktx.value.identifier.StringIdentifier
 import kotlinx.serialization.Serializable
 import kotlin.jvm.JvmInline
 
@@ -11,6 +10,6 @@ import kotlin.jvm.JvmInline
 @Scope(Requirement.REQUIRED, Permission.ACCOUNT)
 @Serializable
 @JvmInline
-value class ApiKey(override val value: String = "") : StringIdentifier {
+value class ApiKey(override val value: String = "") : Token {
     override fun toString(): String = value
 }

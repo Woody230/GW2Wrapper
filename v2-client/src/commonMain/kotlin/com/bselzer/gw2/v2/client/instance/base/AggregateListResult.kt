@@ -5,7 +5,7 @@ import kotlin.jvm.JvmInline
 
 @JvmInline
 class AggregateListResult<Model>(val results: List<Result<List<Model>>>) {
-    private val exceptions: List<Throwable>
+    val exceptions: List<Throwable>
         get() = results.mapNotNull { result -> result.exceptionOrNull() }
 
     private val models: List<Model>

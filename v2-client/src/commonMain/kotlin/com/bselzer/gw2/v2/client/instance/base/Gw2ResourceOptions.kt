@@ -86,6 +86,6 @@ interface Gw2ResourceOptions {
 }
 
 data class ResourceOptions(
-    override val path: String,
-    override val defaultOptions: DefaultGw2HttpOptions
+    override val defaultOptions: DefaultGw2HttpOptions,
+    override val path: String
 ) : Gw2ResourceOptions

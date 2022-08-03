@@ -8,7 +8,7 @@ import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.options.Gw2RequestOptions
 import com.bselzer.gw2.v2.client.request.token.CreateSubToken
-import com.bselzer.gw2.v2.client.request.token.Token
+import com.bselzer.gw2.v2.model.account.token.SubToken
 import com.bselzer.gw2.v2.scope.core.Permission
 import io.ktor.client.*
 import io.ktor.client.request.*
@@ -35,9 +35,9 @@ class CreateSubTokenResource @PublishedApi internal constructor(
         parameter("urls", urls.joinToString(","))
     }
 
-    private fun JsonObject.extractToken(): Token? = this["subtoken"]?.toString()?.let { Token(it) }
+    private fun JsonObject.extractToken(): SubToken? = this["subtoken"]?.toString()?.let { SubToken(it) }
 
-    override suspend fun create(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2HttpOptions): Result<Token> {
+    override suspend fun create(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2HttpOptions): Result<SubToken> {
         // Validate that the token exists.
         defaultOptions.merge(options as Gw2RequestOptions).token ?: return RequestException("A token is required in order to create a sub-token.").failureResult()
 
@@ -54,11 +54,11 @@ class CreateSubTokenResource @PublishedApi internal constructor(
         )
     }
 
-    override suspend fun createOrThrow(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2HttpOptions): Token {
+    override suspend fun createOrThrow(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2HttpOptions): SubToken {
         return create(expiration, permissions, urls, options).getOrThrow()
     }
 
-    override suspend fun createOrNull(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2HttpOptions): Token? {
+    override suspend fun createOrNull(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2HttpOptions): SubToken? {
         return create(expiration, permissions, urls, options).getOrNull()
     }
 }
