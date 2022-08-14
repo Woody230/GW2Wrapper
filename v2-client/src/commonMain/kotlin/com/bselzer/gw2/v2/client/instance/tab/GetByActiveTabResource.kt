@@ -4,6 +4,7 @@ import com.bselzer.gw2.v2.client.GenericTypeInfo
 import com.bselzer.gw2.v2.client.genericTypeInfo
 import com.bselzer.gw2.v2.client.instance.base.GetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
+import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.tab.GetByActiveTab
 import com.bselzer.ktx.value.identifier.Identifiable
@@ -27,7 +28,11 @@ class GetByActiveTabResource<Model, Tab, Value> @PublishedApi internal construct
     override suspend fun byActiveTabOrNull(options: Gw2HttpOptions): Model? = byActiveTab(options).getOrNull()
 }
 
-inline fun <reified Model, Tab, Value> getByActiveTabResource(
-    httpClient: HttpClient,
+inline fun <reified Model, Tab, Value> ResourceDependencies.getByActiveTabResource(
     options: Gw2ResourceOptions
-): GetByActiveTabResource<Model, Tab, Value> where Tab : Identifier<Value>, Model : Identifiable<Tab, Value> = GetByActiveTabResource(httpClient, options, genericTypeInfo())
+): GetByActiveTabResource<Model, Tab, Value> where Tab : Identifier<Value>, Model : Identifiable<Tab, Value> =
+    GetByActiveTabResource(
+        httpClient,
+        options,
+        genericTypeInfo()
+    )

@@ -7,7 +7,9 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 
-abstract class Gw2Resource : Gw2ResourceOptions {
+interface Gw2Resource : Gw2ResourceOptions
+
+abstract class Resource : Gw2Resource {
     protected abstract val httpClient: HttpClient
 
     internal fun (() -> String).message(message: String) = "${this()} $message".trimStart()

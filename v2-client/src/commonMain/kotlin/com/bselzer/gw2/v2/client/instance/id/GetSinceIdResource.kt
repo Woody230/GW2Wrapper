@@ -4,6 +4,7 @@ import com.bselzer.gw2.v2.client.GenericTypeInfo
 import com.bselzer.gw2.v2.client.genericTypeInfo
 import com.bselzer.gw2.v2.client.instance.base.GetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
+import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.id.GetSinceId
 import com.bselzer.ktx.value.identifier.Identifiable
@@ -25,7 +26,11 @@ class GetSinceIdResource<Model, Id, Value> @PublishedApi internal constructor(
     override suspend fun sinceOrEmpty(id: Id, options: Gw2HttpOptions): List<Model> = since(id, options).getOrNull() ?: emptyList()
 }
 
-inline fun <reified Model, Id, Value> getSinceIdResource(
-    httpClient: HttpClient,
+inline fun <reified Model, Id, Value> ResourceDependencies.getSinceIdResource(
     options: Gw2ResourceOptions
-): GetSinceIdResource<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> = GetSinceIdResource(httpClient, options, genericTypeInfo())
+): GetSinceIdResource<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> =
+    GetSinceIdResource(
+        httpClient,
+        options,
+        genericTypeInfo()
+    )

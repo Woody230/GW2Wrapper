@@ -3,6 +3,8 @@ package com.bselzer.gw2.v2.client.instance.base
 import com.bselzer.gw2.v2.client.constant.Headers
 import com.bselzer.gw2.v2.client.options.DefaultGw2HttpOptions
 import com.bselzer.gw2.v2.client.options.Gw2RequestOptions
+import com.bselzer.gw2.v2.scope.core.Scope
+import com.bselzer.gw2.v2.scope.guild.GuildScope
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.util.*
@@ -12,6 +14,20 @@ interface Gw2ResourceOptions {
      * The path relative to the base url.
      */
     val path: String
+
+    // TODO pre-validation: ability to check permissions of a TokenInfo
+    // TODO post-validation: forbidden vs unauthorized
+    /**
+     * The permissions required to access the resource.
+     */
+    val scopes: Collection<Scope>
+        get() = emptyList()
+
+    /**
+     * The guild rankings required to access the resource.
+     */
+    val guildScopes: Collection<GuildScope>
+        get() = emptyList()
 
     /**
      * The customizations specific to the endpoint.
@@ -86,6 +102,9 @@ interface Gw2ResourceOptions {
 }
 
 data class ResourceOptions(
-    override val defaultOptions: DefaultGw2HttpOptions,
-    override val path: String
+    override val defaultOptions: DefaultGw2HttpOptions = DefaultGw2HttpOptions,
+    override val path: String,
+    override val scopes: Collection<Scope> = emptyList(),
+    override val guildScopes: Collection<GuildScope> = emptyList(),
+    override val customizations: HttpRequestBuilder.() -> Unit = {}
 ) : Gw2ResourceOptions

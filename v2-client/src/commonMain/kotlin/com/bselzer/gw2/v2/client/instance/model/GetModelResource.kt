@@ -4,12 +4,13 @@ import com.bselzer.gw2.v2.client.GenericTypeInfo
 import com.bselzer.gw2.v2.client.genericTypeInfo
 import com.bselzer.gw2.v2.client.instance.base.GetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
+import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.model.GetModel
 import io.ktor.client.*
 import io.ktor.client.request.*
 
-class GetModelResource<Model> @PublishedApi internal constructor(
+open class GetModelResource<Model> @PublishedApi internal constructor(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions,
     private val modelTypeInfo: GenericTypeInfo<Model>,
@@ -22,7 +23,10 @@ class GetModelResource<Model> @PublishedApi internal constructor(
     override suspend fun modelOrNull(options: Gw2HttpOptions): Model? = model(options).getOrNull()
 }
 
-inline fun <reified Model> getModelResource(
-    httpClient: HttpClient,
+inline fun <reified Model> ResourceDependencies.getModelResource(
     options: Gw2ResourceOptions
-): GetModelResource<Model> = GetModelResource(httpClient, options, genericTypeInfo())
+): GetModelResource<Model> = GetModelResource(
+    httpClient,
+    options,
+    genericTypeInfo()
+)

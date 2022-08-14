@@ -4,6 +4,7 @@ import com.bselzer.gw2.v2.client.GenericTypeInfo
 import com.bselzer.gw2.v2.client.genericTypeInfo
 import com.bselzer.gw2.v2.client.instance.base.GetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
+import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.world.GetByWorld
 import com.bselzer.gw2.v2.model.world.WorldId
@@ -23,7 +24,10 @@ class GetByWorldResource<Model> @PublishedApi internal constructor(
     override suspend fun byWorldOrNull(worldId: WorldId, options: Gw2HttpOptions): Model? = byWorld(worldId, options).getOrNull()
 }
 
-inline fun <reified Model> getByWorldResource(
-    httpClient: HttpClient,
+inline fun <reified Model> ResourceDependencies.getByWorldResource(
     options: Gw2ResourceOptions
-): GetByWorldResource<Model> = GetByWorldResource(httpClient, options, genericTypeInfo())
+): GetByWorldResource<Model> = GetByWorldResource(
+    httpClient,
+    options,
+    genericTypeInfo()
+)

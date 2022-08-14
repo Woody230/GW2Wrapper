@@ -5,6 +5,7 @@ import com.bselzer.gw2.v2.client.exception.ResponseException
 import com.bselzer.gw2.v2.client.genericTypeInfo
 import com.bselzer.gw2.v2.client.instance.base.GetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
+import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.options.Gw2RequestOptions
 import com.bselzer.gw2.v2.client.request.token.CreateSubToken
@@ -63,4 +64,6 @@ class CreateSubTokenResource @PublishedApi internal constructor(
     }
 }
 
-fun createSubTokenResource(httpClient: HttpClient, options: Gw2ResourceOptions): CreateSubTokenResource = CreateSubTokenResource(httpClient, options)
+fun ResourceDependencies.createSubTokenResource(
+    options: Gw2ResourceOptions
+): CreateSubTokenResource = CreateSubTokenResource(httpClient, options)

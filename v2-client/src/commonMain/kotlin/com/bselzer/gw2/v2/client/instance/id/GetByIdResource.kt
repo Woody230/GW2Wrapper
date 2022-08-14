@@ -4,6 +4,7 @@ import com.bselzer.gw2.v2.client.GenericTypeInfo
 import com.bselzer.gw2.v2.client.genericTypeInfo
 import com.bselzer.gw2.v2.client.instance.base.GetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
+import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.id.GetById
 import com.bselzer.ktx.value.identifier.Identifiable
@@ -29,8 +30,13 @@ class GetByIdResource<Model, Id, Value> @PublishedApi internal constructor(
     override suspend fun byIdOrNull(id: Id, options: Gw2HttpOptions): Model? = byId(id, options).getOrNull()
 }
 
-inline fun <reified Model, Id, Value> getByIdResource(
-    httpClient: HttpClient,
+inline fun <reified Model, Id, Value> ResourceDependencies.getByIdResource(
     options: Gw2ResourceOptions,
     noinline defaultById: (Id) -> Model,
-): GetByIdResource<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> = GetByIdResource(httpClient, options, genericTypeInfo(), defaultById)
+): GetByIdResource<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> =
+    GetByIdResource(
+        httpClient,
+        options,
+        genericTypeInfo(),
+        defaultById
+    )

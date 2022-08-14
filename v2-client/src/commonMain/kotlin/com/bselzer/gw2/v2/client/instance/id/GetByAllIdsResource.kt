@@ -4,6 +4,7 @@ import com.bselzer.gw2.v2.client.GenericTypeInfo
 import com.bselzer.gw2.v2.client.genericTypeInfo
 import com.bselzer.gw2.v2.client.instance.base.GetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
+import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.id.GetByAllIds
 import com.bselzer.ktx.value.identifier.Identifiable
@@ -28,7 +29,11 @@ class GetByAllIdsResource<Model, Id, Value> @PublishedApi internal constructor(
     override suspend fun byAllIdsOrEmpty(options: Gw2HttpOptions): List<Model> = byAllIds(options).getOrNull() ?: emptyList()
 }
 
-inline fun <reified Model, Id, Value> getByAllIdsResource(
-    httpClient: HttpClient,
+inline fun <reified Model, Id, Value> ResourceDependencies.getByAllIdsResource(
     options: Gw2ResourceOptions
-): GetByAllIdsResource<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> = GetByAllIdsResource(httpClient, options, genericTypeInfo())
+): GetByAllIdsResource<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> =
+    GetByAllIdsResource(
+        httpClient,
+        options,
+        genericTypeInfo()
+    )

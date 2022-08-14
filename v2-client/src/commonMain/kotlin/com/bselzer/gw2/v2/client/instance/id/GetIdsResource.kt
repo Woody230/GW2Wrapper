@@ -4,6 +4,7 @@ import com.bselzer.gw2.v2.client.GenericTypeInfo
 import com.bselzer.gw2.v2.client.genericTypeInfo
 import com.bselzer.gw2.v2.client.instance.base.GetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
+import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.id.GetIds
 import com.bselzer.ktx.value.identifier.Identifier
@@ -26,7 +27,10 @@ class GetIdsResource<Id> @PublishedApi internal constructor(
     override suspend fun idsOrEmpty(options: Gw2HttpOptions): List<Id> = ids(options).getOrNull() ?: emptyList()
 }
 
-inline fun <reified Id> getIdsResource(
-    httpClient: HttpClient,
+inline fun <reified Id> ResourceDependencies.getIdsResource(
     options: Gw2ResourceOptions
-): GetIdsResource<Id> where Id : Identifier<*> = GetIdsResource(httpClient, options, genericTypeInfo())
+): GetIdsResource<Id> where Id : Identifier<*> = GetIdsResource(
+    httpClient,
+    options,
+    genericTypeInfo()
+)

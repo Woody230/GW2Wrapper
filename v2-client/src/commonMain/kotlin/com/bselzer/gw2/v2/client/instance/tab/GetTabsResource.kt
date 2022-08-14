@@ -4,6 +4,7 @@ import com.bselzer.gw2.v2.client.GenericTypeInfo
 import com.bselzer.gw2.v2.client.genericTypeInfo
 import com.bselzer.gw2.v2.client.instance.base.GetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
+import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.tab.GetTabs
 import com.bselzer.ktx.value.identifier.Identifier
@@ -23,7 +24,11 @@ class GetTabsResource<Tab> @PublishedApi internal constructor(
     override suspend fun tabsOrEmpty(options: Gw2HttpOptions): List<Tab> = tabs(options).getOrNull() ?: emptyList()
 }
 
-inline fun <reified Tab> getTabsResource(
-    httpClient: HttpClient,
+inline fun <reified Tab> ResourceDependencies.getTabsResource(
     options: Gw2ResourceOptions
-): GetTabsResource<Tab> where Tab : Identifier<*> = GetTabsResource(httpClient, options, genericTypeInfo())
+): GetTabsResource<Tab> where Tab : Identifier<*> =
+    GetTabsResource(
+        httpClient,
+        options,
+        genericTypeInfo()
+    )

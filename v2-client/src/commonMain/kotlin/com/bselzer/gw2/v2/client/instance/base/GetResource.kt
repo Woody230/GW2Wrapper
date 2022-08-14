@@ -13,7 +13,7 @@ import io.ktor.http.*
 
 abstract class GetResource<Model>(
     private val typeInfo: GenericTypeInfo<Model>
-) : Gw2Resource() {
+) : Resource() {
     /**
      * [configure]s the [HttpClient] customizations and executes the request.
      * If an exception occurs during this process, then the result fails with a [RequestException].

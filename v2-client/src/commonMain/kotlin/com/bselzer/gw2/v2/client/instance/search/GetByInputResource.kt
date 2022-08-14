@@ -4,6 +4,7 @@ import com.bselzer.gw2.v2.client.GenericTypeInfo
 import com.bselzer.gw2.v2.client.genericTypeInfo
 import com.bselzer.gw2.v2.client.instance.base.GetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
+import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.search.GetByInput
 import io.ktor.client.*
@@ -22,7 +23,10 @@ class GetByInputResource<Model, Input> @PublishedApi internal constructor(
     override suspend fun byInputOrEmpty(input: Input, options: Gw2HttpOptions): List<Model> = byInput(input, options).getOrNull() ?: emptyList()
 }
 
-inline fun <reified Model, Input> getByInputResource(
-    httpClient: HttpClient,
-    options: Gw2ResourceOptions
-): GetByInputResource<Model, Input> = GetByInputResource(httpClient, options, genericTypeInfo())
+inline fun <reified Model, Input> ResourceDependencies.getByInputResource(
+    options: Gw2ResourceOptions,
+): GetByInputResource<Model, Input> = GetByInputResource(
+    httpClient,
+    options,
+    genericTypeInfo()
+)

@@ -4,6 +4,7 @@ import com.bselzer.gw2.v2.client.GenericTypeInfo
 import com.bselzer.gw2.v2.client.genericTypeInfo
 import com.bselzer.gw2.v2.client.instance.base.GetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
+import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.exchange.GetByQuantity
 import io.ktor.client.*
@@ -23,7 +24,11 @@ class GetByQuantityResource<Model, Quantity> @PublishedApi internal constructor(
     override suspend fun byQuantityOrNull(quantity: Quantity, options: Gw2HttpOptions): Model? = byQuantity(quantity, options).getOrNull()
 }
 
-inline fun <reified Model, reified Quantity> getByQuantityResource(
-    httpClient: HttpClient,
+inline fun <reified Model, reified Quantity> ResourceDependencies.getByQuantityResource(
     options: Gw2ResourceOptions
-): GetByQuantityResource<Model, Quantity> = GetByQuantityResource(httpClient, options, genericTypeInfo(), genericTypeInfo())
+): GetByQuantityResource<Model, Quantity> = GetByQuantityResource(
+    httpClient,
+    options,
+    genericTypeInfo(),
+    genericTypeInfo()
+)
