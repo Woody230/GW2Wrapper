@@ -11,7 +11,6 @@ object Versions {
     const val KTX_DATETIME = "0.3.2"
     const val KTX_SERIALIZATION = "1.3.2"
     const val KTOR = "2.0.1"
-    const val POET = "1.12.0"
     const val BUILD_CONFIG = "0.11.0"
     const val ANDROID_TEST = "1.1.0"
     const val ROBOLECTRIC = "4.6.1"
@@ -47,10 +46,6 @@ fun KotlinDependencyHandler.ktorSerialization() {
 }
 
 fun KotlinDependencyHandler.coroutine() = api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$COROUTINE")
-fun KotlinDependencyHandler.poet() {
-    implementation("com.squareup:kotlinpoet:$POET")
-    implementation("com.squareup:kotlinpoet-ksp:$POET")
-}
 
 fun KotlinDependencyHandler.v2Client() = api(project(":v2-client"))
 fun KotlinDependencyHandler.v2Model() = api(project(":v2-model"))
