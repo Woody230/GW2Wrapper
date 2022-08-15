@@ -5,7 +5,6 @@ import Versions.KODEIN_DB
 import Versions.KTOR
 import Versions.KTX_DATETIME
 import Versions.KTX_SERIALIZATION
-import Versions.POET
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 
 object Versions {

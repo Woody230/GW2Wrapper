@@ -16,7 +16,6 @@ rootProject.name = "GW2Wrapper"
 include("asset-cdn")
 include("v2-chatlink")
 include("v2-client")
-include("v2-client-generator")
 include("v2-emblem")
 include("v2-intl")
 include("v2-intl-kodein-db")
