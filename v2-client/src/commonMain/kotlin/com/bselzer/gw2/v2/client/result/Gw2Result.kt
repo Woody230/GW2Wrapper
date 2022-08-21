@@ -14,11 +14,11 @@ sealed class Gw2Result {
         /**
          * Successfully made the request, but the response is unsuccessful.
          */
-        class Http(message: String, val error: HttpError) : Failure(message)
+        class Response(message: String, val error: HttpError) : Failure(message)
 
         fun exception(): Gw2ClientException = when (this) {
             is Request -> Gw2ClientException(message, cause)
-            is Http -> Gw2ClientException("$message $error")
+            is Response -> Gw2ClientException("$message $error")
         }
     }
 }

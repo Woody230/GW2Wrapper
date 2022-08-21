@@ -42,7 +42,7 @@ abstract class Resource : Gw2Resource {
 
         return when {
             response.status.isSuccess() -> Gw2Result.Success(response).apply(onSuccess)
-            else -> Gw2Result.Failure.Http(context(), response.error()).apply(onFailure)
+            else -> Gw2Result.Failure.Response(context(), response.error()).apply(onFailure)
         }
     }
 }
