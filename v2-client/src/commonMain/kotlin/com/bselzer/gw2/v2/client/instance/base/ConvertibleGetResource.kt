@@ -9,7 +9,7 @@ import io.ktor.client.request.*
 /**
  * A [GetResource] that gets the response body as a [ResponseModel] and converts it into the [ResultModel].
  */
-abstract class ConvertGetResource<ResponseModel, ResultModel>(
+abstract class ConvertibleGetResource<ResponseModel, ResultModel>(
     private val responseTypeInfo: GenericTypeInfo<ResponseModel>,
     private val resultTypeInfo: GenericTypeInfo<ResultModel>
 ) : GetResource<ResponseModel>(responseTypeInfo) {

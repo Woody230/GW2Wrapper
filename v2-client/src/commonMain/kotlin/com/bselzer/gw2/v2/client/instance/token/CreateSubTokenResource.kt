@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.client.instance.token
 
 import com.bselzer.gw2.v2.client.genericTypeInfo
-import com.bselzer.gw2.v2.client.instance.base.ConvertGetResource
+import com.bselzer.gw2.v2.client.instance.base.ConvertibleGetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
@@ -21,7 +21,7 @@ import kotlinx.serialization.json.Json
 class CreateSubTokenResource @PublishedApi internal constructor(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions
-) : ConvertGetResource<CreatedSubToken, SubToken>(genericTypeInfo(), genericTypeInfo()), Gw2ResourceOptions by options, CreateSubToken {
+) : ConvertibleGetResource<CreatedSubToken, SubToken>(genericTypeInfo(), genericTypeInfo()), Gw2ResourceOptions by options, CreateSubToken {
     private fun context(expiration: Instant, permissions: List<Permission>, urls: List<String>): () -> String = {
         "Request for a sub-token expiring at $expiration with ${permissions.count()} permissions and ${urls.count()} urls."
     }

@@ -11,7 +11,7 @@ import com.bselzer.gw2.v2.client.result.GetResult
 import io.ktor.client.*
 import io.ktor.client.request.*
 
-open class GetModelResource<Model> @PublishedApi internal constructor(
+class GetModelResource<Model> @PublishedApi internal constructor(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions,
     private val modelTypeInfo: GenericTypeInfo<Model>,
