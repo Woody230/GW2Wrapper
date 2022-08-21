@@ -14,6 +14,11 @@ abstract class GetResource<Model>(
     private val typeInfo: GenericTypeInfo<Model>
 ) : Resource() {
     /**
+     * Whether to apply the result immediately after deserializing the response.
+     */
+    internal open val shouldApply = true
+
+    /**
      * [configure]s the [HttpClient] customizations and executes the request.
      * If an exception occurs during this process, then the result fails with a [GetResult.Failure.Gw2] and [Gw2HttpOptions.onFailure]/[Gw2HttpOptions.onGetFailure] is applied.
      *
@@ -27,7 +32,7 @@ abstract class GetResource<Model>(
      */
     protected suspend fun Gw2HttpOptions.get(
         context: () -> String,
-        customizations: HttpRequestBuilder.() -> Unit
+        customizations: HttpRequestBuilder.() -> Unit,
     ): GetResult<Model> {
         val httpResult = response(context) {
             method = HttpMethod.Get
@@ -39,12 +44,18 @@ abstract class GetResource<Model>(
             is Gw2Result.Success -> httpResult.response.deserialize(context)
         }
 
-        when (getResult) {
-            is GetResult.Success<Model> -> onGetSuccess(getResult)
-            is GetResult.Failure<Model> -> onGetFailure(getResult)
+        if (shouldApply) {
+            getResult.apply(options = this)
         }
 
         return getResult
+    }
+
+    protected open fun <T> GetResult<T>.apply(options: Gw2HttpOptions): GetResult<T> = apply {
+        when (this) {
+            is GetResult.Success<T> -> options.onGetSuccess(this)
+            is GetResult.Failure<T> -> options.onGetFailure(this)
+        }
     }
 
     private suspend fun <Model> HttpResponse.deserialize(

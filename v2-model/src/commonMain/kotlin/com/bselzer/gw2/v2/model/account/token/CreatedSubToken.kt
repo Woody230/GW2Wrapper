@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CreateSubToken(
+data class CreatedSubToken(
     @SerialName("subtoken")
     val subtoken: SubToken
 )

@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.client.instance.token
 
 import com.bselzer.gw2.v2.client.genericTypeInfo
-import com.bselzer.gw2.v2.client.instance.base.GetResource
+import com.bselzer.gw2.v2.client.instance.base.ConvertGetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
@@ -9,6 +9,7 @@ import com.bselzer.gw2.v2.client.options.Gw2RequestOptions
 import com.bselzer.gw2.v2.client.request.token.CreateSubToken
 import com.bselzer.gw2.v2.client.result.GetResult
 import com.bselzer.gw2.v2.client.result.Gw2Result
+import com.bselzer.gw2.v2.model.account.token.CreatedSubToken
 import com.bselzer.gw2.v2.model.account.token.SubToken
 import com.bselzer.gw2.v2.scope.core.Permission
 import io.ktor.client.*
@@ -20,7 +21,7 @@ import kotlinx.serialization.json.Json
 class CreateSubTokenResource @PublishedApi internal constructor(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions
-) : GetResource<com.bselzer.gw2.v2.model.account.token.CreateSubToken>(genericTypeInfo()), Gw2ResourceOptions by options, CreateSubToken {
+) : ConvertGetResource<CreatedSubToken, SubToken>(genericTypeInfo(), genericTypeInfo()), Gw2ResourceOptions by options, CreateSubToken {
     private fun context(expiration: Instant, permissions: List<Permission>, urls: List<String>): () -> String = {
         "Request for a sub-token expiring at $expiration with ${permissions.count()} permissions and ${urls.count()} urls."
     }
@@ -44,10 +45,7 @@ class CreateSubTokenResource @PublishedApi internal constructor(
 
         val context = context(expiration, permissions, urls)
         val parameters = parameters(expiration, permissions, urls)
-        return when (val result = options.get(context, parameters)) {
-            is GetResult.Success<com.bselzer.gw2.v2.model.account.token.CreateSubToken> -> GetResult.Success(result.response, result.body.subtoken)
-            is GetResult.Failure<com.bselzer.gw2.v2.model.account.token.CreateSubToken> -> result.persistFailure()
-        }
+        return options.get(context, parameters) { result -> GetResult.Success(result.response, result.body.subtoken) }
     }
 
     override suspend fun createOrThrow(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2HttpOptions): SubToken {
