@@ -7,6 +7,7 @@ import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.model.GetModel
+import com.bselzer.gw2.v2.client.result.GetResult
 import io.ktor.client.*
 import io.ktor.client.request.*
 
@@ -18,7 +19,7 @@ open class GetModelResource<Model> @PublishedApi internal constructor(
     private val context: () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}." }
     private val parameters: HttpRequestBuilder.() -> Unit = { }
 
-    override suspend fun model(options: Gw2HttpOptions): Result<Model> = options.get(context, parameters)
+    override suspend fun model(options: Gw2HttpOptions): GetResult<Model> = options.get(context, parameters)
     override suspend fun modelOrThrow(options: Gw2HttpOptions): Model = model(options).getOrThrow()
     override suspend fun modelOrNull(options: Gw2HttpOptions): Model? = model(options).getOrNull()
 }

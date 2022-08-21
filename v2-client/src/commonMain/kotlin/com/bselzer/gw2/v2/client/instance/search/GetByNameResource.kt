@@ -7,6 +7,7 @@ import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.search.GetByName
+import com.bselzer.gw2.v2.client.result.GetResult
 import io.ktor.client.*
 import io.ktor.client.request.*
 
@@ -18,7 +19,7 @@ class GetByNameResource<Model> @PublishedApi internal constructor(
     private fun String.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}s with name $this." }
     private fun String.parameters(): HttpRequestBuilder.() -> Unit = { parameter("name", this@parameters) }
 
-    override suspend fun byName(name: String, options: Gw2HttpOptions): Result<List<Model>> = options.get(name.context(), name.parameters())
+    override suspend fun byName(name: String, options: Gw2HttpOptions): GetResult<List<Model>> = options.get(name.context(), name.parameters())
     override suspend fun byNameOrThrow(name: String, options: Gw2HttpOptions): List<Model> = byName(name, options).getOrThrow()
     override suspend fun byNameOrEmpty(name: String, options: Gw2HttpOptions): List<Model> = byName(name, options).getOrNull() ?: emptyList()
 }

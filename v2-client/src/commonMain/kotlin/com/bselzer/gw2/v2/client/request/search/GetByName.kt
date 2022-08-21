@@ -2,12 +2,13 @@ package com.bselzer.gw2.v2.client.request.search
 
 import com.bselzer.gw2.v2.client.exception.Gw2ClientException
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
+import com.bselzer.gw2.v2.client.result.GetResult
 
 interface GetByName<Model> {
     /**
-     * Gets the [Model]s with the given [name], or a [Gw2ClientException] if unable to fulfill the request.
+     * Gets the [Model]s with the given [name], or a [GetResult.Failure] if unable to fulfill the request.
      */
-    suspend fun byName(name: String, options: Gw2HttpOptions): Result<List<Model>>
+    suspend fun byName(name: String, options: Gw2HttpOptions): GetResult<List<Model>>
 
     /**
      * Gets the [Model]s with the given [name], or throws a [Gw2ClientException] if unable to fulfill the request.

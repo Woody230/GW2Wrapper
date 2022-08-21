@@ -1,11 +1,12 @@
 package com.bselzer.gw2.v2.client.instance.base
 
-import com.bselzer.gw2.v2.client.exception.RequestException
-import com.bselzer.gw2.v2.client.exception.ValidationException
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
+import com.bselzer.gw2.v2.client.result.Gw2Result
+import com.bselzer.gw2.v2.client.result.HttpError.Companion.error
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
+import io.ktor.http.*
 
 interface Gw2Resource : Gw2ResourceOptions
 
@@ -13,49 +14,35 @@ abstract class Resource : Gw2Resource {
     protected abstract val httpClient: HttpClient
 
     internal fun (() -> String).message(message: String) = "${this()} $message".trimStart()
-    internal fun <T> Throwable.failureResult(): Result<T> = Result.failure(this)
-    internal fun <T> T.successResult(): Result<T> = Result.success(this)
 
     /**
      * [configure]s the [HttpClient] customizations and executes the request.
-     * If an exception occurs during this process, then the result fails with a [RequestException].
-     *
-     * If the response is able to be obtained, then it is validated according to the given [Gw2HttpOptions].
-     * If an exception occurs during this process, then the result fails with a [ValidationException].
-     *
-     * If validation is successful, then the result succeeds with the [HttpResponse].
+     * If an exception occurs during this process, then the result fails with a [Gw2Result.Failure.Request] and [Gw2HttpOptions.onFailure] is applied.
+     * Otherwise the result succeeds with a [Gw2Result.Success] and [Gw2HttpOptions.onSuccess] is applied.
      *
      * @param context The type of request being made, which should include any important information being used in the request.
      * @param customizations The [HttpClient] customizations specific to this implementation of the request.
-     * @return The result of the request. On success, the [HttpResponse]. On failure, a [RequestException] or [ValidationException].
+     * @return The [HttpResponse] on [Gw2Result.Success], otherwise [Gw2Result.Failure].
      * @see [configure]
      */
-    protected suspend fun Gw2HttpOptions.response(context: () -> String, customizations: HttpRequestBuilder.() -> Unit): Result<HttpResponse> {
+    protected suspend fun Gw2HttpOptions.response(context: () -> String, customizations: HttpRequestBuilder.() -> Unit): Gw2Result {
         val configured = try {
             configure(customizations)
         } catch (ex: Exception) {
             val message = context.message("Failed to configure the HttpClient customizations.")
-            return RequestException(message, ex).failureResult()
+            return Gw2Result.Failure.Request(message, ex).apply(onFailure)
         }
 
         val response = try {
             httpClient.request(configured)
         } catch (ex: Exception) {
             val message = context.message("Failed to make the request to ${url}.")
-            return RequestException(message, ex).failureResult()
+            return Gw2Result.Failure.Request(message, ex).apply(onFailure)
         }
 
-        return try {
-            val result = validate(response)
-            val cause = result.exceptionOrNull()
-            return when {
-                result.isSuccess -> result
-                cause is ValidationException -> cause.failureResult()
-                else -> ValidationException(cause).failureResult()
-            }
-        } catch (ex: Exception) {
-            val message = context.message("Failed to validate the response and create a result.")
-            ValidationException(message).failureResult()
+        return when {
+            response.status.isSuccess() -> Gw2Result.Success(response).apply(onSuccess)
+            else -> Gw2Result.Failure.Http(context(), response.error()).apply(onFailure)
         }
     }
 }

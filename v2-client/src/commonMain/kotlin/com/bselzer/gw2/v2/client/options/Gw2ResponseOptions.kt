@@ -1,24 +1,29 @@
 package com.bselzer.gw2.v2.client.options
 
-import io.ktor.client.statement.*
+import com.bselzer.gw2.v2.client.result.Gw2Result
 
 interface Gw2ResponseOptions {
     /**
-     * The block for performing validation on the response.
+     * The block for performing an action when the result is successful.
      */
-    val validate: (HttpResponse) -> Result<HttpResponse>
+    val onSuccess: (Gw2Result.Success) -> Unit
 
     /**
-     * This validation is performed first, then the given [validate] block, then the [other] validation.
+     * The block for performing an action when the result is a failure.
      */
-    fun merge(other: Gw2ResponseOptions, validate: (HttpResponse) -> Result<HttpResponse> = { response -> Result.success(response) }): Gw2ResponseOptions = ResponseOptions(
-        validate = { response ->
-            listOf(this@Gw2ResponseOptions.validate, validate, other.validate).fold(Result.success(response)) { result, block ->
-                result.fold(
-                    onSuccess = { newResponse -> block(newResponse) },
-                    onFailure = { exception -> Result.failure(exception) }
-                )
-            }
+    val onFailure: (Gw2Result.Failure) -> Unit
+
+    /**
+     * Performs this [onSuccess] and [onFailure] first, then the [other] [Gw2ResponseOptions.onSuccess] and [Gw2ResponseOptions.onFailure]
+     */
+    fun merge(other: Gw2ResponseOptions): Gw2ResponseOptions = ResponseOptions(
+        onSuccess = { success ->
+            onSuccess(success)
+            other.onSuccess(success)
+        },
+        onFailure = { failure ->
+            onFailure(failure)
+            other.onFailure(failure)
         }
     )
 
@@ -26,5 +31,6 @@ interface Gw2ResponseOptions {
 }
 
 data class ResponseOptions(
-    override val validate: (HttpResponse) -> Result<HttpResponse> = { response -> Result.success(response) }
+    override val onSuccess: (Gw2Result.Success) -> Unit = {},
+    override val onFailure: (Gw2Result.Failure) -> Unit = {}
 ) : Gw2ResponseOptions

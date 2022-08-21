@@ -2,12 +2,14 @@ package com.bselzer.gw2.v2.client.instance.tab
 
 import com.bselzer.gw2.v2.client.GenericTypeInfo
 import com.bselzer.gw2.v2.client.genericTypeInfo
-import com.bselzer.gw2.v2.client.instance.base.AggregateListResult
 import com.bselzer.gw2.v2.client.instance.base.GetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.tab.GetByTabs
+import com.bselzer.gw2.v2.client.result.AggregateGetResult
+import com.bselzer.gw2.v2.client.result.getOrEmpty
+import com.bselzer.gw2.v2.client.result.getOrThrow
 import com.bselzer.ktx.value.identifier.Identifiable
 import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
@@ -23,10 +25,9 @@ class GetByTabsResource<Model, Tab, Value> @PublishedApi internal constructor(
     private fun Collection<Tab>.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}s associated with tabs ${joinToString(separator = ",")}." }
     private fun Collection<Tab>.parameters(): HttpRequestBuilder.() -> Unit = { parameter("tabs", joinToString(separator = ",")) }
 
-    override suspend fun byTabs(tabs: Collection<Tab>, options: Gw2HttpOptions): AggregateListResult<Model> {
+    override suspend fun byTabs(tabs: Collection<Tab>, options: Gw2HttpOptions): AggregateGetResult<Model> {
         val chunks = tabs.chunked(options.coercedPageSize()).filter { chunk -> chunk.isNotEmpty() }
-        val results = chunks.map { chunk -> options.get(chunk.context(), chunk.parameters()) }
-        return AggregateListResult(results)
+        return chunks.map { chunk -> options.get(chunk.context(), chunk.parameters()) }
     }
 
     override suspend fun byTabsOrThrow(

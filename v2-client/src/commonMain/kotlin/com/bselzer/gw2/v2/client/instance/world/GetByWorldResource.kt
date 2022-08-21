@@ -7,6 +7,7 @@ import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.world.GetByWorld
+import com.bselzer.gw2.v2.client.result.GetResult
 import com.bselzer.gw2.v2.model.world.WorldId
 import io.ktor.client.*
 import io.ktor.client.request.*
@@ -19,7 +20,7 @@ class GetByWorldResource<Model> @PublishedApi internal constructor(
     private fun WorldId.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} associated with the world with id $this." }
     private fun WorldId.parameters(): HttpRequestBuilder.() -> Unit = { parameter("world", value) }
 
-    override suspend fun byWorld(worldId: WorldId, options: Gw2HttpOptions): Result<Model> = options.get(worldId.context(), worldId.parameters())
+    override suspend fun byWorld(worldId: WorldId, options: Gw2HttpOptions): GetResult<Model> = options.get(worldId.context(), worldId.parameters())
     override suspend fun byWorldOrThrow(worldId: WorldId, options: Gw2HttpOptions): Model = byWorld(worldId, options).getOrThrow()
     override suspend fun byWorldOrNull(worldId: WorldId, options: Gw2HttpOptions): Model? = byWorld(worldId, options).getOrNull()
 }

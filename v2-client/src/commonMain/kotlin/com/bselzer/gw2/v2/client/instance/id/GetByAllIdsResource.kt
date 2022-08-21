@@ -7,6 +7,7 @@ import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.id.GetByAllIds
+import com.bselzer.gw2.v2.client.result.GetResult
 import com.bselzer.ktx.value.identifier.Identifiable
 import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
@@ -24,7 +25,7 @@ class GetByAllIdsResource<Model, Id, Value> @PublishedApi internal constructor(
     private val context: () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} with all ids." }
     private val parameters: HttpRequestBuilder.() -> Unit = { parameter("ids", "all") }
 
-    override suspend fun byAllIds(options: Gw2HttpOptions): Result<List<Model>> = options.get(context, parameters)
+    override suspend fun byAllIds(options: Gw2HttpOptions): GetResult<List<Model>> = options.get(context, parameters)
     override suspend fun byAllIdsOrThrow(options: Gw2HttpOptions): List<Model> = byAllIds(options).getOrThrow()
     override suspend fun byAllIdsOrEmpty(options: Gw2HttpOptions): List<Model> = byAllIds(options).getOrNull() ?: emptyList()
 }

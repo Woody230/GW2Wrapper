@@ -7,6 +7,7 @@ import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.exchange.GetByQuantity
+import com.bselzer.gw2.v2.client.result.GetResult
 import io.ktor.client.*
 import io.ktor.client.request.*
 
@@ -19,7 +20,7 @@ class GetByQuantityResource<Model, Quantity> @PublishedApi internal constructor(
     private fun Quantity.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} in an exchange of $this ${quantityTypeInfo.toDisplayableString()}." }
     private fun Quantity.parameters(): HttpRequestBuilder.() -> Unit = { parameter("quantity", this@parameters) }
 
-    override suspend fun byQuantity(quantity: Quantity, options: Gw2HttpOptions): Result<Model> = options.get(quantity.context(), quantity.parameters())
+    override suspend fun byQuantity(quantity: Quantity, options: Gw2HttpOptions): GetResult<Model> = options.get(quantity.context(), quantity.parameters())
     override suspend fun byQuantityOrThrow(quantity: Quantity, options: Gw2HttpOptions): Model = byQuantity(quantity, options).getOrThrow()
     override suspend fun byQuantityOrNull(quantity: Quantity, options: Gw2HttpOptions): Model? = byQuantity(quantity, options).getOrNull()
 }

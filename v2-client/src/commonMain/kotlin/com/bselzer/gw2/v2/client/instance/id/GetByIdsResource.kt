@@ -2,12 +2,14 @@ package com.bselzer.gw2.v2.client.instance.id
 
 import com.bselzer.gw2.v2.client.GenericTypeInfo
 import com.bselzer.gw2.v2.client.genericTypeInfo
-import com.bselzer.gw2.v2.client.instance.base.AggregateListResult
 import com.bselzer.gw2.v2.client.instance.base.GetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.id.GetByIds
+import com.bselzer.gw2.v2.client.result.AggregateGetResult
+import com.bselzer.gw2.v2.client.result.getOrEmpty
+import com.bselzer.gw2.v2.client.result.getOrThrow
 import com.bselzer.ktx.value.identifier.Identifiable
 import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
@@ -26,10 +28,9 @@ class GetByIdsResource<Model, Id, Value> @PublishedApi internal constructor(
     private fun Collection<Id>.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} with ids ${joinToString(separator = ",")}." }
     private fun Collection<Id>.parameters(): HttpRequestBuilder.() -> Unit = { parameter("ids", joinToString(separator = ",")) }
 
-    override suspend fun byIds(ids: Collection<Id>, options: Gw2HttpOptions): AggregateListResult<Model> {
+    override suspend fun byIds(ids: Collection<Id>, options: Gw2HttpOptions): AggregateGetResult<Model> {
         val chunks = ids.chunked(options.coercedPageSize()).filter { chunk -> chunk.isNotEmpty() }
-        val results = chunks.map { chunk -> options.get(chunk.context(), chunk.parameters()) }
-        return AggregateListResult(results)
+        return chunks.map { chunk -> options.get(chunk.context(), chunk.parameters()) }
     }
 
     override suspend fun byIdsOrThrow(

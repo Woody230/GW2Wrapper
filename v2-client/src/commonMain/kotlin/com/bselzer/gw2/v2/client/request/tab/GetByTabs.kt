@@ -1,8 +1,9 @@
 package com.bselzer.gw2.v2.client.request.tab
 
 import com.bselzer.gw2.v2.client.exception.Gw2ClientException
-import com.bselzer.gw2.v2.client.instance.base.AggregateListResult
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
+import com.bselzer.gw2.v2.client.result.AggregateGetResult
+import com.bselzer.gw2.v2.client.result.GetResult
 import com.bselzer.ktx.value.identifier.Identifiable
 import com.bselzer.ktx.value.identifier.Identifier
 
@@ -10,9 +11,9 @@ interface GetByTabs<Model, Tab, Value> where Tab : Identifier<Value>, Model : Id
     /**
      * Requests are split into [Gw2HttpOptions.pageSize] size chunks, where each result is the following:
      *
-     * Gets the [Model]s associated with the [tabs], or a [Gw2ClientException] if unable to fulfill the request.
+     * Gets the [Model]s associated with the [tabs], or a [GetResult.Failure] if unable to fulfill the request.
      */
-    suspend fun byTabs(tabs: Collection<Tab>, options: Gw2HttpOptions): AggregateListResult<Model>
+    suspend fun byTabs(tabs: Collection<Tab>, options: Gw2HttpOptions): AggregateGetResult<Model>
 
     /**
      * Requests are split into [Gw2HttpOptions.pageSize] size chunks.

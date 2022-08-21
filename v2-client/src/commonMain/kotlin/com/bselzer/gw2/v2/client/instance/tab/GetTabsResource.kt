@@ -7,6 +7,7 @@ import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.tab.GetTabs
+import com.bselzer.gw2.v2.client.result.GetResult
 import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
 import io.ktor.client.request.*
@@ -19,7 +20,7 @@ class GetTabsResource<Tab> @PublishedApi internal constructor(
     private val context: () -> String = { "Request for ${tabTypeInfo.toDisplayableString()}s." }
     private val parameters: HttpRequestBuilder.() -> Unit = {}
 
-    override suspend fun tabs(options: Gw2HttpOptions): Result<List<Tab>> = options.get(context, parameters)
+    override suspend fun tabs(options: Gw2HttpOptions): GetResult<List<Tab>> = options.get(context, parameters)
     override suspend fun tabsOrThrow(options: Gw2HttpOptions): List<Tab> = tabs(options).getOrThrow()
     override suspend fun tabsOrEmpty(options: Gw2HttpOptions): List<Tab> = tabs(options).getOrNull() ?: emptyList()
 }

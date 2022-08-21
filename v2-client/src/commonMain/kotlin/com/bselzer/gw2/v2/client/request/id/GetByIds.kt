@@ -1,8 +1,8 @@
 package com.bselzer.gw2.v2.client.request.id
 
 import com.bselzer.gw2.v2.client.exception.Gw2ClientException
-import com.bselzer.gw2.v2.client.instance.base.AggregateListResult
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
+import com.bselzer.gw2.v2.client.result.GetResult
 import com.bselzer.ktx.value.identifier.Identifiable
 import com.bselzer.ktx.value.identifier.Identifier
 
@@ -10,9 +10,9 @@ interface GetByIds<Model, Id, Value> where Id : Identifier<Value>, Model : Ident
     /**
      * Requests are split into [Gw2HttpOptions.pageSize] size chunks, where each result is the following:
      *
-     * Gets the [Model]s associated with the [ids], or a [Gw2ClientException] if unable to fulfill the request.
+     * Gets the [Model]s associated with the [ids], or a [GetResult.Failure] if unable to fulfill the request.
      */
-    suspend fun byIds(ids: Collection<Id>, options: Gw2HttpOptions): AggregateListResult<Model>
+    suspend fun byIds(ids: Collection<Id>, options: Gw2HttpOptions): List<GetResult<List<Model>>>
 
     /**
      * Requests are split into [Gw2HttpOptions.pageSize] size chunks.

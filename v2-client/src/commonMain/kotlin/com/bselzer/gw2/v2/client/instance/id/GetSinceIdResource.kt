@@ -7,6 +7,7 @@ import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.id.GetSinceId
+import com.bselzer.gw2.v2.client.result.GetResult
 import com.bselzer.ktx.value.identifier.Identifiable
 import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
@@ -21,7 +22,7 @@ class GetSinceIdResource<Model, Id, Value> @PublishedApi internal constructor(
     private fun Id.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}s newer than $this." }
     private fun Id.parameters(): HttpRequestBuilder.() -> Unit = { parameter("since", value) }
 
-    override suspend fun since(id: Id, options: Gw2HttpOptions): Result<List<Model>> = options.get(id.context(), id.parameters())
+    override suspend fun since(id: Id, options: Gw2HttpOptions): GetResult<List<Model>> = options.get(id.context(), id.parameters())
     override suspend fun sinceOrThrow(id: Id, options: Gw2HttpOptions): List<Model> = since(id, options).getOrThrow()
     override suspend fun sinceOrEmpty(id: Id, options: Gw2HttpOptions): List<Model> = since(id, options).getOrNull() ?: emptyList()
 }

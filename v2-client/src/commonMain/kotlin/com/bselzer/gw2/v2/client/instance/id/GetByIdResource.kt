@@ -7,6 +7,7 @@ import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.id.GetById
+import com.bselzer.gw2.v2.client.result.GetResult
 import com.bselzer.ktx.value.identifier.Identifiable
 import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
@@ -24,7 +25,7 @@ class GetByIdResource<Model, Id, Value> @PublishedApi internal constructor(
     private fun Id.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} with id $this." }
     private fun Id.parameters(): HttpRequestBuilder.() -> Unit = { parameter("id", value) }
 
-    override suspend fun byId(id: Id, options: Gw2HttpOptions): Result<Model> = options.get(id.context(), id.parameters())
+    override suspend fun byId(id: Id, options: Gw2HttpOptions): GetResult<Model> = options.get(id.context(), id.parameters())
     override suspend fun byIdOrThrow(id: Id, options: Gw2HttpOptions): Model = byId(id, options).getOrThrow()
     override suspend fun byIdOrDefault(id: Id, options: Gw2HttpOptions): Model = byIdOrNull(id, options) ?: defaultById(id)
     override suspend fun byIdOrNull(id: Id, options: Gw2HttpOptions): Model? = byId(id, options).getOrNull()

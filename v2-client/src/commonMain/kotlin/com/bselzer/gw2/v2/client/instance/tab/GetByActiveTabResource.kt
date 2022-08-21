@@ -7,6 +7,7 @@ import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.tab.GetByActiveTab
+import com.bselzer.gw2.v2.client.result.GetResult
 import com.bselzer.ktx.value.identifier.Identifiable
 import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*
@@ -23,7 +24,7 @@ class GetByActiveTabResource<Model, Tab, Value> @PublishedApi internal construct
         url { appendPathSegments("active") }
     }
 
-    override suspend fun byActiveTab(options: Gw2HttpOptions): Result<Model> = options.get(context, parameters)
+    override suspend fun byActiveTab(options: Gw2HttpOptions): GetResult<Model> = options.get(context, parameters)
     override suspend fun byActiveTabOrThrow(options: Gw2HttpOptions): Model = byActiveTab(options).getOrThrow()
     override suspend fun byActiveTabOrNull(options: Gw2HttpOptions): Model? = byActiveTab(options).getOrNull()
 }
