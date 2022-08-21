@@ -16,12 +16,11 @@ import io.ktor.client.request.*
 import kotlinx.datetime.Instant
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonObject
 
 class CreateSubTokenResource @PublishedApi internal constructor(
     override val httpClient: HttpClient,
     options: Gw2ResourceOptions
-) : GetResource<JsonObject>(genericTypeInfo()), Gw2ResourceOptions by options, CreateSubToken {
+) : GetResource<com.bselzer.gw2.v2.model.account.token.CreateSubToken>(genericTypeInfo()), Gw2ResourceOptions by options, CreateSubToken {
     private fun context(expiration: Instant, permissions: List<Permission>, urls: List<String>): () -> String = {
         "Request for a sub-token expiring at $expiration with ${permissions.count()} permissions and ${urls.count()} urls."
     }
@@ -36,8 +35,6 @@ class CreateSubTokenResource @PublishedApi internal constructor(
         parameter("urls", urls.joinToString(","))
     }
 
-    private fun JsonObject.extractToken(): SubToken? = this["subtoken"]?.toString()?.let { SubToken(it) }
-
     override suspend fun create(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2HttpOptions): GetResult<SubToken> {
         // Validate that the token exists.
         if (defaultOptions.merge(options as Gw2RequestOptions).token == null) {
@@ -48,11 +45,8 @@ class CreateSubTokenResource @PublishedApi internal constructor(
         val context = context(expiration, permissions, urls)
         val parameters = parameters(expiration, permissions, urls)
         return when (val result = options.get(context, parameters)) {
-            is GetResult.Success<JsonObject> -> {
-                val token = result.body.extractToken() ?: return GetResult.Failure.Serialization(result.response, "subtoken key missing from the JsonObject")
-                GetResult.Success(result.response, token)
-            }
-            is GetResult.Failure<JsonObject> -> result.persistFailure()
+            is GetResult.Success<com.bselzer.gw2.v2.model.account.token.CreateSubToken> -> GetResult.Success(result.response, result.body.subtoken)
+            is GetResult.Failure<com.bselzer.gw2.v2.model.account.token.CreateSubToken> -> result.persistFailure()
         }
     }
 
