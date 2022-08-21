@@ -15,10 +15,10 @@ abstract class GetResource<Model>(
 ) : Resource() {
     /**
      * [configure]s the [HttpClient] customizations and executes the request.
-     * If an exception occurs during this process, then the result fails with a [GetResult.Failure.Gw2] and [Gw2HttpOptions.onFailure] is applied.
+     * If an exception occurs during this process, then the result fails with a [GetResult.Failure.Gw2] and [Gw2HttpOptions.onFailure]/[Gw2HttpOptions.onGetFailure] is applied.
      *
-     * If the response is successful, then the response body is converted into the [Model].
-     * If an exception occurs during this process, then the result fails with a [GetResult.Failure.Serialization].
+     * If the response is successful, then the response body is converted into the [Model] and the [Gw2HttpOptions.onGetSuccess] is applied.
+     * If an exception occurs during this process, then the result fails with a [GetResult.Failure.Serialization] and [Gw2HttpOptions.onGetFailure] is applied.
      *
      * @param context The type of request being made, which should include any important information being used in the request.
      * @param customizations The [HttpClient] customizations specific to this implementation of the request.
@@ -29,15 +29,22 @@ abstract class GetResource<Model>(
         context: () -> String,
         customizations: HttpRequestBuilder.() -> Unit
     ): GetResult<Model> {
-        val result = response(context) {
+        val httpResult = response(context) {
             method = HttpMethod.Get
             apply(customizations)
         }
 
-        return when (result) {
-            is Gw2Result.Failure -> GetResult.Failure.Gw2(result)
-            is Gw2Result.Success -> result.response.deserialize(context)
+        val getResult = when (httpResult) {
+            is Gw2Result.Failure -> GetResult.Failure.Gw2<Model>(httpResult)
+            is Gw2Result.Success -> httpResult.response.deserialize(context)
         }
+
+        when (getResult) {
+            is GetResult.Success<Model> -> onGetSuccess(getResult)
+            is GetResult.Failure<Model> -> onGetFailure(getResult)
+        }
+
+        return getResult
     }
 
     private suspend fun <Model> HttpResponse.deserialize(
