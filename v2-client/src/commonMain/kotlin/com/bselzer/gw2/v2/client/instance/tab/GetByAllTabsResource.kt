@@ -1,13 +1,13 @@
 package com.bselzer.gw2.v2.client.instance.tab
 
-import com.bselzer.gw2.v2.client.GenericTypeInfo
-import com.bselzer.gw2.v2.client.genericTypeInfo
 import com.bselzer.gw2.v2.client.instance.base.GetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
 import com.bselzer.gw2.v2.client.request.tab.GetByAllTabs
 import com.bselzer.gw2.v2.client.result.GetResult
+import com.bselzer.ktx.client.GenericTypeInfo
+import com.bselzer.ktx.client.genericTypeInfo
 import com.bselzer.ktx.value.identifier.Identifiable
 import com.bselzer.ktx.value.identifier.Identifier
 import io.ktor.client.*

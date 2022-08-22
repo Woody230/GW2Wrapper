@@ -1,6 +1,5 @@
 package com.bselzer.gw2.v2.client.instance.token
 
-import com.bselzer.gw2.v2.client.genericTypeInfo
 import com.bselzer.gw2.v2.client.instance.base.ConvertibleGetResource
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
 import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
@@ -12,6 +11,7 @@ import com.bselzer.gw2.v2.client.result.Gw2Result
 import com.bselzer.gw2.v2.model.account.token.CreatedSubToken
 import com.bselzer.gw2.v2.model.account.token.SubToken
 import com.bselzer.gw2.v2.scope.core.Permission
+import com.bselzer.ktx.client.genericTypeInfo
 import io.ktor.client.*
 import io.ktor.client.request.*
 import kotlinx.datetime.Instant

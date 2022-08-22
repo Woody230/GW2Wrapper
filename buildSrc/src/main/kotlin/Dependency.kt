@@ -18,7 +18,7 @@ object Versions {
     const val KODEIN_DB = "0.9.0-beta"
     const val KOTLIN = "1.6.10"
     const val RESOURCE = "0.19.0"
-    const val EXTENSION = "5.0.0"
+    const val EXTENSION = "5.1.0"
 }
 
 object Metadata {
@@ -62,6 +62,8 @@ fun KotlinDependencyHandler.extDateTime() {
     api("io.github.woody230.ktx:datetime:$EXTENSION")
     api("io.github.woody230.ktx:datetime-serialization:$EXTENSION")
 }
+
+fun KotlinDependencyHandler.extKtorClient() = api("io.github.woody230.ktx:ktor-client:$EXTENSION")
 
 fun KotlinDependencyHandler.extGeometry() {
     api("io.github.woody230.ktx:geometry:$EXTENSION")

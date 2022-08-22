@@ -16,9 +16,9 @@ kotlin.setup {
         v2Model()
         v2Scope()
         ktxDateTime()
-        ktorClient()
         ktorSerialization()
         extLogging()
+        extKtorClient()
     }
     commonTest {
         v2ModelEnumeration()
