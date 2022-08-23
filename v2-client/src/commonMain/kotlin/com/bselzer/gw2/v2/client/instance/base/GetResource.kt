@@ -63,7 +63,8 @@ abstract class GetResource<Model>(
     ): GetResult<Model> = try {
         GetResult.Success(this, body(typeInfo.value))
     } catch (ex: Exception) {
-        val message = context.message("Unable to convert the response body into ${typeInfo.toDisplayableString()}.")
+        val message =
+            context.message("Unable to convert the response body into ${typeInfo.toDisplayableString()}. Verify that the ContentNegotiation feature is installed on the HttpClient using `Modules.JSON`.")
         GetResult.Failure.Serialization(this, message, ex)
     }
 }

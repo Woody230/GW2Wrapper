@@ -8,9 +8,9 @@ import io.ktor.client.request.*
 
 data class ResourceDependencies(
     val httpClient: HttpClient,
-    val defaultOptions: DefaultGw2HttpOptions
+    val defaultOptions: DefaultGw2HttpOptions = DefaultGw2HttpOptions
 ) {
-    fun resourceOptions(
+    internal fun resourceOptions(
         path: String,
         scopes: Collection<Scope> = emptyList(),
         guildScopes: Collection<GuildScope> = emptyList(),

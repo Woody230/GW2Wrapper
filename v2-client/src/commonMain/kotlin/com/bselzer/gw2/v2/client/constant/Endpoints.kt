@@ -14,5 +14,5 @@ internal object Endpoints {
     /**
      * The base url.
      */
-    const val BASE_URL = "https://api.guildwars2.com/v2/"
+    const val BASE_URL = "https://api.guildwars2.com/v2"
 }
