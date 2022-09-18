@@ -1,9 +1,9 @@
 package com.bselzer.gw2.v2.client.instance.search
 
 import com.bselzer.gw2.v2.client.instance.base.GetResource
+import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceContext
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
-import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
-import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
+import com.bselzer.gw2.v2.client.options.Gw2Options
 import com.bselzer.gw2.v2.client.request.search.GetByOutput
 import com.bselzer.gw2.v2.client.result.GetResult
 import com.bselzer.ktx.client.GenericTypeInfo
@@ -20,12 +20,12 @@ class GetByOutputResource<Model, Output> @PublishedApi internal constructor(
     private fun Output.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()}s with output $this." }
     private fun Output.parameters(): HttpRequestBuilder.() -> Unit = { parameter("output", this@parameters) }
 
-    override suspend fun byOutput(output: Output, options: Gw2HttpOptions): GetResult<List<Model>> = options.get(output.context(), output.parameters())
-    override suspend fun byOutputOrThrow(output: Output, options: Gw2HttpOptions): List<Model> = byOutput(output, options).getOrThrow()
-    override suspend fun byOutputOrEmpty(output: Output, options: Gw2HttpOptions): List<Model> = byOutput(output, options).getOrNull() ?: emptyList()
+    override suspend fun byOutput(output: Output, options: Gw2Options): GetResult<List<Model>> = options.get(output.context(), output.parameters())
+    override suspend fun byOutputOrThrow(output: Output, options: Gw2Options): List<Model> = byOutput(output, options).getOrThrow()
+    override suspend fun byOutputOrEmpty(output: Output, options: Gw2Options): List<Model> = byOutput(output, options).getOrNull() ?: emptyList()
 }
 
-inline fun <reified Model, Output> ResourceDependencies.getByOutputResource(
+inline fun <reified Model, Output> Gw2ResourceContext.getByOutputResource(
     options: Gw2ResourceOptions
 ): GetByOutputResource<Model, Output> = GetByOutputResource(
     httpClient,

@@ -1,7 +1,8 @@
 package com.bselzer.gw2.v2.client.instance.base
 
+import com.bselzer.gw2.v2.client.constant.Endpoints
 import com.bselzer.gw2.v2.client.constant.Headers
-import com.bselzer.gw2.v2.client.options.DefaultGw2HttpOptions
+import com.bselzer.gw2.v2.client.options.Gw2Options
 import com.bselzer.gw2.v2.client.options.Gw2RequestOptions
 import com.bselzer.gw2.v2.scope.core.Scope
 import com.bselzer.gw2.v2.scope.guild.GuildScope
@@ -30,53 +31,33 @@ interface Gw2ResourceOptions {
         get() = emptyList()
 
     /**
-     * The customizations specific to the endpoint.
-     */
-    val customizations: HttpRequestBuilder.() -> Unit
-        get() = {}
-
-    /**
      * The options to use by default if they are not provided with the request.
      */
-    val defaultOptions: DefaultGw2HttpOptions
-
-    /**
-     * The [DefaultGw2HttpOptions.baseUrl] and the [path].
-     */
-    val url: Url
-        get() = URLBuilder().apply {
-            takeFrom(defaultOptions.baseUrl)
-            appendPathSegments(path)
-        }.build()
+    val defaultOptions: Gw2Options
 
     /**
      * Creates the [HttpRequestBuilder] block in the following order:
      *
-     * The [DefaultGw2HttpOptions.baseUrl] and [path] as the url.
+     * The [Gw2RequestOptions.url] as the url.
      *
-     * The [Gw2RequestOptions.schemaVersion] or [DefaultGw2HttpOptions.schemaVersion] as a header if it exists.
+     * The [Gw2RequestOptions.schemaVersion] as a header if it exists.
      *
-     * The [Gw2RequestOptions.language] or [DefaultGw2HttpOptions.language] as a header if it exists.
+     * The [Gw2RequestOptions.language] as a header if it exists.
      *
-     * The [Gw2RequestOptions.token] or [DefaultGw2HttpOptions.token] as a header if it exists.
+     * The [Gw2RequestOptions.token] as a header if it exists.
      *
      * Customizations are applied in the following order:
      *
-     * [DefaultGw2HttpOptions.customizations]
-     *
-     * The [Gw2ResourceOptions.customizations].
+     * [Gw2RequestOptions.customizations]
      *
      * The given [customizations].
-     *
-     * The [Gw2RequestOptions.customizations].
      */
     fun Gw2RequestOptions.configure(customizations: HttpRequestBuilder.() -> Unit): HttpRequestBuilder.() -> Unit = {
-        url(this@Gw2ResourceOptions.url)
+        val merged = defaultOptions.request.merge(this@configure)
+        url(merged.url.url)
 
-        val merged = defaultOptions.merge(this@configure) {
-            apply(this@Gw2ResourceOptions.customizations)
-            apply(customizations)
-        }
+        apply(merged.customizations)
+        apply(customizations)
 
         appendIfNameAbsent(Headers.SCHEMA_VERSION, merged.schemaVersion)
         appendIfNameAbsent(HttpHeaders.AcceptLanguage, merged.language)
@@ -93,18 +74,18 @@ interface Gw2ResourceOptions {
     }
 
     /**
-     * Coerces the [Gw2RequestOptions.pageSize] between a range of 1 to [DefaultGw2HttpOptions.Companion.pageSize] inclusive.
+     * Coerces the [Gw2RequestOptions.pageSize] between a range of 1 to 200 inclusive.
      */
     fun Gw2RequestOptions.coercedPageSize(): Int {
-        val pageSize = defaultOptions.merge(this).pageSize ?: DefaultGw2HttpOptions.pageSize
-        return pageSize.coerceAtLeast(1).coerceAtMost(DefaultGw2HttpOptions.pageSize)
+        val default = Endpoints.MAXIMUM_PAGE_SIZE
+        val pageSize = defaultOptions.request.merge(this).pageSize ?: default
+        return pageSize.coerceAtLeast(1).coerceAtMost(default)
     }
 }
 
 data class ResourceOptions(
-    override val defaultOptions: DefaultGw2HttpOptions = DefaultGw2HttpOptions,
+    override val defaultOptions: Gw2Options,
     override val path: String,
     override val scopes: Collection<Scope> = emptyList(),
     override val guildScopes: Collection<GuildScope> = emptyList(),
-    override val customizations: HttpRequestBuilder.() -> Unit = {}
 ) : Gw2ResourceOptions

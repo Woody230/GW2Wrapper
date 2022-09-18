@@ -1,10 +1,9 @@
 package com.bselzer.gw2.v2.client.instance.token
 
 import com.bselzer.gw2.v2.client.instance.base.ConvertibleGetResource
+import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceContext
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
-import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
-import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
-import com.bselzer.gw2.v2.client.options.Gw2RequestOptions
+import com.bselzer.gw2.v2.client.options.Gw2Options
 import com.bselzer.gw2.v2.client.request.token.CreateSubToken
 import com.bselzer.gw2.v2.client.result.GetResult
 import com.bselzer.gw2.v2.client.result.Gw2Result
@@ -36,10 +35,10 @@ class CreateSubTokenResource @PublishedApi internal constructor(
         parameter("urls", urls.joinToString(","))
     }
 
-    override suspend fun create(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2HttpOptions): GetResult<SubToken> {
+    override suspend fun create(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2Options): GetResult<SubToken> {
         // Validate that the token exists.
-        if (defaultOptions.merge(options as Gw2RequestOptions).token == null) {
-            val failure = Gw2Result.Failure.Request("A token is required in order to create a sub-token.").apply(options.onFailure)
+        if (options.request.token == null) {
+            val failure = Gw2Result.Failure.Request("A token is required in order to create a sub-token.").apply(options.response.onFailure)
             return GetResult.Failure.Gw2(failure)
         }
 
@@ -48,15 +47,15 @@ class CreateSubTokenResource @PublishedApi internal constructor(
         return options.get(context, parameters) { result -> GetResult.Success(result.response, result.body.subtoken) }
     }
 
-    override suspend fun createOrThrow(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2HttpOptions): SubToken {
+    override suspend fun createOrThrow(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2Options): SubToken {
         return create(expiration, permissions, urls, options).getOrThrow()
     }
 
-    override suspend fun createOrNull(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2HttpOptions): SubToken? {
+    override suspend fun createOrNull(expiration: Instant, permissions: List<Permission>, urls: List<String>, options: Gw2Options): SubToken? {
         return create(expiration, permissions, urls, options).getOrNull()
     }
 }
 
-fun ResourceDependencies.createSubTokenResource(
+fun Gw2ResourceContext.createSubTokenResource(
     options: Gw2ResourceOptions
 ): CreateSubTokenResource = CreateSubTokenResource(httpClient, options)

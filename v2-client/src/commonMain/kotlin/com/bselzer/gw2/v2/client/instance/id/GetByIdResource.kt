@@ -1,9 +1,9 @@
 package com.bselzer.gw2.v2.client.instance.id
 
 import com.bselzer.gw2.v2.client.instance.base.GetResource
+import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceContext
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
-import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
-import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
+import com.bselzer.gw2.v2.client.options.Gw2Options
 import com.bselzer.gw2.v2.client.request.id.GetById
 import com.bselzer.gw2.v2.client.result.GetResult
 import com.bselzer.ktx.client.GenericTypeInfo
@@ -25,13 +25,13 @@ class GetByIdResource<Model, Id, Value> @PublishedApi internal constructor(
     private fun Id.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} with id $this." }
     private fun Id.parameters(): HttpRequestBuilder.() -> Unit = { parameter("id", value) }
 
-    override suspend fun byId(id: Id, options: Gw2HttpOptions): GetResult<Model> = options.get(id.context(), id.parameters())
-    override suspend fun byIdOrThrow(id: Id, options: Gw2HttpOptions): Model = byId(id, options).getOrThrow()
-    override suspend fun byIdOrDefault(id: Id, options: Gw2HttpOptions): Model = byIdOrNull(id, options) ?: defaultById(id)
-    override suspend fun byIdOrNull(id: Id, options: Gw2HttpOptions): Model? = byId(id, options).getOrNull()
+    override suspend fun byId(id: Id, options: Gw2Options): GetResult<Model> = options.get(id.context(), id.parameters())
+    override suspend fun byIdOrThrow(id: Id, options: Gw2Options): Model = byId(id, options).getOrThrow()
+    override suspend fun byIdOrDefault(id: Id, options: Gw2Options): Model = byIdOrNull(id, options) ?: defaultById(id)
+    override suspend fun byIdOrNull(id: Id, options: Gw2Options): Model? = byId(id, options).getOrNull()
 }
 
-inline fun <reified Model, Id, Value> ResourceDependencies.getByIdResource(
+inline fun <reified Model, Id, Value> Gw2ResourceContext.getByIdResource(
     options: Gw2ResourceOptions,
     noinline defaultById: (Id) -> Model,
 ): GetByIdResource<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> =

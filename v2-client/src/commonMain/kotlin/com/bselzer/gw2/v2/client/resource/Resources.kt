@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.client.resource
 
 import com.bselzer.gw2.v2.client.instance.base.Gw2Resource
-import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
+import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceContext
 import com.bselzer.gw2.v2.client.instance.model.getModelResource
 import com.bselzer.gw2.v2.client.instance.model.getModelsResource
 import com.bselzer.gw2.v2.client.request.model.GetModel
@@ -14,7 +14,7 @@ import com.bselzer.gw2.v2.scope.core.Permission
 import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
 
-fun ResourceDependencies.accountResource(): AccountResource {
+fun Gw2ResourceContext.accountResource(): AccountResource {
     val options = resourceOptions(
         path = "account",
         scopes = listOf(
@@ -27,7 +27,7 @@ fun ResourceDependencies.accountResource(): AccountResource {
     return object : AccountResource, Gw2Resource by delegate, GetModel<Account> by delegate {}
 }
 
-fun ResourceDependencies.accountAchievementResource(): AccountAchievementResource {
+fun Gw2ResourceContext.accountAchievementResource(): AccountAchievementResource {
     val options = resourceOptions(
         path = "account/achievements",
         scopes = listOf(

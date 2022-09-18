@@ -1,9 +1,9 @@
 package com.bselzer.gw2.v2.client.instance.id
 
 import com.bselzer.gw2.v2.client.instance.base.GetResource
+import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceContext
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
-import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
-import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
+import com.bselzer.gw2.v2.client.options.Gw2Options
 import com.bselzer.gw2.v2.client.request.id.GetIds
 import com.bselzer.gw2.v2.client.result.GetResult
 import com.bselzer.ktx.client.GenericTypeInfo
@@ -23,12 +23,12 @@ class GetIdsResource<Id> @PublishedApi internal constructor(
     private val context: () -> String = { "Request for ${idTypeInfo.toDisplayableString()}s." }
     private val parameters: HttpRequestBuilder.() -> Unit = {}
 
-    override suspend fun ids(options: Gw2HttpOptions): GetResult<List<Id>> = options.get(context, parameters)
-    override suspend fun idsOrThrow(options: Gw2HttpOptions): List<Id> = ids(options).getOrThrow()
-    override suspend fun idsOrEmpty(options: Gw2HttpOptions): List<Id> = ids(options).getOrNull() ?: emptyList()
+    override suspend fun ids(options: Gw2Options): GetResult<List<Id>> = options.get(context, parameters)
+    override suspend fun idsOrThrow(options: Gw2Options): List<Id> = ids(options).getOrThrow()
+    override suspend fun idsOrEmpty(options: Gw2Options): List<Id> = ids(options).getOrNull() ?: emptyList()
 }
 
-inline fun <reified Id> ResourceDependencies.getIdsResource(
+inline fun <reified Id> Gw2ResourceContext.getIdsResource(
     options: Gw2ResourceOptions
 ): GetIdsResource<Id> where Id : Identifier<*> = GetIdsResource(
     httpClient,

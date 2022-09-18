@@ -5,14 +5,10 @@ package com.bselzer.gw2.v2.client.constant
  */
 internal object Endpoints {
     const val SCHEMA_VERSION = "2022-03-24T00:00:00Z"
+    const val HOST = "api.guildwars2.com/v2"
 
     /**
      * The maximum page size across all endpoints.
      */
     const val MAXIMUM_PAGE_SIZE = 200
-
-    /**
-     * The base url.
-     */
-    const val BASE_URL = "https://api.guildwars2.com/v2"
 }

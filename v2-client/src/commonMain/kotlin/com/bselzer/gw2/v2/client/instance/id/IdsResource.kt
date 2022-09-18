@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.client.instance.id
 
+import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceContext
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
-import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.request.id.GetById
 import com.bselzer.gw2.v2.client.request.id.GetByIds
 import com.bselzer.gw2.v2.client.request.id.GetIds
@@ -27,7 +27,7 @@ class IdsResource<Model, Id, Value> @PublishedApi internal constructor(
     GetIds<Id> by GetIdsResource(httpClient, options, idTypeInfo)
         where Id : Identifier<Value>, Model : Identifiable<Id, Value>
 
-inline fun <reified Model, reified Id, Value> ResourceDependencies.idsResource(
+inline fun <reified Model, reified Id, Value> Gw2ResourceContext.idsResource(
     options: Gw2ResourceOptions,
     noinline defaultById: (Id) -> Model,
 ): IdsResource<Model, Id, Value> where Id : Identifier<Value>, Model : Identifiable<Id, Value> =

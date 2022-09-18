@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.client.instance.tab
 
+import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceContext
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
-import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
 import com.bselzer.gw2.v2.client.request.tab.*
 import com.bselzer.ktx.client.GenericTypeInfo
 import com.bselzer.ktx.client.genericTypeInfo
@@ -25,7 +25,7 @@ class AllTabsResource<Model, Tab, Value> @PublishedApi internal constructor(
     GetTabs<Tab> by GetTabsResource(httpClient, options, tabTypeInfo)
         where Tab : Identifier<Value>, Model : Identifiable<Tab, Value>
 
-inline fun <reified Model, reified Tab, Value> ResourceDependencies.allTabsResource(
+inline fun <reified Model, reified Tab, Value> Gw2ResourceContext.allTabsResource(
     options: Gw2ResourceOptions,
     noinline defaultByTab: (Tab) -> Model,
 ): AllTabsResource<Model, Tab, Value> where Tab : Identifier<Value>, Model : Identifiable<Tab, Value> =

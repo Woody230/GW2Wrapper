@@ -1,6 +1,6 @@
 package com.bselzer.gw2.v2.client.instance.base
 
-import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
+import com.bselzer.gw2.v2.client.options.Gw2Options
 import com.bselzer.gw2.v2.client.result.Gw2Result
 import com.bselzer.gw2.v2.client.result.HttpError.Companion.error
 import io.ktor.client.*
@@ -17,17 +17,20 @@ abstract class Resource : Gw2Resource {
 
     /**
      * [configure]s the [HttpClient] customizations and executes the request.
-     * If an exception occurs during this process, then the result fails with a [Gw2Result.Failure.Request] and [Gw2HttpOptions.onFailure] is applied.
-     * Otherwise the result succeeds with a [Gw2Result.Success] and [Gw2HttpOptions.onSuccess] is applied.
+     * If an exception occurs during this process, then the result fails with a [Gw2Result.Failure.Request] and [Gw2Options.onFailure] is applied.
+     * Otherwise the result succeeds with a [Gw2Result.Success] and [Gw2Options.onSuccess] is applied.
      *
      * @param context The type of request being made, which should include any important information being used in the request.
      * @param customizations The [HttpClient] customizations specific to this implementation of the request.
      * @return The [HttpResponse] on [Gw2Result.Success], otherwise [Gw2Result.Failure].
      * @see [configure]
      */
-    protected suspend fun Gw2HttpOptions.response(context: () -> String, customizations: HttpRequestBuilder.() -> Unit): Gw2Result {
+    protected suspend fun Gw2Options.response(context: () -> String, customizations: HttpRequestBuilder.() -> Unit): Gw2Result {
+        val onSuccess = response.onSuccess
+        val onFailure = response.onFailure
+
         val configured = try {
-            configure(customizations)
+            request.configure(customizations)
         } catch (ex: Exception) {
             val message = context.message("Failed to configure the HttpClient customizations.")
             return Gw2Result.Failure.Request(message, ex).apply(onFailure)
@@ -36,7 +39,7 @@ abstract class Resource : Gw2Resource {
         val response = try {
             httpClient.request(configured)
         } catch (ex: Exception) {
-            val message = context.message("Failed to make the request to ${url}.")
+            val message = context.message("Failed to make the request to ${defaultOptions.request.merge(request).url.url}.")
             return Gw2Result.Failure.Request(message, ex).apply(onFailure)
         }
 

@@ -1,9 +1,9 @@
 package com.bselzer.gw2.v2.client.instance.model
 
 import com.bselzer.gw2.v2.client.instance.base.ConvertibleGetResource
+import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceContext
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
-import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
-import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
+import com.bselzer.gw2.v2.client.options.Gw2Options
 import com.bselzer.gw2.v2.client.request.model.GetModel
 import com.bselzer.gw2.v2.client.result.GetResult
 import com.bselzer.ktx.client.GenericTypeInfo
@@ -22,16 +22,16 @@ class ConvertibleGetModelResource<ResponseModel, ResultModel> @PublishedApi inte
     private val parameters: HttpRequestBuilder.() -> Unit = { }
 
     override suspend fun model(
-        options: Gw2HttpOptions
+        options: Gw2Options
     ): GetResult<ResultModel> = options.get(context, parameters) { result ->
         GetResult.Success(result.response, convert(result.body))
     }
 
-    override suspend fun modelOrThrow(options: Gw2HttpOptions): ResultModel = model(options).getOrThrow()
-    override suspend fun modelOrNull(options: Gw2HttpOptions): ResultModel? = model(options).getOrNull()
+    override suspend fun modelOrThrow(options: Gw2Options): ResultModel = model(options).getOrThrow()
+    override suspend fun modelOrNull(options: Gw2Options): ResultModel? = model(options).getOrNull()
 }
 
-inline fun <reified ResponseModel, reified ResultModel> ResourceDependencies.convertibleGetModelResource(
+inline fun <reified ResponseModel, reified ResultModel> Gw2ResourceContext.convertibleGetModelResource(
     options: Gw2ResourceOptions,
     noinline convert: (ResponseModel) -> ResultModel
 ): ConvertibleGetModelResource<ResponseModel, ResultModel> = ConvertibleGetModelResource(

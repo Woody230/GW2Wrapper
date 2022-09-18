@@ -1,9 +1,9 @@
 package com.bselzer.gw2.v2.client.instance.exchange
 
 import com.bselzer.gw2.v2.client.instance.base.GetResource
+import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceContext
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
-import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
-import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
+import com.bselzer.gw2.v2.client.options.Gw2Options
 import com.bselzer.gw2.v2.client.request.exchange.GetByQuantity
 import com.bselzer.gw2.v2.client.result.GetResult
 import com.bselzer.ktx.client.GenericTypeInfo
@@ -20,12 +20,12 @@ class GetByQuantityResource<Model, Quantity> @PublishedApi internal constructor(
     private fun Quantity.context(): () -> String = { "Request for ${modelTypeInfo.toDisplayableString()} in an exchange of $this ${quantityTypeInfo.toDisplayableString()}." }
     private fun Quantity.parameters(): HttpRequestBuilder.() -> Unit = { parameter("quantity", this@parameters) }
 
-    override suspend fun byQuantity(quantity: Quantity, options: Gw2HttpOptions): GetResult<Model> = options.get(quantity.context(), quantity.parameters())
-    override suspend fun byQuantityOrThrow(quantity: Quantity, options: Gw2HttpOptions): Model = byQuantity(quantity, options).getOrThrow()
-    override suspend fun byQuantityOrNull(quantity: Quantity, options: Gw2HttpOptions): Model? = byQuantity(quantity, options).getOrNull()
+    override suspend fun byQuantity(quantity: Quantity, options: Gw2Options): GetResult<Model> = options.get(quantity.context(), quantity.parameters())
+    override suspend fun byQuantityOrThrow(quantity: Quantity, options: Gw2Options): Model = byQuantity(quantity, options).getOrThrow()
+    override suspend fun byQuantityOrNull(quantity: Quantity, options: Gw2Options): Model? = byQuantity(quantity, options).getOrNull()
 }
 
-inline fun <reified Model, reified Quantity> ResourceDependencies.getByQuantityResource(
+inline fun <reified Model, reified Quantity> Gw2ResourceContext.getByQuantityResource(
     options: Gw2ResourceOptions
 ): GetByQuantityResource<Model, Quantity> = GetByQuantityResource(
     httpClient,

@@ -22,8 +22,8 @@ import org.kodein.db.getById
 suspend fun <Model : Identifiable<Id, Value>, Id : Identifier<Value>, Value> Transaction.putMissingTranslations(
     translator: Translator<Model>,
     defaults: Collection<Model>,
-    language: Language,
-    requestTranslated: suspend (Collection<Id>, Language) -> Collection<Model>
+    language: String,
+    requestTranslated: suspend (Collection<Id>, String) -> Collection<Model>
 ): Map<String, String> {
     val defaultToTranslation = mutableMapOf<String, String>()
 
@@ -31,7 +31,7 @@ suspend fun <Model : Identifiable<Id, Value>, Id : Identifier<Value>, Value> Tra
     val texts = defaults.associateWith { default -> translator.texts(default) }
     val translations: Map<Model, List<Translation>> = texts.mapValues { model ->
         model.value.mapNotNull { default ->
-            val id = org.kodein.db.Value.of(default, language.value)
+            val id = org.kodein.db.Value.of(default, language)
             getById<Translation>(id)?.also { translation ->
                 defaultToTranslation[default] = translation.translated
             }
@@ -48,7 +48,7 @@ suspend fun <Model : Identifiable<Id, Value>, Id : Identifier<Value>, Value> Tra
         val translated = requestTranslated(missing.keys.map { default -> default.id }, language).associateBy { translated -> translated.id }
         missing.keys.associateWith { default -> translated[default.id] }.forEach { (default, translated) ->
             if (translated != null) {
-                translator.translations(default = default, translated = translated, language = language.value).forEach { translation ->
+                translator.translations(default = default, translated = translated, language = language).forEach { translation ->
                     defaultToTranslation[translation.default] = translation.translated
                     put(translation)
                 }

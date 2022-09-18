@@ -1,9 +1,9 @@
 package com.bselzer.gw2.v2.client.instance.tab
 
 import com.bselzer.gw2.v2.client.instance.base.GetResource
+import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceContext
 import com.bselzer.gw2.v2.client.instance.base.Gw2ResourceOptions
-import com.bselzer.gw2.v2.client.instance.base.ResourceDependencies
-import com.bselzer.gw2.v2.client.options.Gw2HttpOptions
+import com.bselzer.gw2.v2.client.options.Gw2Options
 import com.bselzer.gw2.v2.client.request.tab.GetByActiveTab
 import com.bselzer.gw2.v2.client.result.GetResult
 import com.bselzer.ktx.client.GenericTypeInfo
@@ -24,12 +24,12 @@ class GetByActiveTabResource<Model, Tab, Value> @PublishedApi internal construct
         url { appendPathSegments("active") }
     }
 
-    override suspend fun byActiveTab(options: Gw2HttpOptions): GetResult<Model> = options.get(context, parameters)
-    override suspend fun byActiveTabOrThrow(options: Gw2HttpOptions): Model = byActiveTab(options).getOrThrow()
-    override suspend fun byActiveTabOrNull(options: Gw2HttpOptions): Model? = byActiveTab(options).getOrNull()
+    override suspend fun byActiveTab(options: Gw2Options): GetResult<Model> = options.get(context, parameters)
+    override suspend fun byActiveTabOrThrow(options: Gw2Options): Model = byActiveTab(options).getOrThrow()
+    override suspend fun byActiveTabOrNull(options: Gw2Options): Model? = byActiveTab(options).getOrNull()
 }
 
-inline fun <reified Model, Tab, Value> ResourceDependencies.getByActiveTabResource(
+inline fun <reified Model, Tab, Value> Gw2ResourceContext.getByActiveTabResource(
     options: Gw2ResourceOptions
 ): GetByActiveTabResource<Model, Tab, Value> where Tab : Identifier<Value>, Model : Identifiable<Tab, Value> =
     GetByActiveTabResource(
