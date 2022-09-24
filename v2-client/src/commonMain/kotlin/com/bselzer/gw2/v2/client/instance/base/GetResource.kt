@@ -1,6 +1,7 @@
 package com.bselzer.gw2.v2.client.instance.base
 
 import com.bselzer.gw2.v2.client.options.Gw2Options
+import com.bselzer.gw2.v2.client.options.Gw2ResponseOptions
 import com.bselzer.gw2.v2.client.result.GetResult
 import com.bselzer.gw2.v2.client.result.Gw2Result
 import com.bselzer.ktx.client.GenericTypeInfo
@@ -20,10 +21,10 @@ abstract class GetResource<Model>(
 
     /**
      * [configure]s the [HttpClient] customizations and executes the request.
-     * If an exception occurs during this process, then the result fails with a [GetResult.Failure.Gw2] and [Gw2Options.onFailure]/[Gw2Options.onGetFailure] is applied.
+     * If an exception occurs during this process, then the result fails with a [GetResult.Failure.Gw2] and [Gw2ResponseOptions.onFailure]/[Gw2ResponseOptions.onGetFailure] is applied.
      *
-     * If the response is successful, then the response body is converted into the [Model] and the [Gw2Options.onGetSuccess] is applied.
-     * If an exception occurs during this process, then the result fails with a [GetResult.Failure.Serialization] and [Gw2Options.onGetFailure] is applied.
+     * If the response is successful, then the response body is converted into the [Model] and the [Gw2ResponseOptions.onGetSuccess] is applied.
+     * If an exception occurs during this process, then the result fails with a [GetResult.Failure.Serialization] and [Gw2ResponseOptions.onGetFailure] is applied.
      *
      * @param context The type of request being made, which should include any important information being used in the request.
      * @param customizations The [HttpClient] customizations specific to this implementation of the request.
