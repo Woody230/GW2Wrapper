@@ -1,0 +1,86 @@
+paths:
+  /tokeninfo:
+    get:
+      tags: [ getModel ]
+      operationId: getTokenInformation
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/tokeninfo
+      security:
+        - Bearer: [ account ]
+      responses:
+        "200":
+          description: This resource returns information about the supplied API key.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenInfo"
+              example: '{"id":"180417F8-CD6D-4E45-8BB4-4799593D62F7","name":"Test","permissions":["tradingpost","characters","pvp","progression","wallet","guilds","builds","account","inventories","unlocks"],"type":"APIKey"}'
+components:
+  schemas:
+    Token:
+      type: string
+      x-ktx-id: true
+
+    ApiKey:
+      $ref: "#/components/schemas/Token"
+
+    SubToken:
+      $ref: "#/components/schemas/Token"
+
+    TokenInfoType:
+      type: string
+      oneOf:
+        - const: APIKey
+        - const: Subtoken
+
+    # TODO identifiable generic parameter
+    TokenInfo:
+      type: object
+      discriminator:
+        propertyName: type
+        mapping:
+          APIKey: "#/components/schemas/ApiKeyInfo"
+          Subtoken: "#/components/schemas/SubTokenInfo"
+      required: [ type,name,permissions ]
+      properties:
+        type:
+          $ref: "#/components/schemas/TokenInfoType"
+        name:
+          type: string
+          description: The name of the token, given by the owner.
+        permissions:
+          type: array
+          description: The permissions accessible by the token.
+          items:
+            $ref: "#/components/schemas/Permission"
+
+      ApiKeyInfo:
+        allOf:
+          - $ref: "#/components/schemas/TokenInfo"
+          - type: object
+            required: [ id ]
+            properties:
+              id:
+                $ref: "#/components/schemas/ApiKey"
+
+      SubTokenInfo:
+        allOf:
+          - $ref: "#/components/schemas/TokenInfo"
+          - type: object
+            required: [ id ]
+            properties:
+              id:
+                $ref: "#/components/schemas/SubToken"
+              expires_at:
+                type: string
+                format: date-time
+              issued_at:
+                type: string
+                format: date-time
+              urls:
+                type: [ array, "null" ]
+                description: The collection of available endpoints if the token is restricted.
+                items:
+                  $ref: "#/components/schemas/Url"
+    
+    

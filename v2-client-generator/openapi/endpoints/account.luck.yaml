@@ -1,0 +1,30 @@
+paths:
+  /account/luck:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,progression,unlocks ]
+      operationId: getAccountLuck
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/luck
+      responses:
+        "200":
+          description: This resource returns the total amount of luck consumed on an account.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountLuck"
+              example: '[{"id":"luck","value":1704730}]'
+components:
+  schemas:
+    AccountLuck:
+      type: object
+      required: [ id, value ]
+      properties:
+        id:
+          type: string
+        value:
+          type: integer
+          description: The amount of luck consumed.

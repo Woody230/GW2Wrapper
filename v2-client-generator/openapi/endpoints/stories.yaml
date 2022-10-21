@@ -1,0 +1,150 @@
+paths:
+  /stories:
+    get:
+      tags: [ getIds ]
+      operationId: getStoryIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/stories
+      responses:
+        "200":
+          description: This resource returns information about the Story Journal stories; including the personal story and Living World.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StoryId"
+              example: '[1,2,3,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,25,26,27,31,32,33,34,35,36,39,41,42,46,56,63,64,65,66,67,68,69,71,72,75,76,78,79,80,81,82,83,85,86,87,88,89,90,91,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118]'
+  /stories?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getStoriesByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/stories
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/StoryId"
+      responses:
+        "200":
+          description: This resource returns information about the Story Journal stories; including the personal story and Living World.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Story"
+              example: '[{"id":1,"season":"215AAA0F-CDAC-4F93-86DA-C155A99B5784","name":"My Story","description":"","timeline":"1325 AE","level":1,"races":["Charr"],"order":0,"chapters":[{"name":"1. Getting the Band Back Together"},{"name":"2. Sins of the Father"},{"name":"3. Crystal Corruption"}]},{"id":2,"season":"215AAA0F-CDAC-4F93-86DA-C155A99B5784","name":"My Story","description":"","timeline":"1325 AE","level":1,"races":["Norn"],"order":0,"chapters":[{"name":"1. Forging a Legend"},{"name":"2. Everyone Makes Mistakes"},{"name":"3. Death from Below"}]}]'
+  /stories?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getStoriesByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/stories
+      responses:
+        "200":
+          description: This resource returns information about the Story Journal stories; including the personal story and Living World.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Story"
+              example: '[{"id":1,"season":"215AAA0F-CDAC-4F93-86DA-C155A99B5784","name":"My Story","description":"","timeline":"1325 AE","level":1,"races":["Charr"],"order":0,"chapters":[{"name":"1. Getting the Band Back Together"},{"name":"2. Sins of the Father"},{"name":"3. Crystal Corruption"}]},{"id":2,"season":"215AAA0F-CDAC-4F93-86DA-C155A99B5784","name":"My Story","description":"","timeline":"1325 AE","level":1,"races":["Norn"],"order":0,"chapters":[{"name":"1. Forging a Legend"},{"name":"2. Everyone Makes Mistakes"},{"name":"3. Death from Below"}]}]'
+  /stories?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getStoriesByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/stories
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information about the Story Journal stories; including the personal story and Living World.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Story"
+              example: '[{"id":1,"season":"215AAA0F-CDAC-4F93-86DA-C155A99B5784","name":"My Story","description":"","timeline":"1325 AE","level":1,"races":["Charr"],"order":0,"chapters":[{"name":"1. Getting the Band Back Together"},{"name":"2. Sins of the Father"},{"name":"3. Crystal Corruption"}]},{"id":2,"season":"215AAA0F-CDAC-4F93-86DA-C155A99B5784","name":"My Story","description":"","timeline":"1325 AE","level":1,"races":["Norn"],"order":0,"chapters":[{"name":"1. Forging a Legend"},{"name":"2. Everyone Makes Mistakes"},{"name":"3. Death from Below"}]}]'
+  /stories/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getStoryById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/stories
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/StoryId"
+      responses:
+        "200":
+          description: This resource returns information about the Story Journal stories; including the personal story and Living World.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Story"
+              example: '{"id":1,"season":"215AAA0F-CDAC-4F93-86DA-C155A99B5784","name":"My Story","description":"","timeline":"1325 AE","level":1,"races":["Charr"],"order":0,"chapters":[{"name":"1. Getting the Band Back Together"},{"name":"2. Sins of the Father"},{"name":"3. Crystal Corruption"}]}'
+
+components:
+  schemas:
+    StoryId:
+      type: integer
+      x-ktx-id: true
+
+    Storage:
+      type: object
+      required: [ id,season,name,description,timeline,level,order,chapters ]
+      properties:
+        id:
+          $ref: "#/components/schemas/StoryId"
+        season:
+          $ref: "#/components/schemas/StorySeasonId"
+        name:
+          type: string
+          x-gw2-intl: true
+        description:
+          type: string
+          x-gw2-intl: true
+        timeline:
+          type: string
+          description: The in-game date this story occurs at.
+          x-gw2-intl: true
+        level:
+          allOf:
+            - $ref: "#/components/schemas/CharacterLevel"
+            - description: The minimum level required to begin this story.
+        order:
+          type: integer
+          description: The order this story gets displayed in the story journal.
+        chapters:
+          type: array
+          items:
+            $ref: "#/components/schemas/StoryChapter"
+        races:
+          type: array
+          description: The names of the races that can participate in this story. Empty if there are no race requirements.
+          items:
+            $ref: "#/components/schemas/RaceId"
+        flags:
+          type: array
+          description: The flags for additional requirements for being able to participate in this story. Empty if there are no additional requirements.
+          items:
+            type: string
+
+    StoryChapter:
+      type: object
+      required: [ name ]
+      properties:
+        name:
+          type: string
+          x-gw2-intl: true

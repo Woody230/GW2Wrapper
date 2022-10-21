@@ -1,0 +1,19 @@
+paths:
+  /account/dailycrafting:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,progression ]
+      operationId: getAccountDailyCrafting
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/dailycrafting
+      responses:
+        "200":
+          description: This resource returns information about time-gated recipes that have been crafted by the account since daily-reset.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DailyCraftingId"
+              example: '["lump_of_mithrilium","spool_of_silk_weaving_thread","spool_of_thick_elonian_cord"]'

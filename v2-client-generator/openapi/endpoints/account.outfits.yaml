@@ -1,0 +1,20 @@
+paths:
+  /account/outfits:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,unlocks ]
+      operationId: getAccountOutfits
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/outfits
+      responses:
+        "200":
+          description: This resource returns information about outfits that are unlocked for an account.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OutfitId"
+              example: '[12,27,95]'
+  

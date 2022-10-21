@@ -1,0 +1,44 @@
+paths:
+  /characters/{name}/training:
+    get:
+      tags: [ getModel ]
+      operationId: getCharacterTraining
+      security:
+        - Bearer: [ account,builds,characters ]
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/training
+      parameters:
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns information about the training of a character attached to a specific account.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CharacterTrainings"
+              example: '{"training":[{"id":23,"spent":15,"done":true},{"id":110,"spent":22,"done":true},{"id":29,"spent":24,"done":true},{"id":79,"spent":15,"done":true},{"id":38,"spent":22,"done":true},{"id":44,"spent":60,"done":true},{"id":22,"spent":60,"done":true},{"id":80,"spent":60,"done":true},{"id":28,"spent":60,"done":true},{"id":57,"spent":60,"done":true},{"id":108,"spent":250,"done":true},{"id":412,"spent":250,"done":true},{"id":465,"spent":250,"done":true}]}'
+components:
+  schemas:
+    CharacterTrainings:
+      type: object
+      required: [ training ]
+      properties:
+        training:
+          type: array
+          items:
+            $ref: "#/components/schemas/CharacterTraining"
+
+    CharacterTraining:
+      type: object
+      required: [ id,spent,done ]
+      properties:
+        id:
+          allOf:
+            - $ref: "#/components/schemas/TrainingId"
+            - description: The id of the skill tree associated with the profession's training.
+        spent:
+          type: integer
+          description: The number of hero points spent.
+        done:
+          type: boolean
+          description: Whether the skill tree is fully trained.

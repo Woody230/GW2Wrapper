@@ -1,0 +1,69 @@
+openapi: "3.1.0"
+info:
+  title: Guild Wars 2
+  version: "2"
+servers:
+  - url: https://api.guildwars2.com/v2
+tags:
+  - name: getModel
+    description: No special requirements for getting a model.
+  - name: getById
+    description: Get a model with a single ids.
+  - name: getByIds
+    description: Get model(s) with one or more ids.
+  - name: getIds
+    description: Get the ids associated with models.
+  - name: getByPage
+    description: Get model(s) with pagination.
+  - name: getByAllIds
+    description: Get model(s) using all ids without specifying them individually.
+components:
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+  responses:
+    "400":
+      description: The request is unable to be completed due to invalid or missing information.
+    "401":
+      description: The request is unable to be authorized due to invalid credentials.
+    "403":
+      description: The request is unable to be authorized due to missing permission(s).
+    "404":
+      description: The specified resource was not found.
+  parameters:
+    AccessToken:
+      name: access_token
+      in: query
+      description: The API key or subtoken.
+      required: false
+      schema:
+        $ref: "#/components/schemas/Token"
+    Page:
+      name: page
+      in: path
+      description: The page number for paginated responses.
+      required: true
+      schema:
+        type: integer
+        minimum: 0
+    PageSize:
+      name: page_size
+      in: query
+      description: The maximum number of items to include in the response.
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+  schemas:
+    ImageLink:
+      type: string
+      x-ktx-id: true
+
+    ChatLink:
+      type: string
+      x-ktx-id: true
+
+    Url:
+      type: string
+      x-ktx-id: true

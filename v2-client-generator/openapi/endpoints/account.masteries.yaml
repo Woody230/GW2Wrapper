@@ -1,0 +1,30 @@
+paths:
+  /account/masteries:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,progression ]
+      operationId: getAccountMasteries
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/masteries
+      responses:
+        "200":
+          description: This resource returns information about masteries that are unlocked for an account.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountMastery"
+              example: '[{"id":1,"level":4},{"id":2,"level":5},{"id":3,"level":5},{"id":4,"level":4},{"id":5,"level":3},{"id":6,"level":3},{"id":8,"level":5},{"id":12,"level":3},{"id":13,"level":5},{"id":14,"level":3},{"id":15,"level":4},{"id":16,"level":2},{"id":17,"level":3},{"id":18,"level":3},{"id":19,"level":3},{"id":20,"level":2},{"id":22,"level":3},{"id":23,"level":3},{"id":24,"level":3},{"id":25,"level":3},{"id":26,"level":5},{"id":27,"level":6}]'
+components:
+  schemas:
+    AccountMastery:
+      type: object
+      required: [ id ]
+      properties:
+        id:
+          $ref: "#/components/schemas/MasteryId"
+        level:
+          type: [ integer, "null" ]
+          description: The index into the Mastery.levels collection. If null, then the mastery has not been started.

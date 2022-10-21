@@ -1,0 +1,28 @@
+paths:
+  /pvp/seasons/{seasonId}/leaderboards/{leaderboardType}:
+    get:
+      tags: [ getModel ]
+      operationId: getPvpSeasonLeaderboardRegions
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/pvp/seasons/:id/leaderboards
+      parameters:
+        - $ref: "#/components/parameters/PvpSeasonId"
+        - $ref: "#/components/parameters/PvpLeaderboardType"
+      responses:
+        "200":
+          description: This resource returns information about regions of League season leaderboards.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PvpLeaderboardRegion"
+              example: '["na","eu"]'
+components:
+  parameters:
+    PvpLeaderboardType:
+      name: leaderboardType
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/PvpLeaderboardType"

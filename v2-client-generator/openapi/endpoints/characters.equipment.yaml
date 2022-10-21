@@ -1,0 +1,81 @@
+paths:
+  /characters/{name}/equipment:
+    get:
+      tags: [ getModel ]
+      operationId: getCharacterEquipment
+      security:
+        - Bearer: [ account,characters ]
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/equipment
+      parameters:
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns information about the equipment on a character attached to a specific account.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CharacterEquipments"
+              example: '{"equipment":[{"id":78382,"slot":"HelmAquatic","upgrades":[24806],"binding":"Character","bound_to":"Spectralstar","location":"Equipped","tabs":[1,2]},{"id":86979,"slot":"Backpack","infusions":[49431],"skin":8833,"stats":{"id":584,"attributes":{"Power":63,"Precision":40,"CritDamage":40}},"binding":"Account","location":"Equipped","tabs":[1],"dyes":[null,null,null,null]},{"id":83036,"slot":"Coat","upgrades":[24836],"infusions":[49431],"skin":5743,"stats":{"id":161,"attributes":{"Power":141,"Precision":101,"CritDamage":101}},"binding":"Account","location":"EquippedFromLegendaryArmory","tabs":[1],"dyes":[1152,1152,1152,null]},{"id":81500,"slot":"Boots","upgrades":[24836],"infusions":[49431],"skin":769,"stats":{"id":161,"attributes":{"Power":47,"Precision":34,"CritDamage":34}},"binding":"Account","location":"Equipped","tabs":[1],"dyes":[1152,1152,480,null]},{"id":81428,"slot":"Gloves","upgrades":[24836],"infusions":[49432],"skin":772,"stats":{"id":161,"attributes":{"Power":47,"Precision":34,"CritDamage":34}},"binding":"Account","location":"Equipped","tabs":[1],"dyes":[null,null,480,null]},{"id":81476,"slot":"Helm","upgrades":[24836],"infusions":[49432],"skin":6896,"stats":{"id":161,"attributes":{"Power":63,"Precision":45,"CritDamage":45}},"binding":"Account","location":"Equipped","tabs":[1],"dyes":[86,86,86,null]},{"id":83497,"slot":"Leggings","upgrades":[24836],"infusions":[49431],"skin":5726,"stats":{"id":161,"attributes":{"Power":94,"Precision":67,"CritDamage":67}},"binding":"Account","location":"EquippedFromLegendaryArmory","tabs":[1],"dyes":[1152,1152,1152,null]},{"id":81285,"slot":"Shoulders","upgrades":[24836],"infusions":[49432],"skin":775,"stats":{"id":161,"attributes":{"Power":47,"Precision":34,"CritDamage":34}},"binding":"Account","location":"Equipped","tabs":[1],"dyes":[null,null,480,null]},{"id":92706,"slot":"Accessory1","infusions":[49430],"stats":{"id":584,"attributes":{"Power":110,"Precision":74,"CritDamage":74}},"binding":"Account","location":"Equipped","tabs":[1]},{"id":39237,"slot":"Accessory2","infusions":[49431],"binding":"Account","location":"Equipped","tabs":[1]},{"id":75669,"slot":"Ring1","infusions":[49432,49432,49432],"binding":"Account","location":"Equipped","tabs":[1]},{"id":76024,"slot":"Ring2","infusions":[49432,49432,49432],"binding":"Account","location":"Equipped","tabs":[1]},{"id":39273,"slot":"Amulet","infusions":[87398],"binding":"Account","location":"Equipped","tabs":[1]},{"id":78461,"slot":"WeaponAquaticA","upgrades":[44944,24618],"binding":"Character","bound_to":"Spectralstar","location":"Equipped","tabs":[1,2]},{"id":78447,"slot":"WeaponAquaticB","upgrades":[44944,24618],"binding":"Character","bound_to":"Spectralstar","location":"Equipped","tabs":[1,2]},{"id":46762,"slot":"WeaponA1","upgrades":[24868,24615],"binding":"Account","location":"Equipped","tabs":[1]},{"id":46759,"slot":"WeaponB1","upgrades":[24615],"binding":"Account","location":"Equipped","tabs":[1]},{"id":46761,"slot":"WeaponB2","upgrades":[24868],"binding":"Account","location":"Equipped","tabs":[1]},{"id":78909,"slot":"Sickle","binding":"Account","location":"Equipped"},{"id":67394,"slot":"Axe","binding":"Account","location":"Equipped"},{"id":87422,"slot":"Pick","binding":"Account","location":"Equipped"},{"id":73562,"count":1,"upgrades":[24687],"skin":5743,"binding":"Character","bound_to":"Spectralstar","location":"Armory","tabs":[2],"dyes":[1152,1152,1152,null]},{"id":75850,"count":1,"upgrades":[24687],"skin":2264,"binding":"Character","bound_to":"Spectralstar","location":"Armory","tabs":[2],"dyes":[1152,1152,null,null]},{"id":76389,"count":1,"upgrades":[24687],"skin":772,"binding":"Character","bound_to":"Spectralstar","location":"Armory","tabs":[2],"dyes":[null,null,480,null]},{"id":74298,"count":1,"upgrades":[24687],"skin":6896,"binding":"Character","bound_to":"Spectralstar","location":"Armory","tabs":[2],"dyes":[86,86,86,null]},{"id":76455,"count":1,"upgrades":[24687],"skin":5726,"binding":"Character","bound_to":"Spectralstar","location":"Armory","tabs":[2],"dyes":[1152,1152,1152,null]},{"id":71226,"count":1,"upgrades":[24687],"skin":775,"binding":"Character","bound_to":"Spectralstar","location":"Armory","tabs":[2],"dyes":[null,null,480,null]},{"id":78275,"count":1,"upgrades":[24496],"skin":5544,"binding":"Character","bound_to":"Spectralstar","location":"Armory","tabs":[2],"dyes":[null,null,null,null]},{"id":39235,"count":1,"infusions":[49426],"binding":"Account","location":"Armory","tabs":[2]},{"id":39234,"count":1,"infusions":[49426],"binding":"Account","location":"Armory","tabs":[2]},{"id":37087,"count":1,"infusions":[49428],"binding":"Account","location":"Armory","tabs":[2]},{"id":37077,"count":1,"infusions":[49426],"binding":"Account","location":"Armory","tabs":[2]},{"id":39275,"count":1,"infusions":[87417],"binding":"Account","location":"Armory","tabs":[2]},{"id":96883,"count":1,"stats":{"id":1717,"attributes":{"Vitality":102,"ConditionDamage":102,"BoonDuration":56,"ConditionDuration":56}},"binding":"Character","bound_to":"Spectralstar","location":"Armory","tabs":[2]},{"id":72885,"count":1,"upgrades":[24612],"skin":6907,"binding":"Character","bound_to":"Spectralstar","location":"Armory","tabs":[2]},{"id":70918,"count":1,"upgrades":[24607],"skin":6920,"binding":"Character","bound_to":"Spectralstar","location":"Armory","tabs":[2]}]}'
+components:
+  schemas:
+    CharacterEquipments:
+      type: object
+      required: [ equipment ]
+      properties:
+        equipment:
+          type: array
+          description: The equipped items.
+          items:
+            $ref: "#/components/schemas/CharacterEquipment"
+
+    CharacterEquipment:
+      type: object
+      required: [ id, location ]
+      properties:
+        id:
+          $ref: "#/components/schemas/ItemId"
+        slot:
+          $ref: "#/components/schemas/EquipmentSlot"
+        skin:
+          $ref: "#/components/schemas/SkinId"
+        dyes:
+          type: array
+          description: The ids of the dyes. An id will be null if there is no selection.
+          items:
+            allOf:
+              - $ref: "#/components/schemas/DyeColorId"
+              - type: "null"
+        charges:
+          type: integer
+          description: The number of charges left.
+        upgrades:
+          type: array
+          description: The ids of the equipped upgrade components.
+          externalDocs:
+            url: https://wiki.guildwars2.com/wiki/Upgrade_component
+          items:
+            $ref: "#/components/schemas/ItemId"
+        infusions:
+          description: The ids of the infusions applied to the item.
+          type: array
+          externalDocs:
+            url: https://wiki.guildwars2.com/wiki/Infusion
+          items:
+            $ref: "#/components/schemas/ItemId"
+        binding:
+          allOf:
+            - $ref: "#/components/schemas/Binding"
+            - description: What owns this item. Null if there is no binding.
+              type: "null"
+        bound_to:
+          allOf:
+            - $ref: "#/components/schemas/CharacterName"
+            - description: Who owns this item. Null if the binding is NOT for a character.
+              type: "null"
+        stats:
+          type: array
+          externalDocs:
+            url: https://wiki.guildwars2.com/wiki/API:2/itemstats
+          items:
+            $ref: "#/components/schemas/CharacterItemStat"

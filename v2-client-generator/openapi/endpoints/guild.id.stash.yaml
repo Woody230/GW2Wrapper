@@ -1,0 +1,57 @@
+paths:
+  /guild/{guildId}/stash:
+    get:
+      tags: [ getModel ]
+      operationId: getGuildStash
+      security:
+        - Bearer: [ account,guilds ]
+      x-gw2-guild-scopes: [ leader ]
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/guild/:id/stash
+      parameters:
+        - $ref: "#/components/parameters/GuildId"
+      responses:
+        "200":
+          description: This resource returns information about the items in a guild's vault. The endpoint requires the scope guilds, and will only work if the API key is from the guild leader's account.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GuildStash"
+              example: '[{"upgrade_id":1,"size":10,"coins":100000,"note":"Take it all!","inventory":[{"id":1,"count":1},{"id":2,"count":10},{"id":3,"count":100},{"id":4,"count":200},{"id":5,"count":250},null,null,null,null,null]},{"upgrade_id":2,"size":1,"coins":10000000,"note":"Take it all!","inventory":[null]}]'
+components:
+  schemas:
+    GuildStash:
+      type: object
+      required: [ upgrade_id,size,coins,note,inventory ]
+      properties:
+        upgrade_id:
+          allOf:
+            - $ref: "#/components/schemas/GuildUpgradeId"
+            - description: The id of the upgrade that grants access to this section of the vault.
+        size:
+          type: integer
+          description: The number of slots in this section of the vault.
+        coins:
+          $ref: "#/components/schemas/Coins"
+        note:
+          type: string
+        inventory:
+          type: array
+          description: The items in the slots of this section of the vault. A slot is null if it is empty.
+          items:
+            allOf:
+              - $ref: "#/components/schemas/GuildStashSlot"
+              - type: "null"
+
+    GuildStashSlot:
+      type: object
+      required: [ id,count ]
+      properties:
+        id:
+          $ref: "#/components/schemas/ItemId"
+        count:
+          type: integer
+          description: The number of items in the stack.
+        

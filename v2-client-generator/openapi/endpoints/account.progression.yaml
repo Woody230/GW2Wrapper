@@ -1,0 +1,30 @@
+paths:
+  /account/progression:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,progression,unlocks ]
+      operationId: getAccountProgression
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/progression
+      responses:
+        "200":
+          description: This resource returns account-wide progression for Fractals's Account Augmentation and Luck.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountProgression"
+              example: '[{"id":"fractal_agony_impedance","value":2},{"id":"fractal_empowerment","value":2},{"id":"fractal_karmic_retribution","value":2},{"id":"luck","value":650810}]'
+components:
+  schemas:
+    AccountProgression:
+      type: object
+      required: [ id, value ]
+      properties:
+        id:
+          $ref: "#/components/schemas/AccountProgressionName"
+        value:
+          type: integer
+  

@@ -1,0 +1,133 @@
+paths:
+  /backstory/answers:
+    get:
+      tags: [ getIds ]
+      operationId: getBackstoryAnswerIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/backstory/answers
+      responses:
+        "200":
+          description: This resource returns information about the Biography answers that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BackstoryAnswerId"
+              example: '["7-54","188-189","22-109","15-84","187-186","189-189","17-94","21-107","184-167","27-126","36-153","183-174","184-168","36-158","21-105","22-110","12-75","7-55","12-74","183-175","36-156","186-162","185-163","15-85","184-169","12-76","183-182","182-166","11-72","188-188","10-69","30-136","32-143","181-180","10-68","16-89","12-73","186-161","25-119","185-164","181-178","187-185","32-141","30-133","16-88","183-172","11-71","26-121","27-124","25-117","26-123","181-179","15-86","17-93","26-122","183-181","185-165","10-67","31-137","32-142","27-125","30-134","183-171","17-92","188-187","187-184","182-177","30-135","189-188","16-90","36-154","186-160","25-118","16-87","22-108","36-155","11-70","186-159","25-120","183-1","31-140","182-176","189-187","16-91","36-157","7-53","21-106","31-138","183-173"]'
+  /backstory/answers?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getBackstoryAnswersByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/backstory/answers
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/BackstoryAnswerId"
+      responses:
+        "200":
+          description: This resource returns information about the Biography answers that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BackstoryAnswer"
+              example: '[{"id":"7-54","title":"Dignity","description":"I''m dignified even when up to my ears in mud. It''s what makes people respect me. A serious, thoughtful demeanor is the route to success.","journal":"Though trouble may follow me, I overcome it with dignity.","question":7},{"id":"188-189","title":"Fanged Dread","description":"I''m a whisper in the night, eyes that glow in darkness. I stand in shadow, and my mask is the monster you fear.","journal":"<br><br>I look out from behind a mask of fanged dread.<br><br>This is my story.<br>","question":188,"professions":["Mesmer"]}]'
+  /backstory/answers?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getBackstoryAnswersByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/backstory/answers
+      responses:
+        "200":
+          description: This resource returns information about the Biography answers that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BackstoryAnswer"
+              example: '[{"id":"7-54","title":"Dignity","description":"I''m dignified even when up to my ears in mud. It''s what makes people respect me. A serious, thoughtful demeanor is the route to success.","journal":"Though trouble may follow me, I overcome it with dignity.","question":7},{"id":"188-189","title":"Fanged Dread","description":"I''m a whisper in the night, eyes that glow in darkness. I stand in shadow, and my mask is the monster you fear.","journal":"<br><br>I look out from behind a mask of fanged dread.<br><br>This is my story.<br>","question":188,"professions":["Mesmer"]}]'
+  /backstory/answers?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getBackstoryAnswersByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/backstory/answers
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information about the Biography answers that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BackstoryAnswer"
+              example: '[{"id":"7-54","title":"Dignity","description":"I''m dignified even when up to my ears in mud. It''s what makes people respect me. A serious, thoughtful demeanor is the route to success.","journal":"Though trouble may follow me, I overcome it with dignity.","question":7},{"id":"188-189","title":"Fanged Dread","description":"I''m a whisper in the night, eyes that glow in darkness. I stand in shadow, and my mask is the monster you fear.","journal":"<br><br>I look out from behind a mask of fanged dread.<br><br>This is my story.<br>","question":188,"professions":["Mesmer"]}]'
+  /backstory/answers/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getBackstoryAnswersById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/backstory/answers
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/BackstoryAnswerId"
+      responses:
+        "200":
+          description: This resource returns information about the Biography answers that are in the game.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BackstoryAnswer"
+              example: '{"id":"7-54","title":"Dignity","description":"I''m dignified even when up to my ears in mud. It''s what makes people respect me. A serious, thoughtful demeanor is the route to success.","journal":"Though trouble may follow me, I overcome it with dignity.","question":7}'
+components:
+  schemas:
+    BackstoryAnswerId:
+      type: string
+      x-ktx-id: true
+
+    BackstoryAnswer:
+      type: object
+      required: [ id,title,description,journal,question ]
+      properties:
+        id:
+          $ref: "#/components/schemas/BackstoryAnswerId"
+        title:
+          type: string
+          x-gw2-intl: true
+        description:
+          type: string
+          x-gw2-intl: true
+        journal:
+          type: string
+          x-gw2-intl: true
+          description: The entry in the story journal.
+        question:
+          allOf:
+            - $ref: "#/components/schemas/BackstoryQuestionId"
+            - description: The id of the question this is an answer for.
+        professions:
+          type: array
+          description: The names of the professions that can choose this answer. Empty if there are no profession requirements.
+          items:
+            $ref: "#/components/schemas/ProfessionId"
+        races:
+          type: array
+          description: The names of the races that can choose this answer. Empty if there are no race requirements.
+          items:
+            $ref: "#/components/schemas/RaceId"
+      

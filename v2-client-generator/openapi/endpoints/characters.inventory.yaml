@@ -1,0 +1,99 @@
+paths:
+  /characters/{name}/inventory:
+    get:
+      tags: [ getModel ]
+      operationId: getCharacterBags
+      security:
+        - Bearer: [ account,characters,inventories ]
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/inventory
+      parameters:
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns information about the inventory of a character attached to a specific account.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CharacterBags"
+              example: '{"bags":[{"id":87225,"size":32,"inventory":[{"id":85063,"count":114,"binding":"Character","bound_to":"Spectralstar"},{"id":20316,"count":110},{"id":75919,"count":168},{"id":73718,"count":1,"binding":"Account"},{"id":67836,"count":13,"binding":"Account"},{"id":19986,"count":1,"charges":25,"binding":"Account"},{"id":19986,"count":1,"charges":25,"binding":"Account"},{"id":19986,"count":1,"charges":25,"binding":"Account"},{"id":19986,"count":1,"charges":25,"binding":"Account"},{"id":19986,"count":1,"charges":25,"binding":"Account"},{"id":19986,"count":1,"charges":25,"binding":"Account"},{"id":19986,"count":1,"charges":25,"binding":"Account"},{"id":19986,"count":1,"charges":25,"binding":"Account"},{"id":44205,"count":11,"binding":"Account"},{"id":21158,"count":54},{"id":8920,"count":60},{"id":43766,"count":6,"binding":"Account"},{"id":98938,"count":1,"binding":"Account"},{"id":43992,"count":1,"binding":"Account"},{"id":41741,"count":1,"binding":"Account"},{"id":68341,"count":1,"binding":"Account"},{"id":68331,"count":1,"binding":"Account"},{"id":68315,"count":1,"binding":"Account"},{"id":68324,"count":1,"binding":"Account"},{"id":68316,"count":1,"binding":"Account"},{"id":68326,"count":1,"binding":"Account"},null,null,null,null,null,null]},{"id":8932,"size":20,"inventory":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]},{"id":95018,"size":32,"inventory":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,{"id":95241,"count":1,"binding":"Account"},{"id":74895,"count":1,"skin":6466,"upgrades":[24607,24612],"upgrade_slot_indices":[0,1],"binding":"Character","bound_to":"Spectralstar"},{"id":72256,"count":1,"skin":6936,"upgrades":[24624],"upgrade_slot_indices":[0],"binding":"Account"},{"id":76889,"count":1,"skin":6466,"upgrades":[24575,24607],"upgrade_slot_indices":[0,1],"binding":"Account"},{"id":68109,"count":250,"binding":"Account"},{"id":74426,"count":4,"binding":"Account"},{"id":74185,"count":3,"binding":"Account"},{"id":71659,"count":14,"binding":"Account"},{"id":75427,"count":25,"binding":"Account"},{"id":76150,"count":23,"binding":"Account"},{"id":73070,"count":5,"binding":"Account"},{"id":93407,"count":49,"binding":"Account"},{"id":93659,"count":1,"binding":"Account"},{"id":93539,"count":1,"binding":"Account"}]},{"id":9569,"size":18,"inventory":[{"id":83008,"count":183},{"id":85016,"count":160},{"id":84731,"count":191},{"id":87517,"count":35,"binding":"Account"},{"id":44941,"count":60},{"id":68109,"count":25,"binding":"Account"},{"id":81296,"count":64,"binding":"Account"},{"id":84966,"count":49,"binding":"Account"},{"id":78600,"count":61,"binding":"Account"},{"id":43766,"count":250,"binding":"Account"},{"id":66961,"count":1,"binding":"Character","bound_to":"Spectralstar"},{"id":45175,"count":86,"binding":"Account"},{"id":45176,"count":106,"binding":"Account"},{"id":45177,"count":22,"binding":"Account"},{"id":45178,"count":90,"binding":"Account"},{"id":70537,"count":43,"binding":"Account"},{"id":76209,"count":23,"binding":"Account"},{"id":70956,"count":34,"binding":"Account"}]},{"id":9580,"size":18,"inventory":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]}]}'
+components:
+  schemas:
+    CharacterBags:
+      type: object
+      required: [ bags ]
+      properties:
+        bags:
+          type: array
+          description: The equipped bags. A bag is null if a bag does not exist in the slot.
+          items:
+            allOf:
+              - $ref: "#/components/schemas/Bag"
+              - type: "null"
+
+    Bag:
+      type: object
+      required: [ id, size, inventory ]
+      properties:
+        id:
+          allOf:
+            - $ref: "#/components/schemas/ItemId"
+            - description: The item id of the bag.
+        size:
+          type: integer
+          description: The number of slots in the bag.
+        inventory:
+          title: slots
+          type: array
+          description: The bag slots. A null slot indicates that there is no item in the slot.
+          items:
+            allOf:
+              - $ref: "#/components/schemas/BagSlot"
+              - type: "null"
+
+    BagSlot:
+      type: object
+      required: [ id,count ]
+      properties:
+        id:
+          allOf:
+            - $ref: "#/components/schemas/ItemId"
+            - description: The id of the item being held.
+        count:
+          type: integer
+          description: The number of this item in the stack.
+        skin:
+          $ref: "#/components/schemas/SkinId"
+        charges:
+          type: integer
+          description: The number of charges left.
+        upgrades:
+          type: array
+          description: The ids of the equipped upgrade components.
+          externalDocs:
+            url: https://wiki.guildwars2.com/wiki/Upgrade_component
+          items:
+            $ref: "#/components/schemas/ItemId"
+        infusions:
+          description: The ids of the infusions applied to the item.
+          type: array
+          externalDocs:
+            url: https://wiki.guildwars2.com/wiki/Infusion
+          items:
+            $ref: "#/components/schemas/ItemId"
+        binding:
+          allOf:
+            - $ref: "#/components/schemas/Binding"
+            - description: What owns this item. Null if there is no binding.
+              type: "null"
+        bound_to:
+          allOf:
+            - $ref: "#/components/schemas/CharacterName"
+            - description: Who owns this item. Null if the binding is NOT for a character.
+              type: "null"
+        stats:
+          type: array
+          externalDocs:
+            url: https://wiki.guildwars2.com/wiki/API:2/itemstats
+          items:
+            $ref: "#/components/schemas/CharacterItemStat"

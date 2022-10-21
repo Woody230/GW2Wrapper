@@ -1,0 +1,37 @@
+paths:
+  /account/mounts/skins:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,unlocks ]
+      operationId: getAccountMountSkins
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/mounts/skins
+      responses:
+        "200":
+          description: This resource returns the unlocked mount skins of the account.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MountSkinId"
+              example: '[1,2,3,4,6,103,130,131,132,133,134,161,304]'
+  /account/mounts/types:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,unlocks ]
+      operationId: getAccountMountTypes
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/mounts/types
+      responses:
+        "200":
+          description: This resource returns the unlocked mounts of the account.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MountTypeId"
+              example: '["griffon","jackal","raptor","roller_beetle","skimmer","springer","warclaw"]'

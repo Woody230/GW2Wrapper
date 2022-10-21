@@ -1,0 +1,111 @@
+paths:
+  /quaggans:
+    get:
+      tags: [ getIds ]
+      operationId: getQuagganIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/quaggans
+      responses:
+        "200":
+          description: This resource returns quaggan images.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/QuagganId"
+              example: '["404","aloha","attack","bear","bowl","box","breakfast","bubble","cake","cheer","coffee","construction","cow","cry","elf","ghost","girl","hat","helmut","hoodie-down","hoodie-up","killerwhale","knight","lollipop","lost","moving","party","present","quaggan","rain","scifi","seahawks","sleep","summer","vacation"]'
+  /quaggans?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getQuaggansByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/quaggans
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/QuagganId"
+      responses:
+        "200":
+          description: This resource returns quaggan images.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Quaggan"
+              example: '[{"id":"404","url":"https://static.staticwars.com/quaggans/404.jpg"},{"id":"aloha","url":"https://static.staticwars.com/quaggans/aloha.jpg"}]'
+  /quaggans?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getQuaggansByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/quaggans
+      responses:
+        "200":
+          description: This resource returns quaggan images.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Quaggan"
+              example: '[{"id":"404","url":"https://static.staticwars.com/quaggans/404.jpg"},{"id":"aloha","url":"https://static.staticwars.com/quaggans/aloha.jpg"}]'
+  /quaggans?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getQuaggansByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/quaggans
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns quaggan images.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Quaggan"
+              example: '[{"id":"404","url":"https://static.staticwars.com/quaggans/404.jpg"},{"id":"aloha","url":"https://static.staticwars.com/quaggans/aloha.jpg"}]'
+  /quaggans/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getQuagganById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/quaggans
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/QuagganId"
+      responses:
+        "200":
+          description: This resource returns quaggan images.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Quaggan"
+              example: '{"id":"aloha","url":"https://static.staticwars.com/quaggans/aloha.jpg"}'
+
+components:
+  schemas:
+    QuagganId:
+      type: string
+      x-ktx-id: true
+
+    Quaggan:
+      type: object
+      required: [ id,url ]
+      properties:
+        id:
+          $ref: "#/components/schemas/QuagganId"
+        url:
+          $ref: "#/components/schemas/ImageLink"

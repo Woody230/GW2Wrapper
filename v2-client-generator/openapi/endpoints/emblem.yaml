@@ -1,0 +1,18 @@
+components:
+  schemas:
+    EmblemId:
+      type: integer
+      x-ktx-id: true
+
+    Emblem:
+      type: object
+      required: [ id,layers ]
+      properties:
+        id:
+          $ref: "#/components/schemas/EmblemId"
+        layers:
+          type: array
+          description: The URLs representing the components of the emblem.
+          items:
+            $ref: "#/components/schemas/Url"
+          

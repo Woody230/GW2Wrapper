@@ -1,0 +1,36 @@
+paths:
+  /guild/{guildId}/members:
+    get:
+      tags: [ getModel ]
+      operationId: getGuildMembers
+      security:
+        - Bearer: [ account,guilds ]
+      x-gw2-guild-scopes: [ leader ]
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/guild/:id/members
+      parameters:
+        - $ref: "#/components/parameters/GuildId"
+      responses:
+        "200":
+          description: This resource returns information about the members of a specified guild. The endpoint requires the scope guilds, and will only work if the API key is from the guild leader's account.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GuildMember"
+              example: '[{"name":"Lawton Campbell.9413","rank":"Leader","joined":"2015-07-22T06:18:35.000Z"},{"name":"Lawton Campbell.1450","rank":"Member","joined":"2015-06-17T02:38:27.000Z"}]'
+components:
+  schemas:
+    GuildMember:
+      type: object
+      required: [ name,rank ]
+      properties:
+        name:
+          $ref: "#/components/schemas/AccountName"
+        rank:
+          $ref: "#/components/schemas/GuildRankId"
+        joined:
+          type: [ string, "null" ]
+          format: date-time
+    

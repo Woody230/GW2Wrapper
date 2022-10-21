@@ -1,0 +1,84 @@
+paths:
+  /characters/{name}/sab:
+    get:
+      tags: [ getModel ]
+      operationId: getCharacterSabProgress
+      security:
+        - Bearer: [ account,characters,progression ]
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/sab
+      parameters:
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns information about Super Adventure Box on a character attached to a specific account.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SabProgress"
+              example: '{"zones":[{"id":1,"mode":"normal","world":1,"zone":1},{"id":2,"mode":"normal","world":1,"zone":2},{"id":13,"mode":"infantile","world":1,"zone":1},{"id":14,"mode":"infantile","world":1,"zone":2}],"unlocks":[],"songs":[]}'
+components:
+  schemas:
+    SabProgress:
+      type: object
+      required: [ zones,unlocks,songs ]
+      properties:
+        zones:
+          type: array
+          description: The worlds and difficulties completed.
+          items:
+            $ref: "#/components/schemas/SabZone"
+        unlocks:
+          type: array
+          description: The unlocked items.
+          items:
+            $ref: "#/components/schemas/SabUnlock"
+        songs:
+          type: array
+          description: The unlocked songs.
+          items:
+            $ref: "#/components/schemas/SabSong"
+
+    SabZoneId:
+      type: integer
+      x-ktx-id: true
+
+    SabZone:
+      type: object
+      required: [ id, mode, world, zone ]
+      properties:
+        id:
+          $ref: "#/components/schemas/SabZoneId"
+        mode:
+          type: string
+          description: The difficulty mode cleared.
+        world:
+          type: integer
+        zone:
+          type: integer
+
+    SabUnlockId:
+      type: integer
+      x-ktx-id: true
+
+    SabUnlock:
+      type: object
+      required: [ id ]
+      properties:
+        id:
+          $ref: "#/components/schemas/SabUnlockId"
+        name:
+          $ref: "#/components/schemas/SabUnlockName"
+
+    SabSongId:
+      type: integer
+      x-ktx-id: true
+
+    SabSong:
+      type: object
+      required: [ id ]
+      properties:
+        id:
+          $ref: "#/components/schemas/SabSongId"
+        name:
+          type: string

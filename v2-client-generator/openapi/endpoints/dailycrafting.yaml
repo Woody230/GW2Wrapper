@@ -1,0 +1,109 @@
+paths:
+  /dailycrafting:
+    get:
+      tags: [ getIds ]
+      operationId: getDailyCraftingIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/dailycrafting
+      responses:
+        "200":
+          description: This resource returns information about time-gated recipes that can be crafted in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DailyCraftingId"
+              example: '["charged_quartz_crystal","glob_of_elder_spirit_residue","lump_of_mithrilium","spool_of_silk_weaving_thread","spool_of_thick_elonian_cord"]'
+  /dailycrafting?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getDailyCraftingByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/dailycrafting
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/DailyCraftingId"
+      responses:
+        "200":
+          description: This resource returns information about time-gated recipes that can be crafted in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DailyCrafting"
+              example: '[{"id":"charged_quartz_crystal"},{"id":"glob_of_elder_spirit_residue"}]'
+  /dailycrafting?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getDailyCraftingByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/dailycrafting
+      responses:
+        "200":
+          description: This resource returns information about time-gated recipes that can be crafted in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DailyCrafting"
+              example: '[{"id":"charged_quartz_crystal"},{"id":"glob_of_elder_spirit_residue"}]'
+  /dailycrafting?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getDailyCraftingByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/dailycrafting
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information about time-gated recipes that can be crafted in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DailyCrafting"
+              example: '[{"id":"charged_quartz_crystal"},{"id":"glob_of_elder_spirit_residue"}]'
+  /dailycrafting/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getDailyCraftingById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/dailycrafting
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/DailyCraftingId"
+      responses:
+        "200":
+          description: This resource returns information about time-gated recipes that can be crafted in-game.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DailyCrafting"
+              example: '{"id":"charged_quartz_crystal"}'
+
+components:
+  schemas:
+    DailyCraftingId:
+      type: string
+      x-ktx-id: true
+
+    DailyCrafting:
+      type: object
+      required: [ id ]
+      properties:
+        id:
+          $ref: "#/components/schemas/DailyCraftingId"

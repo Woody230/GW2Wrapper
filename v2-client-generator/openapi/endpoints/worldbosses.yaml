@@ -1,0 +1,109 @@
+paths:
+  /worldbosses:
+    get:
+      tags: [ getIds ]
+      operationId: getWorldBossIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/worldbosses
+      responses:
+        "200":
+          description: This resource returns information about scheduled World bosses in Core Tyria that reward boss chests that can be be opened once a day in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WorldBossId"
+              example: '["admiral_taidha_covington","claw_of_jormag","drakkar","fire_elemental","great_jungle_wurm","inquest_golem_mark_ii","karka_queen","megadestroyer","modniir_ulgoth","shadow_behemoth","svanir_shaman_chief","tequatl_the_sunless","the_shatterer","triple_trouble_wurm"]'
+  /worldbosses?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getWorldBossesByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/worldbosses
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/WorldBossId"
+      responses:
+        "200":
+          description: This resource returns information about scheduled World bosses in Core Tyria that reward boss chests that can be be opened once a day in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WorldBoss"
+              example: '[{"id":"admiral_taidha_covington"},{"id":"claw_of_jormag"}]'
+  /worldbosses?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getWorldBossesByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/worldbosses
+      responses:
+        "200":
+          description: This resource returns information about scheduled World bosses in Core Tyria that reward boss chests that can be be opened once a day in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WorldBoss"
+              example: '[{"id":"admiral_taidha_covington"},{"id":"claw_of_jormag"}]'
+  /worldbosses?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getWorldBossesByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/worldbosses
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information about scheduled World bosses in Core Tyria that reward boss chests that can be be opened once a day in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WorldBoss"
+              example: '[{"id":"admiral_taidha_covington"},{"id":"claw_of_jormag"}]'
+  /worldbosses/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getWorldBossById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/worldbosses
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/WorldBossId"
+      responses:
+        "200":
+          description: This resource returns information about scheduled World bosses in Core Tyria that reward boss chests that can be be opened once a day in-game.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorldBoss"
+              example: '{"id":"tequatl_the_sunless"}'
+
+components:
+  schemas:
+    WorldBossId:
+      type: integer
+      x-ktx-id: true
+
+    WorldBoss:
+      type: object
+      required: [ id ]
+      properties:
+        id:
+          $ref: "#/components/schemas/WorldBossId"

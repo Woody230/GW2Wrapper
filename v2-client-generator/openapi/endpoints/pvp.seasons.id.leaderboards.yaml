@@ -1,0 +1,19 @@
+paths:
+  /pvp/seasons/{seasonId}/leaderboards:
+    get:
+      tags: [ getModel ]
+      operationId: getPvpSeasonLeaderboardTypes
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/pvp/seasons/:id/leaderboards
+      parameters:
+        - $ref: "#/components/parameters/PvpSeasonId"
+      responses:
+        "200":
+          description: This resource returns information about types of League season leaderboards.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PvpLeaderboardType"
+              example: '["ladder"]'

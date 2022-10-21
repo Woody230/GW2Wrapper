@@ -1,0 +1,19 @@
+paths:
+  /account/mapchests:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,progression ]
+      operationId: getAccountMapChests
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/mapchests
+      responses:
+        "200":
+          description: This resource returns information about Hero's Choice Chests acquired by the account since daily-reset.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MapChestId"
+              example: '["verdant_brink_heros_choice_chest"]'

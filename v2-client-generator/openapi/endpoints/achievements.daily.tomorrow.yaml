@@ -1,0 +1,15 @@
+paths:
+  /achievements/daily/tomorrow:
+    get:
+      tags: [ getModel ]
+      operationId: getTomorrowsDailyAchievements
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/achievements/daily/tomorrow
+      responses:
+        "200":
+          description: This resource returns the next set of daily achievements.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dailies"
+              example: '{"pve":[{"id":1837,"level":{"min":1,"max":80}},{"id":1937,"level":{"min":80,"max":80}},{"id":1839,"level":{"min":11,"max":79}},{"id":2945,"level":{"min":80,"max":80},"required_access":{"product":"HeartOfThorns","condition":"HasAccess"}},{"id":1951,"level":{"min":80,"max":80},"required_access":{"product":"HeartOfThorns","condition":"NoAccess"}},{"id":1951,"level":{"min":11,"max":79}},{"id":2026,"level":{"min":76,"max":80}},{"id":1933,"level":{"min":31,"max":75}}],"pvp":[{"id":2817,"level":{"min":1,"max":80}},{"id":1861,"level":{"min":11,"max":80}},{"id":3450,"level":{"min":11,"max":80}},{"id":3449,"level":{"min":31,"max":80}}],"wvw":[{"id":946,"level":{"min":1,"max":80}},{"id":1846,"level":{"min":11,"max":80}},{"id":1850,"level":{"min":11,"max":80}},{"id":1844,"level":{"min":31,"max":80}}],"fractals":[{"id":2245,"level":{"min":1,"max":80}},{"id":2266,"level":{"min":1,"max":80}},{"id":3238,"level":{"min":1,"max":80}},{"id":4244,"level":{"min":1,"max":80}},{"id":4218,"level":{"min":1,"max":80}},{"id":4210,"level":{"min":1,"max":80}},{"id":4224,"level":{"min":1,"max":80}},{"id":4551,"level":{"min":1,"max":80}},{"id":4496,"level":{"min":1,"max":80}},{"id":4526,"level":{"min":1,"max":80}},{"id":4494,"level":{"min":1,"max":80}},{"id":2976,"level":{"min":1,"max":80}},{"id":2955,"level":{"min":1,"max":80}},{"id":2944,"level":{"min":1,"max":80}},{"id":2903,"level":{"min":1,"max":80}}],"special":[]}'

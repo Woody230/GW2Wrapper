@@ -1,0 +1,30 @@
+paths:
+  /characters/{name}/backstory:
+    get:
+      tags: [ getModel ]
+      operationId: getCharacterBackstory
+      security:
+        - Bearer: [ account,characters ]
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/backstory
+      parameters:
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns information about the backstory of a character attached to a specific account.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CharacterBackstories"
+              example: '{"backstory":["184-167","7-55","32-143","31-137","30-135"]}'
+components:
+  schemas:
+    CharacterBackstories:
+      type: object
+      required: [ backstory ]
+      properties:
+        backstory:
+          type: array
+          items:
+            $ref: "#/components/schemas/BackstoryAnswerId"
+      

@@ -1,0 +1,47 @@
+paths:
+  /characters/{name}/crafting:
+    get:
+      tags: [ getModel ]
+      operationId: getCharacterCrafting
+      security:
+        - Bearer: [ account,characters ]
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/crafting
+      parameters:
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns information about the crafting disciplines available to a character attached to a specific account.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CharacterCraftings"
+              example: '{"crafting":[{"discipline":"Artificer","rating":500,"active":true},{"discipline":"Tailor","rating":500,"active":true}]}'
+components:
+  schemas:
+    CharacterCraftings:
+      type: object
+      required: [ crafting ]
+      properties:
+        crafting:
+          type: array
+          description: The crafting disciplines the character has unlocked.
+          items:
+            $ref: "#/components/schemas/CharacterCrafting"
+
+    CharacterCrafting:
+      type: object
+      required: [ discipline,rating,active ]
+      properties:
+        discipline:
+          allOf:
+            - $ref: "#/components/schemas/CraftingDiscipline"
+            - description: The name of the discipline.
+              externalDocs:
+                url: https://wiki.guildwars2.com/wiki/Crafting
+        rating:
+          type: integer
+        active:
+          type: boolean
+          description: Whether this discipline is currently active on the character.
+    

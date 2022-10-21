@@ -1,0 +1,44 @@
+paths:
+  /guild/{guildId}/ranks:
+    get:
+      tags: [ getModel ]
+      operationId: getGuildRanks
+      security:
+        - Bearer: [ account,guilds ]
+      x-gw2-guild-scopes: [ leader ]
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/guild/:id/ranks
+      parameters:
+        - $ref: "#/components/parameters/GuildId"
+      responses:
+        "200":
+          description: This resource returns information about the ranks of a specified guild. The endpoint requires the scope guilds, and will only work if the API key is from the guild leader's account.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GuildRank"
+              example: '[{"id":"Initiate","order":4,"permissions":["StartingRole","DepositItemsTrove","DepositItemsStash","DepositCoinsTrove","DepositCoinsStash"],"icon":"https://render.guildwars2.com/file/B7E3FD3210E9E2E80C917E0F9E0FA85CE2EC052B/156370.png"},{"id":"Leader","order":1,"permissions":["Admin","EditRoles","ClaimableEditOptions","EditBGM","WithdrawCoinsStash","WithdrawItemsStash","ActivatePlaceables","DepositItemsTrove","WithdrawItemsTrove","EditAssemblyQueue","ActivateWorldEvent","PlaceArenaDecoration","DepositItemsStash","EditMonument","SpendFuel","TeamAdmin","WithdrawCoinsTrove","DepositCoinsTrove","PurchaseUpgrades","EditEmblem","ClaimableActivate","MissionControl","ClaimableClaim","ClaimableSpend","OpenPortal","SetGuildHall","DepositCoinsStash","PlaceDecoration","EditMOTD","EditAnthem","DecorationAdmin"],"icon":"https://render.guildwars2.com/file/EB3B3BC73EE3252092F162A855FA0A4425232A03/156377.png"},{"id":"Member","order":3,"permissions":["DepositItemsTrove","WithdrawItemsStash","WithdrawCoinsStash","PlaceArenaDecoration","DepositItemsStash","DepositCoinsTrove","MissionControl","OpenPortal","DepositCoinsStash","PlaceDecoration"],"icon":"https://render.guildwars2.com/file/30EB1BDA3850EF59AFEFAA005DA19605250D3620/156373.png"},{"id":"Officer","order":2,"permissions":["Admin","ClaimableEditOptions","EditBGM","ActivatePlaceables","DepositItemsTrove","WithdrawItemsStash","WithdrawItemsTrove","EditAssemblyQueue","WithdrawCoinsStash","ActivateWorldEvent","PlaceArenaDecoration","DepositItemsStash","EditMonument","SpendFuel","TeamAdmin","WithdrawCoinsTrove","DepositCoinsTrove","PurchaseUpgrades","EditEmblem","ClaimableActivate","MissionControl","OpenPortal","SetGuildHall","DepositCoinsStash","PlaceDecoration","ClaimableSpend","EditMOTD","EditAnthem","ClaimableClaim"],"icon":"https://render.guildwars2.com/file/E602B19395D6E435F42DECBDC4E85124A45A909F/156371.png"}]'
+components:
+  schemas:
+    GuildRankId:
+      type: string
+      description: The name of the rank.
+
+    GuildRank:
+      type: object
+      required: [ id,order,permissions,icon ]
+      properties:
+        id:
+          $ref: "#/components/schemas/GuildRankId"
+        order:
+          type: integer
+          default: 2147483647
+          description: The sorting order. The lower the value, the higher the priority.
+        permissions:
+          type: array
+          items:
+            $ref: "#/components/schemas/GuildPermissionId"
+        icon:
+          $ref: "#/components/schemas/ImageLink"

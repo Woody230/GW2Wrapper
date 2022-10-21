@@ -1,0 +1,65 @@
+paths:
+  /account/inventory:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,inventories ]
+      operationId: getAccountSharedSlots
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/inventory
+      responses:
+        "200":
+          description: This resource returns the shared inventory slots in an account.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SharedSlot"
+              example: '[{"id":44602,"count":1,"charges":1,"binding":"Account"},{"id":90025,"count":1,"binding":"Account"},{"id":81752,"count":1,"binding":"Account"},{"id":85656,"count":1,"binding":"Account"},{"id":92694,"count":1,"binding":"Account"},{"id":83305,"count":1,"binding":"Account"},{"id":78177,"count":1,"binding":"Account"},{"id":23045,"count":1,"charges":134,"binding":"Account"},{"id":19986,"count":1,"charges":25,"binding":"Account"},{"id":23001,"count":1,"binding":"Account"},{"id":22997,"count":1,"binding":"Account"},{"id":23000,"count":1,"binding":"Account"},{"id":78599,"count":1,"binding":"Account"}]'
+components:
+  schemas:
+    SharedSlot:
+      type: object
+      required: [ id, count ]
+      properties:
+        id:
+          $ref: "#/components/schemas/ItemId"
+        count:
+          type: integer
+          description: The number of this item in the stack.
+        charges:
+          type: integer
+          description: The number of charges left. If charges exist, then there can only be a single item because chargeable items do not stack.
+        skin:
+          $ref: "#/components/schemas/SkinId"
+        dyes:
+          type: array
+          items:
+            allOf:
+              - $ref: "#/components/schemas/DyeColorId"
+              - type: "null"
+        upgrades:
+          description: The ids of the upgrades (runes/sigils) applied to the item.
+          type: array
+          externalDocs:
+            url: https://wiki.guildwars2.com/wiki/Upgrade_component
+          items:
+            $ref: "#/components/schemas/ItemId"
+        upgrade_slot_indices:
+          description: The position of the upgrades applied to the item.
+          type: array
+          items:
+            type: integer
+        infusions:
+          description: The ids of the infusions applied to the item.
+          type: array
+          externalDocs:
+            url: https://wiki.guildwars2.com/wiki/Infusion
+          items:
+            $ref: "#/components/schemas/ItemId"
+        binding:
+          allOf:
+            - $ref: "#/components/schemas/Binding"
+            - description: What owns this item. Null if there is no binding.
+              type: "null"

@@ -1,0 +1,112 @@
+paths:
+  /home/cats:
+    get:
+      tags: [ getIds ]
+      operationId: getCatIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/home/cats
+      responses:
+        "200":
+          description: This resource returns information about home instance cats.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CatId"
+              example: '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,32,33,34,35,36,37]'
+  /home/cats?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getCatsByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/home/cats
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/CatId"
+      responses:
+        "200":
+          description: This resource returns information about home instance cats.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Cat"
+              example: '[{"hint":"chicken","id":1},{"hint":"grilled_chicken","id":2}]'
+  /home/cats?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getCatsByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/home/cats
+      responses:
+        "200":
+          description: This resource returns information about home instance cats.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Cat"
+              example: '[{"hint":"chicken","id":1},{"hint":"grilled_chicken","id":2}]'
+  /home/cats?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getCatsByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/home/cats
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information about home instance cats.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Cat"
+              example: '[{"hint":"chicken","id":1},{"hint":"grilled_chicken","id":2}]'
+  /home/cats/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getCatById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/home/cats
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/CatId"
+      responses:
+        "200":
+          description: This resource returns information about cats.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cat"
+              example: '{"hint":"chicken","id":1}'
+
+components:
+  schemas:
+    CatId:
+      type: integer
+      x-ktx-id: true
+
+    Cat:
+      type: object
+      required: [ id,hint ]
+      properties:
+        id:
+          $ref: "#/components/schemas/CatId"
+        hint:
+          type: string
+          description: The hint for unlocking this cat.

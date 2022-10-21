@@ -1,0 +1,119 @@
+paths:
+  /emotes:
+    get:
+      tags: [ getIds ]
+      operationId: getEmoteIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/emotes
+      responses:
+        "200":
+          description: This resource returns information about unlockable emotes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EmoteId"
+              example: '["Shiverplus","Stretch","geargrind","playdead","rockout","shiver","shuffle","step"]'
+  /emotes?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getEmotesByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/emotes
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/EmoteId"
+      responses:
+        "200":
+          description: This resource returns information about unlockable emotes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Emote"
+              example: '[{"commands":["/shiverplus","/tremblefort","/zitternplus","/tiritarmucho"],"id":"Shiverplus","unlock_items":[93739]},{"commands":["/stretch","/�tirement","/Dehnen","/estirarse"],"id":"Stretch","unlock_items":[94530]}]'
+  /emotes?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getEmotesByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/emotes
+      responses:
+        "200":
+          description: This resource returns information about unlockable emotes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Emote"
+              example: '[{"commands":["/shiverplus","/tremblefort","/zitternplus","/tiritarmucho"],"id":"Shiverplus","unlock_items":[93739]},{"commands":["/stretch","/�tirement","/Dehnen","/estirarse"],"id":"Stretch","unlock_items":[94530]}]'
+  /emotes?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getEmotesByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/emotes
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information about unlockable emotes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Emote"
+              example: '[{"commands":["/shiverplus","/tremblefort","/zitternplus","/tiritarmucho"],"id":"Shiverplus","unlock_items":[93739]},{"commands":["/stretch","/�tirement","/Dehnen","/estirarse"],"id":"Stretch","unlock_items":[94530]}]'
+  /emotes/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getEmoteById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/emotes
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/EmoteId"
+      responses:
+        "200":
+          description: This resource returns information about unlockable emotes.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Emote"
+              example: '{"commands":["/shiverplus","/tremblefort","/zitternplus","/tiritarmucho"],"id":"Shiverplus","unlock_items":[93739]}'
+
+components:
+  schemas:
+    EmoteId:
+      type: string
+      x-ktx-id: true
+
+    Emote:
+      type: object
+      required: [ id,commands,unlock_items ]
+      properties:
+        id:
+          $ref: "#/components/schemas/EmoteId"
+        commands:
+          type: array
+          description: The unlocked commands associated with the emote.
+          items:
+            type: string
+        unlock_items:
+          type: array
+          description: The items required to unlock this emote.
+          items:
+            $ref: "#/components/schemas/ItemId"

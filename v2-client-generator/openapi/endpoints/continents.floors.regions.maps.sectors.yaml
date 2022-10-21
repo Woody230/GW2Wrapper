@@ -1,0 +1,157 @@
+paths:
+  /continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors:
+    get:
+      tags: [ getIds ]
+      operationId: getContinentMapSectorIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/continents
+      parameters:
+        - $ref: "#/components/parameters/ContinentId"
+        - $ref: "#/components/parameters/FloorId"
+        - $ref: "#/components/parameters/RegionId"
+        - $ref: "#/components/parameters/MapId"
+      responses:
+        "200":
+          description: This resource returns information about sectors.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SectorId"
+              example: '[513,514,515,516,517,518,519,520,521,522,523,524,525,526,527,528,529,530,531,532,533,534,535,536,537,538,1067,1075]'
+  /continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors?ids={sectorIds}:
+    get:
+      tags: [ getByIds ]
+      operationId: getContinentMapSectorsByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/continents
+      parameters:
+        - name: sectorIds
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/SectorId"
+        - $ref: "#/components/parameters/ContinentId"
+        - $ref: "#/components/parameters/FloorId"
+        - $ref: "#/components/parameters/RegionId"
+        - $ref: "#/components/parameters/MapId"
+      responses:
+        "200":
+          description: This resource returns information about sectors.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Sector"
+              example: '[{"name":"Tribulation Rift","level":50,"coord":[52584,34298.8],"bounds":[[52958.2,34291.2],[52837.4,34445.1],[52840.8,34659.1],[52639.2,34694.9],[52367.6,34641.9],[52451.3,34504.9],[52375.3,34444.1],[52379,34388.7],[52456,34336.2],[52443.4,34171.7],[52385.4,34129.2],[52400.6,34080.1],[52487.6,34043.5],[52486.7,34004.1],[52609.8,34001.6],[52876.6,34089],[52933.4,34153.8],[52958.2,34291.2]],"id":513,"chat_link":"[&BAECAAA=]"},{"name":"De Molish Post","level":50,"coord":[53016.1,34454.5],"bounds":[[52838.5,34660.4],[53170.2,34564.7],[53154.3,34455.5],[53140.9,34308],[52956.2,34291.6],[52836.3,34446.5],[52838.5,34660.4]],"id":514,"chat_link":"[&BAICAAA=]"}]'
+  /continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getContinentMapSectorsByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/continents
+      parameters:
+        - $ref: "#/components/parameters/ContinentId"
+        - $ref: "#/components/parameters/FloorId"
+        - $ref: "#/components/parameters/RegionId"
+        - $ref: "#/components/parameters/MapId"
+      responses:
+        "200":
+          description: This resource returns information about sectors.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Sector"
+              example: '[{"name":"Tribulation Rift","level":50,"coord":[52584,34298.8],"bounds":[[52958.2,34291.2],[52837.4,34445.1],[52840.8,34659.1],[52639.2,34694.9],[52367.6,34641.9],[52451.3,34504.9],[52375.3,34444.1],[52379,34388.7],[52456,34336.2],[52443.4,34171.7],[52385.4,34129.2],[52400.6,34080.1],[52487.6,34043.5],[52486.7,34004.1],[52609.8,34001.6],[52876.6,34089],[52933.4,34153.8],[52958.2,34291.2]],"id":513,"chat_link":"[&BAECAAA=]"},{"name":"De Molish Post","level":50,"coord":[53016.1,34454.5],"bounds":[[52838.5,34660.4],[53170.2,34564.7],[53154.3,34455.5],[53140.9,34308],[52956.2,34291.6],[52836.3,34446.5],[52838.5,34660.4]],"id":514,"chat_link":"[&BAICAAA=]"}]'
+  /continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getContinentMapSectorsByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/continents
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/ContinentId"
+        - $ref: "#/components/parameters/FloorId"
+        - $ref: "#/components/parameters/RegionId"
+        - $ref: "#/components/parameters/MapId"
+      responses:
+        "200":
+          description: This resource returns information about sectors.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Sector"
+              example: '[{"name":"Tribulation Rift","level":50,"coord":[52584,34298.8],"bounds":[[52958.2,34291.2],[52837.4,34445.1],[52840.8,34659.1],[52639.2,34694.9],[52367.6,34641.9],[52451.3,34504.9],[52375.3,34444.1],[52379,34388.7],[52456,34336.2],[52443.4,34171.7],[52385.4,34129.2],[52400.6,34080.1],[52487.6,34043.5],[52486.7,34004.1],[52609.8,34001.6],[52876.6,34089],[52933.4,34153.8],[52958.2,34291.2]],"id":513,"chat_link":"[&BAECAAA=]"},{"name":"De Molish Post","level":50,"coord":[53016.1,34454.5],"bounds":[[52838.5,34660.4],[53170.2,34564.7],[53154.3,34455.5],[53140.9,34308],[52956.2,34291.6],[52836.3,34446.5],[52838.5,34660.4]],"id":514,"chat_link":"[&BAICAAA=]"}]'
+  /continent/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/sectors/{sectorId}:
+    get:
+      tags: [ getById ]
+      operationId: getContinentMapSectorById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/continents
+      parameters:
+        - $ref: "#/components/parameters/ContinentId"
+        - $ref: "#/components/parameters/FloorId"
+        - $ref: "#/components/parameters/RegionId"
+        - $ref: "#/components/parameters/MapId"
+        - name: sectorId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/SectorId"
+      responses:
+        "200":
+          description: This resource returns information about sectors.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Sector"
+              example: '{"name":"Tribulation Rift","level":50,"coord":[52584,34298.8],"bounds":[[52958.2,34291.2],[52837.4,34445.1],[52840.8,34659.1],[52639.2,34694.9],[52367.6,34641.9],[52451.3,34504.9],[52375.3,34444.1],[52379,34388.7],[52456,34336.2],[52443.4,34171.7],[52385.4,34129.2],[52400.6,34080.1],[52487.6,34043.5],[52486.7,34004.1],[52609.8,34001.6],[52876.6,34089],[52933.4,34153.8],[52958.2,34291.2]],"id":513,"chat_link":"[&BAECAAA=]"}'
+
+components:
+  schemas:
+    SectorId:
+      type: integer
+      x-ktx-id: true
+
+    Sector:
+      type: object
+      required: [ id,name,level,coord,bounds,chat_link ]
+      properties:
+        id:
+          $ref: "#/components/schemas/SectorId"
+        name:
+          type: string
+          x-gw2-intl: true
+        level:
+          $ref: "#/components/schemas/CharacterLevel"
+        coord:
+          title: coordinates
+          type: array
+          description: The two-dimensional coordinates within the texture.
+          format: textureposition
+          items:
+            type: number
+            format: double
+        bounds:
+          type: array
+          description: The boundary of this area represented by multiple two-dimensional coordinates.
+          format: textureposition
+          items:
+            type: number
+            format: double
+        chat_link:
+          allOf:
+            - $ref: "#/components/schemas/ChatLink"
+            - externalDocs:
+                url: https://wiki.guildwars2.com/wiki/Chat_link_format#Map_link
+    

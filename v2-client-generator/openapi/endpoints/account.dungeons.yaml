@@ -1,0 +1,19 @@
+paths:
+  /account/dungeons:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,progression ]
+      operationId: getAccountDungeons
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/dungeons
+      responses:
+        "200":
+          description: This resource returns the dungeons completed since daily dungeon reset.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DungeonPathId"
+              example: '["hodgins","seraph","seer"]'

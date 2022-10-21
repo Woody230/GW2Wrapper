@@ -1,0 +1,160 @@
+paths:
+  /pvp/games:
+    get:
+      tags: [ getIds ]
+      operationId: getPvpGameIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/pvp/games
+      security:
+        - Bearer: [ account,pvp ]
+      responses:
+        "200":
+          description: This resource returns information about past PvP matches the player has participated in.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Id"
+              example: '["095861E7-D6C8-4C1F-8802-0D4DB9378170","3D5E8F50-36EA-451A-9C2A-C066B450B0A7","62337979-21A2-4D58-A3A7-0C1B8C2F1524","735CAF69-64EE-4D7F-B3B0-E8E9D3574E06","73E54FDA-5EB7-4391-857F-8B6F3CB8FAD8","78262F72-6C7C-449F-8E83-ED32C70F3F79","A5E34DA1-0CC7-4A6E-8D46-51A947773FE6","A72B1789-A558-4EB1-A3B1-78F23D989CE3","D5426529-084C-4F80-80E5-AD48C2AE67C3","DEE60AA5-893C-4500-8081-E5A0F7D8B81D"]'
+  /pvp/games?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getPvpGamesByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/pvp/games
+      security:
+        - Bearer: [ account,pvp ]
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/PvpGameId"
+      responses:
+        "200":
+          description: This resource returns information about past PvP matches the player has participated in.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PvpGame"
+              example: '[{"id":"095861E7-D6C8-4C1F-8802-0D4DB9378170","map_id":549,"started":"2021-07-19T01:28:45.552Z","ended":"2021-07-19T01:38:51.552Z","result":"Defeat","team":"Blue","profession":"Necromancer","rating_type":"Unranked","rating_change":-49,"scores":{"red":500,"blue":256}},{"id":"3D5E8F50-36EA-451A-9C2A-C066B450B0A7","map_id":1163,"started":"2021-06-05T15:21:16.827Z","ended":"2021-06-05T15:30:45.827Z","result":"Victory","team":"Red","profession":"Necromancer","rating_type":"Unranked","rating_change":53,"scores":{"red":504,"blue":323}}]'
+  /pvp/games?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getPvpGamesByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/pvp/games
+      security:
+        - Bearer: [ account,pvp ]
+      responses:
+        "200":
+          description: This resource returns information about past PvP matches the player has participated in.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PvpGame"
+              example: '[{"id":"095861E7-D6C8-4C1F-8802-0D4DB9378170","map_id":549,"started":"2021-07-19T01:28:45.552Z","ended":"2021-07-19T01:38:51.552Z","result":"Defeat","team":"Blue","profession":"Necromancer","rating_type":"Unranked","rating_change":-49,"scores":{"red":500,"blue":256}},{"id":"3D5E8F50-36EA-451A-9C2A-C066B450B0A7","map_id":1163,"started":"2021-06-05T15:21:16.827Z","ended":"2021-06-05T15:30:45.827Z","result":"Victory","team":"Red","profession":"Necromancer","rating_type":"Unranked","rating_change":53,"scores":{"red":504,"blue":323}}]'
+  /pvp/games?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getPvpGamesByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/pvp/games
+      security:
+        - Bearer: [ account,pvp ]
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information about past PvP matches the player has participated in.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PvpGame"
+              example: '[{"id":"095861E7-D6C8-4C1F-8802-0D4DB9378170","map_id":549,"started":"2021-07-19T01:28:45.552Z","ended":"2021-07-19T01:38:51.552Z","result":"Defeat","team":"Blue","profession":"Necromancer","rating_type":"Unranked","rating_change":-49,"scores":{"red":500,"blue":256}},{"id":"3D5E8F50-36EA-451A-9C2A-C066B450B0A7","map_id":1163,"started":"2021-06-05T15:21:16.827Z","ended":"2021-06-05T15:30:45.827Z","result":"Victory","team":"Red","profession":"Necromancer","rating_type":"Unranked","rating_change":53,"scores":{"red":504,"blue":323}}]'
+  /pvp/games/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getPvpGameById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/pvp/games
+      security:
+        - Bearer: [ account,pvp ]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/PvpGameId"
+      responses:
+        "200":
+          description: This resource returns information about past PvP matches the player has participated in.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PvpGame"
+              example: '{"id":"095861E7-D6C8-4C1F-8802-0D4DB9378170","map_id":549,"started":"2021-07-19T01:28:45.552Z","ended":"2021-07-19T01:38:51.552Z","result":"Defeat","team":"Blue","profession":"Necromancer","rating_type":"Unranked","rating_change":-49,"scores":{"red":500,"blue":256}}'
+
+components:
+  schemas:
+    PvpGameId:
+      type: string
+      format: uuid
+      x-ktx-id: true
+
+    PvpGame:
+      type: object
+      required: [ id,map_id,started,ended,result,team,profession,scores,rating_type,rating_change ]
+      properties:
+        id:
+          $ref: "#/components/schemas/PvpGameId"
+        map_id:
+          allOf:
+            - $ref: "#/components/schemas/MapId"
+            - description: The id of the map the match was played on.
+        started:
+          type: string
+          format: date-time
+        ended:
+          type: string
+          format: date-time
+        result:
+          $ref: "#/components/schemas/PvpResult"
+        team:
+          allOf:
+            - $ref: "#/components/schemas/PvpTeam"
+            - description: The name of the team the player was on.
+        profession:
+          allOf:
+            - $ref: "#/components/schemas/ProfessionId"
+            - description: The name of the profession the player used.
+          scores:
+            type: object
+            description: The scores for each team.
+            x-key:
+              $ref: "#/components/schemas/PvpTeam"
+            additionalProperties:
+              type: integer
+          rating_type:
+            allOf:
+              - $ref: "#/components/schemas/PvpRatingType"
+              - description: The type of game mode.
+          rating_change:
+            type: integer
+            description: The change in rating. Positive for a win and negative for a loss.
+          season:
+            allOf:
+              - $ref: "#/components/schemas/PvpSeasonId"
+              - type: "null"
+
+        

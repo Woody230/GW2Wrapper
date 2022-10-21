@@ -1,0 +1,29 @@
+paths:
+  /account/wallet:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,wallet ]
+      operationId: getAccountWallet
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/wallet
+      responses:
+        "200":
+          description: This resource returns the currencies of the account.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountCurrency"
+              example: '[{"id":1,"value":30307772},{"id":2,"value":6126352},{"id":3,"value":3062},{"id":4,"value":2600},{"id":7,"value":1016},{"id":15,"value":39632},{"id":16,"value":270},{"id":18,"value":427},{"id":19,"value":39},{"id":20,"value":10},{"id":22,"value":410},{"id":23,"value":7254},{"id":24,"value":263},{"id":25,"value":2191},{"id":26,"value":4672},{"id":27,"value":2920},{"id":28,"value":19},{"id":29,"value":100},{"id":31,"value":788},{"id":32,"value":58948},{"id":34,"value":3044},{"id":35,"value":225},{"id":36,"value":4642},{"id":37,"value":206},{"id":38,"value":542},{"id":40,"value":58},{"id":41,"value":220},{"id":42,"value":209},{"id":43,"value":28},{"id":44,"value":34},{"id":45,"value":35540},{"id":47,"value":59},{"id":49,"value":15},{"id":51,"value":18},{"id":54,"value":6},{"id":57,"value":162},{"id":58,"value":8349},{"id":60,"value":734},{"id":68,"value":2},{"id":69,"value":1023}]'
+components:
+  schemas:
+    AccountCurrency:
+      type: object
+      required: [ id, value ]
+      properties:
+        id:
+          $ref: "#/components/schemas/CurrencyId"
+        value:
+          type: integer

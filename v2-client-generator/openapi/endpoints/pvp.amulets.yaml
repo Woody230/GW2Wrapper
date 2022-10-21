@@ -1,0 +1,121 @@
+paths:
+  /pvp/amulets:
+    get:
+      tags: [ getIds ]
+      operationId: getPvpAmuletIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/pvp/amulets
+      responses:
+        "200":
+          description: This resource returns information about the PvP amulets that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PvpAmuletId"
+              example: '[4,8,9,13,14,18,20,22,30,31,34,35,40,41,43,45]'
+  /pvp/amulets?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getPvpAmuletsByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/pvp/amulets
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/PvpAmuletId"
+      responses:
+        "200":
+          description: This resource returns information about the PvP amulets that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PvpAmulet"
+              example: '[{"id":4,"name":"Assassin Amulet","icon":"https://render.guildwars2.com/file/02E9EFDEF9587130A25F17AC396913FBBE3C716D/455602.png","attributes":{"Precision":1200,"Power":900,"CritDamage":900}},{"id":8,"name":"Berserker Amulet","icon":"https://render.guildwars2.com/file/5044509F3DB0F391576CCAD891BC654DC5FE79B3/63600.png","attributes":{"Power":1200,"Precision":900,"CritDamage":900}}]'
+  /pvp/amulets?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getPvpAmuletsByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/pvp/amulets
+      responses:
+        "200":
+          description: This resource returns information about the PvP amulets that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PvpAmulet"
+              example: '[{"id":4,"name":"Assassin Amulet","icon":"https://render.guildwars2.com/file/02E9EFDEF9587130A25F17AC396913FBBE3C716D/455602.png","attributes":{"Precision":1200,"Power":900,"CritDamage":900}},{"id":8,"name":"Berserker Amulet","icon":"https://render.guildwars2.com/file/5044509F3DB0F391576CCAD891BC654DC5FE79B3/63600.png","attributes":{"Power":1200,"Precision":900,"CritDamage":900}}]'
+  /pvp/amulets?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getPvpAmuletsByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/pvp/amulets
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information about the PvP amulets that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PvpAmulet"
+              example: '[{"id":4,"name":"Assassin Amulet","icon":"https://render.guildwars2.com/file/02E9EFDEF9587130A25F17AC396913FBBE3C716D/455602.png","attributes":{"Precision":1200,"Power":900,"CritDamage":900}},{"id":8,"name":"Berserker Amulet","icon":"https://render.guildwars2.com/file/5044509F3DB0F391576CCAD891BC654DC5FE79B3/63600.png","attributes":{"Power":1200,"Precision":900,"CritDamage":900}}]'
+  /pvp/amulets/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getPvpAmuletById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/pvp/amulets
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/PvpAmuletId"
+      responses:
+        "200":
+          description: This resource returns information about the PvP amulets that are in the game.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PvpAmulet"
+              example: '{"id":4,"name":"Assassin Amulet","icon":"https://render.guildwars2.com/file/02E9EFDEF9587130A25F17AC396913FBBE3C716D/455602.png","attributes":{"Precision":1200,"Power":900,"CritDamage":900}}'
+
+components:
+  schemas:
+    PvpAmuletId:
+      type: integer
+      x-ktx-id: true
+
+    PvpAmulet:
+      type: object
+      required: [ id,name,icon,attributes ]
+      properties:
+        id:
+          $ref: "#/components/schemas/PvpAmuletId"
+        name:
+          type: string
+          x-gw2-intl: true
+        icon:
+          $ref: "#/components/schemas/ImageLink"
+        attributes:
+          type: object
+          description: The name of the attribute mapped to the amount it is increased by.
+          x-key:
+            $ref: "#/components/schemas/AttributeName"
+          additionalProperties:
+            type: integer

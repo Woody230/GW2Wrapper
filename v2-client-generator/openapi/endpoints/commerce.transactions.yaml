@@ -1,0 +1,35 @@
+components:
+  schemas:
+    TransactionId:
+      type: integer
+      format: int64
+      x-ktx-id: true
+
+    Transaction:
+      type: object
+      required: [ id, item_id, price, quantity, created ]
+      properties:
+        id:
+          $ref: "#/components/schemas/TransactionId"
+        item_id:
+          $ref: "#/components/schemas/ItemId"
+        price:
+          $ref: "#/components/schemas/Coins"
+        quantity:
+          type: integer
+        created:
+          type: string
+          format: date-time
+
+    CurrentTransaction:
+      $ref: "#/components/schemas/Transaction"
+
+    PastTransaction:
+      allOf:
+        - $ref: "#/components/schemas/Transaction"
+        - type: object
+          required: [ purchased ]
+          properties:
+            purchased:
+              type: string
+              format: date-time

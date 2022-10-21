@@ -1,0 +1,63 @@
+paths:
+  /pvp/standings:
+    get:
+      tags: [ getModel ]
+      operationId: getPvpStandings
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/pvp/standings
+      security:
+        - Bearer: [ account,pvp ]
+      responses:
+        "200":
+          description: This resource returns information about player pips.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PvpStandings"
+              example: '{"current":{"total_points":101,"division":4,"tier":1,"points":1,"repeats":0,"rating":845,"decay":100},"best":{"total_points":200,"division":5,"tier":4,"points":0,"repeats":2},"season_id":"44B85826-B5ED-4890-8C77-82DDF9F2CF2B"}'
+components:
+  schemas:
+    PvpStandings:
+      type: object
+      required: [ current,best,season_id ]
+      properties:
+        current:
+          type: array
+          items:
+            $ref: "#/components/schemas/CurrentStanding"
+        best:
+          type: array
+          items:
+            $ref: "#/components/schemas/BestStanding"
+
+    PvpStanding:
+      type: object
+      required: [ total_points,division,points,repeats ]
+      properties:
+        total_points:
+          type: integer
+        division:
+          type: integer
+          description: The index into the pvp season divisions.
+          externalDocs:
+            url: https://wiki.guildwars2.com/wiki/API:2/pvp/seasons
+        points:
+          type: integer
+        repeats:
+          type: integer
+          description: The number of times the account has maxed out the repeat division.
+
+    CurrentStanding:
+      allOf:
+        - $ref: "#/components/schemas/PvpStanding"
+        - type: object
+          properties:
+            rating:
+              type: [ integer, "null" ]
+              description: Exists since season 5.
+            decay:
+              type: [ integer, "null" ]
+              description: Exists since season 5.
+
+    BestStanding:
+      $ref: "#/components/schemas/PvpStanding"

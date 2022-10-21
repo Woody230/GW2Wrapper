@@ -1,0 +1,83 @@
+paths:
+  /guild/{guildId}:
+    get:
+      tags: [ getById ]
+      operationId: getGuildById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/guild/:id
+      parameters:
+        - $ref: "#/components/parameters/GuildId"
+      responses:
+        "200":
+          description: This resource returns core details about a given guild. The end point will include more or less fields dependend on whether or not an API Key of a Leader or Member of the Guild with the guilds scope is included in the Request.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Guild"
+              example: '{"level":34,"motd":"Our unique message of the day","influence":52800,"aetherium":15000,"resonance":1121,"favor":680,"id":"116E0C0E-0035-44A9-BB22-4AE3E23127E5","name":"Edit Conflict","tag":"wiki","emblem":{"background":{"id":8,"colors":[64]},"foreground":{"id":18,"colors":[584,146]},"flags":["FlipBackgroundHorizontal"]}}'
+components:
+  parameters:
+    GuildId:
+      name: guildId
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/GuildId"
+
+  schemas:
+    GuildId:
+      type: string
+      format: uuid
+      x-ktx-id: true
+
+    GuildLevel:
+      type: integer
+      x-ktx-id: true
+
+    Guild:
+      type: object
+      required: [ id,name,tag,level ]
+      properties:
+        id:
+          $ref: "#/components/schemas/GuildId"
+        level:
+          allOf:
+            - $ref: "#/components/schemas/GuildLevel"
+            - x-gw2-scopes: [ guilds ]
+            - x-gw2-guild-scopes: [ leader, member ]
+        motd:
+          title: messageOfTheDay
+          type: string
+          x-gw2-scopes: [ guilds ]
+          x-gw2-guild-scopes: [ leader,member ]
+        influence:
+          type: integer
+          x-gw2-scopes: [ guilds ]
+          x-gw2-guild-scopes: [ leader,member ]
+        aetherium:
+          type: integer
+          x-gw2-scopes: [ guilds ]
+          x-gw2-guild-scopes: [ leader,member ]
+        favor:
+          type: integer
+          x-gw2-scopes: [ guilds ]
+          x-gw2-guild-scopes: [ leader,member ]
+        member_count:
+          type: integer
+          description: The current number of members in the guild.
+          x-gw2-scopes: [ guilds ]
+          x-gw2-guild-scopes: [ leader,member ]
+        member_capacity:
+          type: integer
+          description: The maximum number of members in the guild.
+          x-gw2-scopes: [ guilds ]
+          x-gw2-guild-scopes: [ leader,member ]
+        name:
+          type: string
+        tag:
+          type: string
+          description: The 2 to 4 letter tag representing the guild.
+        emblem:
+          allOf:
+            - $ref: "#/components/schemas/GuildEmblem"
+            - type: "null"

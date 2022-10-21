@@ -1,0 +1,66 @@
+paths:
+  /pvp/stats:
+    get:
+      tags: [ getModel ]
+      operationId: getPvpStats
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/pvp/stats
+      security:
+        - Bearer: [ account,pvp ]
+      responses:
+        "200":
+          description: TThis resource returns information about wins and losses in the account's PvP matches.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PvpStats"
+              example: '{"pvp_rank":13,"pvp_rank_points":26727,"pvp_rank_rollovers":0,"aggregate":{"wins":15,"losses":9,"desertions":0,"byes":0,"forfeits":0},"professions":{"elementalist":{"wins":5,"losses":4,"desertions":0,"byes":0,"forfeits":0},"necromancer":{"wins":10,"losses":4,"desertions":0,"byes":0,"forfeits":0},"revenant":{"wins":0,"losses":1,"desertions":0,"byes":0,"forfeits":0}},"ladders":{"ranked":{"wins":0,"losses":0,"desertions":0,"byes":0,"forfeits":0},"unranked":{"wins":15,"losses":9,"desertions":0,"byes":0,"forfeits":0}}}'
+components:
+  schemas:
+    PvpStats:
+      type: object
+      required: [ pvp_rank,pvp_rank_points,pvp_rank_rollovers,aggregate,professions,ladders ]
+      properties:
+        pvp_rank:
+          type: integer
+        pvp_rank_points:
+          type: integer
+        pvp_rank_rollovers:
+          type: integer
+          description: The number of times the player has leveled up since rank 80.
+        aggregate:
+          allOf:
+            - $ref: "#/components/schemas/PvpStatAggregate"
+            - title: totalAggregate
+              description: The total count of wins and losses.
+        professions:
+          type: object
+          description: The profession names mapped to an aggregate.
+          x-key:
+            $ref: "#/components/schemas/ProfessionId"
+          additionalProperties:
+            $ref: "#/components/schemas/PvpStatAggregate"
+        ladders:
+          type: object
+          description: The ladder types mapped to an aggregate.
+          x-key:
+            $ref: "#/components/schemas/PvpLadderType"
+          additionalProperties:
+            $ref: "#/components/schemas/PvpStatAggregate"
+
+    PvpStatAggregate:
+      type: object
+      required: [ wins,losses,desertions,byes,forfeits ]
+      properties:
+        wins:
+          type: integer
+        losses:
+          type: integer
+        desertions:
+          type: integer
+        byes:
+          type: integer
+        forfeits:
+          type: integer
+    
+    

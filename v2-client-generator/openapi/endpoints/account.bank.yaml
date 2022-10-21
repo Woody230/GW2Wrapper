@@ -1,0 +1,78 @@
+paths:
+  /account/bank:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,inventories ]
+      operationId: getAccountBankSlots
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/bank
+      responses:
+        "200":
+          description: This resource returns the items stored in a player's vault (not including material storage). A null bank slot indicates that the slot does not contain an item.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: "#/components/schemas/BankSlot"
+                    - type: "null"
+              example: '[{"id":84335,"count":158,"binding":"Account"},{"id":19996,"count":54,"binding":"Account"},{"id":20017,"count":74,"binding":"Account"},{"id":19980,"count":29,"binding":"Account"},{"id":93075,"count":107,"binding":"Account"},{"id":89231,"count":20,"binding":"Account"},{"id":42834,"count":15,"binding":"Account"},{"id":21161,"count":95},{"id":21159,"count":5},{"id":78600,"count":250,"binding":"Account"},{"id":94097,"count":34,"binding":"Account"},{"id":19984,"count":101,"binding":"Account"},{"id":20018,"count":56,"binding":"Account"},{"id":19983,"count":200,"binding":"Account"},{"id":93146,"count":13,"binding":"Account"},{"id":78494,"count":24,"binding":"Account"},{"id":41291,"count":17,"binding":"Account"},{"id":21156,"count":29},{"id":21157,"count":9},{"id":68110,"count":48,"binding":"Account"},{"id":87630,"count":250,"binding":"Account"},{"id":19992,"count":78,"binding":"Account"},{"id":20000,"count":34,"binding":"Account"},{"id":19983,"count":250,"binding":"Account"},{"id":87557,"count":31,"binding":"Account"},{"id":92923,"count":15,"binding":"Account"},{"id":67348,"count":23,"binding":"Account"},{"id":21158,"count":167},{"id":21160,"count":16},{"id":19925,"count":235,"binding":"Account"},{"id":81861,"count":1,"binding":"Account"},{"id":83259,"count":1,"binding":"Account"},{"id":73196,"count":1,"binding":"Account"},{"id":70801,"count":1,"binding":"Account"},{"id":71787,"count":1,"binding":"Account"},{"id":73196,"count":1,"binding":"Account"},{"id":71655,"count":1,"binding":"Account"},{"id":73236,"count":1,"binding":"Account"},{"id":19747,"count":250},{"id":92014,"count":1,"binding":"Account"},{"id":96156,"count":1,"binding":"Account"},{"id":86694,"count":2,"binding":"Account"},{"id":79696,"count":1,"binding":"Account"},{"id":83500,"count":2,"binding":"Account"},{"id":19747,"count":35},{"id":19684,"count":211},{"id":19684,"count":250},{"id":19737,"count":162},{"id":19709,"count":250},{"id":19713,"count":177},{"id":35991,"count":2,"binding":"Account"},{"id":43765,"count":1,"binding":"Account"},{"id":20005,"count":2,"binding":"Account"},{"id":95175,"count":1,"binding":"Account"},{"id":19709,"count":123},{"id":19735,"count":250},{"id":19746,"count":191},{"id":19685,"count":135},{"id":19714,"count":167},{"id":19712,"count":142},{"id":81780,"count":1,"binding":"Account"},{"id":68369,"count":1,"binding":"Account"},{"id":67280,"count":184,"binding":"Account"},{"id":20005,"count":17,"binding":"Account"},{"id":20003,"count":31,"binding":"Account"},{"id":92108,"count":1,"binding":"Account"},{"id":19721,"count":205},{"id":19721,"count":250},{"id":84966,"count":250,"binding":"Account"},{"id":19986,"count":1,"charges":25,"binding":"Account"},{"id":66999,"count":1,"binding":"Account"},{"id":77093,"count":1,"binding":"Account"},{"id":67836,"count":73,"binding":"Account"},{"id":38050,"count":28,"binding":"Account"},{"id":92843,"count":3,"binding":"Account"},{"id":19678,"count":19,"binding":"Account"},{"id":43766,"count":250,"binding":"Account"},{"id":19721,"count":250},{"id":81324,"count":250,"binding":"Account"},{"id":23045,"count":1,"charges":250,"binding":"Account"},{"id":69887,"count":1,"binding":"Account"},{"id":86205,"count":1,"binding":"Account"},{"id":45003,"count":80,"binding":"Account"},{"id":9251,"count":28,"binding":"Account"},{"id":20002,"count":4,"binding":"Account"},{"id":80835,"count":3,"binding":"Account"},{"id":20323,"count":68},{"id":19721,"count":250},{"id":84966,"count":250,"binding":"Account"},{"id":84966,"count":239,"binding":"Account"}]'
+components:
+  schemas:
+    BankSlot:
+      type: object
+      required: [ id, count ]
+      properties:
+        id:
+          $ref: "#/components/schemas/ItemId"
+        count:
+          type: integer
+          description: The number of this item in the stack.
+        charges:
+          type: integer
+          description: The number of charges left. If charges exist, then there can only be a single item because chargeable items do not stack.
+        skin:
+          $ref: "#/components/schemas/SkinId"
+        dyes:
+          type: array
+          items:
+            allOf:
+              - $ref: "#/components/schemas/DyeColorId"
+              - type: "null"
+        upgrades:
+          description: The ids of the upgrades (runes/sigils) applied to the item.
+          type: array
+          externalDocs:
+            url: https://wiki.guildwars2.com/wiki/Upgrade_component
+          items:
+            $ref: "#/components/schemas/ItemId"
+        upgrade_slot_indices:
+          description: The position of the upgrades applied to the item.
+          type: array
+          items:
+            type: integer
+        infusions:
+          description: The ids of the infusions applied to the item.
+          type: array
+          externalDocs:
+            url: https://wiki.guildwars2.com/wiki/Infusion
+          items:
+            $ref: "#/components/schemas/ItemId"
+        binding:
+          allOf:
+            - $ref: "#/components/schemas/Binding"
+            - description: What owns this item. Null if there is no binding.
+              type: "null"
+        bound_to:
+          allOf:
+            - $ref: "#/components/schemas/CharacterName"
+            - description: Who owns this item. Null if the binding is NOT for a character.
+              type: "null"
+        stats:
+          type: array
+          externalDocs:
+            url: https://wiki.guildwars2.com/wiki/API:2/itemstats
+          items:
+            $ref: "#/components/schemas/CharacterItemStat"

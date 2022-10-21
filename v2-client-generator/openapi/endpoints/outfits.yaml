@@ -1,0 +1,121 @@
+paths:
+  /outfits:
+    get:
+      tags: [ getIds ]
+      operationId: getOutfitIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/outfits
+      responses:
+        "200":
+          description: This resource returns information about the outfits that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OutfitId"
+              example: '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119]'
+  /outfits?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getOutfitsByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/outfits
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/OutfitId"
+      responses:
+        "200":
+          description: This resource returns information about the outfits that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Outfit"
+              example: '[{"id":1,"name":"Cook''s Outfit","icon":"https://render.guildwars2.com/file/1509D1B76FCECC111E28D2F50EBEAD5DA102995A/340522.png","unlock_items":[64756]},{"id":2,"name":"Mad King''s Outfit","icon":"https://render.guildwars2.com/file/041DC1695CF0DD1A4438D45ACB036C510E1AFFB4/499488.png","unlock_items":[65196]}]'
+  /outfits?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getOutfitsByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/outfits
+      responses:
+        "200":
+          description: This resource returns information about the outfits that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Outfit"
+              example: '[{"id":1,"name":"Cook''s Outfit","icon":"https://render.guildwars2.com/file/1509D1B76FCECC111E28D2F50EBEAD5DA102995A/340522.png","unlock_items":[64756]},{"id":2,"name":"Mad King''s Outfit","icon":"https://render.guildwars2.com/file/041DC1695CF0DD1A4438D45ACB036C510E1AFFB4/499488.png","unlock_items":[65196]}]'
+  /outfits?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getOutfitsByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/outfits
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information about the outfits that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Outfit"
+              example: '[{"id":1,"name":"Cook''s Outfit","icon":"https://render.guildwars2.com/file/1509D1B76FCECC111E28D2F50EBEAD5DA102995A/340522.png","unlock_items":[64756]},{"id":2,"name":"Mad King''s Outfit","icon":"https://render.guildwars2.com/file/041DC1695CF0DD1A4438D45ACB036C510E1AFFB4/499488.png","unlock_items":[65196]}]'
+  /outfits/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getOutfitById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/outfits
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/OutfitId"
+      responses:
+        "200":
+          description: This resource returns information about the outfits that are in the game.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Outfit"
+              example: '{"id":1,"name":"Cook''s Outfit","icon":"https://render.guildwars2.com/file/1509D1B76FCECC111E28D2F50EBEAD5DA102995A/340522.png","unlock_items":[64756]}'
+
+components:
+  schemas:
+    OutfitId:
+      type: integer
+      x-ktx-id: true
+
+    Outfit:
+      type: object
+      required: [ id,unlock_item,icon,name ]
+      properties:
+        id:
+          $ref: "#/components/schemas/OutfitId"
+        unlock_item:
+          type: array
+          title: unlockItems
+          description: The ids of the items used to unlock this outfit.
+          items:
+            $ref: "#/components/schemas/ItemId"
+        icon:
+          $ref: "#/components/schemas/ImageLink"
+        name:
+          type: string
+          x-gw2-intl: true
+          

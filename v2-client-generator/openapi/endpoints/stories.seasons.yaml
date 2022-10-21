@@ -1,0 +1,121 @@
+paths:
+  /stories/seasons:
+    get:
+      tags: [ getIds ]
+      operationId: getStorySeasonIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/stories/seasons
+      responses:
+        "200":
+          description: This resource returns information about the Story Journal story seasons; including the personal story and Living World.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StorySeasonId"
+              example: '["A515A1D3-4BD7-4594-AE30-2C5D05FF5960","A49D0CD7-E725-4141-8E10-180F1CED7CAF","EAB597C0-C484-4FD3-9430-31433BAC81B6","09766A86-D88D-4DF2-9385-259E9A8CA583","215AAA0F-CDAC-4F93-86DA-C155A99B5784","B8901E58-DC9D-4525-ADB2-79C93593291E","EDCAE800-302A-4D9B-8331-3CC769ADA0B3","D1B709AB-92B6-4EE9-8B40-2B7C628E5022","002C2D90-69B5-41A2-A422-8DB6F2EFC53E","C22AFD21-667A-4AA8-8210-AC74EAEE58BB"]'
+  /stories/seasons?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getStorySeasonsByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/stories/seasons
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/StorySeasonId"
+      responses:
+        "200":
+          description: This resource returns information about the Story Journal story seasons; including the personal story and Living World.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StorySeason"
+              example: '[{"id":"A515A1D3-4BD7-4594-AE30-2C5D05FF5960","name":"Living World Season 2","order":3,"stories":[15,11,16,14,18,13,12,17]},{"id":"A49D0CD7-E725-4141-8E10-180F1CED7CAF","name":"Living World Season 1","order":2,"stories":[118,117,116,115]}]'
+  /stories/seasons?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getStorySeasonsByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/stories/seasons
+      responses:
+        "200":
+          description: This resource returns information about the Story Journal story seasons; including the personal story and Living World.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StorySeason"
+              example: '[{"id":"A515A1D3-4BD7-4594-AE30-2C5D05FF5960","name":"Living World Season 2","order":3,"stories":[15,11,16,14,18,13,12,17]},{"id":"A49D0CD7-E725-4141-8E10-180F1CED7CAF","name":"Living World Season 1","order":2,"stories":[118,117,116,115]}]'
+  /stories/seasons?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getStorySeasonsByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/stories/seasons
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information about the Story Journal story seasons; including the personal story and Living World.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StorySeason"
+              example: '[{"id":"A515A1D3-4BD7-4594-AE30-2C5D05FF5960","name":"Living World Season 2","order":3,"stories":[15,11,16,14,18,13,12,17]},{"id":"A49D0CD7-E725-4141-8E10-180F1CED7CAF","name":"Living World Season 1","order":2,"stories":[118,117,116,115]}]'
+  /stories/seasons/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getStorySeasonById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/stories/seasons
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/StorySeasonId"
+      responses:
+        "200":
+          description: This resource returns information about the Story Journal story seasons; including the personal story and Living World.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StorySeason"
+              example: '{"id":"A515A1D3-4BD7-4594-AE30-2C5D05FF5960","name":"Living World Season 2","order":3,"stories":[15,11,16,14,18,13,12,17]}'
+
+components:
+  schemas:
+    StorySeasonId:
+      type: string
+      format: uuid
+      x-ktx-id: true
+
+    StorySeason:
+      type: object
+      required: [ id,name,order,stories ]
+      properties:
+        id:
+          $ref: "#/components/schemas/StorySeasonId"
+        name:
+          type: string
+          x-gw2-intl: true
+        order:
+          type: integer
+          description: The order in which this season gets displayed in the story journal.
+        stories:
+          type: array
+          description: The ids of the stories that belong to this season.
+          items:
+            $ref: "#/components/schemas/StoryId"

@@ -1,0 +1,49 @@
+paths:
+  /createsubtoken:
+    get:
+      tags: [ getModel ]
+      operationId: createSubToken
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/createsubtoken
+      security:
+        - Bearer: [ account ]
+      parameters:
+        - name: expire
+          in: query
+          required: true
+          description: An ISO-8601 datetime specifing when the generated Subtoken will expire. The token expiry date may not exceed one year from creation - attempting to specify a longer expiry date will result in the expiry being clamped at one year.
+          schema:
+            type: string
+            format: date-time
+        - name: permissions
+          in: query
+          required: true
+          description: The permissions to allow the subtoken to access. The token granting these permissions to the subtoken must have access to them for them to be granted.
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Permission"
+        - name: urls
+          in: query
+          required: false
+          description: The specific endpoints to allow the subtoken to access. The endpoints should be associated with one of the permissions.
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Url"
+      responses:
+        "200":
+          description: This resource allows for the creation of Subtokens; essentially API keys with a more limited set of permissions, which can be used as a substitute for them.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreatedSubToken"
+              example: '{"subtoken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiItT2V3LThjZkYtX2s5a1ZBM1dCZnVpWkhaT1AzSU1pSHA1cEVXZjNuZTJjIiwiaWF0IjoxNTU4NjAzMTA1LCJleHAiOjE1NTg2MDMyNDIsInBlcm1pc3Npb25zIjpbImFjY291bnQiLCJpbnZlbnRvcmllcyJdLCJ1cmxzIjpbIi92Mi9hY2NvdW50L2JhbmsiLCIvdjIvYWNjb3VudC9pbnZlbnRvcnkiXX0.vLvKn8Arn0dlp4i-VR9S5bukm_sMDhLVT-5VXzc9bSg"}'
+components:
+  schemas:
+    CreatedSubToken:
+      type: object
+      required: [ subtoken ]
+      properties:
+        subtoken:
+          $ref: "#/components/schemas/SubToken"

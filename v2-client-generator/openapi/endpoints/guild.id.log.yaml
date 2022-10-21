@@ -1,0 +1,218 @@
+paths:
+  /guild/{guildId}/log:
+    get:
+      tags: [ getModel ]
+      operationId: getGuildLogs
+      security:
+        - Bearer: [ account,guilds ]
+      x-gw2-guild-scopes: [ leader ]
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/guild/:id/log
+      parameters:
+        - $ref: "#/components/parameters/GuildId"
+        - name: since
+          in: query
+          description: Get logs since the log with the given id.
+          required: false
+          schema:
+            $ref: "#/components/schemas/GuildLogId"
+      responses:
+        "200":
+          description: This resource returns information about certain events in a guild's log. The endpoint requires the scope guilds, and will only work if the API key is from the guild leader's account.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GuildLog"
+              example: '[{"id":1190,"time":"2015-12-10T23:58:49.106Z","type":"treasury","user":"Lawton Campbell.9413","item_id":24299,"count":150},{"id":1111,"time":"2015-12-10T23:52:01.099Z","type":"motd","user":"Lawton Campbell.9413","motd":"FSFOSDFJS"},{"id":1375,"time":"2016-02-16T01:08:07.538Z","type":"invited","user":"Lawton Campbell.9413","invited_by":"Lawton Campbell.9413"},{"id":1533,"time":"2016-03-04T18:54:02.785Z","type":"stash","user":"Lawton Campbell.9413","operation":"deposit","item_id":0,"count":0,"coins":20000},{"id":1286,"time":"2015-12-23T00:48:20.539Z","type":"upgrade","upgrade_id":364,"action":"queued","user":"Lawton Campbell.9413"}]'
+components:
+  schemas:
+    GuildLogId:
+      type: integer
+      description: The id of the log. It is only unique within the scope of the associated guild.
+      x-ktx-id: true
+
+    GuildLogType:
+      type: string
+      oneOf:
+        - const: influence
+        - const: invite_declined
+        - const: invited
+        - const: joined
+        - const: kick
+        - const: motd
+        - const: rank_change
+        - const: stash
+        - const: treasury
+        - const: upgrade
+
+    GuildLog:
+      type: object
+      required: [ id,type,time ]
+      discriminator:
+        propertyName: type
+        mapping:
+          influence: "#/components/schemas/InfluenceGuildLog"
+          invite_declined: "#/components/schemas/InviteDeclinedGuildLog"
+          invited: "#/components/schemas/InviteGuildLog"
+          joined: "#/components/schemas/JoinedGuildLog"
+          kick: "#/components/schemas/KickGuildLog"
+          motd: "#/components/schemas/MessageOfTheDayGuildLog"
+          rank_change: "#/components/schemas/RankChangeGuildLog"
+          stash: "#/components/schemas/StashGuildLog"
+          treasury: "#/components/schemas/TreasuryGuildLog"
+          upgrade: "#/components/schemas/UpgradeGuildLog"
+      properties:
+        type:
+          $ref: "#/components/schemas/GuildLogType"
+        id:
+          $ref: "#/components/schemas/GuildLogId"
+        time:
+          type: string
+          format: date-time
+          description: The date and time this log was created.
+        user:
+          allOf:
+            - $ref: "#/components/schemas/AccountName"
+            - type: "null"
+              description: The account name of the player who generated this log. Null if there is no player associated with the log.
+
+    InfluenceGuildLog:
+      allOf:
+        - $ref: "#/components/schemas/GuildLog"
+        - type: object
+          required: [ activity,total_participants,participants ]
+          properties:
+            activity:
+              $ref: "#/components/schemas/InfluenceActivity"
+            total_participants:
+              type: integer
+            participants:
+              type: array
+              items:
+                $ref: "#/components/schemas/AccountName"
+
+    InviteDeclinedGuildLog:
+      allOf:
+        - $ref: "#/components/schemas/GuildLog"
+        - type: object
+          required: [ declined_by ]
+          properties:
+            declined_by:
+              allOf:
+                - $ref: "#/components/schemas/AccountName"
+                - description: The account name of the player who declined the invitation.
+
+    InvitedGuildLog:
+      allOf:
+        - $ref: "#/components/schemas/GuildLog"
+        - type: object
+          description: The user has been invited to the guild.
+          required: [ invited_by ]
+          properties:
+            invited_by:
+              allOf:
+                - $ref: "#/components/schemas/AccountName"
+                - description: The account name of the guild member which invited the user.
+
+    JoinedGuildLog:
+      allOf:
+        - $ref: "#/components/schemas/GuildLog"
+        - description: The user has joined the guild.
+
+    KickGuildLog:
+      allOf:
+        - $ref: "#/components/schemas/GuildLog"
+        - type: object
+          description: The user has been kicked from the guild.
+          required: [ kicked_by ]
+          properties:
+            kicked_by:
+              allOf:
+                - $ref: "#/components/schemas/AccountName"
+                - description: The account name of the guild member which kicked the user.
+
+    MessageOfTheDayGuildLog:
+      allOf:
+        - $ref: "#/components/schemas/GuildLog"
+        - type: object
+          required: [ motd ]
+          properties:
+            motd:
+              title: messageOfTheDay
+              type: string
+              description: The new message of the day.
+
+    RankChangeGuildLog:
+      allOf:
+        - $ref: "#/components/schemas/GuildLog"
+        - type: object
+          required: [ changed_by,old_rank,new_rank ]
+          properties:
+            changed_by:
+              allOf:
+                - $ref: "#/components/schemas/AccountName"
+                - description: The account name of the guild member which changed the user's rank.
+            old_rank:
+              $ref: "#/components/schemas/GuildRankId"
+            new_rank:
+              $ref: "#/components/schemas/GuildRankId"
+
+    StashGuildLog:
+      allOf:
+        - $ref: "#/components/schemas/GuildLog"
+        - type: object
+          required: [ operation,item_id,count,coins ]
+          properties:
+            operation:
+              allOf:
+                - $ref: "#/components/schemas/StashOperation"
+                - description: The type of operation performed on the stash.
+            item_id:
+              allOf:
+                - $ref: "#/components/schemas/ItemId"
+                - description: The id of the item associated with the operation.
+            count:
+              type: integer
+              description: The number of items with the item id being operated with.
+            coins:
+              $ref: "#/components/schemas/Coins"
+
+    TreasuryGuildLog:
+      allOf:
+        - $ref: "#/components/schemas/GuildLog"
+        - type: object
+          required: [ item_id,count ]
+          properties:
+            item_id:
+              allOf:
+                - $ref: "#/components/schemas/ItemId"
+                - description: The id of the item being deposited.
+            count:
+              type: integer
+              description: The number of the items with the item id being deposited.
+
+    UpgradeGuildLog:
+      allOf:
+        - $ref: "#/components/schemas/GuildLog"
+        - type: object
+          required: [ action,upgrade_id ]
+          properties:
+            action:
+              allOf:
+                - $ref: "#/components/schemas/UpgradeAction"
+                - description: The type of interaction.
+            upgrade_id:
+              allOf:
+                - $ref: "#/components/schemas/ItemId"
+                - externalDocs:
+                    url: https://wiki.guildwars2.com/wiki/API:2/guild/upgrades
+            recipe_id:
+              allOf:
+                - $ref: "#/components/schemas/RecipeId"
+                - type: "null"
+            count:
+              type: integer
+              description: The number of upgrades.
+    

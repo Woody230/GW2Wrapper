@@ -1,0 +1,126 @@
+paths:
+  /achievements/groups:
+    get:
+      tags: [ getIds ]
+      operationId: getAchievementGroupsIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/achievements/groups
+      responses:
+        "200":
+          description: This resource returns all the top-level groups for achievements.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AchievementGroupId"
+              example: '["18DB115A-8637-4290-A636-821362A3C4A8","1CAFA333-0C2B-4782-BC4C-7DA30E9CE289","3A185655-09A5-4F6C-8B21-F1FCF62587B1","45410F60-AB66-4146-A0F7-CE99250C4CB0","4E6A6CE7-B131-40BB-81A3-235CDBACDAA9","56A82BB9-6B07-4AB0-89EE-E4A6D68F5C47","65B4B678-607E-4D97-B458-076C3E96A810","A4ED8379-5B6B-4ECC-B6E1-70C350C902D2","A9F7378E-9C8A-48CC-9505-3094E661D5F6","AACBCEF3-BFEE-405B-967D-30A989589AD7","B1311A68-2F67-4718-AB57-5E1750C1410B","B42E2379-9599-46CA-9D4A-40A27E192BBE","BE8B9954-5B55-4FCB-9022-B871AD00EAAB","EFADEE67-588F-412F-A1BD-6C9AFF782988","F59FFE23-4616-47D2-86B4-00F15819AD45"]'
+  /achievements/groups?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getAchievementGroupsByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/achievements/groups
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/AchievementGroupId"
+      responses:
+        "200":
+          description: This resource returns all the top-level groups for achievements.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AchievementGroup"
+              example: '[{"id":"18DB115A-8637-4290-A636-821362A3C4A8","name":"Daily","description":"Achievements that change on a daily basis.","order":1,"categories":[79,88,97,98,102,162,201,207,213,221,233,238,243,250,321,330]},{"id":"1CAFA333-0C2B-4782-BC4C-7DA30E9CE289","name":"Raids","description":"Achievements related to raids.","order":12,"categories":[124,134,138,155,195,215,229]}]'
+  /achievements/groups?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getAchievementGroupsByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/achievements/groups
+      responses:
+        "200":
+          description: This resource returns all the top-level groups for achievements.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AchievementGroup"
+              example: '[{"id":"18DB115A-8637-4290-A636-821362A3C4A8","name":"Daily","description":"Achievements that change on a daily basis.","order":1,"categories":[79,88,97,98,102,162,201,207,213,221,233,238,243,250,321,330]},{"id":"1CAFA333-0C2B-4782-BC4C-7DA30E9CE289","name":"Raids","description":"Achievements related to raids.","order":12,"categories":[124,134,138,155,195,215,229]}]'
+  /achievements/groups?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getAchievementGroupsByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/achievements/groups
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns all the top-level groups for achievements.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AchievementGroup"
+              example: '[{"id":"18DB115A-8637-4290-A636-821362A3C4A8","name":"Daily","description":"Achievements that change on a daily basis.","order":1,"categories":[79,88,97,98,102,162,201,207,213,221,233,238,243,250,321,330]},{"id":"1CAFA333-0C2B-4782-BC4C-7DA30E9CE289","name":"Raids","description":"Achievements related to raids.","order":12,"categories":[124,134,138,155,195,215,229]}]'
+  /achievements/groups/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getAchievementGroupsById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/achievements/groups
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/AchievementGroupId"
+      responses:
+        "200":
+          description: This resource returns all the top-level groups for achievements.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AchievementGroup"
+              example: '{"id":"18DB115A-8637-4290-A636-821362A3C4A8","name":"Daily","description":"Achievements that change on a daily basis.","order":1,"categories":[79,88,97,98,102,162,201,207,213,221,233,238,243,250,321,330]}'
+components:
+  schemas:
+    AchievementGroupId:
+      type: string
+      format: uuid
+      x-ktx-id: true
+
+    AchievementGroup:
+      type: object
+      required: [ id,name,description,order,categories ]
+      properties:
+        id:
+          $ref: "#/components/schemas/AchievementGroupId"
+        name:
+          type: string
+          x-gw2-intl: true
+        description:
+          type: string
+          x-gw2-intl: true
+        order:
+          type: integer
+          default: 2147483647
+          description: The order of this group among other groups. The lower the order, the higher the priority.
+        categories:
+          type: array
+          items:
+            $ref: "#/components/schemas/AchievementCategoryId"
+
+
+      

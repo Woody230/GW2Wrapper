@@ -1,0 +1,33 @@
+paths:
+  /guild/{guildId}/storage:
+    get:
+      tags: [ getModel ]
+      operationId: getGuildStorage
+      security:
+        - Bearer: [ account,guilds ]
+      x-gw2-guild-scopes: [ leader ]
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/guild/:id/storage
+      parameters:
+        - $ref: "#/components/parameters/GuildId"
+      responses:
+        "200":
+          description: This resource returns information about the items in a guild's storage. The endpoint requires the scope guilds, and will only work if the API key is from the guild leader's account.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GuildStorage"
+              example: '[{"id":1,"count":12},{"id":2,"count":23},{"id":3,"count":34}]'
+components:
+  schemas:
+    GuildStorage:
+      type: object
+      required: [ id, count ]
+      properties:
+        id:
+          $ref: "#/components/schemas/GuildUpgradeId"
+        count:
+          type: integer
+          description: The number of items in the stack.

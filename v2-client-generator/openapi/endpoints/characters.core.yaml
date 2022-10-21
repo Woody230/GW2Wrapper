@@ -1,0 +1,55 @@
+paths:
+  /characters/{name}/core:
+    get:
+      tags: [ getModel ]
+      operationId: getCharacterCore
+      security:
+        - Bearer: [ account,characters ]
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/core
+      parameters:
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns core information about a character attached to a specific account.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CharacterCore"
+              example: '{"name":"Spectralstar","race":"Sylvari","gender":"Male","profession":"Necromancer","level":80,"guild":"90D96902-657A-4CC6-A8FC-CD66C0BB969C","age":7520451,"last_modified":"2022-10-16T23:46:00Z","created":"2013-05-31T21:51:00Z","deaths":2511,"title":354}'
+components:
+  schemas:
+    CharacterCore:
+      type: object
+      required: [ name, race, gender, profession, level, age, last_modified, created, deaths ]
+      properties:
+        # TODO identifiable: using name
+        name:
+          $ref: "#/components/schemas/CharacterName"
+        race:
+          $ref: "#/components/schemas/RaceId"
+        gender:
+          $ref: "#/components/schemas/Gender"
+        profession:
+          $ref: "#/components/schemas/ProfessionId"
+        level:
+          $ref: "#/components/schemas/CharacterLevel"
+        guild:
+          $ref: "#/components/schemas/GuildId"
+        age:
+          type: string
+          format: duration-seconds
+          description: The amount of seconds the character has been played.
+        last_modified:
+          type: string
+          format: date-time
+        created:
+          type: string
+          format: date-time
+        deaths:
+          type: integer
+          description: The number of times the character has been defeated.
+        title:
+          allOf:
+            - $ref: "#/components/schemas/TitleId"
+            - description: The id of the character's currently selected title.

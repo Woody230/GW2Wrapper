@@ -1,0 +1,37 @@
+paths:
+  /account/home/cats:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,progression,unlocks ]
+      operationId: getAccountCats
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/home/cats
+      responses:
+        "200":
+          description: This resource returns information about unlocked home instance cats.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CatId"
+              example: '[2,24,1,20]'
+  /account/home/nodes:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,progression,unlocks ]
+      operationId: getAccountNodes
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/home/nodes
+      responses:
+        "200":
+          description: This resource returns information about unlocked home instance nodes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NodeId"
+              example: '["quartz_node","krait_obelisk","sprocket_generator","wintersday_tree","bandit_chest","aurilium_node","exalted_chest","airship_cargo","crystallized_supply_cache"]'

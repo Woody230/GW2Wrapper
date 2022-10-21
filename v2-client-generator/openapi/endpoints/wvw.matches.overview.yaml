@@ -1,0 +1,137 @@
+paths:
+  /wvw/matches/overview:
+    get:
+      tags: [ getIds ]
+      operationId: getWvwMatchOverviewIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/wvw/matches
+      responses:
+        "200":
+          description: This resource returns further details about the specified match, including the total score, kills and deaths, and further details for each map.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WvwMatchId"
+              example: '["1-1","1-2","1-3","1-4","2-1","2-2","2-3","2-4","2-5"]'
+  /wvw/matches/overview?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getWvwMatchOverviewsByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/wvw/matches
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/WvwMatchId"
+      responses:
+        "200":
+          description: This resource returns further details about the specified match, including the total score, kills and deaths, and further details for each map.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WvwMatchOverview"
+              example: '[{"id":"1-1","worlds":{"red":1010,"blue":1004,"green":1005},"all_worlds":{"red":[11010,1013,1010],"blue":[11004,1019,1004],"green":[1020,11005,1005]},"start_time":"2022-10-15T02:00:00Z","end_time":"2022-10-22T01:58:00Z"},{"id":"1-2","worlds":{"red":1003,"blue":1012,"green":1011},"all_worlds":{"red":[1018,11003,1003],"blue":[1015,11012,1012],"green":[11011,1014,1011]},"start_time":"2022-10-15T02:00:00Z","end_time":"2022-10-22T01:58:00Z"}]'
+  /wvw/matches/overview?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getWvwMatchOverviewsByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/wvw/matches
+      responses:
+        "200":
+          description: This resource returns further details about the specified match, including the total score, kills and deaths, and further details for each map.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WvwMatchOverview"
+              example: '[{"id":"1-1","worlds":{"red":1010,"blue":1004,"green":1005},"all_worlds":{"red":[11010,1013,1010],"blue":[11004,1019,1004],"green":[1020,11005,1005]},"start_time":"2022-10-15T02:00:00Z","end_time":"2022-10-22T01:58:00Z"},{"id":"1-2","worlds":{"red":1003,"blue":1012,"green":1011},"all_worlds":{"red":[1018,11003,1003],"blue":[1015,11012,1012],"green":[11011,1014,1011]},"start_time":"2022-10-15T02:00:00Z","end_time":"2022-10-22T01:58:00Z"}]'
+  /wvw/matches/overview?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getWvwMatchOverviewsByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/wvw/matches
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns further details about the specified match, including the total score, kills and deaths, and further details for each map.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WvwMatchOverview"
+              example: '[{"id":"1-1","worlds":{"red":1010,"blue":1004,"green":1005},"all_worlds":{"red":[11010,1013,1010],"blue":[11004,1019,1004],"green":[1020,11005,1005]},"start_time":"2022-10-15T02:00:00Z","end_time":"2022-10-22T01:58:00Z"},{"id":"1-2","worlds":{"red":1003,"blue":1012,"green":1011},"all_worlds":{"red":[1018,11003,1003],"blue":[1015,11012,1012],"green":[11011,1014,1011]},"start_time":"2022-10-15T02:00:00Z","end_time":"2022-10-22T01:58:00Z"}]'
+  /wvw/matches/overview/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getWvwMatchOverviewById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/wvw/matches
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/WvwMatchId"
+      responses:
+        "200":
+          description: This resource returns further details about the specified match, including the total score, kills and deaths, and further details for each map.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WvwMatchOverview"
+              example: '{"id":"1-2","worlds":{"red":1003,"blue":1012,"green":1011},"all_worlds":{"red":[1018,11003,1003],"blue":[1015,11012,1012],"green":[11011,1014,1011]},"start_time":"2022-10-15T02:00:00Z","end_time":"2022-10-22T01:58:00Z"}'
+  /wvw/matches/overview?world={worldId}:
+    get:
+      tags: [ getModel ]
+      operationId: getWvwMatchByWorld
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/wvw/matches
+      parameters:
+        - $ref: "#/components/parameters/WorldId"
+      responses:
+        "200":
+          description: This resource returns further details about the specified match, including the total score, kills and deaths, and further details for each map.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WvwMatchOverview"
+              example: '{"id":"1-2","worlds":{"red":1003,"blue":1012,"green":1011},"all_worlds":{"red":[1018,11003,1003],"blue":[1015,11012,1012],"green":[11011,1014,1011]},"start_time":"2022-10-15T02:00:00Z","end_time":"2022-10-22T01:58:00Z"}'
+
+components:
+  schemas:
+    WvwMatchOverview:
+      type: object
+      required: [ id,start_time,end_time,scores,worlds,all_world ]
+      properties:
+        id:
+          $ref: "#/components/schemas/WvwMatchId"
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        scores:
+          $ref: "#/components/schemas/WorldCount"
+        worlds:
+          allOf:
+            - $ref: "#/components/schemas/WvwWorldId"
+            - description: The main worlds.
+        all_worlds:
+          allOf:
+            - $ref: "#/components/schemas/WvwWorldIds"
+            - description: All of the worlds.

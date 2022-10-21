@@ -1,0 +1,19 @@
+paths:
+  /account/dyes:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,unlocks ]
+      operationId: getAccountDyes
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/dyes
+      responses:
+        "200":
+          description: This resource returns the unlocked dyes of the account.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DyeColorId"
+              example: '[11,13,14,17,19,25,33,45,47,49,59,65,68,71,77,78,81,83,86,89,90,96,98,101,109,114,116,117,122,131,134,142,332,341,345,348,354,355,362,366,368,371,376,377,435,438,440,442,452,453,454,457,459,480,587,588,598,604,610,612,615,624,626,627,629,631,632,640,652,660,673,679,680,684,685,690,700,704,712,1149,1151,1152,1157,1279,1658]'

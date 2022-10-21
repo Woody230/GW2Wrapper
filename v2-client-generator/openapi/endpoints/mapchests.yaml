@@ -1,0 +1,109 @@
+paths:
+  /mapchests:
+    get:
+      tags: [ getIds ]
+      operationId: getMapChestIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/mapchests
+      responses:
+        "200":
+          description: This resource returns information about Hero's Choice Chests that can be be acquired once a day in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MapChestId"
+              example: '["auric_basin_heros_choice_chest","crystal_oasis_heros_choice_chest","domain_of_vabbi_heros_choice_chest","dragons_stand_heros_choice_chest","elon_riverlands_heros_choice_chest","tangled_depths_heros_choice_chest","the_desolation_heros_choice_chest","verdant_brink_heros_choice_chest"]'
+  /mapchests?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getMapChestsByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/mapchests
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/MapChestId"
+      responses:
+        "200":
+          description: This resource returns information about Hero's Choice Chests that can be be acquired once a day in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MapChest"
+              example: '[{"id":"auric_basin_heros_choice_chest"},{"id":"crystal_oasis_heros_choice_chest"},{"id":"domain_of_vabbi_heros_choice_chest"},{"id":"dragons_stand_heros_choice_chest"},{"id":"elon_riverlands_heros_choice_chest"},{"id":"tangled_depths_heros_choice_chest"},{"id":"the_desolation_heros_choice_chest"},{"id":"verdant_brink_heros_choice_chest"}]'
+  /mapchests?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getMapChestsByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/mapchests
+      responses:
+        "200":
+          description: This resource returns information about Hero's Choice Chests that can be be acquired once a day in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MapChest"
+              example: '[{"id":"auric_basin_heros_choice_chest"},{"id":"crystal_oasis_heros_choice_chest"},{"id":"domain_of_vabbi_heros_choice_chest"},{"id":"dragons_stand_heros_choice_chest"},{"id":"elon_riverlands_heros_choice_chest"},{"id":"tangled_depths_heros_choice_chest"},{"id":"the_desolation_heros_choice_chest"},{"id":"verdant_brink_heros_choice_chest"}]'
+  /mapchests?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getMapChestsByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/mapchests
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information about Hero's Choice Chests that can be be acquired once a day in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MapChest"
+              example: '[{"id":"auric_basin_heros_choice_chest"},{"id":"crystal_oasis_heros_choice_chest"},{"id":"domain_of_vabbi_heros_choice_chest"},{"id":"dragons_stand_heros_choice_chest"},{"id":"elon_riverlands_heros_choice_chest"},{"id":"tangled_depths_heros_choice_chest"},{"id":"the_desolation_heros_choice_chest"},{"id":"verdant_brink_heros_choice_chest"}]'
+  /mapchests/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getMapChestById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/mapchests
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/MapChestId"
+      responses:
+        "200":
+          description: This resource returns information about Hero's Choice Chests that can be be acquired once a day in-game.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MapChest"
+              example: '{"id":"auric_basin_heros_choice_chest"}'
+
+components:
+  schemas:
+    MapChestId:
+      type: string
+      x-ktx-id: true
+
+    MapChest:
+      type: object
+      required: [ id ]
+      properties:
+        id:
+          $ref: "#/components/schemas/MapChestId"

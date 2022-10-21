@@ -1,0 +1,116 @@
+paths:
+  /guild/permissions:
+    get:
+      tags: [ getIds ]
+      operationId: getGuildPermissionIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/guild/permissions
+      responses:
+        "200":
+          description: This resource returns information about all guild permissions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GuildPermissionId"
+              example: '["ClaimableEditOptions","EditBGM","ActivatePlaceables","DepositItemsTrove","WithdrawItemsStash","WithdrawItemsTrove","EditAssemblyQueue","WithdrawCoinsStash","ActivateWorldEvent","PlaceArenaDecoration","DepositItemsStash","EditMonument","StartingRole","SpendFuel","TeamAdmin","EditRoles","Admin","WithdrawCoinsTrove","DepositCoinsTrove","PurchaseUpgrades","EditEmblem","ClaimableActivate","MissionControl","OpenPortal","SetGuildHall","DepositCoinsStash","PlaceDecoration","ClaimableSpend","EditMOTD","EditAnthem","DecorationAdmin","ClaimableClaim"]'
+  /guild/permissions?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getGuildPermissionsByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/guild/permissions
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/GuildPermissionId"
+      responses:
+        "200":
+          description: This resource returns information about all guild permissions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GuildPermission"
+              example: '[{"id":"ClaimableEditOptions","name":"Edit Claimable Options","description":"Allowed to edit options at guild-owned claimables."},{"id":"EditBGM","name":"Change Guild Hall Music","description":"Change the guild hall''s background music."}]'
+  /guild/permissions?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getGuildPermissionsByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/guild/permissions
+      responses:
+        "200":
+          description: This resource returns information about all guild permissions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GuildPermission"
+              example: '[{"id":"ClaimableEditOptions","name":"Edit Claimable Options","description":"Allowed to edit options at guild-owned claimables."},{"id":"EditBGM","name":"Change Guild Hall Music","description":"Change the guild hall''s background music."}]'
+  /guild/permissions?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getGuildPermissionsByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/guild/permissions
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information about all guild permissions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GuildPermission"
+              example: '[{"id":"ClaimableEditOptions","name":"Edit Claimable Options","description":"Allowed to edit options at guild-owned claimables."},{"id":"EditBGM","name":"Change Guild Hall Music","description":"Change the guild hall''s background music."}]'
+  /guild/permissions/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getGuildPermissionById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/guild/permissions
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/GuildPermissionId"
+      responses:
+        "200":
+          description: This resource returns information about all guild permissions.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GuildPermission"
+              example: '{"id":"ClaimableEditOptions","name":"Edit Claimable Options","description":"Allowed to edit options at guild-owned claimables."}'
+
+components:
+  schemas:
+    GuildPermissionId:
+      type: string
+      x-ktx-id: true
+
+    GuildPermission:
+      type: object
+      required: [ id,name,description ]
+      properties:
+        id:
+          $ref: "#/components/schemas/GuildPermissionId"
+        name:
+          type: string
+          x-gw2-intl: true
+        description:
+          type: string
+          x-gw2-intl: true
+        

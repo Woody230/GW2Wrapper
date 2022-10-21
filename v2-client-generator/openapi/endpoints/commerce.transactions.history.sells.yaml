@@ -1,0 +1,19 @@
+paths:
+  /commerce/transactions/history/sells:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,tradingpost ]
+      operationId: getAccountHistoricalSellTransactions
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/commerce/transactions
+      responses:
+        "200":
+          description: This resource provides access to the historical sell transactions of a player.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PastTransaction"
+              example: '[{"id":6824719864,"item_id":24624,"price":1957,"quantity":1,"created":"2022-06-19T11:32:44+00:00","purchased":"2022-10-08T11:15:33+00:00"},{"id":6820553476,"item_id":49425,"price":642,"quantity":1,"created":"2021-06-12T01:06:15+00:00","purchased":"2022-10-04T20:13:24+00:00"},{"id":6820327280,"item_id":76166,"price":38978,"quantity":1,"created":"2021-06-06T13:31:47+00:00","purchased":"2022-10-04T17:05:42+00:00"},{"id":6811570574,"item_id":24757,"price":15538,"quantity":1,"created":"2021-07-11T14:51:19+00:00","purchased":"2022-09-27T17:59:06+00:00"},{"id":6811568491,"item_id":24757,"price":15538,"quantity":5,"created":"2021-07-11T14:51:19+00:00","purchased":"2022-09-27T17:57:22+00:00"},{"id":6806941544,"item_id":24635,"price":1398,"quantity":1,"created":"2022-05-08T11:53:05+00:00","purchased":"2022-09-24T10:04:38+00:00"},{"id":6796817158,"item_id":74978,"price":16592,"quantity":1,"created":"2021-06-06T13:31:53+00:00","purchased":"2022-09-16T14:42:42+00:00"},{"id":6769010293,"item_id":46710,"price":6119,"quantity":1,"created":"2022-08-23T23:20:18+00:00","purchased":"2022-08-25T15:37:17+00:00"},{"id":6768053090,"item_id":24688,"price":722,"quantity":1,"created":"2022-08-23T23:20:13+00:00","purchased":"2022-08-24T18:23:56+00:00"},{"id":6760243987,"item_id":24863,"price":588,"quantity":1,"created":"2021-07-02T00:01:33+00:00","purchased":"2022-08-17T10:07:53+00:00"},{"id":6751766979,"item_id":66670,"price":126,"quantity":10,"created":"2021-06-10T00:41:24+00:00","purchased":"2022-08-08T20:38:30+00:00"},{"id":6750851662,"item_id":75241,"price":150,"quantity":108,"created":"2021-06-11T11:24:47+00:00","purchased":"2022-08-07T22:11:43+00:00"},{"id":6750851569,"item_id":75241,"price":150,"quantity":142,"created":"2021-06-11T11:24:47+00:00","purchased":"2022-08-07T22:11:34+00:00"},{"id":6746122732,"item_id":19697,"price":82,"quantity":50,"created":"2021-08-14T14:36:04+00:00","purchased":"2022-08-03T13:15:33+00:00"},{"id":6746122707,"item_id":19697,"price":82,"quantity":200,"created":"2021-08-14T14:36:04+00:00","purchased":"2022-08-03T13:15:32+00:00"},{"id":6745408643,"item_id":19697,"price":77,"quantity":85,"created":"2021-06-20T15:18:26+00:00","purchased":"2022-08-02T20:43:21+00:00"},{"id":6745408632,"item_id":19697,"price":77,"quantity":165,"created":"2021-06-20T15:18:26+00:00","purchased":"2022-08-02T20:43:21+00:00"},{"id":6745361772,"item_id":19698,"price":65,"quantity":87,"created":"2021-08-13T00:15:29+00:00","purchased":"2022-08-02T20:04:50+00:00"},{"id":6745361713,"item_id":19698,"price":65,"quantity":163,"created":"2021-08-13T00:15:29+00:00","purchased":"2022-08-02T20:04:47+00:00"},{"id":6745260005,"item_id":19698,"price":61,"quantity":15,"created":"2021-07-13T01:34:32+00:00","purchased":"2022-08-02T18:45:01+00:00"},{"id":6745259975,"item_id":19698,"price":61,"quantity":5,"created":"2021-07-13T01:34:32+00:00","purchased":"2022-08-02T18:45:01+00:00"},{"id":6745255298,"item_id":19698,"price":61,"quantity":202,"created":"2021-07-13T01:34:32+00:00","purchased":"2022-08-02T18:40:51+00:00"},{"id":6745254527,"item_id":19698,"price":61,"quantity":28,"created":"2021-07-13T01:34:32+00:00","purchased":"2022-08-02T18:40:06+00:00"}]'

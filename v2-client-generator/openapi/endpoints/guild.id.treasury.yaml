@@ -1,0 +1,48 @@
+paths:
+  /guild/{guildId}/treasury:
+    get:
+      tags: [ getModel ]
+      operationId: getGuildTreasury
+      security:
+        - Bearer: [ account,guilds ]
+      x-gw2-guild-scopes: [ leader ]
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/guild/:id/treasury
+      parameters:
+        - $ref: "#/components/parameters/GuildId"
+      responses:
+        "200":
+          description: This resource returns information about the items in a guild's treasury. The endpoint requires the scope guilds, and will only work if the API key is from the guild leader's account.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GuildTreasurySlot"
+              example: '[{"item_id":1,"count":75,"needed_by":[{"upgrade_id":2,"count":75}]},{"item_id":2,"count":120,"needed_by":[{"upgrade_id":3,"count":250}]},{"item_id":4,"count":500,"needed_by":[{"upgrade_id":7,"count":9000}]}]'
+components:
+  schemas:
+    GuildTresurySlot:
+      type: object
+      required: [ item_id, count, needed_by ]
+      properties:
+        item_id:
+          $ref: "#/components/schemas/ItemId"
+        count:
+          type: integer
+          description: The number of items in the stack.
+        needed_by:
+          type: array
+          description: The guild upgrades that need the item.
+          items:
+            $ref: "#/components/schemas/GuildTreasuryUpgrade"
+
+    GuildTreasuryUpgrade:
+      type: object
+      required: [ upgrade_id,count ]
+      properties:
+        upgrade_id:
+          $ref: "#/components/schemas/GuildUpgradeId"
+        count:
+          type: integer
+          description: The number of items required.

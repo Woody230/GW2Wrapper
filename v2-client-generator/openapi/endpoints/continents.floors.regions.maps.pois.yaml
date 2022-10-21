@@ -1,0 +1,157 @@
+paths:
+  /continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois:
+    get:
+      tags: [ getIds ]
+      operationId: getContinentMapPointsOfInterestIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/continents
+      parameters:
+        - $ref: "#/components/parameters/ContinentId"
+        - $ref: "#/components/parameters/FloorId"
+        - $ref: "#/components/parameters/RegionId"
+        - $ref: "#/components/parameters/MapId"
+      responses:
+        "200":
+          description: This resource returns information about points of interests.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PointOfInterestId"
+              example: '[554,555,556,557,558,559,560,561,562,563,564,565,566,598,599,600,601,602,603,604,605,606,607,608,609,610,611,612,613,1262,1266,1267,1268,1269,1291,1343,1486,1569,1570,1571,1572,1573,1574,1575,1576,1577,1578,1579,1580,1700,1732]'
+  /continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois?ids={pointOfInterestIds}:
+    get:
+      tags: [ getByIds ]
+      operationId: getContinentMapPointOfInterestsByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/continents
+      parameters:
+        - name: pointOfInterestIds
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/PointOfInterestId"
+        - $ref: "#/components/parameters/ContinentId"
+        - $ref: "#/components/parameters/FloorId"
+        - $ref: "#/components/parameters/RegionId"
+        - $ref: "#/components/parameters/MapId"
+      responses:
+        "200":
+          description: This resource returns information about points of interests.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PointOfInterest"
+              example: '[{"name":"Stonemist Keep","type":"landmark","floor":3,"coord":[10606.1,14549.6],"id":990,"chat_link":"[&BN4DAAA=]"},{"name":"Great Northern Gate","type":"landmark","floor":3,"coord":[10598.2,14328.8],"id":991,"chat_link":"[&BN8DAAA=]"}]'
+  /continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getContinentMapPointOfInterestsByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/continents
+      parameters:
+        - $ref: "#/components/parameters/ContinentId"
+        - $ref: "#/components/parameters/FloorId"
+        - $ref: "#/components/parameters/RegionId"
+        - $ref: "#/components/parameters/MapId"
+      responses:
+        "200":
+          description: This resource returns information about points of interests.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PointOfInterest"
+              example: '[{"name":"Stonemist Keep","type":"landmark","floor":3,"coord":[10606.1,14549.6],"id":990,"chat_link":"[&BN4DAAA=]"},{"name":"Great Northern Gate","type":"landmark","floor":3,"coord":[10598.2,14328.8],"id":991,"chat_link":"[&BN8DAAA=]"}]'
+  /continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getContinentMapPointOfInterestsByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/continents
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/ContinentId"
+        - $ref: "#/components/parameters/FloorId"
+        - $ref: "#/components/parameters/RegionId"
+        - $ref: "#/components/parameters/MapId"
+      responses:
+        "200":
+          description: This resource returns information about points of interests.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PointOfInterest"
+              example: '[{"name":"Stonemist Keep","type":"landmark","floor":3,"coord":[10606.1,14549.6],"id":990,"chat_link":"[&BN4DAAA=]"},{"name":"Great Northern Gate","type":"landmark","floor":3,"coord":[10598.2,14328.8],"id":991,"chat_link":"[&BN8DAAA=]"}]'
+  /continent/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/pois/{pointOfInterestId}:
+    get:
+      tags: [ getById ]
+      operationId: getContinentMapPointOfInterestById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/continents
+      parameters:
+        - $ref: "#/components/parameters/ContinentId"
+        - $ref: "#/components/parameters/FloorId"
+        - $ref: "#/components/parameters/RegionId"
+        - $ref: "#/components/parameters/MapId"
+        - name: pointOfInterestId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/PointOfInterestId"
+      responses:
+        "200":
+          description: This resource returns information about point of interests.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PointOfInterest"
+              example: '{"name":"Leaning Grade","type":"landmark","floor":1,"coord":[52657.7,32978.8],"id":554,"chat_link":"[&BCoCAAA=]"}'
+
+components:
+  schemas:
+    PointOfInterestId:
+      type: integer
+      x-ktx-id: true
+
+    PointOfInterest:
+      type: object
+      required: [ id,name,type,floor,coord,chat_link,icon ]
+      properties:
+        id:
+          $ref: "#/components/schemas/PointOfInterestId"
+        name:
+          type: string
+          x-gw2-intl: true
+        type:
+          $ref: "#/components/schemas/PointOfInterestType"
+        floor:
+          allOf:
+            - $ref: "#/components/schemas/FloorId"
+            - description: The id of the floor this point of interest is located on.
+        coord:
+          title: coordinates
+          type: array
+          description: The two-dimensional coordinates within the texture.
+          format: textureposition
+          items:
+            type: number
+            format: double
+        chat_link:
+          allOf:
+            - $ref: "#/components/schemas/ChatLink"
+            - externalDocs:
+                url: https://wiki.guildwars2.com/wiki/Chat_link_format#Map_link
+        icon:
+          allOf:
+            - $ref: "#/components/schemas/ImageLink"
+            - description: The link to the point of interest icon. Used for a type of unlock.

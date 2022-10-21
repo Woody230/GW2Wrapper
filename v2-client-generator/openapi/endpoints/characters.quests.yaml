@@ -1,0 +1,21 @@
+paths:
+  /characters/{name}/recipes:
+    get:
+      tags: [ getModel ]
+      operationId: getCharacterQuests
+      security:
+        - Bearer: [ account,characters,progression ]
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/quests
+      parameters:
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns information about the quests selected that by a character attached to a specific account.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/QuestId"
+              example: '[201,212,213,214,215,216,230,231,232,234,236,238,239,241,247,251,254,256,257,267,269,270,282,283,284,285,286,287,289,300,301,308,309,310,311,318,319,320,321,322,323,324,328,329,330,335,337,338,358,359,360,361,362,363,364,365,366,368,371,377,378,384,391,392,398,401,404,405,408,411,413,415,417,418,419,421,423,431,435,441,453,456,466,477,479,480,481,482,483,484,486,491,493,496,499,500,501,505,525,526,529,549,569,570,576,577,578,579,580,581,583,587,590,593,595,596,598,599,600,602,605,606,608,611]'

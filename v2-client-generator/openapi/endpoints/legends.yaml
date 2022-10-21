@@ -1,0 +1,128 @@
+paths:
+  /legends:
+    get:
+      tags: [ getIds ]
+      operationId: getLegendIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/legends
+      responses:
+        "200":
+          description: This resource returns information about the Revenant Legends that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LegendId"
+              example: '["Legend1","Legend2","Legend3","Legend4","Legend5","Legend6"]'
+  /legends?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getLegendsByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/legends
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/LegendId"
+      responses:
+        "200":
+          description: This resource returns information about the Revenant Legends that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Legend"
+              example: '[{"id":"Legend1","code":1,"swap":28085,"heal":27220,"elite":27760,"utilities":[28379,27014,26644]},{"id":"Legend2","code":2,"swap":28134,"heal":26937,"elite":28406,"utilities":[29209,28231,27107]},{"id":"Legend3","code":3,"swap":28419,"heal":27372,"elite":27975,"utilities":[28516,26679,26557]},{"id":"Legend4","code":4,"swap":28494,"heal":28219,"elite":28287,"utilities":[27322,27505,27917]},{"id":"Legend5","code":5,"swap":41858,"heal":45686,"elite":45773,"utilities":[42949,40485,41220]},{"id":"Legend6","code":6,"swap":28195,"heal":28427,"elite":27356,"utilities":[26821,27025,27715]}]'
+  /legends?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getLegendsByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/legends
+      responses:
+        "200":
+          description: This resource returns information about the Revenant Legends that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Legend"
+              example: '[{"id":"Legend1","code":1,"swap":28085,"heal":27220,"elite":27760,"utilities":[28379,27014,26644]},{"id":"Legend2","code":2,"swap":28134,"heal":26937,"elite":28406,"utilities":[29209,28231,27107]},{"id":"Legend3","code":3,"swap":28419,"heal":27372,"elite":27975,"utilities":[28516,26679,26557]},{"id":"Legend4","code":4,"swap":28494,"heal":28219,"elite":28287,"utilities":[27322,27505,27917]},{"id":"Legend5","code":5,"swap":41858,"heal":45686,"elite":45773,"utilities":[42949,40485,41220]},{"id":"Legend6","code":6,"swap":28195,"heal":28427,"elite":27356,"utilities":[26821,27025,27715]}]'
+  /legends?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getLegendsByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/legends
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information about the Revenant Legends that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Legend"
+              example: '[{"id":"Legend1","code":1,"swap":28085,"heal":27220,"elite":27760,"utilities":[28379,27014,26644]},{"id":"Legend2","code":2,"swap":28134,"heal":26937,"elite":28406,"utilities":[29209,28231,27107]},{"id":"Legend3","code":3,"swap":28419,"heal":27372,"elite":27975,"utilities":[28516,26679,26557]},{"id":"Legend4","code":4,"swap":28494,"heal":28219,"elite":28287,"utilities":[27322,27505,27917]},{"id":"Legend5","code":5,"swap":41858,"heal":45686,"elite":45773,"utilities":[42949,40485,41220]},{"id":"Legend6","code":6,"swap":28195,"heal":28427,"elite":27356,"utilities":[26821,27025,27715]}]'
+  /legends/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getLegendById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/legends
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/LegendId"
+      responses:
+        "200":
+          description: This resource returns information about the Revenant Legends that are in the game.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Legend"
+              example: '{"id":"Legend1","code":1,"swap":28085,"heal":27220,"elite":27760,"utilities":[28379,27014,26644]}'
+
+components:
+  schemas:
+    LegendId:
+      type: string
+      x-ktx-id: true
+
+    LegendCode:
+      type: string
+      x-ktx-id: true
+      description: The id used in build template chat links.
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/Chat_link_format#Build_template_link
+
+    Legend:
+      type: object
+      required: [ id,code,swap,heal,elite,utilites ]
+      properties:
+        id:
+          $ref: "#/components/schemas/LegendId"
+        code:
+          $ref: "#/components/schemas/LegendCode"
+        swap:
+          $ref: "#/components/schemas/SkillId"
+        heal:
+          $ref: "#/components/schemas/SkillId"
+        elite:
+          $ref: "#/components/schemas/SkillId"
+        utilities:
+          type: array
+          items:
+            $ref: "#/components/schemas/SkillId"

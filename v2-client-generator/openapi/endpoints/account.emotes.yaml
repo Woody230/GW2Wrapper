@@ -1,0 +1,19 @@
+paths:
+  /account/emotes:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account ]
+      operationId: getAccountEmotes
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/emotes
+      responses:
+        "200":
+          description: This resource returns the player's unlocked emotes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EmoteId"
+              example: '["playdead","rockout","shiver"]'

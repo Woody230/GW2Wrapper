@@ -1,0 +1,62 @@
+paths:
+  /achievements/daily:
+    get:
+      tags: [ getModel ]
+      operationId: getTodaysDailyAchievements
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/achievements/daily
+      responses:
+        "200":
+          description: This resource returns the current set of daily achievements.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dailies"
+              example: '{"pve":[{"id":1976,"level":{"min":70,"max":80}},{"id":1970,"level":{"min":1,"max":69}},{"id":500,"level":{"min":11,"max":80}},{"id":1953,"level":{"min":11,"max":80}},{"id":2959,"level":{"min":50,"max":80}},{"id":2893,"level":{"min":31,"max":49}}],"pvp":[{"id":1857,"level":{"min":1,"max":80}},{"id":2816,"level":{"min":11,"max":80}},{"id":3449,"level":{"min":11,"max":80}},{"id":3450,"level":{"min":31,"max":80}}],"wvw":[{"id":1848,"level":{"min":1,"max":80}},{"id":1849,"level":{"min":11,"max":80}},{"id":1851,"level":{"min":11,"max":80}},{"id":1845,"level":{"min":31,"max":80}}],"fractals":[{"id":2238,"level":{"min":1,"max":80}},{"id":2598,"level":{"min":1,"max":80}},{"id":3172,"level":{"min":1,"max":80}},{"id":3063,"level":{"min":1,"max":80}},{"id":3044,"level":{"min":1,"max":80}},{"id":3045,"level":{"min":1,"max":80}},{"id":3038,"level":{"min":1,"max":80}},{"id":2940,"level":{"min":1,"max":80}},{"id":2902,"level":{"min":1,"max":80}},{"id":2925,"level":{"min":1,"max":80}},{"id":2939,"level":{"min":1,"max":80}},{"id":2896,"level":{"min":1,"max":80}},{"id":2907,"level":{"min":1,"max":80}},{"id":2897,"level":{"min":1,"max":80}},{"id":2941,"level":{"min":1,"max":80}}],"special":[]}'
+components:
+  schemas:
+    Dailies:
+      type: object
+      required: [ pve,pvp,wvw,fractals,special ]
+      properties:
+        pve:
+          type: array
+          description: The dailies for the player vs. environment game mode.
+          items:
+            $ref: "#/components/schemas/Daily"
+        pvp:
+          type: array
+          description: The dailies for the player vs. player game mode.
+          items:
+            $ref: "#/components/schemas/Daily"
+        wvw:
+          type: array
+          description: The dailies for the world vs. world game mode.
+          items:
+            $ref: "#/components/schemas/Daily"
+        fractals:
+          type: array
+          description: The dailies for fractals.
+          items:
+            $ref: "#/components/schemas/Daily"
+        special:
+          type: array
+          description: The dailies for temporary content such as festivals.
+          items:
+            $ref: "#/components/schemas/Daily"
+
+    Daily:
+      type: object
+      required: [ id,level ]
+      properties:
+        id:
+          $ref: "#/components/schemas/AchievementId"
+        level:
+          allOf:
+            - $ref: "#/components/schemas/AchievementLevel"
+            - description: The level requirements.
+        access:
+          allOf:
+            - $ref: "#/components/schemas/AchievementAccess"
+            - description: The access requirement.
+

@@ -1,0 +1,248 @@
+paths:
+  /characters/{name}/buildtabs:
+    get:
+      tags: [ getTabs ]
+      security:
+        - Bearer: [ account,build,characters ]
+      operationId: getCharacterBuildTemplateTabs
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/buildtabs
+      parameters:
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns information about an accounts build template tabs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BuildTemplateTabId"
+              example: '[1,2,3]'
+  /characters/{name}/buildtabs?tabs={tabs}:
+    get:
+      tags: [ getByTabs ]
+      security:
+        - Bearer: [ account,build,characters ]
+      operationId: getCharacterBuildTemplatesByTabs
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/buildtabs
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/BuildTemplateTabId"
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns information about an accounts build template tabs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BuildTemplateTab"
+              example: '[{"tab":1,"is_active":false,"build":{"name":"PvE Reaper","profession":"Necromancer","specializations":[{"id":53,"traits":[914,829,853]},{"id":50,"traits":[875,861,893]},{"id":34,"traits":[1974,1969,2021]}],"skills":{"heal":30488,"utilities":[10546,10607,10685],"elite":30105},"aquatic_skills":{"heal":10548,"utilities":[10546,10607,10685],"elite":30105}}},{"tab":2,"is_active":true,"build":{"name":"PvP Heal Reaper","profession":"Necromancer","specializations":[{"id":19,"traits":[1876,1844,1692]},{"id":50,"traits":[888,861,893]},{"id":34,"traits":[1974,1969,2021]}],"skills":{"heal":10548,"utilities":[10607,10543,10685],"elite":10550},"aquatic_skills":{"heal":10548,"utilities":[10583,10620,10685],"elite":30105}}}]'
+  /characters/{name}/buildtabs?tabs=all:
+    get:
+      tags: [ getByAllTabs ]
+      security:
+        - Bearer: [ account,build,characters ]
+      operationId: getCharacterBuildTemplatesByAllTabs
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/buildtabs
+      parameters:
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns information about an accounts build template tabs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BuildTemplateTab"
+              example: '[{"tab":1,"is_active":false,"build":{"name":"PvE Reaper","profession":"Necromancer","specializations":[{"id":53,"traits":[914,829,853]},{"id":50,"traits":[875,861,893]},{"id":34,"traits":[1974,1969,2021]}],"skills":{"heal":30488,"utilities":[10546,10607,10685],"elite":30105},"aquatic_skills":{"heal":10548,"utilities":[10546,10607,10685],"elite":30105}}},{"tab":2,"is_active":true,"build":{"name":"PvP Heal Reaper","profession":"Necromancer","specializations":[{"id":19,"traits":[1876,1844,1692]},{"id":50,"traits":[888,861,893]},{"id":34,"traits":[1974,1969,2021]}],"skills":{"heal":10548,"utilities":[10607,10543,10685],"elite":10550},"aquatic_skills":{"heal":10548,"utilities":[10583,10620,10685],"elite":30105}}}]'
+  /characters/{name}/buildtabs?page={page}:
+    get:
+      tags: [ getByPage ]
+      security:
+        - Bearer: [ account,build,characters ]
+      operationId: getCharacterBuildTemplatesByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/buildtabs
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns information about an accounts build template tabs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BuildTemplateTab"
+              example: '[{"tab":1,"is_active":false,"build":{"name":"PvE Reaper","profession":"Necromancer","specializations":[{"id":53,"traits":[914,829,853]},{"id":50,"traits":[875,861,893]},{"id":34,"traits":[1974,1969,2021]}],"skills":{"heal":30488,"utilities":[10546,10607,10685],"elite":30105},"aquatic_skills":{"heal":10548,"utilities":[10546,10607,10685],"elite":30105}}},{"tab":2,"is_active":true,"build":{"name":"PvP Heal Reaper","profession":"Necromancer","specializations":[{"id":19,"traits":[1876,1844,1692]},{"id":50,"traits":[888,861,893]},{"id":34,"traits":[1974,1969,2021]}],"skills":{"heal":10548,"utilities":[10607,10543,10685],"elite":10550},"aquatic_skills":{"heal":10548,"utilities":[10583,10620,10685],"elite":30105}}}]'
+  /characters/{name}/buildtabs/{tab}:
+    get:
+      tags: [ getByTab ]
+      security:
+        - Bearer: [ account,build,characters ]
+      operationId: getCharacterBuildTemplateById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/buildtabs
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/BuildTemplateTabId"
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns information about an accounts build template tabs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BuildTemplateTab"
+              example: '{"tab":1,"is_active":false,"build":{"name":"PvE Reaper","profession":"Necromancer","specializations":[{"id":53,"traits":[914,829,853]},{"id":50,"traits":[875,861,893]},{"id":34,"traits":[1974,1969,2021]}],"skills":{"heal":30488,"utilities":[10546,10607,10685],"elite":30105},"aquatic_skills":{"heal":10548,"utilities":[10546,10607,10685],"elite":30105}}}'
+  /characters/{name}/buildtabs/active:
+    get:
+      tags: [ getByTab ]
+      security:
+        - Bearer: [ account,build,characters ]
+      operationId: getCharacterBuildTemplateByActive
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/buildtabs
+      parameters:
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns information about an accounts build template tabs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BuildTemplateTab"
+              example: '{"tab":2,"is_active":true,"build":{"name":"PvP Heal Reaper","profession":"Necromancer","specializations":[{"id":19,"traits":[1876,1844,1692]},{"id":50,"traits":[888,861,893]},{"id":34,"traits":[1974,1969,2021]}],"skills":{"heal":10548,"utilities":[10607,10543,10685],"elite":10550},"aquatic_skills":{"heal":10548,"utilities":[10583,10620,10685],"elite":30105}}}'
+components:
+  schemas:
+    BuildTemplateTabId:
+      type: integer
+      x-ktx-id: true
+      description: The index of the build template in a character's build tabs.
+
+    BuildTemplateTab:
+      type: object
+      required: [ id,is_active,build ]
+      properties:
+        id:
+          $ref: "#/components/schemas/BuildTemplateTabId"
+        is_active:
+          type: boolean
+          description: Whether this tab is the currently selected tab.
+        build:
+          $ref: "#/components/schemas/BuildTemplate"
+
+    BuildTemplate:
+      type: object
+      required: [ name, profession, specializations ]
+      properties:
+        name:
+          type: string
+          description: The name of the template given by the player.
+        profession:
+          $ref: "#/components/schemas/ProfessionId"
+        specializations:
+          description: The selected specializations and traits.
+          type: array
+          items:
+            $ref: "#/components/schemas/BuildSpecialization"
+        skills:
+          title: terrestrialSkills
+          description: The selected skills on land.
+          type: array
+          items:
+            $ref: "#/components/schemas/BuildSkill"
+        aquatic_skills:
+          description: The selected skills underwater.
+          type: array
+          items:
+            $ref: "#/components/schemas/BuildSkill"
+        pets:
+          allOf:
+            - $ref: "#/components/schemas/BuildPets"
+            - x-gw2-profession-scopes: [ ranger ]
+        legends:
+          type: array
+          title: terrestrialLegends
+          description: The selected legends on land. For Revenants only. A null indicates no selection.
+          x-gw2-profession-scopes: [ revenant ]
+          items:
+            allOf:
+              - $ref: "#/components/schemas/LegendId"
+              - type: "null"
+        aquatic_legends:
+          type: array
+          description: The selected legends underwater. For Revenants only. A null indicates no selection.
+          x-gw2-profession-scopes: [ revenant ]
+          items:
+            allOf:
+              - $ref: "#/components/schemas/LegendId"
+              - type: "null"
+
+    BuildSpecialization:
+      type: object
+      required: [ id, traits ]
+      properties:
+        id:
+          $ref: "#/components/schemas/SpecializationId"
+        traits:
+          type: array
+          description: The ids of the selected traits, or null if there is no selection.
+          items:
+            allOf:
+              - $ref: "#/components/schemas/TraitId"
+              - type: null
+
+    BuildSkill:
+      type: object
+      required: [ utilities ]
+      properties:
+        heal:
+          allOf:
+            - $ref: "#/components/schemas/SkillId"
+            - type: "null"
+        utilities:
+          type: array
+          items:
+            allOf:
+              - $ref: "#/components/schemas/SkillId"
+              - type: "null"
+        elite:
+          allOf:
+            - $ref: "#/components/schemas/SkillId"
+            - type: "null"
+
+    BuildPets:
+      type: object
+      required: [ terrestrial,aquatic ]
+      properties:
+        terrestrial:
+          type: array
+          description: The ids of the selected pets on land. An id is null if it is not selected.
+          items:
+            allOf:
+              - $ref: "#/components/schemas/PetId"
+              - type: "null"
+        aquatic:
+          type: array
+          description: The ids of the selected pets underwater. An id is null if it is not selected.
+          items:
+            allOf:
+              - $ref: "#/components/schemas/PetId"
+              - type: "null"

@@ -1,0 +1,19 @@
+paths:
+  /account/mailcarriers:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,unlocks ]
+      operationId: getAccountMailCarriers
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/mailcarriers
+      responses:
+        "200":
+          description: This resource returns information about mail carriers that are unlocked for an account.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MailCarrierId"
+              example: '[15,4]'

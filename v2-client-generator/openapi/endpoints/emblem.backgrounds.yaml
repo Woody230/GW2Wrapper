@@ -1,0 +1,97 @@
+paths:
+  /emblem/backgrounds:
+    get:
+      tags: [ getIds ]
+      operationId: getEmblemBackgroundIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/emblem/backgrounds
+      responses:
+        "200":
+          description: This resource returns image resources that are needed to render the background of guild emblems.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EmblemId"
+              example: '[1,2,3,4,5,6,7,8,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28]'
+  /emblem/backgrounds?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getEmblemBackgroundByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/emblem/backgrounds
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/EmblemId"
+      responses:
+        "200":
+          description: This resource returns image resources that are needed to render the background of guild emblems.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Emblem"
+              example: '[{"id":1,"layers":["https://render.guildwars2.com/file/B1417CDCD8320A390AB5781909F59C0FE805047D/59597.png"]},{"id":2,"layers":["https://render.guildwars2.com/file/936BEB492B0D2BD77307FCB10DBEE51AFB5E6C64/59599.png"]}]'
+  /emblem/backgrounds?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getEmblemBackgroundsByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/emblem/backgrounds
+      responses:
+        "200":
+          description: This resource returns image resources that are needed to render the background of guild emblems.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Emblem"
+              example: '[{"id":1,"layers":["https://render.guildwars2.com/file/B1417CDCD8320A390AB5781909F59C0FE805047D/59597.png"]},{"id":2,"layers":["https://render.guildwars2.com/file/936BEB492B0D2BD77307FCB10DBEE51AFB5E6C64/59599.png"]}]'
+  /emblem/backgrounds?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getEmblemBackgroundsByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/emblem/backgrounds
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns image resources that are needed to render the background of guild emblems.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Emblem"
+              example: '[{"id":1,"layers":["https://render.guildwars2.com/file/B1417CDCD8320A390AB5781909F59C0FE805047D/59597.png"]},{"id":2,"layers":["https://render.guildwars2.com/file/936BEB492B0D2BD77307FCB10DBEE51AFB5E6C64/59599.png"]}]'
+  /emblem/backgrounds/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getEmblemBackgroundById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/emblem/backgrounds
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/EmblemId"
+      responses:
+        "200":
+          description: This resource returns image resources that are needed to render the background of guild emblems.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Emblem"
+              example: '{"id":1,"layers":["https://render.guildwars2.com/file/B1417CDCD8320A390AB5781909F59C0FE805047D/59597.png"]}'
+

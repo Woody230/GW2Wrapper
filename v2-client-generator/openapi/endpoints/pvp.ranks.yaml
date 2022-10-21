@@ -1,0 +1,140 @@
+paths:
+  /pvp/ranks:
+    get:
+      tags: [ getIds ]
+      operationId: getPvpRankIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/pvp/ranks
+      responses:
+        "200":
+          description: This resource returns information about the available ranks in the Player versus Player game mode.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PvpRankId"
+              example: '[1,2,3,4,5,6,7,8,9]'
+  /pvp/ranks?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getPvpRanksByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/pvp/ranks
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/PvpRankId"
+      responses:
+        "200":
+          description: This resource returns information about the available ranks in the Player versus Player game mode.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PvpRank"
+              example: '[{"id":1,"finisher_id":1,"name":"Rabbit","icon":"https://render.guildwars2.com/file/592A4144FE1B6904CD0C69230840B8C21A0C36F7/347222.png","min_rank":1,"max_rank":9,"levels":[{"min_rank":1,"max_rank":5,"points":500},{"min_rank":6,"max_rank":9,"points":1500}]},{"id":2,"finisher_id":2,"name":"Deer","icon":"https://render.guildwars2.com/file/DECD0D647C9433CC2128BF2F6FE5A5185513EE59/347223.png","min_rank":10,"max_rank":19,"levels":[{"min_rank":10,"max_rank":19,"points":4000}]}]'
+  /pvp/ranks?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getPvpRanksByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/pvp/ranks
+      responses:
+        "200":
+          description: This resource returns information about the available ranks in the Player versus Player game mode.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PvpRank"
+              example: '[{"id":1,"finisher_id":1,"name":"Rabbit","icon":"https://render.guildwars2.com/file/592A4144FE1B6904CD0C69230840B8C21A0C36F7/347222.png","min_rank":1,"max_rank":9,"levels":[{"min_rank":1,"max_rank":5,"points":500},{"min_rank":6,"max_rank":9,"points":1500}]},{"id":2,"finisher_id":2,"name":"Deer","icon":"https://render.guildwars2.com/file/DECD0D647C9433CC2128BF2F6FE5A5185513EE59/347223.png","min_rank":10,"max_rank":19,"levels":[{"min_rank":10,"max_rank":19,"points":4000}]}]'
+  /pvp/ranks?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getPvpRanksByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/pvp/ranks
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information about the available ranks in the Player versus Player game mode.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PvpRank"
+              example: '[{"id":1,"finisher_id":1,"name":"Rabbit","icon":"https://render.guildwars2.com/file/592A4144FE1B6904CD0C69230840B8C21A0C36F7/347222.png","min_rank":1,"max_rank":9,"levels":[{"min_rank":1,"max_rank":5,"points":500},{"min_rank":6,"max_rank":9,"points":1500}]},{"id":2,"finisher_id":2,"name":"Deer","icon":"https://render.guildwars2.com/file/DECD0D647C9433CC2128BF2F6FE5A5185513EE59/347223.png","min_rank":10,"max_rank":19,"levels":[{"min_rank":10,"max_rank":19,"points":4000}]}]'
+  /pvp/ranks/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getPvpRankById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/pvp/ranks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/PvpRankId"
+      responses:
+        "200":
+          description: This resource returns information about the available ranks in the Player versus Player game mode.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PvpRank"
+              example: '{"id":1,"finisher_id":1,"name":"Rabbit","icon":"https://render.guildwars2.com/file/592A4144FE1B6904CD0C69230840B8C21A0C36F7/347222.png","min_rank":1,"max_rank":9,"levels":[{"min_rank":1,"max_rank":5,"points":500},{"min_rank":6,"max_rank":9,"points":1500}]}'
+
+components:
+  schemas:
+    PvpRankId:
+      type: integer
+      x-ktx-id: true
+
+    PvpRank:
+      type: object
+      required: [ id,finisher_id,name,icon,min_rank,max_rank,levels ]
+      properties:
+        id:
+          $ref: "#/components/schemas/PvpRankId"
+        finisher_id:
+          $ref: "#/components/schemas/FinisherId"
+        name:
+          type: string
+          x-gw2-intl: true
+        icon:
+          $ref: "#/components/schemas/ImageLink"
+        min_rank:
+          type: integer
+          description: The minimum PvP level to be at this rank.
+        max_rank:
+          type: integer
+          description: The maximum PvP level to be at this rank.
+        levels:
+          type: array
+          items:
+            $ref: "#/components/schemas/PvpLevel"
+
+    PvpLevel:
+      type: object
+      required: [ min_rank,max_rank,points ]
+      properties:
+        min_rank:
+          type: integer
+          description: The minimum PvP level to be at this level.
+        max_rank:
+          type: integer
+          description: The maximum PvP level to be at this level.
+        points:
+          type: integer
+          description: The amount of experience required to go from the min rank to the max rank.

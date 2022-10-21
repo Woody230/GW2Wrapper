@@ -1,0 +1,41 @@
+paths:
+  /commerce/exchange/coins:
+    get:
+      tags: [ getModel ]
+      operationId: getCoinExchange
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/commerce/exchange/coins
+      parameters:
+        - name: quantity
+          in: query
+          description: The number of coins to exchange for gems.
+          required: false
+          schema:
+            $ref: "#/components/schemas/Coins"
+      responses:
+        "200":
+          description: This resource returns the current coins to gems exchange rate.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CoinExchange"
+              example: '{"coins_per_gem":3048,"quantity":164}'
+components:
+  schemas:
+    Coins:
+      type: integer
+      x-ktx-id: true
+
+    CoinExchange:
+      type: object
+      required: [ coins_per_gem,quantity ]
+      properties:
+        coins_per_gem:
+          allOf:
+            - $ref: "#/components/schemas/Coins"
+            - description: The number of coins required for a single gem.
+        quantity:
+          allOf:
+            - $ref: "#/components/schemas/Gems"
+            - description: The number of gems obtained in exchange for the specified quantity of coins.
+    

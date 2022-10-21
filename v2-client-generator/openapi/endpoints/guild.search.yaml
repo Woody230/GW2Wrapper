@@ -1,0 +1,24 @@
+paths:
+  /guild/search:
+    get:
+      tags: [ getModel ]
+      operationId: getGuildByName
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/guild/search
+      parameters:
+        - name: name
+          in: query
+          required: true
+          description: The name of the guild.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: This resource returns information on guild ids to be used for other API queries.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GuildId"
+              example: '["116E0C0E-0035-44A9-BB22-4AE3E23127E5"]'

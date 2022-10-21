@@ -1,0 +1,47 @@
+paths:
+  /recipes/search?input={input}:
+    get:
+      tags: [ getIds ]
+      operationId: getRecipesIdsByInput
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/recipes/search
+      parameters:
+        - name: input
+          in: path
+          required: true
+          description: The id of the item which exists as an input to a recipe.
+          schema:
+            $ref: "#/components/schemas/ItemId"
+      responses:
+        "200":
+          description: This resource allows searching for recipes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RecipeId"
+              example: '[5420,5415,5359,5396,5384,5378,5405,5417,5345,5354,5418,5416,5414,5324,5404,5337,5390,6058,5419,5422,5366,6057,5406,5069,4502,4477,4767,4459,4503,4470,4486,4466,4765,4461,4504,5068,10267,10726,8520,9630,999,249,255,252,256,1000,1006,258,501,257,248,250,251,1004,265,253,499,1002,1005,500,263,998,1003,997,1001,247,1008,996,1007,9472,13584,30,3859]'
+  /recipes/search?output={output}:
+    get:
+      tags: [ getIds ]
+      operationId: getRecipesIdsByOutput
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/recipes/search
+      parameters:
+        - name: output
+          in: path
+          required: true
+          description: The id of the item which exists as an output to a recipe.
+          schema:
+            $ref: "#/components/schemas/ItemId"
+      responses:
+        "200":
+          description: This resource allows searching for recipes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RecipeId"
+              example: '[5420,5415,5359,5396,5384,5378,5405,5417,5345,5354,5418,5416,5414,5324,5404,5337,5390,6058,5419,5422,5366,6057,5406,5069,4502,4477,4767,4459,4503,4470,4486,4466,4765,4461,4504,5068,10267,10726,8520,9630,999,249,255,252,256,1000,1006,258,501,257,248,250,251,1004,265,253,499,1002,1005,500,263,998,1003,997,1001,247,1008,996,1007,9472,13584,30,3859]'

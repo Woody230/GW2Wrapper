@@ -1,0 +1,133 @@
+paths:
+  /backstory/questions:
+    get:
+      tags: [ getIds ]
+      operationId: getBackstoryQuestionIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/backstory/questions
+      responses:
+        "200":
+          description: This resource returns information about the Biography questions that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BackstoryQuestionId"
+              example: '[7,10,11,12,15,16,17,21,22,25,26,27,30,31,32,36,181,182,183,184,185,186,187,188,189]'
+  /backstory/questions?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getBackstoryQuestionsByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/backstory/questions
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/BackstoryQuestionId"
+      responses:
+        "200":
+          description: This resource returns information about the Biography questions that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BackstoryQuestion"
+              example: '[{"id":7,"title":"My Personality","description":"Trouble may follow me, but I use my ______ to overcome it.","answers":["7-53","7-54","7-55"],"order":1},{"id":10,"title":"My college","description":"I''m a member of the College of ______.","answers":["10-67","10-68","10-69"],"order":2,"races":["Asura"]}]'
+  /backstory/questions?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getBackstoryQuestionsByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/backstory/questions
+      responses:
+        "200":
+          description: This resource returns information about the Biography questions that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BackstoryQuestion"
+              example: '[{"id":7,"title":"My Personality","description":"Trouble may follow me, but I use my ______ to overcome it.","answers":["7-53","7-54","7-55"],"order":1},{"id":10,"title":"My college","description":"I''m a member of the College of ______.","answers":["10-67","10-68","10-69"],"order":2,"races":["Asura"]}]'
+  /backstory/questions?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getBackstoryQuestionsByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/backstory/questions
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information about the Biography questions that are in the game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BackstoryQuestion"
+              example: '[{"id":7,"title":"My Personality","description":"Trouble may follow me, but I use my ______ to overcome it.","answers":["7-53","7-54","7-55"],"order":1},{"id":10,"title":"My college","description":"I''m a member of the College of ______.","answers":["10-67","10-68","10-69"],"order":2,"races":["Asura"]}]'
+  /backstory/questions/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getBackstoryQuestionsById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/backstory/questions
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/BackstoryQuestionId"
+      responses:
+        "200":
+          description: This resource returns information about the Biography questions that are in the game.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BackstoryQuestion"
+              example: '{"id":7,"title":"My Personality","description":"Trouble may follow me, but I use my ______ to overcome it.","answers":["7-53","7-54","7-55"],"order":1}'
+components:
+  schemas:
+    BackstoryQuestionId:
+      type: int
+      x-ktx-id: true
+
+    BackstoryQuestion:
+      type: object
+      required: [ id,title,description,answers,order ]
+      properties:
+        id:
+          $ref: "#/components/schemas/BackstoryQuestionId"
+        title:
+          type: string
+          x-gw2-intl: true
+        description:
+          type: string
+          x-gw2-intl: true
+        answers:
+          type: array
+          description: The ids of the answer choices.
+          items:
+            $ref: "#/components/schemas/BackstoryAnswerId"
+        order:
+          type: integer
+          description: The order this question gets when being displayed while answering biography questions during character creation.
+        professions:
+          type: array
+          description: The names of the professions that can choose this question. Empty if there are no profession requirements.
+          items:
+            $ref: "#/components/schemas/ProfessionId"
+        races:
+          type: array
+          description: The names of the races that can choose this question. Empty if there are no race requirements.
+          items:
+            $ref: "#/components/schemas/RaceId"
+      

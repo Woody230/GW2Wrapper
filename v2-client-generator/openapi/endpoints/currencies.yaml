@@ -1,0 +1,120 @@
+paths:
+  /currencies:
+    get:
+      tags: [ getIds ]
+      operationId: getCurrencyIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/currencies
+      responses:
+        "200":
+          description: This resource returns a list of the currencies contained in the account wallet.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CurrencyId"
+              example: '[1,2,3,4,5,6,7,9,10,11,12,13,14,15,16,18,19,20,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,49,50,51,52,53,54,55,56,57,58,59,60,61,62,64,65,67,68,69,70]'
+  /currencies?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getCurrenciesByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/currencies
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/CurrencyId"
+      responses:
+        "200":
+          description: This resource returns a list of the currencies contained in the account wallet.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Currency"
+              example: '[{"id":1,"name":"Coin","description":"The primary currency of Tyria. Spent at vendors throughout the world.","order":101,"icon":"https://render.guildwars2.com/file/98457F504BA2FAC8457F532C4B30EDC23929ACF9/619316.png"},{"id":2,"name":"Karma","description":"Earned through various activities. Spent at vendors throughout the world.","order":102,"icon":"https://render.guildwars2.com/file/94953FA23D3E0D23559624015DFEA4CFAA07F0E5/155026.png"}]'
+  /currencies?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getCurrenciesByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/currencies
+      responses:
+        "200":
+          description: This resource returns a list of the currencies contained in the account wallet.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Currency"
+              example: '[{"id":1,"name":"Coin","description":"The primary currency of Tyria. Spent at vendors throughout the world.","order":101,"icon":"https://render.guildwars2.com/file/98457F504BA2FAC8457F532C4B30EDC23929ACF9/619316.png"},{"id":2,"name":"Karma","description":"Earned through various activities. Spent at vendors throughout the world.","order":102,"icon":"https://render.guildwars2.com/file/94953FA23D3E0D23559624015DFEA4CFAA07F0E5/155026.png"}]'
+  /currencies?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getCurrenciesByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/currenies
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns a list of the currencies contained in the account wallet.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Currency"
+              example: '[{"id":1,"name":"Coin","description":"The primary currency of Tyria. Spent at vendors throughout the world.","order":101,"icon":"https://render.guildwars2.com/file/98457F504BA2FAC8457F532C4B30EDC23929ACF9/619316.png"},{"id":2,"name":"Karma","description":"Earned through various activities. Spent at vendors throughout the world.","order":102,"icon":"https://render.guildwars2.com/file/94953FA23D3E0D23559624015DFEA4CFAA07F0E5/155026.png"}]'
+  /currencies/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getCurrencyById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/currencies
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/CurrencyId"
+      responses:
+        "200":
+          description: This resource returns a list of the currencies contained in the account wallet.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Currency"
+              example: '[{"id":1,"name":"Coin","description":"The primary currency of Tyria. Spent at vendors throughout the world.","order":101,"icon":"https://render.guildwars2.com/file/98457F504BA2FAC8457F532C4B30EDC23929ACF9/619316.png"},{"id":2,"name":"Karma","description":"Earned through various activities. Spent at vendors throughout the world.","order":102,"icon":"https://render.guildwars2.com/file/94953FA23D3E0D23559624015DFEA4CFAA07F0E5/155026.png"}]'
+
+components:
+  schemas:
+    CurrencyId:
+      type: integer
+      x-ktx-id: true
+
+    Currency:
+      type: object
+      required: [ id,name,description,icon,order ]
+      properties:
+        id:
+          $ref: "#/components/schemas/CurrencyId"
+        name:
+          type: string
+          x-gw2-id: true
+        description:
+          type: string
+          x-gw2-id: true
+        icon:
+          $ref: "#/components/schemas/ImageLink"
+        order:
+          type: integer
+          description: The order of appearance among all currencies. A collection of currencies should be ordered from least to greatest.

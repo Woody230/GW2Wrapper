@@ -1,0 +1,94 @@
+paths:
+  /account:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account ]
+      operationId: getAccount
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account
+      responses:
+        "200":
+          description: This resource returns information about player accounts.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Account"
+              example: '{"id":"19C3BDE2-1FCA-E211-8757-78E7D1936222","name":"Woody.6302","age":10155840,"last_modified":"2022-10-11T07:14:00Z","world":1018,"guilds":["90D96902-657A-4CC6-A8FC-CD66C0BB969C","8FC20950-1B5B-4BD1-8E31-88A99D252826","1BE6452D-C1FB-EB11-81B2-A840610878B3","3606F80A-0130-465A-AD57-AA65086E7B1F"],"guild_leader":["1BE6452D-C1FB-EB11-81B2-A840610878B3"],"created":"2013-05-31T18:29:00Z","access":["GuildWars2","HeartOfThorns","PathOfFire","EndOfDragons"],"commander":true,"fractal_level":66,"daily_ap":14722,"monthly_ap":278,"wvw_rank":1333,"build_storage_slots":6}'
+components:
+  schemas:
+    Account:
+      type: object
+      required: [ id, age, name, world, guilds, created, access, last_modified ]
+      properties:
+        id:
+          $ref: "#/components/schemas/AccountId"
+        age:
+          type: integer
+          format: duration-seconds
+          description: The age in the form of seconds.
+        name:
+          $ref: "#/components/schemas/AccountName"
+        world:
+          $ref: "#/components/schemas/WorldId"
+        guilds:
+          description: The guild ids in the form of UUIDs.
+          type: array
+          items:
+            $ref: "#/components/schemas/GuildId"
+        guild_leader:
+          description: The guilds ids that the account is a leader of, in the form of UUIDs.
+          type: array
+          items:
+            $ref: "#/components/schemas/GuildId"
+          x-gw2-scopes: [ guilds ]
+        created:
+          description: The date and time of account creation.
+          type: string
+          format: date-time
+        access:
+          description: The types of access, indicating no access, free to play access, or base/expansion content access.
+          type: array
+          items:
+            $ref: "#/components/schemas/AccountAccess"
+        commander:
+          description: Whether the account has bought a commander tag.
+          type: boolean
+        fractal_level:
+          description: The personal fractal reward level.
+          type: integer
+          x-gw2-scopes: [ progression ]
+        daily_ap:
+          allOf:
+            - $ref: "#/components/schemas/AchievementPoints"
+            - description: The number of daily achievement points earned.
+              x-gw2-scopes: [ progression ]
+        monthly_ap:
+          allOf:
+            - $ref: "#/components/schemas/AchievementPoints"
+            - description: The number of monthly achievement points earned.
+              x-gw2-scopes: [ progression ]
+        wvw_rank:
+          allOf:
+            - $ref: "#/components/schemas/WvwLevel"
+            - description: The personal World vs. World rank.
+              x-gw2-scopes: [ progression ]
+        last_modified:
+          type: string
+          format: date-time
+          description: The date and time of when the account information last changed.
+        build_storage_slots:
+          type: integer
+          description: The number of build storage slots.
+          x-see: https://wiki.guildwars2.com/wiki/Template#Build_Storage
+          x-gw2-scopes: [ build ]
+
+    AccountId:
+      type: string
+      format: uuid
+      description: The id in the form of a UUID.
+      x-ktx-id: true
+
+    AccountName:
+      type: string
+      description: "The unique name in the form of DisplayName.#### where # are numbers."

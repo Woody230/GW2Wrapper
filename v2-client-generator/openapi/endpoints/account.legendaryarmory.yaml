@@ -1,0 +1,34 @@
+paths:
+  /account/legendaryarmory:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,inventories,unlocks ]
+      operationId: getAccountLegendaryArmory
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/legendaryarmory
+      responses:
+        "200":
+          description: This resource returns information about the Legendary Armory items that are unlocked for an account.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AccountArmoryItem"
+              example: '[{"id":83497,"count":1},{"id":71383,"count":1},{"id":83036,"count":1}]'
+components:
+  schemas:
+    AccountArmoryItem:
+      type: object
+      required: [ id, count ]
+      properties:
+        id:
+          allOf:
+            - $ref: "#/components/schemas/ItemId"
+            - externalDocs:
+              url: https://wiki.guildwars2.com/wiki/API:2/legendaryarmory
+        count:
+          type: integer
+          description: The number of this item available for use in a single equipment template.
+    

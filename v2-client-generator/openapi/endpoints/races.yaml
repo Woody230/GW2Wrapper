@@ -1,0 +1,118 @@
+paths:
+  /races:
+    get:
+      tags: [ getIds ]
+      operationId: getRaceIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/races
+      responses:
+        "200":
+          description: The resource returns information about races.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RaceId"
+              example: '["Human","Asura","Sylvari","Charr","Norn"]'
+  /races?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getRacesByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/races
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/RaceId"
+      responses:
+        "200":
+          description: The resource returns information about races.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Race"
+              example: '[{"id":"Human","name":"Human","skills":[12360,12361,12362,12363,12367,12373,10800]},{"id":"Asura","name":"Asura","skills":[12320,12319,12318,12324,12323,12325,10800]}]'
+  /races?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getRacesByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/races
+      responses:
+        "200":
+          description: The resource returns information about races.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Race"
+              example: '[{"id":"Human","name":"Human","skills":[12360,12361,12362,12363,12367,12373,10800]},{"id":"Asura","name":"Asura","skills":[12320,12319,12318,12324,12323,12325,10800]}]'
+  /races?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getRacesByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/races
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: The resource returns information about races.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Race"
+              example: '[{"id":"Human","name":"Human","skills":[12360,12361,12362,12363,12367,12373,10800]},{"id":"Asura","name":"Asura","skills":[12320,12319,12318,12324,12323,12325,10800]}]'
+  /races/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getRacesById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/races
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/RaceId"
+      responses:
+        "200":
+          description: The resource returns information about races.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Race"
+              example: '{"id":"Sylvari","name":"Sylvari","skills":[12440,12453,12456,12450,12447,12457,10800]}'
+
+components:
+  schemas:
+    RaceId:
+      type: string
+      x-ktx-id: true
+
+    Race:
+      type: object
+      required: [ id,name,skills ]
+      properties:
+        id:
+          $ref: "#/components/schemas/RaceId"
+        name:
+          allOf:
+            - $ref: "#/components/schemas/RaceName"
+            - x-gw2-intl: true
+        skills:
+          type: array
+          description: The ids of the skills usable by characters of this race.
+          items:
+            $ref: "#/components/schemas/SkillId"

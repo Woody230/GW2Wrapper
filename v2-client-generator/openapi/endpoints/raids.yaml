@@ -1,0 +1,141 @@
+paths:
+  /raids:
+    get:
+      tags: [ getIds ]
+      operationId: getRaidIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/raids
+      responses:
+        "200":
+          description: This resource returns details about each raid and it's associated wings.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RaidId"
+              example: '["forsaken_thicket","bastion_of_the_penitent","hall_of_chains","mythwright_gambit","the_key_of_ahdashim"]'
+  /raids?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getRaidsByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/raids
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/RaidId"
+      responses:
+        "200":
+          description: This resource returns details about each raid and it's associated wings.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Raid"
+              example: '[{"id":"forsaken_thicket","wings":[{"id":"spirit_vale","events":[{"id":"vale_guardian","type":"Boss"},{"id":"spirit_woods","type":"Checkpoint"},{"id":"gorseval","type":"Boss"},{"id":"sabetha","type":"Boss"}]},{"id":"salvation_pass","events":[{"id":"slothasor","type":"Boss"},{"id":"bandit_trio","type":"Boss"},{"id":"matthias","type":"Boss"}]},{"id":"stronghold_of_the_faithful","events":[{"id":"escort","type":"Boss"},{"id":"keep_construct","type":"Boss"},{"id":"twisted_castle","type":"Checkpoint"},{"id":"xera","type":"Boss"}]}]},{"id":"bastion_of_the_penitent","wings":[{"id":"bastion_of_the_penitent","events":[{"id":"cairn","type":"Boss"},{"id":"mursaat_overseer","type":"Boss"},{"id":"samarog","type":"Boss"},{"id":"deimos","type":"Boss"}]}]}]'
+  /raids?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getRaidsByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/raids
+      responses:
+        "200":
+          description: This resource returns details about each raid and it's associated wings.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Raid"
+              example: '[{"id":"forsaken_thicket","wings":[{"id":"spirit_vale","events":[{"id":"vale_guardian","type":"Boss"},{"id":"spirit_woods","type":"Checkpoint"},{"id":"gorseval","type":"Boss"},{"id":"sabetha","type":"Boss"}]},{"id":"salvation_pass","events":[{"id":"slothasor","type":"Boss"},{"id":"bandit_trio","type":"Boss"},{"id":"matthias","type":"Boss"}]},{"id":"stronghold_of_the_faithful","events":[{"id":"escort","type":"Boss"},{"id":"keep_construct","type":"Boss"},{"id":"twisted_castle","type":"Checkpoint"},{"id":"xera","type":"Boss"}]}]},{"id":"bastion_of_the_penitent","wings":[{"id":"bastion_of_the_penitent","events":[{"id":"cairn","type":"Boss"},{"id":"mursaat_overseer","type":"Boss"},{"id":"samarog","type":"Boss"},{"id":"deimos","type":"Boss"}]}]}]'
+  /raids?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getRaidsByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/raids
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns details about each raid and it's associated wings.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Raid"
+              example: '[{"id":"forsaken_thicket","wings":[{"id":"spirit_vale","events":[{"id":"vale_guardian","type":"Boss"},{"id":"spirit_woods","type":"Checkpoint"},{"id":"gorseval","type":"Boss"},{"id":"sabetha","type":"Boss"}]},{"id":"salvation_pass","events":[{"id":"slothasor","type":"Boss"},{"id":"bandit_trio","type":"Boss"},{"id":"matthias","type":"Boss"}]},{"id":"stronghold_of_the_faithful","events":[{"id":"escort","type":"Boss"},{"id":"keep_construct","type":"Boss"},{"id":"twisted_castle","type":"Checkpoint"},{"id":"xera","type":"Boss"}]}]},{"id":"bastion_of_the_penitent","wings":[{"id":"bastion_of_the_penitent","events":[{"id":"cairn","type":"Boss"},{"id":"mursaat_overseer","type":"Boss"},{"id":"samarog","type":"Boss"},{"id":"deimos","type":"Boss"}]}]}]'
+  /raids/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getRaidById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/raids
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/RaidId"
+      responses:
+        "200":
+          description: This resource returns details about each raid and it's associated wings.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Raid"
+              example: '{"id":"forsaken_thicket","wings":[{"id":"spirit_vale","events":[{"id":"vale_guardian","type":"Boss"},{"id":"spirit_woods","type":"Checkpoint"},{"id":"gorseval","type":"Boss"},{"id":"sabetha","type":"Boss"}]},{"id":"salvation_pass","events":[{"id":"slothasor","type":"Boss"},{"id":"bandit_trio","type":"Boss"},{"id":"matthias","type":"Boss"}]},{"id":"stronghold_of_the_faithful","events":[{"id":"escort","type":"Boss"},{"id":"keep_construct","type":"Boss"},{"id":"twisted_castle","type":"Checkpoint"},{"id":"xera","type":"Boss"}]}]}'
+
+components:
+  schemas:
+    RaidId:
+      type: string
+      x-ktx-id: true
+
+    Raid:
+      type: object
+      required: [ id,wings ]
+      properties:
+        id:
+          $ref: "#/components/schemas/RaidId"
+        wings:
+          type: array
+          items:
+            $ref: "#/components/schemas/RaidWing"
+
+    RaidWingId:
+      type: string
+      x-ktx-id: true
+
+    RaidWing:
+      type: object
+      required: [ id,events ]
+      properties:
+        id:
+          $ref: "#/components/schemas/RaidWingId"
+        events:
+          type: array
+          items:
+            $ref: "#/components/schemas/RaidEvent"
+
+    RaidEventId:
+      type: string
+      x-ktx-id: true
+
+    RaidEvent:
+      type: object
+      required: [ id,type ]
+      properties:
+        id:
+          $ref: "#/components/schemas/RaidEventId"
+        type:
+          $ref: "#/components/schemas/RaidEventType"

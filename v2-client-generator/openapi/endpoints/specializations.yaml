@@ -1,0 +1,142 @@
+paths:
+  /specializations:
+    get:
+      tags: [ getIds ]
+      operationId: getSpecializationIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/specializations
+      responses:
+        "200":
+          description: This resource returns information on currently released specializations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SpecializationId"
+              example: '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72]'
+  /specializations?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getSpecializationsByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/specializations
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/SpecializationId"
+      responses:
+        "200":
+          description: This resource returns information on currently released specializations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Specialization"
+              example: '[{"id":1,"name":"Dueling","profession":"Mesmer","elite":false,"minor_traits":[706,710,707],"major_traits":[701,705,700,1889,1960,708,692,1950,704],"icon":"https://render.guildwars2.com/file/43C5400906A104C60F30DFE0A145D1E767353573/1012003.png","background":"https://render.guildwars2.com/file/992D53319C5FCD4AE841C592DC2AE91D5906AECF/1012057.png"},{"id":2,"name":"Death Magic","profession":"Necromancer","elite":false,"minor_traits":[856,839,1929],"major_traits":[820,857,1922,858,860,855,842,1940,1694],"icon":"https://render.guildwars2.com/file/16663C1CDF532AB0DCC0CB08951DD2F49351D5D4/1012008.png","background":"https://render.guildwars2.com/file/B3F92D581B0A036CABB51590E6E560B21708391F/1012067.png"}]'
+  /specializations?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getSpecializationsByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/specializations
+      responses:
+        "200":
+          description: This resource returns information on currently released specializations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Specialization"
+              example: '[{"id":1,"name":"Dueling","profession":"Mesmer","elite":false,"minor_traits":[706,710,707],"major_traits":[701,705,700,1889,1960,708,692,1950,704],"icon":"https://render.guildwars2.com/file/43C5400906A104C60F30DFE0A145D1E767353573/1012003.png","background":"https://render.guildwars2.com/file/992D53319C5FCD4AE841C592DC2AE91D5906AECF/1012057.png"},{"id":2,"name":"Death Magic","profession":"Necromancer","elite":false,"minor_traits":[856,839,1929],"major_traits":[820,857,1922,858,860,855,842,1940,1694],"icon":"https://render.guildwars2.com/file/16663C1CDF532AB0DCC0CB08951DD2F49351D5D4/1012008.png","background":"https://render.guildwars2.com/file/B3F92D581B0A036CABB51590E6E560B21708391F/1012067.png"}]'
+  /specializations?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getSpecializationsByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/specializations
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information on currently released specializations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Specialization"
+              example: '[{"id":1,"name":"Dueling","profession":"Mesmer","elite":false,"minor_traits":[706,710,707],"major_traits":[701,705,700,1889,1960,708,692,1950,704],"icon":"https://render.guildwars2.com/file/43C5400906A104C60F30DFE0A145D1E767353573/1012003.png","background":"https://render.guildwars2.com/file/992D53319C5FCD4AE841C592DC2AE91D5906AECF/1012057.png"},{"id":2,"name":"Death Magic","profession":"Necromancer","elite":false,"minor_traits":[856,839,1929],"major_traits":[820,857,1922,858,860,855,842,1940,1694],"icon":"https://render.guildwars2.com/file/16663C1CDF532AB0DCC0CB08951DD2F49351D5D4/1012008.png","background":"https://render.guildwars2.com/file/B3F92D581B0A036CABB51590E6E560B21708391F/1012067.png"}]'
+  /specializations/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getSpecializationById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/specializations
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/SpecializationId"
+      responses:
+        "200":
+          description: This resource returns information on currently released specializations.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Specialization"
+              example: '{"id":1,"name":"Dueling","profession":"Mesmer","elite":false,"minor_traits":[706,710,707],"major_traits":[701,705,700,1889,1960,708,692,1950,704],"icon":"https://render.guildwars2.com/file/43C5400906A104C60F30DFE0A145D1E767353573/1012003.png","background":"https://render.guildwars2.com/file/992D53319C5FCD4AE841C592DC2AE91D5906AECF/1012057.png"}'
+
+components:
+  schemas:
+    SpecializationId:
+      type: integer
+      format: byte
+      x-ktx-id: true
+
+    Specialization:
+      type: object
+      required: [ id,name,profession,elite,icon,background,minor_traits,major_traits ]
+      properties:
+        id:
+          $ref: "#/components/schemas/SpecializationId"
+        name:
+          allOf:
+            - $ref: "#/components/schemas/SpecializationName"
+            - x-gw2-intl: true
+        profession:
+          allOf:
+            - $ref: "#/components/schemas/ProfessionId"
+            - description: The name of the profession this specialization belongs to.
+        elite:
+          type: boolean
+          description: Whether this specialization is an elite specialization.
+        icon:
+          $ref: "#/components/schemas/ImageLink"
+        background:
+          $ref: "#/components/schemas/ImageLink"
+        minor_traits:
+          type: array
+          items:
+            $ref: "#/components/schemas/TraitId"
+        major_traits:
+          type: array
+          items:
+            $ref: "#/components/schemas/TraitId"
+        weapon_trait:
+          allOf:
+            - $ref: "#/components/schemas/TraitId"
+            - type: "null"
+              description: The id of the trait enabling the weapon associated with an elite specialization.
+        profession_icon:
+          $ref: "#/components/schemas/ImageLink"
+        profession_icon_big:
+          $ref: "#/components/schemas/ImageLink"

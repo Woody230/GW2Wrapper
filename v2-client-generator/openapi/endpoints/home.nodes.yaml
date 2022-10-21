@@ -1,0 +1,109 @@
+paths:
+  /home/nodes:
+    get:
+      tags: [ getIds ]
+      operationId: getNodeIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/home/nodes
+      responses:
+        "200":
+          description: This resource returns information about home instance nodes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NodeId"
+              example: '["advanced_cloth_rack","advanced_leather_rack","airship_cargo","ancient_wood_node","aurilium_node","bandit_chest","basic_cloth_rack","basic_harvesting_nodes","basic_leather_rack","basic_lumber_nodes","basic_ore_nodes","bauble_gathering_system","black_lion_expedition_board","black_lion_expedition_board_s4","black_lion_hunters_board","black_lion_industry_board","bloodstone_crystals","bound_hatched_chili_pepper_node","brandstone_node","candy_corn_node","commemorative_dragon_pinata","crystallized_supply_cache","difluorite_crystal_cluster_node","dragon_crystal","elder_wood_node","enchanted_treasure_chest","eternal_ice_shard_node","exalted_chest","flaxseed_node","garden_plot_01","garden_plot_02","garden_plot_03","ghost_pepper_node","hard_wood_node","iron_ore_node","jade_fragment","king_sized_candy_corn","kournan_supply_cache","krait_obelisk","lotus_node","mistborn_mote","mistonium_node","mithril_ore_node","omnomberry_node","orichalcum_ore_node","orrian_oyster_node","orrian_truffle_node","petrified_stump","platinum_ore_node","primordial_orchid","prismaticite_node","quartz_node","salvage_pile","snow_truffle_node","sprocket_generator","winterberry_bush","wintersday_tree"]'
+  /home/nodes?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getNodesByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/home/nodes
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/NodeId"
+      responses:
+        "200":
+          description: This resource returns information about home instance nodes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Node"
+              example: '[{"id":"advanced_cloth_rack"},{"id":"advanced_leather_rack"}]'
+  /home/nodes?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getNodesByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/home/nodes
+      responses:
+        "200":
+          description: This resource returns information about home instance nodes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Node"
+              example: '[{"id":"advanced_cloth_rack"},{"id":"advanced_leather_rack"}]'
+  /home/nodes?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getNodesByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/home/nodes
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information about home instance nodes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Node"
+              example: '[{"id":"advanced_cloth_rack"},{"id":"advanced_leather_rack"}]'
+  /home/nodes/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getNodeById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/home/nodes
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/NodeId"
+      responses:
+        "200":
+          description: This resource returns information about nodes.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Node"
+              example: '{"id":"advanced_cloth_rack"}'
+
+components:
+  schemas:
+    NodeId:
+      type: string
+      x-ktx-id: true
+
+    Node:
+      type: object
+      required: [ id ]
+      properties:
+        id:
+          $ref: "#/components/schemas/NodeId"

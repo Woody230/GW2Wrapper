@@ -1,0 +1,220 @@
+paths:
+  /characters/{name}/equipmenttabs:
+    get:
+      tags: [ getTabs ]
+      security:
+        - Bearer: [ account,build,characters ]
+      operationId: getCharacterEquipmentTemplateTabs
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/equipmenttabs
+      parameters:
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns information about an accounts equipment template tabs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EquipmentTemplateTabId"
+              example: '[1,2]'
+  /characters/{name}/equipmenttabs?tabs={tabs}:
+    get:
+      tags: [ getByTabs ]
+      security:
+        - Bearer: [ account,build,characters ]
+      operationId: getCharacterEquipmentTemplatesByTabs
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/equipmenttabs
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/EquipmentTemplateTabId"
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns information about an accounts equipment template tabs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EquipmentTemplateTab"
+              example: '[{"tab":1,"name":"Power","is_active":true,"equipment":[{"id":78382,"slot":"HelmAquatic","upgrades":[24806],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":83036,"slot":"Coat","upgrades":[24836],"infusions":[49431],"skin":5743,"binding":"Account","location":"EquippedFromLegendaryArmory","dyes":[1152,1152,1152,null],"stats":{"id":161,"attributes":{"Power":141,"Precision":101,"CritDamage":101}}},{"id":81500,"slot":"Boots","upgrades":[24836],"skin":769,"binding":"Account","location":"Equipped","dyes":[1152,1152,480,null]},{"id":81428,"slot":"Gloves","upgrades":[24836],"skin":772,"binding":"Account","location":"Equipped","dyes":[null,null,480,null]},{"id":81476,"slot":"Helm","upgrades":[24836],"skin":6896,"binding":"Account","location":"Equipped","dyes":[86,86,86,null]},{"id":83497,"slot":"Leggings","upgrades":[24836],"infusions":[49431],"skin":5726,"binding":"Account","location":"EquippedFromLegendaryArmory","dyes":[1152,1152,1152,null],"stats":{"id":161,"attributes":{"Power":94,"Precision":67,"CritDamage":67}}},{"id":81285,"slot":"Shoulders","upgrades":[24836],"skin":775,"binding":"Account","location":"Equipped","dyes":[null,null,480,null]},{"id":86979,"slot":"Backpack","skin":8833,"binding":"Account","location":"Equipped","dyes":[null,null,null,null]},{"id":92706,"slot":"Accessory1","binding":"Account","location":"Equipped"},{"id":39237,"slot":"Accessory2","binding":"Account","location":"Equipped"},{"id":75669,"slot":"Ring1","binding":"Account","location":"Equipped"},{"id":76024,"slot":"Ring2","binding":"Account","location":"Equipped"},{"id":39273,"slot":"Amulet","binding":"Account","location":"Equipped"},{"id":78461,"slot":"WeaponAquaticA","upgrades":[44944,24618],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":78447,"slot":"WeaponAquaticB","upgrades":[44944,24618],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":46762,"slot":"WeaponA1","upgrades":[24868,24615],"binding":"Account","location":"Equipped"},{"id":46759,"slot":"WeaponB1","upgrades":[24615],"binding":"Account","location":"Equipped"},{"id":46761,"slot":"WeaponB2","upgrades":[24868],"binding":"Account","location":"Equipped"}],"equipment_pvp":{"amulet":8,"rune":79983,"sigils":[21149,21152,81268,81254]}},{"tab":2,"name":"Condi","is_active":false,"equipment":[{"id":78382,"slot":"HelmAquatic","upgrades":[24806],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":73562,"slot":"Coat","upgrades":[24687],"skin":5743,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[1152,1152,1152,null]},{"id":75850,"slot":"Boots","upgrades":[24687],"skin":2264,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[1152,1152,null,null]},{"id":76389,"slot":"Gloves","upgrades":[24687],"skin":772,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[null,null,480,null]},{"id":74298,"slot":"Helm","upgrades":[24687],"skin":6896,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[86,86,86,null]},{"id":76455,"slot":"Leggings","upgrades":[24687],"skin":5726,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[1152,1152,1152,null]},{"id":71226,"slot":"Shoulders","upgrades":[24687],"skin":775,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[null,null,480,null]},{"id":78275,"slot":"Backpack","upgrades":[24496],"skin":5544,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[null,null,null,null]},{"id":39235,"slot":"Accessory1","binding":"Account","location":"Armory"},{"id":39234,"slot":"Accessory2","binding":"Account","location":"Armory"},{"id":37087,"slot":"Ring1","binding":"Account","location":"Armory"},{"id":37077,"slot":"Ring2","binding":"Account","location":"Armory"},{"id":39275,"slot":"Amulet","binding":"Account","location":"Armory"},{"id":78461,"slot":"WeaponAquaticA","upgrades":[44944,24618],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":78447,"slot":"WeaponAquaticB","upgrades":[44944,24618],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":96883,"slot":"WeaponA1","binding":"Character","bound_to":"Spectralstar","location":"Armory"},{"id":72885,"slot":"WeaponA2","upgrades":[24612],"skin":6907,"binding":"Character","bound_to":"Spectralstar","location":"Armory"},{"id":70918,"slot":"WeaponB1","upgrades":[24607],"skin":6920,"binding":"Character","bound_to":"Spectralstar","location":"Armory"}],"equipment_pvp":{"amulet":9,"rune":21218,"sigils":[21149,null,null,81257]}}]'
+  /characters/{name}/equipmenttabs?tabs=all:
+    get:
+      tags: [ getByAllTabs ]
+      security:
+        - Bearer: [ account,build,characters ]
+      operationId: getCharacterEquipmentTemplatesByAllTabs
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/equipmenttabs
+      parameters:
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns information about an accounts equipment template tabs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EquipmentTemplateTab"
+              example: '[{"tab":1,"name":"Power","is_active":true,"equipment":[{"id":78382,"slot":"HelmAquatic","upgrades":[24806],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":83036,"slot":"Coat","upgrades":[24836],"infusions":[49431],"skin":5743,"binding":"Account","location":"EquippedFromLegendaryArmory","dyes":[1152,1152,1152,null],"stats":{"id":161,"attributes":{"Power":141,"Precision":101,"CritDamage":101}}},{"id":81500,"slot":"Boots","upgrades":[24836],"skin":769,"binding":"Account","location":"Equipped","dyes":[1152,1152,480,null]},{"id":81428,"slot":"Gloves","upgrades":[24836],"skin":772,"binding":"Account","location":"Equipped","dyes":[null,null,480,null]},{"id":81476,"slot":"Helm","upgrades":[24836],"skin":6896,"binding":"Account","location":"Equipped","dyes":[86,86,86,null]},{"id":83497,"slot":"Leggings","upgrades":[24836],"infusions":[49431],"skin":5726,"binding":"Account","location":"EquippedFromLegendaryArmory","dyes":[1152,1152,1152,null],"stats":{"id":161,"attributes":{"Power":94,"Precision":67,"CritDamage":67}}},{"id":81285,"slot":"Shoulders","upgrades":[24836],"skin":775,"binding":"Account","location":"Equipped","dyes":[null,null,480,null]},{"id":86979,"slot":"Backpack","skin":8833,"binding":"Account","location":"Equipped","dyes":[null,null,null,null]},{"id":92706,"slot":"Accessory1","binding":"Account","location":"Equipped"},{"id":39237,"slot":"Accessory2","binding":"Account","location":"Equipped"},{"id":75669,"slot":"Ring1","binding":"Account","location":"Equipped"},{"id":76024,"slot":"Ring2","binding":"Account","location":"Equipped"},{"id":39273,"slot":"Amulet","binding":"Account","location":"Equipped"},{"id":78461,"slot":"WeaponAquaticA","upgrades":[44944,24618],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":78447,"slot":"WeaponAquaticB","upgrades":[44944,24618],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":46762,"slot":"WeaponA1","upgrades":[24868,24615],"binding":"Account","location":"Equipped"},{"id":46759,"slot":"WeaponB1","upgrades":[24615],"binding":"Account","location":"Equipped"},{"id":46761,"slot":"WeaponB2","upgrades":[24868],"binding":"Account","location":"Equipped"}],"equipment_pvp":{"amulet":8,"rune":79983,"sigils":[21149,21152,81268,81254]}},{"tab":2,"name":"Condi","is_active":false,"equipment":[{"id":78382,"slot":"HelmAquatic","upgrades":[24806],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":73562,"slot":"Coat","upgrades":[24687],"skin":5743,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[1152,1152,1152,null]},{"id":75850,"slot":"Boots","upgrades":[24687],"skin":2264,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[1152,1152,null,null]},{"id":76389,"slot":"Gloves","upgrades":[24687],"skin":772,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[null,null,480,null]},{"id":74298,"slot":"Helm","upgrades":[24687],"skin":6896,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[86,86,86,null]},{"id":76455,"slot":"Leggings","upgrades":[24687],"skin":5726,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[1152,1152,1152,null]},{"id":71226,"slot":"Shoulders","upgrades":[24687],"skin":775,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[null,null,480,null]},{"id":78275,"slot":"Backpack","upgrades":[24496],"skin":5544,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[null,null,null,null]},{"id":39235,"slot":"Accessory1","binding":"Account","location":"Armory"},{"id":39234,"slot":"Accessory2","binding":"Account","location":"Armory"},{"id":37087,"slot":"Ring1","binding":"Account","location":"Armory"},{"id":37077,"slot":"Ring2","binding":"Account","location":"Armory"},{"id":39275,"slot":"Amulet","binding":"Account","location":"Armory"},{"id":78461,"slot":"WeaponAquaticA","upgrades":[44944,24618],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":78447,"slot":"WeaponAquaticB","upgrades":[44944,24618],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":96883,"slot":"WeaponA1","binding":"Character","bound_to":"Spectralstar","location":"Armory"},{"id":72885,"slot":"WeaponA2","upgrades":[24612],"skin":6907,"binding":"Character","bound_to":"Spectralstar","location":"Armory"},{"id":70918,"slot":"WeaponB1","upgrades":[24607],"skin":6920,"binding":"Character","bound_to":"Spectralstar","location":"Armory"}],"equipment_pvp":{"amulet":9,"rune":21218,"sigils":[21149,null,null,81257]}}]'
+  /characters/{name}/equipmenttabs?page={page}:
+    get:
+      tags: [ getByPage ]
+      security:
+        - Bearer: [ account,build,characters ]
+      operationId: getCharacterEquipmentTemplatesByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/equipmenttabs
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns information about an accounts equipment template tabs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EquipmentTemplateTab"
+              example: '[{"tab":1,"name":"Power","is_active":true,"equipment":[{"id":78382,"slot":"HelmAquatic","upgrades":[24806],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":83036,"slot":"Coat","upgrades":[24836],"infusions":[49431],"skin":5743,"binding":"Account","location":"EquippedFromLegendaryArmory","dyes":[1152,1152,1152,null],"stats":{"id":161,"attributes":{"Power":141,"Precision":101,"CritDamage":101}}},{"id":81500,"slot":"Boots","upgrades":[24836],"skin":769,"binding":"Account","location":"Equipped","dyes":[1152,1152,480,null]},{"id":81428,"slot":"Gloves","upgrades":[24836],"skin":772,"binding":"Account","location":"Equipped","dyes":[null,null,480,null]},{"id":81476,"slot":"Helm","upgrades":[24836],"skin":6896,"binding":"Account","location":"Equipped","dyes":[86,86,86,null]},{"id":83497,"slot":"Leggings","upgrades":[24836],"infusions":[49431],"skin":5726,"binding":"Account","location":"EquippedFromLegendaryArmory","dyes":[1152,1152,1152,null],"stats":{"id":161,"attributes":{"Power":94,"Precision":67,"CritDamage":67}}},{"id":81285,"slot":"Shoulders","upgrades":[24836],"skin":775,"binding":"Account","location":"Equipped","dyes":[null,null,480,null]},{"id":86979,"slot":"Backpack","skin":8833,"binding":"Account","location":"Equipped","dyes":[null,null,null,null]},{"id":92706,"slot":"Accessory1","binding":"Account","location":"Equipped"},{"id":39237,"slot":"Accessory2","binding":"Account","location":"Equipped"},{"id":75669,"slot":"Ring1","binding":"Account","location":"Equipped"},{"id":76024,"slot":"Ring2","binding":"Account","location":"Equipped"},{"id":39273,"slot":"Amulet","binding":"Account","location":"Equipped"},{"id":78461,"slot":"WeaponAquaticA","upgrades":[44944,24618],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":78447,"slot":"WeaponAquaticB","upgrades":[44944,24618],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":46762,"slot":"WeaponA1","upgrades":[24868,24615],"binding":"Account","location":"Equipped"},{"id":46759,"slot":"WeaponB1","upgrades":[24615],"binding":"Account","location":"Equipped"},{"id":46761,"slot":"WeaponB2","upgrades":[24868],"binding":"Account","location":"Equipped"}],"equipment_pvp":{"amulet":8,"rune":79983,"sigils":[21149,21152,81268,81254]}},{"tab":2,"name":"Condi","is_active":false,"equipment":[{"id":78382,"slot":"HelmAquatic","upgrades":[24806],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":73562,"slot":"Coat","upgrades":[24687],"skin":5743,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[1152,1152,1152,null]},{"id":75850,"slot":"Boots","upgrades":[24687],"skin":2264,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[1152,1152,null,null]},{"id":76389,"slot":"Gloves","upgrades":[24687],"skin":772,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[null,null,480,null]},{"id":74298,"slot":"Helm","upgrades":[24687],"skin":6896,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[86,86,86,null]},{"id":76455,"slot":"Leggings","upgrades":[24687],"skin":5726,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[1152,1152,1152,null]},{"id":71226,"slot":"Shoulders","upgrades":[24687],"skin":775,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[null,null,480,null]},{"id":78275,"slot":"Backpack","upgrades":[24496],"skin":5544,"binding":"Character","bound_to":"Spectralstar","location":"Armory","dyes":[null,null,null,null]},{"id":39235,"slot":"Accessory1","binding":"Account","location":"Armory"},{"id":39234,"slot":"Accessory2","binding":"Account","location":"Armory"},{"id":37087,"slot":"Ring1","binding":"Account","location":"Armory"},{"id":37077,"slot":"Ring2","binding":"Account","location":"Armory"},{"id":39275,"slot":"Amulet","binding":"Account","location":"Armory"},{"id":78461,"slot":"WeaponAquaticA","upgrades":[44944,24618],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":78447,"slot":"WeaponAquaticB","upgrades":[44944,24618],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":96883,"slot":"WeaponA1","binding":"Character","bound_to":"Spectralstar","location":"Armory"},{"id":72885,"slot":"WeaponA2","upgrades":[24612],"skin":6907,"binding":"Character","bound_to":"Spectralstar","location":"Armory"},{"id":70918,"slot":"WeaponB1","upgrades":[24607],"skin":6920,"binding":"Character","bound_to":"Spectralstar","location":"Armory"}],"equipment_pvp":{"amulet":9,"rune":21218,"sigils":[21149,null,null,81257]}}]'
+  /characters/{name}/equipmenttabs/{tab}:
+    get:
+      tags: [ getByTab ]
+      security:
+        - Bearer: [ account,build,characters ]
+      operationId: getCharacterEquipmentTemplateById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/equipmenttabs
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/EquipmentTemplateTabId"
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns information about an accounts equipment template tabs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EquipmentTemplateTab"
+              example: '{"tab":1,"name":"Power","is_active":true,"equipment":[{"id":78382,"slot":"HelmAquatic","upgrades":[24806],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":83036,"slot":"Coat","upgrades":[24836],"infusions":[49431],"skin":5743,"binding":"Account","location":"EquippedFromLegendaryArmory","dyes":[1152,1152,1152,null],"stats":{"id":161,"attributes":{"Power":141,"Precision":101,"CritDamage":101}}},{"id":81500,"slot":"Boots","upgrades":[24836],"skin":769,"binding":"Account","location":"Equipped","dyes":[1152,1152,480,null]},{"id":81428,"slot":"Gloves","upgrades":[24836],"skin":772,"binding":"Account","location":"Equipped","dyes":[null,null,480,null]},{"id":81476,"slot":"Helm","upgrades":[24836],"skin":6896,"binding":"Account","location":"Equipped","dyes":[86,86,86,null]},{"id":83497,"slot":"Leggings","upgrades":[24836],"infusions":[49431],"skin":5726,"binding":"Account","location":"EquippedFromLegendaryArmory","dyes":[1152,1152,1152,null],"stats":{"id":161,"attributes":{"Power":94,"Precision":67,"CritDamage":67}}},{"id":81285,"slot":"Shoulders","upgrades":[24836],"skin":775,"binding":"Account","location":"Equipped","dyes":[null,null,480,null]},{"id":86979,"slot":"Backpack","skin":8833,"binding":"Account","location":"Equipped","dyes":[null,null,null,null]},{"id":92706,"slot":"Accessory1","binding":"Account","location":"Equipped"},{"id":39237,"slot":"Accessory2","binding":"Account","location":"Equipped"},{"id":75669,"slot":"Ring1","binding":"Account","location":"Equipped"},{"id":76024,"slot":"Ring2","binding":"Account","location":"Equipped"},{"id":39273,"slot":"Amulet","binding":"Account","location":"Equipped"},{"id":78461,"slot":"WeaponAquaticA","upgrades":[44944,24618],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":78447,"slot":"WeaponAquaticB","upgrades":[44944,24618],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":46762,"slot":"WeaponA1","upgrades":[24868,24615],"binding":"Account","location":"Equipped"},{"id":46759,"slot":"WeaponB1","upgrades":[24615],"binding":"Account","location":"Equipped"},{"id":46761,"slot":"WeaponB2","upgrades":[24868],"binding":"Account","location":"Equipped"}],"equipment_pvp":{"amulet":8,"rune":79983,"sigils":[21149,21152,81268,81254]}}'
+  /characters/{name}/equipmenttabs/active:
+    get:
+      tags: [ getByTab ]
+      security:
+        - Bearer: [ account,build,characters ]
+      operationId: getCharacterEquipmentTemplateByActive
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/characters/:id/equipmenttabs
+      parameters:
+        - $ref: "#/components/parameters/CharacterName"
+      responses:
+        "200":
+          description: This resource returns information about an accounts equipment template tabs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EquipmentTemplateTab"
+              example: '{"tab":1,"name":"Power","is_active":true,"equipment":[{"id":78382,"slot":"HelmAquatic","upgrades":[24806],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":83036,"slot":"Coat","upgrades":[24836],"infusions":[49431],"skin":5743,"binding":"Account","location":"EquippedFromLegendaryArmory","dyes":[1152,1152,1152,null],"stats":{"id":161,"attributes":{"Power":141,"Precision":101,"CritDamage":101}}},{"id":81500,"slot":"Boots","upgrades":[24836],"skin":769,"binding":"Account","location":"Equipped","dyes":[1152,1152,480,null]},{"id":81428,"slot":"Gloves","upgrades":[24836],"skin":772,"binding":"Account","location":"Equipped","dyes":[null,null,480,null]},{"id":81476,"slot":"Helm","upgrades":[24836],"skin":6896,"binding":"Account","location":"Equipped","dyes":[86,86,86,null]},{"id":83497,"slot":"Leggings","upgrades":[24836],"infusions":[49431],"skin":5726,"binding":"Account","location":"EquippedFromLegendaryArmory","dyes":[1152,1152,1152,null],"stats":{"id":161,"attributes":{"Power":94,"Precision":67,"CritDamage":67}}},{"id":81285,"slot":"Shoulders","upgrades":[24836],"skin":775,"binding":"Account","location":"Equipped","dyes":[null,null,480,null]},{"id":86979,"slot":"Backpack","skin":8833,"binding":"Account","location":"Equipped","dyes":[null,null,null,null]},{"id":92706,"slot":"Accessory1","binding":"Account","location":"Equipped"},{"id":39237,"slot":"Accessory2","binding":"Account","location":"Equipped"},{"id":75669,"slot":"Ring1","binding":"Account","location":"Equipped"},{"id":76024,"slot":"Ring2","binding":"Account","location":"Equipped"},{"id":39273,"slot":"Amulet","binding":"Account","location":"Equipped"},{"id":78461,"slot":"WeaponAquaticA","upgrades":[44944,24618],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":78447,"slot":"WeaponAquaticB","upgrades":[44944,24618],"binding":"Character","bound_to":"Spectralstar","location":"Equipped"},{"id":46762,"slot":"WeaponA1","upgrades":[24868,24615],"binding":"Account","location":"Equipped"},{"id":46759,"slot":"WeaponB1","upgrades":[24615],"binding":"Account","location":"Equipped"},{"id":46761,"slot":"WeaponB2","upgrades":[24868],"binding":"Account","location":"Equipped"}],"equipment_pvp":{"amulet":8,"rune":79983,"sigils":[21149,21152,81268,81254]}}'
+components:
+  schemas:
+    EquipmentTemplateTabId:
+      type: integer
+      x-ktx-id: true
+      description: The index of the equipment template in a character's equipment tabs.
+
+    EquipmentTemplateTab:
+      type: object
+      required: [ id, is_active, equipment, equipment_pvp ]
+      properties:
+        id:
+          $ref: "#/components/schemas/EquipmentTemplateTabId"
+        is_active:
+          type: boolean
+          description: Whether this tab is the currently selected tab.
+        equipment:
+          type: array
+          items:
+            $ref: "#/components/schemas/EquipmentTemplate"
+        equipment_pvp:
+          type: array
+          items:
+            $ref: "#/components/schemas/EquipmentTemplatePvp"
+
+    EquipmentTemplate:
+      type: object
+      required: [ id,slot,location ]
+      properties:
+        skin:
+          $ref: "#/components/schemas/SkinId"
+        dyes:
+          type: array
+          items:
+            allOf:
+              - $ref: "#/components/schemas/DyeColorId"
+              - type: "null"
+        upgrades:
+          description: The ids of the upgrades (runes/sigils) applied to the item.
+          type: array
+          externalDocs:
+            url: https://wiki.guildwars2.com/wiki/Upgrade_component
+          items:
+            $ref: "#/components/schemas/ItemId"
+        infusions:
+          description: The ids of the infusions applied to the item.
+          type: array
+          externalDocs:
+            url: https://wiki.guildwars2.com/wiki/Infusion
+          items:
+            $ref: "#/components/schemas/ItemId"
+        binding:
+          allOf:
+            - $ref: "#/components/schemas/Binding"
+            - description: What owns this item. Null if there is no binding.
+              type: "null"
+        bound_to:
+          allOf:
+            - $ref: "#/components/schemas/CharacterName"
+            - description: Who owns this item. Null if the binding is NOT for a character.
+              type: "null"
+        stats:
+          type: array
+          externalDocs:
+            url: https://wiki.guildwars2.com/wiki/API:2/itemstats
+          items:
+            $ref: "#/components/schemas/CharacterItemStat"
+        location:
+          $ref: "#/components/schemas/EquipmentLocation"
+
+    EquipmentTemplatePvp:
+      type: object
+      required: [ sigils ]
+      properties:
+        amulet:
+          allOf:
+            - $ref: "#/components/schemas/PvpAmuletId"
+            - type: "null"
+        rune:
+          allOf:
+            - $ref: "#/components/schemas/ItemId"
+            - type: "null"
+        sigils:
+          type: array
+          items:
+            allOf:
+              - $ref: "#/components/schemas/ItemId"
+              - type: "null"
+                description: "The ids of the PvP sigils. An id is null if it is not selected. Order: primary weapon sigil 1, secondary weapon sigil 1, primary weapon sigil 2, secondary weapon sigil 2"

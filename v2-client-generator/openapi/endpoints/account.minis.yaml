@@ -1,0 +1,19 @@
+paths:
+  /account/minis:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,unlocks ]
+      operationId: getAccountMiniPets
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/minis
+      responses:
+        "200":
+          description: This resource returns the unlocked miniatures of the account.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MiniPetId"
+              example: '[28,65,161,175,177,194,204,217,223,224,235,244,289,298,301,352,423,424,492,497,499,504,510,514,519,527,538,547,548,554,555,556,561,562,564,568,573,577,581,640,679,710,736,746,748,790]'

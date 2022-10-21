@@ -1,0 +1,19 @@
+paths:
+  /account/raids:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,progression ]
+      operationId: getAccountRaids
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/raids
+      responses:
+        "200":
+          description: This resource returns the completed raid encounters since weekly raid reset.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RaidEventId"
+              example: '["gorseval","xera"]'

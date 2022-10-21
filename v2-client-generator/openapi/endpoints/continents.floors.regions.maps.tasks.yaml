@@ -1,0 +1,158 @@
+paths:
+  /continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks:
+    get:
+      tags: [ getIds ]
+      operationId: getContinentMapRenownHeartIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/continents
+      parameters:
+        - $ref: "#/components/parameters/ContinentId"
+        - $ref: "#/components/parameters/FloorId"
+        - $ref: "#/components/parameters/RegionId"
+        - $ref: "#/components/parameters/MapId"
+      responses:
+        "200":
+          description: This resource returns information about renown hearts.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RenownHeartId"
+              example: '[1,2,3,4,5,6,7,8,9,10,11]'
+  /continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks?ids={renownHeartIds}:
+    get:
+      tags: [ getByIds ]
+      operationId: getContinentMapRenownHeartsByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/continents
+      parameters:
+        - name: renownHeartIds
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/RenownHeartId"
+        - $ref: "#/components/parameters/ContinentId"
+        - $ref: "#/components/parameters/FloorId"
+        - $ref: "#/components/parameters/RegionId"
+        - $ref: "#/components/parameters/MapId"
+      responses:
+        "200":
+          description: This resource returns information about renown hearts.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RenownHeart"
+              example: '[{"objective":"Assist Daphne in halting the encroaching corruption.","level":40,"coord":[52412.7,32988.2],"bounds":[[52647.3,32760.9],[52593.6,32714.5],[52526.2,32718.6],[52365,32812.5],[52315.8,32879.6],[52313.2,33065.1],[52352.7,33296],[52443.6,33476.4],[52733.5,33445.1],[52924.7,33198.3],[52804.3,32921.6],[52647.3,32760.9]],"id":1,"chat_link":"[&BAEAAAA=]"},{"objective":"Assist the skritt of Ratatosk.","level":45,"coord":[54163.6,32112.6],"bounds":[[54504.5,31985.3],[54395.6,31844.7],[54268.4,31884.2],[54201,31973.4],[54175.5,32018.3],[54111.3,32053.4],[54050.7,32047.1],[54011.3,32097.3],[53996.9,32194.2],[54011.4,32402.4],[54161.2,32518],[54206.4,32594],[54271.3,32609.4],[54390.6,32553.4],[54516.2,32391.4],[54504.5,31985.3]],"id":2,"chat_link":"[&BAIAAAA=]"}]'
+  /continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getContinentMapRenownHeartsByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/continents
+      parameters:
+        - $ref: "#/components/parameters/ContinentId"
+        - $ref: "#/components/parameters/FloorId"
+        - $ref: "#/components/parameters/RegionId"
+        - $ref: "#/components/parameters/MapId"
+      responses:
+        "200":
+          description: This resource returns information about renown hearts.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RenownHeart"
+              example: '[{"objective":"Assist Daphne in halting the encroaching corruption.","level":40,"coord":[52412.7,32988.2],"bounds":[[52647.3,32760.9],[52593.6,32714.5],[52526.2,32718.6],[52365,32812.5],[52315.8,32879.6],[52313.2,33065.1],[52352.7,33296],[52443.6,33476.4],[52733.5,33445.1],[52924.7,33198.3],[52804.3,32921.6],[52647.3,32760.9]],"id":1,"chat_link":"[&BAEAAAA=]"},{"objective":"Assist the skritt of Ratatosk.","level":45,"coord":[54163.6,32112.6],"bounds":[[54504.5,31985.3],[54395.6,31844.7],[54268.4,31884.2],[54201,31973.4],[54175.5,32018.3],[54111.3,32053.4],[54050.7,32047.1],[54011.3,32097.3],[53996.9,32194.2],[54011.4,32402.4],[54161.2,32518],[54206.4,32594],[54271.3,32609.4],[54390.6,32553.4],[54516.2,32391.4],[54504.5,31985.3]],"id":2,"chat_link":"[&BAIAAAA=]"}]'
+  /continents/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getContinentMapRenownHeartsByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/continents
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+        - $ref: "#/components/parameters/ContinentId"
+        - $ref: "#/components/parameters/FloorId"
+        - $ref: "#/components/parameters/RegionId"
+        - $ref: "#/components/parameters/MapId"
+      responses:
+        "200":
+          description: This resource returns information about renown hearts.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RenownHeart"
+              example: '[{"objective":"Assist Daphne in halting the encroaching corruption.","level":40,"coord":[52412.7,32988.2],"bounds":[[52647.3,32760.9],[52593.6,32714.5],[52526.2,32718.6],[52365,32812.5],[52315.8,32879.6],[52313.2,33065.1],[52352.7,33296],[52443.6,33476.4],[52733.5,33445.1],[52924.7,33198.3],[52804.3,32921.6],[52647.3,32760.9]],"id":1,"chat_link":"[&BAEAAAA=]"},{"objective":"Assist the skritt of Ratatosk.","level":45,"coord":[54163.6,32112.6],"bounds":[[54504.5,31985.3],[54395.6,31844.7],[54268.4,31884.2],[54201,31973.4],[54175.5,32018.3],[54111.3,32053.4],[54050.7,32047.1],[54011.3,32097.3],[53996.9,32194.2],[54011.4,32402.4],[54161.2,32518],[54206.4,32594],[54271.3,32609.4],[54390.6,32553.4],[54516.2,32391.4],[54504.5,31985.3]],"id":2,"chat_link":"[&BAIAAAA=]"}]'
+  /continent/{continentId}/floors/{floorId}/regions/{regionId}/maps/{mapId}/tasks/{renownHeartId}:
+    get:
+      tags: [ getById ]
+      operationId: getContinentMapRenownHeartById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/continents
+      parameters:
+        - $ref: "#/components/parameters/ContinentId"
+        - $ref: "#/components/parameters/FloorId"
+        - $ref: "#/components/parameters/RegionId"
+        - $ref: "#/components/parameters/MapId"
+        - name: renownHeartId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/RenownHeartId"
+      responses:
+        "200":
+          description: This resource returns information about renown hearts.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RenownHeart"
+              example: '{"objective":"Assist Daphne in halting the encroaching corruption.","level":40,"coord":[52412.7,32988.2],"bounds":[[52647.3,32760.9],[52593.6,32714.5],[52526.2,32718.6],[52365,32812.5],[52315.8,32879.6],[52313.2,33065.1],[52352.7,33296],[52443.6,33476.4],[52733.5,33445.1],[52924.7,33198.3],[52804.3,32921.6],[52647.3,32760.9]],"id":1,"chat_link":"[&BAEAAAA=]"}'
+
+components:
+  schemas:
+    RenownHeartId:
+      type: integer
+      x-ktx-id: true
+
+    RenownHeart:
+      type: object
+      required: [ id,objective,level,coord,bounds,chat_link ]
+      properties:
+        id:
+          $ref: "#/components/schemas/RenownHeartId"
+        objective:
+          type: string
+          description: The description of the objective.
+          x-gw2-intl: true
+        level:
+          $ref: "#/components/schemas/CharacterLevel"
+        coord:
+          title: coordinates
+          type: array
+          description: The two-dimensional coordinates within the texture.
+          format: textureposition
+          items:
+            type: number
+            format: double
+        bounds:
+          type: array
+          description: The boundary of where the player can complete the heart represented by two-dimensional coordinates.
+          format: textureposition
+          items:
+            type: number
+            format: double
+        chat_link:
+          allOf:
+            - $ref: "#/components/schemas/ChatLink"
+            - externalDocs:
+                url: https://wiki.guildwars2.com/wiki/Chat_link_format#Map_link
+    

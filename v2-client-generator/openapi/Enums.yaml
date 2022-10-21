@@ -1,0 +1,1322 @@
+components:
+  schemas:
+    Accessibility:
+      type: string
+      oneOf:
+        - const: HasAccess
+        - const: NoAccess
+    AccountAccess:
+      type: string
+      oneOf:
+        - const: None
+        - const: PlayForFree
+          description: A free to play account. The owner has not purchased the game.
+        - const: GuildWars2
+          description: The base game.
+        - const: HeartOfThorns
+          description: The first expansion.
+        - const: PathOfFire
+          description: The second expansion.
+        - const: EndOfDragons
+          description: The third expansion.
+    AccountProgressionName:
+      type: string
+      oneOf:
+        - const: fractal_agony_impedance
+        - const: fractal_empowerment
+        - const: fractal_karmic_retribution
+        - const: luck
+    AchievementFlag:
+      type: string
+      oneOf:
+        - const: Pvp
+          description: An achievement for the PvP or WvW game modes.
+        - const: CategoryDisplay
+          description: A meta achievement.
+        - const: MoveToTop
+          description: An achievement that affects in-game UI collation.
+        - const: IgnoreNearlyComplete
+          description: An achievement that does not appear in the nearly complete UI.
+        - const: Repeatable
+          description: An achievement that can be done multiple times.
+        - const: Hidden
+          description: An achievement that cannot be tracked before it is unlocked.
+          externalDocs:
+            url: https://wiki.guildwars2.com/wiki/List_of_hidden_achievements
+        - const: RequiresUnlock
+          description: An achievement that can be tracked before it is unlocked.
+        - const: RepairOnLogin
+        - const: Daily
+          description: An achievement that resets daily.
+        - const: Weekly
+          description: An achievement that resets weekly.
+        - const: Monthly
+          description: An achievement that resets monthly.
+        - const: Permanent
+          description: An achievement that does not reset.
+    AchievementType:
+      type: string
+      oneOf:
+        - const: Default
+        - const: ItemSet
+          description: A collection of achievements.
+          externalDocs:
+            url: https://wiki.guildwars2.com/wiki/Collections
+    ArmorDetailType:
+      type: string
+      oneOf:
+        - const: Boots
+        - const: Coat
+          title: Chest
+        - const: Gloves
+        - const: Helm
+        - const: HelmAquatic
+          title: Breather
+        - const: Leggings
+        - const: Shoulders
+    ArmorWeight:
+      type: string
+      oneOf:
+        - const: Heavy
+        - const: Medium
+        - const: Light
+        - const: Clothing
+    AssetName:
+      type: string
+      oneOf:
+        - const: map_complete
+        - const: map_dungeon
+        - const: map_heart_empty
+        - const: map_heart_full
+        - const: map_node_harvesting
+        - const: map_node_logging
+        - const: map_node_mining
+        - const: map_poi
+        - const: map_special_event
+        - const: map_waypoint
+        - const: map_waypoint_contested
+        - const: map_vista
+        - const: map_heropoint
+        - const: wvw_battles_hollow_blue
+        - const: wvw_battles_hollow_green
+        - const: wvw_battles_hollow_red
+        - const: wvw_battles_hollow_white
+        - const: wvw_bauers_estate_blue
+        - const: wvw_bauers_estate_green
+        - const: wvw_bauers_estate_red
+        - const: wvw_bauers_estate_white
+        - const: wvw_carvers_ascent_blue
+        - const: wvw_carvers_ascent_green
+        - const: wvw_carvers_ascent_red
+        - const: wvw_carvers_ascent_white
+        - const: wvw_orchard_overlook_blue
+        - const: wvw_orchard_overlook_green
+        - const: wvw_orchard_overlook_red
+        - const: wvw_orchard_overlook_white
+        - const: wvw_template_of_lost_prayers_blue
+        - const: wvw_template_of_lost_prayers_green
+        - const: wvw_template_of_lost_prayers_red
+        - const: wvw_template_of_lost_prayers_white
+        - const: wvw_camp
+        - const: wvw_tower
+        - const: wvw_keep
+        - const: wvw_castle
+        - const: ui_upgrade_slot_open
+        - const: ui_infusion_slot_agony
+        - const: ui_infusion_slot_defensive
+        - const: ui_infusion_slot_offensive
+        - const: ui_infusion_slot_utility
+        - const: ui_coin_gold
+        - const: ui_coin_silver
+        - const: ui_coin_copper
+        - const: ui_gem
+        - const: ui_supply
+        - const: ui_minor_trait_mask
+        - const: ui_major_trait_mask
+        - const: icon_guardian
+        - const: icon_warrior
+        - const: icon_revenant
+        - const: icon_necromancer
+        - const: icon_mesmer
+        - const: icon_elementalist
+        - const: icon_thief
+        - const: icon_ranger
+        - const: icon_engineer
+        - const: icon_guardian_big
+        - const: icon_warrior_big
+        - const: icon_revenant_big
+        - const: icon_necromancer_big
+        - const: icon_mesmer_big
+        - const: icon_elementalist_big
+        - const: icon_thief_big
+        - const: icon_ranger_big
+        - const: icon_engineer_big
+        - const: map_crafting_scribe
+        - const: map_bank
+        - const: map_guild_bank
+        - const: map_trading_post
+        - const: map_crafting_armorsmith
+        - const: map_crafting_artificer
+        - const: map_crafting_cook
+        - const: map_crafting_huntsman
+        - const: map_crafting_jeweler
+        - const: map_crafting_leatherworker
+        - const: map_crafting_tailor
+        - const: map_crafting_weaponsmith
+        - const: map_guild_registrar
+        - const: map_profession_trainer
+        - const: map_repair
+        - const: map_vendor
+        - const: map_vendor_armor
+        - const: map_vendor_weapons
+        - const: map_vendor_mystic_forge
+        - const: map_vendor_laurel
+        - const: map_fractal
+        - const: map_raid_entrance
+        - const: map_adventure
+        - const: map_adventure_complete
+        - const: map_adventure_locked
+        - const: map_outpost
+        - const: map_outpost_locked
+        - const: map_outpost_contested
+        - const: map_outpost_active
+        - const: map_vendor_festival
+        - const: map_guild_armorer
+        - const: map_guild_weaponsmith
+        - const: map_vendor_ecto
+        - const: map_vendor_guild
+        - const: map_vendor_cultural_armor
+        - const: map_vendor_cultural_weapons
+        - const: map_vendor_crystalline_ore
+        - const: map_vendor_airship_parts
+        - const: map_vendor_aurillium
+        - const: map_vendor_leyline_crystals
+        - const: map_vendor_dungeon
+        - const: map_elevator_down
+        - const: map_elevator_up
+        - const: map_ramp_down
+        - const: map_ramp_up
+        - const: map_stairs_down
+        - const: map_stairs_up
+    AttributeName:
+      type: string
+      oneOf:
+        - const: AgonyResistance
+        - const: BoonDuration
+          title: Concentration
+        - const: ConditionDamage
+        - const: ConditionDuration
+          title: Expertise
+        - const: CritDamage
+          title: Ferocity
+        - const: Healing
+          title: HealingPower
+        - const: Power
+        - const: Precision
+        - const: Toughness
+        - const: Vitality
+    AttunementName:
+      type: string
+      oneOf:
+        - const: Fire
+        - const: Water
+        - const: Earth
+        - const: Air
+    Binding:
+      type: string
+      oneOf:
+        - const: Account
+          description: All characters on the account have access.
+        - const: Character
+          description: A single character on the account has access.
+    CategoryAchievementFlag:
+      type: string
+      oneOf:
+        - const: PvE
+          title: PlayerVsEnvironment
+          description: An achievement for the Player vs. Environment mode.
+        - const: PvP
+          title: PlayerVsPlayer
+          description: An achievement for the Player vs. Player mode.
+        - const: WvW
+          title: WorldVsWorld
+          description: An achievement for the World vs. World mode.
+        - const: SpecialEvent
+          description: An achievement for a special event such as a festival.
+    CharacterFlag:
+      type: string
+      oneOf:
+        - const: Beta
+          description: A character for beta testing periods.
+    ColorCategory:
+      type: string
+      oneOf:
+        # Hues
+        - const: Gray
+        - const: Brown
+        - const: Red
+        - const: Orange
+        - const: Yellow
+        - const: Green
+        - const: Blue
+        - const: Purple
+
+        # Materials
+        - const: Vibrant
+        - const: Leather
+        - const: Metal
+
+        # Rarities
+        - const: Starter
+        - const: Common
+        - const: Uncommon
+        - const: Rare
+        - const: Exclusive
+    ComboFieldType:
+      type: string
+      oneOf:
+        - const: Air
+        - const: Dark
+        - const: Fire
+        - const: Ice
+        - const: Light
+        - const: Lightning
+        - const: Poison
+        - const: Smoke
+        - const: Ethereal
+        - const: Water
+    ComboFinisherType:
+      type: string
+      oneOf:
+        - const: Blast
+        - const: Leap
+        - const: Projectile
+        - const: Whirl
+    ConsumableDetailType:
+      type: string
+      oneOf:
+        - const: AppearanceChange
+        - const: Booze
+        - const: ContractNpc
+        - const: Currency
+        - const: Food
+        - const: Generic
+        - const: Halloween
+        - const: Immediate
+          title: ImmediateEffect
+        - const: MountRandomUnlock
+        - const: RandomUnlock
+        - const: Transmutation
+          title: Skin
+        - const: Unlock
+        - const: UpgradeRemoval
+        - const: Utility
+        - const: TeleportToFriend
+    ConsumableUnlockType:
+      type: string
+      oneOf:
+        - const: BagSlot
+        - const: BankTab
+        - const: Champion
+          title: MistChampion
+        - const: CollectibleCapacity
+          title: StorageExpander
+        - const: Content
+        - const: CraftingRecipe
+        - const: Dye
+        - const: GliderSkin
+        - const: Minipet
+          title: Miniature
+        - const: Ms
+          title: MountSkin
+        - const: Outfit
+        - const: RandomUnlock
+        - const: SharedSlot
+    ContainerDetailType:
+      type: string
+      oneOf:
+        - const: Default
+        - const: GiftBox
+          title: Gift
+        - const: Immediate
+          title: ContainerWithoutUi
+        - const: OpenUI
+          title: ContainerWithUi
+    CraftingDiscipline:
+      type: string
+      oneOf:
+        - const: Armorsmith
+        - const: Artificer
+        - const: Chef
+        - const: Huntsman
+        - const: Jeweler
+        - const: Leatherworker
+        - const: Scribe
+        - const: Tailor
+        - const: Weaponsmith
+    DungeonPathType:
+      type: string
+      oneOf:
+        - const: Story
+        - const: Explorable
+    EffectName:
+      type: string
+      oneOf:
+        - const: Aegis
+        - const: Fury
+        - const: Might
+        - const: Protection
+        - const: Quickness
+        - const: Regeneration
+        - const: Resistance
+        - const: Resolution
+        - const: Retaliation
+        - const: Stability
+        - const: Swiftness
+        - const: Vigor
+        - const: Bleeding
+        - const: Blinded
+        - const: Burning
+        - const: Chilled
+        - const: Confusion
+        - const: Crippled
+        - const: Fear
+        - const: Immobile
+        - const: Poison
+        - const: Slow
+        - const: Taunt
+        - const: Torment
+        - const: Vulnerability
+        - const: Weakness
+        - const: Daze
+        - const: Float
+        - const: Knockback
+        - const: Launch
+        - const: Pull
+        - const: Sink
+        - const: Stun
+        - const: Agony
+          title: AgonyResistance
+        - const: Alacrity
+        - const: Invulnerability
+        - const: Revealed
+        - const: Stealth
+        - const: Superspeed
+    EquipmentLocation:
+      type: string
+      oneOf:
+        - const: equipped
+        - const: Armory
+          title: LegendaryArmory
+    EquipmentSlot:
+      type: string
+      oneOf:
+        - const: HelmAquatic
+          title: Breather
+          description: The breathing apparatus for aquatic environments.
+        - const: Backpack
+          title: Back
+          description: The back trinket.
+        - const: Coat
+          description: The coat armor.
+        - const: Gloves
+          description: The glove armor.
+        - const: Helm
+          description: The helm armor.
+        - const: Leggings
+          description: The legging armor.
+        - const: Shoulders
+          description: The shoulder armor.
+        - const: Accessory1
+          description: The first accessory trinket.
+        - const: Accessory2
+          description: The second accessory trinket.
+        - const: Ring1
+          description: The first ring trinket.
+        - const: Ring2
+          description: The second ring trinket.
+        - const: Amulet
+          description: The amulet trinket.
+        - const: WeaponAquaticA
+          title: AquaticWeapon1Set1
+          description: The first (and only) weapon in the first set for aquatic environments.
+        - const: WeaponAquaticB
+          title: AquaticWeapon1Set2
+          description: The first (and only) weapon in the second set for aquatic environments.
+        - const: WeaponA1
+          title: Weapon1Set1
+          description: The first weapon in the first set for terrestrial environments.
+        - const: WeaponA2
+          title: Weapon2Set1
+          description: The second weapon in the first set for terrestrial environments.
+        - const: WeaponB1
+          title: Weapon1Set2
+          description: The first weapon in the second set for terrestrial environments.
+        - const: WeaponB2
+          title: Weapon2Set2
+          description: The second weapon in the second set for terrestrial environments.
+        - const: Sickle
+          title: ForagingTool
+          description: The forging gathering tool.
+        - const: Axe
+          title: LoggingTool
+          description: The logging gathering tool.
+        - const: Pick
+          title: MiningTool
+          description: The mining gathering tool.
+    GatheringToolDetailType:
+      type: string
+      oneOf:
+        - const: Foraging
+        - const: Logging
+        - const: Mining
+    Gender:
+      type: string
+      oneOf:
+        - const: Male
+        - const: Female
+    GizmoDetailType:
+      type: string
+      oneOf:
+        - const: Default
+        - const: ContainerKey
+        - const: RentableContractNpc
+        - const: UnlimitedConsumable
+    GuildEmblemFlag:
+      type: string
+      oneOf:
+        - const: FlipBackgroundHorizontal
+        - const: FlipBackgroundVertical
+    InfluenceActivity:
+      type: string
+      oneOf:
+        - const: gifted
+        - const: daily_login
+    InfusionUpgradeFlag:
+      type: string
+      oneOf:
+        - const: Enrichment
+        - const: Infusion
+        - const: Defense
+        - const: Offense
+        - const: Utility
+        - const: Agony
+    ItemFlag:
+      type: string
+      oneOf:
+        - const: AccountBindOnUse
+        - const: AccountBound
+          title: AccountBindOnAcquire
+        - const: Attuned
+        - const: BulkConsume
+        - const: DeleteWarning
+          description: Prompt a warning upon deletion.
+        - const: HideSuffix
+          description: Hides the upgrade component suffix.
+        - const: Infused
+        - const: MonsterOnly
+        - const: NoMysticForge
+        - const: NoSalvage
+        - const: NoSell
+        - const: NotUpgradeable
+        - const: NoUnderwater
+        - const: SoulbindOnAcquire
+        - const: SoulBindOnUse
+          title: SoulBindOnUse
+        - const: Tonic
+        - const: Unique
+    ItemGameType:
+      type: string
+      oneOf:
+        - const: Activity
+        - const: Dungeon
+        - const: Pve
+          title: PlayerVsEnvironment
+        - const: Pvp
+          title: PlayerVsPlayer
+        - const: PvpLobby
+          title: PlayerVsPlayerLobby
+        - const: Wvw
+          title: WorldVsWorld
+    ItemRarity:
+      type: string
+      oneOf:
+        - const: Junk
+        - const: Basic
+        - const: Fine
+        - const: Masterwork
+        - const: Rare
+        - const: Exotic
+        - const: Ascended
+        - const: Legendary
+    ItemRestriction:
+      type: string
+      oneOf:
+        - const: Asura
+        - const: Charr
+        - const: Human
+        - const: Norn
+        - const: Sylvari
+        - const: Necromancer
+        - const: Mesmer
+        - const: Elementalist
+        - const: Warrior
+        - const: Guardian
+        - const: Revenant
+        - const: Engineer
+        - const: Ranger
+        - const: Thief
+        - const: Female
+        - const: Male
+    Language:
+      description: The languages supported by the API.
+      externalDocs:
+        url: https://api.guildwars2.com/v2.json?v=latest
+      type: string
+      oneOf:
+        - const: en
+          title: English
+        - const: es
+          title: Spanish
+        - const: de
+          title: German
+        - const: fr
+          title: French
+        - const: zh
+          title: Chinese
+
+    # Usage is currently broken https://github.com/gw2-api/issues/issues/6
+    LegendName:
+      type: string
+      oneOf:
+        - const: Legend1
+          title: Dragon
+        - const: Legend2
+          title: Assassin
+        - const: Legend3
+          title: Dwarf
+        - const: Legend4
+          title: Demon
+        - const: Legend5
+          title: Renegade
+        - const: Legend6
+          title: Centaur
+        - const: Legend7
+          title: Alliance
+    MapType:
+      type: string
+      oneOf:
+        - const: Center
+          title: EternalBattlegrounds
+        - const: RedHome
+          title: RedBorderlands
+        - const: BlueHome
+          title: BlueBorderlands
+        - const: GreenHome
+          title: GreenBorderlands
+        - const: EdgeOfTheMists
+        - const: Instance
+        - const: JumpPuzzle
+        - const: Public
+        - const: Pvp
+          title: PlayerVsPlayer
+        - const: Tutorial
+        - const: Unknown
+    MaterialType:
+      type: string
+      oneOf:
+        - const: cloth
+        - const: leather
+        - const: metal
+    MountName:
+      type: string
+      oneOf:
+        - const: griffon
+        - const: jackal
+        - const: raptor
+        - const: roller_beetle
+        - const: siege_turtle
+        - const: skiff
+        - const: skimmer
+        - const: skyscale
+        - const: springer
+        - const: warclaw
+    NoveltySlot:
+      type: string
+      oneOf:
+        - const: Chair
+        - const: Music
+        - const: HeldItem
+        - const: Miscellaneous
+        - const: Tonic
+    Permission:
+      type: string
+      oneOf:
+        - const: account
+          description: Grants access to the /v2/account endpoint. Required by all tokens.
+        - const: builds
+          description: Grants access to view each character's equipped specializations and gear.
+        - const: characters
+          description: Grants access to the /v2/characters endpoint.
+        - const: guilds
+          description: Grants access to guild info under the /v2/guild/:id/ sub-endpoints.
+        - const: inventories
+          description: Grants access to inventories in the /v2/characters, /v2/account/bank, and /v2/account/materials endpoints.
+        - const: progression
+          description: Grants access to achievements, dungeon unlock status, mastery point assignments, and general PvE progress.
+        - const: pvp
+          description: Grants access to the /v2/pvp sub-endpoints. (i.e. /v2/pvp/games, /v2/pvp/stats)
+        - const: tradingpost
+          description: Grants access to the /v2/commerce/transactions endpoint.
+        - const: unlocks
+          description: Grants access to the /v2/account/skins and /v2/account/dyes endpoints.
+        - const: wallet
+          description: Grants access to the /v2/account/wallet endpoint.
+    PointOfInterestType:
+      type: string
+      oneOf:
+        - const: landmark
+          description: An actual in-game point of interest.
+        - const: waypoint
+        - const: vista
+        - const: unlock
+    Product:
+      type: string
+      oneOf:
+        - const: HeartOfThorns
+          description: The first expansion.
+        - const: PathOfFire
+          description: The second expansion.
+        - const: EndOfDragons
+          description: The third expansion.
+    ProfessionFlag:
+      type: string
+      oneOf:
+        - const: NoRacialSkills
+        - const: NoWeaponSwap
+    ProfessionName:
+      type: string
+      oneOf:
+        - const: Necromancer
+        - const: Mesmer
+        - const: Elementalist
+        - const: Warrior
+        - const: Guardian
+        - const: Revenant
+        - const: Engineer
+        - const: Ranger
+        - const: Thief
+    PvpDivisionFlag:
+      type: string
+      oneOf:
+        - const: CanLosePoints
+          description: Whether the player can lose points in this division.
+        - const: CanLoseTiers
+          description: Whether the player can lose tiers in this division.
+        - const: Repeatable
+          description: Whether the division is repeatable.
+    PvpHeroName:
+      type: string
+      oneOf:
+        - const: Nika
+        - const: Lightbringer Tybalt Leftpaw
+        - const: Turai Ossa
+        - const: Grymm Svarrd
+    PvpHeroType:
+      type: string
+      oneOf:
+        - const: Offensive Hero
+        - const: Defensive Hero
+        - const: Specialist Hero
+    PvpLadderType:
+      type: string
+      oneOf:
+        - const: ranked
+        - const: unranked
+    PvpLeaderboardType:
+      type: string
+      oneOf:
+        - const: legendary
+        - const: guild
+        - const: ladder
+    PvpLeaderboardRegion:
+      type: string
+      oneOf:
+        - const: na
+          title: NorthAmerica
+        - const: eu
+          title: Europe
+    PvpRatingType:
+      type: string
+      oneOf:
+        - const: Ranked
+        - const: Unranked
+        - const: 2v2Ranked
+          title: TwoVsTwoRanked
+        - const: None
+          description: For custom arenas.
+    PvpResult:
+      type: string
+      oneOf:
+        - const: Victory
+        - const: Defeat
+    PvpTeam:
+      type: string
+      oneOf:
+        - const: Red
+        - const: Blue
+    RaceGender:
+      type: string
+      oneOf:
+        - const: AsuraMale
+        - const: AsuraFemale
+        - const: CharrMale
+        - const: CharrFemale
+        - const: HumanMale
+        - const: HumanFemale
+        - const: NornMale
+        - const: NornFemale
+        - const: SylvariMale
+        - const: SylvariFemale
+    RaceName:
+      type: string
+      oneOf:
+        - const: Asura
+        - const: Charr
+        - const: Human
+        - const: Norn
+        - const: Sylvari
+    RaidEventType:
+      type: string
+      oneOf:
+        - const: Checkpoint
+        - const: Boss
+    RecipeFlag:
+      type: string
+      oneOf:
+        - const: AutoLearned
+          description: The recipe is automatically unlocked when reaching the required discipline rating.
+        - const: LearnedFromItem
+          description: The recipe must be unlocked by consuming a recipe sheet.
+    RegionType:
+      type: string
+      oneOf:
+        - const: Tyria
+        - const: Maguuma
+        - const: Desert
+        - const: Tundra
+    SabUnlockName:
+      type: string
+      oneOf:
+        - const: chain_stick
+        - const: slingshot
+        - const: whip
+        - const: mini_bomb
+        - const: candle
+        - const: torch
+        - const: wooden_whistle
+        - const: digger
+        - const: nice_scoop
+        - const: glove_of_wisdom
+        - const: bauble_purse
+        - const: bauble_tote_bag
+        - const: moto_breath
+        - const: moto_finger
+        - const: health_vessel_1
+        - const: health_vessel_2
+        - const: medium_health_potion
+    SalvageKitDetailType:
+      type: string
+      oneOf:
+        - const: Salvage
+    SkillCategory:
+      type: string
+      oneOf:
+        - const: Physical
+        - const: Glyph
+        - const: Signet
+        - const: Shout
+        - const: Well
+        - const: Consecration
+        - const: Meditation
+        - const: SpiritWeapon
+        - const: Symbol
+        - const: Virtue
+        - const: Ward
+        - const: Legend
+        - const: LegendaryAssassin
+        - const: LegendaryCentaur
+        - const: LegendaryDemon
+        - const: LegendaryDragon
+        - const: LegendaryDwarf
+        - const: Banner
+        - const: Burst
+        - const: PrimalBurst
+        - const: Rage
+        - const: Stance
+        - const: kit
+        - const: Elixir
+        - const: Gadget
+        - const: Gyro
+        - const: Turret
+        - const: CelestialAvatar
+        - const: Pet
+        - const: Spirit
+        - const: Survival
+        - const: Deception
+        - const: DualWield
+        - const: StealthAttack
+        - const: Trick
+        - const: Venom
+        - const: Arcane
+        - const: Cantrip
+        - const: Conjure
+        - const: Overload
+        - const: Clone
+        - const: Glamour
+        - const: Manipulation
+        - const: Mantra
+        - const: Phantasm
+        - const: Corruption
+        - const: Mark
+        - const: Minion
+        - const: Spectral
+        - const: Transform
+        - const: Kit
+        - const: Trap
+    SkillFlag:
+      type: string
+      oneOf:
+        - const: GroundTargeted
+        - const: NoUnderwater
+    SkillSlot:
+      type: string
+      oneOf:
+        - const: Profession_1
+        - const: Profession_2
+        - const: Profession_3
+        - const: Profession_4
+        - const: Profession_5
+        - const: Utility
+        - const: Heal
+        - const: Elite
+        - const: Weapon_1
+        - const: Weapon_2
+        - const: Weapon_3
+        - const: Weapon_4
+        - const: Weapon_5
+        - const: Pet
+        - const: Downed_1
+        - const: Downed_2
+        - const: Downed_3
+        - const: Downed_4
+        - const: Downed_5
+        - const: Toolbelt
+        - const: Transform_1
+        - const: Transform_2
+        - const: Transform_3
+        - const: Transform_4
+        - const: Transform_5
+    SkillType:
+      type: string
+      oneOf:
+        - const: Bundle
+          description: Engineer kits or weapons picked up in the world.
+        - const: Elite
+        - const: Heal
+        - const: Profession
+        - const: Utility
+        - const: Weapon
+          description: Weapon or downed.
+        - const: Toolbelt
+        - const: Monster
+        - const: Pet
+        - const: Transform
+    SkinFlag:
+      type: string
+      oneOf:
+        - const: ShowInWardrobe
+          description: Displayable in the account wardrobe.
+        - const: NoCost
+          description: A transmutation charge is not required to apply the skin.
+        - const: HideIfLocked
+          description: The skin is hidden until it is unlocked.
+        - const: OverrideRarity
+          description: The skin overrides rarity when it is applied.
+    SpecializationName:
+      type: string
+      oneOf:
+        # Guardian
+        - const: Zeal
+        - const: Radiance
+        - const: Valor
+        - const: Honor
+        - const: Virtues
+        - const: Dragonhunter
+        - const: Firebrand
+        - const: Willbender
+
+        # Revenant
+        - const: Corruption
+        - const: Retribution
+        - const: Salvation
+        - const: Invocation
+        - const: Devastation
+        - const: Herald
+        - const: Renegade
+        - const: Vindicator
+
+        # Warrior
+        - const: Strength
+        - const: Arms
+        - const: Defense
+        - const: Tactics
+        - const: Discipline
+        - const: Berserker
+        - const: Spellbreaker
+        - const: Bladesworn
+
+        # Engineer
+        - const: Explosive
+        - const: Firearms
+        - const: Inventions
+        - const: Alchemy
+        - const: Tools
+        - const: Scrapper
+        - const: Holosmith
+        - const: Mechanist
+
+        # Ranger
+        - const: Marksmanship
+        - const: Skirmishing
+        - const: Wilderness Survival
+        - const: Nature Magic
+        - const: Beastmastery
+        - const: Druid
+        - const: Soulbeast
+        - const: Untamed
+
+        # Thief
+        - const: Deadly Arts
+        - const: Critical Strikes
+        - const: Acrobatics
+        - const: Trickery
+        - const: Daredevil
+        - const: Deadeye
+        - const: Specter
+
+        # Elementalist
+        - const: Fire
+        - const: Air
+        - const: Earth
+        - const: Water
+        - const: Arcane
+        - const: Tempest
+        - const: Weaver
+        - const: Catalyst
+
+        # Mesmer
+        - const: Domination
+        - const: Dueling
+        - const: Chaos
+        - const: Inspiration
+        - const: Illusions
+        - const: Chronomancer
+        - const: Mirage
+        - const: Virtuoso
+
+        # Necromancer
+        - const: Spite
+        - const: Curses
+        - const: Death Magic
+        - const: Blood Magic
+        - const: Soul Reaping
+        - const: Reaper
+        - const: Scourge
+        - const: Harbinger
+    StashOperation:
+      type: string
+      oneOf:
+        - const: deposit
+        - const: withdraw
+        - const: move
+    TeamMemberRole:
+      type: string
+      oneOf:
+        - const: Captain
+        - const: Member
+    TrainingCategory:
+      type: string
+      oneOf:
+        - const: Skills
+        - const: Specializations
+        - const: EliteSpecializations
+    TrainingTrackType:
+      type: string
+      oneOf:
+        - const: Trait
+        - const: Skill
+    TraitSlot:
+      type: string
+      oneOf:
+        - const: Major
+        - const: Minor
+    TraitTier:
+      type: string
+      oneOf:
+        - const: "0"
+          title: Proficiency
+        - const: "1"
+          title: Adept
+        - const: "2"
+          title: Master
+        - const: "3"
+          title: Grandmaster
+    TrinketDetailType:
+      type: string
+      oneOf:
+        - const: Accessory
+        - const: Amulet
+        - const: Ring
+    UpgradeAction:
+      type: string
+      oneOf:
+        - const: queued
+        - const: cancelled
+        - const: completed
+        - const: sped_up
+    UpgradeComponentDetailType:
+      type: string
+      oneOf:
+        - const: Default
+          description: For infusions, jewels, and historical PvP runes/sigils.
+        - const: Gem
+          title: UniversalUpgrade
+          description: For gemstones, crests, and doubloons.
+        - const: Rune
+        - const: Sigil
+    UpgradeComponentFlag:
+      type: string
+      oneOf:
+        - const: Axe
+        - const: Dagger
+        - const: Focus
+        - const: Greatsword
+        - const: Hammer
+        - const: Harpoon
+          title: Spear
+        - const: LongBow
+        - const: Mace
+        - const: Pistol
+        - const: Rifle
+        - const: Scepter
+        - const: Shield
+        - const: ShortBow
+        - const: Speargun
+          title: HarpoonGun
+        - const: Staff
+        - const: Sword
+        - const: Torch
+        - const: Trident
+        - const: Warhorn
+        - const: HeavyArmor
+        - const: MediumArmor
+        - const: LightArmor
+        - const: Trinket
+    WeaponDamageType:
+      type: string
+      oneOf:
+        - const: Fire
+        - const: Ice
+        - const: Lightning
+        - const: Physical
+        - const: Choking
+    WeaponDetailType:
+      type: string
+      oneOf:
+        - const: Axe
+        - const: Dagger
+        - const: Focus
+        - const: Greatsword
+        - const: Hammer
+        - const: Harpoon
+          title: Spear
+        - const: LongBow
+        - const: Mace
+        - const: Pistol
+        - const: Rifle
+        - const: Scepter
+        - const: Shield
+        - const: ShortBow
+        - const: Speargun
+          title: HarpoonGun
+        - const: Staff
+        - const: Sword
+        - const: Torch
+        - const: Trident
+        - const: Warhorn
+        - const: LargeBundle
+        - const: SmallBundle
+        - const: Toy
+        - const: ToyTwoHanded
+    WeaponFlag:
+      type: string
+      oneOf:
+        - const: Mainhand
+        - const: Offhand
+        - const: TwoHand
+        - const: Aquatic
+    WeaponType:
+      type: string
+      oneOf:
+        - const: Nothing
+        - const: None
+        - const: Axe
+        - const: Dagger
+        - const: Focus
+        - const: Greatsword
+        - const: Hammer
+        - const: Harpoon
+          title: Spear
+        - const: LongBow
+        - const: Mace
+        - const: Pistol
+        - const: Rifle
+        - const: Scepter
+        - const: Shield
+        - const: ShortBow
+        - const: Speargun
+          title: HarpoonGun
+        - const: Staff
+        - const: Sword
+        - const: Torch
+        - const: Trident
+        - const: Warhorn
+    WorldLanguage:
+      type: string
+      oneOf:
+        - const: "0"
+          title: English
+        - const: "1"
+          title: French
+        - const: "2"
+          title: German
+        - const: "3"
+          title: Spanish
+    WorldName:
+      type: string
+      oneOf:
+        - const: Anvil Rock
+        - const: Borlis Pass
+        - const: Yaks Bend
+        - const: Henge of Denravi
+        - const: Maguuma
+        - const: Sorrows Furnance
+        - const: Gate of Madness
+        - const: Jade Quarry
+        - const: Fort Aspenwood
+        - const: Ehmry Bay
+        - const: Stormbluff Isle
+        - const: Darhaven
+        - const: Sanctum of Rall
+        - const: Crystal Desert
+        - const: Isle of Janthir
+        - const: Sea of Sorrows
+        - const: Tarnished Coast
+        - const: Northern Shiverpeaks
+        - const: Blackgate
+        - const: Fergusons Crossing
+        - const: Dragonbrand
+        - const: Kaineng
+        - const: Devonas Rest
+        - const: Eredon Terrace
+        - const: Fissure of Woe
+        - const: Desolation
+        - const: Gandara
+        - const: Blacktide
+        - const: Ring of Fire
+        - const: Underworld
+        - const: Far Shiverpeaks
+        - const: Whiteside Ridge
+        - const: Ruins of Surmia
+        - const: Seafarers Rest
+        - const: Vabbi
+        - const: Piken Square
+        - const: Aurora Glade
+        - const: Gunnars Hold
+        - const: Jade Sea [FR]
+          title: JadeSea
+        - const: Fort Ranik [FR]
+          title: FortRanik
+        - const: Augury Rock [FR]
+          title: AuguryRock
+        - const: Vizunah Square [FR]
+          title: VizunahSquare
+        - const: Arborstone [FR]
+          title: Arborstone
+        - const: Kodash [DE]
+          title: Kodash
+        - const: Riverside [DE]
+          title: Riverside
+        - const: Elona Reach [DE]
+          title: ElonaReach
+        - const: Abaddons Mouth [DE]
+          title: AbaddonsMouth
+        - const: Drakkar Lake [DE]
+          title: DrakkarLake
+        - const: Millers Sound [DE]
+          title: MillersSound
+        - const: Dzagonur [DE]
+          title: Dzagonur
+        - const: Baruch Bay [SP]
+          title:
+    WorldPopulationLevel:
+      type: string
+      oneOf:
+        - const: Low
+        - const: Medium
+        - const: High
+        - const: VeryHigh
+        - const: Full
+    WorldRegion:
+      type: string
+      oneOf:
+        - const: "1"
+          title: NorthAmerica
+        - const: "2"
+          title: Europe
+    WvwMapBonusType:
+      type: string
+      oneOf:
+        - const: Bloodlust
+    WvwMapType:
+      type: string
+      oneOf:
+        - const: Center
+          title: EternalBattlegrounds
+        - const: RedHome
+          title: RedBorderlands
+        - const: BlueHome
+          title: BlueBorderlands
+        - const: GreenHome
+          title: GreenBorderlands
+        - const: EdgeOfTheMists
+    WvwObjectiveOwner:
+      type: string
+      oneOf:
+        - const: Red
+        - const: Blue
+        - const: Green
+        - const: Neutral
+    WvwObjectiveType:
+      type: string
+      oneOf:
+        - const: Camp
+        - const: Castle
+        - const: Keep
+        - const: Mercenary
+        - const: Tower
+        - const: Ruins
+        - const: Resource
+        - const: Generic
+        - const: Spawn

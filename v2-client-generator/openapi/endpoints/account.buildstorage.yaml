@@ -1,0 +1,112 @@
+paths:
+  /account/buildstorage:
+    get:
+      tags: [ getIds ]
+      security:
+        - Bearer: [ account ]
+      operationId: getAccountBuildTemplateIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/buildstorage
+      responses:
+        "200":
+          description: This resource returns the templates stored in a player's build storage.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BuildStorageId"
+              example: '[1,2,3,4,5,6]'
+  /account/buildstorage?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      security:
+        - Bearer: [ account ]
+      operationId: getAccountBuildTemplatesByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/buildstorage
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/BuildStorageId"
+      responses:
+        "200":
+          description: This resource returns the templates stored in a player's build storage.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BuildTemplate"
+              example: '[{"name":"PvP Reaper","profession":"Necromancer","specializations":[{"id":19,"traits":[780,1844,1692]},{"id":50,"traits":[888,861,893]},{"id":34,"traits":[1974,1969,2021]}],"skills":{"heal":30488,"utilities":[29666,10543,10685],"elite":30105},"aquatic_skills":{"heal":10548,"utilities":[10583,10620,10612],"elite":30105}},{"name":"WvW Reaper","profession":"Necromancer","specializations":[{"id":53,"traits":[914,829,853]},{"id":50,"traits":[888,861,893]},{"id":34,"traits":[1974,1969,2021]}],"skills":{"heal":30488,"utilities":[10546,10607,10685],"elite":30105},"aquatic_skills":{"heal":10548,"utilities":[10583,10620,10612],"elite":30105}}]'
+  /account/buildstorage?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      security:
+        - Bearer: [ account ]
+      operationId: getAccountBuildTemplatesByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/buildstorage
+      responses:
+        "200":
+          description: This resource returns the templates stored in a player's build storage.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BuildTemplate"
+              example: '[{"name":"PvP Reaper","profession":"Necromancer","specializations":[{"id":19,"traits":[780,1844,1692]},{"id":50,"traits":[888,861,893]},{"id":34,"traits":[1974,1969,2021]}],"skills":{"heal":30488,"utilities":[29666,10543,10685],"elite":30105},"aquatic_skills":{"heal":10548,"utilities":[10583,10620,10612],"elite":30105}},{"name":"WvW Reaper","profession":"Necromancer","specializations":[{"id":53,"traits":[914,829,853]},{"id":50,"traits":[888,861,893]},{"id":34,"traits":[1974,1969,2021]}],"skills":{"heal":30488,"utilities":[10546,10607,10685],"elite":30105},"aquatic_skills":{"heal":10548,"utilities":[10583,10620,10612],"elite":30105}}]'
+  /account/buildstorage?page={page}:
+    get:
+      tags: [ getByPage ]
+      security:
+        - Bearer: [ account ]
+      operationId: getAccountBuildTemplatesByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/buildstorage
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns the templates stored in a player's build storage.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BuildTemplate"
+              example: '[{"name":"PvP Reaper","profession":"Necromancer","specializations":[{"id":19,"traits":[780,1844,1692]},{"id":50,"traits":[888,861,893]},{"id":34,"traits":[1974,1969,2021]}],"skills":{"heal":30488,"utilities":[29666,10543,10685],"elite":30105},"aquatic_skills":{"heal":10548,"utilities":[10583,10620,10612],"elite":30105}},{"name":"WvW Reaper","profession":"Necromancer","specializations":[{"id":53,"traits":[914,829,853]},{"id":50,"traits":[888,861,893]},{"id":34,"traits":[1974,1969,2021]}],"skills":{"heal":30488,"utilities":[10546,10607,10685],"elite":30105},"aquatic_skills":{"heal":10548,"utilities":[10583,10620,10612],"elite":30105}}]'
+  /account/buildstorage/{id}:
+    get:
+      tags: [ getById ]
+      security:
+        - Bearer: [ account ]
+      operationId: getAccountBuildTemplateById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/buildstorage
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/BuildStorageId"
+      responses:
+        "200":
+          description: This resource returns the templates stored in a player's build storage.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BuildTemplate"
+              example: '{"name":"PvP Reaper","profession":"Necromancer","specializations":[{"id":19,"traits":[780,1844,1692]},{"id":50,"traits":[888,861,893]},{"id":34,"traits":[1974,1969,2021]}],"skills":{"heal":30488,"utilities":[29666,10543,10685],"elite":30105},"aquatic_skills":{"heal":10548,"utilities":[10583,10620,10612],"elite":30105}}'
+components:
+  schemas:
+    BuildStorageId:
+      type: integer
+      x-ktx-id: true
+      description: The index of the build template in account storage.

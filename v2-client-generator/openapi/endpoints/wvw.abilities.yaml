@@ -1,0 +1,131 @@
+paths:
+  /wvw/abilities:
+    get:
+      tags: [ getIds ]
+      operationId: getWvwAbilityIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/wvw/abilities
+      responses:
+        "200":
+          description: This resource returns information about the available abilities in the World versus World game mode.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WvwAbilityId"
+              example: '[2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20,23,24,25,26]'
+  /wvw/abilities?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getWvwAbilitiesByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/wvw/abilities
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/WvwAbilityId"
+      responses:
+        "200":
+          description: This resource returns information about the available abilities in the World versus World game mode.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WvwAbility"
+              example: '[{"id":2,"name":"Guard Killer","description":"Increases damage to enemy guards","icon":"https://render.guildwars2.com/file/C5E6E906927E2C6311036C11F1306CCF57CBF259/544537.png","ranks":[{"cost":1,"effect":"4% damage to guards"},{"cost":3,"effect":"8% (total) damage to guards"},{"cost":6,"effect":"12% (total) damage to guards"},{"cost":10,"effect":"16% (total) damage to guards. All Guard Killer bonuses now also affect enemy lords and supervisors."},{"cost":15,"effect":"20% (total) damage to guards, lords, and supervisors. Gain 50% of your endurance back after killing guards, lords, and supervisors."}]},{"id":3,"name":"Defense Against Guards","description":"Reduces the damage you take from enemy guards","icon":"https://render.guildwars2.com/file/0C450AE1344F410E08D0E4A851F0EFD77210D615/544541.png","ranks":[{"cost":1,"effect":"4% reduced damage from guards"},{"cost":3,"effect":"8% reduced damage (total) from guards"},{"cost":6,"effect":"12% reduced damage (total) from guards"},{"cost":10,"effect":"16% reduced damage (total) from guards. All Defense Against Guards bonuses apply to lords and supervisors."},{"cost":15,"effect":"20% reduced damage (total) from guards, lords, and supervisors. Gain resolution for 10 seconds when you take damage from guards, lords, or supervisors. This effect triggers once every 20 seconds."}]}]'
+  /wvw/abilities?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getWvwAbilitiesByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/wvw/abilities
+      responses:
+        "200":
+          description: This resource returns information about the available abilities in the World versus World game mode.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WvwAbility"
+              example: '[{"id":2,"name":"Guard Killer","description":"Increases damage to enemy guards","icon":"https://render.guildwars2.com/file/C5E6E906927E2C6311036C11F1306CCF57CBF259/544537.png","ranks":[{"cost":1,"effect":"4% damage to guards"},{"cost":3,"effect":"8% (total) damage to guards"},{"cost":6,"effect":"12% (total) damage to guards"},{"cost":10,"effect":"16% (total) damage to guards. All Guard Killer bonuses now also affect enemy lords and supervisors."},{"cost":15,"effect":"20% (total) damage to guards, lords, and supervisors. Gain 50% of your endurance back after killing guards, lords, and supervisors."}]},{"id":3,"name":"Defense Against Guards","description":"Reduces the damage you take from enemy guards","icon":"https://render.guildwars2.com/file/0C450AE1344F410E08D0E4A851F0EFD77210D615/544541.png","ranks":[{"cost":1,"effect":"4% reduced damage from guards"},{"cost":3,"effect":"8% reduced damage (total) from guards"},{"cost":6,"effect":"12% reduced damage (total) from guards"},{"cost":10,"effect":"16% reduced damage (total) from guards. All Defense Against Guards bonuses apply to lords and supervisors."},{"cost":15,"effect":"20% reduced damage (total) from guards, lords, and supervisors. Gain resolution for 10 seconds when you take damage from guards, lords, or supervisors. This effect triggers once every 20 seconds."}]}]'
+  /wvw/abilities?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getWvwAbilitiesByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/wvw/abilities
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information about the available abilities in the World versus World game mode.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WvwAbility"
+              example: '[{"id":2,"name":"Guard Killer","description":"Increases damage to enemy guards","icon":"https://render.guildwars2.com/file/C5E6E906927E2C6311036C11F1306CCF57CBF259/544537.png","ranks":[{"cost":1,"effect":"4% damage to guards"},{"cost":3,"effect":"8% (total) damage to guards"},{"cost":6,"effect":"12% (total) damage to guards"},{"cost":10,"effect":"16% (total) damage to guards. All Guard Killer bonuses now also affect enemy lords and supervisors."},{"cost":15,"effect":"20% (total) damage to guards, lords, and supervisors. Gain 50% of your endurance back after killing guards, lords, and supervisors."}]},{"id":3,"name":"Defense Against Guards","description":"Reduces the damage you take from enemy guards","icon":"https://render.guildwars2.com/file/0C450AE1344F410E08D0E4A851F0EFD77210D615/544541.png","ranks":[{"cost":1,"effect":"4% reduced damage from guards"},{"cost":3,"effect":"8% reduced damage (total) from guards"},{"cost":6,"effect":"12% reduced damage (total) from guards"},{"cost":10,"effect":"16% reduced damage (total) from guards. All Defense Against Guards bonuses apply to lords and supervisors."},{"cost":15,"effect":"20% reduced damage (total) from guards, lords, and supervisors. Gain resolution for 10 seconds when you take damage from guards, lords, or supervisors. This effect triggers once every 20 seconds."}]}]'
+  /wvw/abilities/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getWvwAbilitiesById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/wvw/abilities
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/WvwAbilityId"
+      responses:
+        "200":
+          description: This resource returns information about the available abilities in the World versus World game mode.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WvwAbility"
+              example: '{"id":3,"name":"Defense Against Guards","description":"Reduces the damage you take from enemy guards","icon":"https://render.guildwars2.com/file/0C450AE1344F410E08D0E4A851F0EFD77210D615/544541.png","ranks":[{"cost":1,"effect":"4% reduced damage from guards"},{"cost":3,"effect":"8% reduced damage (total) from guards"},{"cost":6,"effect":"12% reduced damage (total) from guards"},{"cost":10,"effect":"16% reduced damage (total) from guards. All Defense Against Guards bonuses apply to lords and supervisors."},{"cost":15,"effect":"20% reduced damage (total) from guards, lords, and supervisors. Gain resolution for 10 seconds when you take damage from guards, lords, or supervisors. This effect triggers once every 20 seconds."}]}'
+
+components:
+  schemas:
+    WvwAbilityId:
+      type: integer
+      x-ktx-id: true
+
+    WvwAbility:
+      type: object
+      required: [ id,name,description,icon,ranks ]
+      properties:
+        id:
+          $ref: "#/components/schemas/WvwAbilityId"
+        name:
+          type: string
+          x-gw2-intl: true
+        description:
+          type: string
+          x-gw2-intl: true
+        icon:
+          $ref: "#/components/schemas/ImageLink"
+        ranks:
+          type: array
+          items:
+            $ref: "#/components/schemas/WvwAbilityRank"
+
+    WvwAbilityRank:
+      type: object
+      required: [ cost,effect ]
+      properties:
+        cost:
+          type: integer
+        effect:
+          type: string
+          x-gw2-intl: true

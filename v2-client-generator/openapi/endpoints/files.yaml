@@ -1,0 +1,107 @@
+paths:
+  /files:
+    get:
+      tags: [ getIds ]
+      operationId: getAssetIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/files
+      responses:
+        "200":
+          description: This resource returns commonly requested in-game assets that may be used to enhance API-derived applications.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AssetName"
+              example: '["map_complete","map_dungeon","map_heart_empty","map_heart_full","map_node_harvesting","map_node_logging","map_node_mining","map_poi","map_special_event","map_story","map_waypoint","map_waypoint_contested","map_waypoint_hover","map_vista","map_heropoint","wvw_battles_hollow_blue","wvw_battles_hollow_green","wvw_battles_hollow_red","wvw_battles_hollow_white","wvw_bauers_estate_blue","wvw_bauers_estate_green","wvw_bauers_estate_red","wvw_bauers_estate_white","wvw_carvers_ascent_blue","wvw_carvers_ascent_green","wvw_carvers_ascent_red","wvw_carvers_ascent_white","wvw_orchard_overlook_blue","wvw_orchard_overlook_green","wvw_orchard_overlook_red","wvw_orchard_overlook_white","wvw_temple_of_lost_prayers_blue","wvw_temple_of_lost_prayers_green","wvw_temple_of_lost_prayers_red","wvw_temple_of_lost_prayers_white","wvw_camp","wvw_tower","wvw_keep","wvw_castle","ui_upgrade_slot_open","ui_infusion_slot_agony","ui_infusion_slot_defensive","ui_infusion_slot_offensive","ui_infusion_slot_utility","ui_coin_gold","ui_coin_silver","ui_coin_copper","ui_gem","ui_supply","ui_minor_trait_mask","ui_major_trait_mask","icon_guardian","icon_warrior","icon_revenant","icon_necromancer","icon_mesmer","icon_elementalist","icon_thief","icon_ranger","icon_engineer","icon_guardian_big","icon_warrior_big","icon_revenant_big","icon_necromancer_big","icon_mesmer_big","icon_elementalist_big","icon_thief_big","icon_ranger_big","icon_engineer_big","map_crafting_scribe","map_bank","map_guild_bank","map_trading_post","map_crafting_armorsmith","map_crafting_artificer","map_crafting_cook","map_crafting_huntsman","map_crafting_jeweler","map_crafting_leatherworker","map_crafting_tailor","map_crafting_weaponsmith","map_guild_registrar","map_profession_trainer","map_repair","map_vendor","map_vendor_armor","map_vendor_weapons","map_vendor_mystic_forge","map_vendor_laurel","map_fractal","map_raid_entrance","map_adventure","map_adventure_complete","map_adventure_locked","map_outpost","map_outpost_locked","map_outpost_contested","map_outpost_active","map_vendor_festival","map_guild_armorer","map_guild_weaponsmith","map_vendor_ecto","map_vendor_guild","map_vendor_cultural_armor","map_vendor_cultural_weapons","map_vendor_crystalline_ore","map_vendor_airship_parts","map_vendor_aurillium","map_vendor_leyline_crystals","map_vendor_dungeon","map_elevator_down","map_elevator_up","map_ramp_down","map_ramp_up","map_stairs_down","map_stairs_up"]'
+  /files?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getAssetsByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/files
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/AssetName"
+      responses:
+        "200":
+          description: This resource returns commonly requested in-game assets that may be used to enhance API-derived applications.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Asset"
+              example: '[{"id":"map_complete","icon":"https://render.guildwars2.com/file/5A4E663071250EC72668C09E3C082E595A380BF7/528724.png"},{"id":"map_dungeon","icon":"https://render.guildwars2.com/file/943538394A94A491C8632FBEF6203C2013443555/102478.png"}]'
+  /files?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getAssetsByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/files
+      responses:
+        "200":
+          description: This resource returns commonly requested in-game assets that may be used to enhance API-derived applications.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Asset"
+              example: '[{"id":"map_complete","icon":"https://render.guildwars2.com/file/5A4E663071250EC72668C09E3C082E595A380BF7/528724.png"},{"id":"map_dungeon","icon":"https://render.guildwars2.com/file/943538394A94A491C8632FBEF6203C2013443555/102478.png"}]'
+  /files?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getAssetsByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/files
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns commonly requested in-game assets that may be used to enhance API-derived applications.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Asset"
+              example: '[{"id":"map_complete","icon":"https://render.guildwars2.com/file/5A4E663071250EC72668C09E3C082E595A380BF7/528724.png"},{"id":"map_dungeon","icon":"https://render.guildwars2.com/file/943538394A94A491C8632FBEF6203C2013443555/102478.png"}]'
+  /files/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getAssetById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/files
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/AssetName"
+      responses:
+        "200":
+          description: This resource returns commonly requested in-game assets that may be used to enhance API-derived applications.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Asset"
+              example: '{"id":"map_complete","icon":"https://render.guildwars2.com/file/5A4E663071250EC72668C09E3C082E595A380BF7/528724.png"}'
+
+components:
+  schemas:
+    Asset:
+      type: object
+      required: [ id,icon ]
+      properties:
+        id:
+          $ref: "#/components/schemas/AssetName"
+        icon:
+          $ref: "#/components/schemas/ImageLink"

@@ -1,0 +1,132 @@
+paths:
+  /mounts/types:
+    get:
+      tags: [ getIds ]
+      operationId: getMountTypeIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/mounts/types
+      responses:
+        "200":
+          description: This resource returns information about mount types that are available in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MountTypeId"
+              example: '["griffon","jackal","raptor","roller_beetle","skimmer","skyscale","springer","turtle","warclaw"]'
+  /mounts/types?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getMountTypesByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/mounts/types
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/MountTypeId"
+      responses:
+        "200":
+          description: This resource returns information about mount types that are available in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MountType"
+              example: '[{"id":"griffon","name":"Griffon","default_skin":4,"skins":[4,16,23,25,27,34,40,50,53,62,75,77,80,91,95,100,109,110,115,129,132,141,146,150,155,177,180,181,210,223,244,246,250,267,271,313,330,346,347,361,370],"skills":[{"id":40576,"slot":"Weapon_1"}]},{"id":"jackal","name":"Jackal","default_skin":6,"skins":[6,14,22,28,30,33,39,46,49,56,68,87,89,90,93,97,102,107,117,131,143,149,153,176,183,203,213,220,224,247,270,272,287,302,309,332,343,355,359,372,406],"skills":[{"id":46089,"slot":"Weapon_1"}]}]'
+  /mounts/types?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getMountTypesByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/mounts/types
+      responses:
+        "200":
+          description: This resource returns information about mount types that are available in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MountType"
+              example: '[{"id":"griffon","name":"Griffon","default_skin":4,"skins":[4,16,23,25,27,34,40,50,53,62,75,77,80,91,95,100,109,110,115,129,132,141,146,150,155,177,180,181,210,223,244,246,250,267,271,313,330,346,347,361,370],"skills":[{"id":40576,"slot":"Weapon_1"}]},{"id":"jackal","name":"Jackal","default_skin":6,"skins":[6,14,22,28,30,33,39,46,49,56,68,87,89,90,93,97,102,107,117,131,143,149,153,176,183,203,213,220,224,247,270,272,287,302,309,332,343,355,359,372,406],"skills":[{"id":46089,"slot":"Weapon_1"}]}]'
+  /mounts/types?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getMountTypesByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/mounts/types
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information about mount types that are available in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MountType"
+              example: '[{"id":"griffon","name":"Griffon","default_skin":4,"skins":[4,16,23,25,27,34,40,50,53,62,75,77,80,91,95,100,109,110,115,129,132,141,146,150,155,177,180,181,210,223,244,246,250,267,271,313,330,346,347,361,370],"skills":[{"id":40576,"slot":"Weapon_1"}]},{"id":"jackal","name":"Jackal","default_skin":6,"skins":[6,14,22,28,30,33,39,46,49,56,68,87,89,90,93,97,102,107,117,131,143,149,153,176,183,203,213,220,224,247,270,272,287,302,309,332,343,355,359,372,406],"skills":[{"id":46089,"slot":"Weapon_1"}]}]'
+  /mounts/types/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getMountTypeById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/mounts/types
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/MountTypeId"
+      responses:
+        "200":
+          description: This resource returns information about mount types that are available in-game.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MountType"
+              example: '{"id":"griffon","name":"Griffon","default_skin":4,"skins":[4,16,23,25,27,34,40,50,53,62,75,77,80,91,95,100,109,110,115,129,132,141,146,150,155,177,180,181,210,223,244,246,250,267,271,313,330,346,347,361,370],"skills":[{"id":40576,"slot":"Weapon_1"}]}'
+
+components:
+  schemas:
+    MountTypeId:
+      type: string
+      x-ktx-id: true
+
+    MountType:
+      type: object
+      required: [ id,name,default_skin,skins,skills ]
+      properties:
+        id:
+          $ref: "#/components/schemas/MountTypeId"
+        name:
+          allOf:
+            - $ref: "#/components/schemas/MountName"
+            - x-gw2-intl: true
+        default_skin:
+          $ref: "#/components/schemas/MountSkinId"
+        skins:
+          type: array
+          items:
+            $ref: "#/components/schemas/MountSkinId"
+        skills:
+          type: array
+          items:
+            $ref: "#/components/schemas/MountSkill"
+
+    MountSkill:
+      type: object
+      required: [ id,slot ]
+      properties:
+        id:
+          $ref: "#/components/schemas/SkillId"
+        slot:
+          $ref: "#/components/schemas/SkillSlot"

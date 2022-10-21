@@ -1,0 +1,130 @@
+paths:
+  /mounts/skins:
+    get:
+      tags: [ getIds ]
+      operationId: getMountSkinIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/mounts/skins
+      responses:
+        "200":
+          description: This resource returns information about mount skins that are available in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MountSkinId"
+              example: '[1,2,3,4,6,12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,52,53,56,57,58,60,61,62,66,68,70,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,126,129,130,131,132,133,134,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,152,153,154,155,157,158,161,162,163,164,165,166,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,186,191,193,194,195,196,198,200,202,203,204,205,206,207,208,209,210,211,213,215,216,217,218,220,222,223,224,225,226,231,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,250,251,252,264,265,266,267,268,269,270,271,272,273,275,276,277,278,279,280,287,292,293,294,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,316,329,330,331,332,336,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,380,391,396,397,403,406]'
+  /mounts/skins?ids={ids}:
+    get:
+      tags: [ getByIds ]
+      operationId: getMountSkinsByIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/mounts/skins
+      parameters:
+        - name: ids
+          in: path
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/MountSkinId"
+      responses:
+        "200":
+          description: This resource returns information about mount skins that are available in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MountSkin"
+              example: '[{"id":1,"name":"Raptor","icon":"https://render.guildwars2.com/file/2F4AAA52F573C5425BFCD7525FB70C9E6DCAD791/1766903.png","dye_slots":[{"color_id":19,"material":"leather"}],"mount":"raptor"},{"id":2,"name":"Skimmer","icon":"https://render.guildwars2.com/file/BD357CB6A25EEFA961B974B6E980DFB0A396A5A4/1766901.png","dye_slots":[{"color_id":590,"material":"leather"}],"mount":"skimmer"}]'
+  /mounts/skins?ids=all:
+    get:
+      tags: [ getByAllIds ]
+      operationId: getMountSkinsByAllIds
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/mounts/skins
+      responses:
+        "200":
+          description: This resource returns information about mount skins that are available in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MountSkin"
+              example: '[{"id":1,"name":"Raptor","icon":"https://render.guildwars2.com/file/2F4AAA52F573C5425BFCD7525FB70C9E6DCAD791/1766903.png","dye_slots":[{"color_id":19,"material":"leather"}],"mount":"raptor"},{"id":2,"name":"Skimmer","icon":"https://render.guildwars2.com/file/BD357CB6A25EEFA961B974B6E980DFB0A396A5A4/1766901.png","dye_slots":[{"color_id":590,"material":"leather"}],"mount":"skimmer"}]'
+  /mounts/skins?page={page}:
+    get:
+      tags: [ getByPage ]
+      operationId: getMountSkinsByPage
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/mounts/skins
+      parameters:
+        - $ref: "#/components/parameters/Page"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          description: This resource returns information about mount skins that are available in-game.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MountSkin"
+              example: '[{"id":1,"name":"Raptor","icon":"https://render.guildwars2.com/file/2F4AAA52F573C5425BFCD7525FB70C9E6DCAD791/1766903.png","dye_slots":[{"color_id":19,"material":"leather"}],"mount":"raptor"},{"id":2,"name":"Skimmer","icon":"https://render.guildwars2.com/file/BD357CB6A25EEFA961B974B6E980DFB0A396A5A4/1766901.png","dye_slots":[{"color_id":590,"material":"leather"}],"mount":"skimmer"}]'
+  /mounts/skins/{id}:
+    get:
+      tags: [ getById ]
+      operationId: getMountSkinById
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/mounts/skins
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/MountSkinId"
+      responses:
+        "200":
+          description: This resource returns information about mount skins that are available in-game.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MountSkin"
+              example: '{"id":1,"name":"Raptor","icon":"https://render.guildwars2.com/file/2F4AAA52F573C5425BFCD7525FB70C9E6DCAD791/1766903.png","dye_slots":[{"color_id":19,"material":"leather"}],"mount":"raptor"}'
+
+components:
+  schemas:
+    MountSkinId:
+      type: integer
+      x-ktx-id: true
+
+    MountSkin:
+      type: object
+      required: [ id,name,icon,mount,dye_slots ]
+      properties:
+        id:
+          $ref: "#/components/schemas/MountSkinId"
+        name:
+          allOf:
+            - $ref: "#/components/schemas/MountName"
+            - x-gw2-intl: true
+        icon:
+          $ref: "#/components/schemas/ImageLink"
+        mount:
+          $ref: "#/components/schemas/MountTypeId"
+        dye_slots:
+          type: array
+          items:
+            $ref: "#/components/schemas/MountDyeSlot"
+
+    MountDyeSlot:
+      type: object
+      required: [ color_id,material ]
+      properties:
+        color_id:
+          $ref: "#/components/schemas/DyeColorId"
+        material:
+          type: string
