@@ -1,0 +1,19 @@
+paths:
+  /account/home/cats:
+    get:
+      tags: [ getModel ]
+      security:
+        - Bearer: [ account,progression,unlocks ]
+      operationId: getAccountCats
+      externalDocs:
+        url: https://wiki.guildwars2.com/wiki/API:2/account/home/cats
+      responses:
+        "200":
+          description: This resource returns information about unlocked home instance cats.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CatId"
+              example: '[2,24,1,20]'
