@@ -99,7 +99,7 @@ components:
   schemas:
     WorldBossId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     WorldBoss:
       type: object

@@ -99,11 +99,11 @@ components:
   schemas:
     LegendId:
       type: string
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     LegendCode:
       type: string
-      x-ktx-id: true
+      x-ktx-identifier: true
       description: The id used in build template chat links.
       externalDocs:
         url: https://wiki.guildwars2.com/wiki/Chat_link_format#Build_template_link

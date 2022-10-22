@@ -103,7 +103,7 @@ components:
   schemas:
     ContinentId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Continent:
       type: object

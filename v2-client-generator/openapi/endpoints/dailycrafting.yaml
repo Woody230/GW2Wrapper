@@ -99,7 +99,7 @@ components:
   schemas:
     DailyCraftingId:
       type: string
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     DailyCrafting:
       type: object

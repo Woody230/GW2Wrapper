@@ -109,7 +109,7 @@ components:
   schemas:
     FloorId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Floor:
       type: object

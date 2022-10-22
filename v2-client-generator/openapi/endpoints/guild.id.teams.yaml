@@ -25,7 +25,7 @@ components:
     GuildTeamId:
       type: integer
       description: The id of the team unique to this guild only.
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     GuildTeam:
       type: object

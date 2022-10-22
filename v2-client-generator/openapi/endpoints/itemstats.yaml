@@ -99,7 +99,7 @@ components:
   schemas:
     ItemStatId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     ItemStat:
       type: object

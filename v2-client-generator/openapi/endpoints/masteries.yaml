@@ -99,7 +99,7 @@ components:
   schemas:
     MasteryId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Mastery:
       type: object

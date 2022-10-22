@@ -99,7 +99,7 @@ components:
   schemas:
     WvwAbilityId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     WvwAbility:
       type: object

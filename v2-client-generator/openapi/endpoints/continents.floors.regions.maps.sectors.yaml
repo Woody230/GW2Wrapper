@@ -121,7 +121,7 @@ components:
   schemas:
     SectorId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Sector:
       type: object

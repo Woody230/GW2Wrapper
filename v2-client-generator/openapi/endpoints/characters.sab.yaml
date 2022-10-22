@@ -41,7 +41,7 @@ components:
 
     SabZoneId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     SabZone:
       type: object
@@ -59,7 +59,7 @@ components:
 
     SabUnlockId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     SabUnlock:
       type: object
@@ -72,7 +72,7 @@ components:
 
     SabSongId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     SabSong:
       type: object

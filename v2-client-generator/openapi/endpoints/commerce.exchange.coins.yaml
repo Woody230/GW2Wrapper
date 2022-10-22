@@ -24,7 +24,7 @@ components:
   schemas:
     Coins:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     CoinExchange:
       type: object

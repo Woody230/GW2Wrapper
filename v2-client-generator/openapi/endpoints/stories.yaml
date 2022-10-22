@@ -99,7 +99,7 @@ components:
   schemas:
     StoryId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Storage:
       type: object

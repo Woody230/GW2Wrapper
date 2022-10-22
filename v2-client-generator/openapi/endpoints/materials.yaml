@@ -99,7 +99,7 @@ components:
   schemas:
     MaterialId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Material:
       type: object

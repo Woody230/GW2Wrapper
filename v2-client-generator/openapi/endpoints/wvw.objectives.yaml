@@ -100,7 +100,7 @@ components:
     WvwObjectiveId:
       type: string
       description: The map identifier and objective identifier split by a dash (-).
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     WvwObjective:
       type: object

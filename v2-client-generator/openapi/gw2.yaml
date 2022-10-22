@@ -58,12 +58,12 @@ components:
   schemas:
     ImageLink:
       type: string
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     ChatLink:
       type: string
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Url:
       type: string
-      x-ktx-id: true
+      x-ktx-identifier: true

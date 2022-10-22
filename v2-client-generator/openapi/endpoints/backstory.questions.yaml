@@ -98,7 +98,7 @@ components:
   schemas:
     BackstoryQuestionId:
       type: int
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     BackstoryQuestion:
       type: object

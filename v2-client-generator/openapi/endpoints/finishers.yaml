@@ -99,7 +99,7 @@ components:
   schemas:
     FinisherId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Finisher:
       type: object

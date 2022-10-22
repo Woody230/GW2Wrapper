@@ -31,7 +31,7 @@ components:
     GuildLogId:
       type: integer
       description: The id of the log. It is only unique within the scope of the associated guild.
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     GuildLogType:
       type: string

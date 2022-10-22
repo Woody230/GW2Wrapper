@@ -2,7 +2,7 @@ components:
   schemas:
     EmblemId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Emblem:
       type: object

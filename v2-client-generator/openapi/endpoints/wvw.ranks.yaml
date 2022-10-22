@@ -99,11 +99,11 @@ components:
   schemas:
     WvwLevel:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     WvwRankId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     WvwRank:
       type: object

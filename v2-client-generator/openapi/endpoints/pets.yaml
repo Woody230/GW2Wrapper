@@ -100,7 +100,7 @@ components:
     PetId:
       type: integer
       format: byte
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Pet:
       type: object

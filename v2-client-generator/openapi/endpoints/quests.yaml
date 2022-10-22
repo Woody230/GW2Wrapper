@@ -99,7 +99,7 @@ components:
   schemas:
     QuestId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Quest:
       type: object

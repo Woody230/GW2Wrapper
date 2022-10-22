@@ -99,7 +99,7 @@ components:
   schemas:
     EmoteId:
       type: string
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Emote:
       type: object

@@ -28,11 +28,11 @@ components:
     GuildId:
       type: string
       format: uuid
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     GuildLevel:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Guild:
       type: object

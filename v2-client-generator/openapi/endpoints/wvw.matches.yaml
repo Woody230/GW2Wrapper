@@ -124,7 +124,7 @@ components:
   schemas:
     WvwMatchId:
       type: string
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     WvwMatch:
       type: object
@@ -239,7 +239,7 @@ components:
 
     WvwSkirmishId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     WvwSkirmish:
       type: object

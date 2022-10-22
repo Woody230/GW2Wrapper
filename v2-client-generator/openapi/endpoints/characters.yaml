@@ -111,7 +111,7 @@ components:
   schemas:
     CharacterName:
       type: string
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Character:
       allOf:

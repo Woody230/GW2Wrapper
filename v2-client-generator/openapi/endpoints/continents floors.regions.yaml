@@ -115,7 +115,7 @@ components:
   schemas:
     RegionId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Region:
       type: object

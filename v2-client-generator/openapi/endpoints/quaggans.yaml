@@ -99,7 +99,7 @@ components:
   schemas:
     QuagganId:
       type: string
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Quaggan:
       type: object

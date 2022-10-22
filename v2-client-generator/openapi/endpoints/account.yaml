@@ -87,7 +87,7 @@ components:
       type: string
       format: uuid
       description: The id in the form of a UUID.
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     AccountName:
       type: string

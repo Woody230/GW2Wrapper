@@ -3,7 +3,7 @@ components:
     TransactionId:
       type: integer
       format: int64
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Transaction:
       type: object

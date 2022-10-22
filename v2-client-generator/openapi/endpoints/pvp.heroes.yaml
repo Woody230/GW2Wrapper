@@ -100,7 +100,7 @@ components:
     PvpHeroId:
       type: string
       format: uuid
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     PvpHero:
       type: object

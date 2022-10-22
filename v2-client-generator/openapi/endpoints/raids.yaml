@@ -99,7 +99,7 @@ components:
   schemas:
     RaidId:
       type: string
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Raid:
       type: object
@@ -114,7 +114,7 @@ components:
 
     RaidWingId:
       type: string
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     RaidWing:
       type: object
@@ -129,7 +129,7 @@ components:
 
     RaidEventId:
       type: string
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     RaidEvent:
       type: object

@@ -108,5 +108,5 @@ components:
   schemas:
     BuildStorageId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
       description: The index of the build template in account storage.

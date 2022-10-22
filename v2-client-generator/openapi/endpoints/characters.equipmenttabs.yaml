@@ -133,7 +133,7 @@ components:
   schemas:
     EquipmentTemplateTabId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
       description: The index of the equipment template in a character's equipment tabs.
 
     EquipmentTemplateTab:

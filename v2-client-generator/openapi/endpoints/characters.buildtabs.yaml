@@ -133,7 +133,7 @@ components:
   schemas:
     BuildTemplateTabId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
       description: The index of the build template in a character's build tabs.
 
     BuildTemplateTab:

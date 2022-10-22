@@ -99,7 +99,7 @@ components:
   schemas:
     NodeId:
       type: string
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Node:
       type: object

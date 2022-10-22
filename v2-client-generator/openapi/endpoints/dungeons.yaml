@@ -99,7 +99,7 @@ components:
   schemas:
     DungeonId:
       type: string
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Dungeon:
       type: object
@@ -114,7 +114,7 @@ components:
 
     DungeonPathId:
       type: string
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     DungeonPath:
       type: object

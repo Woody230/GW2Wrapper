@@ -98,7 +98,7 @@ components:
   schemas:
     AchievementCategoryId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     AchievementCategory:
       type: object

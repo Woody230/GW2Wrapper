@@ -99,7 +99,7 @@ components:
   schemas:
     PvpAmuletId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     PvpAmulet:
       type: object

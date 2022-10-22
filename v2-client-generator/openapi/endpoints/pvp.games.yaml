@@ -110,7 +110,7 @@ components:
     PvpGameId:
       type: string
       format: uuid
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     PvpGame:
       type: object

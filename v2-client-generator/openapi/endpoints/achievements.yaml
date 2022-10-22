@@ -83,7 +83,7 @@ components:
   schemas:
     AchievementId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Achievement:
       type: object
@@ -292,5 +292,5 @@ components:
 
     AchievementPoints:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
           

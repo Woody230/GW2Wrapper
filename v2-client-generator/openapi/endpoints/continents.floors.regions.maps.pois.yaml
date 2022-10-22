@@ -121,7 +121,7 @@ components:
   schemas:
     PointOfInterestId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     PointOfInterest:
       type: object

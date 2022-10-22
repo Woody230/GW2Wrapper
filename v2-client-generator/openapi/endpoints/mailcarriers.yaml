@@ -99,7 +99,7 @@ components:
   schemas:
     MailCarrierId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     MailCarrier:
       type: object

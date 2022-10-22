@@ -99,12 +99,12 @@ components:
   schemas:
     SkillId:
       type: integer
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     SkillCode:
       type: integer
       format: short
-      x-ktx-id: true
+      x-ktx-identifier: true
       description: The id of a skill for build templates.
       externalDocs:
         url: https://wiki.guildwars2.com/wiki/Chat_link_format#Build_template_link

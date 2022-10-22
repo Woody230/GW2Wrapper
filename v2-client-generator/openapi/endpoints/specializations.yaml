@@ -100,7 +100,7 @@ components:
     SpecializationId:
       type: integer
       format: byte
-      x-ktx-id: true
+      x-ktx-identifier: true
 
     Specialization:
       type: object
