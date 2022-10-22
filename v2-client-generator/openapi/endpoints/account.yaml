@@ -82,7 +82,8 @@ components:
         build_storage_slots:
           type: integer
           description: The number of build storage slots.
-          x-see: https://wiki.guildwars2.com/wiki/Template#Build_Storage
+          externalDocs:
+            url: https://wiki.guildwars2.com/wiki/Template#Build_Storage
           x-gw2-scopes: [ build ]
 
     AccountId:
