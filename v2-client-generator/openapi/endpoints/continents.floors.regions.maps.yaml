@@ -122,6 +122,8 @@ components:
     ContinentMap:
       type: object
       required: [ id,name,min_level,max_level,default_floor,map_rect,continent_rect,points_of_interest,tasks,skill_challenges,sectors,adventures,mastery_points ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/MapId"
@@ -202,6 +204,8 @@ components:
     HeroChallenge:
       type: object
       required: [ id, coord ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/HeroChallengeId"
@@ -222,6 +226,8 @@ components:
     Adventure:
       type: object
       required: [ id,name,description,coord ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/AdventureId"
@@ -243,6 +249,8 @@ components:
     MasteryPoint:
       type: object
       required: [ id,coord,region ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/MasteryId"

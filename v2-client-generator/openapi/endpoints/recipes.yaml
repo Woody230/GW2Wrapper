@@ -104,6 +104,8 @@ components:
     Recipe:
       type: object
       required: [ id,type,output_item_id,output_item_count,time_to_craft_ms_disciplines,min_rating,flags,ingredients,chat_link ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/RecipeId"

@@ -119,6 +119,8 @@ components:
     GuildUpgrade:
       type: object
       required: [ id, type, name, description, build_time, required_level, experience, prerequisites, costs ]
+      x-ktx-identifiable:
+        id: id
       discriminator:
         propertyName: type
         mapping:

@@ -104,6 +104,8 @@ components:
     Material:
       type: object
       required: [ id,name,items,order ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/MaterialId"

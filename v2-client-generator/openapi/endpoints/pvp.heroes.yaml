@@ -105,6 +105,8 @@ components:
     PvpHero:
       type: object
       required: [ id, name, type, descripton, stats, overlay, underlay, skins ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/PvpHeroId"
@@ -148,6 +150,8 @@ components:
     PvpHeroSkin:
       type: object
       required: [ id,name,icon,default,unlock_items ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/PvpHeroSkinId"

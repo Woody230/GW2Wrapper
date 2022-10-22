@@ -108,6 +108,8 @@ components:
     WvwRank:
       type: object
       required: [ id,title,min_rank ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/WvwRankId"

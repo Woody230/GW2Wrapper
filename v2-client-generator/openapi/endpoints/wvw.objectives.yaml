@@ -105,6 +105,8 @@ components:
     WvwObjective:
       type: object
       required: [ id,name,type,sector_id,map_id,map_type,chat_link ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/WvwObjectiveId"

@@ -111,6 +111,8 @@ components:
     Legend:
       type: object
       required: [ id,code,swap,heal,elite,utilites ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/LegendId"

@@ -104,6 +104,8 @@ components:
     WvwUpgrade:
       type: object
       required: [ id,tiers ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/WvwUpgradeId"

@@ -120,6 +120,8 @@ components:
     Region:
       type: object
       required: [ id,name,label_coord,continent_rect,maps ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/RegionId"

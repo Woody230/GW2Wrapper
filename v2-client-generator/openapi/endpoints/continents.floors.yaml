@@ -114,6 +114,8 @@ components:
     Floor:
       type: object
       required: [ id,texture_dims,regions ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/FloorId"

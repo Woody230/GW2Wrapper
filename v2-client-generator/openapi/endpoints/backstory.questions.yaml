@@ -103,6 +103,8 @@ components:
     BackstoryQuestion:
       type: object
       required: [ id,title,description,answers,order ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/BackstoryQuestionId"

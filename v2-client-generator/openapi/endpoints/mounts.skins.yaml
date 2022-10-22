@@ -104,6 +104,8 @@ components:
     MountSkin:
       type: object
       required: [ id,name,icon,mount,dye_slots ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/MountSkinId"

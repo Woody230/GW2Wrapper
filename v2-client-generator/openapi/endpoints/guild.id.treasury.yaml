@@ -25,6 +25,8 @@ components:
     GuildTresurySlot:
       type: object
       required: [ item_id, count, needed_by ]
+      x-ktx-identifiable:
+        id: item_id
       properties:
         item_id:
           $ref: "#/components/schemas/ItemId"
@@ -40,6 +42,8 @@ components:
     GuildTreasuryUpgrade:
       type: object
       required: [ upgrade_id,count ]
+      x-ktx-identifiable:
+        id: upgrade_id
       properties:
         upgrade_id:
           $ref: "#/components/schemas/GuildUpgradeId"

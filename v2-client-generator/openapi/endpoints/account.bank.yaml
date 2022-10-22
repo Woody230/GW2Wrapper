@@ -24,6 +24,8 @@ components:
     BankSlot:
       type: object
       required: [ id, count ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/ItemId"

@@ -48,6 +48,8 @@ components:
     Daily:
       type: object
       required: [ id,level ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/AchievementId"

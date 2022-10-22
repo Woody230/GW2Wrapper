@@ -101,9 +101,11 @@ components:
       type: integer
       x-ktx-identifier: true
 
-    Storage:
+    Story:
       type: object
       required: [ id,season,name,description,timeline,level,order,chapters ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/StoryId"

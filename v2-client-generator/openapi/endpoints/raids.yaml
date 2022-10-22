@@ -104,6 +104,8 @@ components:
     Raid:
       type: object
       required: [ id,wings ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/RaidId"
@@ -119,6 +121,8 @@ components:
     RaidWing:
       type: object
       required: [ id,events ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/RaidWingId"
@@ -134,6 +138,8 @@ components:
     RaidEvent:
       type: object
       required: [ id,type ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/RaidEventId"

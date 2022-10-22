@@ -22,12 +22,14 @@ components:
     AccountArmoryItem:
       type: object
       required: [ id, count ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           allOf:
             - $ref: "#/components/schemas/ItemId"
             - externalDocs:
-              url: https://wiki.guildwars2.com/wiki/API:2/legendaryarmory
+                url: https://wiki.guildwars2.com/wiki/API:2/legendaryarmory
         count:
           type: integer
           description: The number of this item available for use in a single equipment template.

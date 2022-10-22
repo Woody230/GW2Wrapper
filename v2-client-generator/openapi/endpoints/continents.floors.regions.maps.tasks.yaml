@@ -126,6 +126,8 @@ components:
     RenownHeart:
       type: object
       required: [ id,objective,level,coord,bounds,chat_link ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/RenownHeartId"

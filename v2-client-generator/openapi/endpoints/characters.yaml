@@ -167,6 +167,8 @@ components:
     CharacterWvwAbility:
       type: object
       required: [ id,rank ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/WvwAbilityId"
@@ -176,6 +178,8 @@ components:
     CharacterItemStat:
       type: object
       required: [ id,attributes ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/ItemStatId"

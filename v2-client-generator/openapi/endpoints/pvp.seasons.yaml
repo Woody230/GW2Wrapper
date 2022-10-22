@@ -109,6 +109,8 @@ components:
     PvpSeason:
       type: object
       required: [ id,name,start,end,active,divisions,leaderboards,ranks ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/PvpSeasonId"
@@ -225,6 +227,8 @@ components:
     PvpLadderScoring:
       type: object
       required: [ id,type,description,name,ordering ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/PvpLadderScoringId"

@@ -104,6 +104,8 @@ components:
     World:
       type: object
       required: [ id,name,population ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/WorldId"

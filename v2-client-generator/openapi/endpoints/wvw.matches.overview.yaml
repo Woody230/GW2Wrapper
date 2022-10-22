@@ -116,6 +116,8 @@ components:
     WvwMatchOverview:
       type: object
       required: [ id,start_time,end_time,scores,worlds,all_world ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/WvwMatchId"

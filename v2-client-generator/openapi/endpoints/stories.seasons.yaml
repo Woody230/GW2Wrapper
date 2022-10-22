@@ -105,6 +105,8 @@ components:
     StorySeason:
       type: object
       required: [ id,name,order,stories ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/StorySeasonId"

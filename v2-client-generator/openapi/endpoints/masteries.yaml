@@ -104,6 +104,8 @@ components:
     Mastery:
       type: object
       required: [ id,name,requirement,order,background,region,levels ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/MasteryId"

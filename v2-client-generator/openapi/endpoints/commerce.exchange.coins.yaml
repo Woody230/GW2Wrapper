@@ -24,6 +24,7 @@ components:
   schemas:
     Coins:
       type: integer
+      description: The amount of copper coins.
       x-ktx-identifier: true
 
     CoinExchange:

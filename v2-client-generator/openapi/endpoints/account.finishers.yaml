@@ -22,6 +22,8 @@ components:
     AccountFinisher:
       type: object
       required: [ id,permanent ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/FinisherId"

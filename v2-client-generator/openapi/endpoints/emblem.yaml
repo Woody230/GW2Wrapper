@@ -7,6 +7,8 @@ components:
     Emblem:
       type: object
       required: [ id,layers ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/EmblemId"

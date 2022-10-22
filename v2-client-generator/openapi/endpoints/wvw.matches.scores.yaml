@@ -116,6 +116,8 @@ components:
     WvwMatchScore:
       type: object
       required: [ id,scores,victory_points,maps,skirmishes ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/WvwMatchId"

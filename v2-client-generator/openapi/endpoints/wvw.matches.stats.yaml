@@ -116,6 +116,8 @@ components:
     WvwMatchStat:
       type: object
       required: [ id,deaths,kills,maps ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/WvwMatchId"

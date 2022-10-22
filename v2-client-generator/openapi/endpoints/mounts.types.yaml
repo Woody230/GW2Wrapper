@@ -104,6 +104,8 @@ components:
     MountType:
       type: object
       required: [ id,name,default_skin,skins,skills ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/MountTypeId"
@@ -125,6 +127,8 @@ components:
     MountSkill:
       type: object
       required: [ id,slot ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/SkillId"

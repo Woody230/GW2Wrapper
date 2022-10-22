@@ -46,6 +46,8 @@ components:
     SabZone:
       type: object
       required: [ id, mode, world, zone ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/SabZoneId"
@@ -64,6 +66,8 @@ components:
     SabUnlock:
       type: object
       required: [ id ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/SabUnlockId"
@@ -77,6 +81,8 @@ components:
     SabSong:
       type: object
       required: [ id ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/SabSongId"

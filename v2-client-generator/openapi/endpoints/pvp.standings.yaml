@@ -20,7 +20,11 @@ components:
     PvpStandings:
       type: object
       required: [ current,best,season_id ]
+      x-ktx-identifiable:
+        id: season_id
       properties:
+        season_id:
+          $ref: "#/components/schemas/PvpSeasonId"
         current:
           type: array
           items:

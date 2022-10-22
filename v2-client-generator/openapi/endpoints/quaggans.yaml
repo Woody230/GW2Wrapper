@@ -104,6 +104,8 @@ components:
     Quaggan:
       type: object
       required: [ id,url ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/QuagganId"

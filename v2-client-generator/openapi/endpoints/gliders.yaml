@@ -104,6 +104,8 @@ components:
     Glider:
       type: object
       required: [ id,unlock_items,order,icon,name,description,default_dyes ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/GliderId"

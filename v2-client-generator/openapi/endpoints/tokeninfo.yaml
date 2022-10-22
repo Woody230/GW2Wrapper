@@ -59,6 +59,8 @@ components:
           - $ref: "#/components/schemas/TokenInfo"
           - type: object
             required: [ id ]
+            x-ktx-identifiable:
+              id: id
             properties:
               id:
                 $ref: "#/components/schemas/ApiKey"
@@ -68,6 +70,8 @@ components:
           - $ref: "#/components/schemas/TokenInfo"
           - type: object
             required: [ id ]
+            x-ktx-identifiable:
+              id: id
             properties:
               id:
                 $ref: "#/components/schemas/SubToken"

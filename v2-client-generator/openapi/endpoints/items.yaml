@@ -110,6 +110,8 @@ components:
 
     Item:
       type: object
+      x-ktx-identifiable:
+        id: id
       discriminator:
         propertyName: type
         mapping:
@@ -314,6 +316,8 @@ components:
     InfixUpgrade:
       type: object
       required: [ id,attributes ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/ItemStatId"

@@ -104,6 +104,8 @@ components:
     Outfit:
       type: object
       required: [ id,unlock_item,icon,name ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/OutfitId"

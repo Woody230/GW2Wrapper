@@ -104,6 +104,8 @@ components:
     DyeColor:
       type: object
       required: [ id, name,base_rgb,cloth,leather,metal,categories ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/DyeColorId"

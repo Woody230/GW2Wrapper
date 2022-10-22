@@ -22,6 +22,8 @@ components:
     AccountMaterial:
       type: object
       required: [ id, category, count ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/ItemId"

@@ -104,6 +104,8 @@ components:
     AchievementGroup:
       type: object
       required: [ id,name,description,order,categories ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/AchievementGroupId"

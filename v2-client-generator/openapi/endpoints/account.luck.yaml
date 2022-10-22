@@ -22,6 +22,8 @@ components:
     AccountLuck:
       type: object
       required: [ id, value ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           type: string

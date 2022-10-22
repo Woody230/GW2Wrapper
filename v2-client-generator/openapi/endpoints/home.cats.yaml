@@ -104,6 +104,8 @@ components:
     Cat:
       type: object
       required: [ id,hint ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/CatId"

@@ -100,6 +100,8 @@ components:
     Asset:
       type: object
       required: [ id,icon ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/AssetName"

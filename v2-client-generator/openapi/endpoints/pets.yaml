@@ -105,6 +105,8 @@ components:
     Pet:
       type: object
       required: [ id,name,description,icon,skills ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/PetId"
@@ -124,6 +126,8 @@ components:
     PetSkill:
       type: object
       required: [ id ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/SkillId"

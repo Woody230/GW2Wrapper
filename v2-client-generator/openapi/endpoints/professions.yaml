@@ -103,7 +103,9 @@ components:
 
     Profession:
       type: object
-      required: [ name,code,icon,icon_big,specializations,training,weapons,flags,skills,skills_by_palette ]
+      required: [ id,name,code,icon,icon_big,specializations,training,weapons,flags,skills,skills_by_palette ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/ProfessionId"
@@ -155,6 +157,8 @@ components:
     Training:
       type: object
       required: [ id, category, name, track ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/TrainingId"
@@ -228,6 +232,8 @@ components:
     ProfessionWeaponSkill:
       type: object
       required: [ id,slot ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/SkillId"
@@ -249,6 +255,8 @@ components:
     ProfessionSkill:
       type: object
       required: [ id,slot,type ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/SkillId"

@@ -8,6 +8,8 @@ components:
     Transaction:
       type: object
       required: [ id, item_id, price, quantity, created ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/TransactionId"

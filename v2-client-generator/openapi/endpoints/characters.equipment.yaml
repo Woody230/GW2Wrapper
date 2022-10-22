@@ -32,6 +32,8 @@ components:
     CharacterEquipment:
       type: object
       required: [ id, location ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/ItemId"

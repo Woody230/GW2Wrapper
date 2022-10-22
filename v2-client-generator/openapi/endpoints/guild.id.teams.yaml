@@ -30,6 +30,8 @@ components:
     GuildTeam:
       type: object
       required: [ id, members, name, aggregate, ladders, games, seasons ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/GuildTeamId"
@@ -74,6 +76,8 @@ components:
     GuildTeamSeason:
       type: object
       required: [ id,wins,losses,rating ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/PvpSeasonId"

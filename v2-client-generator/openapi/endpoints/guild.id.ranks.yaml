@@ -29,6 +29,8 @@ components:
     GuildRank:
       type: object
       required: [ id,order,permissions,icon ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/GuildRankId"

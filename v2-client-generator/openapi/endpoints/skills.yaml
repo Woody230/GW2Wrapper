@@ -112,6 +112,8 @@ components:
     Skill:
       type: object
       required: [ id,name,description,icon,chat_link ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/SkillId"

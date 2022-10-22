@@ -88,6 +88,8 @@ components:
     Achievement:
       type: object
       required: [ id, name, description, requirement,locked_text,type,flags,tiers ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/AchievementId"
@@ -239,6 +241,8 @@ components:
         - $ref: "#/components/schemas/AchievementBit"
         - type: object
           required: [ id ]
+          x-ktx-identifiable:
+            id: id
           properties:
             id:
               $ref: "#/components/schemas/ItemId"
@@ -248,6 +252,8 @@ components:
         - $ref: "#/components/schemas/AchievementBit"
         - type: object
           required: [ id ]
+          x-ktx-identifiable:
+            id: id
           properties:
             id:
               $ref: "#/components/schemas/MiniId"
@@ -257,6 +263,8 @@ components:
         - $ref: "#/components/schemas/AchievementBit"
         - type: object
           required: [ id ]
+          x-ktx-identifiable:
+            id: id
           properties:
             id:
               $ref: "#/components/schemas/SkinId"

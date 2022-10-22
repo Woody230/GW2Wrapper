@@ -103,6 +103,8 @@ components:
 
     Map:
       type: object
+      x-ktx-identifiable:
+        id: id
       required: [ id,name,type,min_level,max_level,default_floor,floors,region_id,continent_id,map_rect,continent_rect ]
       properties:
         id:

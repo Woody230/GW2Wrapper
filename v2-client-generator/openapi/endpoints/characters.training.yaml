@@ -31,6 +31,8 @@ components:
     CharacterTraining:
       type: object
       required: [ id,spent,done ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           allOf:

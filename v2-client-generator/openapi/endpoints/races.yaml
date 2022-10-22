@@ -104,6 +104,8 @@ components:
     Race:
       type: object
       required: [ id,name,skills ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/RaceId"

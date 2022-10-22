@@ -129,6 +129,8 @@ components:
     WvwMatch:
       type: object
       required: [ id,start_time,end_time,scores,world,all_world,deaths,kills,victory_points,maps,skirmishes ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/WvwMatchId"
@@ -166,6 +168,8 @@ components:
     WvwMap:
       type: object
       required: [ id,type,scores,deaths,kills,objectives,bonuses ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/MapId"
@@ -189,6 +193,8 @@ components:
     WvwMapObjective:
       type: object
       required: [ id,type,owner,points_tick,points_capture ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/WvwObjectiveId"
@@ -244,6 +250,8 @@ components:
     WvwSkirmish:
       type: object
       required: [ id,scores,map_scores ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/WvwSkirmishId"

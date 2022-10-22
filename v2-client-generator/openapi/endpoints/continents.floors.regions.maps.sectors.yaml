@@ -126,6 +126,8 @@ components:
     Sector:
       type: object
       required: [ id,name,level,coord,bounds,chat_link ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/SectorId"

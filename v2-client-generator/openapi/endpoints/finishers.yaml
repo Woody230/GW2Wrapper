@@ -104,6 +104,8 @@ components:
     Finisher:
       type: object
       required: [ id,unlock_details,unlock_items,order,icon,name ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/FinisherId"

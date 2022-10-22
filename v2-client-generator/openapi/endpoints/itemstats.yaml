@@ -104,6 +104,8 @@ components:
     ItemStat:
       type: object
       required: [ id, name, attributes ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/ItemStatId"

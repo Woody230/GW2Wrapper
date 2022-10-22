@@ -50,6 +50,8 @@ components:
     GuildLog:
       type: object
       required: [ id,type,time ]
+      x-ktx-identifiable:
+        id: id
       discriminator:
         propertyName: type
         mapping:

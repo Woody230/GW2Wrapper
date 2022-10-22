@@ -104,6 +104,8 @@ components:
     MailCarrier:
       type: object
       required: [ id,unlock_items,order,icon,name,flags ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/MailCarrierId"

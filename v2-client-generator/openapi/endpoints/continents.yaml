@@ -108,6 +108,8 @@ components:
     Continent:
       type: object
       required: [ id,name,continent_dims,min_zoom,max_zoom,floors ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/ContinentId"

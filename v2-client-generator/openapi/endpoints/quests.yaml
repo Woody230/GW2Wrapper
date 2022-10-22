@@ -104,6 +104,8 @@ components:
     Quest:
       type: object
       required: [ id,name,level,story,goals ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/QuestId"

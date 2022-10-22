@@ -22,6 +22,8 @@ components:
     AccountAchievement:
       type: object
       required: [ id, done ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/AchievementId"

@@ -104,6 +104,8 @@ components:
     Currency:
       type: object
       required: [ id,name,description,icon,order ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/CurrencyId"

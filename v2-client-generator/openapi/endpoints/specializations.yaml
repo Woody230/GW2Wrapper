@@ -105,6 +105,8 @@ components:
     Specialization:
       type: object
       required: [ id,name,profession,elite,icon,background,minor_traits,major_traits ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/SpecializationId"

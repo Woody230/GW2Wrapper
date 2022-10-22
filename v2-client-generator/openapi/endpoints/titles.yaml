@@ -104,6 +104,8 @@ components:
     Title:
       type: object
       required: [ id,name ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/TitleId"

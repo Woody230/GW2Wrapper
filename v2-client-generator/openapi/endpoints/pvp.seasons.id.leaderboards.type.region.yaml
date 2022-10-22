@@ -60,6 +60,8 @@ components:
     PvpLeaderboardScore:
       type: object
       required: [ id,value ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/PvpLadderScoringId"

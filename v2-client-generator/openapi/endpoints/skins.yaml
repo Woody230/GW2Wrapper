@@ -104,6 +104,8 @@ components:
           Gathering: "#/component/schemas/GatheringToolSkin"
           Weapon: "#/components/schemas/WeaponSkin"
       required: [ id,type,name,flags,restrictions,icon,rarity ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/SkinId"

@@ -34,6 +34,8 @@ components:
     Bag:
       type: object
       required: [ id, size, inventory ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           allOf:
@@ -54,6 +56,8 @@ components:
     BagSlot:
       type: object
       required: [ id,count ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           allOf:

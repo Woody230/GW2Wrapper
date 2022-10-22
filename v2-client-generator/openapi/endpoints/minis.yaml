@@ -104,6 +104,8 @@ components:
     MiniPet:
       type: object
       required: [ id,item_id,order,icon,name ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/MiniPetId"

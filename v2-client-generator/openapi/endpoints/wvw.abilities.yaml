@@ -104,6 +104,8 @@ components:
     WvwAbility:
       type: object
       required: [ id,name,description,icon,ranks ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/WvwAbilityId"

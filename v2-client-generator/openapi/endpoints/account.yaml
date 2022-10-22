@@ -20,6 +20,8 @@ components:
     Account:
       type: object
       required: [ id, age, name, world, guilds, created, access, last_modified ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/AccountId"

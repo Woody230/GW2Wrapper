@@ -100,6 +100,8 @@ components:
     ArmoryItem:
       type: object
       required: [ id,max_count ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/ItemId"

@@ -84,6 +84,8 @@ components:
     Listings:
       type: object
       required: [ id,buys,sells ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/ItemId"

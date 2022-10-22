@@ -37,6 +37,8 @@ components:
     Guild:
       type: object
       required: [ id,name,tag,level ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/GuildId"

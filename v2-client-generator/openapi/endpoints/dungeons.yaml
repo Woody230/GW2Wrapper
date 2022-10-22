@@ -104,6 +104,8 @@ components:
     Dungeon:
       type: object
       required: [ id,paths ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/DungeonId"
@@ -119,6 +121,8 @@ components:
     DungeonPath:
       type: object
       required: [ id,type ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/DungeonPathId"

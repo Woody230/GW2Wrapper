@@ -115,6 +115,8 @@ components:
     PvpGame:
       type: object
       required: [ id,map_id,started,ended,result,team,profession,scores,rating_type,rating_change ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/PvpGameId"

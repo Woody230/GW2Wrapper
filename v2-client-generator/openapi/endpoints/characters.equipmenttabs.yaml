@@ -139,6 +139,8 @@ components:
     EquipmentTemplateTab:
       type: object
       required: [ id, is_active, equipment, equipment_pvp ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/EquipmentTemplateTabId"

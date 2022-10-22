@@ -104,6 +104,8 @@ components:
     Novelty:
       type: object
       required: [ id,unlock_item,description,icon,name,slot ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/NoveltyId"

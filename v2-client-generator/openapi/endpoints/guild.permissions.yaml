@@ -104,6 +104,8 @@ components:
     GuildPermission:
       type: object
       required: [ id,name,description ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/GuildPermissionId"

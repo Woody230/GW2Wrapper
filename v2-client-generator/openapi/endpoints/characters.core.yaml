@@ -22,8 +22,9 @@ components:
     CharacterCore:
       type: object
       required: [ name, race, gender, profession, level, age, last_modified, created, deaths ]
+      x-ktx-identifiable:
+        id: name
       properties:
-        # TODO identifiable: using name
         name:
           $ref: "#/components/schemas/CharacterName"
         race:

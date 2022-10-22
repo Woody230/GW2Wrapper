@@ -104,6 +104,8 @@ components:
     PvpAmulet:
       type: object
       required: [ id,name,icon,attributes ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/PvpAmuletId"

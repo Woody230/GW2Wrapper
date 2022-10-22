@@ -126,6 +126,8 @@ components:
     PointOfInterest:
       type: object
       required: [ id,name,type,floor,coord,chat_link,icon ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/PointOfInterestId"

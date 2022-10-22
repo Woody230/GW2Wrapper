@@ -104,6 +104,8 @@ components:
     Emote:
       type: object
       required: [ id,commands,unlock_items ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/EmoteId"

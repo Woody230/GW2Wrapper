@@ -22,6 +22,8 @@ components:
     AccountMastery:
       type: object
       required: [ id ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/MasteryId"

@@ -104,6 +104,8 @@ components:
     Trait:
       type: object
       required: [ id,tier,order,name,slot,specialization,icon ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/TraitId"
@@ -142,6 +144,8 @@ components:
     TraitSkill:
       type: object
       required: [ id,name,description,icon,chat_link ]
+      x-ktx-identifiable:
+        id: id
       properties:
         id:
           $ref: "#/components/schemas/SkillId"
