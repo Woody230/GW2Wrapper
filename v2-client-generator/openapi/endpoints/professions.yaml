@@ -111,6 +111,8 @@ components:
           $ref: "#/components/schemas/ProfessionId"
         name:
           $ref: "#/components/schemas/ProfessionName"
+        code:
+          $ref: "#/components/schemas/SkillCode"
         icon:
           $ref: "#/components/schemas/ImageLink"
         icon_big:
