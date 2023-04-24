@@ -1269,7 +1269,7 @@ components:
         - const: Dzagonur [DE]
           title: Dzagonur
         - const: Baruch Bay [SP]
-          title:
+          title: Baruch Bay
     WorldPopulationLevel:
       type: string
       oneOf:
