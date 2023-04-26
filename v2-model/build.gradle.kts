@@ -18,7 +18,7 @@ kotlin.setup {
         ktxDateTime()
         extSerialization()
         extDateTime()
-        extValue()
+        extValueIdentifier()
         extGeometry()
     }
     commonTest()

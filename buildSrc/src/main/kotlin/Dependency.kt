@@ -17,13 +17,13 @@ object Versions {
     const val KODEIN_DB = "0.9.0-beta"
     const val KOTLIN = "1.6.10"
     const val RESOURCE = "0.19.0"
-    const val EXTENSION = "5.0.0"
+    const val EXTENSION = "5.2.0"
 }
 
 object Metadata {
     const val GROUP_ID = "io.github.woody230"
     const val SUBGROUP_ID = "gw2"
-    const val VERSION = "3.0.0"
+    const val VERSION = "3.1.0"
     const val JVM_TARGET = "1.8"
 }
 
@@ -67,7 +67,7 @@ fun KotlinDependencyHandler.extGeometry() {
 }
 
 fun KotlinDependencyHandler.extKodeinDb() = api("io.github.woody230.ktx:kodein-db:$EXTENSION")
-fun KotlinDependencyHandler.extValue() = api("io.github.woody230.ktx:value:$EXTENSION")
+fun KotlinDependencyHandler.extValueIdentifier() = api("io.github.woody230.ktx:value-identifier:$EXTENSION")
 fun KotlinDependencyHandler.extResource() = api("io.github.woody230.ktx:resource:$EXTENSION")
 
 // Test
