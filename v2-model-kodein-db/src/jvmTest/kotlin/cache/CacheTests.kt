@@ -1,16 +1,19 @@
 package cache
 
 import com.bselzer.gw2.v2.client.instance.Gw2Client
-import com.bselzer.gw2.v2.db.instance.GuildCache
+import com.bselzer.gw2.v2.db.operation.clearGuild
 import com.bselzer.gw2.v2.db.type.gw2
 import com.bselzer.gw2.v2.model.guild.upgrade.GuildUpgrade
 import com.bselzer.gw2.v2.model.serialization.Modules
-import com.bselzer.ktx.kodein.db.metadata.IdentifiableMetadataExtractor
-import com.bselzer.ktx.kodein.db.transaction.transaction
-import com.bselzer.ktx.kodein.db.value.IdentifierValueConverter
-import io.ktor.client.*
-import io.ktor.client.engine.mock.*
-import io.ktor.http.*
+import com.bselzer.ktx.db.metadata.IdentifiableMetadataExtractor
+import com.bselzer.ktx.db.transaction.transaction
+import com.bselzer.ktx.db.value.IdentifierValueConverter
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.mock.MockEngine
+import io.ktor.client.engine.mock.respond
+import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
+import io.ktor.http.headersOf
 import kotlinx.coroutines.runBlocking
 import org.kodein.db.DB
 import org.kodein.db.TypeTable
@@ -50,8 +53,6 @@ class CacheTests {
             TypeTable { gw2() }
         )
 
-        val guild = GuildCache(client)
-
         val upgrades = runBlocking { client.guild.upgrades() }
         db.newBatch().apply {
             upgrades.forEach { upgrade -> put(upgrade) }
@@ -65,7 +66,7 @@ class CacheTests {
         // Act
         runBlocking {
             db.transaction().use {
-                with(guild) { clear() }
+                clearGuild()
             }
         }
 
