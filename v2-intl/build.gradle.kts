@@ -9,7 +9,7 @@ publishing.publish(
     description = "Internalization support by mapping translations from Guild Wars 2 API models."
 )
 
-android.setup()
+android.setup(project)
 
 kotlin.setup {
     commonMain {

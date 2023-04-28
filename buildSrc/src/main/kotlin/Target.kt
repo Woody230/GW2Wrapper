@@ -1,3 +1,4 @@
+import Metadata.GROUP_ID
 import com.android.build.gradle.LibraryExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.NamedDomainObjectContainer
@@ -5,11 +6,13 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import Metadata.JVM_TARGET
+import Metadata.SUBGROUP_ID
 import Versions.ANDROID_TEST_JUNIT
 import Versions.ANDROID_TEST_CORE
 import Versions.ANDROID_TEST_RUNNER
 import Versions.ANDROID_TEST_RULES
 import Versions.ROBOLECTRIC
+import org.gradle.api.Project
 
 /**
  * Sets up common dependencies.
@@ -96,8 +99,9 @@ fun NamedDomainObjectContainer<KotlinSourceSet>.androidTest(block: KotlinDepende
 /**
  * Sets up Android.
  */
-fun LibraryExtension.setup(block: LibraryExtension.() -> Unit = {})
+fun LibraryExtension.setup(project: Project, block: LibraryExtension.() -> Unit = {})
 {
+    namespace = "${GROUP_ID}.${SUBGROUP_ID}.${project.name}".replace("-", ".")
     compileSdk = 33
     defaultConfig {
         minSdk = 21
@@ -112,6 +116,13 @@ fun LibraryExtension.setup(block: LibraryExtension.() -> Unit = {})
             allVariants()
             withSourcesJar()
             withJavadocJar()
+        }
+    }
+    testOptions {
+        unitTests {
+            androidResources {
+                isIncludeAndroidResources = true
+            }
         }
     }
     block(this)

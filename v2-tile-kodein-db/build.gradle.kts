@@ -8,7 +8,7 @@ publishing.publish(
     description = "Kodein-DB extensions for v2-tile-model."
 )
 
-android.setup()
+android.setup(project)
 
 kotlin.setup {
     commonMain {

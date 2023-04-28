@@ -9,7 +9,7 @@ publishing.publish(
     description = "Tiling service models for Guild Wars 2 map images."
 )
 
-android.setup()
+android.setup(project)
 
 kotlin.setup {
     commonMain {

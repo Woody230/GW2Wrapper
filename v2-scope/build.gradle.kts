@@ -9,7 +9,7 @@ publishing.publish(
     description = "Annotations for permissions required to access Guild Wars 2 API endpoints."
 )
 
-android.setup()
+android.setup(project)
 
 kotlin.setup {
     commonMain {
