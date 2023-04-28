@@ -17,6 +17,7 @@ kotlin.setup {
         v2ModelEnumeration()
         ktxSerialization()
         extBase64()
+        extFunction()
     }
     commonTest()
     jvmTest()
