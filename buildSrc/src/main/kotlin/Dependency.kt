@@ -18,7 +18,7 @@ object Versions {
     const val ROBOLECTRIC = "4.10"
     const val COROUTINE = "1.6.4"
     const val KODEIN_DB = "0.9.0-beta"
-    const val KOTLIN = "1.8.20"
+    const val KOTLIN = "1.8.10"
     const val RESOURCE = "0.22.0"
     const val EXTENSION = "5.3.0"
 }
