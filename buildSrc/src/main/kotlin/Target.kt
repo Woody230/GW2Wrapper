@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import Metadata.JVM_TARGET
+import Metadata.NAMESPACE_ID
 import Metadata.SUBGROUP_ID
 import Versions.ANDROID_TEST_JUNIT
 import Versions.ANDROID_TEST_CORE
@@ -101,7 +102,7 @@ fun NamedDomainObjectContainer<KotlinSourceSet>.androidTest(block: KotlinDepende
  */
 fun LibraryExtension.setup(project: Project, block: LibraryExtension.() -> Unit = {})
 {
-    namespace = "${GROUP_ID}.${SUBGROUP_ID}.${project.name}".replace("-", ".")
+    namespace = "${NAMESPACE_ID}.${SUBGROUP_ID}.${project.name}".replace("-", ".")
     compileSdk = 33
     defaultConfig {
         minSdk = 21
