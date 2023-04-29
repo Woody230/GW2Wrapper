@@ -14,7 +14,7 @@ publishing.publish(
     description = "Guild Wars 2 moko-resources strings and images"
 )
 
-android.setup()
+android.setup(project)
 
 kotlin.setup {
     commonMain {

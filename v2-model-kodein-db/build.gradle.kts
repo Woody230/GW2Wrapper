@@ -8,7 +8,7 @@ publishing.publish(
     description = "Kodein-DB extensions for v2-model."
 )
 
-android.setup()
+android.setup(project)
 
 kotlin.setup {
     commonMain {
@@ -16,6 +16,7 @@ kotlin.setup {
         v2ModelExtension()
     }
     commonTest {
+        v2Client()
         mockKtorClient()
         testKodeinDb()
     }

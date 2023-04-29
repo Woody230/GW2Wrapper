@@ -9,7 +9,7 @@ publishing.publish(
     description = "Guild emblem image fetching from https://emblem.werdes.net/"
 )
 
-android.setup()
+android.setup(project)
 
 kotlin.setup {
     commonMain {

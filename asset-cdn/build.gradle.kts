@@ -9,7 +9,7 @@ publishing.publish(
     description = "Build information from ArenaNet's assetcdn."
 )
 
-android.setup()
+android.setup(project)
 
 kotlin.setup {
     commonMain {

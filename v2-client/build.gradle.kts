@@ -9,7 +9,7 @@ publishing.publish(
     description = "Ktor client for v2 endpoints of the Guild Wars 2 API."
 )
 
-android.setup()
+android.setup(project)
 
 kotlin.setup {
     commonMain {

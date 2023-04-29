@@ -8,7 +8,7 @@ publishing.publish(
     description = "Kodein-DB extensions for v2-intl."
 )
 
-android.setup()
+android.setup(project)
 
 kotlin.setup {
     commonMain {

@@ -8,23 +8,27 @@ import Versions.KTX_SERIALIZATION
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 
 object Versions {
-    const val KTX_DATETIME = "0.3.2"
-    const val KTX_SERIALIZATION = "1.3.2"
-    const val KTOR = "2.0.1"
-    const val ANDROID_TEST = "1.1.0"
-    const val ROBOLECTRIC = "4.6.1"
-    const val COROUTINE = "1.5.2"
+    const val KTX_DATETIME = "0.4.0"
+    const val KTX_SERIALIZATION = "1.5.0"
+    const val KTOR = "2.3.0"
+    const val ANDROID_TEST_CORE = "1.5.0"
+    const val ANDROID_TEST_JUNIT = "1.1.5"
+    const val ANDROID_TEST_RUNNER = "1.5.2"
+    const val ANDROID_TEST_RULES = "1.5.0"
+    const val ROBOLECTRIC = "4.10"
+    const val COROUTINE = "1.6.4"
     const val KODEIN_DB = "0.9.0-beta"
-    const val KOTLIN = "1.6.10"
-    const val RESOURCE = "0.19.0"
-    const val EXTENSION = "5.2.0"
+    const val KOTLIN = "1.8.10"
+    const val RESOURCE = "0.22.0"
+    const val EXTENSION = "5.3.0"
 }
 
 object Metadata {
     const val GROUP_ID = "io.github.woody230"
     const val SUBGROUP_ID = "gw2"
-    const val VERSION = "3.1.0"
-    const val JVM_TARGET = "1.8"
+    const val NAMESPACE_ID = "com.bselzer"
+    const val VERSION = "3.2.0"
+    const val JVM_TARGET = "11"
 }
 
 object LocalProperty {

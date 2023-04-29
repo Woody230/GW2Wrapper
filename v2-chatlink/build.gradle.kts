@@ -9,7 +9,7 @@ publishing.publish(
     description = "Base64 Guild Wars 2 chat link encoding and decoding."
 )
 
-android.setup()
+android.setup(project)
 
 kotlin.setup {
     commonMain {
@@ -17,6 +17,7 @@ kotlin.setup {
         v2ModelEnumeration()
         ktxSerialization()
         extBase64()
+        extFunction()
     }
     commonTest()
     jvmTest()

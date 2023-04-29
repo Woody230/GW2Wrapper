@@ -1,11 +1,19 @@
+import Metadata.GROUP_ID
 import com.android.build.gradle.LibraryExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.NamedDomainObjectContainer
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
-import Versions.ANDROID_TEST
+import Metadata.JVM_TARGET
+import Metadata.NAMESPACE_ID
+import Metadata.SUBGROUP_ID
+import Versions.ANDROID_TEST_JUNIT
+import Versions.ANDROID_TEST_CORE
+import Versions.ANDROID_TEST_RUNNER
+import Versions.ANDROID_TEST_RULES
 import Versions.ROBOLECTRIC
+import org.gradle.api.Project
 
 /**
  * Sets up common dependencies.
@@ -79,10 +87,10 @@ fun NamedDomainObjectContainer<KotlinSourceSet>.androidTest(block: KotlinDepende
     getByName("androidTest") {
         dependencies {
             implementation(kotlin("test-junit"))
-            implementation("androidx.test.ext:junit:$ANDROID_TEST")
-            implementation("androidx.test:core:$ANDROID_TEST")
-            implementation("androidx.test:runner:$ANDROID_TEST")
-            implementation("androidx.test:rules:$ANDROID_TEST")
+            implementation("androidx.test.ext:junit:$ANDROID_TEST_JUNIT")
+            implementation("androidx.test:core:$ANDROID_TEST_CORE")
+            implementation("androidx.test:runner:$ANDROID_TEST_RUNNER")
+            implementation("androidx.test:rules:$ANDROID_TEST_RULES")
             implementation("org.robolectric:robolectric:$ROBOLECTRIC")
             block(this)
         }
@@ -92,24 +100,30 @@ fun NamedDomainObjectContainer<KotlinSourceSet>.androidTest(block: KotlinDepende
 /**
  * Sets up Android.
  */
-fun LibraryExtension.setup(manifestPath: String = "src/androidMain/AndroidManifest.xml", block: LibraryExtension.() -> Unit = {})
+fun LibraryExtension.setup(project: Project, block: LibraryExtension.() -> Unit = {})
 {
-    compileSdk = 31
-    sourceSets.getByName("main").manifest.srcFile(manifestPath)
+    namespace = "${NAMESPACE_ID}.${SUBGROUP_ID}.${project.name}".replace("-", ".")
+    compileSdk = 33
     defaultConfig {
         minSdk = 21
-        targetSdk = 31
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     publishing {
         multipleVariants {
             allVariants()
             withSourcesJar()
             withJavadocJar()
+        }
+    }
+    testOptions {
+        unitTests {
+            androidResources {
+                isIncludeAndroidResources = true
+            }
         }
     }
     block(this)
@@ -132,4 +146,5 @@ private fun KotlinMultiplatformExtension.targets()
 fun KotlinMultiplatformExtension.setup(sourceSets: NamedDomainObjectContainer<KotlinSourceSet>.() -> Unit = {}) {
     targets()
     sourceSets(this.sourceSets)
+    jvmToolchain(JVM_TARGET.toInt())
 }

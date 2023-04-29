@@ -9,7 +9,7 @@ publishing.publish(
     description = "Guild Wars 2 API models for v2-client."
 )
 
-android.setup()
+android.setup(project)
 
 kotlin.setup {
     commonMain {

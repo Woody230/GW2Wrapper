@@ -8,7 +8,7 @@ publishing.publish(
     description = "Extensions for Guild Wars 2 API models."
 )
 
-android.setup()
+android.setup(project)
 
 kotlin.setup {
     commonMain {
