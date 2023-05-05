@@ -1,6 +1,6 @@
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
+    id(libs.plugins.multiplatform.get().pluginId)
+    id(libs.plugins.android.library.get().pluginId)
 }
 
 publishing.publish(
@@ -12,9 +12,17 @@ android.setup(project)
 
 kotlin.setup {
     commonMain {
-        v2Model()
-        v2ModelEnumeration()
+        api(libs.bundles.common)
+        api(projects.v2Model)
+        api(projects.v2ModelEnumeration)
     }
-    commonTest()
-    jvmTest()
+    commonTest {
+        implementation(libs.bundles.common.test)
+    }
+    androidUnitTest {
+        implementation(libs.bundles.android.unit.test)
+    }
+    jvmTest {
+        implementation(libs.bundles.jvm.test)
+    }
 }

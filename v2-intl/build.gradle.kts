@@ -1,7 +1,7 @@
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
-    kotlin("plugin.serialization") version Versions.KOTLIN
+    id(libs.plugins.multiplatform.get().pluginId)
+    id(libs.plugins.android.library.get().pluginId)
+    alias(libs.plugins.ktx.serialization)
 }
 
 publishing.publish(
@@ -13,18 +13,9 @@ android.setup(project)
 
 kotlin.setup {
     commonMain {
-        ktxSerialization()
-        v2Client()
-        ktorClient()
-        coroutine()
-        extFunction()
-    }
-    commonTest {
-        mockKtorClient()
-        v2Client()
-    }
-    jvmTest {
-        jvmTest()
-        jvmKtorClient()
+        api(libs.bundles.common)
+        api(libs.ktx.serialization.core)
+        api(projects.v2Model)
+        implementation(libs.woody230.ktx.function)
     }
 }

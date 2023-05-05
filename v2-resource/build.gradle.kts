@@ -1,7 +1,7 @@
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
-    id("dev.icerock.mobile.multiplatform-resources") version Versions.RESOURCE
+    id(libs.plugins.multiplatform.get().pluginId)
+    id(libs.plugins.android.library.get().pluginId)
+    alias(libs.plugins.moko.resources)
 }
 
 multiplatformResources {
@@ -18,8 +18,8 @@ android.setup(project)
 
 kotlin.setup {
     commonMain {
-        v2ModelEnumeration()
-        extResource()
+        api(libs.bundles.common)
+        api(projects.v2ModelEnumeration)
+        api(libs.woody230.ktx.resource)
     }
-    commonTest()
 }

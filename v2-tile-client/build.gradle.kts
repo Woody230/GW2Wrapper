@@ -1,7 +1,7 @@
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
-    kotlin("plugin.serialization") version Versions.KOTLIN
+    id(libs.plugins.multiplatform.get().pluginId)
+    id(libs.plugins.android.library.get().pluginId)
+    alias(libs.plugins.ktx.serialization)
 }
 
 publishing.publish(
@@ -13,16 +13,21 @@ android.setup(project)
 
 kotlin.setup {
     commonMain {
-        v2TileModel()
-        ktorClient()
-        coroutine()
+        api(libs.bundles.common)
+        api(projects.v2TileModel)
+        api(libs.ktor.client)
+        implementation(libs.ktx.coroutines)
     }
     commonTest {
-        mockKtorClient()
-        v2Client()
+        implementation(libs.bundles.common.test)
+        implementation(libs.bundles.ktor.client.test)
+    }
+    androidUnitTest {
+        implementation(libs.bundles.android.unit.test)
+        implementation(libs.ktor.client.okhttp)
     }
     jvmTest {
-        jvmTest()
-        jvmKtorClient()
+        implementation(libs.bundles.jvm.test)
+        implementation(libs.ktor.client.okhttp)
     }
 }

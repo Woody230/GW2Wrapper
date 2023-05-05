@@ -1,19 +1,19 @@
-import Metadata.GROUP_ID
+
+import Metadata.COMPILE_SDK
+import Metadata.JAVA_VERSION
+import Metadata.JVM_TARGET
+import Metadata.MIN_SDK
+import Metadata.NAMESPACE_ID
+import Metadata.SUBGROUP_ID
 import com.android.build.gradle.LibraryExtension
-import org.gradle.api.JavaVersion
 import org.gradle.api.NamedDomainObjectContainer
+import org.gradle.api.Project
+import org.gradle.api.artifacts.MinimalExternalModuleDependency
+import org.gradle.api.provider.Provider
+import org.gradle.kotlin.dsl.dependencies
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
-import Metadata.JVM_TARGET
-import Metadata.NAMESPACE_ID
-import Metadata.SUBGROUP_ID
-import Versions.ANDROID_TEST_JUNIT
-import Versions.ANDROID_TEST_CORE
-import Versions.ANDROID_TEST_RUNNER
-import Versions.ANDROID_TEST_RULES
-import Versions.ROBOLECTRIC
-import org.gradle.api.Project
 
 /**
  * Sets up common dependencies.
@@ -21,7 +21,6 @@ import org.gradle.api.Project
 fun NamedDomainObjectContainer<KotlinSourceSet>.commonMain(block: KotlinDependencyHandler.() -> Unit = {}) {
     getByName("commonMain") {
         dependencies {
-            implementation(kotlin("stdlib-common"))
             block(this)
         }
     }
@@ -34,9 +33,6 @@ fun NamedDomainObjectContainer<KotlinSourceSet>.commonTest(block: KotlinDependen
 {
     getByName("commonTest") {
         dependencies {
-            implementation(kotlin("test-common"))
-            implementation(kotlin("test-annotations-common"))
-            implementation(kotlin("test-junit"))
             block(this)
         }
     }
@@ -61,7 +57,6 @@ fun NamedDomainObjectContainer<KotlinSourceSet>.jvmTest(block: KotlinDependencyH
 {
     getByName("jvmTest") {
         dependencies {
-            implementation(kotlin("test-junit"))
             block(this)
         }
     }
@@ -82,16 +77,10 @@ fun NamedDomainObjectContainer<KotlinSourceSet>.androidMain(block: KotlinDepende
 /**
  * Sets up Android test dependencies.
  */
-fun NamedDomainObjectContainer<KotlinSourceSet>.androidTest(block: KotlinDependencyHandler.() -> Unit = {})
+fun NamedDomainObjectContainer<KotlinSourceSet>.androidUnitTest(block: KotlinDependencyHandler.() -> Unit = {})
 {
-    getByName("androidTest") {
+    getByName("androidUnitTest") {
         dependencies {
-            implementation(kotlin("test-junit"))
-            implementation("androidx.test.ext:junit:$ANDROID_TEST_JUNIT")
-            implementation("androidx.test:core:$ANDROID_TEST_CORE")
-            implementation("androidx.test:runner:$ANDROID_TEST_RUNNER")
-            implementation("androidx.test:rules:$ANDROID_TEST_RULES")
-            implementation("org.robolectric:robolectric:$ROBOLECTRIC")
             block(this)
         }
     }
@@ -100,17 +89,16 @@ fun NamedDomainObjectContainer<KotlinSourceSet>.androidTest(block: KotlinDepende
 /**
  * Sets up Android.
  */
-fun LibraryExtension.setup(project: Project, block: LibraryExtension.() -> Unit = {})
-{
+fun LibraryExtension.setup(project: Project, block: LibraryExtension.() -> Unit = {}) {
     namespace = "${NAMESPACE_ID}.${SUBGROUP_ID}.${project.name}".replace("-", ".")
-    compileSdk = 33
+    compileSdk = COMPILE_SDK
     defaultConfig {
-        minSdk = 21
+        minSdk = MIN_SDK
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JAVA_VERSION
+        targetCompatibility = JAVA_VERSION
     }
     publishing {
         multipleVariants {
@@ -127,6 +115,15 @@ fun LibraryExtension.setup(project: Project, block: LibraryExtension.() -> Unit 
         }
     }
     block(this)
+}
+
+fun LibraryExtension.setupDesugaring(project: Project, dependency: Provider<MinimalExternalModuleDependency>) {
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+    }
+    project.dependencies {
+        add("coreLibraryDesugaring", dependency)
+    }
 }
 
 /**
