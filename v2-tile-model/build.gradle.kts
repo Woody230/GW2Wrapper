@@ -1,19 +1,16 @@
+import com.bselzer.gradle.multiplatform.configure.sourceset.multiplatformDependencies
+
 plugins {
-    id(libs.plugins.multiplatform.get().pluginId)
-    id(libs.plugins.android.library.get().pluginId)
+    id(libs.plugins.woody230.gw2.convention.multiplatform.get().pluginId)
     alias(libs.plugins.ktx.serialization)
 }
 
-publishing.publish(
-    project = project,
-    description = "Tiling service models for Guild Wars 2 map images."
-)
+multiplatformPublishExtension {
+    description.set("Tiling service models for Guild Wars 2 map images.")
+}
 
-android.setup(project)
-
-kotlin.setup {
+multiplatformDependencies {
     commonMain {
-        api(libs.bundles.common)
         api(projects.v2Model)
         api(libs.ktx.serialization.core)
     }

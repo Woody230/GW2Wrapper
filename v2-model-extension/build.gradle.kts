@@ -1,28 +1,16 @@
+import com.bselzer.gradle.multiplatform.configure.sourceset.multiplatformDependencies
+
 plugins {
-    id(libs.plugins.multiplatform.get().pluginId)
-    id(libs.plugins.android.library.get().pluginId)
+    id(libs.plugins.woody230.gw2.convention.multiplatform.get().pluginId)
 }
 
-publishing.publish(
-    project = project,
-    description = "Extensions for Guild Wars 2 API models."
-)
+multiplatformPublishExtension {
+    description.set("Extensions for Guild Wars 2 API models.")
+}
 
-android.setup(project)
-
-kotlin.setup {
+multiplatformDependencies {
     commonMain {
-        api(libs.bundles.common)
         api(projects.v2Model)
         api(projects.v2ModelEnumeration)
-    }
-    commonTest {
-        implementation(libs.bundles.common.test)
-    }
-    androidUnitTest {
-        implementation(libs.bundles.android.unit.test)
-    }
-    jvmTest {
-        implementation(libs.bundles.jvm.test)
     }
 }

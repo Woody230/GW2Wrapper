@@ -1,31 +1,27 @@
+import com.bselzer.gradle.multiplatform.configure.sourceset.multiplatformDependencies
+
 plugins {
-    id(libs.plugins.multiplatform.get().pluginId)
-    id(libs.plugins.android.library.get().pluginId)
+    id(libs.plugins.woody230.gw2.convention.multiplatform.get().pluginId)
 }
 
-publishing.publish(
-    project = project,
-    description = "Kodein-DB extensions for v2-model."
-)
+multiplatformPublishExtension {
+    description.set("Kodein-DB extensions for v2-model.")
+}
 
-android.setup(project)
-
-kotlin.setup {
+multiplatformDependencies {
     commonMain {
-        api(libs.bundles.common)
         api(libs.woody230.ktx.kodein.db)
         api(projects.v2ModelExtension)
     }
     commonTest {
-        implementation(libs.bundles.common.test)
+        implementation(projects.v2Client)
+        implementation(libs.bundles.kodein.db.test)
         implementation(libs.bundles.ktor.client.test)
     }
     androidUnitTest {
-        implementation(libs.bundles.android.unit.test)
         implementation(libs.ktor.client.okhttp)
     }
     jvmTest {
-        implementation(libs.bundles.jvm.test)
         implementation(libs.ktor.client.okhttp)
     }
 }

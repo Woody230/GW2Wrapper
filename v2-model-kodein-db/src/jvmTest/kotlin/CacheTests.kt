@@ -1,5 +1,3 @@
-package cache
-
 import com.bselzer.gw2.v2.client.instance.Gw2Client
 import com.bselzer.gw2.v2.db.operation.clearGuild
 import com.bselzer.gw2.v2.db.type.gw2
