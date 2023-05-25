@@ -5,9 +5,9 @@ ktor = "2.3.0"
 ktx-serialization = "1.5.0"
 moko-resources = "0.22.0"
 multiplatform-settings = "1.0.0"
-woody230-ktx = "5.4.0"
 woody230-gradle = "1.0.0"
 woody230-gw2 = "3.3.0"
+woody230-ktx = "5.4.0"
 
 [libraries]
 kodein-db = { group = "org.kodein.db", name = "kodein-db-api", version.ref = "kodein-db" }
