@@ -1,19 +1,25 @@
+import com.bselzer.gradle.multiplatform.configure.sourceset.multiplatformDependencies
+
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
+    id(libs.plugins.woody230.gw2.convention.multiplatform.get().pluginId)
 }
 
-publishing.publish(
-    project = project,
-    description = "Kodein-DB extensions for v2-tile-model."
-)
+multiplatformPublishExtension {
+    description.set("Kodein-DB extensions for v2-tile-model.")
+}
 
-android.setup(project)
-
-kotlin.setup {
+multiplatformDependencies {
     commonMain {
-        v2TileModel()
-        extKodeinDb()
+        api(projects.v2TileModel)
+        api(libs.woody230.ktx.kodein.db)
     }
-    commonTest()
+    commonTest {
+        implementation(libs.bundles.ktor.client.test)
+    }
+    androidUnitTest {
+        implementation(libs.ktor.client.okhttp)
+    }
+    jvmTest {
+        implementation(libs.ktor.client.okhttp)
+    }
 }

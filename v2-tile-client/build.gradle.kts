@@ -1,28 +1,28 @@
+import com.bselzer.gradle.multiplatform.configure.sourceset.multiplatformDependencies
+
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
-    kotlin("plugin.serialization") version Versions.KOTLIN
+    id(libs.plugins.woody230.gw2.convention.multiplatform.get().pluginId)
+    alias(libs.plugins.ktx.serialization)
 }
 
-publishing.publish(
-    project = project,
-    description = "Tiling service for Guild Wars 2 map images."
-)
+multiplatformPublishExtension {
+    description.set("Tiling service for Guild Wars 2 map images.")
+}
 
-android.setup(project)
-
-kotlin.setup {
+multiplatformDependencies {
     commonMain {
-        v2TileModel()
-        ktorClient()
-        coroutine()
+        api(projects.v2TileModel)
+        api(libs.ktor.client)
+        implementation(libs.ktx.coroutines)
     }
     commonTest {
-        mockKtorClient()
-        v2Client()
+        implementation(projects.v2Client)
+        implementation(libs.bundles.ktor.client.test)
+    }
+    androidUnitTest {
+        implementation(libs.ktor.client.okhttp)
     }
     jvmTest {
-        jvmTest()
-        jvmKtorClient()
+        implementation(libs.ktor.client.okhttp)
     }
 }

@@ -1,24 +1,20 @@
+import com.bselzer.gradle.multiplatform.configure.sourceset.multiplatformDependencies
+
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
-    kotlin("plugin.serialization") version Versions.KOTLIN
+    id(libs.plugins.woody230.gw2.convention.multiplatform.get().pluginId)
+    alias(libs.plugins.ktx.serialization)
 }
 
-publishing.publish(
-    project = project,
-    description = "Base64 Guild Wars 2 chat link encoding and decoding."
-)
+multiplatformPublishExtension {
+    description.set("Base64 Guild Wars 2 chat link encoding and decoding.")
+}
 
-android.setup(project)
-
-kotlin.setup {
+multiplatformDependencies {
     commonMain {
-        v2Model()
-        v2ModelEnumeration()
-        ktxSerialization()
-        extBase64()
-        extFunction()
+        api(projects.v2Model)
+        api(projects.v2ModelEnumeration)
+        api(libs.ktx.serialization.core)
+        api(libs.woody230.ktx.base64)
+        api(libs.woody230.ktx.function)
     }
-    commonTest()
-    jvmTest()
 }

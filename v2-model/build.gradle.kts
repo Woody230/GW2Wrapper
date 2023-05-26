@@ -1,25 +1,20 @@
+import com.bselzer.gradle.multiplatform.configure.sourceset.multiplatformDependencies
+
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
-    kotlin("plugin.serialization") version Versions.KOTLIN
+    id(libs.plugins.woody230.gw2.convention.multiplatform.get().pluginId)
+    alias(libs.plugins.ktx.serialization)
 }
 
-publishing.publish(
-    project = project,
-    description = "Guild Wars 2 API models for v2-client."
-)
+multiplatformPublishExtension {
+    description.set("Guild Wars 2 API models for v2-client.")
+}
 
-android.setup(project)
-
-kotlin.setup {
+multiplatformDependencies {
     commonMain {
-        v2Scope()
-        ktxSerialization()
-        ktxDateTime()
-        extSerialization()
-        extDateTime()
-        extValueIdentifier()
-        extGeometry()
+        api(projects.v2Scope)
+        api(libs.woody230.ktx.serialization)
+        api(libs.woody230.ktx.datetime.serialization)
+        api(libs.woody230.ktx.value.identifier)
+        api(libs.woody230.ktx.geometry.serialization)
     }
-    commonTest()
 }

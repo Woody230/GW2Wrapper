@@ -1,7 +1,8 @@
+import com.bselzer.gradle.multiplatform.configure.sourceset.multiplatformDependencies
+
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
-    id("dev.icerock.mobile.multiplatform-resources") version Versions.RESOURCE
+    id(libs.plugins.woody230.gw2.convention.multiplatform.get().pluginId)
+    id(libs.plugins.woody230.gradle.internal.moko.resources.get().pluginId)
 }
 
 multiplatformResources {
@@ -9,17 +10,13 @@ multiplatformResources {
     multiplatformResourcesClassName = "Gw2Resources"
 }
 
-publishing.publish(
-    project = project,
-    description = "Guild Wars 2 moko-resources strings and images"
-)
+multiplatformPublishExtension {
+    description.set("Guild Wars 2 moko-resources strings and images")
+}
 
-android.setup(project)
-
-kotlin.setup {
+multiplatformDependencies {
     commonMain {
-        v2ModelEnumeration()
-        extResource()
+        api(projects.v2ModelEnumeration)
+        api(libs.woody230.ktx.resource)
     }
-    commonTest()
 }

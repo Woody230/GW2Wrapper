@@ -1,30 +1,18 @@
+import com.bselzer.gradle.multiplatform.configure.sourceset.multiplatformDependencies
+
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
-    kotlin("plugin.serialization") version Versions.KOTLIN
+    id(libs.plugins.woody230.gw2.convention.multiplatform.get().pluginId)
+    alias(libs.plugins.ktx.serialization)
 }
 
-publishing.publish(
-    project = project,
-    description = "Internalization support by mapping translations from Guild Wars 2 API models."
-)
+multiplatformPublishExtension {
+    description.set("Internalization support by mapping translations from Guild Wars 2 API models.")
+}
 
-android.setup(project)
-
-kotlin.setup {
+multiplatformDependencies {
     commonMain {
-        ktxSerialization()
-        v2Client()
-        ktorClient()
-        coroutine()
-        extFunction()
-    }
-    commonTest {
-        mockKtorClient()
-        v2Client()
-    }
-    jvmTest {
-        jvmTest()
-        jvmKtorClient()
+        api(libs.ktx.serialization.core)
+        api(projects.v2Model)
+        implementation(libs.woody230.ktx.function)
     }
 }

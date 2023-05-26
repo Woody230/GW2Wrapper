@@ -1,19 +1,16 @@
+import com.bselzer.gradle.multiplatform.configure.sourceset.multiplatformDependencies
+
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
-    kotlin("plugin.serialization") version Versions.KOTLIN
+    id(libs.plugins.woody230.gw2.convention.multiplatform.get().pluginId)
+    alias(libs.plugins.ktx.serialization)
 }
 
-publishing.publish(
-    project = project,
-    description = "Annotations for permissions required to access Guild Wars 2 API endpoints."
-)
+multiplatformPublishExtension {
+    description.set("Annotations for permissions required to access Guild Wars 2 API endpoints.")
+}
 
-android.setup(project)
-
-kotlin.setup {
+multiplatformDependencies {
     commonMain {
-        ktxSerialization()
+        api(libs.ktx.serialization.core)
     }
-    commonTest()
 }

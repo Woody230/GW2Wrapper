@@ -1,24 +1,26 @@
+import com.bselzer.gradle.multiplatform.configure.sourceset.multiplatformDependencies
+
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
-    kotlin("plugin.serialization") version Versions.KOTLIN
+    id(libs.plugins.woody230.gw2.convention.multiplatform.get().pluginId)
+    alias(libs.plugins.ktx.serialization)
 }
 
-publishing.publish(
-    project = project,
-    description = "Guild emblem image fetching from https://emblem.werdes.net/"
-)
+multiplatformPublishExtension {
+    description.set("Guild emblem image fetching from https://emblem.werdes.net/")
+}
 
-android.setup(project)
-
-kotlin.setup {
+multiplatformDependencies {
     commonMain {
-        ktorClient()
-        ktxSerialization()
+        api(libs.ktor.client)
+        api(libs.ktx.serialization.json)
     }
-    commonTest()
+    commonTest {
+        implementation(libs.bundles.ktor.client.test)
+    }
+    androidUnitTest {
+        implementation(libs.ktor.client.okhttp)
+    }
     jvmTest {
-        jvmTest()
-        jvmKtorClient()
+        implementation(libs.ktor.client.okhttp)
     }
 }

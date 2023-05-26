@@ -1,27 +1,26 @@
+import com.bselzer.gradle.multiplatform.configure.sourceset.multiplatformDependencies
+
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
-    kotlin("plugin.serialization") version Versions.KOTLIN
+    id(libs.plugins.woody230.gw2.convention.multiplatform.get().pluginId)
+    alias(libs.plugins.ktx.serialization)
 }
 
-publishing.publish(
-    project = project,
-    description = "Build information from ArenaNet's assetcdn."
-)
+multiplatformPublishExtension {
+    description.set("Build information from ArenaNet's assetcdn.")
+}
 
-android.setup(project)
-
-kotlin.setup {
+multiplatformDependencies {
     commonMain {
-        ktorClient()
-        ktorSerialization()
-        v2Model()
+        api(libs.ktor.client)
+        api(projects.v2Model)
     }
     commonTest {
-        mockKtorClient()
+        implementation(libs.bundles.ktor.client.test)
+    }
+    androidUnitTest {
+        implementation(libs.ktor.client.okhttp)
     }
     jvmTest {
-        jvmTest()
-        jvmKtorClient()
+        implementation(libs.ktor.client.okhttp)
     }
 }

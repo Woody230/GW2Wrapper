@@ -1,22 +1,17 @@
+import com.bselzer.gradle.multiplatform.configure.sourceset.multiplatformDependencies
+
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
-    kotlin("plugin.serialization") version Versions.KOTLIN
+    id(libs.plugins.woody230.gw2.convention.multiplatform.get().pluginId)
+    alias(libs.plugins.ktx.serialization)
 }
 
-publishing.publish(
-    project = project,
-    description = "Enumerations for Guild Wars 2 API models."
-)
+multiplatformPublishExtension {
+    description.set("Enumerations for Guild Wars 2 API models.")
+}
 
-android.setup(project)
-
-kotlin.setup {
+multiplatformDependencies {
     commonMain {
-        v2Model()
-        ktxSerialization()
-        extSerialization()
+        api(projects.v2Model)
+        api(libs.woody230.ktx.serialization)
     }
-    commonTest()
-    jvmTest()
 }

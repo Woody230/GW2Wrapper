@@ -1,0 +1,59 @@
+[versions]
+kodein-db = "0.9.0-beta"
+kotlin = "1.8.10"
+ktor = "2.3.0"
+ktx-serialization = "1.5.0"
+moko-resources = "0.22.0"
+multiplatform-settings = "1.0.0"
+woody230-gradle = "1.0.0"
+woody230-gw2 = "3.3.0"
+woody230-ktx = "5.4.0"
+
+[libraries]
+kodein-db = { group = "org.kodein.db", name = "kodein-db-api", version.ref = "kodein-db" }
+kodein-db-inmemory = { group = "org.kodein.db", name = "kodein-db-inmemory", version.ref = "kodein-db" }
+kodein-db-serialization-ktx = { group = "org.kodein.db", name = "kodein-db-serializer-kotlinx", version.ref = "kodein-db" }
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-common", version.ref = "kotlin" }
+ktor-client = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-mock = { group = "io.ktor", name = "ktor-client-mock", version.ref = "ktor" }
+ktor-client-contentNegotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization-ktx = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version = "0.4.0" }
+ktx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "ktx-serialization" }
+ktx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "ktx-serialization" }
+ktx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.6.4" }
+moko-resources = { group = "dev.icerock.moko", name = "resources", version.ref = "moko-resources" }
+settings = { group = "com.russhwolf", name = "multiplatform-settings", version.ref = "multiplatform-settings" }
+settings-coroutines = { group = "com.russhwolf", name = "multiplatform-settings-coroutines", version.ref = "multiplatform-settings" }
+xml-serialization = { group = "io.github.pdvrieze.xmlutil", name = "serialization", version = "0.85.0" }
+woody230-ktx-base64 = { group = "io.github.woody230.ktx", name = "base64", version.ref = "woody230-ktx" }
+woody230-ktx-datetime-serialization = { group = "io.github.woody230.ktx", name = "datetime-serialization", version.ref = "woody230-ktx" }
+woody230-ktx-function = { group = "io.github.woody230.ktx", name = "function", version.ref = "woody230-ktx" }
+woody230-ktx-geometry-serialization = { group = "io.github.woody230.ktx", name = "geometry-serialization", version.ref = "woody230-ktx" }
+woody230-ktx-kodein-db = { group = "io.github.woody230.ktx", name = "kodein-db", version.ref = "woody230-ktx" }
+woody230-ktx-serialization = { group = "io.github.woody230.ktx", name = "serialization", version.ref = "woody230-ktx" }
+woody230-ktx-value-identifier = { group = "io.github.woody230.ktx", name = "value-identifier", version.ref = "woody230-ktx" }
+woody230-ktx-resource = { group = "io.github.woody230.ktx", name = "resource", version.ref = "woody230-ktx" }
+woody230-gradle-internal-android-desugar-plugin = { group = "io.github.woody230.gradle.internal", name = "android-desugar-plugin", version.ref = "woody230-gradle" }
+woody230-gradle-internal-android-plugin = { group = "io.github.woody230.gradle.internal", name = "android-plugin", version.ref = "woody230-gradle" }
+woody230-gradle-internal-moko-resources-plugin = { group = "io.github.woody230.gradle.internal", name = "moko-resources-plugin", version.ref = "woody230-gradle" }
+woody230-gradle-internal-multiplatform-plugin = { group = "io.github.woody230.gradle.internal", name = "multiplatform-plugin", version.ref = "woody230-gradle" }
+woody230-gradle-internal-multiplatform-publish-plugin = { group = "io.github.woody230.gradle.internal", name = "multiplatform-publish-plugin", version.ref = "woody230-gradle" }
+woody230-gradle-internal-multiplatform-test-plugin = { group = "io.github.woody230.gradle.internal", name = "multiplatform-test-plugin", version.ref = "woody230-gradle" }
+
+[bundles]
+kodein-db-test = ["kodein-db", "kodein-db-inmemory", "kodein-db-serialization-ktx"]
+ktor-client-test = ["ktor-client", "ktor-client-mock", "ktor-client-contentNegotiation", "ktor-serialization-ktx"]
+settings = ["settings", "settings-coroutines"]
+
+# TODO can't NOT provide a version and use alias for plugins already in the classpath https://github.com/gradle/gradle/issues/17968
+[plugins]
+ktx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+woody230-gradle-internal-android-desugar = { id = "io.github.woody230.gradle.internal.android-desugar", version.ref = "woody230-gradle" }
+woody230-gradle-internal-android-library = { id = "io.github.woody230.gradle.internal.android-library", version.ref = "woody230-gradle" }
+woody230-gradle-internal-moko-resources = { id = "io.github.woody230.gradle.internal.moko-resources", version.ref = "woody230-gradle" }
+woody230-gradle-internal-multiplatform = { id = "io.github.woody230.gradle.internal.multiplatform", version.ref = "woody230-gradle" }
+woody230-gradle-internal-multiplatform-publish = { id = "io.github.woody230.gradle.internal.multiplatform-publish", version.ref = "woody230-gradle" }
+woody230-gradle-internal-multiplatform-test = { id = "io.github.woody230.gradle.internal.multiplatform-test", version.ref = "woody230-gradle" }
+woody230-gw2-convention-multiplatform = { id = "io.github.woody230.gw2.convention.multiplatform", version.ref = "woody230-gw2" }
