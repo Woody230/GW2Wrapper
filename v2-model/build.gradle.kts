@@ -12,7 +12,7 @@ multiplatformPublishExtension {
 multiplatformDependencies {
     commonMain {
         api(projects.v2Scope)
-        api(libs.woody230.ktx.serialization)
+        api(libs.woody230.ktx.serialization.json)
         api(libs.woody230.ktx.datetime.serialization)
         api(libs.woody230.ktx.value.identifier)
         api(libs.woody230.ktx.geometry.serialization)
