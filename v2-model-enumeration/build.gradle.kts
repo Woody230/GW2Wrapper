@@ -12,6 +12,6 @@ multiplatformPublishExtension {
 multiplatformDependencies {
     commonMain {
         api(projects.v2Model)
-        api(libs.woody230.ktx.serialization)
+        api(libs.woody230.ktx.serialization.json)
     }
 }
