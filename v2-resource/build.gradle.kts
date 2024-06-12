@@ -6,8 +6,8 @@ plugins {
 }
 
 multiplatformResources {
-    multiplatformResourcesPackage = "com.bselzer.gw2.v2.resource"
-    multiplatformResourcesClassName = "Gw2Resources"
+    resourcesPackage.set("com.bselzer.gw2.v2.resource")
+    resourcesClassName.set("Gw2Resources")
 }
 
 multiplatformPublishExtension {
