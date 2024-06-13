@@ -19,14 +19,14 @@ ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.r
 ktor-client-mock = { group = "io.ktor", name = "ktor-client-mock", version.ref = "ktor" }
 ktor-client-contentNegotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-serialization-ktx = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
-ktx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version = "0.4.0" }
+ktx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version = "0.5.0" }
 ktx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "ktx-serialization" }
 ktx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "ktx-serialization" }
-ktx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.6.4" }
+ktx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.8.0" }
 moko-resources = { group = "dev.icerock.moko", name = "resources", version.ref = "moko-resources" }
 settings = { group = "com.russhwolf", name = "multiplatform-settings", version.ref = "multiplatform-settings" }
 settings-coroutines = { group = "com.russhwolf", name = "multiplatform-settings-coroutines", version.ref = "multiplatform-settings" }
-xml-serialization = { group = "io.github.pdvrieze.xmlutil", name = "serialization", version = "0.85.0" }
+xml-serialization = { group = "io.github.pdvrieze.xmlutil", name = "serialization", version = "0.86.3" }
 woody230-ktx-base64 = { group = "io.github.woody230.ktx", name = "base64", version.ref = "woody230-ktx" }
 woody230-ktx-datetime-serialization = { group = "io.github.woody230.ktx", name = "datetime-serialization", version.ref = "woody230-ktx" }
 woody230-ktx-function = { group = "io.github.woody230.ktx", name = "function", version.ref = "woody230-ktx" }
