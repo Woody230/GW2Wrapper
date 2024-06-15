@@ -6,8 +6,8 @@ ktx-serialization = "1.6.3"
 moko-resources = "0.24.0"
 multiplatform-settings = "1.1.1"
 woody230-gradle = "1.3.0"
-woody230-gw2 = "3.8.0"
-woody230-ktx = "6.2.0"
+woody230-gw2 = "3.9.0"
+woody230-ktx = "6.3.0"
 
 [libraries]
 kodein-db = { group = "org.kodein.db", name = "kodein-db-api", version.ref = "kodein-db" }
@@ -27,7 +27,6 @@ moko-resources = { group = "dev.icerock.moko", name = "resources", version.ref =
 settings = { group = "com.russhwolf", name = "multiplatform-settings", version.ref = "multiplatform-settings" }
 settings-coroutines = { group = "com.russhwolf", name = "multiplatform-settings-coroutines", version.ref = "multiplatform-settings" }
 xml-serialization = { group = "io.github.pdvrieze.xmlutil", name = "serialization", version = "0.86.3" }
-woody230-ktx-base64 = { group = "io.github.woody230.ktx", name = "base64", version.ref = "woody230-ktx" }
 woody230-ktx-datetime-serialization = { group = "io.github.woody230.ktx", name = "datetime-serialization", version.ref = "woody230-ktx" }
 woody230-ktx-function = { group = "io.github.woody230.ktx", name = "function", version.ref = "woody230-ktx" }
 woody230-ktx-geometry-serialization = { group = "io.github.woody230.ktx", name = "geometry-serialization", version.ref = "woody230-ktx" }

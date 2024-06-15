@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.chatlink
 
-import com.bselzer.ktx.base64.decodeBase64ToByteArray
-import com.bselzer.ktx.base64.encodeBase64ToString
+import com.bselzer.ktx.function.collection.encodeBase64ToString
+import com.bselzer.ktx.function.objects.decodeBase64ToByteArray
 
 abstract class ChatLink {
     /**
