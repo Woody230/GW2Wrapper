@@ -2,6 +2,9 @@ import com.bselzer.gradle.multiplatform.configure.sourceset.multiplatformDepende
 
 plugins {
     id(libs.plugins.woody230.gw2.convention.multiplatform.get().pluginId)
+
+    // v2-model project needs desugaring
+    id(libs.plugins.woody230.gradle.internal.android.desugar.get().pluginId)
 }
 
 multiplatformPublishExtension {

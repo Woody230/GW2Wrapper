@@ -3,6 +3,9 @@ import com.bselzer.gradle.multiplatform.configure.sourceset.multiplatformDepende
 plugins {
     id(libs.plugins.woody230.gw2.convention.multiplatform.get().pluginId)
     alias(libs.plugins.ktx.serialization)
+
+    // ktx-datetime-serialization needs desugaring
+    id(libs.plugins.woody230.gradle.internal.android.desugar.get().pluginId)
 }
 
 multiplatformPublishExtension {

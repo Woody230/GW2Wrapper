@@ -19,17 +19,15 @@ class ContestedAreasByOwner internal constructor(
         objectives = objectives[owner]?.get(type) ?: emptyList()
     )
 
-    // TODO enum entries https://kotlinlang.org/docs/whatsnew1820.html#a-modern-and-performant-replacement-of-the-enum-class-values-function
     /**
      * Finds the [ContestedAreasCount]s for all [WvwObjectiveOwner]s and the given [types].
      */
-    fun filter(vararg types: WvwObjectiveType): List<ContestedAreasCountByOwner> = filter(WvwObjectiveOwner.values().toList(), types.toList())
+    fun filter(vararg types: WvwObjectiveType): List<ContestedAreasCountByOwner> = filter(WvwObjectiveOwner.entries, types.toList())
 
-    // TODO enum entries https://kotlinlang.org/docs/whatsnew1820.html#a-modern-and-performant-replacement-of-the-enum-class-values-function
     /**
      * Finds the [ContestedAreasCount]s for the given [owners] and for all [WvwObjectiveType]s.
      */
-    fun filter(vararg owners: WvwObjectiveOwner): List<ContestedAreasCountByOwner> = filter(owners.toList(), WvwObjectiveType.values().toList())
+    fun filter(vararg owners: WvwObjectiveOwner): List<ContestedAreasCountByOwner> = filter(owners.toList(), WvwObjectiveType.entries)
 
     /**
      * Finds the [ContestedAreasCount]s for the given [owner] and [types].
