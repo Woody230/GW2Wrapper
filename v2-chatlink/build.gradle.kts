@@ -17,7 +17,6 @@ multiplatformDependencies {
         api(projects.v2Model)
         api(projects.v2ModelEnumeration)
         api(libs.ktx.serialization.core)
-        api(libs.woody230.ktx.base64)
         api(libs.woody230.ktx.function)
     }
 }
