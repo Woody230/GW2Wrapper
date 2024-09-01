@@ -3,11 +3,11 @@ kodein-db = "0.9.0-beta"
 kotlin = "1.9.22"
 ktor = "2.3.9"
 ktx-serialization = "1.6.3"
-moko-resources = "0.24.0"
+moko-resources = "0.24.1"
 multiplatform-settings = "1.1.1"
-woody230-gradle = "1.3.0"
-woody230-gw2 = "3.9.0"
-woody230-ktx = "6.3.0"
+woody230-gradle = "1.4.0"
+woody230-gw2 = "3.10.0"
+woody230-ktx = "6.4.0"
 
 [libraries]
 kodein-db = { group = "org.kodein.db", name = "kodein-db-api", version.ref = "kodein-db" }
@@ -24,6 +24,7 @@ ktx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-seri
 ktx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "ktx-serialization" }
 ktx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version = "1.8.0" }
 moko-resources = { group = "dev.icerock.moko", name = "resources", version.ref = "moko-resources" }
+moko-resources-generator = { group = "dev.icerock.moko", name = "resources-generator", version.ref = "moko-resources" }
 settings = { group = "com.russhwolf", name = "multiplatform-settings", version.ref = "multiplatform-settings" }
 settings-coroutines = { group = "com.russhwolf", name = "multiplatform-settings-coroutines", version.ref = "multiplatform-settings" }
 xml-serialization = { group = "io.github.pdvrieze.xmlutil", name = "serialization", version = "0.86.3" }
@@ -36,7 +37,6 @@ woody230-ktx-value-identifier = { group = "io.github.woody230.ktx", name = "valu
 woody230-ktx-resource = { group = "io.github.woody230.ktx", name = "resource", version.ref = "woody230-ktx" }
 woody230-gradle-internal-android-desugar-plugin = { group = "io.github.woody230.gradle.internal", name = "android-desugar-plugin", version.ref = "woody230-gradle" }
 woody230-gradle-internal-android-plugin = { group = "io.github.woody230.gradle.internal", name = "android-plugin", version.ref = "woody230-gradle" }
-woody230-gradle-internal-moko-resources-plugin = { group = "io.github.woody230.gradle.internal", name = "moko-resources-plugin", version.ref = "woody230-gradle" }
 woody230-gradle-internal-multiplatform-plugin = { group = "io.github.woody230.gradle.internal", name = "multiplatform-plugin", version.ref = "woody230-gradle" }
 woody230-gradle-internal-multiplatform-publish-plugin = { group = "io.github.woody230.gradle.internal", name = "multiplatform-publish-plugin", version.ref = "woody230-gradle" }
 woody230-gradle-internal-multiplatform-test-plugin = { group = "io.github.woody230.gradle.internal", name = "multiplatform-test-plugin", version.ref = "woody230-gradle" }
@@ -52,7 +52,6 @@ ktx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.
 moko-resources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "moko-resources" }
 woody230-gradle-internal-android-desugar = { id = "io.github.woody230.gradle.internal.android-desugar", version.ref = "woody230-gradle" }
 woody230-gradle-internal-android-library = { id = "io.github.woody230.gradle.internal.android-library", version.ref = "woody230-gradle" }
-woody230-gradle-internal-moko-resources = { id = "io.github.woody230.gradle.internal.moko-resources", version.ref = "woody230-gradle" }
 woody230-gradle-internal-multiplatform-android-target = { id = "io.github.woody230.gradle.internal.multiplatform-android-target", version.ref = "woody230-gradle" }
 woody230-gradle-internal-multiplatform = { id = "io.github.woody230.gradle.internal.multiplatform", version.ref = "woody230-gradle" }
 woody230-gradle-internal-multiplatform-jvm-target = { id = "io.github.woody230.gradle.internal.multiplatform-jvm-target", version.ref = "woody230-gradle" }
