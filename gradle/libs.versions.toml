@@ -1,18 +1,14 @@
 [versions]
-kodein-db = "0.9.0-beta"
 kotlin = "2.0.21"
 ktor = "3.0.1"
 ktx-serialization = "1.6.3"
 moko-resources = "0.24.3"
 multiplatform-settings = "1.1.1"
 woody230-gradle = "1.7.0"
-woody230-gw2 = "3.13.0"
-woody230-ktx = "7.0.0"
+woody230-gw2 = "4.0.0"
+woody230-ktx = "8.0.0"
 
 [libraries]
-kodein-db = { group = "org.kodein.db", name = "kodein-db-api", version.ref = "kodein-db" }
-kodein-db-inmemory = { group = "org.kodein.db", name = "kodein-db-inmemory", version.ref = "kodein-db" }
-kodein-db-serialization-ktx = { group = "org.kodein.db", name = "kodein-db-serializer-kotlinx", version.ref = "kodein-db" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-common", version.ref = "kotlin" }
 ktor-client = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
 ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
@@ -31,7 +27,6 @@ xml-serialization = { group = "io.github.pdvrieze.xmlutil", name = "serializatio
 woody230-ktx-datetime-serialization = { group = "io.github.woody230.ktx", name = "datetime-serialization", version.ref = "woody230-ktx" }
 woody230-ktx-function = { group = "io.github.woody230.ktx", name = "function", version.ref = "woody230-ktx" }
 woody230-ktx-geometry-serialization = { group = "io.github.woody230.ktx", name = "geometry-serialization", version.ref = "woody230-ktx" }
-woody230-ktx-kodein-db = { group = "io.github.woody230.ktx", name = "kodein-db", version.ref = "woody230-ktx" }
 woody230-ktx-serialization-json = { group = "io.github.woody230.ktx", name = "serialization-json", version.ref = "woody230-ktx" }
 woody230-ktx-value-identifier = { group = "io.github.woody230.ktx", name = "value-identifier", version.ref = "woody230-ktx" }
 woody230-ktx-resource = { group = "io.github.woody230.ktx", name = "resource", version.ref = "woody230-ktx" }
@@ -42,7 +37,6 @@ woody230-gradle-internal-multiplatform-publish-plugin = { group = "io.github.woo
 woody230-gradle-internal-multiplatform-test-plugin = { group = "io.github.woody230.gradle.internal", name = "multiplatform-test-plugin", version.ref = "woody230-gradle" }
 
 [bundles]
-kodein-db-test = ["kodein-db", "kodein-db-inmemory", "kodein-db-serialization-ktx"]
 ktor-client-test = ["ktor-client", "ktor-client-mock", "ktor-client-contentNegotiation", "ktor-serialization-ktx"]
 settings = ["settings", "settings-coroutines"]
 
