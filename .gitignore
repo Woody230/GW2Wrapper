@@ -13,5 +13,6 @@ local.properties
 /**/.idea
 /**/.gradle
 /**/build
+/**/.kotlin
 
 /v2-client/src/commonTest/resources/Secrets.json
