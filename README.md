@@ -96,25 +96,6 @@ val bytes: ByteArray = emblem.emblem(request)
  val translations = translator.translations(defaultWorld, spanishWorld, "es")
  ```
 
-## v2-intl-kodein-db
-
-[Kodein-DB](https://github.com/Kodein-Framework/Kodein-DB) extensions for storing the [v2-intl](#v2-intl) translations.
-
-```kotlin
-// You will likely want to check that the language is not for English before trying to request translations.
-suspend fun putMissingWorlds(
-    database: DB, 
-    gw2: Gw2Client,
-) = database.transaction().use {
-    putMissingTranslations(
-        translator = Gw2Translator.world,
-        defaults = gw2.world.worlds(),
-        language = Language("es")
-        requestTranslated = { ids, language -> gw2.world.worlds(ids, language) }
-    )
-}
-```
-
 ## v2-model
 Models for the [v2-client](#v2-client) and [value class](https://kotlinlang.org/docs/inline-classes.html) wrappers for [v2-model-enumeration](#v2-model-enumeration). 
 
@@ -139,14 +120,6 @@ val enumType: com.bselzer.gw2.v2.model.enumeration.WvwObjectiveType = type.decod
 ## v2-model-extension
 
 Extensions for [v2-model](#v2-model) classes. Currently these are focused on World. vs World. related models.
-
-## v2-model-kodein-db
-
-[Kodein-DB](https://github.com/Kodein-Framework/Kodein-DB) extensions for [v2-client](#v2-client).
-
-```kotlin
-val typeTable = TypeTable { gw2() }
-```
 
 ## v2-resource
 
@@ -180,13 +153,6 @@ val tile = TileClient()
 val zoom = 3
 val grid = tile.grid(continent, floor, zoom)
 ```
-
-## v2-tile-kodein-db
-
-[Kodein-DB](https://github.com/Kodein-Framework/Kodein-DB) extensions for [v2-tile](#v2-tile-model).
-
-* `TileGridMetadataExtractor`
-* `TileMetadataExtractor`
 
 ## v2-tile-model
 
