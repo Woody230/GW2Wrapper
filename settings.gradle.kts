@@ -8,7 +8,7 @@ pluginManagement {
 }
 
 plugins {
-    id("io.github.woody230.gradle.internal.bundled") version "1.7.0"
+    id("io.github.woody230.gradle.internal.bundled") version "1.8.0"
 }
 
 rootProject.name = "GW2Wrapper"
