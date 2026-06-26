@@ -2,7 +2,7 @@ package com.bselzer.gw2.v2.model.guild.member
 
 import com.bselzer.gw2.v2.model.account.AccountName
 import com.bselzer.gw2.v2.model.guild.rank.GuildRankId
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

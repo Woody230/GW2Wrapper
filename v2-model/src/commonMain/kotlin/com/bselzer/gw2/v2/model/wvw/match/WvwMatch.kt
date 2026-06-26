@@ -6,7 +6,7 @@ import com.bselzer.gw2.v2.model.wvw.world.WvwWorldCount
 import com.bselzer.gw2.v2.model.wvw.world.WvwWorldId
 import com.bselzer.gw2.v2.model.wvw.world.WvwWorldIds
 import com.bselzer.ktx.value.identifier.Identifiable
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

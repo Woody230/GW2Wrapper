@@ -10,7 +10,7 @@ import com.bselzer.gw2.v2.scope.core.Requirement
 import com.bselzer.gw2.v2.scope.core.Scope
 import io.ktor.client.*
 import io.ktor.client.request.*
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.JsonObject
 

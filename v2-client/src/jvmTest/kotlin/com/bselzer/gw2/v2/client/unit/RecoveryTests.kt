@@ -7,7 +7,7 @@ import com.bselzer.gw2.v2.model.character.CharacterName
 import com.bselzer.gw2.v2.model.guild.GuildId
 import com.bselzer.gw2.v2.model.template.build.BuildTemplateTabId
 import io.ktor.client.engine.mock.*
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals

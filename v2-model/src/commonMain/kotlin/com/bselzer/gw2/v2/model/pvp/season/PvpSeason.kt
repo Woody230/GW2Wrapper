@@ -4,7 +4,7 @@ import com.bselzer.gw2.v2.model.pvp.season.division.PvpDivision
 import com.bselzer.gw2.v2.model.pvp.season.leaderboard.PvpSeasonLeaderboard
 import com.bselzer.gw2.v2.model.pvp.season.rank.PvpSeasonRank
 import com.bselzer.ktx.value.identifier.Identifiable
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
