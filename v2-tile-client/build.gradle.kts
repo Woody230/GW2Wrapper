@@ -22,7 +22,7 @@ multiplatformDependencies {
         implementation(projects.v2Client)
         implementation(libs.bundles.ktor.client.test)
     }
-    androidUnitTest {
+    androidHostTest {
         implementation(libs.ktor.client.okhttp)
     }
     jvmTest {

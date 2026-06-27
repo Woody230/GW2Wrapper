@@ -5,8 +5,7 @@ import com.bselzer.gw2.v2.client.instance.TileClient
 import com.bselzer.gw2.v2.client.instance.TileClientConfiguration
 import com.bselzer.gw2.v2.model.continent.ContinentId
 import com.bselzer.gw2.v2.model.continent.floor.FloorId
-import io.ktor.client.*
-import io.ktor.utils.io.core.*
+import io.ktor.client.HttpClient
 import kotlinx.coroutines.runBlocking
 
 abstract class BaseTests {

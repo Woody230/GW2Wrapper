@@ -1,7 +1,7 @@
 package com.bselzer.gw2.v2.model.pvp.leaderboard
 
 import com.bselzer.gw2.v2.model.account.AccountName
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

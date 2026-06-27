@@ -20,7 +20,7 @@ multiplatformDependencies {
     commonTest {
         implementation(libs.bundles.ktor.client.test)
     }
-    androidUnitTest {
+    androidHostTest {
         implementation(libs.ktor.client.okhttp)
     }
     jvmTest {
